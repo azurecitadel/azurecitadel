@@ -1,0 +1,36 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "hugo",
+			"task": "",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "hugo: Build site"
+		},
+		{
+			"type": "hugo",
+			"task": "server",
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": [
+				{
+					"pattern": [
+						{
+							"regexp": ".",
+							"file": 1,
+							"location": 2,
+							"message": 3
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": ".",
+						"endsPattern": ".",
+					}
+				}
+			],
+			"label": "hugo: Serve site"
+		}
+	]
+}

@@ -1,0 +1,4 @@
+baseURL = "https://azurecitadel.com/"
+languageCode = "en-gb"
+title = "Azure Citadel"
+theme = "ace-documentation"
