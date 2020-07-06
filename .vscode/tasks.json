@@ -15,18 +15,20 @@
 			"isBackground": true,
 			"problemMatcher": [
 				{
-					"pattern": [
-						{
-							"regexp": ".",
-							"file": 1,
-							"location": 2,
-							"message": 3
-						}
-					],
+					"severity": "error",
+					"fileLocation": "absolute",
+					"owner": "hugo",
+					"pattern": {
+						"regexp": "template: (.*):(\\d+): (.*)",
+						"file": 1,
+						"location": 2,
+						"message": 3,
+						"loop": true
+					},
 					"background": {
 						"activeOnStart": true,
-						"beginsPattern": ".",
-						"endsPattern": ".",
+						"beginsPattern": "Change detected, rebuilding site",
+						"endsPattern": "Total in \\d+ ms"
 					}
 				}
 			],
