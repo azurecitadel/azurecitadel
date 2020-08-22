@@ -1,34 +1,29 @@
 {{ define "main" }}
 
-<div class="d-lg-flex">
+{{- partial "sidebar.html" . -}}
 
-	{{- partial "sidebar.html" . -}}
+<main class="width-full">
 
-	<main class="width-full">
+	<main class="container-xl px-3 px-md-6 my-4 my-lg-4 d-lg-flex">
+		<article class="markdown-body width-full">
 
-		<main class="container-xl px-3 px-md-6 my-4 my-lg-4 d-lg-flex">
-			<article class="markdown-body width-full">
+			{{.Site.Home.Content}}
 
-				{{.Site.Home.Content}}
+			<section class="container-xl pb-lg-4 my-8 px-3 px-md-6">
+				<h3 class="text-mono f5 text-normal text-gray text-md-center mb-4">Explore by section</h3>
+				<div class="d-flex flex-wrap gutter gutter-xl-spacious">
 
-				<section class="container-xl pb-lg-4 my-8 px-3 px-md-6">
-					<h3 class="text-mono f5 text-normal text-gray text-md-center mb-4">Explore by section</h3>
-					<div class="d-flex flex-wrap gutter gutter-xl-spacious">
+					{{ range .Site.Menus.section }}
 
-						{{ range .Site.Menus.section }}
-
-						<div class="d-flex flex-column col-12 col-sm-6 col-lg-3 pb-4">
-							<a class="btn-mktg flex-auto btn-outline-mktg btn-large-mktg ws-normal " href="{{ .URL }}"
-								title="{{ .Name }}">{{ .Name }}
-							</a>
-						</div>
-
-						{{ end }}
+					<div class="d-flex flex-column col-12 col-sm-6 col-lg-3 pb-4">
+						<a class="btn-mktg flex-auto btn-outline-mktg btn-large-mktg ws-normal " href="{{ .URL }}"
+							title="{{ .Name }}">{{ .Name }}
+						</a>
 					</div>
-				</section>
-		</main>
 
+					{{ end }}
+				</div>
+			</section>
+	</main>
 
-</div>
-
-{{ end }}
+	{{ end }}

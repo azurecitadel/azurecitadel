@@ -2,6 +2,9 @@
     width: 260px;
     background-color: #05264c;
     position: sticky;
+    top: 0;
+    padding-bottom: 32px;
     overflow-y: auto;
+    height: 100vh;
     flex-shrink: 0;
 }
