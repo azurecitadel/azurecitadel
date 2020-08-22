@@ -1,35 +1,15 @@
-languageCode = "en-gb"
 title = "Azure Citadel"
-theme = "ace-documentation"
+theme = "citadel"
 
-DefaultContentLanguage = "en"
+[menu]
 
-pygmentsCodeFences = true
-pygmentsStyle = "monokailight"
+  # Home -> Sections
 
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir= false
-enableMissingTranslationPlaceholders = false
+  [[menu.section]]
+    name = "Labs"
+    url = "/labs"
 
-# Enable Google Analytics by entering your tracking id
-googleAnalytics = ""
+  [[menu.section]]
+    name = "About"
+    url = "/about"
 
-[params]
-ordersectionsby = "weight" # ordersectionsby = "title"
-disableSearch = false # default is false
-disableReadmoreNav = true # set true to hide prev/next navigation, default is false
-highlightClientSide = false # set true to use highlight.pack.js instead of the default hugo chroma highlighter
-menushortcutsnewtab = true # set true to open shortcuts links to a new tab/window
-
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-
-[outputs]
-home = [ "HTML", "RSS", "JSON"]
-
-[[menu.shortcuts]]
-name = "<i class='fab fa-github'></i>"
-url = "https://github.com/azurecitadel/"
-weight = 1

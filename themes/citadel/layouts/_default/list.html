@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+{{- partial "sidebar.html" . -}}
+
+
+<main class="width-full">
+
+    <div class="article-grid-container">
+        <div class="article-grid-body d-flex flex-items-center" style="height: 39px;">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+    </div>
+
+    <main class="container-xl px-3 px-md-6 my-4 my-lg-4 d-lg-flex">
+        <article class="markdown-body width-full">
+
+
+            {{ .Content }}
+        </article>
+    </main>
+</main>
+
+{{ end }}

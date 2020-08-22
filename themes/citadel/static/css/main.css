@@ -1,0 +1,7 @@
+.sidebar {
+    width: 260px;
+    background-color: #05264c;
+    position: sticky;
+    overflow-y: auto;
+    flex-shrink: 0;
+}

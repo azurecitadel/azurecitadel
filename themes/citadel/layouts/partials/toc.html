@@ -1,0 +1,9 @@
+
+{{ if (gt .WordCount 400 ) }}
+<aside>
+    <header>
+    <h2>{{.Title}}</h2>
+    </header>
+    {{.TableOfContents}}
+</aside>
+{{ end }}
