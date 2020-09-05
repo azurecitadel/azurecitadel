@@ -1,5 +1,6 @@
 ---
 title: "Labs - Test 2"
+description: "Labs - Description - Test 2"
 menu:
   side:
     parent: 'labs'

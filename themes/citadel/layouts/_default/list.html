@@ -1,23 +1,28 @@
 {{ define "main" }}
 
-{{- partial "sidebar.html" . -}}
+{{ partial "breadcrumbs.html" . }}
 
-
-<main class="width-full">
-
-    <div class="article-grid-container">
-        <div class="article-grid-body d-flex flex-items-center" style="height: 39px;">
-            {{ partial "breadcrumbs.html" . }}
-        </div>
+<div class="article-grid-head">
+    <div class="d-flex flex-items-baseline flex-justify-between mt-3">
+        <h1 class="border-bottom-0">{{.Title}}</h1>
     </div>
+    <div class="lead-mktg">
+        <p>{{.Description}}</p>
+    </div>
+    {{.Content}}
+</div>
 
-    <main class="container-xl px-3 px-md-6 my-4 my-lg-4 d-lg-flex">
-        <article class="markdown-body width-full">
+<div id="article-contents" class="article-grid-body">
 
+    {{ range .Pages }}
+    <a class="link-with-intro Bump-link--hover no-underline" href="{{.Permalink}}">
+        <h4 class="link-with-intro-title">{{.Title}}</h4>
+    </a>
+    <p class="link-with-intro-intro">
+        {{.Description}}
+    </p>
+    {{ end }}
 
-            {{ .Content }}
-        </article>
-    </main>
-</main>
+</div>
 
 {{ end }}

@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html>
-    {{- partial "head.html" . -}}
-    <body>
-        {{- partial "header.html" . -}}
-        <div id="content" class="d-lg-flex">
-        {{- block "main" . }}{{- end }}
-        </div>
-        {{- partial "footer.html" . -}}
-    </body>
+<html lang="en">
+{{- partial "head.html" . -}}
+
+<body class="d-lg-flex">
+    {{- partial "header.html" . -}}
+
+    {{- partial "sidebar.html" . -}}
+
+    <main class="width-full">
+        <main class="container-xl px-3 px-md-6 my-4 my-lg-4 d-lg-flex">
+            <article class="markdown-body width-full">
+                {{- block "main" . }}{{- end }}
+            </article>
+        </main>
+    </main>
+
+    {{- partial "footer.html" . -}}
+</body>
+
 </html>

@@ -1,5 +1,6 @@
 ---
 title: "Test 1"
+description: "About - Description - Test 1"
 menu:
   side:
     parent: 'about'
