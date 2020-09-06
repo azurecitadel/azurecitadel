@@ -682,4 +682,3 @@ Creating custom policies is thankfully rarer as the number of built in policies 
 
 Next we'll use the deployIfNotExists effect to help automate compliance, using managed identities to remediate our resources.
 
-[◄ CLI](../cli){: .btn .btn--inverse} [▲ Index](../#labs){: .btn .btn--inverse} [Deploy Policies ►](../deploy){: .btn .btn--primary}

@@ -12,3 +12,14 @@ theme = "citadel"
   [[menu.section]]
     name = "About"
     url = "/about"
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+    tabWidth = 2
