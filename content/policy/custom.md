@@ -22,7 +22,7 @@ After the scenario has been described we will run through the basics of the poli
 
 You will need:
 
-* Azure subscription
+* an Azure subscription
 * Azure CLI
 * jq
 
@@ -143,7 +143,7 @@ The Azure Policy extension in vscode helps to view resources and policies and to
 
     Your list of aliases from the resource level should be:
 
-    ```json
+    ```text
     Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange
     Microsoft.Network/networkSecurityGroups/securityRules[*].sourceAddressPrefix
     ```
@@ -165,7 +165,7 @@ The Azure Policy extension in vscode helps to view resources and policies and to
 
     OK, now we have more aliases that we could use if we are working at the sub resource level.
 
-    ```json
+    ```text
     Microsoft.Network/networkSecurityGroups/securityRules.destinationPortRange
     Microsoft.Network/networkSecurityGroups/securityRules.sourceAddressPrefix
     ```
@@ -562,16 +562,16 @@ If you go back into the portal you can see the [definition](https://portal.azure
 
 * [Azure Policy documentation](https://docs.microsoft.com/azure/governance/policy/)
 * [Azure Policy definition structure](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure)
-    * [aliases](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#aliases)
-    * [conditions](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#conditions)
-    * [count](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#count)
-    * [effects](https://docs.microsoft.com/azure/governance/policy/concepts/effects)
-    * [fields](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#fields)
-    * [logical operators](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#logical-operators)
-    * [metadata](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#metadata)
-    * [parameters](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#parameters)
-    * [splat aliases](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#understanding-the--alias)
-    * [template](https://docs.microsoft.com/azure/governance/policy/tutorials/create-custom-policy-definition#compose-the-definition)
+  * [aliases](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#aliases)
+  * [conditions](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#conditions)
+  * [count](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#count)
+  * [effects](https://docs.microsoft.com/azure/governance/policy/concepts/effects)
+  * [fields](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#fields)
+  * [logical operators](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#logical-operators)
+  * [metadata](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#metadata)
+  * [parameters](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#parameters)
+  * [splat aliases](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#understanding-the--alias)
+  * [template](https://docs.microsoft.com/azure/governance/policy/tutorials/create-custom-policy-definition#compose-the-definition)
 * [Azure Policy extension](https://marketplace.visualstudio.com/items?itemName=AzurePolicy.azurepolicyextension)
 * [Azure Policy extension documentation](https://docs.microsoft.com/azure/governance/policy/how-to/extension-for-vscode)
 
@@ -678,7 +678,9 @@ For reference, here is the full azurepolicy.json for this lab
 
 ## Finishing up
 
-Creating custom policies is thankfully rarer as the number of built in policies grows each days. And there is a growing amount of community content out there too. But if you need to create your own policies then understanding aliases and the policy structure is vital. If you think your new custom policy could be useful to others then why not contribute back?
+Thankfully, creating custom policies is an increasingly rare event as the number of built in policies grows each day. There is also a growing amount of community content out there. But if you need to create your own policies then understanding aliases and the policy structure is vital.
+
+If you have created a new custom policy that you couldn't find anywhere else then perhaps it could be useful to others. You could always contribute to the set of community policies.
 
 Next we'll use the deployIfNotExists effect to help automate compliance, using managed identities to remediate our resources.
 
