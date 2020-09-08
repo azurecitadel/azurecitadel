@@ -684,4 +684,3 @@ If you have created a new custom policy that you couldn't find anywhere else the
 
 Next we'll use the deployIfNotExists effect to help automate compliance, using managed identities to remediate our resources.
 
-[◄ CLI](../cli){: .btn .btn--inverse} [▲ Index](../#labs){: .btn .btn--inverse} [Deploy Policies ►](../deploy){: .btn .btn--primary}

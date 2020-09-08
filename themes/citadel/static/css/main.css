@@ -144,3 +144,8 @@ nav.breadcrumbs ol {
     margin-left: 0;
     margin-bottom: 8px;
 }
+
+#TableOfContents li ul {
+    margin-top: 8px;
+    padding-left: 1em;
+}
