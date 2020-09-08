@@ -6,10 +6,9 @@ theme = "citadel"
   # Home -> Sections
 
   [[menu.section]]
-    name = "Labs"
-    url = "/labs"
+    name = "Azure Policy"
+    url = "/policy"
 
   [[menu.section]]
     name = "About"
     url = "/about"
-
