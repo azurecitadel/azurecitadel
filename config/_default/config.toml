@@ -6,16 +6,20 @@ theme = "citadel"
   # Home -> Sections
 
   [[menu.section]]
+    name = "About"
+    url = "/about"
+
+  [[menu.section]]
+    name = "ARM Templates"
+    url = "/arm"
+
+  [[menu.section]]
     name = "Azure Policy"
     url = "/policy"
 
   [[menu.section]]
     name = "Packer & Ansible"
     url = "/packeransible"
-
-  [[menu.section]]
-    name = "About"
-    url = "/about"
 
 [markup]
   [markup.highlight]

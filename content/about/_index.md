@@ -1,15 +1,9 @@
 ---
 title: "About"
-description: "About - Description"
+description: "Find out about the Azure Citadel site and the people who create it."
 menu:
   side:
-    identifier: 'about'
+    identifier: 'About'
 ---
 
-# What is this?
-
-This is some content that introduces everything that sits underneath **About**
-
-## Where is this?
-
-this is `_index.md` in `./content/about`
+## Sections
