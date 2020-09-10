@@ -1,10 +1,10 @@
 ---
 title: "Azure Citadel"
 description: "What is Azure Citadel and why does it exist?"
+weight: 1
 menu:
   side:
     parent: 'About'
-    weight: 1
 ---
 
 ## Azure Citadel

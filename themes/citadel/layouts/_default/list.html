@@ -14,7 +14,7 @@
 
 <div id="article-contents" class="article-grid-body">
 
-    {{ range .Pages }}
+    {{ range .Pages.ByWeight }}
     <a class="link-with-intro Bump-link--hover no-underline" href="{{.Permalink}}">
         <h4 class="link-with-intro-title">{{.Title}}</h4>
     </a>

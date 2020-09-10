@@ -1,10 +1,10 @@
 ---
 title: "Contributors"
 description: "Content authors and site administrators."
+weight: 2
 menu:
   side:
     parent: 'About'
-    weight: 2
 ---
 
 ## Site Admins

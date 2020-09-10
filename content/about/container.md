@@ -1,10 +1,10 @@
 ---
 title: "Remote Container"
 description: "Running the Hugo server in a container using the Visual Studio Code remote extension."
+weight: 5
 menu:
   side:
     parent: 'About'
-    weight: 5
 ---
 
 

@@ -1,6 +1,8 @@
 ---
 title: "Packer & Ansible"
 description: "Collection of labs using Packer and Ansible to automate VM image creation and management"
+author: [ "Richard Cheney" ]
+github: [ "richeney" ]
 menu:
   side:
     identifier: 'Packer & Ansible'

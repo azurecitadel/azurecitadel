@@ -5,5 +5,3 @@ menu:
   side:
     identifier: 'About'
 ---
-
-## Sections

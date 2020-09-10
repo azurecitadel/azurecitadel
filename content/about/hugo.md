@@ -1,10 +1,10 @@
 ---
 title: "Shortcodes"
 description: "Hugo specific shortcodes for embedding content."
+weight: 9
 menu:
   side:
     parent: 'About'
-    weight: 9
 ---
 
 ## Introduction

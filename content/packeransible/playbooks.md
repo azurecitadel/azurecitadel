@@ -2,10 +2,10 @@
 title: "Playbooks & Roles"
 author: [ "Richard Cheney" ]
 description: "Using declarative playbooks in Ansible, and installing roles from Ansible Galaxy."
+weight: 4
 menu:
   side:
     parent: 'Packer & Ansible'
-    weight: 4
 ---
 
 ## Introduction

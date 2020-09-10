@@ -1,10 +1,10 @@
 ---
 title: "Disclaimer"
 description: "Standard disclaimer for the Azure Citadel community site."
+weight: 10
 menu:
   side:
     parent: 'About'
-    weight: 10
 ---
 
 ## Introduction

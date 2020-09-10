@@ -1,10 +1,10 @@
 ---
 title: "Front Matter"
 description: "Examples of Front Matter for the Hugo content."
+weight: 6
 menu:
   side:
     parent: 'About'
-    weight: 6
 ---
 
 ## Introduction
