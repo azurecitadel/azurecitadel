@@ -1,7 +1,7 @@
 <div class="sidebar d-none d-lg-block">
 
     <div class="d-flex flex-items-center p-4" style="z-index: 3;" id="citadel-logo">
-        
+
         <a href="{{.Site.BaseURL }}" class="h4-mktg text-white no-underline no-wrap pl-2 flex-auto">Azure Citadel</a>
     </div>
 
@@ -34,6 +34,17 @@
                         <li title="{{ .Name }}"
                             class="sidebar-article {{ if $currentPage.HasMenuCurrent "side" . }}active{{ end }} {{ if $currentPage.IsMenuCurrent "side" . }}is-current-page{{ end }}">
                             {{ .Pre }}<a href="{{ .URL }}" class="pl-4 pr-5 py-1">{{.Name}}</a>
+
+                            {{ if .HasChildren }}
+                            <ul class="sidebar-sub-articles list-style-none pl-4">
+                                {{ range .Children }}
+                                <li title="{{ .Name }}"
+                                    class="sidebar-sub-article {{ if $currentPage.HasMenuCurrent "side" . }}active{{ end }} {{ if $currentPage.IsMenuCurrent "side" . }}is-current-page{{ end }}">
+                                    {{ .Pre }}<a href="{{ .URL }}" class="pl-4 py-1">{{.Name}}</a>
+                                </li>
+                                {{ end }}
+                            </ul>
+                            {{ end }}
                         </li>
                         {{ end }}
                     </ul>
