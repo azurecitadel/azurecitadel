@@ -210,6 +210,15 @@ This is the Terraform workflow.
 
 ![Terraform Workflow](/terraform/basics/images/workflow.svg)
 
+| Command | Description | Notes |
+| --- | --- |--- |
+| terraform fmt | Auto formats .tf files | Shows HCL syntax errors |
+| terraform init  | Downloads providers | Creates .terraform.lock.hcl |
+| terraform validate | Checks syntax and internal consistency |   |
+| terraform plan | Refreshes state and determines actions | Shows provider config errors |
+| terraform apply | Applies the planned changes | Shows provider REST API errors  |
+| terraform delete | Destroys resources in the state | |
+
 Let's step through the commands one by one with our config.
 
 ## Format
