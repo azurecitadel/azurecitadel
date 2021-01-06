@@ -1,6 +1,6 @@
 ---
 title: "Using the Azure CLI"
-date: 2020-18-01
+date: 2021-01-06
 author: [ "Binal Shah" ]
 description: "Use the CLI commands to create a vNet, a VM and then attach an NSG to a subnet."
 weight: 3

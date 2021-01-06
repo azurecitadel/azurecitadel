@@ -1,6 +1,6 @@
 ---
 title: "Virtual Network"
-date: 2020-01-01
+date: 2021-01-06
 author: [ "Binal Shah" ]
 description: "Create a Virtual Network with two subnets, and add a VM to each."
 weight: 1

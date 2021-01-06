@@ -1,6 +1,6 @@
 ---
 title: "Virtual Network Peering"
-date: 2020-18-01
+date: 2021-01-06
 author: [ "Binal Shah" ]
 description: "Connect two isolated vNets using vNet Peering and validate routing and connectivity."
 weight: 4
