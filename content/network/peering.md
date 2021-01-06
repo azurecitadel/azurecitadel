@@ -35,7 +35,7 @@ So far you have configured two virtual networks from labs 1 and 3. Let’s try t
 * _Did the ping succeed?_
 * _Why?_
 
-# Peer virtual networks
+## Peer virtual networks
 
 1. In the Search box at the top of the Azure portal, begin typing vnet1. When **vnet1** appears in the search results, select it.
 1. Go to **Settings &rarr; Peerings**, and then select **+ Add**, as shown in the following picture:
@@ -68,7 +68,7 @@ So far you have configured two virtual networks from labs 1 and 3. Let’s try t
 
     ![next hop](/network/images/lab04-05-nexthop.png)
 
-# Verify reachability between peered vNets
+## Verify reachability between peered vNets
 
 Let’s try to reach virtual machines across the two peers.
 
