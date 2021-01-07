@@ -95,3 +95,7 @@ The *Azure Apps offer* has two distinct flavours; *solution template* and *manag
 The *SaaS App offer* differs from the *Virtual Machine offer* and *Azure App offer* as no resources are deployed in the customer subscription. As such, the publisher must charge both for the software licence and the underlying Azure resource costs used to deliver the solution. *SaaS App offers* can be listed in both the *Azure Marketplace* and *AppSource*.
 
 For further information, see [Publishing a SaaS Application Offer](../saasapp/)
+
+## Next
+
+* [Enroll in Partner Center to Publish Offers](../partnercenter/)
