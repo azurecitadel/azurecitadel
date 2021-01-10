@@ -4,7 +4,7 @@ description: "Hugo specific shortcodes for embedding content."
 weight: 9
 menu:
   side:
-    parent: 'About'
+    parent: 'Contributing'
 ---
 
 ## Introduction

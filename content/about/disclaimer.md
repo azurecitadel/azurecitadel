@@ -1,7 +1,7 @@
 ---
 title: "Disclaimer"
 description: "Standard disclaimer for the Azure Citadel community site."
-weight: 10
+weight: 4
 menu:
   side:
     parent: 'About'
@@ -20,7 +20,7 @@ Do not use the content directly for production workloads. There is no warranty o
 ## MIT license
 
 ```text
-Copyright (c) 2019
+Copyright (c) 2021
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

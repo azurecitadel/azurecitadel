@@ -4,7 +4,7 @@ description: "Site Admin"
 weight: 1
 menu:
   side:
-    parent: 'Contributors'
+    parent: 'People'
 ---
 
 Cloud Solution Architect
