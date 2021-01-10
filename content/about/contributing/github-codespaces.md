@@ -5,6 +5,9 @@ weight: 3
 menu:
   side:
     parent: 'Contributing'
+series:
+ - Contributing
+series_weight: 3
 ---
 
 ## Introduction

@@ -30,6 +30,40 @@
         {{.Content}}
 
         <hr />
+
+        {{ if isset .Params "series" }}
+            {{ $seriesTitle := index .Params.series 0 }}
+            {{ $currentLink := .Permalink }}
+            {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
+            
+            {{ range $index, $page := $wholeSeries }}
+                {{ if eq $currentLink $page.Permalink }}
+                {{ if gt $index 0 }}
+                    {{ .Scratch.Set "prevInSeries" (index $wholeSeries (sub $index 1)) }}
+                {{ end }}
+                {{ if lt $index (sub (len $wholeSeries) 1) }}
+                    {{ .Scratch.Set "nextInSeries" (index $wholeSeries (add $index 1)) }}
+                {{ end }}
+                {{ end }}
+            {{ end }}
+
+            <nav class="paginate-container" aria-label="Pagination">
+                <div class="pagination">
+                {{ with index .Scratch.Values "prevInSeries" }}
+                    <a class="previous_page" rel="next" href="{{ .Permalink }}" aria-label="Previous Page">{{ .Title }}</a>
+                    {{ else }}
+                    <span class="previous_page" aria-disabled="true">Previous</span>
+                {{ end }}
+                {{ with index .Scratch.Values "nextInSeries" }}
+                    <a class="next_page" rel="next" href="{{ .Permalink }}" aria-label="Next Page">{{ .Title }}</a>
+                {{ else }}
+                    <span class="next_page" aria-disabled="true">Next</span>
+                {{ end }}
+                </div>
+            </nav>
+            
+        {{ end }}
+
         <div class="contribution">
             <h4>Help us improve</h4>
             <p class="text-gray f6">Azure Citadel is a community site built on GitHub, please contribute and send a pull request</p>

@@ -21,6 +21,11 @@ theme = "citadel"
     name = "Packer & Ansible"
     url = "/packeransible"
 
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
 [markup]
   [markup.highlight]
     codeFences = true
