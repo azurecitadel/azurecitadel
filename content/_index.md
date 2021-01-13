@@ -1,5 +1,5 @@
 +++
-title = "Home"
+title = "Azure Citadel"
 +++
 
 # Welcome to the Azure Citadel
