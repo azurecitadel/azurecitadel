@@ -22,8 +22,8 @@ Thankfully Azure Citadel makes use of [Visual Studio Code - Remote Containers](h
 On your local computer you will still need the following tools set up, however they are not specific to this one repository and can be re-used for every project that makes use of Remote Containers.
 
 * [Docker](https://docs.docker.com/get-started/)
-* Visual Studio Code
-* The Remote Containers extension for Visual Studio Code
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [The Remote Containers extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 If this is still too much infrastructure to maintain or you are in an environment that restricts what can be installed and run locally, you should look at using a cloud-hosted instance of the container using [GitHub Codespaces](/about/contributing/github-codespaces).
 

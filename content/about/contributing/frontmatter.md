@@ -64,3 +64,13 @@ series_weight: 1
 All single pages within a series are collected, sorted by `series_weight` and next, previous navigation is added at build time.
 
 An example can be seen on the [**Getting Started**](/about/contributing/getting-started) page. If the user is at the first or last pages they will see a disabled, next or previous navigation button.
+
+### Open Graph Images
+
+You can customise the image shown in previews of the website in many applications by overriding the `og:image` attribute for a particular page. You can [read more about open graph images](https://ogp.me/).
+
+```
+---
+og_image: an_image.png
+---
+```

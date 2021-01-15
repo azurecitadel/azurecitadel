@@ -51,7 +51,7 @@
                 <div class="pagination">
                 {{ with index .Scratch.Values "prevInSeries" }}
                     <a class="previous_page" rel="next" href="{{ .Permalink }}" aria-label="Previous Page">{{ .Title }}</a>
-                    {{ else }}
+                {{ else }}
                     <span class="previous_page" aria-disabled="true">Previous</span>
                 {{ end }}
                 {{ with index .Scratch.Values "nextInSeries" }}

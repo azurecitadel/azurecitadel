@@ -1,9 +1,19 @@
 title = "Azure Citadel"
 theme = "citadel"
 
+languageCode = "en-gb"
+DefaultContentLanguage = "en"
+
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT = true
+canonifyURLs = true
+
 [menu]
 
   # Home -> Sections
+  # menu.section appears on the Home Page under "Explore by section"
+  # Side menu is controlled via frontmatter
 
   [[menu.section]]
     name = "About"
@@ -25,6 +35,7 @@ theme = "citadel"
   category = "categories"
   tag = "tags"
   series = "series"
+  author = "people"
 
 [markup]
   [markup.highlight]
