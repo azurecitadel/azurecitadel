@@ -4,6 +4,8 @@ date: 2021-01-06
 author: [ "Binal Shah" ]
 description: "Deploy a Cisco network virtual appliance from the Azure Marketplace."
 weight: 6
+series:
+ - network
 menu:
   side:
     parent: 'network'

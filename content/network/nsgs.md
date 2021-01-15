@@ -4,6 +4,8 @@ date: 2021-01-06
 author: [ "Binal Shah" ]
 description: "Need a L4 ACL to control permitted flows? Create Network Security Groups (NSGs) using Application Security Groups (ASGs)."
 weight: 2
+series:
+ - network
 menu:
   side:
     parent: 'network'

@@ -9,6 +9,6 @@ menu:
 
 ## Introduction
 
-A selection of labs for Azure Network.
+A series of sequential labs to take you through the basics of Azure Networking.
 
 ## Labs

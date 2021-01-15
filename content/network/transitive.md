@@ -4,6 +4,8 @@ date: 2021-01-06
 author: [ "Binal Shah" ]
 description: "Understand the implications of transitive peering."
 weight: 5
+series:
+ - network
 menu:
   side:
     parent: 'network'

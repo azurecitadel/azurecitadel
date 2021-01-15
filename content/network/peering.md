@@ -4,6 +4,8 @@ date: 2021-01-06
 author: [ "Binal Shah" ]
 description: "Connect two isolated vNets using vNet Peering and validate routing and connectivity."
 weight: 4
+series:
+ - network
 menu:
   side:
     parent: 'network'
