@@ -2,9 +2,10 @@
 title: "Terraform"
 description: "Labs for using Terraform to deploy Azure resources"
 date: 2021-01-21
+draft: true
 menu:
   side:
-    identifier: 'terraform-index'
+    identifier: 'terraform'
 ---
 
 ## Introduction
