@@ -19,7 +19,7 @@ The Azure CLI is one of the many utilities baked into the [Cloud Shell container
 
 Installing the Azure CLI is recommended For linux based systems.
 
-For linux users on Windows 10 then the strong recommendaton is to [install WSL2](https://docs.microsoft.com/windows/wsl/install-win10) and then install the CLI in your chosen distro rather than installing the .msi.
+For linux users on Windows 10 then the strong recommendation is to [install WSL2](https://docs.microsoft.com/windows/wsl/install-win10) and then install the CLI in your chosen distro rather than installing the .msi.
 
 * [macOS](https://docs.microsoft.com/cli/azure/install-azure-cli-macos)
 * [Ubuntu, Debian](https://docs.microsoft.com/cli/azure/install-azure-cli-linux?pivots=apt)
