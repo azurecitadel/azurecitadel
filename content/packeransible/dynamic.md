@@ -446,7 +446,7 @@ So your keyed group would look like:
 
 ## Defaults
 
-Assuming that you have followed the labs all the way through, then one of your three VMs will not have any tags. We recommend using [Azure Policy](/automation/policy) for creating default tags and flagging those that are non-compliant. You can also use defaults in the keyed groups to create dynamic groups of servers that do not have certain tags.
+Assuming that you have followed the labs all the way through, then one of your three VMs will not have any tags. We recommend using [Azure Policy](/policy) for creating default tags and flagging those that are non-compliant. You can also use defaults in the keyed groups to create dynamic groups of servers that do not have certain tags.
 
 If you remember the tags keyed group then it was in this format:
 
