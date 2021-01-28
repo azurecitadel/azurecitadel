@@ -3,7 +3,7 @@ title: "Azure Policy"
 description: "Governance Labs for Azure Policy"
 menu:
   side:
-    identifier: 'Azure Policy'
+    identifier: policy
 ---
 
 ## Introduction
@@ -18,4 +18,4 @@ The labs below complement the [Azure Policy documentation](https://docs.microsof
 
 The labs also help partners automate their Azure Policy defaults and customisation and help scale their professional and managed services.
 
-### Labs
+### Lab Sections
