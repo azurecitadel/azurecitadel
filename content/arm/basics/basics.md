@@ -4,7 +4,7 @@ author: [ "Richard Cheney" ]
 description: "Create a simple hardcoded ARM template and deploy to Azure."
 menu:
   side:
-    parent: 'ARM Templates'
+    parent: arm-basics
     weight: 1
 ---
 

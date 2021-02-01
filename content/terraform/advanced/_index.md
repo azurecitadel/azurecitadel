@@ -1,5 +1,5 @@
 ---
-title: "Advanced"
+title: "Terraform - Advanced"
 description: "Advanced scenarios such as multi-tenancies, split state deployments, GitHub Actions, Terraform Cloud, aliased providers etc."
 date: 2021-01-21
 draft: true

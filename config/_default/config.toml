@@ -16,20 +16,32 @@ canonifyURLs = true
   # Side menu is controlled via frontmatter
 
   [[menu.section]]
-    name = "About"
-    url = "/about"
+    name = "Azure Arc"
+    url = "/arc"
 
   [[menu.section]]
-    name = "ARM Templates"
-    url = "/arm"
+    name = "Azure CLI"
+    url = "/cli"
 
   [[menu.section]]
     name = "Azure Policy"
     url = "/policy"
 
   [[menu.section]]
+    name = "Marketplace"
+    url = "/marketplace"
+
+  [[menu.section]]
+    name = "Network"
+    url = "/network"
+
+  [[menu.section]]
     name = "Packer & Ansible"
     url = "/packeransible"
+
+  [[menu.section]]
+    name = "Videos"
+    url = "/videos"
 
 [taxonomies]
   category = "categories"
