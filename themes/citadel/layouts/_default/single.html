@@ -29,13 +29,11 @@
     <div id="article-contents" class="article-grid-body">
         {{.Content}}
 
-        <hr />
-
         {{ if isset .Params "series" }}
             {{ $seriesTitle := index .Params.series 0 }}
             {{ $currentLink := .Permalink }}
             {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
-            
+
             {{ range $index, $page := $wholeSeries }}
                 {{ if eq $currentLink $page.Permalink }}
                 {{ if gt $index 0 }}
@@ -47,6 +45,8 @@
                 {{ end }}
             {{ end }}
 
+
+
             <nav class="paginate-container" aria-label="Pagination">
                 <div class="pagination">
                 {{ with index .Scratch.Values "prevInSeries" }}
@@ -54,6 +54,9 @@
                 {{ else }}
                     <span class="previous_page" aria-disabled="true">Previous</span>
                 {{ end }}
+
+                <a class="text-gray-light" href="{{ .CurrentSection.Permalink }}" aria-label="Top">{{ .Name}}</a>
+
                 {{ with index .Scratch.Values "nextInSeries" }}
                     <a class="next_page" rel="next" href="{{ .Permalink }}" aria-label="Next Page">{{ .Title }}</a>
                 {{ else }}
@@ -61,8 +64,10 @@
                 {{ end }}
                 </div>
             </nav>
-            
+
         {{ end }}
+
+        <hr />
 
         <div class="contribution">
             <h4>Help us improve</h4>
