@@ -4,9 +4,11 @@ date: 2021-01-04
 author: [ "Richard Cheney" ]
 description: "Introduction to using the Azure CLI"
 weight: 2
+series:
+ - cli
 menu:
   side:
-    parent: 'cli'
+    parent: cli
 ---
 
 ## Logging into Azure

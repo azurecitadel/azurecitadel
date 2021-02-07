@@ -3,9 +3,11 @@ title: "Dynamic Inventories"
 author: [ "Richard Cheney" ]
 description: "Create dynamic inventories in Azure based on tags, resource groups and more."
 weight: 3
+series:
+ - packeransible
 menu:
   side:
-    parent: 'Packer & Ansible'
+    parent: packeransible
 ---
 
 ## Introduction

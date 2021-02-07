@@ -3,9 +3,11 @@ title: "Ansible"
 author: [ "Richard Cheney" ]
 description: "Run some ad hoc Ansible commands against static inventories of virtual machines."
 weight: 2
+series:
+ - packeransible
 menu:
   side:
-    parent: 'Packer & Ansible'
+    parent: packeransible
 ---
 
 ## Introduction

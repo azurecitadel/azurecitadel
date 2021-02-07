@@ -3,9 +3,11 @@ title: "Custom Roles"
 author: [ "Richard Cheney" ]
 description: "Sometimes you need a specific role, but there isn't one in Ansible Galaxy. No problem - follow our guide to creating your own."
 weight: 5
+series:
+ - packeransible
 menu:
   side:
-    parent: 'Packer & Ansible'
+    parent: packeransible
 ---
 
 ## Introduction

@@ -4,9 +4,11 @@ date: 2021-01-04
 author: [ "Richard Cheney" ]
 description: "Understand the JMESPATH queries using this lab that explores some common uses."
 weight: 3
+series:
+ - cli
 menu:
   side:
-    parent: 'cli'
+    parent: cli
 ---
 
 ## Introduction

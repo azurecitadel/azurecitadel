@@ -3,9 +3,11 @@ title: "Packer"
 author: [ "Richard Cheney" ]
 description: "Work through some basics with Packer to generate a simple Ubuntu image and then deploy VMs from it."
 weight: 1
+series:
+ - packeransible
 menu:
   side:
-    parent: 'Packer & Ansible'
+    parent: packeransible
 ---
 
 ## Introduction

@@ -4,9 +4,11 @@ date: 2021-01-04
 author: [ "Richard Cheney" ]
 description: "Bash script with the Azure CLI using JMESPATH queries, plus the jp and jq filters."
 weight: 4
+series:
+ - cli
 menu:
   side:
-    parent: 'cli'
+    parent: cli
 ---
 
 ## Introduction

@@ -4,9 +4,11 @@ date: 2021-01-04
 author: [ "Richard Cheney" ]
 description: "Install the Azure CLI"
 weight: 1
+series:
+ - cli
 menu:
   side:
-    parent: 'cli'
+    parent: cli
 ---
 
 ## Cloud Shell

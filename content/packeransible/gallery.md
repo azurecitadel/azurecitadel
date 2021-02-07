@@ -3,9 +3,11 @@ title: "Shared Image Gallery"
 author: [ "Richard Cheney" ]
 description: "Combine Packer with Ansible roles to publish custom images to a Shared Image Gallery."
 weight: 6
+series:
+ - packeransible
 menu:
   side:
-    parent: 'Packer & Ansible'
+    parent: packeransible
 ---
 
 ## Introduction

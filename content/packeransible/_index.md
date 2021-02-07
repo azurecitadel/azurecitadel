@@ -5,7 +5,7 @@ author: [ "Richard Cheney" ]
 github: [ "richeney" ]
 menu:
   side:
-    identifier: 'Packer & Ansible'
+    identifier: packeransible
 ---
 
 ## Introduction

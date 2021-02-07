@@ -5,7 +5,7 @@ author: [ "Richard Cheney" ]
 github: [ "richeney" ]
 menu:
   side:
-    identifier: 'cli'
+    identifier: cli
 ---
 
 ## Introduction
