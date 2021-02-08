@@ -2,7 +2,7 @@
 title: "Policy Aliases"
 date: 2020-08-25
 author: [ "Richard Cheney" ]
-description: ""
+description: "Policy aliases are the secret sauce in custom policy creation. This lab will explain what they are and help you list the ones available for a resource type."
 weight: 2
 draft: false
 series:

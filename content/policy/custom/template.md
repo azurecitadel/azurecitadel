@@ -2,7 +2,7 @@
 title: "Create the custom policy"
 date: 2020-08-25
 author: [ "Richard Cheney" ]
-description: ""
+description: "OK, we know the aliases to use and the logic we need to apply. Time to construct the JSON for the custom policy."
 weight: 4
 draft: false
 series:
