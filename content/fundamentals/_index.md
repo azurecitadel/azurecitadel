@@ -1,15 +1,14 @@
 ---
-title: "Azure Fundamentals"
+title: "Fundamentals"
+description: "New to Azure and don't know where to start? Let Azure Dan show you in this introductory video."
 author: [ "Dan Baker" ]
-description: "Don't know where to start? Let Azure Dan show you."
-weight: null
 layout: single
 menu:
   side:
-    parent: 'Videos'
+    identifier: fundamentals
 ---
 
-## Video
+## Overview
 
 In this session I will take you on a whirlwind tour of Azure and build out a number of solutions. This will enable you to get a feel for things that cloud computing offers.
 

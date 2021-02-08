@@ -1,6 +1,6 @@
 ---
-title: "Azure Arc"
-description: "Extend the Azure management plane to cover VMs and SQL servers in other locations."
+title: "Arc"
+description: "Use Azure Arc to extend the Azure management plane to cover VMs and SQL servers in other locations."
 menu:
   side:
     identifier: arc

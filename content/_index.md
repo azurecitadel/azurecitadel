@@ -10,12 +10,14 @@ Azure Citadel is a community driven site devoted to getting hands on & learning 
 
 ### New Hugo site
 
-We have moved over to a Hugo generated site integrated with an Azure Static Web App via a GitHub Actions pipeline. The new site has a custom theme which is cleaner and easier to navigate.
+We have moved over to a Hugo generated site integrated with an Azure Static Web App via a GitHub Actions pipeline. The new site has a custom theme which is cleaner and easier to navigate. The focus is on getting you to the content as quickly as possible.
 
-This change has given us an opportunity to clean up older content as the Azure documentation has grown and the Microsoft Learn site covers so much ground. Therefore we will be focusing purely on materials that are pitched towards the needs of the Azure partner community, but are freely available for all to use.
+This change has also given us an opportunity to review the need for the older content. The Azure documentation has grown massively and the Microsoft Learn site now covers so much ground. Therefore we will be more selective with labs that are pitched towards the needs of the Azure partner community, but are freely available for all.
 
-### Where's the \<insert name here> lab?
+### Where's the _\<insert name here>_ lab?
 
 The old site has been moved to <https://archive.azurecitadel.com>. Note that some of the material on the archive is now out of date. If you have favourite materials that you think should be moved on to here then let us know in the [lab suggestions](https://github.com/azurecitadel/azurecitadel/discussions/7).
 
 ## Categories
+
+Below are a few of the categories. The full list is available in the sidebar.

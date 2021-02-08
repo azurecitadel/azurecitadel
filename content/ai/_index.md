@@ -1,15 +1,17 @@
 ---
-title: "Introduction to AI"
+title: "AI"
+description: "Azure offers a wide range of artificial intelligence based services. This video will describe some of these, from the AI trained models embedded into Azure services, to pretrained services and frameworks to train your own."
 author: [ "Dan Baker" ]
-description: "Join Azure Dan in a series of short videos covering topics on Azure related to Artificial Intelligence."
-weight: null
 layout: single
+toc: 3
 menu:
   side:
-    parent: 'Videos'
+    identifier: ai
 ---
 
-## Episode 1: Introduction to AI
+## Video Series
+
+### Episode 1: Introduction to AI
 
 The idea of inanimate objects coming to life and thinking for themselves isn’t new, for years we have dreamed about a world of robots and Artificial Intelligence coexisting alongside humans and integrating into the fabric of our daily lives.
 
@@ -17,7 +19,7 @@ We’ve seen countless movies romanticising this dream, from robots helping to s
 
 {{< youtube id="XTt470CLrYg" autoplay="false">}}
 
-## Episode 2: How Machines Learn
+### Episode 2: How Machines Learn
 
 How should we define intelligence, what is it? is it free thinking, mastery through repetition or something more divine?
 
@@ -27,7 +29,7 @@ Learning, Reasoning, Problem Solving, Perception, and Language.
 
 {{< youtube id="Ug9QGBNCt1k" autoplay="false">}}
 
-## Episode 3: The Ethical Dilemma of AI
+### Episode 3: The Ethical Dilemma of AI
 
 With any paradigm shift in technology we have to ask the question that just because we can, does that mean we should?
 
@@ -37,7 +39,7 @@ Designing ethical AI to empower others and amplify human ingenuity means that it
 
 {{< youtube id="h4TbWVkyKlM" autoplay="false">}}
 
-## Episode 4: Will AI take our Jobs?
+### Episode 4: Will AI take our Jobs?
 
 Regardless of whether we embrace AI, change is inevitable, it marks the natural progression of human potential. But historically, change has been met with resistance, loss of control, excess uncertainty, concerns of competence and fears of redundancy. But it has also demonstrated that it creates new opportunity.
 
@@ -47,13 +49,13 @@ Again, to understand where we are, we need to understand where we have been.
 
 {{< youtube id="6Q2J1jG8kA4" autoplay="false">}}
 
-## Episode 5: Bringing AI to Life
+### Episode 5: Bringing AI to Life
 
 In my final video of the series I want to bring Artificial Intelligence to life by demonstrating some of the standout applications that Microsoft have created. This isn’t future tech, what I will show you are applications that you can use today as a consumer and without any developer knowledge.
 
 {{< youtube id="WzcgVggOpBo" autoplay="false">}}
 
-## Episode 6: Closing the AI skills gap
+### Episode 6: Closing the AI skills gap
 
 This video builds on the initiative of Katie King – published Author and CEO of AI in Business to train the students of tomorrow. We will explore the changes that society faces, discuss the ethics and impacts of Artificial Intelligence before demonstrating some of the tools available today.
 
@@ -61,7 +63,7 @@ Finally, we will build an end-to-end solution, bringing together the power of Cl
 
 {{< youtube id="-ywNdUXOuc8" autoplay="false">}}
 
-## Episode 7: AI-900 Fundamentals
+### Episode 7: AI-900 Fundamentals
 
 Join me as we explore Machine Learning and Artificial Intelligence solutions as we prepare for the AI-900 AI Fundamentals exam.
 

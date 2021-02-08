@@ -1,5 +1,5 @@
 ---
-title: "Azure CLI"
+title: "CLI"
 description: "Overview of the Azure CLI, plus how to make use of JMESPAH queries, followed by integration into Bash scripting."
 author: [ "Richard Cheney" ]
 github: [ "richeney" ]

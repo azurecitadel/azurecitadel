@@ -16,15 +16,19 @@ canonifyURLs = true
   # Side menu is controlled via frontmatter
 
   [[menu.section]]
+    name = "Artificial Intelligence"
+    url = "/ai"
+
+  [[menu.section]]
     name = "Azure Arc"
     url = "/arc"
 
   [[menu.section]]
-    name = "Azure CLI"
+    name = "CLI"
     url = "/cli"
 
   [[menu.section]]
-    name = "Azure Policy"
+    name = "Policy"
     url = "/policy"
 
   [[menu.section]]
@@ -40,8 +44,8 @@ canonifyURLs = true
     url = "/packeransible"
 
   [[menu.section]]
-    name = "Videos"
-    url = "/videos"
+    name = "WVD"
+    url = "/wvd"
 
 [taxonomies]
   category = "categories"
