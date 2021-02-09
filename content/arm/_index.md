@@ -1,9 +1,9 @@
 ---
-title: "ARM Templates"
+title: "ARM"
 description: "Set of labs for those who want to create their own ARM templates."
 menu:
   side:
-    identifier: 'ARM Templates'
+    identifier: arm
 ---
 
 ## Introduction
