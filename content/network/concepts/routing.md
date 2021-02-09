@@ -5,10 +5,10 @@ author: [ "Binal Shah" ]
 description: "Understand how Azure routes traffic in a virtual network and how user defined routes can be used to change the default behaviour."
 weight: 7
 series:
- - network
+ - network-concepts
 menu:
   side:
-    parent: 'network'
+    parent: 'network-concepts'
 ---
 
 ## Lab Overview
@@ -17,7 +17,7 @@ Let’s look at how routing and custom routes work in a virtual network. We spun
 
 ## Lab Diagram
 
-![Diagram](/network/images/lab07-01-summary.png)
+![Diagram](/network/concepts/images/lab07-01-summary.png)
 
 ## Create a route table
 

@@ -5,10 +5,10 @@ author: [ "Binal Shah" ]
 description: "Need a L4 ACL to control permitted flows? Create Network Security Groups (NSGs) using Application Security Groups (ASGs)."
 weight: 2
 series:
- - network
+ - network-concepts
 menu:
   side:
-    parent: 'network'
+    parent: 'network-concepts'
 ---
 
 ## Lab Overview
@@ -17,7 +17,7 @@ In this lab, we will see how to create network security groups. Network Security
 
 ### Lab Diagram
 
-![Diagram](/network/images/lab02-01-diagram.png)
+![Diagram](/network/concepts/images/lab02-01-diagram.png)
 
 ## Create application security groups
 
@@ -111,7 +111,7 @@ Create a security rule to allow SSH and RDP to the management servers.
 1. Go to Settings &rarr; Network interfaces.
 1. Click on the three dots … on the right and click Dissociate.
 
-    ![Disassociate](/network/images/lab02-02-disassociate.png)
+    ![Disassociate](/network/concepts/images/lab02-02-disassociate.png)
 
 1. Repeat above steps for each VM created with a basic network security group
 
@@ -142,4 +142,4 @@ We learnt how to configure network security groups and application security grou
 
 Complete additional flows as given in the diagram below to restrict traffic further within your virtual network. Make sure only this traffic is allowed.
 
-![Challenge](/network/images/lab02-03-challenge.png)
+![Challenge](/network/concepts/images/lab02-03-challenge.png)

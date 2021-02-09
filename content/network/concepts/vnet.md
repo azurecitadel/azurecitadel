@@ -5,10 +5,10 @@ author: [ "Binal Shah" ]
 description: "Create a Virtual Network with two subnets, and add a VM to each."
 weight: 1
 series:
- - network
+ - network-concepts
 menu:
   side:
-    parent: 'network'
+    parent: 'network-concepts'
 ---
 
 ## Lab Overview
@@ -19,7 +19,7 @@ It is expected you have access to Azure portal and have an account and subscript
 
 ### Lab Diagram
 
-![diagram](/network/images/lab01-01-diagram.png)
+![diagram](/network/concepts/images/lab01-01-diagram.png)
 
 ## Create a virtual network
 
@@ -57,12 +57,12 @@ It is expected you have access to Azure portal and have an account and subscript
 
 1. Leave the rest as default and select **Review + Create**. Review the values. Your output should look like this:
 
-    ![validation](/network/images/lab01-02-validation.png)
+    ![validation](/network/concepts/images/lab01-02-validation.png)
 
 1. Click **Create**
 1. Once the deployment is complete, go to the search bar at the top and type ‘Virtual Networks’ (`G`+`/`). Select **Virtual Networks** in the search results. You should see vnet1 show up in the list.
 
-    ![resource](/network/images/lab01-03-resource.png)
+    ![resource](/network/concepts/images/lab01-03-resource.png)
 
 ## Create virtual machines
 
@@ -106,7 +106,7 @@ Create a virtual machine in the virtual network.
 
 1. Select **Next : Disks**
 1. In **Create a virtual machine - Disks**, leave the defaults and select **Next : Networking**
-1. In **Create a virtual machine - Networking**, select this information:
+1. In **Create a virtual machine - network-conceptsing**, select this information:
 
     **Setting** | **Value**
     ---: | ---
@@ -168,7 +168,7 @@ Use a web browser of your choice to view the default welcome page. Type the publ
 
 Verify the web page loads successfully.
 
-![apache](/network/images/lab01-04-apache.png)
+![apache](/network/concepts/images/lab01-04-apache.png)
 
 ## Next
 

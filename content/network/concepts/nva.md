@@ -5,10 +5,10 @@ author: [ "Binal Shah" ]
 description: "Deploy a Cisco network virtual appliance from the Azure Marketplace."
 weight: 6
 series:
- - network
+ - network-concepts
 menu:
   side:
-    parent: 'network'
+    parent: 'network-concepts'
 ---
 
 ## Lab Overview
@@ -46,7 +46,7 @@ Let’s look at how to deploy an NVA on Azure. We will deploy a Cisco CSR 1000v 
 1. Go to the Virtual machines page. You should see the VM 'csr1' listed.
 1. Once the status of the VM changes to 'Running', click on the name. This takes you to the VM overview page.
 
-    ![Summary](/network/images/lab06-01-summary.png)
+    ![Summary](/network/concepts/images/lab06-01-summary.png)
 
 ## Connect
 

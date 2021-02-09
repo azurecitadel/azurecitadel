@@ -5,10 +5,10 @@ author: [ "Binal Shah" ]
 description: "Connect two isolated vNets using vNet Peering and validate routing and connectivity."
 weight: 4
 series:
- - network
+ - network-concepts
 menu:
   side:
-    parent: 'network'
+    parent: 'network-concepts'
 ---
 
 ## Lab Overview
@@ -17,7 +17,7 @@ This lab covers how to enable connectivity between two virtual networks. Each vi
 
 ### Lab Diagram
 
-![Diagram](/network/images/lab04-01-diagram.png)
+![Diagram](/network/concepts/images/lab04-01-diagram.png)
 
 ## Check connectivity between virtual networks
 
@@ -42,7 +42,7 @@ So far you have configured two virtual networks from labs 1 and 3. Let’s try t
 1. In the Search box at the top of the Azure portal, begin typing vnet1. When **vnet1** appears in the search results, select it.
 1. Go to **Settings &rarr; Peerings**, and then select **+ Add**, as shown in the following picture:
 
-    ![add](/network/images/lab04-02-add.png)
+    ![add](/network/concepts/images/lab04-02-add.png)
 
 1. Enter, or select, the following information, accept the defaults for the remaining settings, and then select **OK**
 
@@ -57,18 +57,18 @@ So far you have configured two virtual networks from labs 1 and 3. Let’s try t
 
 1. Verify the peering status. This should show as Connected.
 
-    ![verify](/network/images/lab04-03-verify.png)
+    ![verify](/network/concepts/images/lab04-03-verify.png)
 
     Now verify the routes in vnet1.
 
 1. Go to the virtual machine vnet1-vm-mgmt1 page and go to Settings &rarr; Networking tab
 1. Click on the network interface name. See the screenshot below to find the NIC name.
 
-    ![verify](/network/images/lab04-04-nic.png)
+    ![verify](/network/concepts/images/lab04-04-nic.png)
 
 1. The route table should show a route added to the table for network 10.0.0.0/16. The next hop type for this route shows Vnet peering.
 
-    ![next hop](/network/images/lab04-05-nexthop.png)
+    ![next hop](/network/concepts/images/lab04-05-nexthop.png)
 
 ## Verify reachability between peered vNets
 
