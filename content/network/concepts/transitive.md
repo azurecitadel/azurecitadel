@@ -5,10 +5,10 @@ author: [ "Binal Shah" ]
 description: "Understand the implications of transitive peering."
 weight: 5
 series:
- - network
+ - network-concepts
 menu:
   side:
-    parent: 'network'
+    parent: 'network-concepts'
 ---
 
 ## Lab Overview
@@ -17,7 +17,7 @@ Now that we have successfully setup a virtual network peering, let’s see how t
 
 ## Lab Diagram
 
-![Diagram](/network/images/lab05-01-diagram.png)
+![Diagram](/network/concepts/images/lab05-01-diagram.png)
 
 ## Create a vNet
 
@@ -80,7 +80,7 @@ Next, let’s peer virtual networks vnet-hub and vnet2.
 1. In the Search box at the top of the Azure portal, begin typing vnet2. When vnet2 appears in the search results, select it.
 1. Go to Settings  Peerings, and then select + Add, as shown in the following picture:
 
-    ![Add](/network/images/lab05-02-add.png)
+    ![Add](/network/concepts/images/lab05-02-add.png)
 
 1. Enter, or select, the following information, accept the defaults for the remaining settings, and then select OK.
 

@@ -5,10 +5,10 @@ author: [ "Binal Shah" ]
 description: "Use the CLI commands to create a vNet, a VM and then attach an NSG to a subnet."
 weight: 3
 series:
- - network
+ - network-concepts
 menu:
   side:
-    parent: 'network'
+    parent: 'network-concepts'
 ---
 
 ## Lab Overview
@@ -17,13 +17,13 @@ In this lab, we will learn how to use Azure CLI commands from the cloud shell to
 
 ### Lab Diagram
 
-![Diagram](/network/images/lab03-01-diagram.png)
+![Diagram](/network/concepts/images/lab03-01-diagram.png)
 
 ## Start Cloud Shell
 
 1. Launch Cloud Shell from the top navigation of the Azure portal
 
-    ![Portal](/network/images/lab03-02-cloudshell1.png)
+    ![Portal](/network/concepts/images/lab03-02-cloudshell1.png)
 
 1. Select a subscription to create a storage account and Microsoft Azure Files share
 1. Select "Create storage"
@@ -33,7 +33,7 @@ In this lab, we will learn how to use Azure CLI commands from the cloud shell to
 
 Check that the environment drop-down from the left-hand side of shell window says Bash.
 
-![Portal](/network/images/lab03-02-cloudshell1.png)
+![Portal](/network/concepts/images/lab03-02-cloudshell1.png)
 
 We are ready to run CLI commands to create our virtual network.
 
