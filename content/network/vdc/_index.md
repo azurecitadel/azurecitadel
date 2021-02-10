@@ -20,7 +20,7 @@ The labs use a Cisco network virtual appliance. Feel free to swap it out for you
 
 ## Other topologies
 
-Hub and spoke is only one topology type for your landing zones. Some prefer the flexibility of full or partial meshes. In multi tenanted environments (e.g. ISVs, or central IT business unit in large organisations) then more comples topologies can come into play. Some like a one or more separate management vNets with one way peers to select vNets. There is some good info in the network section of the [architecture](https://aka.ms/architecture) docs. For those who don't want the hassle of managing the hub and all of the peering config and UDRs then look at the [vWAN](https://aka.ms/vwan). Finally, for the largest customers then check out the Enterprise Scale landing zone
+Hub and spoke is only one topology type for your landing zones. Some prefer the flexibility of full or partial meshes. In multi tenanted environments (e.g. ISVs, or central IT business unit in large organisations) then more comples topologies can come into play. Some like one or more separate management vNets with one way peers to select vNets. There is some good info in the network section of the [architecture](https://aka.ms/architecture) docs. For those who don't want the hassle of managing the hub and all of the peering config and UDRs then look at the [vWAN](https://aka.ms/vwan). Finally, for the largest customers then check out the Enterprise Scale landing zone
 
 ## Pre-requisites
 
