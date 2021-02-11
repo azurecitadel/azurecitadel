@@ -4,7 +4,7 @@ description: "The hack will be run over three days. Here is the rough timetable.
 layout: single
 weight: 2
 series:
- - es
+ - es-hack
 ---
 
 ## Dates

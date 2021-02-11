@@ -4,7 +4,7 @@ description: "Attending an Enterprise Scale partner hacks? Get these done before
 layout: single
 weight: 1
 series:
- - es
+ - es-hack
 ---
 
 ## Pre-reading
