@@ -6,13 +6,36 @@
 		<article class="markdown-body col-md-10 col-lg-7 mx-auto">
 			<h1>Ooops!</h1>
 			<div class="lead-mktg mb-5">It looks like this page doesn't exist (yet!).</div>
-			<a href="{{ .Site.BaseURL }}" class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">Return home</a>
 
+			<div class="col-lg-12 mt-6">
+				<h3 class="mb-3">Tried the archive?</h3>
+				<div class="mb-5">You can see if this page exists using the archive URL <a id="archive-url" href="https://archive.azurecitadel.com">https://archive.azurecitadel.com</a></a></div>
 
-			<a href="https://github.com/azurecitadel/azurecitadel/discussions/" class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">Start a discussion</a>
-			
+				<div>
+					<p>Otherwise you can always
+					<ul>
+						<li><a href="{{ .Site.BaseURL }}"
+								class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">Return home</a></li>
+						<li> <a href="https://github.com/azurecitadel/azurecitadel/discussions/"
+								class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">Start a discussion</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
 		</article>
 	</div>
 </section>
 
+{{ end }}
+
+{{ define "embedded-script" }}
+<script type="application/javascript">
+document.addEventListener('DOMContentLoaded', function(event) {
+	const link = document.getElementById("archive-url");
+	const archiveURL = "https://archive.azurecitadel.com" + window.location.pathname;
+	link.href = archiveURL;
+	link.innerText = archiveURL;
+});
+</script>
 {{ end }}
