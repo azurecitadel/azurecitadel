@@ -7,6 +7,8 @@ menu:
   side:
     identifier: network-concepts
     parent: network
+aliases:
+    - /infra/networking/
 ---
 
 ## Introduction

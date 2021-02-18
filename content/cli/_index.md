@@ -6,6 +6,8 @@ github: [ "richeney" ]
 menu:
   side:
     identifier: cli
+aliases:
+    - /prereqs/cli/
 ---
 
 ## Introduction

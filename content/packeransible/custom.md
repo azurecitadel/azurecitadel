@@ -8,6 +8,8 @@ series:
 menu:
   side:
     parent: packeransible
+aliases:
+    - /automation/packeransible/lab5/
 ---
 
 ## Introduction

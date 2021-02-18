@@ -9,6 +9,8 @@ series:
 menu:
   side:
     parent: policy-basics
+aliases:
+    - /automation/policy/mg/
 ---
 
 ## Introduction

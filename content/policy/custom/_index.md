@@ -7,6 +7,9 @@ menu:
   side:
     identifier: 'policy-custom'
     parent: 'policy'
+aliases:
+    - aliases:
+    - /automation/policy/custom/
 ---
 
 ## Introduction

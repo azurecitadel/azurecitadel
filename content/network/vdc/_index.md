@@ -8,6 +8,8 @@ menu:
     identifier: network-vdc
     parent: network
 weight: 2
+aliases:
+    - /infra/vdc/
 ---
 
 ## Introduction
