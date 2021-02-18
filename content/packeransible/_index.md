@@ -6,6 +6,8 @@ github: [ "richeney" ]
 menu:
   side:
     identifier: packeransible
+aliases:
+    - /automation/packeransible/
 ---
 
 ## Introduction

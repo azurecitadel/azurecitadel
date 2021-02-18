@@ -9,6 +9,8 @@ series:
 menu:
   side:
     parent: cli
+aliases:
+    - /prereqs/cli/cli-2-firststeps/
 ---
 
 ## Logging into Azure

@@ -9,6 +9,8 @@ series:
 menu:
   side:
     parent: network-vdc
+aliases:
+    - /infra/vdc/lab2/
 ---
 
 ## Introduction

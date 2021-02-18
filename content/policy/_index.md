@@ -4,6 +4,8 @@ description: "Governance Labs for Azure Policy"
 menu:
   side:
     identifier: policy
+aliases:
+    - /automation/policy/
 ---
 
 ## Introduction
