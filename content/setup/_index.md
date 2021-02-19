@@ -22,7 +22,7 @@ If you do not have a GitHub ID already then sign up.
 
 ## MacOS or Linux
 
-If you are working on MacOS or a Linux distro then great. You can just use Bash in your preferred terminal. Skip the WSL step and install the [binaries](#binaries).
+If you are working on MacOS or a Linux distro then you can just use Bash in your preferred terminal. Skip the WSL step and install the [binaries](#binaries).
 
 ## Windows 10
 

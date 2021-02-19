@@ -2,9 +2,13 @@
 title: "Agenda"
 description: "The hack will be run over three days. Here is the rough timetable."
 layout: single
-weight: 2
+draft: true
+weight: 3
 series:
  - es-hack
+menu:
+  side:
+    parent: es-hack
 ---
 
 ## Dates
