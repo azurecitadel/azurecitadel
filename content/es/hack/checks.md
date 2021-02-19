@@ -1,5 +1,5 @@
 ---
-title: "Access Checks"
+title: "Checks"
 description: "Run through these commands to check that you have the right permissions in your tenant to deploy Enterprise Scale onto your multiple subscriptions. "
 layout: single
 weight: 2
