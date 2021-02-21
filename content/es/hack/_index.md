@@ -5,4 +5,5 @@ menu:
   side:
     parent: es
     identifier: es-hack
+weight: 1
 ---
