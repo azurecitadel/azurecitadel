@@ -5,10 +5,10 @@ layout: single
 draft: false
 weight: 3
 series:
- - es-hack
+ - es
 menu:
   side:
-    parent: es-hack
+    parent: es
 ---
 
 ## Day One

@@ -5,10 +5,10 @@ layout: single
 weight: 1
 draft: false
 series:
- - es-hack
+ - es
 menu:
   side:
-    parent: es-hack
+    parent: es
 ---
 
 

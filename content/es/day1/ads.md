@@ -3,12 +3,12 @@ title: "Day 1 Challenge"
 description: "Architectural Design Session for Azure Baristas."
 layout: single
 draft: true
-weight: 8
+weight: 5
 series:
- - es-hack
+ - es-hack-day1
 menu:
   side:
-    parent: es-hack
+    parent: es-hack-day1
 ---
 
 ## Introduction

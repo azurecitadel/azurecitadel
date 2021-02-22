@@ -3,12 +3,12 @@ title: "Deploy to Azure"
 description: "Follow along with the default deployment of Enterprise Scale with one of our CSAs."
 layout: single
 draft: true
-weight: 6
+weight: 3
 series:
- - es-hack
+ - es-hack-day1
 menu:
   side:
-    parent: es-hack
+    parent: es-hack-day1
 ---
 
 ## Pre-reqs

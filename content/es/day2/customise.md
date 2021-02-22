@@ -3,12 +3,12 @@ title: "Day 2 Challenge"
 description: "Manually customise the default deployment to match your design."
 layout: single
 draft: true
-weight: 10
+weight: 2
 series:
- - es-hack
+ - es-hack-day2
 menu:
   side:
-    parent: es-hack
+    parent: es-hack-day2
 ---
 
 **DRAFT**

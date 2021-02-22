@@ -3,10 +3,12 @@ title: "Useful Links"
 description: "Set of useful links for Enterprise Scale"
 layout: single
 draft: false
-weight: 2
+weight: 9
 menu:
   side:
     parent: es
+series:
+ - es
 ---
 
 ## Docs

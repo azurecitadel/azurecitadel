@@ -3,12 +3,12 @@ title: "Azure Baristas"
 description: "Background information for the Azure Baristas scenario."
 layout: single
 draft: true
-weight: 7
+weight: 4
 series:
- - es-hack
+ - es-hack-day1
 menu:
   side:
-    parent: es-hack
+    parent: es-hack-day1
 ---
 
 ## Company background & information
