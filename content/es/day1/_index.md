@@ -24,7 +24,6 @@ aliases:
 | 11:15 | Follow along with the Deploy to Azure demo |
 | 11:45 | Hack kick off - Azure Baristas scenario |
 | 12:00 | **Hacking - Architecture Design Session** |
-| 14:00 | _Lightning Talk: Enterprise Scale Roadmap_ |
 | 15:00 | Present design to your proctor |
 | 15:30 | Q&A and wrap up |
 
