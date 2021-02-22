@@ -8,5 +8,21 @@ menu:
 series:
  - es
 weight: 7
-draft: true
+draft: false
 ---
+
+## Agenda
+
+| **Time** | **Description**
+|---|---|
+| 09:30 | Day 3 kick off |
+| 09:45 | Deployment options for Enterprise Scale |
+| 10:15 | **Hacking - Azure Baristas' Enterprise Scale deployment with the Terraform module** |
+| | _--or--_ |
+| | **Hacking - Managing Azure Baristas' Enterprise Scale with AzOps** |
+| 11:30 | _Lightning Talk: Subscription vending machine_ (optional) |
+| 13:30 | **Sharing session - 2-3 slide presentation from each team** |
+| 14:00 | **Hacking - continued** |
+| 15:30 | Q&A and wrap up |
+
+## Content
