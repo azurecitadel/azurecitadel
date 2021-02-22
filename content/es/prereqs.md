@@ -126,6 +126,7 @@ az role assignment delete --role Reader --assignee $groupObjectId
 az ad group delete --group eshack-deleteme
 az account management-group delete --name eshack-deleteme
 ```
+
 ## Pre-reading
 
 If you are attending an Enterprise Scale partner hack and need a basic overview of using git, or a grounding in the basic concepts in Enterprise Scale, then use these links:
