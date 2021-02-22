@@ -9,6 +9,8 @@ series:
 menu:
   side:
     parent: es
+aliases:
+    - /es/hack/agenda/
 ---
 
 ## Day One
