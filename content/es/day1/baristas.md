@@ -23,8 +23,8 @@ menu:
 * Currently a typical VMware vSphere estate in each of the regional HQs either in the offices or in co-lo DCs in the same countries, all have a DR DC in the same country too.
 * Around 10,000 VMs worldwide
 * Due to COVID-19 – heavy investment in online shop/website as main revenue stream for business
-* Developed by teams across the globe – local teams focus on regional specific features/offers/promos
-* Another development team is developing a separate payment service which is subject to PCI-DSS which will be used by the online shop/website
+  * Developed by teams across the globe – local teams focus on regional specific features/offers/promos
+  * Another development team is developing a separate payment service which is subject to PCI-DSS which will be used by the online shop/website
 * Global MPLS connecting all sites with regional DC hubs acting as internet breakout points. No local breakouts at each site
 * Already utilising Microsoft 365 services (EOL, SharePoint, Teams etc.)
 
@@ -35,7 +35,7 @@ menu:
 * Azure EA Prepayment (aka Commit): $10 million over 3 years
 * Azure Subscriptions: 3 subscriptions in total that developers have been using to test and play in. Can be deleted if required.
 * Azure AD Tenant: azurebaristas.onmicrosoft.com
-* Synced with on-premise AD DS Domain: azbaristas.local via Azure AD Connect, Password Hash Sync Enabled & SSO
+  * Synced with on-premise AD DS Domain: azbaristas.local via Azure AD Connect, Password Hash Sync Enabled & SSO
 * Centralised Network team that manages all networking globally with strong skills in the Citrix networking space (ADC, NetScaler etc.)
 * All IT staff are trained and certified in Microsoft Azure and have basic to intermediate experience with ARM Templates, Git, GitHub/Azure DevOps.
 * A CCoE has been formed between 3 members of each IT team from each regional HQ – total of 12 members – now at ‘Ready’ phase of CAF
