@@ -2,7 +2,7 @@
 title: "Azure Baristas"
 description: "Background information for the Azure Baristas scenario."
 layout: single
-draft: true
+draft: false
 weight: 4
 series:
  - es-hack-day1
