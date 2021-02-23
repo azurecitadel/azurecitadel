@@ -47,15 +47,28 @@ Required:
 
 > You can skip the Packer install if you wish.
 
-## Checks
+## Tenant level permissions
 
-This hack will require someone in the team to have high levels of access as we will be working with security groups, management groups and RBAC and policy assignments. Ideally you will be Global Admin in your Azure AD tenant and Owner of your subscription.
+This hack will require someone in the team to have high levels of access as we will be working with security groups, management groups and RBAC and policy assignments. You will need someone in you team to have Global Admin in your Azure AD tenant
+
+Follow the instructions to elevate the Global Admin to
+
+1. enable User Access Administrator at the tenant root
+1. add Owner role to allow the tenant scope template to work
+
+Instructions:
+
+* [Configure Azure permissions for ARM tenant deployments](https://github.com/Azure/Enterprise-Scale/blob/main/docs/EnterpriseScale-Setup-azure.md)
 
 **Please test that you have the correct AAD and subscription permissions in advance of the hack.**
 
 If you get any error messages (e.g. _Insufficient privileges to complete the operation_) then speak to the Global Admin and/or Owner to request that your access permissions are increased.
 
 > Alternatively you may need to create a separate tenant and generate a few [Microsoft IDs](https://signup.live.com/) and [trial subscriptions](https://azure.microsoft.com/free/).
+
+The root (/) permissions can removed after the initial deployment as long as the security principal has the appropriate management group and subscription level permissions for lifecycle management.
+
+## Checks
 
 Run through the following tests to check your permissions.
 
