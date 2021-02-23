@@ -18,8 +18,7 @@ aliases:
 | **Time** | **Description**
 |---|---|
 | 09:30 | Welcome and introduction |
-| 10:00 | What is Enterprise Scale?
-| 10:30 | Enterprise Scale design principals and reference architecture overview |
+| 10:00 | Enterprise Scale design principals and reference architecture overview |
 | 11:00 | _--break--_ |
 | 11:15 | Follow along with the Deploy to Azure demo |
 | 11:45 | Hack kick off - Azure Baristas scenario |
