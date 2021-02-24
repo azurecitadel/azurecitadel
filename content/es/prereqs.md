@@ -1,6 +1,6 @@
 ---
 title: "Prereqs"
-description: "Attending an Enterprise Scale partner hacks? Get these done before it starts and then check you have the right access."
+description: "Attending an Enterprise Scale partner hack? Get these done before it starts and then check you have the right access."
 layout: single
 weight: 1
 draft: false
