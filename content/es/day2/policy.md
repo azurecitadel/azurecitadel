@@ -3,7 +3,7 @@ title: "Azure Policy"
 description: "Overview of Azure Policy in Enterprise Scale."
 layout: single
 draft: true
-weight: 1
+weight: 2
 series:
  - es-hack-day2
 menu:
@@ -11,8 +11,6 @@ menu:
     parent: es-hack-day2
 ---
 
-**DRAFT**
-
-Let's deep dive.
+**TO BE RECORDED< UPLOADED AND ADDED**
 
 {{< youtube id="-ywNdUXOuc8" autoplay="false">}}
