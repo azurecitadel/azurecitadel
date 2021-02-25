@@ -48,5 +48,5 @@ The primary objective is to build out the architecture using the Infrastructure 
 * [Official module](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest) - recommended
 * [Community module - management groups](https://github.com/terraform-azurerm-modules/terraform-azurerm-management-groups)
 * [Community module - policy definitions](https://github.com/terraform-azurerm-modules/terraform-azurerm-azopsreference)
-* [Community CI/CD example](https://github.com/terraform-azurerm-examples/terraform-enterprisescale-starter)
+* [Subscription vending machine](https://github.com/terraform-azurerm-examples/terraform-enterprisescale-starter) - community CI/CD pipeline
 * [aztfmod](https://github.com/Azure/caf-terraform-landingzones) - complete and opinionated CAF solution, not 100% ES aligned

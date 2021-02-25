@@ -37,7 +37,7 @@ There are a number of choices with Terraform, with the official module, communit
 | [Enterprise Scale Terraform module](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest) | Recommended, official, extensible archetypes |
 | [Management Groups module](https://github.com/terraform-azurerm-modules/terraform-azurerm-management-groups) | Community module |
 | [Policy Definitions module](https://github.com/terraform-azurerm-modules/terraform-azurerm-azopsreference) | Community module |
-| [CI/CD pipeline](https://github.com/terraform-azurerm-examples/terraform-enterprisescale-starter) | Example community pipeline |
+| [Subscription vending machine](https://github.com/terraform-azurerm-examples/terraform-enterprisescale-starter) | Example community templates and CI/CD pipeline |
 | [CAF aztfmod repo](https://github.com/Azure/caf-terraform-landingzones) | Complete, opinionated, not 100% ES aligned |
 
 ## Azure Policy
