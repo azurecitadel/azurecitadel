@@ -2,7 +2,7 @@
 title: "Example"
 description: "There is no 100% right answer to the scenario, but here is an example solution."
 layout: single
-draft: true
+draft: false
 weight: 1
 series:
  - es-hack-day2
@@ -15,7 +15,7 @@ menu:
 
 There are a number of requirements in the Azure Barista's scenario that force you to deviate a little from the default management group structure, as defined by Enterprise Scale. You will also need to create some additional custom policies to meet the customer's specific needs. This is a very common thing to do after you have run through a design workshop.
 
-On this page we will run through an example structure and explain the reason's why these have been added.
+On this page we will run through an example structure and explain the reasons why these decisions have been made.
 
 ## EA enrolment and AAD tenants
 
@@ -50,7 +50,6 @@ The Management Group structure should look similar to the below example:
   - UAE North
   - East US
 
-
 ![Azure Baristas VWAN Diagram](/es/day2/images/az-bar-vwan-example.png)
 
 ## Management and monitoring
@@ -67,4 +66,4 @@ The Management Group structure should look similar to the below example:
 
 ## Platform automation and DevOps
 
-Not in scope, so far, for the Azure Baristas scenario.
+Not currently in scope for the Azure Baristas scenario.
