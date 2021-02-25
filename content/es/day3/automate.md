@@ -50,11 +50,3 @@ The primary objective is to build out the architecture using the Infrastructure 
 * [Community module - policy definitions](https://github.com/terraform-azurerm-modules/terraform-azurerm-azopsreference)
 * [Community CI/CD example](https://github.com/terraform-azurerm-examples/terraform-enterprisescale-starter)
 * [aztfmod](https://github.com/Azure/caf-terraform-landingzones) - not fully ES aligned
-
-## Feedback
-
-Your feedback on hacks is vital to prove their value. Without it they may not exist.
-
-* [aka.ms/EnterpriseScalePartnerHack](https://aka.ms/EnterpriseScalePartnerHack)
-
-Please let us know what you got out of the hack and where we can look to improve. And thank you for taking the time out to attend!
