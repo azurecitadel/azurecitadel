@@ -33,7 +33,7 @@ The primary objective is to build out the architecture using the Infrastructure 
 1. Implement a canary management group branch
     * You can combine this with the primary objective if you want to retain the manually deployed system for comparison
 1. Implement a branch protection strategy to control changes to production
-1.Implement a subscription vending machine
+1. Implement a subscription vending machine
     * You can mock up the subscription creation rather than using the real APIs
 
 ## Links
