@@ -49,4 +49,4 @@ The primary objective is to build out the architecture using the Infrastructure 
 * [Community module - management groups](https://github.com/terraform-azurerm-modules/terraform-azurerm-management-groups)
 * [Community module - policy definitions](https://github.com/terraform-azurerm-modules/terraform-azurerm-azopsreference)
 * [Community CI/CD example](https://github.com/terraform-azurerm-examples/terraform-enterprisescale-starter)
-* [aztfmod](https://github.com/Azure/caf-terraform-landingzones) - not fully ES aligned
+* [aztfmod](https://github.com/Azure/caf-terraform-landingzones) - complete and opinionated CAF solution, not 100% ES aligned
