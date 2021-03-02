@@ -9,6 +9,7 @@ series:
 menu:
   side:
     parent: es
+    identifier: es-prereqs
 aliases:
     - /es/hack/prereqs/
     - /es/hack/checks/

@@ -62,7 +62,7 @@ stress
 
 > You may want to add `export JQ_COLORS="1;90:0;35:0;35:0;91:0;33:1;37:1;37"` to your ~/.bashrc file to improve the colours.
 
-## Install the Azure CLI
+## Azure CLI
 
 You will need the Azure CLI.
 
@@ -184,3 +184,56 @@ Check:
 ```bash
 packer --version
 ```
+
+## Ansible
+
+Ansible is used in a few of the labs.  per the [Ansible docs](https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html#microsoft-azure-guide), Ansible on Azure is installed using the Python installer, pip. It is preinstalled in the Cloud Shell's container image.
+
+* Install PIP
+
+    ```bash
+    sudo apt update && sudo apt install -y python3-pip
+    ```
+
+* Install Ansible
+
+    ```bash
+    pip3 install ansible[azure]
+    ```
+
+The remaining steps are option if you are familiar with Ansible and wish to configure it yourself. If you would like a default config then feel free to continue.
+
+* Create the ansible config file and directory structure
+
+    ```bash
+    umask 022
+
+    cat << ANSIBLE_CFG > ~/.ansible.cfg
+    [defaults]
+    inventory = ~/ansible/hosts
+    roles_path = ~/ansible/roles
+    deprecation_warnings=False
+    nocows = 1
+    ANSIBLE_CFG
+
+    mkdir -pm 755 ~/ansible/roles && cd ~/ansible
+
+    cat << ANSIBLE_HOSTS > ~/ansible/hosts
+    [localhost]
+    127.0.0.1
+
+    ANSIBLE_HOSTS
+    ```
+
+* Install the Ansible collection for Azure
+
+    ```bash
+    ansible-galaxy collection install azure.azcollection
+    ```
+
+* Install Azure modules
+
+    ```bash
+    wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
+    sudo pip3 install -r requirements-azure.txt
+    ```

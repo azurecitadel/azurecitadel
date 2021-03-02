@@ -1,25 +1,35 @@
 ---
-title: "Arc"
-description: "Use Azure Arc to extend the Azure management plane to cover VMs and SQL servers in other locations."
+title: "Useful Links"
+description: "Set of useful links for Azure Arc"
+layout: single
+draft: false
 menu:
   side:
-    identifier: arc
+    parent: arc-servers
+    identifier: arc-servers-links
+series:
+ - arc-servers
+weight: 9
 ---
 
-## Introduction
+## Core Links
 
-This is a placeholder for future hack challenge content.
-
-## Public Links
-
-Here are a selection of other useful public links for Azure Arc:
+Here are the main links for Azure Arc:
 
 | **Site** | **Description** |
 |---|---|
 | [aka.ms/AzureArc](https://aka.ms/AzureArc) | Main product page |
 | [aka.ms/AzureArcLearn](https://aka.ms/AzureArcLearn) | Learning Paths |
-| **[Azure Arc Jumpstart](https://azurearcjumpstart.io)** | **Multiple labs with a range of Arc  functionality demos** |
 | [aka.ms/AzureArcDocs](https://aka.ms/AzureArcDocs) | Azure Docs for Arc |
+
+## Learning
+
+| **Site** | **Description** |
+|---|---|
+| **[Azure Arc Jumpstart](https://azurearcjumpstart.io)** | **Multiple labs with a range of Arc functionality** |
+| [WhatTheHack / 025-ArcEnabledServers](https://github.com/microsoft/WhatTheHack/tree/master/025-ArcEnabledServers) | Short challenge hack for Arc Enabled Servers |
+| [WhatTheHack / 026-ArcEnabledKubernetes](https://github.com/microsoft/WhatTheHack/tree/master/025-ArcEnabledServers) | Short challenge hack for Arc Enabled Kubernetes |
+| <https://azurecitadel.com/arc-servers/> | This page |
 | [aka.ms/AzureArcSkilling](https://aka.ms/AzureArcSkilling) | Demo videos |
 
 The Azure Arc Jumpstart site is highly recommended for going a little deeper with many of the capabilities that Azure Arc provides and how to create your own demo environments. It covers Azure Arc for Servers (including SQL servers), Azure Arc for Kubernetes and Azure Arc for Data Services.
