@@ -1,14 +1,14 @@
 ---
-title: "Challenge: Management baseline"
-description: "Use Log Analytics and Azure Automation to enable update management and collect inventory."
+title: "Management"
+description: "Create a management baseline for the connected machines. Enable update management and inventory."
 layout: single
 draft: false
-weight: 4
-series:
- - arc-servers
 menu:
   side:
     parent: arc-servers
+series:
+ - arc-servers
+weight: 6
 ---
 
 ## Introduction
@@ -33,7 +33,7 @@ In this challenge you will implement a update management strategy and report inv
 * Review the software and services inventory
 * (optional) Install additional software to an Azure Arc virtual machine, view the software in the Inventory
 
-## Log Analytics 
+## Log Analytics
 
 * (optional) Write a Log Analytics query to report the installed Windows Updates and the needed Windows Updates on Azure Arc connected Windows virtual machines
 * (optional) Write a Log Analytics query to report the Python version on Azure Arc connected Linux virtual machines

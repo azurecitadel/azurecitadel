@@ -1,14 +1,14 @@
 ---
-title: "Challenge: Azure Policy"
-description: "Use Azure Policy to manage governance of Azure Arc Virtual Machines."
+title: "Azure Policy"
+description: "Use Azure Policy to automate agent deployments and tagging for your Azure Arc Virtual Machines."
 layout: single
 draft: false
-weight: 3
-series:
- - arc-servers
 menu:
   side:
     parent: arc-servers
+series:
+ - arc-servers
+weight: 3
 ---
 
 ## Introduction
@@ -27,6 +27,7 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
 ## Azure Policy
 
 Assign Policy to:
+
 * Deploy the Log Analytics agent to the Azure Arc virtual machines
 * Deploy the Dependency agent to the Azure Arc virtual machines
 * Inherit Tags from the Resource Group (or Subscription) to the Azure Arc virtual machines
