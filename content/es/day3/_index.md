@@ -1,6 +1,7 @@
 ---
 title: "Day 3"
 description: "Sessions on day three of the enterprise-scale hack where you'll work with automation tooling and repos for deploying enterprise scale."
+layout: series
 menu:
   side:
     parent: es

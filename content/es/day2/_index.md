@@ -1,6 +1,7 @@
 ---
 title: "Day 2"
 description: "Sessions on day two of the enterprise-scale hack, customising the default deployment to match your design."
+layout: series
 menu:
   side:
     parent: es

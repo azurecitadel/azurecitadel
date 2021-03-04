@@ -45,7 +45,7 @@
                 {{ end }}
             {{ end }}
 
-            {{ range $wholeSeries }}
+            {{ range (index .Site.Taxonomies.series ($.Param "menu.side.identifier")).Pages.ByWeight }}
                 <a class="link-with-intro Bump-link--hover no-underline" href="{{.Permalink}}">
                     <h4 class="link-with-intro-title">{{.Title}}</h4>
                 </a>

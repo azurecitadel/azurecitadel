@@ -1,6 +1,7 @@
 ---
 title: "Day 1"
 description: "Sessions on day one of the enterprise-scale hack for a design session around our Azure Baristas scenario."
+layout: series
 menu:
   side:
     parent: es
