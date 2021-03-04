@@ -237,3 +237,9 @@ The remaining steps are option if you are familiar with Ansible and wish to conf
     wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
     sudo pip3 install -r requirements-azure.txt
     ```
+
+## PowerShell
+
+Most of this site has a slight bias towards OSS technologies rather than traditional Windows Server and PowerShell. Most Linux users will prefer to use the Azure CLI. Having said that, it is always useful to have the PowerShell Az module installed as there are some operations that can only be achieved with PowerShell cmdlets. The good news is that PowerShell and the PowerShell Az module are cross platform.
+
+* [Install PowerShell & the Az module](https://docs.microsoft.com/powershell/azure/install-az-ps)
