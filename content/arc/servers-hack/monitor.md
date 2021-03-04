@@ -1,14 +1,14 @@
 ---
-title: "Manual Onboarding"
-description: "Work through the first challenge, onboarding a pair of \"on prem\" machines into Azure and adding agents."
+title: "Monitoring"
+description: "Configure the new Azure Monitoring Agent and Data Collection Rules. Optionally integrate with Azure Security Center and Azure Sentinel."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers
+    parent: arc-servers-hack
 series:
- - arc-servers
-weight: 2
+ - arc-servers-hack
+weight: 5
 ---
 
 ## Introduction

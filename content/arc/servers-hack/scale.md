@@ -1,14 +1,14 @@
 ---
-title: "Integration"
-description: "Each connected machine has an identity. Run a script on prem that uses Azure Key Vault, Azure Storage and PostgreSQL."
+title: "Scale Onboarding"
+description: "Onboarding multiple Linux and WIndows servers with a service principal, then automate conneting with the azcmagent."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers
+    parent: arc-servers-hack
 series:
- - arc-servers
-weight: 8
+ - arc-servers-hack
+weight: 4
 ---
 
 ## Introduction

@@ -5,9 +5,9 @@ layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers
+    parent: arc-servers-hack
 series:
- - arc-servers
+ - arc-servers-hack
 weight: 6
 ---
 

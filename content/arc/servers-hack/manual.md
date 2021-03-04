@@ -1,14 +1,14 @@
 ---
-title: "Scale Onboarding"
-description: "Onboarding multiple Linux and WIndows servers with a service principal, then automate conneting with the azcmagent."
+title: "Manual Onboarding"
+description: "Work through the first challenge, onboarding a pair of \"on prem\" machines into Azure and adding agents."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers
+    parent: arc-servers-hack
 series:
- - arc-servers
-weight: 4
+ - arc-servers-hack
+weight: 2
 ---
 
 ## Introduction

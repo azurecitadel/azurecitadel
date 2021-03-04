@@ -1,15 +1,17 @@
 ---
 title: "Prereqs"
-description: "Attending an Azure Arc & Management partner hack? Get these done before it starts."
+description: "Attending one of our Azure Arc hacks? Get these completed before it starts."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers
-    identifier: arc-servers-prereqs
+    parent: arc
+    identifier: arc-prereqs
+aliases:
+ - /arc-servers/prereqs/
 series:
- - arc-servers
-weight: 1
+ - arc
+weight: 2
 ---
 
 
@@ -52,6 +54,7 @@ It is possible to complete the whole hack using the portal and Cloud Shell but w
   * Azure CLI
   * jq
   * git
+  * Terraform
   * Ansible
 * Visual Studio Code
 * PowerShell, plus the Az module

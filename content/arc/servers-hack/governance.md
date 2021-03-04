@@ -1,14 +1,14 @@
 ---
-title: "Monitoring"
-description: "Configure the new Azure Monitoring Agent and Data Collection Rules. Optionally integrate with Azure Security Center and Azure Sentinel."
+title: "Governance"
+description: "Use Azure Policy and the Guest Configuration policy definitions to govern your resources and prove compliancy."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers
+    parent: arc-servers-hack
 series:
- - arc-servers
-weight: 5
+ - arc-servers-hack
+weight: 7
 ---
 
 ## Introduction

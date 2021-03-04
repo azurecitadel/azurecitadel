@@ -1,14 +1,14 @@
 ---
 title: "Useful Links"
-description: "Set of useful links for Azure Arc"
+description: "Set of useful links for Azure Arc."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers
-    identifier: arc-servers-links
+    parent: arc
+    identifier: arc-links
 series:
- - arc-servers
+ - arc
 weight: 9
 ---
 

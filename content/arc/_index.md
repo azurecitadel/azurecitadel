@@ -1,23 +1,21 @@
 ---
-title: "Arc for Servers"
-description: "Use Azure Arc to extend the Azure management plane to cover VMs and SQL servers in other locations."
+title: "Arc"
+description: "Azure Arc extends Azure to on prem and other clouds with both management plane capabilities and the ability to drive containerised workloads and Azure services in other locations."
 menu:
   side:
-    identifier: arc-servers
+    identifier: arc
 ---
 
 ## Introduction
 
 Azure Arc is a pivotal technology that opens up new opportunities for managing systems outside of the Azure public cloud. Azure Arc is comprised of three complimentary areas.
 
-![Azure Arc](/arc-servers/images/arc.png)
+![Azure Arc](/arc/images/arc.png)
 
 The three areas are:
 
 1. Azure Arc enabled Servers
 1. Azure Arc enabled Kubernetes
 1. Azure Arc enabled Data Services
-
-The Azure Arc & Management hack is a two day hack format to cover the key functionality offered by Azure Arc enabled Servers.
 
 ## Content

@@ -1,14 +1,14 @@
 ---
-title: "Governance"
-description: "Use Azure Policy and the Guest Configuration policy definitions to govern your resources and prove compliancy."
+title: "Integration"
+description: "Each connected machine has an identity. Run a script on prem that uses Azure Key Vault, Azure Storage and PostgreSQL."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers
+    parent: arc-servers-hack
 series:
- - arc-servers
-weight: 7
+ - arc-servers-hack
+weight: 8
 ---
 
 ## Introduction
