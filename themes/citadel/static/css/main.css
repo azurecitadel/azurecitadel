@@ -75,6 +75,12 @@
     display: block;
 }
 
+/* Main Content */
+
+#main {
+    overflow: auto;
+}
+
 /* Dropdown */
 
 .dropdown-withArrow[open] .arrow {
