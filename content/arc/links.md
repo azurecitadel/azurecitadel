@@ -21,18 +21,25 @@ Here are the main links for Azure Arc:
 | [aka.ms/AzureArc](https://aka.ms/AzureArc) | Main product page |
 | [aka.ms/AzureArcLearn](https://aka.ms/AzureArcLearn) | Learning Paths |
 | [aka.ms/AzureArcDocs](https://aka.ms/AzureArcDocs) | Azure Docs for Arc |
+| [Azure Arc Deal Size Estimator](https://arcestimator.azurewebsites.net/calculator) | Configure scenarios for ballpark costings |
 
-## Learning
+## Azure Arc Jumpstart
 
 | **Site** | **Description** |
 |---|---|
-| **[Azure Arc Jumpstart](https://azurearcjumpstart.io)** | **Multiple labs with a range of Arc functionality** |
+| [Azure Arc Jumpstart](https://azurearcjumpstart.io) | Multiple tutorials with a range of Arc functionality |
+| [YouTube Channel](https://www.youtube.com/channel/UCoIJw-P_9Jp6Jo_0Ca9avcA) | Join Thomas Maurer & Lior Marat for Azure Arc demos |
+
+The Azure Arc Jumpstart site is highly recommended for going a little deeper with many of the capabilities that Azure Arc provides and how to create your own demo environments. It covers Azure Arc for Servers (including SQL servers), Azure Arc for Kubernetes and Azure Arc for Data Services.
+
+## Other learning resources
+
+| **Site** | **Description** |
+|---|---|
 | [WhatTheHack / 025-ArcEnabledServers](https://github.com/microsoft/WhatTheHack/tree/master/025-ArcEnabledServers) | Short challenge hack for Arc Enabled Servers |
 | [WhatTheHack / 026-ArcEnabledKubernetes](https://github.com/microsoft/WhatTheHack/tree/master/025-ArcEnabledServers) | Short challenge hack for Arc Enabled Kubernetes |
 | <https://azurecitadel.com/arc-servers/> | This page |
 | [aka.ms/AzureArcSkilling](https://aka.ms/AzureArcSkilling) | Demo videos |
-
-The Azure Arc Jumpstart site is highly recommended for going a little deeper with many of the capabilities that Azure Arc provides and how to create your own demo environments. It covers Azure Arc for Servers (including SQL servers), Azure Arc for Kubernetes and Azure Arc for Data Services.
 
 ## GitHub repos
 
