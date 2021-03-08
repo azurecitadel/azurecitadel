@@ -27,10 +27,10 @@ Use the <https://github.com/azurecitadel/arc-onprem-servers> repo to create two 
 
 | Operating system | Name |
 |---|---|
-| Ubuntu 18.04 LTS | **ubuntu1** |
-| Windows Server 2019 | **win1** |
+| Ubuntu 18.04 LTS | **ubuntu-01** |
+| Windows Server 2019 | **win-01** |
 
-Review the contents of the two resource groups, arc-demo and arc-demo-resources, in the Azure Portal.
+Review the contents of the two resource groups, arc-hack and arc-hack-resources, in the Azure Portal.
 
 ## Onboard
 
@@ -38,7 +38,7 @@ Connect the two VMs to Azure Arc using the _Servers - Azure Arc_ portal screen.
 
 | | |
 |---|---|
-| resourceGroup | **arc-demo** |
+| resourceGroup | **arc-hack** |
 | location | **UK South** |
 | tags.Owner | **\<your name>** |
 | tags.Hack | **arc** |

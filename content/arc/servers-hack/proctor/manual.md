@@ -45,7 +45,7 @@ Should be simple enough as this is a gentle intro.
     * Example scp command (if stuck)
 
         ```bash
-        scp /mnt/c/Users/richeney/Downloads/OnboardingScript.sh arcdemo@arclinuxvm-f7a1d2eb-linux1.uksouth.cloudapp.azure.com:/tmp
+        scp /mnt/c/Users/richeney/Downloads/OnboardingScript.sh arcadmin@arc-f7a1d2eb-ubuntu-01.uksouth.cloudapp.azure.com:/tmp
         ```
 
     * Log on using the ssh command in `terraform output` and run the script as root
@@ -60,7 +60,9 @@ Should be simple enough as this is a gentle intro.
 
     * Go to Server Manager --> Local Server and switch off IEC for Admins. (Seriously, why is IE being shipped as the default browser? Embarrassing.)
 
-    * If you are using the older Remote Desktop Connection you can upload the OnboardingScript.ps1 script up. With the newer universal app, Remote Desktop, then you just use the clipboard. Run the PowerShell ISE as Administrator.
+    * If you are using the older Remote Desktop Connection you can upload the OnboardingScript.ps1 script up. With the newer universal app, Remote Desktop, then you just use the clipboard to paste into Notepad or PowerShell ISE.
+
+    * The PowerShell script must be run as Administrator.
 
     * Note that you don't need to switch off the Windows PowerShell execution policy as the Terraform does that when setting up WinRM. However, here is the command for reference:
 
@@ -68,7 +70,7 @@ Should be simple enough as this is a gentle intro.
     Set-ExecutionPolicy Bypass -Scope Process
     ```
 
-1. Check the Portal screen to make sure they are visible
+1. Check the Portal screen to make sure the onboarded VMs are visible.
 
 ## Success criteria
 
