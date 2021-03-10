@@ -41,7 +41,7 @@ Steps:
 
 In the portal, navigate to or search for **Log Analytics workspaces** and **Create**.
 
-* Resource group: Create new and input name `arc-hack-rg`
+* Resource group: `arc-hack`
 * Name: `arc-hack-workspace-team1` *(Note: must be globally unique)*
 * Region: `UK South`
 * Pricing tier: `Pay-as-you-go (Per GB 2018)`
@@ -49,9 +49,7 @@ In the portal, navigate to or search for **Log Analytics workspaces** and **Crea
 Alternatively, using Azure CLI:
 
 ```bash
-az group create --name arc-hack-rg --location uksouth
-
-az monitor log-analytics workspace create --resource-group arc-hack-rg --workspace-name arc-hack-workspace-team1
+az monitor log-analytics workspace create --resource-group arc-hack --workspace-name arc-hack-workspace-team1
 
 # Note: workspace-name must be globally unique
 ``` 
@@ -117,7 +115,7 @@ Alternatively, using Azure CLI:
 ```bash
 az policy assignment create --policy-set-definition "55f3eceb-5573-4f18-9695-226972c6d74a" \
      --params "{ \"logAnalytics_1\": { \"value\": \
-    \"/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourcegroups/arc-hack-rg/providers/microsoft.operationalinsights/workspaces/arc-hack-workspace-team1\" \
+    \"/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourcegroups/arc-hack/providers/microsoft.operationalinsights/workspaces/arc-hack-workspace-team1\" \
     } }" \
     --display-name "Arc Hack - Enable Azure Monitor for VMs" \
     --assign-identity --location uksouth
