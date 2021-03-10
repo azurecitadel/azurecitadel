@@ -56,9 +56,9 @@ Tasks:
   * create a remediation task for the Dependency agent for one OS type
 * Manually add another remediation task for the other OS type
 * Assign the Inherit a tag from the resource group if missing
-  * Rename and specify Owner
+  * Rename and specify "platform"
   * Add remediation tasks
-  * Duplicate for Platform
+  * Duplicate for "datacentre"
 
 Discussion point - custom initiative for auditing missing tags, creating default tags, inheriting tags. Mention policy labs. (Rich needs to add custom initiative - work in progress.)
 

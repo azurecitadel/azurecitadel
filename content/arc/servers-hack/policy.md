@@ -30,7 +30,13 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
 
 # Tagging
 
-Add Location and Owner tags to the arc-hack resource group.
+Add the following tags to the arc-hack resource group.
+
+| | |
+|---|---|
+| platform | **private cloud** |
+| datacentre | **citadel** |
+| | |
 
 ## Azure Policy
 
