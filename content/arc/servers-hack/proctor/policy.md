@@ -41,10 +41,10 @@ Steps:
 
 In the portal, navigate to or search for **Log Analytics workspaces** and **Create**.
 
-* Resource group: Create new and `arc-hack-rg`
-* Name: arc-hack-workspace-team1 *(Note: must be globally unique)*
-* Region: UK South
-* Pricing tier: Pay-as-you-go (Per GB 2018)
+* Resource group: Create new and input name `arc-hack-rg`
+* Name: `arc-hack-workspace-team1` *(Note: must be globally unique)*
+* Region: `UK South`
+* Pricing tier: `Pay-as-you-go (Per GB 2018)`
 
 Alternatively, using Azure CLI:
 
@@ -101,7 +101,7 @@ Discussion point - custom initiative for auditing missing tags, creating default
 
 The built-in Policy Initiative **Enable Azure Monitor for VMs** includes the Policy Definitions to deploy both the Log Analytics agents and Dependency agents for Windows and Linux Azure Arc machines.
 
-In the portal, browse to the **Policy** blade and **Definitions**. Search for **"monitor"**, and select the built-in Policy Initiative named **Enable Azure Monitor for VMs**.
+In the portal, browse to the **Policy** blade and **Definitions**. Search for `"monitor"`, and select the built-in Policy Initiative named **Enable Azure Monitor for VMs**.
 
 **Assign** the initiative, choosing the lab subscription as the **Scope** (note, it can also apply to Management Groups or Resource Groups).
 
@@ -114,7 +114,12 @@ Click **Review + create** to create the Policy Assignment.
 Alternatively, using Azure CLI:
 
 ```bash
-az policy assignment create --policy-set-definition "55f3eceb-5573-4f18-9695-226972c6d74a" --params "{ \"logAnalytics_1\": { \"value\": \"/subscriptions/e9944234-0ec8-4212-a331-79986080068c/resourcegroups/arc-hack-rg/providers/microsoft.operationalinsights/workspaces/arc-hack-workspace-team1\" } }" --display-name "Arc Hack - Enable Azure Monitor for VMs" --assign-identity --location uksouth
+az policy assignment create --policy-set-definition "55f3eceb-5573-4f18-9695-226972c6d74a" \
+     --params "{ \"logAnalytics_1\": { \"value\": \
+    \"/subscriptions/e9944234-0ec8-4212-a331-79986080068c/resourcegroups/arc-hack-rg/providers/microsoft.operationalinsights/workspaces/arc-hack-workspace-team1\" \
+    } }" \
+    --display-name "Arc Hack - Enable Azure Monitor for VMs" \
+    --assign-identity --location uksouth
 ```
 
 * (optional) Deploy a custom script to the Azure Arc virtual machines
