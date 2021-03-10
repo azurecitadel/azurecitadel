@@ -116,10 +116,11 @@ Alternatively, using Azure CLI:
 ```bash
 az policy assignment create --policy-set-definition "55f3eceb-5573-4f18-9695-226972c6d74a" \
      --params "{ \"logAnalytics_1\": { \"value\": \
-    \"/subscriptions/e9944234-0ec8-4212-a331-79986080068c/resourcegroups/arc-hack-rg/providers/microsoft.operationalinsights/workspaces/arc-hack-workspace-team1\" \
+    \"/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourcegroups/arc-hack-rg/providers/microsoft.operationalinsights/workspaces/arc-hack-workspace-team1\" \
     } }" \
     --display-name "Arc Hack - Enable Azure Monitor for VMs" \
     --assign-identity --location uksouth
+# Note: Replace with your subscription ID
 ```
 
 * (optional) Deploy a custom script to the Azure Arc virtual machines
