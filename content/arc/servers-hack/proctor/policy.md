@@ -52,14 +52,15 @@ Alternatively, using Azure CLI:
 az group create --name arc-hack-rg --location uksouth
 
 az monitor log-analytics workspace create --resource-group arc-hack-rg --workspace-name arc-hack-workspace-team1
+
 # Note: workspace-name must be globally unique
 ``` 
 
 * Collect event and performance data from virtual machines connected to the Log Analytics workspace
 
-In the portal, open the blade of the Log Analytics workspace, in Settings select **Agents configuration**.
+Open the blade of the Log Analytics workspace, in Settings select **Agents configuration**.
 
-From the Windows event logs tab, **Add Windows event log** and add **Application** and **System** logs. Select Error and Warning level.
+From the Windows event logs tab, **Add Windows event log** and add `Application` and `System` logs. Select Error and Warning level.
 
 From the Windows performance counters tab, **Add recommended counters**.
 
@@ -99,13 +100,13 @@ Discussion point - custom initiative for auditing missing tags, creating default
 * Deploy the Log Analytics agent to the Azure Arc virtual machines
 * Deploy the Dependency agent to the Azure Arc virtual machines
 
-The built-in Policy Initiative **Enable Azure Monitor for VMs** includes the Policy Definitions to deploy both the Log Analytics agents and Dependency agents for Windows and Linux Azure Arc machines.
+The built-in Policy Initiative **Enable Azure Monitor for VMs** includes Policy Definitions to deploy the Log Analytics agents and Dependency agents for Windows and Linux Azure Arc machines.
 
-In the portal, browse to the **Policy** blade and **Definitions**. Search for `"monitor"`, and select the built-in Policy Initiative named **Enable Azure Monitor for VMs**.
+In the portal, browse to the **Policy** blade and **Definitions**. Search for `monitor`, select the built-in Policy Initiative named `Enable Azure Monitor for VMs`.
 
-**Assign** the initiative, choosing the lab subscription as the **Scope** (note, it can also apply to Management Groups or Resource Groups).
+**Assign** the initiative, choosing your subscription as the **Scope** (Note: policy can also apply to Management Group or Resource Group scope).
 
-From the Parameters tab, select the Log Analytics workspace created above.
+From the Parameters tab, select the `arc-hack-workspace-team1` Log Analytics workspace created above.
 
 From the Remediation tab, choose **UK South** as the Managed identity location.
 
@@ -120,16 +121,9 @@ az policy assignment create --policy-set-definition "55f3eceb-5573-4f18-9695-226
     } }" \
     --display-name "Arc Hack - Enable Azure Monitor for VMs" \
     --assign-identity --location uksouth
+
 # Note: Replace with your subscription ID
 ```
-
-* (optional) Deploy a custom script to the Azure Arc virtual machines
-
-Custom script extensions can be used to run post deployment actions. 
-
-[Custom Script Extension for Windows](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows) and [Use the Azure Custom Script Extension Version 2 with Linux virtual machines](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-linux) details this configuration. 
-
-An example script to initialise data disks is available here: [Github.com/Azure-Samples/compute-automation-configurations](https://github.com/Azure-Samples/compute-automation-configurations/blob/master/prepare_vm_disks.ps1)
 
 ## Success criteria
 
