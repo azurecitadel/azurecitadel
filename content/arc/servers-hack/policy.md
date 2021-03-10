@@ -23,6 +23,14 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
 
 * Create a Log Analytics workspace
 * Collect event and performance data from virtual machines connected to the Log Analytics workspace
+  * System events from the Windows Event Log and syslog from linux
+  * Recommended performance counters
+  * Ignore events unless they are warning or higher severity level
+* Manually add the Log Analytics agent to the two Azure Arc VMs
+
+# Tagging
+
+Add Location and Owner tags to the arc-hack resource group.
 
 ## Azure Policy
 
@@ -30,8 +38,10 @@ Assign Policy to:
 
 * Deploy the Log Analytics agent to the Azure Arc virtual machines
 * Deploy the Dependency agent to the Azure Arc virtual machines
-* Inherit Tags from the Resource Group (or Subscription) to the Azure Arc virtual machines
+* Inherit the two tags from the Resource Group to the Azure Arc virtual machines
+* Use remediation tasks to make the two VMs fully compliant
 * (optional) Deploy a custom script to the Azure Arc virtual machines
+
 
 ## Success criteria
 

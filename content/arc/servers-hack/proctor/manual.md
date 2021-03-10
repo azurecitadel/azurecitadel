@@ -70,7 +70,6 @@ Should be simple enough as this is a gentle intro.
     Set-ExecutionPolicy Bypass -Scope Process
     ```
 
-1. Check the Portal screen to make sure the onboarded VMs are visible.
 
 ## Success criteria
 
@@ -81,7 +80,7 @@ Should be simple enough as this is a gentle intro.
     ```text
     resources
     | where type == "microsoft.hybridcompute/machines"
-    | project name,resourceGroup,tags.Owner,id
+    | project name,resourceGroup,id
     ```
 
 1. Extra points Resource Graph query:
@@ -89,6 +88,6 @@ Should be simple enough as this is a gentle intro.
     ```text
     resources
     | where type == "microsoft.hybridcompute/machines"
-    | project name,resourceGroup,tags.Owner,properties.osName,id
-    | project-rename owner=tags_Owner, OS=properties_osName
+    | project name,resourceGroup,properties.osName,id
+    | project-rename os=properties_osName
     ```

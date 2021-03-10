@@ -40,11 +40,15 @@ Connect the two VMs to Azure Arc using the _Servers - Azure Arc_ portal screen.
 |---|---|
 | resourceGroup | **arc-hack** |
 | location | **UK South** |
-| tags.Owner | **\<your name>** |
-| tags.Hack | **arc** |
 | | |
 
 Explore the functionality exposed in each VM's portal blade, including the resourceId and the various properties available in JSON view.
+
+> _Hint_: Remove the suggested tags. We will be handling tags via policy.
+
+## Log Analytics agent
+
+Manually deploy the Log Analytics agent to the two VMs.
 
 ## Inventory
 
@@ -52,10 +56,12 @@ Run a basic query in Resource Graph Explorer to list all Azure Arc connected vir
 
 * Name
 * Resource Group
-* Owner tag value
 * Resource ID
 
-For bonus points, add to the query, projecting an additional field renamed to "OS" that shows whether the VM is a linux or windows server. Also rename the tags_Owner field to "owner".
+For bonus points
+
+* add an additional field that shows whether the VM is linux or windows
+* rename your new field to "os"
 
 ## Success criteria
 
@@ -63,6 +69,7 @@ Screen share with your proctor to prove that you've met the success criteria bel
 
 1. Show the connected VMs in the arc-demo resource group
 1. Name the resource provider type used for the connected VMs
+1. Show the extensions are installed
 1. Show your graph query and resulting output in Resource Graph Explorer
 
 ## Resources
