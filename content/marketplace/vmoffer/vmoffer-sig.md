@@ -1,12 +1,12 @@
 ---
-title: "VM Offer"
+title: "VM Offer SIG"
 author: [ "Mike Ormond" ]
 description: "Publishing a VM Offer"
 date: 2021-01-06
-weight: 4
+weight: 6
 menu:
   side:
-    parent: 'marketplace'
+    parent: 'Publish a VM Offer' 
 ---
 
 *Virtual Machine offers* are used to deploy and transact a virtual machine (VM) instance through Marketplace. The solution must consist of a single VM. Anything more complex requires an *Azure Apps offer*.
