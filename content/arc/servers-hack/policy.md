@@ -19,6 +19,21 @@ In the previous challenges, you connected resources to Azure using Azure Arc. Az
 
 In this challenge you will explore using Azure Policy to onboard the Azure Arc virtual machines to a Log Analytics workspace and apply Tags to the Azure Arc virtual machines.
 
+## Tagging
+
+* add the following tags to the arc-hack resource group.
+
+    | | |
+    |---|---|
+    | platform | **private cloud** |
+    | datacentre | **citadel** |
+    | | |
+
+## Azure Policy Part 1
+
+* assign an Azure Policy to inherit the two tags
+* remediate the tagging on the two existing VMs
+
 ## Log Analytics
 
 * Create a Log Analytics workspace
@@ -28,26 +43,12 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
   * Ignore events unless they are warning or higher severity level
 * Manually add the Log Analytics agent to the two Azure Arc VMs
 
-# Tagging
+## Azure Policy Part 2
 
-Add the following tags to the arc-hack resource group.
-
-| | |
-|---|---|
-| platform | **private cloud** |
-| datacentre | **citadel** |
-| | |
-
-## Azure Policy
-
-Assign Policy to:
-
-* Deploy the Log Analytics agent to the Azure Arc virtual machines
-* Deploy the Dependency agent to the Azure Arc virtual machines
-* Inherit the two tags from the Resource Group to the Azure Arc virtual machines
+* assign policy to:
+  * deploy the Log Analytics agent to the Azure Arc virtual machines
+  * deploy the Dependency agent to the Azure Arc virtual machines
 * Use remediation tasks to make the two VMs fully compliant
-* (optional) Deploy a custom script to the Azure Arc virtual machines
-
 
 ## Success criteria
 
@@ -56,7 +57,6 @@ Screen share with your proctor to show that you achieved:
 1. Azure Arc virtual machines are connected to the Log Analytics
 1. Performance data (such as disk % free space) can be viewed in Log Analytics
 1. Azure Arc virtual machines are automatically tagged with the Resource Group (or Subscription) Tags
-1. Show a customer script has ran successfully on an Azure Arc virtual machine
 
 ## Resources
 

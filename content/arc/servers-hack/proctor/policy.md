@@ -47,6 +47,9 @@ Hints:
 Tasks:
 
 * Go to [Policy Definitions](https://ms.portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyMenuBlade/Definitions)
+* Assign the Inherit a tag from the resource group if missing
+  * Rename and specify "platform"
+  * Duplicate for "datacentre"
 * Searching on "Azure Arc" should show the six preview policies
 * Clear the search and filter on type = initiative and category = monitoring
 * Check the Enable Azure Monitor for VMs
@@ -55,10 +58,6 @@ Tasks:
   * select the workspace
   * create a remediation task for the Dependency agent for one OS type
 * Manually add another remediation task for the other OS type
-* Assign the Inherit a tag from the resource group if missing
-  * Rename and specify "platform"
-  * Add remediation tasks
-  * Duplicate for "datacentre"
 
 Discussion point - custom initiative for auditing missing tags, creating default tags, inheriting tags. Mention policy labs. (Rich needs to add custom initiative - work in progress.)
 
@@ -69,4 +68,4 @@ Discussion point - custom initiative for auditing missing tags, creating default
 * Check the policy assignments on the rg
   * VM agent initiative
   * The two tag inheritance policies
-  * Remediation tasks - should be four; two for the tags and two for the dependency agents
+  * Remediation tasks - should be a couple in there for the dependency agents
