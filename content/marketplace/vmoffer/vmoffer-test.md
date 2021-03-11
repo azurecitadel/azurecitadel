@@ -4,6 +4,7 @@ author: [ "Mike Ormond" ]
 description: "Test the VM image before publishing."
 date: 2021-01-06
 weight: 30
+nonav: true
 menu:
   side:
     parent: 'amp-vm-offer'
@@ -142,9 +143,9 @@ To finalise the test:
       This is a Windows application that walks through the process of connecting to the VM, running a series of tests and producing a report. You can create a small Windows VM in Azure and install it on that to test. We will use this approach for the lab.
    2. Use the *Self-Test API*
 
-      This is an API hosted in Azure. You send a POST request to the API with details of the machine to test and it returns a test report. You need to create an AAD app registration to authenticate with the API. You can [find more details here](https://docs.microsoft.com/en-us/azure/marketplace/azure-vm-image-test#how-to-use-powershell-to-consume-the-self-test-api). There is an excellent [walkthrough video here](https://arsenvlad.medium.com/using-self-test-api-to-validate-vm-images-for-publishing-in-azure-marketplace-e7ac2e0b4d6e) which also bridges some of the gaps in the documentation.
+      This is an API hosted in Azure. You send a POST request to the API with details of the machine to test and it returns a test report. You need to create an AAD app registration to authenticate with the API. You can [find more details here](https://docs.microsoft.com/azure/marketplace/azure-vm-image-test#how-to-use-powershell-to-consume-the-self-test-api). There is an excellent [walkthrough video here](https://arsenvlad.medium.com/using-self-test-api-to-validate-vm-images-for-publishing-in-azure-marketplace-e7ac2e0b4d6e) which also bridges some of the gaps in the documentation.
 
-1. Install the Certification Test Tool for Azure Certified on a Windows Machine. [Download Link](https://www.microsoft.com/en-us/download/details.aspx?id=44299)
+1. Install the Certification Test Tool for Azure Certified on a Windows Machine. [Download Link](https://www.microsoft.com/download/details.aspx?id=44299)
 1. Run the Certification Test Tool and enter the required information (test name, platform, auth type, DNS name for the VM to be tested etc)
 1. On completion you will be presented with a set of test results. Review the results and ensure you take any necessary action before submitting a final image for certification.
 
@@ -153,3 +154,16 @@ To finalise the test:
 1. In these labs we will be submitting a VM offer to the marketplace but only to the preview stage for testing purposes. We will not submit for final certification.
 
    While attention should be paid to the results of the report, it is not necessarily required to fix every issue for the purposes of completing the lab.
+
+
+## Resources
+
+* [Test a virtual machine image](https://docs.microsoft.com/azure/marketplace/azure-vm-image-test)
+* [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource)
+* [Create an image from a VM](https://docs.microsoft.com/azure/virtual-machines/image-version-vm-powershell)
+
+## Next
+
+If you are following the Shared Image Gallery approach, jump to [VM Offer with SIG](../vmoffer-sig)
+
+If you are following the SAS Token approach, jump to [VVM Offer with SAS](../vmoffer-sas)

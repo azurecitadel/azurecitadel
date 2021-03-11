@@ -1,15 +1,20 @@
 ---
-title: "VM Offer SAS"
+title: "VM Offer with SAS"
 author: [ "Mike Ormond" ]
 description: "Use Shared Access Signature to Publish"
 date: 2021-01-06
 weight: 50
+nonav: true
 menu:
   side:
     parent: 'amp-vm-offer'
 series:
  - 'amp-vm-offer'
 ---
+
+## Introduction
+
+If using the SAS Token approach, you will have created an unmanaged disk in a storage account which can be accessed directly with a SAS URL. The SAS URL comprised a URI to the resource along with a security token (Shared Access Signature) that authorizes access to the resource. It specifies the resource that a client may access, the permissions granted, and the time interval over which the signature is valid.
 
 ## Generate a SAS URL to the VHD Image
 
@@ -70,8 +75,11 @@ The final thing to do is generate a SAS URL pointing to the generalised VHD imag
 
    Copy the output somewhere safe. You will need the SAS URL to publish the offer.
 
-## Useful Links <!-- omit in toc -->
+## Resources
 
-* [How to create a virtual machine using an approved base](https://docs.microsoft.com/en-us/azure/marketplace/azure-vm-create-using-approved-base)
-* [Test a virtual machine image](https://docs.microsoft.com/en-us/azure/marketplace/azure-vm-image-test)
-* [How to generate a SAS URI for a VM image](https://docs.microsoft.com/en-us/azure/marketplace/azure-vm-get-sas-uri)
+* [How to generate a SAS URI for a VM image](https://docs.microsoft.com/azure/marketplace/azure-vm-get-sas-uri)
+* [Create a service SAS](https://docs.microsoft.com/rest/api/storageservices/create-service-sas)
+
+## Next
+
+[Publish offer in Partner Center](../vmpublish)
