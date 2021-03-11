@@ -13,7 +13,7 @@ series:
 
 ## Introduction
 
-We will create a VM using an approved base image. However it is also possible to [create and deploy your own VM image](https://docs.microsoft.com/en-us/azure/marketplace/azure-vm-create-using-own-image). Starting from an approved base image simplifies the process.
+We will create a VM using an approved base image. However it is also possible to [create and deploy your own VM image](https://docs.microsoft.com/azure/marketplace/azure-vm-create-using-own-image). Starting from an approved base image simplifies the process.
 
 There are numerous way we could create the VHD. In this lab we will use the Azure CLI. [Packer is a useful tool](https://azurecitadel.com/automation/packeransible/lab1/) for helping to automate the process.
 
@@ -123,7 +123,7 @@ Before publishing  VM offer you must ensure you have updated the OS and all inst
 
 ## Perform additional security checks
 
-When you publish a VM offer to the Azure Marketplace, you are required to maintain a high-level of security. Before publishing an offer you should follow the guidance in [Security Recommendations for Azure Marketplace Images](https://docs.microsoft.com/en-us/azure/security/fundamentals/azure-marketplace-images)
+When you publish a VM offer to the Azure Marketplace, you are required to maintain a high-level of security. Before publishing an offer you should follow the guidance in [Security Recommendations for Azure Marketplace Images](https://docs.microsoft.com/azure/security/fundamentals/azure-marketplace-images)
 
 As we are only publishing a test and will not put this "live" into the marketplace we will skip these additional checks for the purposes of this lab.
 
@@ -176,3 +176,7 @@ To create a reusable image, the operating system disk must be generalised. For L
    ```
 
 We now have a generalised OS VHD for our Ubuntu-based VM offer with a web server installed and a scheduled job on reboot. We can use this to create new (specialised) VMs and to submit our VM base to Partner Center as a VM Offer.
+
+## Resources
+
+* [How to create a virtual machine using an approved base](https://docs.microsoft.com/azure/marketplace/azure-vm-create-using-approved-base)

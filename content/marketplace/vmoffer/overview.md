@@ -15,8 +15,8 @@ series:
 
 ## Prerequisites
 
-* An Azure subscription (required) - see [here for free options](https://azure.microsoft.com/en-us/free/)
-* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) (required) either via [Azure Cloud Shell in the Azure Portal](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart) or [installed locally](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+* An Azure subscription (required) - see [here for free options](https://azure.microsoft.com/free/)
+* [Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) (required) either via [Azure Cloud Shell in the Azure Portal](https://docs.microsoft.com/azure/cloud-shell/quickstart) or [installed locally](https://docs.microsoft.com/cli/azure/install-azure-cli)
 * A [Partner Center account](../partnercenter/) with the appropriate permissions (some of the material can be completed without Partner Center access)
 
 ## Overview
