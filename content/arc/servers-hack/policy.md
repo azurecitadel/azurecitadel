@@ -50,6 +50,15 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
   * deploy the Dependency agent to the Azure Arc virtual machines
 * Use remediation tasks to make the two VMs fully compliant
 
+> Note that there is a [known bug](https://github.com/Azure/azure-policy/issues/733) in the _[Preview] Deploy Dependency agent to Windows Azure Arc machines_ policy definition as the managed identity has insufficient permissions to remediate non-compliancy.
+>
+> The following commands will assign it sufficient privileges if you have assigned the expected policy initiative.
+>
+> ```bash
+> identity=$(az policy assignment list --resource-group arc-hack --query "[?displayName == 'Enable Azure Monitor for VMs'].identity.principalId" --output tsv)
+> az role assignment create --assignee $identity --role "Azure Connected Machine Onboarding" --resource-group arc-hack
+> ```
+
 ## Success criteria
 
 Screen share with your proctor to show that you achieved:
