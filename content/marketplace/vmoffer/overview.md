@@ -1,12 +1,15 @@
 ---
-title: "Overview"
+title: "VM Getting Started"
 author: [ "Mike Ormond" ]
 description: "Pre-requisites and overview."
 date: 2021-01-06
-weight: 2
+noback: 123
+weight: 10
 menu:
   side:
-    parent: 'Publish a VM Offer'  
+    parent: 'Publish a VM Offer'
+series:
+ - 'vm-offer'
 ---
 
 ## Prerequisites
@@ -27,8 +30,4 @@ In this lab we will create the technical assets required to publish a VM offer t
 * Test the virtual machine image
 * Run validations on the virtual machine
 * Generate a SAS URL to the VHD Image
-
-## Next 
-
-* [Create VM Image and Test](../vmoffer-vm)
 
