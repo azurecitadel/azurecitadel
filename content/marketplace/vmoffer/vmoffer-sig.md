@@ -6,9 +6,9 @@ date: 2021-01-06
 weight: 40
 menu:
   side:
-    parent: 'Publish a VM Offer'
+    parent: 'amp-vm-offer'
 series:
- - 'vm-offer'
+ - 'amp-vm-offer'
 ---
 
 ## Generate a SAS URL to the VHD Image

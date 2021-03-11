@@ -3,10 +3,12 @@ title: "Publish a VM Offer"
 author: [ "Mike Ormond" ]
 description: "VM Offers are for deploying a single virtual machine."
 date: 2021-01-06
-weight: 5
+weight: 40
+style: list
 menu:
   side:
     parent: 'marketplace'
+    identifier: 'amp-vm-offer'
 ---
 
 *Virtual Machine offers* are used to deploy and transact a virtual machine (VM) instance through Marketplace. The solution must consist of a single VM. Anything more complex requires an *Azure Apps offer*.

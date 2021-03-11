@@ -1,5 +1,5 @@
 ---
-title: "VM Getting Started"
+title: "Getting Started"
 author: [ "Mike Ormond" ]
 description: "Pre-requisites and overview."
 date: 2021-01-06
@@ -7,9 +7,10 @@ noback: 123
 weight: 10
 menu:
   side:
-    parent: 'Publish a VM Offer'
+    parent: 'amp-vm-offer'
+    identifier: 'amp-vm-getting-started'
 series:
- - 'vm-offer'
+ - 'amp-vm-offer'
 ---
 
 ## Prerequisites

@@ -3,7 +3,7 @@ title: "Partner Center"
 author: [ "Mike Ormond" ]
 description: "Enroll in Partner Center to Publish Offers"
 date: 2021-01-06
-weight: 2
+weight: 20
 menu:
   side:
     parent: 'marketplace'
