@@ -1,13 +1,15 @@
 ---
 title: "Partner Center"
 author: [ "Mike Ormond" ]
-description: "Enroll in Partner Center to Publish Offers"
+description: "Enrolling in Partner Center to Publish Offers"
 date: 2021-01-06
 weight: 20
 menu:
   side:
     parent: 'marketplace'
 ---
+
+## Introduction
 
 Partner Center is a portal for Microsoft Partners to manage their relationship with Microsoft and their customers. It includes functionality to manage Microsoft Partner Network (MPN) membership and benefits, the Cloud Solution Provider (CSP) programme, analytics, incentives and access to publish offers to marketplace including the Commercial Marketplace.
 
@@ -46,18 +48,10 @@ In order to publish offers in the Commercial Marketplace your account will need 
 
    ![Create a new offer in Partner Center](/marketplace/images/partnercenter-new-offer.png)
 
-## Useful Links
+## Resources
 
 * [Create a commercial marketplace account in Partner Center
 ](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account)
 * [Manage your commercial marketplace account in Partner Center](https://docs.microsoft.com/azure/marketplace/partner-center-portal/manage-account)
 * [Microsoft Partner Portal](https://partner.microsoft.com/)
 * [Partner Center Homepage](https://partner.microsoft.com/dashboard/home)
-
-## Next
-
-* [Selecting Your Offer Type](../offertype/)
-
-## Back
-
-* [Introduction to the Commercial Marketplace](../introduction/)
