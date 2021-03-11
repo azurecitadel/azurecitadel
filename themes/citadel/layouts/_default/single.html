@@ -46,24 +46,31 @@
             {{ end }}
 
 
+            {{ if eq (isset .Params "nonav") false }}
 
-            <nav class="paginate-container" aria-label="Pagination">
-                <div class="pagination">
-                {{ with index .Scratch.Values "prevInSeries" }}
-                    <a class="previous_page" rel="next" href="{{ .Permalink }}" aria-label="Previous Page">{{ .Title }}</a>
-                {{ else }}
-                    <span class="previous_page" aria-disabled="true">Previous</span>
-                {{ end }}
+                <nav class="paginate-container" aria-label="Pagination">
+                    <div class="pagination">
+                    {{ if eq (isset .Params "nobacknav") false }}
+                        {{ with index .Scratch.Values "prevInSeries" }}
+                            <a class="previous_page" rel="next" href="{{ .Permalink }}" aria-label="Previous Page">{{ .Title }}</a>
+                        {{ else }}
+                            <span class="previous_page" aria-disabled="true">Previous</span>
+                        {{ end }}
+                    {{ end }}
 
-                <a class="text-gray-light" href="{{ .CurrentSection.Permalink }}" aria-label="Top">{{ .Name}}</a>
+                    <a class="text-gray-light" href="{{ .CurrentSection.Permalink }}" aria-label="Top">{{ .Name}}</a>
 
-                {{ with index .Scratch.Values "nextInSeries" }}
-                    <a class="next_page" rel="next" href="{{ .Permalink }}" aria-label="Next Page">{{ .Title }}</a>
-                {{ else }}
-                    <span class="next_page" aria-disabled="true">Next</span>
-                {{ end }}
-                </div>
-            </nav>
+                    {{ if eq (isset .Params "noforwardnav") false }}                
+                        {{ with index .Scratch.Values "nextInSeries" }}
+                            <a class="next_page" rel="next" href="{{ .Permalink }}" aria-label="Next Page">{{ .Title }}</a>
+                        {{ else }}
+                            <span class="next_page" aria-disabled="true">Next</span>
+                        {{ end }}
+                    {{ end }}
+                    </div>
+                </nav>
+
+            {{ end }}
 
         {{ end }}
 
