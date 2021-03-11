@@ -11,13 +11,21 @@ series:
  - 'amp-vm-offer'
 ---
 
-## Create a VM to use as a base
+## Introduction
 
 We will create a VM using an approved base image. However it is also possible to [create and deploy your own VM image](https://docs.microsoft.com/en-us/azure/marketplace/azure-vm-create-using-own-image). Starting from an approved base image simplifies the process.
 
 There are numerous way we could create the VHD. In this lab we will use the Azure CLI. [Packer is a useful tool](https://azurecitadel.com/automation/packeransible/lab1/) for helping to automate the process.
 
-### Create a VM using the Azure CLI <!-- omit in toc -->
+## How to make the VM available for upload to Partner Center
+
+Until recently, the only option was to create an unmanaged VHD and generate a SAS token to grant access to the VHD to Partner Center. This SAS token is provided as part of the technical requirements of the offer listing in Partner Center.
+
+The preferred option now is to use a Shared Image Gallery to make the VM image available. Again the Image details are entered as part of the technical requirements of the offer listing in Partner Center.
+
+Most of the process for creating the VM is the same - expand the relevant section - but unless there is a specific reason to use the SAS Token approach, the Shared Image Gallery is recommended.
+
+## Create a VM using the Azure CLI
 
 1. Create a new resource group using the Azure CLI:
 
@@ -43,7 +51,27 @@ There are numerous way we could create the VHD. In this lab we will use the Azur
 
 2. Create the VM
 
-   We will create an Ubuntu VM using a small machine size to minimise costs. It is important to create a VM using unmanaged disks as the base. This gives us direct access to the VHD which we will need to copy at a later stage. Generating ssh keys gives us a simple, secure way to connect to the VM.
+   We will create an Ubuntu VM using a small machine size to minimise costs.  Generating ssh keys gives us a simple, secure way to connect to the VM.
+
+{{< details "Use Shared Image Gallery approach" >}}
+
+   Create a new VM using the Azure CLI:
+
+   ```bash
+   az vm create \
+      --resource-group 'marketplace-vm-offer' \
+      --name 'marketplacevm' \
+      --image 'Canonical:UbuntuServer:18.04-LTS:latest' \
+      --admin-username 'azureuser' \
+      --generate-ssh-keys \
+      --size 'Standard_B1s' \
+   ```
+
+{{< /details >}}
+
+{{< details "Use SAS Token approach" >}}
+
+   It is important to create a VM using unmanaged disks as the base. This gives us direct access to the VHD which we will need to copy at a later stage.
 
    Create a new VM using the Azure CLI:
 
@@ -57,6 +85,8 @@ There are numerous way we could create the VHD. In this lab we will use the Azur
       --size 'Standard_B1s' \
       --use-unmanaged-disk
    ```
+
+{{< /details >}}
 
    Example output
 
@@ -145,4 +175,4 @@ To create a reusable image, the operating system disk must be generalised. For L
       --name 'marketplacevm'
    ```
 
-We now have a generalised OS VHD for our Ubuntu-based VM offer with a web server installed and a scheduled job on reboot. We can use this VHD image to create new (specialised) VMs.
+We now have a generalised OS VHD for our Ubuntu-based VM offer with a web server installed and a scheduled job on reboot. We can use this to create new (specialised) VMs and to submit our VM base to Partner Center as a VM Offer.
