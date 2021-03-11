@@ -1,7 +1,7 @@
 ---
 title: "Publish a VM Offer"
 author: [ "Mike Ormond" ]
-description: "VM Offers are for deploying a single virtual machine."
+description: "VM Offers are intended for deploying a single virtual machine."
 date: 2021-01-06
 weight: 40
 style: list

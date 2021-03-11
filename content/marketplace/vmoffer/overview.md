@@ -19,7 +19,7 @@ series:
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) (required) either via [Azure Cloud Shell in the Azure Portal](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart) or [installed locally](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 * A [Partner Center account](../partnercenter/) with the appropriate permissions (some of the material can be completed without Partner Center access)
 
-## Overview 
+## Overview
 
 In this lab we will create the technical assets required to publish a VM offer to the commercial marketplace. The high level steps required to do this are as follows:
 
@@ -30,5 +30,7 @@ In this lab we will create the technical assets required to publish a VM offer t
 * Generalise the image
 * Test the virtual machine image
 * Run validations on the virtual machine
-* Generate a SAS URL to the VHD Image
-
+* Either
+  * Publish the generalised VM to a shared image gallery (preferred)
+  * Generate a SAS URL to the VHD Image
+* Publish the Offer through Partner Center
