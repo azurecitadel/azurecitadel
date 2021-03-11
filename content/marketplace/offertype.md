@@ -3,7 +3,7 @@ title: "Offer Type"
 author: [ "Mike Ormond" ]
 description: "Selecting your Offer Type"
 date: 2021-01-06
-weight: 3
+weight: 30
 menu:
   side:
     parent: 'marketplace'
