@@ -26,3 +26,5 @@ The *Azure Apps offer* has two distinct flavours; *solution template* and *manag
    For further information, see [Publishing an Azure Application - Managed Application Offer](../managedapp/)
 
 ## Content
+
+The content for this section is still under construction.
