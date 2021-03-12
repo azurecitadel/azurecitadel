@@ -8,8 +8,6 @@ nonav: true
 menu:
   side:
     parent: 'amp-vm-offer'
-series:
- - 'amp-vm-offer'
 ---
 
 ## Introduction

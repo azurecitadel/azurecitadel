@@ -8,8 +8,6 @@ nonav: true
 menu:
   side:
     parent: 'amp-vm-offer'
-series:
- - 'amp-vm-offer'
 ---
 
 ## Introduction
@@ -155,15 +153,21 @@ To finalise the test:
 
    While attention should be paid to the results of the report, it is not necessarily required to fix every issue for the purposes of completing the lab.
 
-
 ## Resources
 
 * [Test a virtual machine image](https://docs.microsoft.com/azure/marketplace/azure-vm-image-test)
 * [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource)
 * [Create an image from a VM](https://docs.microsoft.com/azure/virtual-machines/image-version-vm-powershell)
 
-## Next
-
-If you are following the Shared Image Gallery approach, jump to [VM Offer with SIG](../vmoffer-sig)
-
-If you are following the SAS Token approach, jump to [VVM Offer with SAS](../vmoffer-sas)
+{{< raw >}}
+  <nav class="paginate-container" aria-label="Pagination">
+    <div class="pagination">
+      <a class="previous_page" rel="next" href="../vmoffer-vm" aria-label="Previous Page">Create VM Image</a>
+      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
+      <a class="text-gray-light" href="." aria-label="Top">Test VM Image</a>
+      <a class="next_page" rel="next" href="../vmoffer-sig" aria-label="Next Page">VM Offer with SIG</a>
+      <a class="next_page" rel="next" href="../vmoffer-sas" aria-label="Next Page">VM Offer with SAS</a>
+      <!-- <span class="next_page" aria-disabled="true">Next</span> -->
+    </div>
+  </nav>
+{{< /raw >}}
