@@ -9,8 +9,6 @@ menu:
   side:
     parent: 'amp-vm-offer'
     identifier: 'amp-vm-getting-started'
-series:
- - 'amp-vm-offer'
 ---
 
 ## Prerequisites
@@ -34,3 +32,15 @@ In this lab we will create the technical assets required to publish a VM offer t
   * Publish the generalised VM to a shared image gallery (preferred)
   * Generate a SAS URL to the VHD Image
 * Publish the Offer through Partner Center
+
+{{< raw >}}
+  <nav class="paginate-container" aria-label="Pagination">
+    <div class="pagination">
+      <a class="previous_page" rel="next" href="../" aria-label="Previous Page">Publish a VM Offer</a>
+      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
+      <a class="text-gray-light" href="." aria-label="Top">Getting Started</a>
+      <a class="next_page" rel="next" href="../vmoffer-vm" aria-label="Next Page">Create VM Image</a>
+      <!-- <span class="next_page" aria-disabled="true">Next</span> -->
+    </div>
+  </nav>
+{{< /raw >}}

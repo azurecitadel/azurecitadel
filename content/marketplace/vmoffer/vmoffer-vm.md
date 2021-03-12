@@ -7,8 +7,6 @@ weight: 20
 menu:
   side:
     parent: 'amp-vm-offer'
-series:
- - 'amp-vm-offer'
 ---
 
 ## Introduction
@@ -21,9 +19,11 @@ There are numerous way we could create the VHD. In this lab we will use the Azur
 
 Until recently, the only option was to create an unmanaged VHD and generate a SAS token to grant access to the VHD to Partner Center. This SAS token is provided as part of the technical requirements of the offer listing in Partner Center.
 
-The preferred option now is to use a Shared Image Gallery to make the VM image available. Again the Image details are entered as part of the technical requirements of the offer listing in Partner Center.
+The preferred option now is to use a **Shared Image Gallery** to make the VM image available. Again the Image details are entered as part of the technical requirements of the offer listing in Partner Center.
 
-Most of the process for creating the VM is the same - expand the relevant section - but unless there is a specific reason to use the SAS Token approach, the Shared Image Gallery is recommended.
+Most of the process for creating the VM is the same - expand the relevant section.
+
+> Note: Unless there is a specific reason to use the SAS Token approach, **the Shared Image Gallery is recommended.**
 
 ## Create a VM using the Azure CLI
 
@@ -180,3 +180,15 @@ We now have a generalised OS VHD for our Ubuntu-based VM offer with a web server
 ## Resources
 
 * [How to create a virtual machine using an approved base](https://docs.microsoft.com/azure/marketplace/azure-vm-create-using-approved-base)
+
+{{< raw >}}
+  <nav class="paginate-container" aria-label="Pagination">
+    <div class="pagination">
+      <a class="previous_page" rel="next" href="../overview" aria-label="Previous Page">Getting Started</a>
+      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
+      <a class="text-gray-light" href="." aria-label="Top">Create VM Image</a>
+      <a class="next_page" rel="next" href="../vmoffer-test" aria-label="Next Page">Test VM Image</a>
+      <!-- <span class="next_page" aria-disabled="true">Next</span> -->
+    </div>
+  </nav>
+{{< /raw >}}
