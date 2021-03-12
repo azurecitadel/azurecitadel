@@ -12,7 +12,7 @@ menu:
 
 ## Introduction
 
-If using the SAS Token approach, you will have created an unmanaged disk in a storage account which can be accessed directly with a SAS URL. The SAS URL comprised a URI to the resource along with a security token (Shared Access Signature) that authorizes access to the resource. It specifies the resource that a client may access, the permissions granted, and the time interval over which the signature is valid.
+If using the SAS URI approach, you will have created an unmanaged disk in a storage account which can be accessed directly with a SAS URL. The SAS URL comprised a URI to the resource along with a security token (Shared Access Signature) that authorizes access to the resource. It specifies the resource that a client may access, the permissions granted, and the time interval over which the signature is valid.
 
 ## Generate a SAS URL to the VHD Image
 

@@ -26,6 +26,8 @@ Now that we have the "technical assets" prepared for our offer, we can proceed t
 
 ## Offer Setup
 
+Here we enter fundamental details about the offer and can connect a destination for Customer leads generated through the marketplace. For the purposes of the lab, complete as follows:
+
 1. Alias
     1. Leave per above
 1. Test drive
@@ -35,13 +37,18 @@ Now that we have the "technical assets" prepared for our offer, we can proceed t
 
 ## Properties
 
+Here we define the relevant categories the offer should appear in the marketplace and the legal terms. For the purposes of the lab, complete as follows:
+
 1. Categories
     1. Select a ```Primary category``` and ```Subcategory``` eg Media / Media Services
 1. Legal
     1. Check the ```Use the Standard Contract...``` checkbox
-1. Save draft
+
+   > Be sure to **Save draft** before exiting the page
 
 ## Offer listing
+
+Here we define how the offer will appear in the marketplace - the offer listing itself and relevant metadata. For the purposes of the lab, complete as follows:
 
 1. Marketplace details
     1. Enter some text in each of the ```Name```, ```Search results summary```, ```Short description``` and ```Description``` fields
@@ -52,15 +59,122 @@ Now that we have the "technical assets" prepared for our offer, we can proceed t
 1. Marketplace media
     1. Only the Large logo is required
     1. You can use your own image or the [image here](../../images/logo.png)
-1. Save draft
+
+   > Be sure to **Save draft** before exiting the page
 
 ## Preview audience
 
+A preview audience is able to browse and acquire an offer before it is published in the marketplace. This is intended as a testing mechanism and to provide a limited audience with a preview of the offer. The offer does not go through full certification so it is possible to review and test with the inherent delay that involves. It will take a few hours for a preview to become available as opposed to a few days for a full publish and certification cycle.
+
+As we will not be going through the full publish process it is important a Preview audience is specified otherwise we will not be able to test our efforts. For the purposes of the lab, complete as follows:
+
+1. Enter your Azure Subscription ID in the ```Azure Subscription ID``` field and a suitable description in the ```Description``` field
+1. You can add multiple subscription IDs but for the lab one will be sufficient
+
+   > Be sure to **Save draft** before exiting the page
+
 ## Plan overview
+
+At least one plan is required for every offer. You can think of the offer as a container for plans which detail the
+
+1. Select ```Create new plan``` (at the top of the page)
+1. Enter a ```Plan ID``` and ```Plan name``` and select ```Create```
+1. You will enter a series of pages to define the individual plan
+
+### Plan setup
+
+This is the "high-level configuration" for the plan. For the purposes of the lab, complete as follows:
+
+1. ```Reuse technical configuration``` - leave unchecked
+1. ```Azure regions``` - leave as ```Azure Global``` checked and ```Azure Government``` unchecked
+
+### Plan listing
+
+This is the marketplace listing for the plan. eg we might have a bronze, silver, gold plan or "5 users", "25 users" etc. The share the same offer but may provide different capabilities or licence conditions. For the purposes of the lab, complete as follows:
+
+1. ```Plan name``` should be pre-populated. Leave as is.
+1. Enter some short text for ```Plan summary``` and ```Plan description```
+
+   > Be sure to **Save draft** before exiting the page
+
+### Pricing and availability
+
+Here we describe which markets we want to make the offer available and the pricing model and price point. For the purposes of the lab, complete as follows:
+
+1. ```Markets``` should be pre-populated for all markets except China which has some specific restrictions. Leave it as is.
+1. ```Pricing``` - leave the radio buttons as default and enter 0 for the ```Price per core```
+1. ```Free Trial``` - leave as "No Trial"
+1. ```Plan visibility``` - leave as "Public"
+1. ```Hide plan``` - leave unchecked
+
+   > Be sure to **Save draft** before exiting the page
+
+### Technical configuration
+
+This is what all the work in the previous sections was leading up to. This is where we reference the assets we've created and provide the VM image to the marketplace. For the purposes of the lab, complete as follows:
+
+1. ```Operating system``` - change the family to "Linux"
+1. ```Vendor``` - change to "Ubuntu"
+1. ```OS friendly name``` - change to Ubuntu
+1. ```Recommended VM Sizes``` - for a real offer we could recommend optimal VM sizes for our offer. There's no need to complete this for the lab.
+1. ```Open ports``` - add port 80 as follows
+
+   ![Open http port](../../images/partnercenter-open-ports.png)
+
+1. ```Properties``` - leave ```Supports accelerated networking``` unchecked
+1. ```Generations``` - leave ```Generation type``` as "Generation 1"
+1. ```VM Images``` - set the ```Disk version``` to "1.0.0"
+1. ```Select a method to provide your VM image``` - select the method you followed in the lab, "Shared Image Gallery" or "SAS URI"
+
+{{< details "Use Shared Image Gallery approach" >}}
+
+1. Click on ```Select shared image```
+1. A flyout will appear displaying the Shared Image Galleries you have access to
+1. Expand the ```marketplace_sig``` gallery
+1. Select the image we created earlier in the lab. It should be identified as version 1.0.0.
+
+{{< /details >}}
+
+{{< details "Use SAS URI approach" >}}
+
+1. Paste in the SAS URL you saved at the end of the "VM Offer with SAS" step of the lab.
+
+{{< /details >}}
+
+   > Be sure to **Save draft** before exiting the page
+   >
+   > Click on ```Plan overview``` at the top of the page to revert to the offer pages
 
 ## Co-sell with Microsoft
 
+You are not required to enter anything on the Co-sell tab for the purposed of this lab.
+
 ## Resell through CSPs
+
+1. Select "No partners in the CSP program"
+
+   > Be sure to **Save draft** before exiting the page
+
+## Review and Publish
+
+We are now ready to review and publish (to a preview audience) the offer we have created.
+
+1. Select "Review and publish" at the top of the page. You should see a summary like the below:
+
+   ![Publish summary screenshot](../../images/partnercenter-publish-summary.png)
+
+1. If any of the sections are not marked as "Complete", go back and review.
+1. Select "Publish" at the top of the page.
+1. This will start the publish process. It will take a few hours before the preview becomes available.
+
+   ![Publish status screenshot](../../images/partnercenter-publish-status.png)
+
+1. Note the "Publisher signoff" stage in the process. This is a manual step where the publisher must confirm approval before the offer is fully published in the marketplace.
+
+   > You will not do this for a test offer such as the one we are creating in this lab.
+
+1. Check back after a few hours.
+1. Preview links should be created for Azure Marketplace and the Azure Portal.
 
 ---
 

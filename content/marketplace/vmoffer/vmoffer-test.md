@@ -91,7 +91,7 @@ The first and simplest test is to confirm that we can create a new VM instance b
 
 {{< /details >}}
 
-{{< details "Use SAS Token approach" >}}
+{{< details "Use SAS URI approach" >}}
 
 The following is based on the instructions [Test a virtual machine image](https://docs.microsoft.com/en-us/azure/marketplace/azure-vm-image-test) but with some modifications as I have found the provided script not to work for Linux images.
 
