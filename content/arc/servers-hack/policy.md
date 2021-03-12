@@ -21,18 +21,17 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
 
 ## Tagging
 
-* add the following tags to the arc-hack resource group.
+* Add the following tags to the `arc-hack` resource group.
 
-    | | |
-    |---|---|
-    | platform | **private cloud** |
-    | datacentre | **citadel** |
-    | | |
+    | Tag        | Value             |
+    |------------|-------------------|
+    | platform   | **private cloud** |
+    | datacentre | **citadel**       |
 
-## Azure Policy Part 1
+## Azure Policy
 
-* assign an Azure Policy to inherit the two tags
-* remediate the tagging on the two existing VMs
+* Assign an Azure Policy to inherit the `platform` and `datacentre` tags from the resource group
+* Remediate the tagging on the two existing VMs
 
 ## Log Analytics
 
@@ -43,16 +42,18 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
   * Ignore events unless they are warning or higher severity level
 * Manually add the Log Analytics agent to the two Azure Arc VMs
 
-## Azure Policy Part 2
+## Azure Policy
 
-* assign policy to:
-  * deploy the Log Analytics agent to the Azure Arc virtual machines
-  * deploy the Dependency agent to the Azure Arc virtual machines
+* Assign policy to:
+  * Deploy the Log Analytics agent to the Azure Arc virtual machines
+  * Deploy the Dependency agent to the Azure Arc virtual machines
 * Use remediation tasks to make the two VMs fully compliant
 
-> Note that there is a [known bug](https://github.com/Azure/azure-policy/issues/733) in the _[Preview] Deploy Dependency agent to Windows Azure Arc machines_ policy definition as the managed identity has insufficient permissions to remediate non-compliancy.
+> Note that there is a [known bug](https://github.com/Azure/azure-policy/issues/733) in the _[Preview] Deploy Dependency agent to Windows Azure Arc machines_ policy definition as the managed identity has insufficient permissions to remediate non-compliance.
 >
-> The following commands will assign it sufficient privileges if you have assigned the expected policy initiative.
+> The built-in role *Azure Connected Machine Onboarding* has sufficient permission to write to Arc resources. 
+>
+> The following Azure CLI commands will assign sufficient privileges if you have assigned the expected policy initiative.
 >
 > ```bash
 > identity=$(az policy assignment list --resource-group arc-hack --query "[?displayName == 'Enable Azure Monitor for VMs'].identity.principalId" --output tsv)
