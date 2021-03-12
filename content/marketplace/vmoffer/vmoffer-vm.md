@@ -17,13 +17,13 @@ There are numerous way we could create the VHD. In this lab we will use the Azur
 
 ## How to make the VM available for upload to Partner Center
 
-Until recently, the only option was to create an unmanaged VHD and generate a SAS token to grant access to the VHD to Partner Center. This SAS token is provided as part of the technical requirements of the offer listing in Partner Center.
+Until recently, the only option was to create an unmanaged VHD and generate a SAS URI to grant access to the VHD to Partner Center. This SAS URI is provided as part of the technical requirements of the offer listing in Partner Center.
 
 The preferred option now is to use a **Shared Image Gallery** to make the VM image available. Again the Image details are entered as part of the technical requirements of the offer listing in Partner Center.
 
 Most of the process for creating the VM is the same - expand the relevant section.
 
-> Note: Unless there is a specific reason to use the SAS Token approach, **the Shared Image Gallery is recommended.**
+> Note: Unless there is a specific reason to use the SAS URI approach, **the Shared Image Gallery is recommended.**
 
 ## Create a VM using the Azure CLI
 
@@ -69,7 +69,7 @@ Most of the process for creating the VM is the same - expand the relevant sectio
 
 {{< /details >}}
 
-{{< details "Use SAS Token approach" >}}
+{{< details "Use SAS URI approach" >}}
 
    It is important to create a VM using unmanaged disks as the base. This gives us direct access to the VHD which we will need to copy at a later stage.
 
