@@ -181,6 +181,8 @@ We now have a generalised OS VHD for our Ubuntu-based VM offer with a web server
 
 * [How to create a virtual machine using an approved base](https://docs.microsoft.com/azure/marketplace/azure-vm-create-using-approved-base)
 
+---
+
 {{< raw >}}
   <nav class="paginate-container" aria-label="Pagination">
     <div class="pagination">
