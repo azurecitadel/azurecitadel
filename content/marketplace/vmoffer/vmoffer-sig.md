@@ -27,42 +27,45 @@ If using the Shared Image Gallery approach, you will have created a managed VM I
    Example output
 
    ```json
-      {
-        "description": null,
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/marketplace-vm-offer/providers/Microsoft.Compute/galleries/marketplace_sig",
-        "identifier": {
-          "uniqueName": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-MARKETPLACE_SIG"
-          },
-        "location": "westeurope",
-        "name": "marketplace_sig",
-        "provisioningState": "Succeeded",
-        "resourceGroup": "marketplace-vm-offer",
-        "tags": {},
-        "type": "Microsoft.Compute/galleries"
-      }
+   {
+     "description": null,
+     "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/marketplace-vm-offer/providersMicrosoft.Compute/galleries/marketplace_sig",
+     "identifier": {
+       "uniqueName": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-MARKETPLACE_SIG"
+       },
+     "location": "westeurope",
+     "name": "marketplace_sig",
+     "provisioningState": "Succeeded",
+     "resourceGroup": "marketplace-vm-offer",
+     "tags": {},
+     "type": "Microsoft.Compute/galleries"
+   }
    ```
+## Create an Image Definition
 
 1. Next we need to create an "image definition" in the gallery as a container for our image
 
-    ```bash
-    az sig image-definition create \
-      --resource-group 'marketplace-vm-offer' \
-      --gallery-name 'marketplace_sig' \
-      --gallery-image-definition 'marketplace-definition' \
-      --publisher 'contoso' \
-      --offer 'offer1' \
-      --sku 'standard' \
-      --os-type Linux \
-      --os-state generalized
-    ```
+   ```bash
+   az sig image-definition create \
+    --resource-group 'marketplace-vm-offer' \
+    --gallery-name 'marketplace_sig' \
+    --gallery-image-definition 'marketplace-definition' \
+    --publisher 'contoso' \
+    --offer 'offer1' \
+    --sku 'standard' \
+    --os-type Linux \
+    --os-state generalized
+   ```
+
+## Create an Image Version
 
 1. Then we need an image version in the gallery to fully describe our image
 
-    For this you will need the resource ID of the managed image
+   For this you will need the resource ID of the managed image
 
-    ```bash
-    az image list --query "[].[name, id]" -o tsv
-    ```
+   ```bash
+   az image list --query "[].[name, id]" -o tsv
+   ```
 
     Substitute the resource ID for the ```--managed-image``` parameter
 
@@ -79,34 +82,34 @@ If using the Shared Image Gallery approach, you will have created a managed VM I
    Example output
 
    ```json
-      {
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/marketplace-vm-offer/providers/Microsoft.Compute/galleries/marketplace_sig/images/marketplace-definition/versions/1.0.0",
-        "location": "westeurope",
-        "name": "1.0.0",
-        "provisioningState": "Succeeded",
-        "publishingProfile": {
-          "endOfLifeDate": null,
-          "excludeFromLatest": false,
-          "publishedDate": "2021-03-11T16:34:24.259473+00:00",
-          "replicaCount": 1,
-          "storageAccountType": "Standard_LRS",
-          "targetRegions": [
-            {
-              "encryption": null,
-              "name": "West Europe",
-              "regionalReplicaCount": 1,
-              "storageAccountType": "Standard_LRS"
-            }
-          ]
-        },
-        "replicationStatus": null,
-        ...
-        ...
-        ...
-      }
+    {
+      "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/marketplace-vm-offer/providers/Microsoft.Compute/galleries/marketplace_sig/images/marketplace-definition/versions/1.0.0",
+      "location": "westeurope",
+      "name": "1.0.0",
+      "provisioningState": "Succeeded",
+      "publishingProfile": {
+        "endOfLifeDate": null,
+        "excludeFromLatest": false,
+        "publishedDate": "2021-03-11T16:34:24.259473+00:00",
+        "replicaCount": 1,
+        "storageAccountType": "Standard_LRS",
+        "targetRegions": [
+          {
+            "encryption": null,
+            "name": "West Europe",
+            "regionalReplicaCount": 1,
+            "storageAccountType": "Standard_LRS"
+          }
+        ]
+      },
+      "replicationStatus": null,
+      ...
+      ...
+      ...
+    }
    ```
 
-1. Now the imaged is available in a Shared Image Gallery we can reference it in our offer plan in Partner Center when we publish.
+1. Now the image is available in a Shared Image Gallery we can reference it in our offer plan in Partner Center when we publish.
 
 ## Resources
 
