@@ -33,6 +33,8 @@ In this lab we will create the technical assets required to publish a VM offer t
   * Generate a SAS URL to the VHD Image
 * Publish the Offer through Partner Center
 
+---
+
 {{< raw >}}
   <nav class="paginate-container" aria-label="Pagination">
     <div class="pagination">

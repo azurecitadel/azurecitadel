@@ -61,3 +61,17 @@ Now that we have the "technical assets" prepared for our offer, we can proceed t
 ## Co-sell with Microsoft
 
 ## Resell through CSPs
+
+---
+
+{{< raw >}}
+  <nav class="paginate-container" aria-label="Pagination">
+    <div class="pagination">
+      <a class="previous_page" rel="next" href="../vmoffer-sig" aria-label="Previous Page">VM Offer with SIG</a>
+      <a class="previous_page" rel="next" href="../vmoffer-sas" aria-label="Previous Page">VM Offer with SAS</a>
+      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
+      <a class="text-gray-light" href="." aria-label="Top">Publish Offer</a>
+      <span class="next_page" aria-disabled="true">Next</span>
+    </div>
+  </nav>
+{{< /raw >}}

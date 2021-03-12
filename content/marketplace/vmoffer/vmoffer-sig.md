@@ -115,6 +115,8 @@ If using the Shared Image Gallery approach, you will have created a managed VM I
 
 * [Shared Image Galleries overview](https://docs.microsoft.com/azure/virtual-machines/shared-image-galleries)
 
+---
+
 {{< raw >}}
   <nav class="paginate-container" aria-label="Pagination">
     <div class="pagination">

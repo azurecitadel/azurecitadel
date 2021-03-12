@@ -78,6 +78,16 @@ The final thing to do is generate a SAS URL pointing to the generalised VHD imag
 * [How to generate a SAS URI for a VM image](https://docs.microsoft.com/azure/marketplace/azure-vm-get-sas-uri)
 * [Create a service SAS](https://docs.microsoft.com/rest/api/storageservices/create-service-sas)
 
-## Next
+---
 
-[Publish offer in Partner Center](../vmpublish)
+{{< raw >}}
+  <nav class="paginate-container" aria-label="Pagination">
+    <div class="pagination">
+      <a class="previous_page" rel="next" href="../vmoffer-test" aria-label="Previous Page">Test VM Image</a>
+      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
+      <a class="text-gray-light" href="." aria-label="Top">VM Offer with SAS</a>
+      <a class="next_page" rel="next" href="../vmpublish" aria-label="Next Page">Publish VM Offer</a>
+      <!-- <span class="next_page" aria-disabled="true">Next</span> -->
+    </div>
+  </nav>
+{{< /raw >}}

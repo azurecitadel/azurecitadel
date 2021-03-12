@@ -159,6 +159,8 @@ To finalise the test:
 * [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource)
 * [Create an image from a VM](https://docs.microsoft.com/azure/virtual-machines/image-version-vm-powershell)
 
+---
+
 {{< raw >}}
   <nav class="paginate-container" aria-label="Pagination">
     <div class="pagination">
