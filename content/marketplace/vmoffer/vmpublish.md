@@ -22,7 +22,9 @@ Now that we have the "technical assets" prepared for our offer, we can proceed t
 
    ![Create a new offer in Partner Center](/marketplace/images/partnercenter-new-offer.png)
 
-1. Enter an Offer ID and Offer alias. The Offer ID must be unique within your account. The Offer alias is a friendly name for use within Partner Center.
+1. Enter an ```Offer ID``` and ```Offer alias```. The ```Offer ID``` must be unique within your account. The ```Offer alias``` is a friendly name for use within Partner Center.
+
+   > You may want to create an ```Offer alias``` something like "TEST_OFFER_DO_NOT_PUBLISH_xxxxxxx" to guard against the offer being inadvertently published by another user or in the future.
 
 ## Offer Setup
 
@@ -173,8 +175,22 @@ We are now ready to review and publish (to a preview audience) the offer we have
 
    > You will not do this for a test offer such as the one we are creating in this lab.
 
-1. Check back after a few hours.
-1. Preview links should be created for Azure Marketplace and the Azure Portal.
+1. Check back after a few hours. Preview links should be created for Azure Marketplace and the Azure Portal.
+1. Use the preview links to deploy your VM Offer into your subscription.
+1. You should be able to perform the following tests that we completed previously:
+   1. Confirm that browsing to the IP address of the new VM displays the NGINX welcome page - NOTE you may need to add a rule on the NSG to allow incoming traffic on Port 80.
+   1. SSH into the new VM and confirm the presence of a /tmp/users.txt file with a creation time matching the last reboot.
+
+## Cleanup Resources
+
+1. Once completed, you can cleanup resources by deleting the two Resource Groups created during the lab
+   1. ```marketplace-vm-offer```
+   1. ```marketplace-vm-offer-test```
+
+## Resources
+
+* [How to plan a virtual machine offer](https://docs.microsoft.com/en-gb/azure/marketplace/marketplace-virtual-machines)
+* [How to create a virtual machine offer on Azure Marketplace](https://docs.microsoft.com/en-gb/azure/marketplace/azure-vm-create)
 
 ---
 

@@ -41,6 +41,7 @@ If using the Shared Image Gallery approach, you will have created a managed VM I
      "type": "Microsoft.Compute/galleries"
    }
    ```
+
 ## Create an Image Definition
 
 1. Next we need to create an "image definition" in the gallery as a container for our image
