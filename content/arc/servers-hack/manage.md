@@ -61,12 +61,14 @@ Screen share with your proctor to show that you achieved:
 
 ## Resources
 
-* [Operational compliance in Azure](https://docs.microsoft.com/en-gb/azure/cloud-adoption-framework/manage/azure-management-guide/operational-compliance?tabs=UpdateManagement%2CAzurePolicy%2CAzureBlueprints)
-* [An introduction to Azure Automation](https://docs.microsoft.com/en-us/azure/automation/automation-intro)
-* [Update Management overview](https://docs.microsoft.com/en-us/azure/automation/update-management/overview)
-* [How to deploy updates and review results](https://docs.microsoft.com/en-us/azure/automation/update-management/deploy-updates)
-* [Query Update Management logs](https://docs.microsoft.com/en-us/azure/automation/update-management/query-logs)
-* [Manage inventory collection from VMs](https://docs.microsoft.com/en-us/azure/automation/change-tracking/manage-inventory-vms)
-* [Discover what software is installed on your VMs](https://docs.microsoft.com/en-us/azure/automation/automation-tutorial-installed-software)
-* [Azure Monitor Workbooks](https://docs.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-overview)
+* [Operational compliance in Azure](https://docs.microsoft.com/azure/cloud-adoption-framework/manage/azure-management-guide/operational-compliance?tabs=UpdateManagement%2CAzurePolicy%2CAzureBlueprints)
+* [An introduction to Azure Automation](https://docs.microsoft.com/azure/automation/automation-intro)
+* [Update Management overview](https://docs.microsoft.com/azure/automation/update-management/overview)
+* [How to deploy updates and review results](https://docs.microsoft.com/azure/automation/update-management/deploy-updates)
+* [Query Update Management logs](https://docs.microsoft.com/azure/automation/update-management/query-logs)
+* [Manage inventory collection from VMs](https://docs.microsoft.com/azure/automation/change-tracking/manage-inventory-vms)
+* [Discover what software is installed on your VMs](https://docs.microsoft.com/azure/automation/automation-tutorial-installed-software)
+* [Azure Monitor Workbooks](https://docs.microsoft.com/azure/azure-monitor/visualize/workbooks-overview)
 * [GitHub - Azure Monitor Community repository (Workbook, Queries and Alerts)](https://github.com/microsoft/AzureMonitorCommunity)
+* [Hotpatch for new virtual machines (Preview)](https://docs.microsoft.com/azure/automanage/automanage-hotpatch)
+  * [Preview Portal](https://aka.ms/AzureAutomanageHotPatch)

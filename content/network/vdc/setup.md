@@ -19,7 +19,7 @@ This lab guide allows the user to deploy and test a hub and spoke topology in Az
 
 More information on VDCs can be found at the following link:
 
-<https://docs.microsoft.com/en-us/azure/networking/networking-virtual-datacenter>
+<https://docs.microsoft.com/azure/networking/networking-virtual-datacenter>
 
 This is recommended reading as it covers the theory and recommendations from the field for enterprise deployments in Azure, and the documentation also includes a number of additional governance topics and some extended topologies.
 

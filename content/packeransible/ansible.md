@@ -50,7 +50,7 @@ In this section you'll create a local Ansible area to work in, including a defau
     sudo -H pip install ansible[azure]
     ```
 
-    As per the [Ansible install guide](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ansible-install-configure) for Azure. (Plus python-setuptools.)
+    As per the [Ansible install guide](https://docs.microsoft.com/azure/virtual-machines/linux/ansible-install-configure) for Azure. (Plus python-setuptools.)
 
 1. Create an `http://ansible` service principal and Ansible environment variables
 
@@ -90,7 +90,7 @@ In this section you'll create a local Ansible area to work in, including a defau
     env | grep AZURE
     ```
 
-    There are many other options for Ansible to authenticate to Azure, as per the [documentation](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ansible-install-configure#create-azure-credentials).
+    There are many other options for Ansible to authenticate to Azure, as per the [documentation](https://docs.microsoft.com/azure/virtual-machines/linux/ansible-install-configure#create-azure-credentials).
 
     > Note that these will be listed if you run `az configure`.
 
@@ -412,7 +412,7 @@ We will also move from static to dynamic inventories.
 
 ## References
 
-* <https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ansible-install-configure>
+* <https://docs.microsoft.com/azure/virtual-machines/linux/ansible-install-configure>
 * <https://www.ansible.com/resources/get-started>
 * <https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html>
 * <https://www.howtoforge.com/ansible-guide-ad-hoc-command/>

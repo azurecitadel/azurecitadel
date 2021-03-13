@@ -219,7 +219,7 @@ OK, let's configure the role to install the Azure CLI.
     ```yaml
     ---
     # Install the Azure CLI
-    # Based on <https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest>
+    # Based on <https://docs.microsoft.com/cli/azure/install-azure-cli-apt?view=azure-cli-latest>
 
     - name: Update apt cache
       apt:
