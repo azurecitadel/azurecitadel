@@ -7,8 +7,8 @@ weight: 50
 style: list
 menu:
   side:
-    parent: 'marketplace'
-    identifier: 'amp-aast-offer'
+    parent: marketplace
+    identifier: marketplace-aast-offer
 ---
 
 ## Introduction

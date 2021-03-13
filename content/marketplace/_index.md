@@ -6,7 +6,7 @@ date: 2021-01-06
 style: list
 menu:
   side:
-    identifier: 'marketplace'
+    identifier: marketplace
 ---
 
 ## Introduction

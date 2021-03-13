@@ -7,7 +7,8 @@ weight: 50
 nonav: true
 menu:
   side:
-    parent: 'amp-vm-offer'
+    parent: marketplace-vm-offer
+    identifier: marketplace-vm-offer-sas
 ---
 
 ## Introduction

@@ -7,8 +7,8 @@ noback: 123
 weight: 10
 menu:
   side:
-    parent: 'amp-vm-offer'
-    identifier: 'amp-vm-getting-started'
+    parent: marketplace-vm-offer
+    identifier: marketplace-vm-offer-getting-started
 ---
 
 ## Prerequisites

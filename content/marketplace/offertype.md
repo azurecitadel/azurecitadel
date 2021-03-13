@@ -6,8 +6,8 @@ date: 2021-01-06
 weight: 30
 menu:
   side:
-    parent: 'marketplace'
-    identifier: 'marketplace-offer'
+    parent: marketplace
+    identifier: marketplace-offer
 ---
 
 Now we are familiar with some of the key terminology and characteristics of the different offer types, it's time to decide which offer type is best suited for your solution.
