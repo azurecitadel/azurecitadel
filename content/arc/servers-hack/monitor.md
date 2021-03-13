@@ -6,6 +6,7 @@ draft: false
 menu:
   side:
     parent: arc-servers-hack
+    identifier: arc-servers-hack-monitor
 series:
  - arc-servers-hack
 weight: 5
@@ -35,7 +36,7 @@ You are part of the Security Operations Centers (SOC) team.
 
 ### Cost Management team
 
-You are part of the Cost Management team and performing an exercise on reducing costs. 
+You are part of the Cost Management team and performing an exercise on reducing costs.
 
 * Deploy a Data Collection Rule to collate the RAM usage data and % of free disk space for all VMs
 * (Optional) Produce a workbook showing the % utilisation of CPU, RAM and free disk space for all VMs
@@ -71,4 +72,4 @@ Screen share with your proctor to show that you achieved:
 * [Azure Monitor Workbook Visualizations](https://docs.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-chart-visualizations)
 * [Create, view, and manage log alerts using Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-log)
 * [Connect your non-Azure machines to Security Center](https://docs.microsoft.com/en-us/azure/security-center/quickstart-onboard-machines)
-* 
+*
