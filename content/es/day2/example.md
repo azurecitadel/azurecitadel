@@ -28,7 +28,7 @@ The EA Structure should look similar to the below:
 - The existing Azure AD Tenant of: ```azurebaristas.onmicrosoft.com``` will be used as:
   - Already synced with the On-Premise Active Directory Domain: ```azbaristas.local``` via Azure AD Connect with Password Hash Sync & SSO configured
   - Used already for Office/Microsoft 365 services across the organisation
-- A single Azure AD Tenant is recommended as part of Enterprise Scale & [CAF Security best practices](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/security/security-top-10#9-architecture-standardize-on-a-single-directory-and-identity)
+- A single Azure AD Tenant is recommended as part of Enterprise Scale & [CAF Security best practices](https://docs.microsoft.com/azure/cloud-adoption-framework/security/security-top-10#9-architecture-standardize-on-a-single-directory-and-identity)
 - Relevant RBAC role/custom roles defined and applied as per RBAC requirements on the [Day 2 Challenge Page](../customise/#security-group-and-rbac-assignments) & [Day 1 Azure Baristas Intro](/es/day1/baristas)
 
 ## Management Group Structure
