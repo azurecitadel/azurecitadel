@@ -55,7 +55,7 @@
                     <span class="previous_page" aria-disabled="true">Previous</span>
                 {{ end }}
 
-                <a class="text-gray-light" href="{{ .CurrentSection.Permalink }}" aria-label="Top">{{ .Name}}</a>
+                <a class="text-gray-light" href="." aria-label="Top">{{ .Name}}</a>
 
                 {{ with index .Scratch.Values "nextInSeries" }}
                     <a class="next_page" rel="next" href="{{ .Permalink }}" aria-label="Next Page">{{ .Title }}</a>
