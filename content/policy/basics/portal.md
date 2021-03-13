@@ -41,11 +41,11 @@ Most organizations don't want users creating Azure resources in any region. In t
     ![Policy Definition-Allowed Locations](/policy/basics/images/lab1-policydefinition-allowedlocations.png)
 **Figure 2:** Policy Definition - Allowed Locations
 
-    For more details on the policy definition structure see [here](https://docs.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure).
+    For more details on the policy definition structure see [here](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure).
 
 1. When assigning a policy, we first have to choose the scope, at either:
 
-    - [Management Group](https://docs.microsoft.com/en-us/azure/governance/management-groups/)
+    - [Management Group](https://docs.microsoft.com/azure/governance/management-groups/)
     - Subscription
     - Resource Group
 

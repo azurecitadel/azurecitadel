@@ -32,8 +32,8 @@ See below if you have multiple Azure IDs and/or subscriptions.
   * if there are subcommands then you can use the ```--help``` or ```-h``` at any level
 * ```az find -q <str>``` will search the index for commands containing ```<str>```
   * e.g. ```az find -q image```
-* the [Azure CLI reference](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) has a description of the available commands and parameters
-* most of the [Azure documentation](https://docs.microsoft.com/en-us/azure/#pivot=products&panel=all) sections have examples and tutorials for CLI 2.0 alongside the Portal and PowerShell
+* the [Azure CLI reference](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) has a description of the available commands and parameters
+* most of the [Azure documentation](https://docs.microsoft.com/azure/#pivot=products&panel=all) sections have examples and tutorials for CLI 2.0 alongside the Portal and PowerShell
 
 The CLI includes tab auto-complete for both switches and values, which is very useful for auto-completing resource groups, resource names and long subscription descriptions.
 

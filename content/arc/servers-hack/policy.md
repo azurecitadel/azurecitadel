@@ -71,7 +71,7 @@ Screen share with your proctor to show that you achieved:
 
 ## Resources
 
-* [Azure Policy documentation](https://docs.microsoft.com/en-us/azure/governance/policy/)
-* [Overview of Log Analytics in Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
-* [Collect data from an Azure virtual machine with Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/vm/quick-collect-azurevm)
-* [Overview of Azure Monitor agents](https://docs.microsoft.com/en-us/azure/azure-monitor/agents/agents-overview)
+* [Azure Policy documentation](https://docs.microsoft.com/azure/governance/policy/)
+* [Overview of Log Analytics in Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/logs/log-analytics-overview)
+* [Collect data from an Azure virtual machine with Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/vm/quick-collect-azurevm)
+* [Overview of Azure Monitor agents](https://docs.microsoft.com/azure/azure-monitor/agents/agents-overview)

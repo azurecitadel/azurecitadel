@@ -54,7 +54,7 @@ We will create a simple playbook to install the Azure CLI.  The install instruct
     ```yaml
     ---
     # Simple playbook to install the Azure CLI
-    # Based on <https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest>
+    # Based on <https://docs.microsoft.com/cli/azure/install-azure-cli-apt?view=azure-cli-latest>
 
     - hosts: localhost
       become: yes

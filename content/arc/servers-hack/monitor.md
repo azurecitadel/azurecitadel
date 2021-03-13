@@ -67,9 +67,9 @@ Screen share with your proctor to show that you achieved:
 
 ## Resources
 
-* [Azure Monitoring Agent](https://docs.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-overview)
-* [Data Collection Rule](https://docs.microsoft.com/en-us/azure/azure-monitor/agents/data-collection-rule-overview)
-* [Azure Monitor Workbook Visualizations](https://docs.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-chart-visualizations)
-* [Create, view, and manage log alerts using Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-log)
-* [Connect your non-Azure machines to Security Center](https://docs.microsoft.com/en-us/azure/security-center/quickstart-onboard-machines)
+* [Azure Monitoring Agent](https://docs.microsoft.com/azure/azure-monitor/agents/azure-monitor-agent-overview)
+* [Data Collection Rule](https://docs.microsoft.com/azure/azure-monitor/agents/data-collection-rule-overview)
+* [Azure Monitor Workbook Visualizations](https://docs.microsoft.com/azure/azure-monitor/visualize/workbooks-chart-visualizations)
+* [Create, view, and manage log alerts using Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/alerts/alerts-log)
+* [Connect your non-Azure machines to Security Center](https://docs.microsoft.com/azure/security-center/quickstart-onboard-machines)
 *

@@ -28,7 +28,7 @@ If you are working on MacOS or a Linux distro then you can just use Bash in your
 
 We recommend using the **Windows Subsystem for Linux** (WSL) and installing the binaries into linux rather than at the Windows OS level. This page assumes that you will take that route.
 
-> If your personal preference is to work within Windows and to use PowerShell then we understand. You can install both [git](https://gitforwindows.org/) and [az](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli) at the OS level instead and then skip to [vscode](#visual-studio-code). However you should be aware that you won't be able to use some of the examples in the labs as they are based on Ubuntu 20.04 running in WSL and use pipelines in Bash.
+> If your personal preference is to work within Windows and to use PowerShell then we understand. You can install both [git](https://gitforwindows.org/) and [az](https://docs.microsoft.com/cli/azure/install-azure-cli-windows?tabs=azure-cli) at the OS level instead and then skip to [vscode](#visual-studio-code). However you should be aware that you won't be able to use some of the examples in the labs as they are based on Ubuntu 20.04 running in WSL and use pipelines in Bash.
 
 * [Install Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10)
 
