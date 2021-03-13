@@ -6,6 +6,7 @@ draft: false
 menu:
   side:
     parent: arc-servers-hack
+    identifier: arc-servers-hack-policy
 series:
  - arc-servers-hack
 weight: 3
@@ -51,7 +52,7 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
 
 > Note that there is a [known bug](https://github.com/Azure/azure-policy/issues/733) in the _[Preview] Deploy Dependency agent to Windows Azure Arc machines_ policy definition as the managed identity has insufficient permissions to remediate non-compliance.
 >
-> The built-in role *Azure Connected Machine Onboarding* has sufficient permission to write to Arc resources. 
+> The built-in role *Azure Connected Machine Onboarding* has sufficient permission to write to Arc resources.
 >
 > The following Azure CLI commands will assign sufficient privileges if you have assigned the expected policy initiative.
 >
