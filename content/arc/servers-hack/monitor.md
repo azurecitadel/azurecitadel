@@ -35,7 +35,7 @@ In this challenge, we will deploy the new agent alongisde the current Log Analyt
 You are part of the Security Operations Centers (SOC) team.
 
 * Set up a Data Collection Rule for all your Azure arc virtual machines to send their authentication logs to
-* (Optional) Validate the security logs are visible in the Log Analytics Workspace
+* (Optional) Validate the authentication logs are visible in the Log Analytics Workspace
 
 ### Cost Management team
 
