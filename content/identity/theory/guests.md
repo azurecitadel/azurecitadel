@@ -26,4 +26,4 @@ Note that Members can create service principals by default, but AAD B2B Guests a
 
 ## References
 
-* [](https://docs.microsoft.com/en-us/azure/active-directory/external-identities/b2b-quickstart-add-guest-users-portal)
+* [](https://docs.microsoft.com/azure/active-directory/external-identities/b2b-quickstart-add-guest-users-portal)

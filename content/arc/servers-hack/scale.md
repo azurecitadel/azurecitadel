@@ -6,6 +6,7 @@ draft: false
 menu:
   side:
     parent: arc-servers-hack
+    identifier: arc-servers-hack-scale
 series:
  - arc-servers-hack
 weight: 4
@@ -248,5 +249,5 @@ Screen share with your proctor to show that you achieved:
   * [ansible.windows](https://docs.ansible.com/ansible/latest/collections/index_module.html#ansible-windows)
 * [ad hoc Ansible use](/packeransible/ansible)
 * [Azure Policy](https://docs.microsoft.com/azure/governance/policy/)
-* [Azure Resource Graph](https://docs.microsoft.com/en-us/azure/governance/resource-graph/)
-* [Kusto Query Language](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/concepts/)
+* [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/)
+* [Kusto Query Language](https://docs.microsoft.com/azure/data-explorer/kusto/concepts/)

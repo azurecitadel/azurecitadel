@@ -803,9 +803,9 @@ But first, let's test it out at a safer resource group level. (It is assumed tha
 
 1. Use REST API call to trigger evaluation
 
-    The Azure docs have information on the standard [evaluation triggers](https://docs.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data#evaluation-triggers), but I'm going to assume that you're impatient and don't want to wait 24 hours for the standard compliance evaluation cycle to go round.
+    The Azure docs have information on the standard [evaluation triggers](https://docs.microsoft.com/azure/governance/policy/how-to/get-compliance-data#evaluation-triggers), but I'm going to assume that you're impatient and don't want to wait 24 hours for the standard compliance evaluation cycle to go round.
 
-    We'll use the REST API to trigger an [on demand scan](https://docs.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data#on-demand-evaluation-scan) on our resource group. (Hopefully this will become a CLI command in the future.)
+    We'll use the REST API to trigger an [on demand scan](https://docs.microsoft.com/azure/governance/policy/how-to/get-compliance-data#on-demand-evaluation-scan) on our resource group. (Hopefully this will become a CLI command in the future.)
 
     ```bash
     subscriptionId=$(az account show --output tsv --query id)

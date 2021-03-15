@@ -7,7 +7,8 @@ weight: 30
 nonav: true
 menu:
   side:
-    parent: 'amp-vm-offer'
+    parent: marketplace-vm-offer
+    identifier: marketplace-vm-offer-test
 ---
 
 ## Introduction
@@ -93,7 +94,7 @@ The first and simplest test is to confirm that we can create a new VM instance b
 
 {{< details "Use SAS URI approach" >}}
 
-The following is based on the instructions [Test a virtual machine image](https://docs.microsoft.com/en-us/azure/marketplace/azure-vm-image-test) but with some modifications as I have found the provided script not to work for Linux images.
+The following is based on the instructions [Test a virtual machine image](https://docs.microsoft.com/azure/marketplace/azure-vm-image-test) but with some modifications as I have found the provided script not to work for Linux images.
 
 1. Sign in to the Azure portal.
 1. On the home page, select Create a resource, search for “Template Deployment”, and select Create.

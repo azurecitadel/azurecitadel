@@ -6,7 +6,8 @@ date: 2021-01-06
 weight: 20
 menu:
   side:
-    parent: 'marketplace'
+    parent: marketplace
+    identifier: marketplace-partnercenter
 ---
 
 ## Introduction

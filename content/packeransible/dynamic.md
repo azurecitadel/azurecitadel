@@ -517,10 +517,10 @@ In the next section we will look at playbooks and publishing to the shared image
 
 ## References
 
-* <https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ansible-install-configure>
+* <https://docs.microsoft.com/azure/virtual-machines/linux/ansible-install-configure>
 * <https://www.ansible.com/resources/get-started>
 * <https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html>
 * <https://www.howtoforge.com/ansible-guide-ad-hoc-command/>
 * <http://docs.ansible.com/ansible/modules_by_category.html>
-* <https://docs.microsoft.com/en-us/azure/ansible/ansible-manage-azure-dynamic-inventories>
+* <https://docs.microsoft.com/azure/ansible/ansible-manage-azure-dynamic-inventories>
 * <https://docs.ansible.com/ansible/latest/plugins/inventory/azure_rm.html>

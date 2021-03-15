@@ -6,6 +6,7 @@ draft: false
 menu:
   side:
     parent: arc-servers-hack
+    identifier: arc-servers-hack-manual
 series:
  - arc-servers-hack
 weight: 2

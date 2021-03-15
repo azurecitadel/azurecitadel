@@ -139,6 +139,24 @@ In this challenge you will implement a update management strategy and report inv
   | summarize by Publisher, SoftwareName, Computer
   ```
 
+## Azure Monitor Workbooks
+
+* Create an update assessment Workbook to visualize update compliance and detail missing updates
+
+  An `Update Assessment.json` sample Workbook is available in the GitHub Azure Monitor Community here: [Github.com/microsoft/AzureMonitorCommunity/Azure Services/Azure Monitor/Workbooks](https://github.com/microsoft/AzureMonitorCommunity/blob/master/Azure%20Services/Azure%20Monitor/Workbooks/Update%20Assessment.json)
+  
+  In the portal, navigate to **Monitor**.
+  
+  In **Workbooks**, choose **New** and **`</>` (Advanced Editor icon)**.
+  
+  Paste the contents of the `Update Assessment.json` template into the editor (replace any existing content within the input field). Check the **Template Type** is set to `Gallery Template`.
+  
+  **Apply** the changes, select **Workspace:** `arc-hack-workspace-team1` and **Servers:** `All`, then **Done Editing**.
+  
+  A preview of the Update Assessment Workbook will display and should be populated with compliance data. If not, check the **Workspace** and **Servers** scopes.
+  
+  Click the **Save** icon to save the Workbook, and consider whether to use the **Pin** icons next to each chart to save the charts to the Dashboard.
+
 ## Success criteria
 
 Screen share with your proctor to show that you achieved:
@@ -149,3 +167,4 @@ Screen share with your proctor to show that you achieved:
 1. Show the update history
 1. Inventory solution is enabled
 1. Software, Windows Services and Linux Daemons display in the inventory
+1. Show update compliance with an Azure Monitor Workbook

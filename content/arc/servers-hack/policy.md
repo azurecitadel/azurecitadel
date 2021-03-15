@@ -6,6 +6,7 @@ draft: false
 menu:
   side:
     parent: arc-servers-hack
+    identifier: arc-servers-hack-policy
 series:
  - arc-servers-hack
 weight: 3
@@ -51,7 +52,7 @@ In this challenge you will explore using Azure Policy to onboard the Azure Arc v
 
 > Note that there is a [known bug](https://github.com/Azure/azure-policy/issues/733) in the _[Preview] Deploy Dependency agent to Windows Azure Arc machines_ policy definition as the managed identity has insufficient permissions to remediate non-compliance.
 >
-> The built-in role *Azure Connected Machine Onboarding* has sufficient permission to write to Arc resources. 
+> The built-in role *Azure Connected Machine Onboarding* has sufficient permission to write to Arc resources.
 >
 > The following Azure CLI commands will assign sufficient privileges if you have assigned the expected policy initiative.
 >
@@ -70,7 +71,7 @@ Screen share with your proctor to show that you achieved:
 
 ## Resources
 
-* [Azure Policy documentation](https://docs.microsoft.com/en-us/azure/governance/policy/)
-* [Overview of Log Analytics in Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
-* [Collect data from an Azure virtual machine with Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/vm/quick-collect-azurevm)
-* [Overview of Azure Monitor agents](https://docs.microsoft.com/en-us/azure/azure-monitor/agents/agents-overview)
+* [Azure Policy documentation](https://docs.microsoft.com/azure/governance/policy/)
+* [Overview of Log Analytics in Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/logs/log-analytics-overview)
+* [Collect data from an Azure virtual machine with Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/vm/quick-collect-azurevm)
+* [Overview of Azure Monitor agents](https://docs.microsoft.com/azure/azure-monitor/agents/agents-overview)

@@ -7,8 +7,8 @@ weight: 40
 style: list
 menu:
   side:
-    parent: 'marketplace'
-    identifier: 'amp-vm-offer'
+    parent: marketplace
+    identifier: marketplace-vm-offer
 ---
 
 *Virtual Machine offers* are used to deploy and transact a virtual machine (VM) instance through Marketplace. The solution must consist of a single VM. Anything more complex requires an *Azure Apps offer*.

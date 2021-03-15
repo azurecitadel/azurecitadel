@@ -7,8 +7,8 @@ weight: 70
 style: list
 menu:
   side:
-    parent: 'marketplace'
-    identifier: 'amp-saas-offer'
+    parent: marketplace
+    identifier: marketplace-saas-offer
 ---
 
 ## Introduction

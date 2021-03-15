@@ -6,7 +6,8 @@ date: 2021-01-06
 weight: 20
 menu:
   side:
-    parent: 'amp-vm-offer'
+    parent: marketplace-vm-offer
+    identifier: marketplace-vm-offer-image
 ---
 
 ## Introduction

@@ -6,6 +6,7 @@ draft: false
 menu:
   side:
     parent: arc-servers-hack
+    identifier: arc-servers-hack-monitor
 series:
  - arc-servers-hack
 weight: 5
@@ -30,6 +31,7 @@ In this challenge, we will deploy the new agent alongisde the current Log Analyt
 ## Data Collection Rules (DCRs)
 
 ### Security Operations Centers (SOC) team
+
 You are part of the Security Operations Centers (SOC) team.
 
 * Set up a Data Collection Rule for all your Azure arc virtual machines to send their authentication logs to
@@ -37,7 +39,7 @@ You are part of the Security Operations Centers (SOC) team.
 
 ### Cost Management team
 
-You are part of the Cost Management team and performing an exercise on reducing costs. 
+You are part of the Cost Management team and performing an exercise on reducing costs.
 
 * Deploy a Data Collection Rule to collate the RAM usage data and % of free disk space for all VMs
 * (Optional) Produce a workbook showing the % utilisation of CPU, RAM and free disk space for all VMs

@@ -95,7 +95,7 @@ Create a virtual machine in the virtual network.
     **Setting** | **Value**
     ---: | ---
     Username | Enter a user name of your choosing
-    Password | Enter a password of your choosing. The password must be at least 12 characters long and meet the [defined complexity requirements](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/faq?toc=%2fazure%2fvirtual-network%2ftoc.json#what-are-the-password-requirements-when-creating-a-vm).
+    Password | Enter a password of your choosing. The password must be at least 12 characters long and meet the [defined complexity requirements](https://docs.microsoft.com/azure/virtual-machines/windows/faq?toc=%2fazure%2fvirtual-network%2ftoc.json#what-are-the-password-requirements-when-creating-a-vm).
     Confirm Password | Reenter password
 
     **INBOUND PORT RULES**

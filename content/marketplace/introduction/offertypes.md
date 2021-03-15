@@ -6,9 +6,10 @@ date: 2021-01-06
 weight: 20
 menu:
   side:
-    parent: 'Introduction'
+    parent: marketplace-introduction
+    identifier: marketplace-introduction-offertypes
 series:
- - 'amp-introduction'
+ - marketplace-introduction
 ---
 
 ## Introduction

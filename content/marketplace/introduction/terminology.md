@@ -6,9 +6,10 @@ date: 2021-01-06
 weight: 10
 menu:
   side:
-    parent: 'Introduction'
+    parent: marketplace-introduction
+    identifier: marketplace-introduction-terminology
 series:
- - 'amp-introduction'    
+ - marketplace-introduction
 ---
 
 ## Introduction
@@ -35,6 +36,5 @@ As you might expect, the commercial marketplace has its own vocabulary to descri
 * **Private offers** - a *private offer* is a plan that is made available to a designated set of customers. This allows for scenarios such as negotiated pricing, private terms & conditions and specialised configurations.
 * **Hidden offers** - designed only to be consumed by other *offers*, they are hidden in the commercial marketplace so as not to be discoverable. Think of them as building blocks.
 * **Lead management** - *Offers* need to be connected to a lead management system so publishers can be notified about customers interested in deploying their *offers*. This is typically a CRM system but can be a simple Azure table or webhook.
-* **Categories** - each *offer* is listed in a [category or categories](https://docs.microsoft.com/en-gb/azure/marketplace/gtm-offer-listing-best-practices#categories) to aid discoverability. Categories are specific to Azure Marketplace and AppSource.
+* **Categories** - each *offer* is listed in a [category or categories](https://docs.microsoft.com/azure/marketplace/gtm-offer-listing-best-practices#categories) to aid discoverability. Categories are specific to Azure Marketplace and AppSource.
 * **Metered Billing** - a billing mechanism that uses signals from the solution to advance custom meters. Used to create more sophisticated billing models.
-

@@ -7,8 +7,8 @@ weight: 60
 style: list
 menu:
   side:
-    parent: 'marketplace'
-    identifier: 'amp-aama-offer'
+    parent: marketplace
+    identifier: marketplace-aama-offer
 ---
 
 ## Introduction

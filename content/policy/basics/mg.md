@@ -144,7 +144,7 @@ In later labs we will translate this deny initiative into both a subscription le
 
 Note that your ability to work through this section will depend on your role within your subscription and within the associated tenancy.
 
-If you are Global Admin within a tenancy then you can elevate your permissions to gain access to the default Management Group, known as the Tenant Root Group. (Once the Global Admin has been elevated then they can assign individual users or group(s) the [Management Group Contributor](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#management-group-contributor) role at that scope.)  If the elevation succeeds then you can now manage Management Groups.  If not then you will have to continue working with the subscription and resource group levels and you are free to skip to the next [section](#updating-an-existing-policy-initiative).
+If you are Global Admin within a tenancy then you can elevate your permissions to gain access to the default Management Group, known as the Tenant Root Group. (Once the Global Admin has been elevated then they can assign individual users or group(s) the [Management Group Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#management-group-contributor) role at that scope.)  If the elevation succeeds then you can now manage Management Groups.  If not then you will have to continue working with the subscription and resource group levels and you are free to skip to the next [section](#updating-an-existing-policy-initiative).
 
 1. Elevate the Global Admin
 
@@ -267,11 +267,11 @@ OK, time to add custom policies to the initiative. We'll ensure that we have a s
 
 The creation of custom policy rules is currently a little bit of a dark art at the moment.  The product group is aware of this and is looking for ways to make the process simpler.
 
-In the meantime, be familiar with the available logical operators, conditions and fields within the [Azure Policy definition structure](https://docs.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure#policy-rule).  You will also find some good examples of policies that others have defined, including the Microsoft GitHub repo for [Azure Policy samples](https://github.com/Azure/azure-policy/tree/master/samples), from or from individual contributors such as [Richard Green](https://github.com/richardjgreen/azure-resource-policy-templates).
+In the meantime, be familiar with the available logical operators, conditions and fields within the [Azure Policy definition structure](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#policy-rule).  You will also find some good examples of policies that others have defined, including the Microsoft GitHub repo for [Azure Policy samples](https://github.com/Azure/azure-policy/tree/master/samples), from or from individual contributors such as [Richard Green](https://github.com/richardjgreen/azure-resource-policy-templates).
 
 For naming you can use either the **match** conditional, which will match against standard patterns.  You can use either *#* for a number or *?* for a letter.  Using **like** allows for the use of _\*_ wildcards.
 
-Let's create a simple global naming format based on the [sample](https://docs.microsoft.com/en-us/azure/governance/policy/samples/enforce-like-pattern), allowing a simple parameter to be passed in.
+Let's create a simple global naming format based on the [sample](https://docs.microsoft.com/azure/governance/policy/samples/enforce-like-pattern), allowing a simple parameter to be passed in.
 
 1. Create policy/naming.global.rules.json:
 
@@ -370,7 +370,7 @@ Looking at this from the partner perspective, I would also think of your custom 
 
 You can then make your initiatives configurable by customer. Allow different resources types, different SKUs, different regions, different naming conventions, different tagging requirements.  For most of these you can just use initiative definitions.
 
-Finally, the naming convention policy above is a little coarse and unforgiving.  You may want to look at very customised policies within an initiative so that you can restrict the enforcement to certain provider types such as this [VM naming policy](https://github.com/richardjgreen/azure-resource-policy-templates/blob/master/forceVMNamingConvention.json) from Richard Green.  You might also want to use the [substring()](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-functions-string#substring) function so that you can pull out location codes or environment codes from the naming convention and then ensure that they are from a list of allowedValues. You could get very precise in what is permitted.
+Finally, the naming convention policy above is a little coarse and unforgiving.  You may want to look at very customised policies within an initiative so that you can restrict the enforcement to certain provider types such as this [VM naming policy](https://github.com/richardjgreen/azure-resource-policy-templates/blob/master/forceVMNamingConvention.json) from Richard Green.  You might also want to use the [substring()](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-functions-string#substring) function so that you can pull out location codes or environment codes from the naming convention and then ensure that they are from a list of allowedValues. You could get very precise in what is permitted.
 
 ## What's up next
 

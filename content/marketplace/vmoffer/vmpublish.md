@@ -7,7 +7,8 @@ weight: 60
 nonav: true
 menu:
   side:
-    parent: 'amp-vm-offer'
+    parent: marketplace-vm-offer
+    identifier: marketplace-vm-offer-publish
 ---
 
 ## Introduction
@@ -189,8 +190,8 @@ We are now ready to review and publish (to a preview audience) the offer we have
 
 ## Resources
 
-* [How to plan a virtual machine offer](https://docs.microsoft.com/en-gb/azure/marketplace/marketplace-virtual-machines)
-* [How to create a virtual machine offer on Azure Marketplace](https://docs.microsoft.com/en-gb/azure/marketplace/azure-vm-create)
+* [How to plan a virtual machine offer](https://docs.microsoft.com/azure/marketplace/marketplace-virtual-machines)
+* [How to create a virtual machine offer on Azure Marketplace](https://docs.microsoft.com/azure/marketplace/azure-vm-create)
 
 ---
 
