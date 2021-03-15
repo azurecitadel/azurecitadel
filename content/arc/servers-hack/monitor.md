@@ -19,18 +19,20 @@ During the onboarding of this hack, your current environment reports to a centra
 
 In this challenge, we will deploy the new agent alongisde the current Log Analytics Agent that will report to a new Log Analytics Workspace. After the onboarding process, we will then utilise the new functionality of this agent.
 
+
 ## Azure Monitoring Agent (AMA)
 
 * Create a new Log Analytics Workspace
 * Deploy the new Azure Monitoring Agent to our virtual machines
 * Confirm the virtual machines are communicating to the Log Analytics Workspace
+* Ensure that the Log Analytics Workspace is set up so that users only have access to the logs of resources they have acces to
 
 ## Data Collection Rules (DCRs)
 
 ### Security Operations Centers (SOC) team
 You are part of the Security Operations Centers (SOC) team.
 
-* Set up a Data Collection Rule for all your Azure arc virtual machines to send their security logs to
+* Set up a Data Collection Rule for all your Azure arc virtual machines to send their authentication logs to
 * (Optional) Validate the security logs are visible in the Log Analytics Workspace
 
 ### Cost Management team
@@ -71,4 +73,4 @@ Screen share with your proctor to show that you achieved:
 * [Azure Monitor Workbook Visualizations](https://docs.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-chart-visualizations)
 * [Create, view, and manage log alerts using Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-log)
 * [Connect your non-Azure machines to Security Center](https://docs.microsoft.com/en-us/azure/security-center/quickstart-onboard-machines)
-* 
+* [Azure Monitor Community GitHub](https://github.com/microsoft/AzureMonitorCommunity)
