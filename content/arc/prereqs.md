@@ -19,15 +19,27 @@ weight: 2
 
 * **Azure subscription**
 
-    Each hack attendee will need an Azure subscription with sufficient credits.
+  Each hack attendee will need an Azure subscription with sufficient credits.
 
-    We will use sensible VM SKUs and shutdown those VMs overnight to minimise the spend.
+  Ensure the following providers are enabled.
+
+  * Microsoft.HybridCompute
+  * Microsoft.GuestConfiguration
+
+  You can also use the Bash Cloud Shell:
+
+  ```bash
+  az provider register --namespace 'Microsoft.HybridCompute'
+  az provider register --namespace 'Microsoft.GuestConfiguration'
+  ```
+
+  We will use sensible VM SKUs and shutdown those VMs overnight to minimise the spend.
 
 * **Owner role**
 
-    You will need to have a role assigned on the subscription that allows you to complete the hack activity. We will be deploying services, creating roles and role assignments, and assigning policies and policy initiatives.
+  You will need to have a role assigned on the subscription that allows you to complete the hack activity. We will be deploying services, creating roles and role assignments, and assigning policies and policy initiatives.
 
-    You should have either Owner access, or a combination of roles such as Contributor plus User Access Administrator.
+  You should have either Owner access, or a combination of roles such as Contributor plus User Access Administrator.
 
 * **Service principals**
 
