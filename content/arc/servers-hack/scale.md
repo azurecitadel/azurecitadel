@@ -233,18 +233,21 @@ Given enough time, Policy should eventually get round to provisioning the extens
 
 ## Remediation (optional)
 
-In the last challenge you triggered a policy evaluation which normally takes 30 minutes. The existing resources - the first two VMs - that do not have extensions should show as non-compliant.
+In the last challenge you triggered a policy evaluation. An evaluation normally takes around 30 minutes. The existing resources - the first two VMs - that do not have extensions should now show as non-compliant.
 
-For safety, existing non-compliant resources will not be automatically  remediated. That requires a manual trigger.
+For safety, existing non-compliant resources will not be automatically remediated.
 
-You can trigger remediations via the Policy area in the portal, or you can use some Azure CLI commands. This will also hurry along the new deployments.
+You can trigger remediations via the Policy area in the portal, or you can use Azure CLI commands. For example:
 
 ```bash
-az policy remediation create --name loglin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id LogAnalyticsExtension_Linux_HybridVM_Deploy
-az policy remediation create --name logwin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id LogAnalyticsExtension_Windows_HybridVM_Deploy
-az policy remediation create --name deplin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id DependencyAgentExtension_Linux_HybridVM_Deploy
-az policy remediation create --name depwin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id DependencyAgentExtension_Windows_HybridVM_Deploy
+policyName=$(az policy assignment list --resource-group arc-hack --query "[?displayName == 'Enable Azure Monitor for VMs'].name" --output tsv)
+az policy remediation create --name loglin --policy-assignment $policyName --definition-reference-id LogAnalyticsExtension_Linux_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+az policy remediation create --name logwin --policy-assignment $policyName --definition-reference-id LogAnalyticsExtension_Windows_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+az policy remediation create --name deplin --policy-assignment $policyName --definition-reference-id DependencyAgentExtension_Linux_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+az policy remediation create --name depwin --policy-assignment $policyName --definition-reference-id DependencyAgentExtension_Windows_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
 ```
+
+The default resourceDiscoveryMode for these commands is `ExistingNonCompliant`, but you can also use the `--resource-discovery-mode ReEvaluateCompliance` switch to force a policy evaluation.
 
 ## Resource Graph query
 

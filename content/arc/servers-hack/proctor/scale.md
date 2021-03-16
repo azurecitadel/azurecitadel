@@ -36,10 +36,11 @@ Hints:
     Might not be needed.
 
     ```bash
-    az policy remediation create --name loglin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id LogAnalyticsExtension_Linux_HybridVM_Deploy
-    az policy remediation create --name logwin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id LogAnalyticsExtension_Windows_HybridVM_Deploy
-    az policy remediation create --name deplin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id DependencyAgentExtension_Linux_HybridVM_Deploy
-    az policy remediation create --name depwin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id DependencyAgentExtension_Windows_HybridVM_Deploy
+    policyName=$(az policy assignment list --resource-group arc-hack --query "[?displayName == 'Enable Azure Monitor for VMs'].name" --output tsv)
+    az policy remediation create --name loglin --policy-assignment $policyName --definition-reference-id LogAnalyticsExtension_Linux_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+    az policy remediation create --name logwin --policy-assignment $policyName --definition-reference-id LogAnalyticsExtension_Windows_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+    az policy remediation create --name deplin --policy-assignment $policyName --definition-reference-id DependencyAgentExtension_Linux_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+    az policy remediation create --name depwin --policy-assignment $policyName --definition-reference-id DependencyAgentExtension_Windows_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
     ```
 
 * Resource Graph query
