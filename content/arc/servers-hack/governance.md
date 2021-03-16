@@ -14,31 +14,43 @@ weight: 7
 
 ## Introduction
 
-Text
+Azure Policy can audit settings inside a machine, both for machines running in Azure and Arc Connected Machines. The validation is performed by the Guest Configuration extension and client. The extension, through the client, validates settings such as:
 
-## Section 1
+* The configuration of the operating system
+* Application configuration or presence
+* Environment settings
 
-Text
+At this time, most Azure Policy Guest Configuration policy definitions only audit settings inside the machine. They don't apply configurations.
 
-* Thing 1
-* Thing 2
+In this challenge you are tasked with measuring the compliance state within the Azure Arc virtual machine operating system.
 
-## Section 2
+## Guest Configuration
 
-Text
+The following requirements have been provided for regularly compliance. Assign Policy to measure the guest configuration compliance of the Azure Arc virtual machines:
 
-* Thing 1
-* Thing 2
+* ISO 27001:2013
+* UK OFFICIAL and UK NHS
+
+The security team is concerned about the configuration of on-premises VMs and would like to measure their configuration against the Azure Security Benchmark:
+
+* Windows machines should meet requirements for the Azure security baseline
+* Linux machines should meet requirements for the Azure security baseline
+
+## Inventory
+
+Your applications team has requested a report of the servers without `git` installed
+
+* (optional) Provide a view of all Linux servers without `git` installed
 
 ## Success criteria
 
 Screen share with your proctor to show that you achieved:
 
-1. Success criterion 1
-1. Success criterion 2
-1. Success criterion 3
+1. Show the current Arc virtual machine compliance against ISO 27001:2013 and UK OFFICIAL/UK NHS
+1. Show the current Arc virtual machine compliance against Azure security baseline
 
 ## Resources
 
-* [Description1](https://link)
-* [Description2](https://link)
+* [Understand Azure Policy's Guest Configuration](https://docs.microsoft.com/en-us/azure/governance/policy/concepts/guest-configuration)
+* [Overview of the Azure Security Benchmark](https://docs.microsoft.com/en-us/azure/security/benchmarks/overview)
+* [Azure security baseline for Windows Virtual Machines](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/security-baseline)
