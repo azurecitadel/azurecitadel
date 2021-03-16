@@ -37,6 +37,7 @@ Go back to the root module of your cloned Terraform repo.
 
 * Increase the number of VMs to five of each OS
 * Create an Ansible hosts file
+  * Hint: Check the variables.tf...:wq
 
 Apply the new config.
 
@@ -45,6 +46,7 @@ Apply the new config.
 Check the additional VMs were created and you have a new hosts file similar to the one below.
 
 {{< details "Example ~/arc-onprem-servers/hosts file" >}}
+
 ```ini
 [linux]
 arc-9262c33c-ubuntu-01.uksouth.cloudapp.azure.com
@@ -71,6 +73,7 @@ ansible_winrm_transport=basic
 ansible_port=5985
 ansible_winrm_server_cert_validation=ignore
 ```
+
 {{< /details  >}}
 
 ## Test Ansible
