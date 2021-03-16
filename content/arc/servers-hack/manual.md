@@ -26,6 +26,8 @@ You will need a Bash environment for this, so Windows users should use either Wi
 
 Use the <https://github.com/azurecitadel/arc-onprem-servers> repo to create two "on prem" virtual machines ready for the manual onboarding tasks.
 
+You will need an SSH key for it to work: <https://docs.microsoft.com/azure/virtual-machines/linux/mac-create-ssh-keys>
+
 | Operating system | Name |
 |---|---|
 | Ubuntu 18.04 LTS | **ubuntu-01** |
