@@ -8,6 +8,15 @@ series:
 weight: 3
 ---
 
+## Policy - Tags
+
+Assign the _Inherit a tag from the resource group if missing_ policy
+
+* Parameter **tagName = datacentre**
+* Assignment name: "Inherit datacentre tag from the resource group if missing"
+
+Repeat for _platform_.
+
 ## Log Analytics Workspace
 
 Hints:
@@ -33,39 +42,33 @@ Steps:
     * Apply
   * Linux performance counters
     * Add recommended counters and Apply
-* Deploy the Log Analytics agents in the Extensions part of the [Servers - Azure Arc](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.HybridCompute%2Fmachines) blade
 
-## Policy
+## Policy - VM Extensions
 
 Hints:
 
 * Check the links
 * Filter the definitions and the to see what is available
 * Check both policies and initiatives
-* Mention the [samples](https://github.com/Azure/azure-policy/tree/master/samples) and [community](https://github.com/Azure/Community-Policy/) areas - not required for this challenge but good to share
+
+* Go to [Policy Definitions](https://ms.portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyMenuBlade/Definitions)
+* Searching on "Azure Arc" should show the six preview policies
+* Clear the search and filter on type = initiative and category = monitoring
+* Check the _Enable Azure Monitor for VMs_
+  * includes policies for both Azure VMs and Azure Arc VMs
+  * covers both extensions and both OS types
 
 Tasks:
 
-* Go to [Policy Definitions](https://ms.portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyMenuBlade/Definitions)
-* Assign the Inherit a tag from the resource group if missing
-  * Rename and specify "platform"
-  * Duplicate for "datacentre"
-* Searching on "Azure Arc" should show the six preview policies
-* Clear the search and filter on type = initiative and category = monitoring
-* Check the Enable Azure Monitor for VMs
-  * includes both Azure VMs and Azure Arc VMs
-* Assign to the arc-hack resource group
+* Assign _Enable Azure Monitor for VMs_ to the arc-hack resource group
   * select the workspace
-  * create a remediation task for the Dependency agent for one OS type
-* Manually add another remediation task for the other OS type
-
-Discussion point - custom initiative for auditing missing tags, creating default tags, inheriting tags. Mention policy labs. (Rich needs to add custom initiative - work in progress.)
 
 ## Success criteria
 
 * Check the Agents configuration for the workspace - all but IIS Logs should be configured as above
 * Check the tags on the rg
+* The tags should have been inherited on the workspace
 * Check the policy assignments on the rg
   * VM agent initiative
   * The two tag inheritance policies
-  * Remediation tasks - should be a couple in there for the dependency agents
+* Check the role assignments - Azure Connected Machine Onboarding should list the policy identity

@@ -19,14 +19,14 @@ weight: 2
 
 * **Azure subscription**
 
-  Each hack attendee will need an Azure subscription with sufficient credits.
+  Each hack attendee will need an Azure subscription with sufficient credits. The hack will create 10 x Standard_D2s_v3 so 20 cores, plus 10 public IP addresses. Check your quotas have enough headroom to provision.
 
   Ensure the following providers are enabled.
 
   * Microsoft.HybridCompute
   * Microsoft.GuestConfiguration
 
-  You can also use the Bash Cloud Shell:
+  You can use the Bash Cloud Shell to enable:
 
   ```bash
   az provider register --namespace 'Microsoft.HybridCompute'
@@ -51,19 +51,29 @@ weight: 2
 
 You can confirm your access by following the [checks](#checks) section below.
 
+## Minimal setup
+
+The tooling required for this partner hack is lightweight.
+
+It is possible to complete the whole hack using the portal and Cloud Shell.
+
+Bash is the recommended Cloud Shell experience, and includes git, terraform, jq and ansible as well as the ability to upload files.
+
+Windows Terminal is recommended for most CLI work as it directly supports the Cloud Shell. (Use the drop down to select Cloud Shell, or set Cloud Shell as your default profile.) Having said that, the file upload / download and Monaco editor (`code .`) are only found in the browser.
+
+If using a minimal setup then open the [Cloud Shell](https://shell.azure.com) and extend the Azure CLI with `az extension add --name connectedmachine`.
+
 ## Recommended setup
 
-We recommend that you set up your laptop with the right tooling so that you are ready to hit the ground running on the hack.
+Whilst is it possible to complete the hack with the portal and Cloud Shell, we strongly recommend that you set up your laptop with the right tooling so that you are ready to hit the ground running on the hack. The config below will get you ready for this hack and also much of the other content on the Azure Citadel site.
 
-The tooling required for this partner hack is lightweight. Most of the work will be in the portal and using the Azure CLI. There may also be some PowerShell required.
-
-It is possible to complete the whole hack using the portal and Cloud Shell but we always recommend setting up the right tooling on your machine.
+For Windows 10 users who are comfortable in Bash, then the combination of Windows Terminal, Windows Subsystem for Linux and Visual Studio Code (with remote extensions) is perfect.
 
 **Open the [recommended setup](/setup) page in a new tab.**
 
 * Windows Terminal (or iTerm2 for MacOS, Hyper etc. for Linux)
 * Linux environment, e.g. Windows Subsystem for Linux
-  * Azure CLI
+  * Azure CLI, extended with `az extension add --name connectedmachine`
   * jq
   * git
   * Terraform

@@ -14,60 +14,88 @@ weight: 4
 
 ## Introduction
 
-It is good to get grounded in how to onboard individual servers ad hoc, but for most organisations you will want to onboard VMs at scale.
+It is good to get grounded in how to onboard individual servers ad hoc, but for most organisations you will want to be able to onboard VMs at scale.
 
-You can generate scripts to onboard multiple VMs using service principals, upload the generated scripts to the target machines and execute them with elevated privileges.
+The portal can generate scripts to onboard multiple VMs using service principals. You can then upload the generated scripts to the target machines and execute them with elevated privileges. That is the aim of this challenge.
 
-We will be using Terraform again to spin up more machines and we'll also be using Ansible in this challenge for the script upload and execution. If you are not that familiar with Ansible then don't worry as this is not a challenge around Ansible itself and there will be examples. So Ansible is just a means to end in this challenge.
+## Terraform and Ansible
 
-You could just as easily be using other configuration management software to onboard at scale such as Microsoft Endpoint Configuration Manager, Chef, Puppet, etc.  For example the [Azure Arc jumpstart](https://azurearcjumpstart.io/azure_arc_jumpstart/azure_arc_servers/scaled_deployment/) site has information on a few scale onboarding scenarios, such as using the VMware PowerCLI for VMware vSphere estates, or Ansible for AWS VMs.
+> **"Why are we having to learn Terraform and Ansible?"** 😡
 
-OK, in summary we will:
+OK, yes, there is a little more Terraform in this lab - to spin up more "on prem" VMs for you to onboard.
 
-* use Terraform to provision additional VMs
-* have a brief test for Ansible and then give you a little Ansible knowledge
-* have a checkpoint to make sure you're at the right point to continue
-* move onto the scale onboarding challenge hack proper
+And we will be using Ansible as the mechanism to automate the copy and script execution.
 
-Let's start.
+But don't get hung up on the choice of tooling. The key thing to remember is that for you to experience onboarding at scale we obviously need _something_ for you to onboard. If you had VMs on a test ESXi cluster somewhere then you could have used those instead. And you need _something_ to enable you to copy those scripts and execute them. Ansible is just a means to an end in this challenge, but you could just as easily be using something else such as VMware PowerCLI.
 
-## Additional VMs
+> The [Azure Arc jumpstart](https://azurearcjumpstart.io/azure_arc_jumpstart/azure_arc_servers/scaled_deployment/) site has information on a few alternative scale onboarding scenarios such as VMware ESXi hosted VMs or VMs in other clouds.
+
+So in summary we will:
+
+* prepare
+  * use Terraform to provision additional VMs
+  * check Ansible is working OK
+* scale onboarding challenge
+  * create a service principal
+  * create a role assignment
+  * generate the scale onboarding scripts
+  * copy the scripts to the VMs
+  * execute the scripts on the VMs
+  * remediate any non-compliant resources
+
+Again, this isn't a test of your Terraform and Ansible skills so we'll just give you those commands.
+
+Let's start!
+
+## Create more VMs with Terraform
 
 Go back to the root module of your cloned Terraform repo.
 
-* Increase the number of VMs to five of each OS
-* Create an Ansible hosts file
-  * Hint: Check the variables.tf...:wq
+* Edit the terraform.tfvars to create more VMs
+
+  ```yaml
+  resource_group_name = "arc-hack"
+
+  linux_count  = 5
+  linux_prefix = "ubuntu"
+
+  windows_count  = 5
+  windows_prefix = "win"
+
+  create_ansible_hosts = true
+  ```
+
+The last variable will generate an Ansible compliant hosts file.
 
 Apply the new config.
 
 > _Hint_: If the apply fails then rerun `terraform apply` and Terraform should retry creating the failed resources.
 
-Check the additional VMs were created and you have a new hosts file similar to the one below.
+If you `cat hosts` then you should see a file similar to the one below.
 
 {{< details "Example ~/arc-onprem-servers/hosts file" >}}
 
 ```ini
-[linux]
+[arc_hack_linux_vms]
 arc-9262c33c-ubuntu-01.uksouth.cloudapp.azure.com
 arc-9262c33c-ubuntu-02.uksouth.cloudapp.azure.com
 arc-9262c33c-ubuntu-03.uksouth.cloudapp.azure.com
 arc-9262c33c-ubuntu-04.uksouth.cloudapp.azure.com
 arc-9262c33c-ubuntu-05.uksouth.cloudapp.azure.com
 
-[linux:vars]
+[arc_hack_linux_vms:vars]
 ansible_user=arcadmin
 
-[windows]
+[arc_hack_windows_vms]
 arc-9262c33c-win-01.uksouth.cloudapp.azure.com
 arc-9262c33c-win-02.uksouth.cloudapp.azure.com
 arc-9262c33c-win-03.uksouth.cloudapp.azure.com
 arc-9262c33c-win-04.uksouth.cloudapp.azure.com
 arc-9262c33c-win-05.uksouth.cloudapp.azure.com
 
-[windows:vars]
+[arc_hack_windows_vms:vars]
 ansible_user=arcadmin
-ansible_password="Amazing-Cricket!"
+ansible_password="Amazing-Puma!"
 ansible_connection=winrm
 ansible_winrm_transport=basic
 ansible_port=5985
@@ -78,11 +106,10 @@ ansible_winrm_server_cert_validation=ignore
 
 ## Test Ansible
 
-Why are we using Ansible? As per the intoduction, it is simply to have a method to automate the upload and execution of scripts on multiple servers.
+Why are we using Ansible? As per the introduction, it is simply to have a method to automate the upload and execution of scripts on multiple servers. It is quick and easy to use on Azure. This challenge is not a test of your Ansible skills so if you get stuck then reach out to your proctor.
 
-> _This challenge is not really a test of your Ansible skills so if you get stuck then reach out to your proctor._
+If you are using Cloud Shell then you will already have the ansible binary installed available. If you are using Windows Subsystem for Linux (WSL) or MacOS or linux then you should have installed and configured Ansible as per the [prereqs](/setup/#ansible).
 
-* Install and configure Ansible as per the [prereqs](/setup/#ansible)
 * Export environment variables
 
     ```bash
@@ -95,119 +122,129 @@ Why are we using Ansible? As per the intoduction, it is simply to have a method 
 * Check Ansible can contact the VMs
 
     ```bash
-    ansible linux -m ping
-    ansible windows -m win_ping
+    ansible arc_hack_linux_vms -m ping
+    ansible arc_hack_windows_vms -m win_ping
     ```
 
     Both commands should show green success output for each VM, and the ping command should return a pong. If so then you're now set for the scale onboarding challenge itself.
 
-## Example Ansible modules
-
-Ansible is really powerful when works best with playbooks and roles, but is also great for ad hoc use. Here is a quick explainer on how to use it in this way.
-
-We'll use the file module to create a directory called /etc/arc-hack on the linux VMs, and see how to convert the YAML examples into ad hoc commands.
-
-* Ansible file module
-
-    Check the [examples](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html#examples) in the file module.
-
-* Example YAML
-
-    We won't be using YAML files for Ansible, but all of the examples do.
-
-    Find a directory example. Here's a similar YAML block representing our particular example:
-
-    ```yaml
-    - name: Create a directory if it does not exist
-      file:
-        path: /etc/arc-hack
-        state: directory
-        mode: '0755'
-    ```
-
-    > `ansible.builtin.file` has been reduced to `file` which is also accepted.
-
-* Ad hoc command
-
-    This is how the same thing looks as a single ad hoc command:
-
-    ```bash
-    ansible linux --module-name file --args "path=/tmp/arc-hack state=directory mode=0755" --become
-    ```
-
-    The `linux` matches the pattern in your hosts inventory.
-
-    You may shorten `--module-name` to `-m` and `--args` to `-a`. The module arguments are a space delimited list of arg=value.
-
-    The `--become` switch runs the command as root. This is not required for creating a directory in /tmp
-
-* Run the command and the yellow output displayed will show that each host has changed
-* Run it again and the green output confirms that the host matches the desired state
-
-OK, so that is fine for linux. What about Windows? Ansible usually uses WinRM for Windows Server and there is a set of ansible.windows modules that you can use.
-
-* win_file YAML representation
-
-    ```yaml
-    - name: Create directory structure
-      ansible.windows.win_file:
-        path: C:\Temp\folder\subfolder
-        state: directory
-    ```
-
-* win_file ad hoc command
-
-    ```bash
-    ansible windows -m win_file -a 'path=C:\\arc-hack state=directory' --become --become-method runas --become-user System
-    ```
-
-    Note the single quotes and the double backslash. This is due to how linux handles quotes as the same args in double quotes would be `"path=C:\\\\arc-hack state=directory"`.
-
-    The behaviour of `--become` is modified by specifying values for both `--become-method` and `--become-user`.
-
 ## Checkpoint
 
-**That was a decent amount of setup and scene setting for this challenge. Let's check in and make sure you're at the right point:**
+**Let's check in and make sure you're at the right point before you continue:**
 
-* you have ten VMs in the arc-hack-resources resource group
-* only two have been onboarded so far into the ar-hack resource group
-* Ansible is working and can run modules on the VMs
-* you have just enough knowledge of ad hoc Ansible commands and modules to be dangerous
-
-> If there are any issues, speak to your proctor.
+* you have ten VMs in your arc-hack-resources resource group
+* only two have been onboarded into the arc-hack resource group
+* Ansible is working and you can run modules on the VMs
 
 **If you have ticked all of the boxes then it is time to start on the scale onboarding challenge itself.**
 
 ## Service principal
 
-Follow least privilege and create a service principal called `http://arc-<uniq>`, where _\<uniq>_ is the eight character hash used in your FQDNs to make them globally unique.
+* Create a service principal
 
-## Scale Onboarding
+    We'll use the Azure CLI to create one called `http://arc-<uniq>`, where _\<uniq>_ is the eight character hash used in your FQDNs to make them globally unique.
 
-Onboard all of the servers using Ansible commands for uploading and executing generated scripts.
+    ```bash
+    role="Azure Connected Machine Onboarding"
+    scope=$(az group show --name arc-hack --query id --output tsv)
+    uniq=$(cd ~/arc-onprem-servers; terraform output --raw uniq)
+    name="http://arc-$uniq"
+    az ad sp create-for-rbac --name $name --role "$role" --scope $scope
+    ```
 
-Include an additional tag:
+    The [Azure Connected Machine Onboarding](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#azure-connected-machine-onboarding) role is all you need to onboard VMs to Azure Arc.
 
-| | |
-|---|---|
-| application | **arc hack** |
-| | |
+* Copy the value of the password field
 
-> _Hint_: The linux scripts do not specify the shell. Either:
->
-> * add `#!/bin/bash` as the first line in the shell script, or
-> * use `/bin/bash /path/to/script.sh` as your command
+    You'll need this later when editing the scripts.
+
+## Scale onboarding scripts
+
+* Use the portal to generate scripts to onboard multiple servers
+
+  * For both windows and linux
+  * Include an additional tag - **application: arc hack**
+  * Select the service principal you've just created
+
+    > Note that the portal only shows service principals with the right role.
+
+* Move the scripts to your bash home directory
+
+  * Cloud Shell: use the upload icon in the browser
+  * Windows Subsystem for Linux: copy files from Downloads using
+
+    ```bash
+    cp /mnt/c/Users/username/Downloads/filename ~
+    ```
+
+    > The tilde (`~`) symbol is expanded to your home directory in Bash.
+
+* Edit the files
+
+    Paste in the service principal's password.
+
+## Copy and execute
+
+Here are the ansible commands to copy and execute the scripts.
+
+* Export environment variables
+
+    You should have these from earlier in this challenge.
+
+    ```bash
+    export ANSIBLE_HOST_KEY_CHECKING=false
+    export ANSIBLE_INVENTORY="~/arc-onprem-servers/hosts"
+    ```
+
+* copy the scripts up to the servers
+
+    ```bash
+    ansible arc_hack_linux_vms -m copy -a 'src=OnboardingScript.sh dest=/tmp/ owner=root mode=0755' --become
+    ansible arc_hack_windows_vms -m win_copy -a 'src=OnboardingScript.ps1 dest=C:\\'
+    ```
+
+    You should see yellow output as Ansible is making a change.
+
+* execute the scripts as an elevated user
+
+    ```bash
+    ansible arc_hack_linux_vms -a '/bin/bash /tmp/OnboardingScript.sh' --become
+    ansible arc_hack_windows_vms -m win_shell -a 'C:\\OnboardingScript.ps1' --become --become-method runas --become-user System
+    ```
+
+    More yellow output, but expect a slight pause in these as they initially download the azcmagent to each VM.
 
 ## Policy
 
-Remediate the non compliant resources in the arc-hack resource group.
+Check the activity log for the recent management plane activity. The _Write Azure Arc machines_ entries should show
 
-* Check
-  * the activity log for the recent management plane activity
-  * the compliancy status for tha tags and for the extensions
-* Use the CLI to trigger remediation tasks
+* the main Azure Arc entry
+* a modify for the two tags
+* a deployIfNotExists policy action
+
+Check the arc-hack resource group
+
+* modify the columns to include the individual tags
+* the compliancy status for the tags and for the extensions
 
 > _Note_: Ignore the untagged VM extensions. These are mistakenly set as indexed and will be corrected.
+
+Given enough time, Policy should eventually get round to provisioning the extensions for the new resources.
+
+## Remediation (optional)
+
+In the last challenge you triggered a policy evaluation which normally takes 30 minutes. The existing resources - the first two VMs - that do not have extensions should show as non-compliant.
+
+For safety, existing non-compliant resources will not be automatically  remediated. That requires a manual trigger.
+
+You can trigger remediations via the Policy area in the portal, or you can use some Azure CLI commands. This will also hurry along the new deployments.
+
+```bash
+az policy remediation create --name loglin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id LogAnalyticsExtension_Linux_HybridVM_Deploy
+az policy remediation create --name logwin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id LogAnalyticsExtension_Windows_HybridVM_Deploy
+az policy remediation create --name deplin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id DependencyAgentExtension_Linux_HybridVM_Deploy
+az policy remediation create --name depwin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id DependencyAgentExtension_Windows_HybridVM_Deploy
+```
 
 ## Resource Graph query
 
@@ -220,9 +257,10 @@ Run the resource graph query as a CLI command to generate JSON.
 
 ## Stretch Targets
 
+If you found that too simple then here are some tricker objectives.
+
 Use the CLI to:
 
-* trigger a policy evaluation
 * list the policy assignments at a scope
 * list the policy definitions in an initiative
   * show only the policy definition IDs and policy definition reference IDs
@@ -247,10 +285,7 @@ Screen share with your proctor to show that you achieved:
 
 ## Resources
 
-* [Ansible Modules](https://docs.ansible.com/ansible/latest/collections/index_module.html)
-  * [ansible.builtin](https://docs.ansible.com/ansible/latest/collections/index_module.html#ansible-builtin)
-  * [ansible.windows](https://docs.ansible.com/ansible/latest/collections/index_module.html#ansible-windows)
-* [ad hoc Ansible use](/packeransible/ansible)
+* [Connect hybrid machines to Azure at scale](https://docs.microsoft.com/azure/azure-arc/servers/onboard-service-principal)
 * [Azure Policy](https://docs.microsoft.com/azure/governance/policy/)
 * [Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/)
 * [Kusto Query Language](https://docs.microsoft.com/azure/data-explorer/kusto/concepts/)

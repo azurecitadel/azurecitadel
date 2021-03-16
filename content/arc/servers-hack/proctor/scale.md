@@ -8,51 +8,9 @@ series:
 weight: 4
 ---
 
-## VMs and Ansible Tests
+Most of the script generation etc is now laid out to follow in the lab. Very little challenge left.
 
-The challenge is detailed in this area.
-
-## Service Principal
-
-They will need the password or secret for the next step. If they have lost it then rerunning the `az ad sp create-for-rbac` command will regenerate the password.
-
-The role assignment should be Azure Connected Machine Onboarding and it should be assigned at the resource group scope. Let them off if it is at the subscription level but discuss it.
-
-If you were to script it then it would look something like this:
-
-```bash
-role="Azure Connected Machine Onboarding"
-scope=$(az group show --name arc-hack --query id --output tsv)
-uniq=$(terraform output --raw uniq)
-name="http://arc-$uniq"
-az ad sp create-for-rbac --name $name --role "$role" --scope $scope
-```
-
-If you were grabbing the password into a variable then I would use:
-
-```bash
-password=$(az ad sp create-for-rbac --name $name --role "$role" --scope $scope --query password --output tsv)
-```
-
-## Add multiple servers
-
-Generate the two scripts - one for windows and onw for linux - using the assigned service principal. If they used the wrong role (e.g. Contributor at subscription scope) then the service principal will not show. The scripts should include the tags.
-
-Hints:
-
-* WSL hint: you can easily copy downloaded files to your home directory from the /mnt/c area
-  * Even easier if you have a symbolic link set up e.g.
-
-    ```bash
-    ln -s /mnt/c/Users/richeney/Downloads downloads
-    cp downloads/OnboardingScript.sh .
-    cp downloads/OnboardingScript.ps1 .
-    ```
-
-* Modify the files to include the service principal password. Then the scripts are fully reusable.
-* The copy and win_copy modules can upload files
-* Look at the directory example given
-* If a module is not specified then Ansible defaults to command
+Generate the scripts from the _Servers - Azure Arc_ screen.
 
 ## Policy
 
@@ -72,24 +30,10 @@ Hints:
 ## Success criteria
 
 * Scripts have been generated and include password and tags
-* Show the Ansible commands. Examples:
-  * linux
-
-    ```bash
-    ansible linux -m copy -a 'src=OnboardingScript.sh dest=/tmp/arc-hack/ owner=root mode=0755' --become
-    ansible linux -a '/bin/bash /tmp/arc-hack/OnboardingScript.sh' --become
-    ```
-
-  * windows
-
-    ```bash
-    ansible windows -m win_copy -a 'src=OnboardingScript.ps1 dest=C:\\arc-hack\\'
-    ansible windows -m win_shell -a 'C:\\arc-hack\\OnboardingScript.ps1' --become --become-method runas --become-user System
-    ```
-
-  We didn't specify the target script directory so be flexible.
 
 * Policy remediation
+
+    Might not be needed.
 
     ```bash
     az policy remediation create --name loglin --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines --policy-assignment f5542fa9dd304b23b1b0823a --definition-reference-id LogAnalyticsExtension_Linux_HybridVM_Deploy
@@ -108,14 +52,6 @@ Hints:
     ```
 
 ## Stretch commands
-
-* trigger a policy evaluation
-
-    ```bash
-    az policy state trigger-scan --resource-group arc-hack
-    ```
-
-    From <https://docs.microsoft.com/azure/governance/policy/how-to/determine-non-compliance>
 
 * list the policy assignments at a scope
 
