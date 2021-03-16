@@ -35,6 +35,8 @@ You will need an SSH key for it to work: <https://docs.microsoft.com/azure/virtu
 
 Review the contents of the two resource groups, arc-hack and arc-hack-resources, in the Azure Portal.
 
+> **IMPORTANT!**: You should not do anything after this point directly with the VMs in the arc-hack-resources resource group. These are representing VMs that exist outside of Azure, so think of them as on prem servers. As you work through you will access them via RDP or SSH, or using Ansible with SSH or WinRM, but you shouldn't configure anything in the portal or CLI that _directly_ accesses the VMs in the resource group.
+
 ## Onboard
 
 Connect the two VMs to Azure Arc using the _Servers - Azure Arc_ portal screen.
