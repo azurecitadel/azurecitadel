@@ -49,10 +49,6 @@ Explore the functionality exposed in each VM's portal blade, including the resou
 
 > _Hint_: Remove the suggested tags. We will be handling tags via policy.
 
-## Log Analytics agent
-
-Manually deploy the Log Analytics agent to the two VMs.
-
 ## Inventory
 
 Run a basic query in Resource Graph Explorer to list all Azure Arc connected virtual machines
