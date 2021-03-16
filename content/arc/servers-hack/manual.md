@@ -39,7 +39,9 @@ Review the content of the arc-hack-resources in the Azure Portal. And then ignor
 
 ## Onboard
 
-Switch to the arc-hack resource group. THis is currently empty.
+Switch to the arc-hack resource group. This resource group is currently empty.
+
+> This will be the resource group that you do all your work in as you move through these challenges.
 
 Connect the two VMs to Azure Arc using the _Servers - Azure Arc_ portal screen.
 
