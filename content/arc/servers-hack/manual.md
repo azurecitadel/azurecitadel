@@ -33,13 +33,17 @@ You will need an SSH key for it to work: <https://docs.microsoft.com/azure/virtu
 | Ubuntu 18.04 LTS | **ubuntu-01** |
 | Windows Server 2019 | **win-01** |
 
-Review the contents of the two resource groups, arc-hack and arc-hack-resources, in the Azure Portal.
+Review the content of the arc-hack-resources in the Azure Portal. And then ignore this resource group from now on!
 
-> **IMPORTANT!**: You should not do anything after this point directly with the VMs in the arc-hack-resources resource group. These are representing VMs that exist outside of Azure, so think of them as on prem servers. As you work through you will access them via RDP or SSH, or using Ansible with SSH or WinRM, but you shouldn't configure anything in the portal or CLI that _directly_ accesses the VMs in the resource group.
+> **IMPORTANT!**: You should not do anything after this point directly with the arc-hack-resources resource group. The VMs in here are representing VMs that exist outside of Azure, so think of them as on prem servers, e.g. VMs running in an ESXi cluster in a datacentre. As you work through you will access them via RDP or SSH, or using Ansible with SSH or WinRM, but you shouldn't configure anything in the portal or CLI that _directly_ accesses the VMs in the resource group.
 
 ## Onboard
 
+Switch to the arc-hack resource group. THis is currently empty.
+
 Connect the two VMs to Azure Arc using the _Servers - Azure Arc_ portal screen.
+
+Make sure you are going into the correct resource group and region:
 
 | | |
 |---|---|
@@ -47,9 +51,11 @@ Connect the two VMs to Azure Arc using the _Servers - Azure Arc_ portal screen.
 | location | **UK South** |
 | | |
 
-Explore the functionality exposed in each VM's portal blade, including the resourceId and the various properties available in JSON view.
+> There is no need to set any tag values. We'll use Azure Policy for the tags in the next challenge.
 
-> _Hint_: Remove the suggested tags. We will be handling tags via policy.
+Once the two VMs have been onboarded as Azure Arc VMs, you can explore the functionality exposed in an Azure Arc VM's portal blade.
+
+Also check the JSON view in the Overview screen. What resource provider type is shown in the resourceId?
 
 ## Inventory
 
