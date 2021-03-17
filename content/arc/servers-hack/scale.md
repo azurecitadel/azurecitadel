@@ -229,11 +229,11 @@ Check the arc-hack resource group
 
 > _Note_: Ignore the untagged VM extensions. These are mistakenly set as indexed and will be corrected.
 
-Given enough time, Policy should eventually get round to provisioning the extensions for the new resources.
+The new VMs you onboarded at scale should be showing as non-compliant as they have been processed by the policy engine. They won't automatically remediate the extensions, although there are plans for this to be introduced.
 
-## Remediation (optional)
+## Remediation
 
-In the last challenge you triggered a policy evaluation. An evaluation normally takes around 30 minutes. The existing resources - the first two VMs - that do not have extensions should now show as non-compliant.
+In the last challenge you triggered a policy evaluation. An evaluation normally takes around 30 minutes. The existing resources - the first two VMs - that do not have extensions should now show as non-compliant. And now the new ones are also showing as noncompliant for the extension.
 
 For safety, existing non-compliant resources will not be automatically remediated.
 
