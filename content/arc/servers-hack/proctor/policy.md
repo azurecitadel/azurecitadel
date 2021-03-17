@@ -72,3 +72,18 @@ Tasks:
   * VM agent initiative
   * The two tag inheritance policies
 * Check the role assignments - Azure Connected Machine Onboarding should list the policy identity
+
+### Bug fix
+
+> The bug has now been corrected, but I thought I'd keep the identity command in there for posterity. Vaguely useful, but the policy definitions for dine policies should always list the required roles for the identity.
+
+There is a [known bug](https://github.com/Azure/azure-policy/issues/733) in the _[Preview] Deploy Dependency agent to Windows Azure Arc machines_ policy definition as the managed identity has insufficient permissions to remediate non-compliance. We'll add on the *Azure Connected Machine Onboarding* so that it will remediate successfully.
+
+The following Azure CLI commands will create the additional roles assignment if you have assigned the expected policy initiative at the ar-hack resource group level.
+
+* Add Azure Connected Machine Onboarding to the policy's identity
+
+  ```bash
+  identity=$(az policy assignment list --resource-group arc-hack --query "[?displayName == 'Enable Azure Monitor for VMs'].identity.principalId" --output tsv)
+  az role assignment create --assignee $identity --role "Azure Connected Machine Onboarding" --resource-group arc-hack
+  ```

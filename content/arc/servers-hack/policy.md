@@ -69,19 +69,6 @@ Assign policy at the arc-hack resource group scope to:
 
 Assigning a Deploy If Not Exists policy creates an identity for the deployment. Check the policy assignment and you'll see the managed identity tab and the identity's role assignments.
 
-### Bug fix
-
-There is a [known bug](https://github.com/Azure/azure-policy/issues/733) in the _[Preview] Deploy Dependency agent to Windows Azure Arc machines_ policy definition as the managed identity has insufficient permissions to remediate non-compliance. We'll add on the *Azure Connected Machine Onboarding* so that it will remediate successfully.
-
-The following Azure CLI commands will create the additional roles assignment if you have assigned the expected policy initiative at the ar-hack resource group level.
-
-* Add Azure Connected Machine Onboarding to the policy's identity
-
-  ```bash
-  identity=$(az policy assignment list --resource-group arc-hack --query "[?displayName == 'Enable Azure Monitor for VMs'].identity.principalId" --output tsv)
-  az role assignment create --assignee $identity --role "Azure Connected Machine Onboarding" --resource-group arc-hack
-  ```
-
 ### Policy evaluation
 
 Policy evaluations are usually triggered within 30 minutes of policy assignment. There are other triggers for an evaluation, as per the links at the bottom of the page. You can also trigger one manually. We'll do that now so that your Azure Arc VMs, the ones you manually onboarded, are evaluated against your new policies.
