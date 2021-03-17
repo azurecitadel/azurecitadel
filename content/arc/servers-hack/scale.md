@@ -240,11 +240,11 @@ For safety, existing non-compliant resources will not be automatically remediate
 You can trigger remediations via the Policy area in the portal, or you can use Azure CLI commands. For example:
 
 ```bash
-policyName=$(az policy assignment list --resource-group arc-hack --query "[?displayName == 'Enable Azure Monitor for VMs'].name" --output tsv)
-az policy remediation create --name loglin --policy-assignment $policyName --definition-reference-id LogAnalyticsExtension_Linux_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
-az policy remediation create --name logwin --policy-assignment $policyName --definition-reference-id LogAnalyticsExtension_Windows_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
-az policy remediation create --name deplin --policy-assignment $policyName --definition-reference-id DependencyAgentExtension_Linux_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
-az policy remediation create --name depwin --policy-assignment $policyName --definition-reference-id DependencyAgentExtension_Windows_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+policyAssignmentName=$(az policy assignment list --resource-group arc-hack --query "[?displayName == 'Enable Azure Monitor for VMs'].name" --output tsv)
+az policy remediation create --name loglin --policy-assignment $policyAssignmentName --definition-reference-id LogAnalyticsExtension_Linux_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+az policy remediation create --name logwin --policy-assignment $policyAssignmentName --definition-reference-id LogAnalyticsExtension_Windows_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+az policy remediation create --name deplin --policy-assignment $policyAssignmentName --definition-reference-id DependencyAgentExtension_Linux_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
+az policy remediation create --name depwin --policy-assignment $policyAssignmentName --definition-reference-id DependencyAgentExtension_Windows_HybridVM_Deploy --resource-group arc-hack --resource-type Microsoft.HybridCompute/machines
 ```
 
 The default resourceDiscoveryMode for these commands is `ExistingNonCompliant`, but you can also use the `--resource-discovery-mode ReEvaluateCompliance` switch to force a policy evaluation.

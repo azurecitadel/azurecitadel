@@ -35,6 +35,10 @@ You are part of the Security Operations Centers (SOC) team.
 * Set up a Data Collection Rule for all your Azure arc virtual machines to send their security logs to
 * (Optional) Validate the security logs are visible in the Log Analytics Workspace
 
+    > _Hint_: The linux security logs are:
+
+    ![DCR](/arc/images/linuxDataSource.png)
+
 ### Cost Management team
 
 You are part of the Cost Management team and performing an exercise on reducing costs.
