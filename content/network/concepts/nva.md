@@ -9,6 +9,8 @@ series:
 menu:
   side:
     parent: 'network-concepts'
+aliases:
+ - /network/nva
 ---
 
 ## Lab Overview

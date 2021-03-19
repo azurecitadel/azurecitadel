@@ -8,7 +8,7 @@ series:
 weight: 8
 ---
 
-## Key Vault
+## Setting up the Key Vault
 
 Hint:
 
@@ -19,33 +19,30 @@ By default they won't have access to write secrets, keys, certs.
 
 If they script it out then here are some example commands that include example secret access:
 
-    ```bash
-    uniq=$(cd ~/arc-onprem-servers; terraform output --raw uniq)
-    vault=keyvault-$uniq
+  ```bash
+  uniq=$(cd ~/arc-onprem-servers; terraform output --raw uniq)
+  vault=keyvault-$uniq
+  az keyvault create --name $vault --resource-group arc-hack --location=uksouth --enable-rbac-authorization --retention-days 7
+  keyvaultId=$(az keyvault show --name $vault --resource-group arc-hack --query id --output tsv)
+  objectId=$(az ad signed-in-user show --query objectId --output tsv)
+  az role assignment create --assignee $objectId --resource-group arc-hack --role "Key Vault Secrets Officer"
+  az keyvault secret set --vault-name $vault --name example-secret --value "NinaIsTheMole"
+  secretId=$(az keyvault secret show --vault-name $vault --name example-secret --query id --output tsv)
+  ```
 
-    az keyvault create --name $vault --resource-group arc-hack --location=uksouth --enable-rbac-authorization --retention-days 7
-    keyvaultId=$(az keyvault show --name $vault --resource-group arc-hack --query id --output tsv)
-
-    objectId=$(az ad signed-in-user show --query objectId --output tsv)
-    az role assignment create --assignee $objectId --resource-group arc-hack --role "Key Vault Secrets Officer"
-
-    az keyvault secret set --vault-name $vault --name example-secret --value "NinaIsTheMole"
-    secretId=$(az keyvault secret show --vault-name $vault --name example-secret --query id --output tsv)
-    ```
-
-    Key Vault Administrator is also a valid role at this point. It has more access as it covers certs and keys as well as secrets. They'll be creating certs later so perhaps more sensible!
+  Key Vault Administrator is also a valid role at this point. It has more access as it covers certs and keys as well as secrets. They'll be creating certs later so perhaps more sensible!
 
 Read the secret:
 
-    ```bash
-    az keyvault secret show --vault-name $vault --name example-secret --query value --output tsv
-    ```
+  ```bash
+  az keyvault secret show --vault-name $vault --name example-secret --query value --output tsv
+  ```
 
-    or
+or
 
-    ```bash
-    az keyvault secret show --id $secretId --query value --output tsv
-    ```
+  ```bash
+  az keyvault secret show --id $secretId --query value --output tsv
+  ```
 
 ## Key Vault extension
 
@@ -61,83 +58,82 @@ I have not tested this personally, but it is nice functionality.
 
 ### PostgreSQL
 
-    Hints:
+Hints:
 
-    * Spinning up the SQL is pretty simple
-    * Follow the two pages in the links
-    * They don't need to automate all of the steps.
+* Spinning up the SQL is pretty simple
+* Follow the two pages in the links
+* They don't need to automate all of the steps.
 
-    Steps:
+Steps:
 
-    1. Database creation:
+1. Database creation:
 
-        ```bash
-        admin_password=$(cd ~/arc-onprem-servers; terraform output --raw windows_admin_password)
-        uniq=$(cd ~/arc-onprem-servers; terraform output --raw uniq)
+    ```bash
+    admin_password=$(cd ~/arc-onprem-servers; terraform output --raw windows_admin_password)
+    uniq=$(cd ~/arc-onprem-servers; terraform output --raw uniq)
+    az extension add --name db-up
+    az postgres up --server-name postgres-$uniq --database-name arc_hack --admin-user arcadmin --admin-password $admin_password --location uksouth
+    ```
 
-        az extension add --name db-up
-        az postgres up --server-name postgres-$uniq --database-name arc_hack --admin-user arcadmin --admin-password $admin_password --location uksouth
-        ```
+1. Secret
 
-    1. Secret
+    Manually copying the psql_cmd and adding the secret is perfectly fine. For reference, this is how I'd automate it:
 
-        Manually copying the psql_cmd and adding the secret is perfectly fine. For reference, this is how I'd automate it:
+    ```bash
+    psql_cmd=$(az postgres show-connection-string --server-name postgres-$uniq --database-name arc_hack --admin-user arcadmin --admin-password $admin_password --query connectionStrings.psql_cmd --output tsv)
+    az keyvault secret set --vault-name $vault --name psql-cmd --value "$psql_cmd"
+    ```
 
-        ```bash
-        psql_cmd=$(az postgres show-connection-string --server-name postgres-$uniq --database-name arc_hack --admin-user arcadmin --admin-password $admin_password --query connectionStrings.psql_cmd --output tsv)
-        az keyvault secret set --vault-name $vault --name psql-cmd --value "$psql_cmd"
-        ```
+### Hybrid Instance Metadata Service
 
-### HIMDS
+OK, this one is a little more hardcore. It is definitely a tough one if they haven't done much with REST APIs or managed identity or jq.
 
-    OK, this one is hardcore. It is a tough one if they haven't done much with REST APIs or managed identity or jq.
+Hints:
 
-    Hints:
+* The HIMDS endpoint IP address is not the same as the standard IMDS endpoint on Azure VM.
+* The URI paths and API versions are the same though.
+* The Azure CLI will not work. `az login --identity` has not been updated to use the HIMDS IP address.
+* Key links are
+  * [Authenticate against Azure resources with Arc enabled servers](https://docs.microsoft.com/azure/azure-arc/servers/managed-identity-authentication)
+    * Give the IMDS endpoint
+    * Also shows how to get the challenge token and then the token for the management.azure.com resource
+    * The challenge token is only valid for a single use, so token challenge path, token challenge and resource token should be consecutive commands
+  * [Using managed identities on standard Azure VMs](/vm/identity)
+    * Shows how to use tokens in REST API calls
+    * Also shows that you need RBAC role assignments - i.e. you need Reader on the resource group for the managed identity
+    * Discuss public endpoints therefore need internet access or Microsoft peering - future functionality will add private endpoints
+  * [Instance Metadata Service - Linux](https://docs.microsoft.com/azure/virtual-machines/linux/instance-metadata-service?tabs=linux)
+    * Note that HIMDS is a subset of the info in IMDS
+  * The az command is extensible.... see `az extension --help` or type `az connectedmachine`
 
-    * The HIMDS endpoint IP address is not the same as the standard IMDS endpoint on Azure VM.
-    * The URI paths and API versions are the same though.
-    * The Azure CLI will not work. `az login --identity` has not been updated to use the HIMDS IP address.
-    * Key links are
-      * [Authenticate against Azure resources with Arc enabled servers](https://docs.microsoft.com/azure/azure-arc/servers/managed-identity-authentication)
-        * Give the IMDS endpoint
-        * Also shows how to get the challenge token and then the token for the management.azure.com resource
-        * The challenge token is only valid for a single use, so token challenge path, token challenge and resource token should be consecutive commands
-      * [Using managed identities on standard Azure VMs](/vm/identity)
-        * Shows how to use tokens in REST API calls
-        * Also shows that you need RBAC role assignments - i.e. you need Reader on the resource group for the managed identity
-        * Discuss public endpoints therefore need internet access or Microsoft peering - future functionality will add private endpoints
-      * [Instance Metadata Service - Linux](https://docs.microsoft.com/azure/virtual-machines/linux/instance-metadata-service?tabs=linux)
-        * Note that HIMDS is a subset of the info in IMDS
-      * The az command is extensible.... see `az extension --help` or type `az connectedmachine`
+Steps:
 
-    Steps:
+* SSH to ubuntu-01
+* The IMDS_ENDPOINT is `http://localhost:40342` is what you curl to get the IMDS info, but you need the path. The pathing is from the
 
-    * SSH to ubuntu-01
-    * The IMDS_ENDPOINT is `http://localhost:40342` is what you curl to get the IMDS info, but you need the path. The pathing is from the
+    ```bash
+    curl -sSL -H Metadata:true http://localhost:40342/metadata/instance?api-version=2020-06-01 | jq .
+    ```
 
-        ```bash
-        curl -sSL -H Metadata:true http://localhost:40342/metadata/instance?api-version=2020-06-01 | jq .
-        ```
+* Set the subscriptionId and resourceGroupName variables (stretch)
 
-    * Set the subscriptionId and resourceGroupName variables (stretch)
+    ```bash
+    imds=$(curl -sSL -H Metadata:true http://localhost:40342/metadata/instance?api-version=2020-06-01)
+    subscriptionId=$(jq -r .compute.subscriptionId <<< $imds)
+    resourceGroupName=$(jq -r .compute.resourceGroupName <<< $imds)
+    ```
 
-        ```bash
-        imds=$(curl -sSL -H Metadata:true http://localhost:40342/metadata/instance?api-version=2020-06-01)
-        subscriptionId=$(jq -r .compute.subscriptionId <<< $imds)
-        resourceGroupName=$(jq -r .compute.resourceGroupName <<< $imds)
-        ```
+* Get the challenge token (stretch)
 
-    * Get the token - note the sudo on the second command (stretch)
+    Note that the user won't be able to see the challengeTokenPath. You need sudo to list or cat the files. The challenge token can be used once and then it is deleted from the directory.
 
-        Note the resource on the last curl command.
+    ```bash
+    challengeTokenPath=$(curl -s -D - -H Metadata:true "http://127.0.0.1:40342/metadata/identity/oauth2/token?api-version=2019-11-01&resource=https%3A%2F%2Fmanagement.azure.com" | grep Www-Authenticate | cut -d "=" -f 2 | tr -d "[:cntrl:]")
+    challengeToken=$(sudo cat $challengeTokenPath)
+    token=$(curl -s -H Metadata:true -H "Authorization: Basic $challengeToken" "http://127.0.0.1:40342/metadata/identity/oauth2/token?api-version=2019-11-01&resource=https%3A%2F%2Fmanagement.azure.com" | jq -r .access_token)
+    ```
 
-        ```bash
-        challengeTokenPath=$(curl -s -D - -H Metadata:true "http://127.0.0.1:40342/metadata/identity/oauth2/token?api-version=2019-11-01&resource=https%3A%2F%2Fmanagement.azure.com" | grep Www-Authenticate | cut -d "=" -f 2 | tr -d "[:cntrl:]")
-        challengeToken=$(sudo cat $challengeTokenPath)
-        token=$(curl -s -H Metadata:true -H "Authorization: Basic $challengeToken" "http://127.0.0.1:40342/metadata/identity/oauth2/token?api-version=2019-11-01&resource=https%3A%2F%2Fmanagement.azure.com" | jq -r .access_token)
-        ```
-
-        The token should be good for 24 hours.
+    The token should be good for 24 hours.
 
     * Assign the role
 

@@ -9,6 +9,10 @@ series:
 menu:
   side:
     parent: 'network-concepts'
+aliases:
+ - /network/nsgs
+ - /network/nsg
+ - /network/concepts/nsg
 ---
 
 ## Lab Overview

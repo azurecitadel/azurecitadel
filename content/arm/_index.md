@@ -4,6 +4,15 @@ description: "Set of labs for those who want to create their own ARM templates."
 menu:
   side:
     identifier: arm
+aliases:
+ - /automation/arm
+ - /automation/arm/lab1
+ - /automation/arm/lab2
+ - /automation/arm/lab3
+ - /automation/arm/lab4
+ - /automation/arm/lab5
+ - /automation/arm/lab6
+ - /automation/arm/lab7
 ---
 
 ## Introduction

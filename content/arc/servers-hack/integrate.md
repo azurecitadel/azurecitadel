@@ -10,6 +10,8 @@ menu:
 series:
  - arc-servers-hack
 weight: 8
+aliases:
+ - /arc/server-hack/integrate/proctor
 ---
 
 ## Introduction

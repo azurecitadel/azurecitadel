@@ -16,6 +16,12 @@ aliases:
 
 These are some of the oldest networking labs we have on the site, but they have stood the test of time as hub and spoke is still the most popular topology for those moving away from a single vNet. These labs help you understand how vNet peering works, how to control traffic flows using user defined routes to override the routing tables, and a very basic config for a network virtual appliance.
 
+## Video
+
+Go to the next [section](#nvas-or-azure-firewall) if you want to carry on with the lab overview. If you would rather just follow Azure Dan and Adam Raffe, one of our ex-colleagues, run through the VDC deployment then watch this step-by-step 50 min video.
+
+{{< youtube id="P3jYQCadKmM" autoplay="false">}}
+
 ## NVAs or Azure Firewall
 
 The labs use a Cisco network virtual appliance. Feel free to swap it out for your preferred NVA and configure to forward traffic. Or use the Azure Firewall service which is a great solution for selectively forwarding spoke to spoke traffic. (If you would like to see an Azure Firewall lab then add to the [lab suggestion](https://github.com/azurecitadel/azurecitadel/discussions/7).)

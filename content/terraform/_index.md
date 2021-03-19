@@ -6,6 +6,25 @@ draft: false
 menu:
   side:
     identifier: 'terraform'
+aliases:
+ - /automation/terraform
+ - /automation/terraform/lab1
+ - /automation/terraform/lab2
+ - /automation/terraform/lab3
+ - /automation/terraform/lab4
+ - /automation/terraform/lab5
+ - /automation/terraform/lab6
+ - /automation/terraform/lab7
+ - /automation/terraform/lab8
+ - /automation/terraform-new
+ - /automation/terraform-new/lab1
+ - /automation/terraform-new/lab2
+ - /automation/terraform-new/lab3
+ - /automation/terraform-new/lab4
+ - /automation/terraform-new/lab5
+ - /automation/terraform-new/lab6
+ - /automation/terraform-new/lab7
+ - /automation/terraform-new/lab8
 ---
 
 ## Introduction
