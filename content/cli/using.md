@@ -39,13 +39,52 @@ The CLI includes tab auto-complete for both switches and values, which is very u
 
 ## Configure
 
+### az configure
+
 Run `az configure` to initiate an interactive session to configure defaults for your output format, logging of sessions, data collection.
 
-The `--resource-group` and `--location` switches are common to many commands. If you want to set default values then use `az configure --default group=myRG location=westeurope`.
+The `--resource-group` and `--location` switches are common to many commands. If you want to set default values then use `az configure --defaults group=myRG location=westeurope`.
 
 The argument must be a space delimited list of key=value pairs, and defaults may be unset by a blank string, e.g. `group=''`.
 
+### az config
+
+There is a new `az config` group which is automatically converting between the `~/.azure/config` file's ini format to JSON. It is useful as it works with cascading files, so you can have standard defaults in your home directory, and then configure a set of overrides in your local directory.
+
+1. See the defaults
+
+    ```bash
+    az config get defaults
+    ```
+
+    Example output:
+
+    ```json
+    [
+      {
+        "name": "location",
+        "source": "/home/richeney/.azure/config",
+        "value": "uksouth"
+      }
+    ]
+    ```
+
+1. Create local defaults
+
+  ```bash
+  mkdir ~/localdir && cd ~/localdir
+  az config set defaults.group=myResourceGroup defaults.location=westeurope --local
+  ```
+
+  Running az commands in the localdir will use the defaults in the cat ~/localdir/.azure/config file to  override those in the home directory.
+
+> Note that `az confiug` is experimental and may change or be removed.
+
+### Session defaults
+
 The other way to default those switches is to export the `AZURE_DEFAULTS_GROUP` and `AZURE_DEFAULTS_LOCATION` environment variables within the current shell.
+
+These will supersede anything set using `az configure` or `az config`. You can see what is in effect by using `az configure --list-defaults` or `az config get defaults`.
 
 ## Output formats
 
