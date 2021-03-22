@@ -6,6 +6,8 @@ draft: false
 series:
  - arc-servers-hack-proctor
 weight: 3
+aliases:
+ - /arc/servers-hack/policy/proctor
 ---
 
 ## Policy - Tags

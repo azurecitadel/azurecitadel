@@ -6,6 +6,8 @@ draft: false
 series:
  - arc-servers-hack-proctor
 weight: 7
+aliases:
+ - /arc/server-hack/governance/proctor
 ---
 
 ## Tasks

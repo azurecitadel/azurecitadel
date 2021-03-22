@@ -10,8 +10,6 @@ menu:
 series:
  - arc-servers-hack
 weight: 8
-aliases:
- - /arc/server-hack/integrate/proctor
 ---
 
 ## Introduction
@@ -90,7 +88,25 @@ This is **OPTION TWO** and is the tougher challenge.
 
 ![Hybrid Instance Metadata Service](/arc/images/himds.png)
 
+### Hybrid Instance Metadata Service
+
+Use the ubuntu-01 managed identity to:
+
+* Show the output JSON from the hybrid instance metadata service
+  * Most recent API version is 2020-06-01
+  * `jq` has been pre-installed on the ubuntu VMs
+* Set variables for the subscriptionId and resourceGroupName from the IMDS output (stretch)
+
+### Make an ARM REST API call
+
+Use the ubuntu-01 managed identity to:
+
+* List all of the resources in the resource group using the managed identity
+* Use jq filters to find the name of the key vault in the resource group (stretch)
+
 ### PostgreSQL and Key Vault
+
+> _Hint_: This section should be done using your own user principal, not the managed identity.
 
 * Create a dev PostgreSQL database using the `az postgres up` command
   * Set the following switch values:
@@ -102,29 +118,26 @@ This is **OPTION TWO** and is the tougher challenge.
     * (the Terraform outputs should be used for the `inline code` values)
   * Add a psql-cmd secret to the key vault
     * using the value of `connectionStrings.psql_cmd` from the output JSON
+    * prepend the secret with `PGPASSWORD=<admin-password> `
 
-### Hybrid Instance Metadata Service
+Example psql-cmd:
 
-Use the ubuntu-01 managed identity to access the HIMDS
-
-* Show the output JSON from the hybrid instance metadata service
-  * Most recent API version is 2020-06-01
-  * `jq` has been pre-installed on the ubuntu VMs
-
-Stretch targets:
-
-* Set variables for the subscriptionId and resourceGroupName from the IMDS output
-* List all of the resources in the resource group using the managed identity
-* Use jq filters to find the name of the key vault in the resource group
+```text
+PGPASSWORD=Awesome-Antelope! psql --host=postgres-926f133b.postgres.database.azure.com --port=5432 --username=arcadmin@postgres-926f133b --dbname=arc_hack
+```
 
 ### Access the PostgreSQL DB
+
+Use the ubuntu-01 managed identity to:
 
 * Read the psql_cmd secret from the key vault
 
 Stretch targets:
 
-* Install psql
-* Connect using psql and create a database called arc-hack
+* Install psql (postgresql-client)
+* Connect to the arc_hack database using psql
+
+> _Hint_: Run the interactive postgresql client using `$psql_cmd`. (Assuming that your secret has been formatted as per the example above and you have it in a variable called $psql_cmd.)
 
 ----------
 
@@ -138,10 +151,10 @@ Screen share with your proctor to show that you achieved:
     1. Show the deployed extension and the configuration
     1. Browse to the nginx site over https and show the unsigned cert
 1. Managed identity
-    1. Display the psql_cmd secret value in the key vault
     1. Display the instance metadata through jq
     1. REST API call to list the resources in the resource group (stretch)
     1. Determine the key vault name using curl (stretchier)
+    1. Display the psql_cmd secret value in the key vault
     1. Show psql connecting to the database with psql_cmd pulled from the key vault (stretchiest)
 
 ## Resources

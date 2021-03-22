@@ -6,6 +6,8 @@ draft: false
 series:
  - arc-servers-hack-proctor
 weight: 5
+aliases:
+ - /arc/servers-hack/monitor/proctor
 ---
 
 ## Azure Monitoring Agent (AMA)

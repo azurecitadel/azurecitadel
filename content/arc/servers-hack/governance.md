@@ -10,8 +10,6 @@ menu:
 series:
  - arc-servers-hack
 weight: 7
-aliases:
- - /arc/server-hack/governance/proctor
 ---
 
 ## Introduction

@@ -6,6 +6,8 @@ draft: false
 series:
  - arc-servers-hack-proctor
 weight: 4
+aliases:
+ - /arc/server-hack/scale/proctor
 ---
 
 Most of the script generation etc is now laid out to follow in the lab. Very little challenge left.

@@ -10,8 +10,6 @@ menu:
 series:
  - arc-servers-hack
 weight: 2
-aliases:
- - /arc/server-hack/manual/proctor
 ---
 
 ## Introduction
