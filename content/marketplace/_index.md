@@ -1,7 +1,7 @@
 ---
 title: "Marketplace"
 author: [ "Mike Ormond" ]
-description: "Labs for ISV Partners publishing their solutions on the Commercial Marketplace"
+description: "Labs for ISV Partners publishing their solutions on the commercial marketplace"
 date: 2021-01-06
 style: list
 menu:

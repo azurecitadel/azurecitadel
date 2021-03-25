@@ -2,7 +2,7 @@
 title: "Publish a Solution Template"
 author: [ "Mike Ormond" ]
 description: "Azure Apps Offer"
-date: 2021-01-06
+date: 2021-03-25
 weight: 50
 style: list
 menu:
@@ -26,5 +26,3 @@ The *Azure Apps offer* has two distinct flavours; *solution template* and *manag
    For further information, see [Publishing an Azure Application - Managed Application Offer](../azureappma/)
 
 ## Content
-
-The content for this section is still under construction.

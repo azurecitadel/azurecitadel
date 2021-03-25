@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
+    "version": "0.1.2-preview",
+    "parameters": {
+        "config": {
+            "isWizard": false,
+            "basics": {
+                "description": "You can enter a customised description of your solution with **markdown** support.",
+                "resourceGroup": {
+                    "allowExisting": false
+                },
+                "location": {
+                    "label": "Custom label for location",
+                    "allowedValues": [
+                        "westeurope",
+                        "uksouth"
+                    ],
+                    "visible": true
+                }
+            }
+        },
+        "basics": [
+            {
+                "name": "websiteName",
+                "type": "Microsoft.Common.TextBox",
+                "label": "Website Name",
+                "constraints": {
+                    "required": true,
+                    "validations": [
+                        {
+                            "regex": "^[a-z0-9A-Z]{5,25}$",
+                            "message": "Between 5-25 alphanumeric characters are allowed."
+                        }
+                    ]
+                },
+                "visible": true
+            }
+        ],
+        "steps": [],
+        "outputs": {
+            "siteName": "[basics('websiteName')]"
+        },
+        "resourceTypes": []
+    }
+}

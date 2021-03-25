@@ -4,7 +4,6 @@ author: [ "Mike Ormond" ]
 description: "Test the VM image before publishing."
 date: 2021-01-06
 weight: 30
-nonav: true
 menu:
   side:
     parent: marketplace-vm-offer

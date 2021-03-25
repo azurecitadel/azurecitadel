@@ -1,7 +1,7 @@
 ---
 title: "Offer Types"
 author: [ "Mike Ormond" ]
-description: "Commercial Marketplace offer types for applications"
+description: "commercial marketplace offer types for applications"
 date: 2021-01-06
 weight: 20
 menu:
@@ -23,7 +23,7 @@ The following offer types are available through Partner Center for ISV solutions
 * [IoT Edge module offer](https://docs.microsoft.com/azure/marketplace/iot-edge-module)
 * [SaaS app offer](https://docs.microsoft.com/azure/marketplace/plan-saas-offer)
 
-In these labs we will focus on three main offer types; **Virtual Machine**, **Azure Apps** and **SaaS app** offers. These offer types are transactable through the Commercial Marketplace and require deeper integration in order to publish.
+In these labs we will focus on three main offer types; **Virtual Machine**, **Azure Apps** and **SaaS app** offers. These offer types are transactable through the commercial marketplace and require deeper integration in order to publish.
 
 ## Virtual Machine Offer
 
