@@ -3,7 +3,6 @@ title: "Getting Started"
 author: [ "Mike Ormond" ]
 description: "Pre-requisites and overview."
 date: 2021-01-06
-noback: 123
 weight: 10
 menu:
   side:
@@ -32,6 +31,10 @@ In this lab we will create the technical assets required to publish a VM offer t
   * Publish the generalised VM to a shared image gallery (preferred)
   * Generate a SAS URL to the VHD Image
 * Publish the Offer through Partner Center
+
+## Resources
+
+* [How to plan a virtual machine offer](https://docs.microsoft.com/azure/marketplace/marketplace-virtual-machines)
 
 ---
 

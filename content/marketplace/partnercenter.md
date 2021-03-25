@@ -12,9 +12,9 @@ menu:
 
 ## Introduction
 
-Partner Center is a portal for Microsoft Partners to manage their relationship with Microsoft and their customers. It includes functionality to manage Microsoft Partner Network (MPN) membership and benefits, the Cloud Solution Provider (CSP) programme, analytics, incentives and access to publish offers to marketplace including the Commercial Marketplace.
+Partner Center is a portal for Microsoft Partners to manage their relationship with Microsoft and their customers. It includes functionality to manage Microsoft Partner Network (MPN) membership and benefits, the Cloud Solution Provider (CSP) programme, analytics, incentives and access to publish offers to marketplace including the commercial marketplace.
 
-To publish an offer to the Commercial Marketplace an organisation must be a member of the Microsoft Partner Network, sign up for Partner Center, create a Publisher Profile including payout details and register for one or more programmes including the Commercial Marketplace programme.
+To publish an offer to the commercial marketplace an organisation must be a member of the Microsoft Partner Network, sign up for Partner Center, create a Publisher Profile including payout details and register for one or more programmes including the commercial marketplace programme.
 
 ## Get Started
 
@@ -26,7 +26,7 @@ If your company is **already an MPN Member, but not enrolled in Partner Center**
 
 [Create a commercial marketplace account in Partner Center](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account)
 
-If your company is **already enrolled in Partner Center but not in the Commercial Marketplace programme**.
+If your company is **already enrolled in Partner Center but not in the commercial marketplace programme**.
 
 [Create an account using an existing Partner Center enrollment](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account#create-an-account-using-existing-partner-center-enrollments)
 
@@ -34,7 +34,7 @@ The above may require someone authorized to act on behalf of the company and may
 
 ## Publishing Offers
 
-In order to publish offers in the Commercial Marketplace your account will need to be assigned to a specific role. The **Developer** role is intended for offer publishing and management. Users with **Manager** and **Owner** roles can also publish and manage offers but they have much broader permissions and should only be used if necessary.
+In order to publish offers in the commercial marketplace your account will need to be assigned to a specific role. The **Developer** role is intended for offer publishing and management. Users with **Manager** and **Owner** roles can also publish and manage offers but they have much broader permissions and should only be used if necessary.
 
 [Define user roles and permissions](https://docs.microsoft.com/azure/marketplace/partner-center-portal/manage-account#define-user-roles-and-permissions)
 

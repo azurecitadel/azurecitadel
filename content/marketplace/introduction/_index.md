@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 author: [ "Mike Ormond" ]
-description: "Introduction to the Commercial Marketplace"
+description: "Introduction to the commercial marketplace"
 date: 2021-01-06
 weight: 10
 style: list
@@ -21,7 +21,7 @@ This lab will introduce you to some of the essential concepts and terminology of
 
 ## Resources
 
-* [The Commercial Marketplace documentation](https://docs.microsoft.com/azure/marketplace/overview)
+* [The commercial marketplace documentation](https://docs.microsoft.com/azure/marketplace/overview)
 * [What is Partner Center](https://support.microsoft.com/help/4499930/partner-center-overview)
 * [Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/)
 * [AppSource](https://appsource.microsoft.com/)

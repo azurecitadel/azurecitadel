@@ -4,7 +4,6 @@ author: [ "Mike Ormond" ]
 description: "Use Shared Access Signature to Publish"
 date: 2021-01-06
 weight: 50
-nonav: true
 menu:
   side:
     parent: marketplace-vm-offer

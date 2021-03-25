@@ -4,7 +4,6 @@ author: [ "Mike Ormond" ]
 description: "Use Shared Image Gallery to Publish"
 date: 2021-01-06
 weight: 40
-nonav: true
 menu:
   side:
     parent: marketplace-vm-offer
