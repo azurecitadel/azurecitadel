@@ -17,4 +17,9 @@
         }
         );window[aiName]=aisdk,aisdk.queue&&0===aisdk.queue.length&&aisdk.trackPageView({});
      </script>
+
+      {{ if (findRE "<pre" .Content 1) }}
+      <script src="/js/copy-code-button.js"></script>
+      {{ end }}
+
 </head>
