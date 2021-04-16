@@ -18,6 +18,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Set staging environment base URL
+        if: (github.event_name == 'pull_request' && github.event.action != 'closed')
+        run:
+          echo "baseURL = \"https://jolly-coast-0e6fb7503-${{ github.event.number }}.westeurope.azurestaticapps.net/\"" > ./config/production/config.toml
+      - name: Set production environment base URL
+        if: github.event_name == 'push'
+        run:
+          echo "baseURL = \"https://www.azurecitadel.com/\"" > ./config/production/config.toml
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
