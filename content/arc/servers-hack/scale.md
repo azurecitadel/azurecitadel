@@ -1,6 +1,6 @@
 ---
 title: "Scale Onboarding"
-description: "Onboarding multiple Linux and WIndows servers with a service principal, then automate conneting with the azcmagent."
+description: "Onboarding multiple Linux and WIndows servers with a service principal, then automate connecting with the azcmagent."
 layout: single
 draft: false
 menu:
