@@ -10,8 +10,6 @@ menu:
 
 Azure Arc is a pivotal technology that opens up new opportunities for managing systems outside of the Azure public cloud. Azure Arc is comprised of three complimentary areas.
 
-![Azure Arc](/arc/images/arc.png)
-
 The three areas are:
 
 1. Azure Arc enabled Servers

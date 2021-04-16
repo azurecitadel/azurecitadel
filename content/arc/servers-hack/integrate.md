@@ -73,8 +73,6 @@ You may use the portal, but you get bonus points for style if you create a set o
 
 This is **OPTION ONE**.
 
-![Key Vault Extension](/arc/images/keyvault.png)
-
 * Create a self signed certificate and upload into the key vault
 * Install the Key Vault extension to the ubuntu-01 Azure Arc VM
 * Install nginx
@@ -85,8 +83,6 @@ This is **OPTION ONE**.
 ## Managed Identity scripting
 
 This is **OPTION TWO** and is the tougher challenge.
-
-![Hybrid Instance Metadata Service](/arc/images/himds.png)
 
 ### Hybrid Instance Metadata Service
 
