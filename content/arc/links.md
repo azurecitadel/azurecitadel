@@ -28,7 +28,7 @@ Here are the main links for Azure Arc:
 | **Site** | **Description** |
 |---|---|
 | [Azure Arc Jumpstart](https://azurearcjumpstart.io) | Multiple tutorials with a range of Arc functionality |
-| [YouTube Channel](https://www.youtube.com/channel/UCoIJw-P_9Jp6Jo_0Ca9avcA) | Join Thomas Maurer & Lior Marat for Azure Arc demos |
+| [YouTube Channel](https://www.youtube.com/channel/UCoIJw-P_9Jp6Jo_0Ca9avcA) | Join Thomas Maurer & Lior Kamrat for Azure Arc demos |
 
 The Azure Arc Jumpstart site is highly recommended for going a little deeper with many of the capabilities that Azure Arc provides and how to create your own demo environments. It covers Azure Arc for Servers (including SQL servers), Azure Arc for Kubernetes and Azure Arc for Data Services.
 
