@@ -290,7 +290,9 @@ Search the portal for NAT Gateway and create a new one.
 
 > NAT gateway's are useful if you ever need to have control over the outgoing IP address, notably for customer allowed lists.
 
-Check the HTTP gadget. You should now see a different address, matching the public IP on the NAT gateway, proving that non-RFC1918 traffic is no going through the vNet.
+Restart the web app, reload the Insepctor Gadget homepage and check the HTTP gadget.
+
+You should now see a different address, matching the public IP on the NAT gateway, proving that non-RFC1918 traffic is no going through the vNet.
 
 ```bash
 az network public-ip show --name nat-pip --query ipAddress
