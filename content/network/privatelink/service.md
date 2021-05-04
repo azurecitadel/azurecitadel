@@ -90,11 +90,19 @@ Cloud Shell is recommended as it has the terraform binary include in the Bash co
 
 1. Deploy
 
+   The deployment assumes that you have a default public SSH key at ~/.ssh/id-rsa.pub.
+
+   If you do not then you can create one with `ssh-keygen -t rsa`.
+
+   Deploy the base resources:
+
     ```bash
     terraform apply --auto-approve
     ```
 
     The deployment should only take a few moments, and the `terraform output` displays the VM names and their IP addresses.
+
+    Example output:
 
     ```text
     vms = [
@@ -359,11 +367,30 @@ Connecting to a private link service is different. As there is no public DNS rec
 
 ## Cleanup
 
-Delete the resource groups to cleanup.
+Delete the saasPrivateEndpoint private endpoint in your customer 🟢 subscription.
 
 ```bash
-az group delete --yes --name rivatelink-pls-microhack-rg
-az group delete --yes --name rivatelink-dns-microhack-rg
+az network private-endpoint delete \
+      --name saasPrivateEndpoint \
+      --resource-group privatelink-dns-microhack-rg
+```
+
+Delete the privatelink-pls-microhack-rg resource group in your ISV 🔵 subscription.
+
+```bash
+az group delete --yes --name privatelink-pls-microhack-rg
+```
+
+The privatelink-pls-microhack-rg resource group in your customer 🟢 subscription is also used for the Private Link DNS microhack and for the vNet Integration. If you no longer need it then:
+
+```bash
+az group delete --yes --name privatelink-dns-microhack-rg
+```
+
+You may also unset the two environment variables for this session.
+
+```bash
+unset AZURE_DEFAULTS_GROUP AZURE_DEFAULTS_LOCATION
 ```
 
 ## Resources
