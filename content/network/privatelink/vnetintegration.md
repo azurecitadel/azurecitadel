@@ -118,7 +118,9 @@ Across the top you will see a number of gadgets. We'll start with DNS.
 
 ### DNS
 
-Click on the DNS tab. Enter in the SQL server's FQDN, e.g. `microhack-richeney.database.windows.net`.
+Click on the DNS tab at the top of the Inspector Gadget webpage.
+
+Enter in the SQL server's FQDN, e.g. `microhack-richeney.database.windows.net`.
 
 ![DNS returns Public IP](/network/privatelink/images/dnsPublic.png)
 
@@ -126,7 +128,9 @@ This nslookup should return the **public IP** of the SQL databases's public endp
 
 ### HTTP
 
-Click on the HTTP gadget and curl the default page, <http://ipinfo.io/ip>.
+Click on the HTTP tab at the top of the Inspector Gadget webpage.
+
+ Curl the default page, <http://ipinfo.io/ip>. This page will display the source IP address, so you know where the traffic is coming from.
 
 ![Default outbound IP](/network/privatelink/images/outboundDefault.png)
 
@@ -135,6 +139,8 @@ The gadget show's your web app's current [outbound IP address](https://docs.micr
 ### SQL
 
 OK, let's confirm we cannot connect to the SQL endpoint.
+
+Click on the SQL tab at the top of the Inspector Gadget webpage.
 
 * Database Type
 
@@ -233,11 +239,6 @@ Retest the SQL and DNS gadgets. Has anything changed?
 As always with Private Link, you need to ensure that DNS is resolving the FQDN for your PaaS service to the private IP of the private endpoint.
 
 Time to introduce a couple of important variables to get this to work for the SQL private endpoint. We'll add them in one by one and see the impact.
-
-| Variable | Value | Notes |
-|---|---|---|
-| WEBSITE_VNET_ROUTE_ALL | 1 | Routes all through the vNet, not just RFC1918 |
-| WEBSITE_DNS_SERVER | 168.63.129.16 | Integrate with Azure DNS private zones |
 
 ### Route all traffic
 
@@ -352,6 +353,11 @@ Let's recap:
 * If you have private endpoints then you need to integrate with DNS Private Zones
   * Set WEBSITE_DNS_SERVER=168.63.129.16
   * This requires WEBSITE_VNET_ROUTE_ALL=1
+
+| Variable | Value | Notes |
+|---|---|---|
+| WEBSITE_VNET_ROUTE_ALL | 1 | Routes all through the vNet, not just RFC1918 |
+| WEBSITE_DNS_SERVER | 168.63.129.16 | Integrate with Azure DNS private zones |
 
 ## Cleaning up
 
