@@ -129,23 +129,21 @@ This is what all the work in the previous sections was leading up to. This is wh
 1. ```VM Images``` - set the ```Disk version``` to "1.0.0"
 1. ```Select a method to provide your VM image``` - select the method you followed in the lab, "Shared Image Gallery" or "SAS URI"
 
-{{< details "Use Shared Image Gallery approach" >}}
+   #### Use Shared Image Gallery approach
 
-1. Click on ```Select shared image```
-1. A flyout will appear displaying the Shared Image Galleries you have access to
-1. Expand the ```marketplace_sig``` gallery
-1. Select the image we created earlier in the lab. It should be identified as version 1.0.0.
+   1. Click on ```Select shared image```
+   1. A flyout will appear displaying the Shared Image Galleries you have access to
+   1. Expand the ```marketplace_sig``` gallery
+   1. Select the image we created earlier in the lab. It should be identified as version 1.0.0.
 
-{{< /details >}}
+      > Be sure to **Save draft** before exiting the page
 
-{{< details "Use SAS URI approach" >}}
+   #### Use SAS URI approach
 
-1. Paste in the SAS URL you saved at the end of the "VM Offer with SAS" step of the lab.
+   1. Paste in the SAS URL you saved at the end of the "VM Offer with SAS" step of the lab.
+   
+      > Be sure to **Save draft** before exiting the page
 
-{{< /details >}}
-
-   > Be sure to **Save draft** before exiting the page
-   >
    > Click on ```Plan overview``` at the top of the page to revert to the offer pages
 
 ## Co-sell with Microsoft
