@@ -34,8 +34,8 @@ This lab introduces some fundamental concepts and how to choose the best offer t
 * [Enroll in Partner Center to Publish Offers](../partnercenter/)
 * [Selecting your Offer Type](../offertype/)
 * [Publishing a VM Offer](../vmoffer/)
-* [Publishing an Azure Application Solution Template Offer](../solutiontemplate/)
-* [Publishing an Azure Application - Managed Application Offer](../managedapp/)
+* [Publishing an Azure Application Solution Template Offer](../azureappst/)
+* [Publishing an Azure Application - Managed Application Offer](../azureappma/)
 * [Publishing a SaaS Application Offer](../saasapp/)
 
 ## Introduction Sections
