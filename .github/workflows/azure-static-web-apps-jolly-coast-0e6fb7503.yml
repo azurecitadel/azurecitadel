@@ -10,8 +10,20 @@ on:
       - main
 
 jobs:
+ check_source_repo:
+    runs-on: ubuntu-latest
+    outputs:
+      source_repo: ${{ steps.step1.outputs.source_repo }}    
+    steps:
+      - id: step1
+        run: |
+          SOURCE_REPO="$(jq .pull_request.base.repo.full_name ${GITHUB_EVENT_PATH})"
+          echo $SOURCE_REPO
+          echo "::set-output name=source_repo::$SOURCE_REPO"
+
   build_and_deploy_job:
-    if: github.repository	== 'azurecitadel/azurecitadel' && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
+    needs: check_source_repo
+    if: needs.check_source_repo.outputs.source_repo == 'azurecitadel/azurecitadel' && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
@@ -44,7 +56,8 @@ jobs:
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
-    if: github.repository	== 'azurecitadel/azurecitadel' && (github.event_name == 'pull_request' && github.event.action == 'closed')
+    needs: check_source_repo
+    if: needs.check_source_repo.outputs.source_repo	== 'azurecitadel/azurecitadel' && (github.event_name == 'pull_request' && github.event.action == 'closed')
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
