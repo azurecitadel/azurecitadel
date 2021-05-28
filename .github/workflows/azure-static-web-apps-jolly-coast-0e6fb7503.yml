@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
- check_source_repo:
+  check_source_repo:
     runs-on: ubuntu-latest
     outputs:
       source_repo: ${{ steps.step1.outputs.source_repo }}    
