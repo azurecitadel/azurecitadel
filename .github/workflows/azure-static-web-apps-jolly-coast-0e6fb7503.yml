@@ -17,9 +17,15 @@ jobs:
     steps:
       - id: step1
         run: |
-          SOURCE_REPO="$(jq .pull_request.base.repo.full_name ${GITHUB_EVENT_PATH})"
+          SOURCE_REPO="$(jq -r .pull_request.head.repo.full_name ${GITHUB_EVENT_PATH})"
           echo $SOURCE_REPO
           echo "::set-output name=source_repo::$SOURCE_REPO"
+
+  debug:
+    needs: check_source_repo 
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ needs.check_source_repo.outputs.source_repo }}"
 
   build_and_deploy_job:
     needs: check_source_repo
