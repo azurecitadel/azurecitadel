@@ -17,7 +17,7 @@ jobs:
     steps:
       - id: step1
         run: |
-          SOURCE_REPO="$(jq .pull_request.head.repo.full_name ${GITHUB_EVENT_PATH})"
+          SOURCE_REPO="$(jq -r .pull_request.head.repo.full_name ${GITHUB_EVENT_PATH})"
           echo $SOURCE_REPO
           echo "::set-output name=source_repo::$SOURCE_REPO"
 
