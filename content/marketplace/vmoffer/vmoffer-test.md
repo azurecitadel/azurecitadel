@@ -82,7 +82,7 @@ The steps are different depending on which approach you have chosen to follow. F
    az group create --name 'marketplace-vm-offer-test' --location 'westeurope'
    ```
 
-   Use the "id" as the ```--image``` parameter
+   Use the "id" as the `--image` parameter
 
    ```bash
    az vm create \
