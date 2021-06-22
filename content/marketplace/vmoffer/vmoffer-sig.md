@@ -69,7 +69,7 @@ If using the Shared Image Gallery approach, you will have created a managed VM I
    az image list --query "[].[name, id]" -o tsv
    ```
 
-    Substitute the resource ID for the ```--managed-image``` parameter
+    Substitute the resource ID for the `--managed-image` parameter
 
     ```bash
     az sig image-version create \

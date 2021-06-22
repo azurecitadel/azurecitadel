@@ -19,7 +19,11 @@ It is important that we test the image we've created before publishing. Otherwis
 
 The first and simplest test is to confirm that we can create a new VM instance based on the work we did in the last lab.
 
-{{< details "Use Shared Image Gallery approach" >}}
+The steps are different depending on which approach you have chosen to follow. Follow the relevant steps and then continue from [Finalise the test](#finalise-the-test)
+
+### Steps for Shared Image Gallery approach
+
+1. Do not follow these steps if you are using the [SAS URI approach](#use-sas-uri-approach)
 
 1. Make sure the VM is deallocated
 
@@ -78,7 +82,7 @@ The first and simplest test is to confirm that we can create a new VM instance b
    az group create --name 'marketplace-vm-offer-test' --location 'westeurope'
    ```
 
-   Use the "id" as the ```--image``` parameter
+   Use the "id" as the `--image` parameter
 
    ```bash
    az vm create \
@@ -90,9 +94,11 @@ The first and simplest test is to confirm that we can create a new VM instance b
 
    ```
 
-{{< /details >}}
+[Skip to finalise the test](#finalise-the-test)
 
-{{< details "Use SAS URI approach" >}}
+### Steps for SAS URI approach
+
+1. Do not follow these steps if you're using the [Shared Image Gallery approach](#use-shared-image-gallery-approach)
 
 The following is based on the instructions [Test a virtual machine image](https://docs.microsoft.com/azure/marketplace/azure-vm-image-test) but with some modifications as I have found the provided script not to work for Linux images.
 
@@ -102,7 +108,7 @@ The following is based on the instructions [Test a virtual machine image](https:
 
    ![Create VM from ARM Template](/marketplace/images/create-from-template.png)
 
-1. Replace the contents of the editor with the JSON from [this file](scripts/deploy-user-provided-image.json) and hit **Save**
+1. Replace the contents of the editor with the JSON from [this file](../scripts/deploy-user-provided-image.json) and hit **Save**
 1. You will need to provide parameter values for the following
 
    Parameter | Comment
@@ -123,9 +129,7 @@ The following is based on the instructions [Test a virtual machine image](https:
 
    The first approach is simpler and adequate for the purposes of a test. Once finished testing you can delete the resource group and the new (specialised) VHD from the original storage account. Be careful not to delete the generalised VHD image.
 
-{{< /details >}}
-
-To finalise the test:
+### Finalise the test
 
  1. Confirm that browsing to the IP address of the new VM displays the NGINX welcome page - NOTE you *may* need to add a rule on the NSG to allow incoming traffic on Port 80.
  2. SSH into the new VM and confirm the presence of a `/tmp/users.txt` file with a creation time matching the last reboot

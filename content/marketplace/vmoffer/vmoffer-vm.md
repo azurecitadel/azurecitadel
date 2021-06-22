@@ -54,9 +54,7 @@ Most of the process for creating the VM is the same - expand the relevant sectio
 
    We will create an Ubuntu VM using a small machine size to minimise costs.  Generating ssh keys gives us a simple, secure way to connect to the VM.
 
-{{< details "Use Shared Image Gallery approach" >}}
-
-   Create a new VM using the Azure CLI:
+   ### Create VM using Shared Image Gallery approach (RECOMMENDED)
 
    ```bash
    az vm create \
@@ -68,13 +66,9 @@ Most of the process for creating the VM is the same - expand the relevant sectio
       --size 'Standard_B1s' \
    ```
 
-{{< /details >}}
-
-{{< details "Use SAS URI approach" >}}
+   ### Create VM using SAS URI approach (ALTERNATIVE)
 
    It is important to create a VM using unmanaged disks as the base. This gives us direct access to the VHD which we will need to copy at a later stage.
-
-   Create a new VM using the Azure CLI:
 
    ```bash
    az vm create \
@@ -86,8 +80,6 @@ Most of the process for creating the VM is the same - expand the relevant sectio
       --size 'Standard_B1s' \
       --use-unmanaged-disk
    ```
-
-{{< /details >}}
 
    Example output
 

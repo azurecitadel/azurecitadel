@@ -31,11 +31,11 @@ This lab will introduce you to some of the essential concepts and terminology of
 This lab introduces some fundamental concepts and how to choose the best offer type to match a particular solution. The accompanying labs will take you through the steps to create and publish an offer on the commercial marketplace.
 
 * [Introduction to the Commercial Marketplace](../introduction/)
-* [Enroll in Partner Center to Publish Offers](../../partnercenter/)
-* [Selecting your Offer Type](../../offertype/)
-* [Publishing a VM Offer](../../vmoffer/)
-* [Publishing an Azure Application Solution Template Offer](../solutiontemplate/)
-* [Publishing an Azure Application - Managed Application Offer](../managedapp/)
+* [Enroll in Partner Center to Publish Offers](../partnercenter/)
+* [Selecting your Offer Type](../offertype/)
+* [Publishing a VM Offer](../vmoffer/)
+* [Publishing an Azure Application Solution Template Offer](../azureappst/)
+* [Publishing an Azure Application - Managed Application Offer](../azureappma/)
 * [Publishing a SaaS Application Offer](../saasapp/)
 
 ## Introduction Sections
