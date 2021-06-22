@@ -1,17 +1,23 @@
 ---
 title: "Analytics"
-description: "Azure Synapse Analytics is a Limitless Analytics analytics platform combining the power of Azure Data Lake i.e., Big Data platforms with the Data Warehouses providing the ability to query and analyse the data on user terms"
+author: [ "Mahesh Balija" ]
+description: "Azure offers a wide range of Analytics services. SQL based Analytics solution to Visual based Analytics to Avanced Machine Learning based Analytics."
+date: 2021-06-22
+style: list
 menu:
   side:
     identifier: analytics
 ---
 
-## Topics
+## Introduction
 
-Azure Synapse Analytics is a Limitless Analytics analytics platform which enables the customers and partners to develop the Analytics, BI, Data Science solutions across the data estate.
+Azure offers wide range of Data and Analytics services to meet the need for various organizations at all scales. 
+Some services include,
 
-Interesting Topics:
+1) Azure Synapse Analytics
+2) Azure Databricks
+3) Azure HDInsight 
+4) Azure Machine Learning
+5) Power BI
 
-1. SAP - Azure Synapse Analytics Integration series
-
-## Content
+## Sections
