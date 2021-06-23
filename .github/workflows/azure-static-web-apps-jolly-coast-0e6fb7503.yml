@@ -17,13 +17,12 @@ jobs:
     steps:
       - id: step1
         run: |
-          if [ github.event_name == 'push' ]
+          if [ $GITHUB_EVENT_NAME == 'push' ]
           then
             SOURCE_REPO="$(jq -r .repository.full_name ${GITHUB_EVENT_PATH})"
           else
             SOURCE_REPO="$(jq -r .pull_request.head.repo.full_name ${GITHUB_EVENT_PATH})"
           fi
-          echo $SOURCE_REPO
           echo "::set-output name=source_repo::$SOURCE_REPO"
 
   build_and_deploy_job:
