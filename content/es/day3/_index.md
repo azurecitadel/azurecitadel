@@ -22,8 +22,7 @@ draft: false
 | | _--or--_ |
 | | **Hacking - Managing Azure Baristas' Enterprise Scale with AzOps** |
 | 11:30 | _Lightning Talk: Subscription vending machine_ (optional) |
-| 13:30 | **Sharing session - 2-3 slide presentation from each team** |
-| 14:00 | **Hacking - continued** |
+| 13:00 | **Hacking - continued** |
 | 15:30 | Q&A and wrap up |
 
 ## Content
