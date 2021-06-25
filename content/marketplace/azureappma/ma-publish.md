@@ -2,14 +2,14 @@
 title: "Publish Offer"
 author: [ "Mike Ormond" ]
 description: "Create the listing in Partner Center and publish the offer."
-date: 2021-06-20
+date: 2021-06-25
 weight: 60
 menu:
   side:
-    parent: marketplace-aast-offer
-    identifier: marketplace-aast-offer-publish
+    parent: marketplace-aama-offer
+    identifier: marketplace-aama-offer-publish
 series:
- - marketplace-aast    
+ - marketplace-aama    
 ---
 
 ## Introduction
@@ -62,7 +62,7 @@ Here we define how the offer will appear in the marketplace - the offer listing 
     1. Complete the required fields with name, email and phone
 1. Marketplace media
     1. Only the Large logo is required
-    1. You can use your own image or the [image here](../../images/logo-st.png)
+    1. You can use your own image or the [image here](../../images/logo-ma.png)
 
         > Be sure to **Save draft** before exiting the page
 
@@ -79,7 +79,7 @@ As we will not be going through the full publish process it is important a Previ
 
 ## Technical Configuration
 
-1. This section can be skipped
+1. This section can be skipped. It is only required to authenticate solutions using metered billing where the deployed solution is not the source of events being reported to the metered billing API.
 
 ## Plan overview
 
@@ -93,7 +93,7 @@ At least one plan is required for every offer. You can think of the offer as a c
 
 This is the "high-level configuration" for the plan. For the purposes of the lab, complete as follows:
 
-1. `Plan type` - select `Solution template`
+1. `Plan type` - select `Managed application`
 1. `Azure regions` - leave as `Azure Global` checked and `Azure Government` unchecked
 
    > Be sure to **Save draft** before exiting the page
@@ -107,12 +107,15 @@ This is the marketplace listing for the plan. eg we might have a bronze, silver,
 
    > Be sure to **Save draft** before exiting the page
 
-### Availability
+### Pricing and Availability
 
-Here we describe the visibility of the plan in the commercial marketplace. For the purposes of the lab, complete as follows:
+Here we describe which markets we want to make the offer available and the pricing model and price point. For the purposes of the lab, complete as follows:
 
+1. `Markets` - select `Edit markets` and add your own market (eg UK) and any other regions you choose
+1. `Pricing` - we will set a flat rate price of $0 per month. Enter 0 in the `Price` field
+   1. It is useful to create $0 plans for testing as it is in effect a transactable offer but there is no risk of being  billed if we forget to cancel a purchase
+   1. We could enter metering dimensions at this stage for custom billing but we will keep things simple for now
 1. `Plan visibility` - leave as "Public"
-1. `Hide plan` - leave unchecked
 
    > Be sure to **Save draft** before exiting the page
 
@@ -124,6 +127,43 @@ This is what all the work in the previous sections was leading up to. This is wh
 1. `Version` - enter 1.0.0
 1. Note the [Customer usage attribution ID](https://docs.microsoft.com/en-gb/azure/marketplace/azure-partner-customer-usage-attribution#commercial-marketplace-azure-apps)
 1. Upload your deployment package zip file. It will take a few moments to be ingested
+1. `Enable just-in-time (JIT) access` - leave unchecked
+   1. [JIT access](https://docs.microsoft.com/en-gb/azure/marketplace/plan-azure-app-managed-app#just-in-time-jit-access) allows the customer to control publisher access to the deployed solution
+1. `Deployment mode` - leave as `Complete`
+1. `Notification Endpoint URL` - leave blank
+   1. It is possible to provide a [webhook endpoint](https://docs.microsoft.com/en-gb/azure/marketplace/plan-azure-app-managed-app#notification-endpoint-url) to get notifications of operations on the managed application
+1. `Customize allowed customer actions` - leave unchecked
+   1. By default, the customer has read-only access to the Managed resource group. The publisher can grant additional permissions via 'allowed customer actions'
+1. `Public Azure` - Here we will enter details of the security principals that will be granted RBAC permissions on the Managed resource group in the customer tenant. If you can use an identity from a different AAD tenant than the 'target' tenant you will be using for testing, that's ideal. It will work if the identity is in the same tenant as the Managed resource group but it can be a bit confusing and it doesn't demonstrate the delegated permissions.
+   1. `Azure Active Directory tenant ID` - enter the tenant ID for a security principal (SP) that will manage the deployed resources
+   1. `Authorizations` - enter a SP Object ID for the SP that will manage the deployed resources. Select `Owner` for the `Role definition`
+
+      {{< details "Where to get the Tenant ID and Object ID" >}}
+
+1. Either using the Azure Portal
+   1. Sign in as the desired user (ie the **publisher** identity that will **manage** the resource)
+   1. Navigate to the AAD blade in the Azure Portal
+   1. Copy the `Tenant ID` - paste into the `Azure Active Directory tenant ID` field in Partner Center
+   1. Navigate to the AAD -> Users blade in the Azure Portal
+   1. Select the desired user (you can also use a service principal or group)
+   1. Copy the user's `Object ID` - paste into the `Principal ID` field in Partner Center
+1. Or using the Azure CLI
+   1. Sign in to the Azure CLI as the desired user
+   1. The following command will return the Tenant ID
+
+   ```bash
+   az account get-access-token --query tenant --output tsv
+   ```
+
+   1. The following command will return the Object ID
+
+   ```bash
+   az ad user show --id user@domain.com --query objectId --output tsv
+   ```
+
+      {{</details>}}
+
+1. `Policy settings` - leave this blank
 
       > Be sure to **Save draft** before exiting the page
 

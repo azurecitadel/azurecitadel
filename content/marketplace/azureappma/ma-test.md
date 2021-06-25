@@ -2,14 +2,14 @@
 title: "Validate ARM Template"
 author: [ "Mike Ormond" ]
 description: "Validate the ARM template."
-date: 2021-06-20
+date: 2021-06-25
 weight: 30
 menu:
   side:
-    parent: marketplace-aast-offer
-    identifier: marketplace-aast-offer-test
+    parent: marketplace-aama-offer
+    identifier: marketplace-aama-offer-test
 series:
- - marketplace-aast
+ - marketplace-aama
 ---
 
 ## Introduction

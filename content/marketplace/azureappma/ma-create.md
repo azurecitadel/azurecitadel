@@ -2,14 +2,14 @@
 title: "Create ARM Template"
 author: [ "Mike Ormond" ]
 description: "Create an ARM template for publishing to the commercial marketplace."
-date: 2021-06-20
+date: 2021-06-25
 weight: 20
 menu:
   side:
-    parent: marketplace-aast-offer
-    identifier: marketplace-aast-offer-create
+    parent: marketplace-aama-offer
+    identifier: marketplace-aama-offer-create
 series:
- - marketplace-aast
+ - marketplace-aama
 ---
 
 ## Introduction

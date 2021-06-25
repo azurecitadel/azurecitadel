@@ -2,14 +2,14 @@
 title: "Package Assets"
 author: [ "Mike Ormond" ]
 description: "Create a deployment package for an Azure Application offer."
-date: 2021-06-20
+date: 2021-06-25
 weight: 50
 menu:
   side:
-    parent: marketplace-aast-offer
-    identifier: marketplace-aast-offer-package
+    parent: marketplace-aama-offer
+    identifier: marketplace-aama-offer-package
 series:
- - marketplace-aast    
+ - marketplace-aama    
 ---
 
 ## Introduction
