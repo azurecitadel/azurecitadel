@@ -1,5 +1,6 @@
 ---
 title: "SAP & Synapse"
+url: "/analytics/synapse/sap"
 author: [ "Mahesh Balija" ]
 description: "SAP integration with Azure Synapse Analytics"
 date: 2021-01-06
