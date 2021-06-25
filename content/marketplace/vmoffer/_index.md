@@ -19,4 +19,8 @@ When a customer 'purchases' a *VM offer*, the VM will be deployed into the custo
 
 Transact *VM offers* are billed on a usage-based PAYG (Pay As You Go) model. Each plan can be created with a free trial option giving you the option to offer customers a 1 / 3 / 6 month period with no licence fees.
 
+## Resources
+
+* [Plan a virtual machine offer](https://docs.microsoft.com/azure/marketplace/marketplace-virtual-machines)
+
 ## Content

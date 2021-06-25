@@ -2,14 +2,14 @@
 title: "Create UI Definition"
 author: [ "Mike Ormond" ]
 description: "Create and test a UI definition file."
-date: 2021-06-20
+date: 2021-06-25
 weight: 40
 menu:
   side:
-    parent: marketplace-aast-offer
-    identifier: marketplace-aast-offer-ui
+    parent: marketplace-aama-offer
+    identifier: marketplace-aama-offer-ui
 series:
- - marketplace-aast    
+ - marketplace-aama    
 ---
 
 ## Introduction

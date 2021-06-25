@@ -2,25 +2,25 @@
 title: "Getting Started"
 author: [ "Mike Ormond" ]
 description: "Pre-requisites and overview."
-date: 2021-06-20
+date: 2021-06-25
 weight: 10
 menu:
   side:
-    parent: marketplace-aast-offer
-    identifier: marketplace-aast-offer-getting-started
+    parent: marketplace-aama-offer
+    identifier: marketplace-aama-offer-getting-started
 series:
- - marketplace-aast
+ - marketplace-aama
 ---
 
 ## Prerequisites
 
 * An Azure subscription (required) - see [here for free options](https://azure.microsoft.com/free/)
 * [Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) (required) either via [Azure Cloud Shell in the Azure Portal](https://docs.microsoft.com/azure/cloud-shell/quickstart) or [installed locally](https://docs.microsoft.com/cli/azure/install-azure-cli)
-* A [Partner Center account](../partnercenter/) with the appropriate permissions (some of the material can be completed without Partner Center access)
+* A [Partner Center account](../../partnercenter/) with the appropriate permissions (some of the material can be completed without Partner Center access)
 
 ## Overview
 
-In this lab we will create the technical assets required to publish an Azure Application - Solution Template offer to the commercial marketplace. The bulk of the steps required to do this are identical to the steps for an [Azure Application - Managed Application](../../azureappma/). The high level steps are as follows:
+In this lab we will create the technical assets required to publish an Azure Application - Managed Application offer to the commercial marketplace. The bulk of the steps required to do this are identical to the steps for an [Azure Application - Solution Template](../../azureappst/). The high level steps are as follows:
 
 * Create an ARM template to describe the deployment
 * Validate the ARM template against best-practices
@@ -30,6 +30,6 @@ In this lab we will create the technical assets required to publish an Azure App
 
 ## Resources
 
-* [Plan a solution template for an Azure application offer](https://docs.microsoft.com/azure/marketplace/plan-azure-app-solution-template)
+* [Plan an Azure Application offer for the commercial marketplace](https://docs.microsoft.com/azure/marketplace/plan-azure-application-offer)
 
 ---

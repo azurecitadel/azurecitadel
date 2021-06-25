@@ -2,7 +2,7 @@
 title: "Publish a Solution Template"
 author: [ "Mike Ormond" ]
 description: "Azure Apps Offer"
-date: 2021-03-25
+date: 2021-06-20
 weight: 50
 style: list
 menu:
@@ -19,10 +19,17 @@ The *Azure Apps offer* has two distinct flavours; *solution template* and *manag
 
 * The *solution template* offer is a collection of Azure resources described by an [Azure Resource Manager (ARM) template](https://docs.microsoft.com/azure/azure-resource-manager/templates/overview) which will be deployed into the customer subscription. It is not directly transact-capable but it can deploy *VM offers* which are transactable.
 
-   For further information, see [Publishing an Azure Application Solution Template Offer](../azureappst/)
-
 * The *[managed app](https://docs.microsoft.com/azure/azure-resource-manager/managed-applications/overview)* offer is a collection of Azure resources described by an [ARM template](https://docs.microsoft.com/azure/azure-resource-manager/templates/overview) deployed into the customer subscription to be operated as a managed service.
 
-   For further information, see [Publishing an Azure Application - Managed Application Offer](../azureappma/)
+In this lab we will focus on the *Solution Template* flavour of *Azure Application offer*.
+
+When a customer 'purchases' a *Solution Template offer*, resources will be deployed into the customer's Azure subscription. As a consequence, Solution Template offers can only be published in *Azure Marketplace* (not *AppSource*).
+
+*Solution Template offers* do **not** directly support the *Transact* listing type. They represent a deployment mechanism for customers to deploy a solution into their subscription. However, *Solution Template offers* can reference other transactable offers (specifically *VM Offers*). In this way it is possible for a Solution Template offer to be transactable. This must be made clear in the listing.
+
+## Resources
+
+* [Plan an Azure Application offer for the commercial marketplace](https://docs.microsoft.com/azure/marketplace/plan-azure-application-offer)
+* [Plan a solution template for an Azure application offer](https://docs.microsoft.com/azure/marketplace/plan-azure-app-solution-template)
 
 ## Content
