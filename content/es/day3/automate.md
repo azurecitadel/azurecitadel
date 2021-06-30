@@ -38,10 +38,12 @@ The primary objective is to build out the architecture using the Infrastructure 
 
 ## Links
 
-### AzOps
+### AzOps Wiki
 
-* [Getting started](https://github.com/Azure/Enterprise-Scale/blob/main/docs/Deploy/getting-started.md)
-* [Set up Git CI/CD](https://github.com/Azure/Enterprise-Scale/blob/main/docs/enterprise-scale-iab/setup-git-cicd.md)
+* [Introduction](https://github.com/azure/azops/wiki/introduction)
+* [Pre-reqs](https://github.com/azure/azops/wiki/prerequisites)
+* [GitHub Actions](https://github.com/azure/azops/wiki/github-actions)
+* [Azure DevOps Pipelines](https://github.com/azure/azops/wiki/azure-pipelines)
 
 ### Terraform
 

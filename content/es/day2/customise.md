@@ -76,7 +76,7 @@ It is common to define custom policies at a high point in the management group s
 
 In the stretch goals you will find policy requirements that are a little more involved.
 
-The deep dive session on creating policies is recommended. The session matches the [custom policy](/es/policy/custom) labs which is the basis for the last requirement.
+The deep dive session on creating policies is recommended. The session matches the [custom policy](/policy/custom) labs which is the basis for the last requirement.
 
 * Azure Hybrid Use Benefit must be enabled on Production only VMs
 * All production VMs must be backed up, however selected VMs in dev/test environments may need backing up also

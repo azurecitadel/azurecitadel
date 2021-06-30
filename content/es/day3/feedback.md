@@ -1,8 +1,8 @@
 ---
 title: "Feedback"
-description: "Automate the Azure Barista's Enterprise Scale deployment with either Terraform or AzOps."
+description: "Give us feedback on the hack."
 layout: single
-draft: false
+draft: true
 weight: 3
 series:
  - es-hack-day3
@@ -27,7 +27,7 @@ Whilst your team is presenting your slides, we ask for all of you in the team to
 
 Please complete the feedback form below. It will only take a few minutes., and
 
-* [aka.ms/EnterpriseScalePartnerHack](https://aka.ms/EnterpriseScalePartnerHack)
+* [aka.ms/eshack/feedback](https://aka.ms/eshack/feedback)
 
 Let us know what you got out of the three days and where we can look to improve.
 
