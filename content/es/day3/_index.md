@@ -17,12 +17,18 @@ draft: false
 | **Time** | **Description**
 |---|---|
 | 09:30 | Day 3 kick off |
-| 09:45 | Deployment options for Enterprise Scale |
-| 10:15 | **Hacking - Azure Baristas' Enterprise Scale deployment with the Terraform module** |
-| | _--or--_ |
-| | **Hacking - Managing Azure Baristas' Enterprise Scale with AzOps** |
-| 11:30 | _Lightning Talk: Subscription vending machine_ (optional) |
-| 13:00 | **Hacking - continued** |
+| 09:45 | Deployment options for Enterprise-scale |
+| | **Hacking - Enterprise-scale with Terraform** |
+| 10:30 | - or - |
+| | **Hacking - Enterprise-scale with AzOps** (ARM) |
 | 15:30 | Q&A and wrap up |
+
+## Optional talks
+
+| **Type** | **Description**
+|---|---|
+| Lightning talk | Subscription vending machine |
+
+Check the General channel for the times of optional sessions. The sessions will be recorded.
 
 ## Content
