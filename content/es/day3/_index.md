@@ -18,17 +18,15 @@ draft: false
 |---|---|
 | 09:30 | Day 3 kick off |
 | 09:45 | Deployment options for Enterprise-scale |
-| | **Hacking - Enterprise-scale with Terraform** |
-| 10:30 | - or - |
-| | **Hacking - Enterprise-scale with AzOps** (ARM) |
-| 15:30 | Q&A and wrap up |
+| 10:30 | **Hacking** - Enterprise-scale with Terraform |
+| | - or - |
+| | **Hacking** - Enterprise-scale with AzOps (ARM) |
+| 15:30 | Q&A, roadmap and futures, and hack wrap up |
 
-## Optional talks
+## Lightning talks ⚡
 
-| **Type** | **Description**
+| **Time** | **Description**
 |---|---|
-| Lightning talk | Subscription vending machine |
-
-Check the General channel for the times of optional sessions. The sessions will be recorded.
+| 11:00 - 11:30 | Subscription vending machine |
 
 ## Content

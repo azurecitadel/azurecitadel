@@ -17,17 +17,16 @@ draft: false
 | **Time** | **Description**
 |---|---|
 | 09:30 | Day 2 kick off |
-| 09:45 | Azure Policy in Enterprise Scale |
-| 10:30 | **Hacking - customising the default deployment for Azure Baristas** |
-| 15:30 | Q&A and wrap up |
+| 09:45 | Azure Policy in Enterprise-scale |
+| 10:30 | **Hacking** - Bridging the gap from Enterprise-scale to customer requirements |
+| 15:00 | **Within your group** - Show Policy and Management Group progress |
+| 15:30 | Q&A, Day 2 closeout |
 
-## Optional talks
+## Lightning talks ⚡
 
-| **Type** | **Description**
+| **Time** | **Description**
 |---|---|
-| Lightning talk | Azure Virtual WAN |
-| Deep dive | Creating Custom Policies from scratch |
-
-Check the General channel for the times of optional sessions. The sessions will be recorded.
+| 11:00 - 11:30 | Azure Virtual WAN |
+| 14:00 - 14:30 | Creating custom policies from scratch |
 
 ## Content
