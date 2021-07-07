@@ -57,5 +57,5 @@ The main repo, including built-ins, samples, community contributions and the Azu
 
 AzOps provides CI/CD pipeline to generate a repo of a configuration. Committed changes to the repo will then push creates, updates and deletes back into Azure.
 
-* [Getting started with AzOps](https://github.com/Azure/Enterprise-Scale/blob/main/docs/Deploy/getting-started.md)
-* [Set up AzOps CI/CD](https://github.com/Azure/Enterprise-Scale/blob/main/docs/enterprise-scale-iab/setup-git-cicd.md)
+* [AzOps Wiki](https://github.com/azure/azops/wiki/introduction)
+* [AzOps Accelerator template](https://github.com/azure/azops-accelerator)
