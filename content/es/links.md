@@ -25,9 +25,11 @@ This is the main Enterprise Scale repo with direct links to the three reference 
 | Link | Description |
 |---|---|
 | <https://aka.ms/enterprisescale> | Enterprise Scale repo|
-| [...../docs/reference/wingtip](<https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/wingtip/README.md>) | Wingtip - core management groups and platform |
-| [...../docs/reference/contoso](<https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/contoso/Readme.md>) | Contoso - core plus Azure vWAN |
-| [...../docs/reference/adventureworks](<https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/adventureworks/README.md>) | AdventureWorks - core plus hub & spoke |
+| [...../docs/reference/wingtip](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/wingtip/README.md) | Wingtip - core management groups and platform |
+| [...../docs/reference/contoso](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/contoso/Readme.md) | Contoso - core plus Azure vWAN |
+| [...../docs/reference/adventureworks](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/adventureworks/README.md) | AdventureWorks - core plus hub & spoke |
+| [...../docs/reference/treyresearch](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/treyresearch/README.md) | Trey Research - for smaller enterprises |
+
 
 ## Terraform
 
