@@ -76,13 +76,16 @@ It is common to define custom policies at a high point in the management group s
 
 In the stretch goals you will find policy requirements that are a little more involved.
 
-The deep dive session on creating policies is recommended. The session matches the [custom policy](/policy/custom) labs which is the basis for the last requirement.
-
 * Azure Hybrid Use Benefit must be enabled on Production only VMs
 * All production VMs must be backed up, however selected VMs in dev/test environments may need backing up also
 * Unrestricted area for developers not allowed any connectivity into corporate networks
 * Cost-Centre tag should only accept values starting with “AZBACC-”
 * How can we block Azure Sentinel from being deployed but not stopping Log Analytics Workspaces from being deployed?
+
+## Lightning talk
+
+The deep dive lightning talk session on creating policies is recommended. The session matches the [custom policy](/policy/custom) labs which is the basis for the last requirement.
+
 * Just in time access should not accept * as a source address
 
 ## Success criteria
@@ -94,4 +97,32 @@ Screen share with your proctor to show that you achieved:
 * Security group RBAC assignment
 * Custom policy definition and assignments
 
-You don't need to create all of the custom Azure Policies to success.
+Use the following matrix format:
+
+| Requirement | Definition | Scope |
+|---|---|---|
+| **Core Policy Requirements** |||
+| ISO27001 |||
+| CIS |||
+| PCI-DSS |||
+| Subnets must have NSGs |||
+| Tag: Cost-Centre |||
+| Tag: Environment |||
+| Tag: IT-Owner-Contact |||
+| Tag: Service-Application |||
+| Activity Logs |||
+| Diagnostic settings |||
+| No large VMs |||
+| TDE on SQL |||
+| Azure Monitor on VMs |||
+| No Public IPs |||
+| **Stretch Targets** |||
+| AHUB |||
+| Backup |||
+| No Sandbox peering |||
+| Tag: AZBACC- format on Cost-Centre |||
+| Block Azure Sentinel |||
+
+> For the definition, add a hyperlink to the definition JSON
+
+You don't need to create all of the custom Azure Policies to succeed - just demonstrate sufficient progress and capability.
