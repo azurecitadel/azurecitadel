@@ -88,9 +88,7 @@ Modify the *policyRule* section to deny JIT security rules that have the source 
 
 ## Example azurepolicy.json
 
-If you want to see how your finished template compares to the one I created - or you've just got a bit stuck - then click on the button below.
-
-{{< details "azuredeploy.json">}}
+If you want to see how your finished template compares to the one I created - or you've just got a bit stuck - then here is the full version.
 ```json
 {
   "properties": {
@@ -187,8 +185,6 @@ If you want to see how your finished template compares to the one I created - or
   }
 }
 ```
-
-{{< /details >}}
 
 ## Create the additional files
 

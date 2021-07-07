@@ -151,9 +151,29 @@ We'll use the Azure CLI to get a definitive list of the aliases as the vscode ex
     - networkSecurityGroups/securityRules
     ```
 
-1. You can use the Azure CLI to check for all available aliases.
+1. List the aliases
 
-    OK, let's list out the possible sourceAddress aliases to test where the source address could be set to Any.
+    List all of the aliases for the Microsoft.Network provider.
+
+    ```bash
+    az provider show --namespace Microsoft.Network --expand "resourceTypes/aliases" --query "resourceTypes[].aliases[].name" --output tsv
+    ```
+
+    There will be over 17,000 aliases for the Microsoft.Network provider. Time to filter.
+
+1. Filter on Microsoft.Network/networkSecurityGroups
+
+    Add an additional section to the JMESPATH query to filter on the resource provider type.
+
+    ```bash
+    az provider show --namespace Microsoft.Network --expand "resourceTypes/aliases" --query "resourceTypes[?resourceType == 'networkSecurityGroups'].aliases[].name" --output tsv
+    ```
+
+    Now we have just over 780 aliases.
+
+1. Filter aliases on name
+
+    OK, let's list out the possible sourceAddress aliases to test where the source address could be set to Any. We'll create some custom JSON en route.
 
     ```bash
     az provider show --namespace Microsoft.Network --expand "resourceTypes/aliases" --query "resourceTypes[?starts_with(resourceType, 'networkSecurityGroups')].{type: resourceType, alias:aliases[?contains(name, 'sourceAddress')].name}" --output yamlc
