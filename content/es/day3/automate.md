@@ -28,7 +28,15 @@ Today hacking give you the choice of paths to explore:
 
 The primary objective is to build out the architecture using the Infrastructure as Code (IaC) and (optionally) CI/CD tool of your choice.
 
+> Use a different management group tree for this exercise (use a different top level name, e.g AZBIaC)
+
+1. Implement the reference Enterprise Scale architecture using the IaC tool of your choice
+1. Customise the existing management groups to meet the Azure Baristas requirements
+1. Add additional management groups and policy assignments (custom landing zones) to meet the Azure Baristas requirements
+
 ## Stretch goals
+
+> You do not have to do these challenges in order, pick whichever ones are most appealing!
 
 1. Implement a canary management group branch
     * You can combine this with the primary objective if you want to retain the manually deployed system for comparison
