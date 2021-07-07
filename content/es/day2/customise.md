@@ -123,6 +123,8 @@ Use the following matrix format:
 | Tag: AZBACC- format on Cost-Centre |||
 | Block Azure Sentinel |||
 
+You will find the empty matrix in the presentation deck in the team's General | Files area.
+
 > For the definition, add a hyperlink to the definition JSON
 
 You don't need to create all of the custom Azure Policies to succeed - just demonstrate sufficient progress and capability.
