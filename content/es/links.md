@@ -30,14 +30,28 @@ This is the main Enterprise Scale repo with direct links to the three reference 
 | [...../docs/reference/adventureworks](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/adventureworks/README.md) | AdventureWorks - core plus hub & spoke |
 | [...../docs/reference/treyresearch](https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/treyresearch/README.md) | Trey Research - for smaller enterprises |
 
+## AzOps
 
-## Terraform
+AzOps provides CI/CD pipeline to generate a repo of a configuration. Committed changes to the repo will then push creates, updates and deletes back into Azure.
 
-There are a number of choices with Terraform, with the official module, community modules and the aztfmod solution.
+* [AzOps Wiki](https://github.com/azure/azops/wiki/introduction)
+* [AzOps Accelerator template](https://github.com/azure/azops-accelerator)
+
+## Enterprise-scale Terraform module
+
+This is the official module which is the one we recommend using. Make sure you understand how the archetypes work, as they can be very flexible.
 
 | Link | Notes |
 |---|---|
-| [Enterprise Scale Terraform module](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest) | Recommended, official, extensible archetypes |
+| [Enterprise-scale Terraform module - wiki](https://github.com/Azure/terraform-azurerm-caf-enterprise-scale/wiki) | Recommended, official |
+| [Enterprise-scale Terraform module - Terraform Registry](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest) ||
+
+## Additional Terraform resources
+
+There are other Terraform modules and resources available if you wish to make use of these instead.
+
+| Link | Notes |
+|---|---|
 | [Management Groups module](https://github.com/terraform-azurerm-modules/terraform-azurerm-management-groups) | Community module |
 | [Policy Definitions module](https://github.com/terraform-azurerm-modules/terraform-azurerm-azopsreference) | Community module |
 | [Subscription vending machine](https://github.com/terraform-azurerm-examples/terraform-enterprisescale-starter) | Example community templates and CI/CD pipeline |
@@ -54,10 +68,10 @@ The main repo, including built-ins, samples, community contributions and the Azu
 | [...../tree/master/samples](https://github.com/Azure/azure-policy/tree/master/samples) | - Azure Policy samples |
 | <https://github.com/Azure/Community-Policy/> | Community Policy repo |
 | <https://aka.ms/policydef> | Azure Policy definition structure |
+| <https:/azurecitadel.com/policy> | Our labs for creating custom policies and initiatives |
 
-## AzOps
+Azure RBAC Roles
 
-AzOps provides CI/CD pipeline to generate a repo of a configuration. Committed changes to the repo will then push creates, updates and deletes back into Azure.
-
-* [AzOps Wiki](https://github.com/azure/azops/wiki/introduction)
-* [AzOps Accelerator template](https://github.com/azure/azops-accelerator)
+| Link | Description |
+|---|---|
+| <https://docs.microsoft.com/azure/role-based-access-control/custom-roles> | Create your own custom roles |

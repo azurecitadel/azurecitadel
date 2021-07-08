@@ -46,6 +46,12 @@ The primary objective is to build out the architecture using the Infrastructure 
 
 ## Links
 
+### Bootstrapping CI/CD
+
+Follow the instructions to add CI/CD bootstrapping for you Deploy to Azure environments.
+
+* [CI/CD for ARM Enterprise Scale](https://github.com/Azure/Enterprise-Scale/wiki/Deploying-Enterprise-Scale)
+
 ### AzOps Wiki
 
 * [Introduction](https://github.com/azure/azops/wiki/introduction)
@@ -53,9 +59,15 @@ The primary objective is to build out the architecture using the Infrastructure 
 * [GitHub Actions](https://github.com/azure/azops/wiki/github-actions)
 * [Azure DevOps Pipelines](https://github.com/azure/azops/wiki/azure-pipelines)
 
-### Terraform
+### Official Terraform module
 
-* [Official module](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest) - recommended
+The official module is more recent and is now our recommended approach for Terraform devotees.
+
+* [Official module](https://registry.terraform.io/modules/Azure/caf-enterprise-scale/azurerm/latest)
+* [Official module's wiki](https://github.com/Azure/terraform-azurerm-caf-enterprise-scale/wiki)
+
+### Additional Terraform resources
+
 * [Community module - management groups](https://github.com/terraform-azurerm-modules/terraform-azurerm-management-groups)
 * [Community module - policy definitions](https://github.com/terraform-azurerm-modules/terraform-azurerm-azopsreference)
 * [Subscription vending machine](https://github.com/terraform-azurerm-examples/terraform-enterprisescale-starter) - community CI/CD pipeline
