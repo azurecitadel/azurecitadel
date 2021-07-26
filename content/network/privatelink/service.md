@@ -266,7 +266,7 @@ Customer 🟢 subscription.
     subnetId=$(az network vnet subnet create --name InfrastructureSubnet \
       --address-prefixes 10.1.0.0/24 --vnet-name spoke-vnet \
       --disable-private-endpoint-network-policies true \
-      --resource-group privatelink-dns-microhack-rg --location "West Europe" \
+      --resource-group privatelink-dns-microhack-rg \
       --query id --output tsv)
 
     az network private-dns zone create \
