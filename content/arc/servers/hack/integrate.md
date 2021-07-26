@@ -1,15 +1,15 @@
 ---
-title: "Integration"
+title: "7️⃣ Integration"
 description: "Each connected machine has an identity. Create a Key Vault and add a secret. Configure the Run the commands to pull the secret from the Key Vault from your on prem VM. "
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers-hack
+    parent: arc-servers
     identifier: arc-servers-hack-integrate
 series:
  - arc-servers-hack
-weight: 8
+weight: 170
 ---
 
 ## Introduction

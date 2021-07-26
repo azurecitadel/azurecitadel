@@ -1,15 +1,15 @@
 ---
-title: "Governance"
+title: "6️⃣ Governance"
 description: "Use Azure Policy and the Guest Configuration policy definitions to govern your resources and prove compliance."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers-hack
+    parent: arc-servers
     identifier: arc-servers-hack-governance
 series:
  - arc-servers-hack
-weight: 7
+weight: 160
 ---
 
 ## Introduction

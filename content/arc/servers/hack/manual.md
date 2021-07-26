@@ -1,15 +1,15 @@
 ---
-title: "Manual Onboarding"
+title: "1️⃣ Manual Onboarding"
 description: "Work through the first challenge, onboarding a pair of \"on prem\" machines into Azure and adding agents."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers-hack
+    parent: arc-servers
     identifier: arc-servers-hack-manual
 series:
  - arc-servers-hack
-weight: 2
+weight: 110
 ---
 
 ## Introduction

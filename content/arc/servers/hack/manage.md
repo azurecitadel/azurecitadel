@@ -1,15 +1,15 @@
 ---
-title: "Management"
+title: "5️⃣ Management"
 description: "Create a management baseline for the connected machines. Enable update management and inventory."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers-hack
+    parent: arc-servers
     identifier: arc-servers-hack-manage
 series:
  - arc-servers-hack
-weight: 6
+weight: 150
 ---
 
 ## Introduction
