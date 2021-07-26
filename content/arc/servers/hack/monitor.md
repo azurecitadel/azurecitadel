@@ -1,15 +1,15 @@
 ---
-title: "Monitoring"
+title: "4️⃣ Monitoring"
 description: "Configure the new Azure Monitoring Agent and Data Collection Rules. Optionally integrate with Azure Security Center and Azure Sentinel."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers-hack
+    parent: arc-servers
     identifier: arc-servers-hack-monitor
 series:
  - arc-servers-hack
-weight: 5
+weight: 140
 ---
 
 ## Introduction

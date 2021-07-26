@@ -1,17 +1,18 @@
 ---
-title: "Prereqs"
-description: "Attending one of our Azure Arc hacks? Get these completed before it starts."
+title: "0️⃣ Prereqs"
+description: "Attending one of our Azure Arc hacks? If so then complete these. Before it starts!"
 layout: single
 draft: false
 menu:
   side:
-    parent: arc
-    identifier: arc-prereqs
-aliases:
- - /arc-servers/prereqs/
+    parent: arc-servers
+    identifier: arc-servers-prereqs
 series:
- - arc
-weight: 2
+ - arc-servers-hack
+aliases:
+ - /arc/prereqs
+ - /arc/servers/prereqs
+weight: 105
 ---
 
 

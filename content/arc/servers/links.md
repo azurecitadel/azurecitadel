@@ -5,11 +5,11 @@ layout: single
 draft: false
 menu:
   side:
-    parent: arc
-    identifier: arc-links
+    parent: arc-servers
+    identifier: arc-servers-links
 series:
- - arc
-weight: 9
+ - arc-servers
+weight: 10
 ---
 
 ## Core Links
@@ -49,4 +49,3 @@ For reference, here are a selection of useful GitHub repos relating to Azure Arc
 * <https://github.com/Azure/azure-arc-kubernetes-examples>
 * <https://github.com/Azure/arc-k8s-demo>
 * <https://github.com/Azure/arc-helm-demo>
-* <https://github.com/Azure/AzureStackHCI-EvalGuide>

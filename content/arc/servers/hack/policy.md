@@ -1,15 +1,15 @@
 ---
-title: "Azure Policy"
+title: "2️⃣ Azure Policy"
 description: "Use Azure Policy to automate agent deployments and tagging for your Azure Arc Virtual Machines."
 layout: single
 draft: false
 menu:
   side:
-    parent: arc-servers-hack
+    parent: arc-servers
     identifier: arc-servers-hack-policy
 series:
  - arc-servers-hack
-weight: 3
+weight: 120
 ---
 
 ## Introduction
