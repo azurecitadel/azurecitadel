@@ -47,6 +47,6 @@ Set up App Service for application delivery on your cluster
 ## References
 
 * [App Service for Azure Arc enabled Kubenretes](https://docs.microsoft.com/azure/app-service/manage-create-arc-environment)
-* [Sample RESTful API](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-rest-api)
+* [Web App Quickstart](https://docs.microsoft.com/azure/app-service/quickstart-arc)
 * [Logic Apps](https://docs.microsoft.com/azure/logic-apps/azure-arc-enabled-logic-apps-create-deploy-workflows#create-and-deploy-logic-apps)
 * [Azure Function](https://docs.microsoft.com/azure/azure-functions/create-first-function-arc-cli)
