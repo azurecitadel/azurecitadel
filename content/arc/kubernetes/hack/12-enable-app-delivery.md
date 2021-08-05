@@ -32,7 +32,9 @@ Set up App Service for application delivery on your cluster
 1. Ensure Log Analytics workspace is created
 1. Install App Service on Kubernetes
 
-### Deploy an application to App Service running on Kubernetes
+### Application Developer
+
+Deploy some different application architectures to App Service running on Kubernetes
 
 1. Use the deployed App Service to deploy
     1. Web App
