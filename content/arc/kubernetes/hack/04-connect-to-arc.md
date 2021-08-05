@@ -59,5 +59,6 @@ resources
 ## References
 
 * [Accessing a Kubernetes cluster](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable)
+* [Resource Graph Queries](https://docs.microsoft.com/azure/azure-arc/kubernetes/resource-graph-samples)
 * [Connect an existing Kubernetes cluster to Azure Arc](https://docs.microsoft.com/azure/azure-arc/kubernetes/quickstart-connect-cluster)
 * [Flux concepts](https://fluxcd.io/docs/concepts/)

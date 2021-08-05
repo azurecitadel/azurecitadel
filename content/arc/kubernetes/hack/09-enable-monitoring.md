@@ -15,26 +15,28 @@ weight: 20
 
 It would be great to see application and infrastructure level metrics being reported across all clusters in a single place to allow you to diagnose errors before your customers even notice.
 
-## Challenge
+## Challenge 7
 
 *Persona: Operations*
 
 ### Operations
 
-* Set up Azure Monitor to see the traffic flowing
-* Fire an alert on an error
+* Set up Azure Monitor and Container Insights to
+* Set an alert with an action for when Node CPU % is more than 80%
 * Create a workbook for standard operations
-* Ensure policy exists for enforcing monitoring
+* Add an Azure Policy to enforce monitoring of your cluster
 
 ### Application Developer
 
-* Use Azure Monitor to see the traffic flowing
-
-**Stretch** Can you create a load test using someth
-* Create a [load test](example.com) to get insights into peak application load
+* Use Azure Monitor and Container Insights to view the various default workbooks
 
 ## Success Criteria
+
+* An alert rule exists for when Node CPU % exceeds 80%
+* Cluster is compliant with Azure Policy enforcing monitoring
+
 ## References
 
 * [Azure Monitor for Kubernetes](https://docs.microsoft.com/azure/azure-monitor/containers/container-insights-enable-arc-enabled-clusters)
 * [Enforce with Policy](https://docs.microsoft.com/azure/azure-monitor/containers/container-insights-enable-aks-policy)
+* [Alerts in Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/alerts/alerts-log#create-a-log-alert-rule-with-the-azure-portal)

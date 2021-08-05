@@ -8,7 +8,7 @@ menu:
     identifier: arc-k8s-data-services
 series:
  - arc-k8s-hack
-weight: 23
+weight: 22
 ---
 
 ## Background
@@ -17,9 +17,13 @@ weight: 23
 
 Deploy Data Services for Azure Arc
 
-## Challenge
+## Challenge 9
+
 ## Success Criteria
+
+* Azure Data-Services are running in all your clusters
+* Application is able to connect to them
+
 ## References
 
-[Create Azure Arc data controller in Direct connectivity mode using CLI
-](https://docs.microsoft.com/azure/azure-arc/data/create-data-controller-direct-cli)
+* [Set up Azure Arc enabled Data Services](https://docs.microsoft.com/azure/azure-arc/data/create-data-controller-direct-cli)

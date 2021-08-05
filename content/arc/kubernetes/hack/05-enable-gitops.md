@@ -31,7 +31,7 @@ This allows you to write once and deploy many times to identical clusters.
 
 Create repositories for the cluster administrator and application developers.
 
-You will have to set up [namespaces and RBAC](https://docs.microsoft.com/azure/azure-arc/kubernetes/tutorial-use-gitops-connected-cluster#create-a-configuration) before deploying the application. This should be done as the cluster administrator.
+You will have to set up [namespaces](https://docs.microsoft.com/azure/azure-arc/kubernetes/tutorial-use-gitops-connected-cluster#create-a-configuration) before deploying the application. This should be done as the cluster administrator.
 
 You should create a namespace called `podinfo-app` that podinfo can be deployed into but without running `kubectl`.
 
