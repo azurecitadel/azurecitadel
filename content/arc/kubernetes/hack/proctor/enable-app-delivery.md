@@ -1,7 +1,8 @@
 ```bash
-RESOURCE_GROUP="rg-arc4k8s-westeurope"
+LOCATION=westeurope
+RESOURCE_GROUP="arc4k8s-$LOCATION"
 APP_SVC_NAMESPACE="appservice-ns"
-EXTENSION_NAME="arc4k8s-westeurope-appsvc"
+EXTENSION_NAME="arc4k8s-$LOCATION-appsvc"
 CLUSTER_NAME="Arc-K3s-Demo"
 
 # Create Log Analytics
@@ -52,6 +53,36 @@ az k8s-extension create \
 # Monitor the progress with
 
 watch az k8s-extension show -g $RESOURCE_GROUP -c $CLUSTER_NAME -n $EXTENSION_NAME --cluster-type connectedClusters -o table
+
+
+# Install Custom Location
+EXTENSION_ID=$(az k8s-extension show -g $RESOURCE_GROUP -c $CLUSTER_NAME -n $EXTENSION_NAME --cluster-type connectedClusters --query 'id' -o tsv)
+CUSTOM_LOCATION_NAME=$LOCATION-custom # Name of the custom location
+CONNECTED_CLUSTER_ID=$(az connectedk8s show --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --query id --output tsv)
+
+az customlocation create \
+    --resource-group $RESOURCE_GROUP \
+    --name $CUSTOM_LOCATION_NAME \
+    --host-resource-id $CONNECTED_CLUSTER_ID \
+    --namespace $APP_SVC_NAMESPACE \
+    --cluster-extension-ids $EXTENSION_ID
+
+CUSTOM_LOCATION_ID=$(az customlocation show \
+  --resource-group $RESOURCE_GROUP \
+  --name $CUSTOM_LOCATION_NAME \
+  --query id \
+  --output tsv)
+
+az appservice kube create \
+    --resource-group $RESOURCE_GROUP \
+    --name $CLUSTER_NAME \
+    --custom-location $CUSTOM_LOCATION_NAME \
+    --static-ip $IP_ADDRESS
+
+az appservice kube show \
+    --resource-group $RESOURCE_GROUP \
+    --name $CLUSTER_NAME
+    
 ```
 
 # Problems
@@ -89,7 +120,7 @@ reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 ```
 
-You can view logs of the API using `kubectl logs -lapp=reviewer-api -n dev` and UI using `kubectl logs -lapp=reviewer-ui -n dev`
+You can view logs of the API using `kubectl logs -lapp=reviewer-api -n app-dev-arc` and UI using `kubectl logs -lapp=reviewer-ui -n app-dev-arc`
 
 If you find that the app service is stuck pending a LoadBalancer this is because of a port conflict between Traefik and App Service.
 
