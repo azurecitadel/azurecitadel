@@ -21,7 +21,7 @@ It would be great to see application and infrastructure level metrics being repo
 
 ### Operations
 
-* Set up Azure Monitor and Container Insights to
+* Set up Azure Monitor and Container Insights to get visibility into your cluster and application health
 * Set an alert with an action for when Node CPU % is more than 80%
 * Create a workbook for standard operations
 * Add an Azure Policy to enforce monitoring of your cluster
