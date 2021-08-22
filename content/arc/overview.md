@@ -9,7 +9,7 @@ menu:
     identifier: arc-overview
 series:
  - arc
-weight: 5
+weight: 2
 ---
 
 ## What is Azure Arc?

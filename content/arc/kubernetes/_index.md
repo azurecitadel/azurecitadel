@@ -9,7 +9,7 @@ menu:
     identifier: arc-k8s
 series:
  - arc-k8s
-weight: 15
+weight: 5
 ---
 
 ## Content

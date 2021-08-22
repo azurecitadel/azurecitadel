@@ -10,14 +10,14 @@ menu:
 series:
  - arc-k8s-hack
  - arc-k8s
-weight: 1
+weight: 10
 ---
 
 ## Introduction
 
 For customers who want to simplify complex and distributed environments across on-premises, edge and multi-cloud, Azure Arc enables deployment of Azure services anywhere and extends Azure management to any infrastructure.
 
-**Please make sure that you have met the [prereqs](/arc/k8s-hack/prereqs) before attending.**
+**Please make sure that you have met the [prereqs](/arc/kubernetes/hack/prereqs) before attending.**
 
 ## Agenda
 
