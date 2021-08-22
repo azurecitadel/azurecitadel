@@ -25,27 +25,57 @@ This is causing pain for platform, development and operations teams to support t
 
 The purpose of this challenge is to ensure you are comfortable running actions and creating secrets within GitHub and managing resources using the Azure CLI or Portal.
 
-By the end of the challenge you will have access to at least **2 unmanaged** Kubernetes clusters (not Azure Kubnernetes Service).
+By the end of the challenge you will have access three **unmanaged** Kubernetes clusters.
 
-> Since AKS is a 1st-party Azure solution and natively supports capabilities such as Azure Monitor integration as well as GitOps configurations (currently in preview), we must create unmanaged Kubernetes clusters
+> Note that we are intentionally not using the first party Azure Kubernetes Service (AKS) as we are emulating unmanaged Kubernetes clusters running outside of Azure.
 
-### Cluster Creation
+### Cluster Locations
 
-Create at least two on-premises Kubernetes clusters in **different** regions, e.g UK South and West Europe that represent on-premise locations
+The application needs to be deployed to clusters in London, Dublin and Amsterdam.
 
-> There is no technical reason why these have to be in separate regions except the current scripts use region as a naming convention so will break if you deploy more than one in each region!
+Create an on-premises Kubernetes cluster in each of the following cities:
 
-You are welcome to create these external clusters as you want, however the **team repository** that you created a child of has a [GitHub action](https://devblogs.microsoft.com/premier-developer/github-actions-overview/) already set up for [deploying an unmanaged k3s cluster](https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/00-setup) by Rancher to Azure.
+| **City** | **Region code** |
+|---|---|
+| London | uksouth |
+| Dublin | northeurope |
+| Amsterdam | westeurope |
 
-> Hint: Read the README.md!
+There is no technical reason why these have to be in separate regions except the current scripts use region as a naming convention so will break if you deploy more than one in each region!
 
-You could use any other [validated distribution](https://docs.microsoft.com/azure/azure-arc/kubernetes/validation-program#validated-distributions) on any other deployment host if you're more comfortable but this will make later challenges slightly more challenging
+### Deployment
 
-In order to be able to run `kubectl get node` you will need access to a [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) for each cluster 
+The **team repository** that you created (from the template) has a [GitHub action](https://devblogs.microsoft.com/premier-developer/github-actions-overview/) already set up for [deploying an unmanaged k3s cluster](https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/00-setup) by Rancher to Azure.
+
+* Deploy a cluster to each of the three locations
+
+    > Hint #1: Read the README.md!
+
+    > Hint#2: You may need to login again within the CLoud Shell using `az login` to create the service principal.
+
+### Cluster Access
+
+In order to be able to run `kubectl get node` you will need access to a [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) for each cluster.
+
+* Create kubeconfig files for each location
+
+    > Hint #2: The workflow has a step named _Show SSH connection_. Default password for the VMs is `archack123!!`.
+
+    Note that the NSG deployed by the workflow only permits SSH access from the AzureCloud service tag. Cloud Shell will work but you will timeout from other locations.
+
+## Hardcore Mode
+
+_This is very much optional and depends on how comfortable you are with Kubernetes._
+
+You are free to use any other [validated distribution](https://docs.microsoft.com/azure/azure-arc/kubernetes/validation-program#validated-distributions) on any other deployment host if you are curious. You can do this in addition to the clusters we're deploying using the templated repo, or instead of them.
+
+This will be more real world accurate but may make later challenges slightly more challenging due to the design of the hack.
+
+If you want to give yourself a fuller challenge then go for it!
 
 ## Success Criteria
 
-* At least two unmanaged Kubernetes clusters are running
+* Three unmanaged Kubernetes clusters are running
 * You can get a list of nodes in **Ready** status by using `kubectl get node` for each cluster
 * You can navigate to the FQDN for each cluster and view a 404 page from the Traefik Ingress Controller (since no apps are deployed)
 

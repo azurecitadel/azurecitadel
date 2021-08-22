@@ -9,7 +9,7 @@ menu:
     identifier: arc-servers
 series:
  - arc-servers
-weight: 10
+weight: 3
 ---
 
 ## Content

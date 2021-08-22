@@ -7,7 +7,7 @@ menu:
   side:
     parent: arc
     identifier: arc-app-services
-weight: 30
+weight: 6
 ---
 
 ## Content

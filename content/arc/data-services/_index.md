@@ -7,7 +7,7 @@ menu:
   side:
     parent: arc
     identifier: arc-data-services
-weight: 40
+weight: 7
 ---
 
 ## Introduction
