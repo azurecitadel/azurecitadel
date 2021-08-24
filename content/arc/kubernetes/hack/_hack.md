@@ -31,7 +31,6 @@ For customers who want to simplify complex and distributed environments across o
 |||
 | 09:30 | Day 2 kick off |
 | 09:45 | **Hacking - Onboarding** |
-| 13:00 | _Lightning Talk: CAPI / CAPZ_ (optional) |
 | 15:30 | Wrap up |
 |||
 
