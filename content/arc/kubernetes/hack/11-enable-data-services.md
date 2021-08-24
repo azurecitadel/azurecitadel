@@ -15,9 +15,20 @@ weight: 22
 
 *Persona: Cluster Admin*
 
-Deploy Data Services for Azure Arc
+Deploy Azure Arc-enabled data services
+
+Azure Arc makes it possible to run Azure data services on-premises, at the edge, and in public clouds using Kubernetes and the infrastructure of your choice.
+
+Currently, the following Azure Arc-enabled data services are available:
+
+* SQL Managed Instance
+* PostgreSQL Hyperscale (preview)
 
 ## Challenge 9
+
+Rather than using the Azure SQL database, deploy your own SQL Managed Instance on your own infrastructure
+
+You will need to update the connection string configuration to be able to connect from the API application
 
 ## Success Criteria
 
