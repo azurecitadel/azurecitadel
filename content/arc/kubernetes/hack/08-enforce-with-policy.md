@@ -20,7 +20,7 @@ The reviewer application we have deployed consists of two pods running within a 
 
 The architecture is a very standard web application architecture:
 
-**TODO** Insert architecture diagram
+![simple web app architecture](https://user-images.githubusercontent.com/51163690/130579654-d51dea49-1c1d-4289-9527-ebf1cc7cc18c.png)
 
 The UI pod does not require any access to Azure resources. It's good practice to ensure that traffic is restricted for this application.
 
