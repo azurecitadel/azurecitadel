@@ -25,12 +25,16 @@ Here are the main links for Azure Arc:
 
 ## Azure Arc Jumpstart
 
-| **Site** | **Description** |
-|---|---|
-| [Azure Arc Jumpstart](https://azurearcjumpstart.io) | Multiple tutorials with a range of Arc functionality |
-| [YouTube Channel](https://www.youtube.com/channel/UCoIJw-P_9Jp6Jo_0Ca9avcA) | Join Thomas Maurer & Lior Kamrat for Azure Arc demos |
+The [Azure Arc Jumpstart]((https://azurearcjumpstart.io)) site is highly recommended for going a little deeper with many of the capabilities that Azure Arc provides. It covers:
 
-The Azure Arc Jumpstart site is highly recommended for going a little deeper with many of the capabilities that Azure Arc provides and how to create your own demo environments. It covers Azure Arc for Servers (including SQL servers), Azure Arc for Kubernetes and Azure Arc for Data Services.
+* Azure Arc-enabled servers
+* Azure Arc-enabled SQL Server
+* Azure Arc-enabled Kubernetes
+* Azure Arc-enabled data services
+* Azure Arc-enabled app services
+* Azure Arc-enabled machine learning
+
+There is a Jumpstart ArcBox to accelerate your demos and learning. Also check out the accompanying [YouTube Channel](https://www.youtube.com/channel/UCoIJw-P_9Jp6Jo_0Ca9avcA) where Thomas Maurer & Lior Kamrat run through Azure Arc concepts and demos.
 
 ## Other learning resources
 
@@ -38,8 +42,8 @@ The Azure Arc Jumpstart site is highly recommended for going a little deeper wit
 |---|---|
 | [WhatTheHack / 025-ArcEnabledServers](https://github.com/microsoft/WhatTheHack/tree/master/025-ArcEnabledServers) | Short challenge hack for Arc Enabled Servers |
 | [WhatTheHack / 026-ArcEnabledKubernetes](https://github.com/microsoft/WhatTheHack/tree/master/025-ArcEnabledServers) | Short challenge hack for Arc Enabled Kubernetes |
-| <https://azurecitadel.com/arc-servers/> | This page |
 | [aka.ms/AzureArcSkilling](https://aka.ms/AzureArcSkilling) | Demo videos |
+| <https://azurecitadel.com/arc/servers> | Azure Citadel area for Azure Arc-enabled servers |
 
 ## GitHub repos
 

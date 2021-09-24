@@ -5,22 +5,30 @@ layout: single
 draft: false
 series:
  - arc-servers-hack-proctor
-weight: 6
-aliases:
- - /arc/server-hack/manage/proctor
+weight: 150
+url: /arc/servers/hack/manage/proctor
 ---
 
-## Introduction
+## Azure Automanage
 
-Azure Automation delivers a cloud-based automation and configuration service that supports consistent management across your Azure and non-Azure environments. It comprises process automation, configuration management, update management, shared capabilities, and heterogeneous features.
+* Open Automanage in the portal
+  * \+ Enable on existing machine
+  * Open Advanced
+    * Create new account: arc-pilot-automanage in uksouth
+    * requires either Owner or User Access Administrator
+  * Select servers
+    * Filter to the arc_poc resource group
+    * Select the six Azure Arc servers
+    * Select Production
+    * Select the arc-pilot-automanage Automanage account
 
-In the previous challenge, you onboarded Azure Arc virtual machines to Log Analytics. Azure Arc virtual machines can be managed using cloud based tooling such as Azure Automation and Azure Monitor, which will make use of the Log Analytics connected agents.
-
-In this challenge you will implement a update management strategy and report inventory data.
+Wait until the status shows configured. Some of the services will still take some time to come through.
 
 ## Update Management
 
 * Create an Automation account
+
+  This step may no longer be needed as one gets created as a hidden microsoft.automanage/account, but I'm not sure that can be used for multiple servers. It may need a standard Automation Account for that.
 
   In the portal, navigate to **Automation Accounts** and **Create**.
 
@@ -30,6 +38,11 @@ In this challenge you will implement a update management strategy and report inv
 
 * Enable Update Management for the Azure Arc virtual machines
 
+  * Servers - Azure Arc - open one of the Arc-enabled servers
+  * Select Update Management
+  * Manage multiple machines
+    * The main automation account will be selected
+
   Open the blade for the Automation Account and select **Update management**.
 
   Select the `arc-hack-workspace-team1` Log Analytics workspace created in the previous labs, and **Enable**.
@@ -38,16 +51,18 @@ In this challenge you will implement a update management strategy and report inv
 
   Reselect the Update management pane, **Schedule update deployment**.
 
-  * Name: `arc-windows-security-weekly`
-  * Operating system: `Windows`
-  * Groups to update: `Select your Subscription or Resource Group scope`
-  * Machines to update: `Leave blank`
-  * Update classification: `Security updates`
-  * Include/exclude updates: `Leave blank`
-  * Schedule settings: `Recurring every 1 week`
-  * Pre-scripts + Post scripts: `Leave blank`
-  * Maintenance window (minutes): `120`
-  * Reboot options: `Reboot if required`
+  | Field | Value |
+  |---|---|
+  | Name | arc-windows-security-weekly |
+  | Operating system | Windows |
+  | Groups to update | Select your Subscription or Resource Group scope |
+  | Machines to update | Leave blank |
+  | Update classification | Security updates |
+  | Include/exclude updates | Leave blank |
+  | Schedule settings | Recurring every 1 week |
+  | Pre-scripts + Post scripts | Leave blank |
+  | Maintenance window (minutes) | 120 |
+  | Reboot options | Reboot if required |
 
   Repeat these steps for other update classifications and for Linux operating systems.
 
@@ -59,16 +74,17 @@ In this challenge you will implement a update management strategy and report inv
 
   Reselect the Update management pane, **Schedule update deployment**.
 
-  * Name: `arc-windows-update-now`
-  * Operating system: `Windows`
-  * Groups to update: `Select your Subscription or Resource Group scope`
-  * Machines to update: `Type: Machines`
-  * Update classification: `Select all`
-  * Include/exclude updates: `Leave blank`
-  * Schedule settings: `Set in at least 5 minutes time, to occur once`
-  * Pre-scripts + Post scripts: `Leave blank`
-  * Maintenance window (minutes): `120`
-  * Reboot options: `Reboot if required`
+  | Field | Value |
+  |---|---|
+  | Name | arc-windows-update-now |
+  | Operating system | Windows |
+  | Groups to update | Select your Subscription or Resource Group scope |
+  | Machines to update | Type: Machines |
+  | Update classification | Select all |
+  | Include/exclude updates | `Set in at least 5 minutes time, to occur once |
+  | Pre-scripts + Post scripts | Leave blank |
+  | Maintenance window (minutes) | 120 |
+  | Reboot options | Reboot if required |
 
   From the Update management pane, check **History** tab to check progress of the job.
 
@@ -107,7 +123,7 @@ In this challenge you will implement a update management strategy and report inv
 
     ```Kusto
   Update
-  | where UpdateState contains "Installed"
+  | where UpdateState contains "Needed"
   ```
 
   Summarize can reduce the information displayed, such as using a `count` of `Computer` or `count` of `Title` (name of the update).

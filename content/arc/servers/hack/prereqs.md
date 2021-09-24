@@ -1,6 +1,6 @@
 ---
-title: "0️⃣ Prereqs"
-description: "Attending one of our Azure Arc hacks? If so then complete these. Before it starts!"
+title: "Prereqs"
+description: "Attending an Azure Arc for Servers hack? If so then complete these first. And please - do so before the start of the hack!"
 layout: single
 draft: false
 menu:
@@ -15,72 +15,81 @@ aliases:
 weight: 105
 ---
 
-
 ## Requirements
 
-* **Azure subscription**
+### Azure subscription
 
-  Each hack attendee will need an Azure subscription with sufficient credits. The hack will create 10 x Standard_D2s_v3 so 20 cores, plus 10 public IP addresses. Check your quotas have enough headroom to provision.
+Each hack **team** will need an Azure subscription with sufficient credits. Note the additional requirements further down for both Azure RBAC roles and recommended Azure AD roles.
 
-  Ensure the following providers are enabled.
+Ensure the following providers are registered.
 
-  * Microsoft.HybridCompute
-  * Microsoft.GuestConfiguration
+* Microsoft.HybridCompute
+* Microsoft.GuestConfiguration
 
-  You can use the Bash Cloud Shell to enable:
+```bash
+az provider register --namespace 'Microsoft.HybridCompute'
+az provider register --namespace 'Microsoft.GuestConfiguration'
+```
 
-  ```bash
-  az provider register --namespace 'Microsoft.HybridCompute'
-  az provider register --namespace 'Microsoft.GuestConfiguration'
-  ```
+### On Prem VMs
 
-  We will use sensible VM SKUs and shutdown those VMs overnight to minimise the spend.
+You will be creating your on prem VMs in the first challenge. Choose the right platform for you. This section gives you the heads up and includes a check if you are going to create them in an Azure subscription.
 
-* **Owner role**
+#### Non-Azure
 
-  You will need to have a role assigned on the subscription that allows you to complete the hack activity. We will be deploying services, creating roles and role assignments, and assigning policies and policy initiatives.
+Ideally you will have an on prem platform that you can use to create a few VMs to onboard for the hack scenario's pilot.
 
-  You should have either Owner access, or a combination of roles such as Contributor plus User Access Administrator.
+For example, if you have acccss to a Hyper-V or VMware vSphere dev cluster, or an account on GCP or AWS, then you may create VMs there to onboard. This will be closer to a real world Azure Arc scenario.
 
-* **Service principals**
+The hack scenario assumes a pilot of:
 
-  You will need to be able to create and delete service principals.
+* 3 x Windows Server 2019 VMs
+* 3 x Ubuntu 18.04 VMs
 
-  Standard member users in AAD have that permission by default.
+but you may use any number of Windows and Linux VMs operating systems as long as they are on the [supported list](https://docs.microsoft.com/azure/azure-arc/servers/agent-overview#prerequisites) for Azure Arc.
 
-  If you are a guest user in the tenancy then you will need (at minimum) the Application Administrator role assigned to you.
+Note that your VMs will require outgoing internet access.
 
-You can confirm your access by following the [checks](#checks) section below.
+#### Terraformed Azure VMs
 
-## Minimal setup
+Alternatively, we have authored a Terraform repo to create custom VMs in Azure that may then be onboarded to Azure Arc. This is an unsupported scenario but works fine for training and demo purposes.
 
-The tooling required for this partner hack is lightweight.
+By default the repo will create:
 
-It is possible to complete the whole hack using the portal and Cloud Shell.
+* 3 x Standard_D2s_v3 VMs for Windows Server 2019 (6 Standard DSv3 Family vCPUs)
+* 3 x Standard_A1_v2 VMs for Ubuntu 18.04 (3 Standard Av2 Family vCPUs)
 
-Bash is the recommended Cloud Shell experience, and includes git, terraform, jq and ansible as well as the ability to upload files.
+> Terraform variables allow you to change oth the number of VMs and the VM SKUs.
 
-Windows Terminal is recommended for most CLI work as it directly supports the Cloud Shell. (Use the drop down to select Cloud Shell, or set Cloud Shell as your default profile.) Having said that, the file upload / download and Monaco editor (`code .`) are only found in the browser.
+Check your CPU usage:
 
-If using a minimal setup then open the [Cloud Shell](https://shell.azure.com) and extend the Azure CLI with `az extension add --name connectedmachine`.
+```bash
+az vm list-usage --location uksouth --output table
+```
 
-## Recommended setup
+The VMs don't have to be deployed in the same subscription as your main team subscription.
 
-Whilst is it possible to complete the hack with the portal and Cloud Shell, we strongly recommend that you set up your laptop with the right tooling so that you are ready to hit the ground running on the hack. The config below will get you ready for this hack and also much of the other content on the Azure Citadel site.
+Shut down these VMs in the portal when they are not needed so that they are deallocated and do not incur compute costs.
 
-For Windows 10 users who are comfortable in Bash, then the combination of Windows Terminal, Windows Subsystem for Linux and Visual Studio Code (with remote extensions) is perfect.
+### Owner role
 
-**Open the [recommended setup](/setup) page in a new tab.**
+We will be deploying Azure services, creating role assignments, assigning policies and policy initiatives.
 
-* Windows Terminal (or iTerm2 for MacOS, Hyper etc. for Linux)
-* Linux environment, e.g. Windows Subsystem for Linux
-  * Azure CLI, extended with `az extension add --name connectedmachine`
-  * jq
-  * git
-  * Terraform
-  * Ansible
-* Visual Studio Code
-* PowerShell, plus the Az module
+You should have either Owner access, or a combination of roles such as Contributor plus User Access Administrator.
+
+### Service principals
+
+The scale onboarding scripts use a service principal. Standard AAD members have the ability to create service principals by default.
+
+If you are a guest user in the tenancy then the Application Administrator role will allow service principal creation.
+
+You can confirm your access by completing the [checks](#checks) section below.
+
+### Global Admin (optional)
+
+Ideally you will be in a tenant where your [AAD Role](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RolesAndAdministrators) is Global Administrator or Privileged Role Administrator, or you can speak to someone who is. One of the labs uses Windows Admin Center to connect to Azure, and this registers an application with additional AAD access that requires admin consent.
+
+If that is not possible then you skip the Windows Admin Center section of the hack challenge and will onboard the Windows VMs using PowerShell scripts instead.
 
 ## Checks
 
@@ -92,7 +101,7 @@ You will need the Azure CLI for these checks. Log in and check you are in the co
     az ad sp create-for-rbac --name http://archack-deleteme --role "Azure Connected Machine Onboarding"
     ```
 
-1. Check roles
+1. Check Azure RBAC role
 
     Check the role assignments for the user via the portal:
 
@@ -107,6 +116,42 @@ You will need the Azure CLI for these checks. Log in and check you are in the co
     ```bash
     az ad sp delete --id http://archack-deleteme
     ```
+
+## Setup
+
+### Minimal
+
+The tooling required for this partner hack is lightweight. It is possible to complete the whole hack using the portal and Cloud Shell.
+
+Bash is the recommended Cloud Shell experience, and includes git, terraform and jq as well as the ability to upload files.
+
+Windows Terminal is recommended for most CLI work as it includes a Cloud Shell profile. Having said that, the file upload / download and Monaco editor are only found in the browser.
+
+If using a minimal setup then open the [Cloud Shell](https://shell.azure.com/bash) and extend the Azure CLI with `az extension add --name connectedmachine`.
+
+### Recommended (optional)
+
+Whilst is it possible to complete the hack with the portal and Cloud Shell, we always recommend that you set up your laptop with the right tooling so that you are ready to hit the ground running. The config below will get you ready for this hack and also much of the other content on the Azure Citadel site.
+
+For Windows 10 users who are comfortable in Bash, then the combination of Windows Terminal, Windows Subsystem for Linux and Visual Studio Code (with remote extensions) is perfect.
+
+**Open the [recommended setup](/setup) page in a new tab.**
+
+* Windows Terminal (or iTerm2 for MacOS, Hyper etc. for Linux)
+* Linux environment, e.g. Windows Subsystem for Linux
+  * Azure CLI, extended with `az extension add --name connectedmachine`
+  * jq
+  * git
+  * Terraform
+* Visual Studio Code
+* PowerShell, plus the Az module
+
+## References
+
+* <https://docs.microsoft.com/azure/azure-arc/servers/>
+* <https://docs.microsoft.com/azure/azure-arc/servers/agent-overview#prerequisites>
+* <https://docs.microsoft.com/azure/virtual-machines/linux/quotas>
+* <https://docs.microsoft.com/azure/active-directory/manage-apps/grant-admin-consent>
 
 ## Next
 
