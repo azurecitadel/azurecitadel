@@ -5,32 +5,42 @@ layout: single
 draft: false
 series:
  - arc-servers-hack-proctor
-weight: 5
-aliases:
- - /arc/servers-hack/monitor/proctor
+weight: 140
+url: /arc/servers/hack/monitor/proctor
 ---
 
 ## Azure Monitoring Agent (AMA)
 
-* Create a new Log Analytics Workspace
-
-  In the portal, navigate to **Log Analytics Workspaces** and **Create**.
-
-  * Name: `arc-loganalytics-ama`
-  * Resource group: `arc-hack`
-
 * Deploy the new Azure Monitoring Agent to our virtual machines
 
     To be installed via Extension - either via PowerShell, CLI or ARM template:
-    [Install the Azure Monitor agent (preview)](https://docs.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-install?tabs=ARMAgentPowerShell%2CPowerShellWindows%2CPowerShellWindowsArc%2CCLIWindows%2CCLIWindowsArc#install-with-powershell)
+    [Install the Azure Monitor agent (preview)](https://docs.microsoft.comazure/azure-monitor/agents/azure-monitor-agent-install)
 
     ```powershell
-    Set-AzVMExtension -Name AMAWindows -ExtensionType AzureMonitorWindowsAgent -Publisher Microsoft.Azure.Monitor -ResourceGroupName <resource-group-name> -VMName <virtual-machine-name> -Location <location>
+    Set-AzVMExtension -Name AMAWindows -Publisher Microsoft.Azure.Monitor -ExtensionType AzureMonitorWindowsAgent -VMName <virtual-machine-name> -ResourceGroupName <resource-group-name> -Location <location>
     ```
+
+    ```bash
+    az connectedmachine extension create --name AzureMonitorWindowsAgent --publisher Microsoft.Azure.Monitor --type AzureMonitorWindowsAgent --machine-name <arc-server-name> --resource-group <resource-group-name> --location <arc-server-location>
+    ```
+
+    The linux version is unsurprisingly called AzureMonitorLinuxAgent.
 
 * Confirm the virtual machines are communicating to the Log Analytics Workspace
 
     Check the `Heartbeat` table within the Log Analytics Workspace.
+
+    This may be the arc-pilot-ama or the default ASC one, e.g.:
+
+    ```text
+    /subscriptions/<subId>
+    /resourcegroups/defaultresourcegroup-suk
+    /providers/microsoft.operationalinsights/workspaces
+    /defaultworkspace-<subscriptionId>-suk
+    ```
+
+    Not entirely sure.
+
 * Ensure that the Log Analytics Workspace is set up so that users only have access to the logs of resources they have acces to
 
     Confirm that the **Access control mode** on the Log Analtics Workspace is set to `Use resource or workspace permissions`. The other mode is `Require workspace permissions`. This can be viewed on the Log Analytics overview section and changed within the **Log Analytics Workspace** under **Properties**

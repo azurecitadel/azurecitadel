@@ -1,8 +1,8 @@
 ---
-title: "1️⃣ Manual Onboarding"
-description: "Work through the first challenge, onboarding a pair of \"on prem\" machines into Azure and adding agents."
+title: "Pilot VMs"
+description: "Create some on prem VMs."
 layout: single
-draft: false
+draft: true
 menu:
   side:
     parent: arc-servers
@@ -14,28 +14,37 @@ weight: 110
 
 ## Introduction
 
-In this first challenge you will manually onboard a few virtual machines, one running Windows Server 2019 and one running Ubuntu 18.04 LTS. You will then manually add a couple of agents.
+Your Azure Arc pilot requires a small number of Windows and Linux servers. These will be your on prem machines. In later labs you will be onboarding these VMs as Azure Arc-enabled VMs.
 
-The aim of the challenge is to ensure that you understand the basics of onboarding and how the azcmagent works on both platforms.
+As per the pre-reqs, the hack scenario assumes a pilot of:
 
-You will need a Bash environment for this, so Windows users should use either Windows Subsystem for Linux or the Cloud Shell. Either way, the Windows Terminal is recommended.
+* 3 x Windows Server 2019 VMs
+* 3 x Ubuntu 18.04 VMs
 
-> _Hint:_ Typing `code .` will open the current working directory with vscode (if installed). If you are in the Cloud Shell it will open the Monaco editor.
+**Either create your VMs outside of Azure (preferred), or using the Terraform repo.**
 
-## On prem VMs
+## Non-Azure
 
-Use the <https://github.com/azurecitadel/arc-onprem-servers> repo to create two "on prem" virtual machines ready for the manual onboarding tasks.
+If you have access then create the VMs on another platform, e.g.:
 
-You will need an SSH key for it to work: <https://docs.microsoft.com/azure/virtual-machines/linux/mac-create-ssh-keys>
+* VMware vSphere
+* Hyper-V
+* GCP
+* AWS
 
-| Operating system | Name |
-|---|---|
-| Ubuntu 18.04 LTS | **ubuntu-01** |
-| Windows Server 2019 | **win-01** |
+Note that there is an [operating systems supported list](https://docs.microsoft.com/azure/azure-arc/servers/agent-overview#prerequisites) for Azure Arc.
 
-Review the content of the arc-hack-resources in the Azure Portal. And then ignore this resource group from now on!
+The VMs will need outgoing internet access.
 
-> **IMPORTANT!**: You should not do anything after this point directly with the arc-hack-resources resource group. The VMs in here are representing VMs that exist outside of Azure, so think of them as on prem servers, e.g. VMs running in an ESXi cluster in a datacentre. As you work through you will access them via RDP or SSH, or using Ansible with SSH or WinRM, but you shouldn't configure anything in the portal or CLI that _directly_ accesses the VMs in the resource group.
+## Terraform repo
+
+Use the <https://github.com/azurecitadel/arc_onprem_servers> repo to create two "on prem" virtual machines ready for the manual onboarding tasks. The repo has a README.md file.
+
+Note that you will need an SSH key for it to work: <https://docs.microsoft.com/azure/virtual-machines/linux/mac-create-ssh-keys>
+
+Review the content of the onprem_servers resource group in the Azure Portal. And then ignore this resource group from now on!
+
+**IMPORTANT!**: You should not do anything after this point directly with the onprem\_servers resource group. These VMs represent VMs that exist outside of Azure, so think of them as on prem servers, e.g. VMs running in an ESXi cluster in a datacentre. As you work through you will access them via RDP or SSH and work at the OS level but you shouldn't configure anything in the portal or CLI that _directly_ accesses the VMs in the resource group az Azure resources.
 
 ## Onboard
 

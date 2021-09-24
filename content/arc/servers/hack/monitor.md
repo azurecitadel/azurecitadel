@@ -1,6 +1,6 @@
 ---
-title: "4️⃣ Monitoring"
-description: "Configure the new Azure Monitoring Agent and Data Collection Rules. Optionally integrate with Azure Security Center and Azure Sentinel."
+title: "Monitoring"
+description: "Configure the new Azure Monitor agent and Data Collection Rules. Optionally integrate with Azure Security Center and Azure Sentinel."
 layout: single
 draft: false
 menu:
@@ -14,30 +14,41 @@ weight: 140
 
 ## Introduction
 
-Azure Monitoring Agent (AMA) is the next version of the monitoring agent deployed to guest operting systems. It will replace the current monitoring agent known as the Log Analytics Agent.
+Azure Monitoring agent (AMA) is the next version of the monitoring agent deployed to guest operating systems and is now generally available.
 
-During the onboarding of this hack, your current environment reports to a central Log Analytics workspace that is used by the agents deployed to your virtual machines. The new agent is currently in preview and does not have feature parity with the pre-existing agent.
+In time it will replace the older monitoring agents known as the Log Analytics Agent (MMA), Diagnostics and Telegraf agent, but there are currently some gaps so it is common to install multiple agents to achieve the required functionality. The [Azure Monitor agents overview](https://docs.microsoft.com/azure/azure-monitor/agents/agents-overview) details the current situation and is updated regularly as functionality is migrated over.
 
-In this challenge, we will deploy the new agent alongisde the current Log Analytics Agent that will report to a new Log Analytics Workspace. After the onboarding process, we will then utilise the new functionality of this agent.
+In this challenge, we will deploy the new agent. After the onboarding process, we will then utilise the new functionality of this agent.
 
-## Azure Monitoring Agent (AMA)
+## Azure Monitor Agent (AMA)
 
-* Create a new Log Analytics Workspace
-* Deploy the new Azure Monitoring Agent to our virtual machines
-* Confirm the virtual machines are communicating to the Log Analytics Workspace
+* Deploy the Azure Monitoring Agent to our virtual machines via your preferred CLI
+* Confirm the virtual machine's AMA agents are communicating to an Azure Monitor workspace
+
+  > Hint: query for the _heartbeat_
+
+Note that you will be using CLI commands to install the agent rather than the portal or by using Azure Policy. There are Azure Policy and Initiative definitions to install the Azure Monitor Agent, but they do not currently cover Azure Arc VMs. Expect that to change soon.
 
 ## Data Collection Rules (DCRs)
 
+### DCR Overview
+
+One of the benefits of the AMA agent is the flexibility in data collection rules, which allow you to define which metrics or logs you want to send to which target, and then associate with different groups of servers including hybrid servers. Some of the policy initiatives will assign an identity, install the extension and associate with a DCR.
+
+Here is an overview of the metric and log collection designed for the pilot.
+
+![DCRs](/arc/servers/images/dataCollectionRules.png)
+
 ### Security Operations Centers (SOC) team
 
-You are part of the Security Operations Centers (SOC) team.
+You are part of the Security Operations Centers (SOC) team. You have access to the _arc-pilot-soc_
 
 * Set up a Data Collection Rule for all your Azure arc virtual machines to send their security logs to
 * (Optional) Validate the security logs are visible in the Log Analytics Workspace
 
     > _Hint_: The linux security logs are:
 
-    ![DCR](/arc/images/linuxDataSource.png)
+    ![DCR](/arc/servers/images/linuxDataSource.png)
 
 ### Cost Management team
 
@@ -65,8 +76,9 @@ You are part of a Linux application team.
 
 Screen share with your proctor to show that you achieved:
 
-1. Azure Monitoring Agent (AMA) is reporting to your new Log Analytics Workspace
-1. Data Collection Rules are applied and data is being gathered from the Azure arc connected machines
+1. Azure Monitor Agent (AMA) is reporting heartbeat to your Log Analytics workspace
+1. Data Collection Rules are defined and associated correctly with the resources
+1. Data is being gathered from the Azure Arc-enabled machines
 1. Open Azure Security Center and view the Secure Score for your Azure arc connected machine
 1. From Azure Sentinel, view collected events from your Azure Arc connected machine
 

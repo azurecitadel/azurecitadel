@@ -2,7 +2,7 @@
 title: "3️⃣ Scale Onboarding"
 description: "Onboarding multiple Linux and WIndows servers with a service principal, then automate connecting with the azcmagent."
 layout: single
-draft: false
+draft: true
 menu:
   side:
     parent: arc-servers
