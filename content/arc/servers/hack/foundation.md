@@ -65,18 +65,6 @@ Skip this step if you do not have the appropriate Azure AD role to create AAD se
 
   These may be left empty for the moment.
 
-## Key Vault
-
-* Create a key vault. Prefix the name with arc-pilot.
-* Add a self signed certificate called self-signed-cert
-  * This will be used later with the key vault VM extension
-* Add the private SSH key as a secret called arc-pilot-private-ssh-key
-  * Only if you used the Terraform repo
-  * This will speed up Azure Bastion access to the linux VMs
-  * The default private SSH key is `~/.ssh/id_rsa`
-
-This hack is not a test of your Key Vault skills, so reach out to your proctor if you get stuck.
-
 ## Azure Monitor Workspaces
 
 * Create Azure Monitor workspaces
@@ -84,6 +72,37 @@ This hack is not a test of your Key Vault skills, so reach out to your proctor i
   1. arc-pilot-core
   1. arc-pilot-soc
   1. arc-pilot-linuxapp
+
+## Key Vault
+
+This hack is not a test of your Key Vault skills, so please use the command blocks below.
+
+Run them in the **arc-onprem-servers** directory in your [bash](https://shell.azure.com/bash) environment.
+
+### Create the key vault
+
+```bash
+kv=arc-pilot-keyvault-$(terraform output --raw uniq)
+az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
+```
+
+### Create a self signed certificate
+
+The certificate will be used in the Key Vault Extension lab.
+
+```bash
+az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
+```
+
+### Private SSH Key
+
+This will make it simpler to log into the linux VMs using
+
+```bash
+az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa
+```
+
+> If you specified a different SSH key pair when terraforming the environment then specify the correct private key file.
 
 ## Success criteria
 

@@ -5,9 +5,8 @@ layout: single
 draft: true
 series:
  - arc-servers-hack-proctor
-weight: 7
-aliases:
- - /arc/server-hack/governance/proctor
+weight: 160
+url: /arc/server/hack/governance/proctor
 ---
 
 ## Tasks

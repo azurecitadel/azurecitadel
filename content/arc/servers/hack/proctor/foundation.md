@@ -50,55 +50,6 @@ az role assignment create --assignee $objectId --resource-group arc_pilot --role
 
 If they cannot create security groups then each person should get assigned. They may choose Contributor instead, but this is also a test of least privilege so the specified role is more apt.
 
-## Key Vault
-
-### Creation and access
-
-Example commands also show the AD group getting and access policy to list and get secrets.
-
-```bash
-kv=arc-pilot-richeney
-az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
-```
-
-Key vault creator gets an access policy by default. Could also add the AAD group. Not required but a good stretch to ask.
-
-```bash
-groupId=$(az ad group show --group "Azure Arc Admins" --query objectId --output tsv)
-az keyvault set-policy --name $kv --secret-permissions list get --resource-group arc_pilot --object-id $groupId
-```
-
-Could also use RBAC roles rather than access policies. Arguably more secure as the ability to manage role assignments is usually more locked down than contributor access. Use `--enable-rbac-authorization` when creating the key vault, then assign:
-
-```bash
-kv=arc-pilot-richeney
-az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
-kvId=$(az keyvault show --name $kv --resource-group arc_pilot --query id --output tsv)
-objectId=$(az ad signed-in-user show --query objectId --output tsv)
-az role assignment create --assignee $objectId --scope $kvId --role "Key Vault Administrator"
-```
-
-And the corresponding AAD group.
-
-```bash
-groupId=$(az ad group show --group "Azure Arc Admins" --query objectId --output tsv)
-az role assignment create --assignee $groupId --scope $kvId --role "Key Vault Secrets User"
-```
-
-### Self signed cert
-
-```bash
-az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
-```
-
-### Private SSH Key
-
-Only applicable if VMs were created using the Terraform repo.
-
-```bash
-az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa
-```
-
 ## Azure Monitor Workspace
 
 ```bash
@@ -106,6 +57,10 @@ az monitor log-analytics workspace create --resource-group arc_pilot --location 
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-soc
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-linuxapp
 ```
+
+## Key Vault
+
+Explicit commands in the lab
 
 ## Success criteria
 
