@@ -90,7 +90,7 @@ az policy assignment non-compliance-message create --resource-group arc_pilot --
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-core
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-soc
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-linuxapp
-kv=arc-pilot-keyvault-$(terraform output --raw uniq)
+kv=arc-pilot-$(terraform output --raw uniq)
 az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
 az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
 az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa

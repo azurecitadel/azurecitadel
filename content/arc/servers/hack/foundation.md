@@ -84,7 +84,7 @@ Run them in the **arc-onprem-servers** directory in your [bash](https://shell.az
 ### Create the key vault
 
 ```bash
-kv=arc-pilot-keyvault-$(terraform output --raw uniq)
+kv=arc-pilot-$(terraform output --raw uniq)
 az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
 ```
 
