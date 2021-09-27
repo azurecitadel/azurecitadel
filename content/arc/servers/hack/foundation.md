@@ -24,6 +24,8 @@ You will also create a service principal for the onboarding scripts with the rig
 
 Finally you will create new AAD group for the Arc admins, but only if you have access within AAD.
 
+If working in a team then it is recommended to split the tasks between you.
+
 ## Requirements
 
 The onboarded VMs will be created in a dedicated resource group called arc_pilot. All Azure resources will be created in UK South.
@@ -103,6 +105,22 @@ az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file 
 ```
 
 > If you specified a different SSH key pair when terraforming the environment then specify the correct private key file.
+
+## Storage account
+
+Create a storage account for custom scripts.
+
+```bash
+sa=arcpilotsa$(terraform output --raw uniq)
+az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location uksouth
+```
+
+Add a couple of containers.
+
+```bash
+az storage container create --account-name $sa --name powershell --public-access blob
+az storage container create --account-name $sa --name bash       --public-access blob
+```
 
 ## Success criteria
 

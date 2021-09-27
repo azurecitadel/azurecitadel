@@ -38,10 +38,10 @@ The security team is concerned about the configuration of on-premises VMs and wo
 
 ## Inventory
 
-The governance team has determined that servers should have specific software installed. As a starting point they have decided to audit all linux servers to see whether they have _git_ installed.
+The governance team has determined that servers should have specific software installed. As a starting point they have decided to audit all linux servers to see whether they have the _tree_ package installed on Linux.
 
-* a report of the servers without _git_ installed
-* Provide a report of all Linux servers without _git_ installed (optional)
+* assign a policy to audit Linux servers without _tree_ installed
+* Provide a report of all Linux servers without _tree_ installed (optional)
 
 ## Operational
 

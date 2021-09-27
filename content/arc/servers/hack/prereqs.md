@@ -33,51 +33,58 @@ az provider register --namespace 'Microsoft.GuestConfiguration'
 
 ### On Prem VMs
 
-You will be creating your on prem VMs in the first challenge. Choose the right platform for you. This section gives you the heads up and includes a check if you are going to create them in an Azure subscription.
+You will be creating your on prem VMs in the first challenge.
+
+You have a choice:
+
+1. Create your own test VMs for the hack on a non-Azure platform (preferred)
+2. Use our Terraform repo to quickly spin up some "on prem" VMs to onboard
 
 #### Non-Azure
 
-Ideally you will have an on prem platform that you can use to create a few VMs to onboard for the hack scenario's pilot.
+Ideally you will have an on prem platform that you can use to create a few VMs. You will then onboard them during the hack as you work through the scenario's pilot.
 
 For example, if you have acccss to a Hyper-V or VMware vSphere dev cluster, or an account on GCP or AWS, then you may create VMs there to onboard. This will be closer to a real world Azure Arc scenario.
 
 The hack scenario assumes a pilot of:
 
-* 3 x Windows Server 2019 VMs
-* 3 x Ubuntu 18.04 VMs
+* 3 x Windows Server 2019 VMs (win-01, win-02, win-03)
+* 3 x Ubuntu 18.04 VMs (ubuntu-01, ubuntu-02, ubuntu-03)
 
-but you may use any number of Windows and Linux VMs operating systems as long as they are on the [supported list](https://docs.microsoft.com/azure/azure-arc/servers/agent-overview#prerequisites) for Azure Arc.
+You may use any number of Windows and Linux VMs operating systems as long as they are on the [supported list](https://docs.microsoft.com/azure/azure-arc/servers/agent-overview#prerequisites) for Azure Arc.
 
 Note that your VMs will require outgoing internet access.
 
-#### Terraformed Azure VMs
+**Feel free to create these in advance.** (The )
 
-Alternatively, we have authored a Terraform repo to create custom VMs in Azure that may then be onboarded to Azure Arc. This is an unsupported scenario but works fine for training and demo purposes.
+#### Terraformed Repo
+
+If you don't have access to another platform to create VMs then we have you covered. We have created a [Terraform repo](https://github.com/terraform-azurerm-examples/arc-onprem-servers) to create custom VMs in Azure that may then be onboarded to Azure Arc. (This is officially an unsupported scenario but works fine for training and demo purposes.)
+
+**You will deploy these "on prem" VMs in the first challenge, but you should check your CPU usage first to make sure you have sufficient quota available.**
 
 By default the repo will create:
 
 * 3 x Standard_D2s_v3 VMs for Windows Server 2019 (6 Standard DSv3 Family vCPUs)
 * 3 x Standard_A1_v2 VMs for Ubuntu 18.04 (3 Standard Av2 Family vCPUs)
 
-> Terraform variables allow you to change oth the number of VMs and the VM SKUs.
-
-Check your CPU usage:
-
 ```bash
 az vm list-usage --location uksouth --output table
 ```
 
-The VMs don't have to be deployed in the same subscription as your main team subscription.
+> The repo does allow you to change the VM SKUs and number of VMs.
 
-Shut down these VMs in the portal when they are not needed so that they are deallocated and do not incur compute costs.
+Note that the VMs don't have to be deployed in the same subscription (or indeed tenant) as your main team subscription. In fact it may be preferable to have them in a separate subscription just to reduce any confusion.
 
 ### Owner role
 
 We will be deploying Azure services, creating role assignments, assigning policies and policy initiatives.
 
-You should have either Owner access, or a combination of roles such as Contributor plus User Access Administrator.
+**You should have Owner access on your subscription.** (Or an equivalent combination of roles such as Contributor plus User Access Administrator.)
 
 ### Service principals
+
+**You will need to be able to create service principals.**
 
 The scale onboarding scripts use a service principal. Standard AAD members have the ability to create service principals by default.
 
@@ -87,11 +94,17 @@ You can confirm your access by completing the [checks](#checks) section below.
 
 ### Global Admin (optional)
 
-Ideally you will be in a tenant where your [AAD Role](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RolesAndAdministrators) is Global Administrator or Privileged Role Administrator, or you can speak to someone who is. One of the labs uses Windows Admin Center to connect to Azure, and this registers an application with additional AAD access that requires admin consent.
+**Ideally you will also be Global Admin.**
 
-If that is not possible then you skip the Windows Admin Center section of the hack challenge and will onboard the Windows VMs using PowerShell scripts instead.
+If you are working in a tenant where your [AAD Role](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RolesAndAdministrators) is Global Administrator or Privileged Role Administrator - or you can speak to someone who is - then great.
+
+One of the labs uses Windows Admin Center to connect to Azure, and this registers an application with additional AAD access that requires admin consent.
+
+If that is not possible then you will just skip the Windows Admin Center section of the hack challenge and will onboard the Windows VMs using PowerShell scripts instead.
 
 ## Checks
+
+**Complete these checks before the hack.**
 
 You will need the Azure CLI for these checks. Log in and check you are in the correct subscription context.
 
@@ -146,8 +159,15 @@ For Windows 10 users who are comfortable in Bash, then the combination of Window
 * Visual Studio Code
 * PowerShell, plus the Az module
 
+## Reading
+
+Explore the [Azure Arc product page](https://azure.microsoft.com/services/azure-arc/#product-overview).
+
+Read the [Azure Arc-enabled servers overview](https://docs.microsoft.com/azure/azure-arc/servers/overview) and watch the video.
+
 ## References
 
+* <https://azure.microsoft.com/services/azure-arc/#product-overview>
 * <https://docs.microsoft.com/azure/azure-arc/servers/>
 * <https://docs.microsoft.com/azure/azure-arc/servers/agent-overview#prerequisites>
 * <https://docs.microsoft.com/azure/virtual-machines/linux/quotas>
@@ -155,4 +175,4 @@ For Windows 10 users who are comfortable in Bash, then the combination of Window
 
 ## Next
 
-OK, you should have everything set up now. See you at the hack!
+OK, you should be good to go! See you at the hack!

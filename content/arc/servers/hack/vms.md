@@ -53,11 +53,13 @@ This is not a Terraform training session so the readme file is intended to be us
 
 These VMs represent VMs that exist outside of Azure, so think of them as on prem servers, e.g. VMs running in an ESXi cluster in a datacentre. As you work through you will access them via RDP or SSH and work at the OS level but you shouldn't configure anything in the portal or CLI that _directly_ accesses the VMs in the onprem_servers resource group az Azure resources, e.g. resetting passwords, installing extensions or applying policies.
 
+> Hint: shut down these VMs in the portal when they are not needed so that they are deallocated and do not incur compute costs.
+
 ## Success criteria
 
 Show the proctor
 
-1. on prem pilot servers
+1. your on prem pilot servers
 
 ## Resources
 

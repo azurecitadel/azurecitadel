@@ -60,7 +60,59 @@ az monitor log-analytics workspace create --resource-group arc_pilot --location 
 
 ## Key Vault
 
-Explicit commands in the lab
+```bash
+kv=arc-pilot-keyvault-$(terraform output --raw uniq)
+az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
+az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
+az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa
+```
+
+## Storage account
+
+```bash
+sa=arcpilotsa$(terraform output --raw uniq)
+az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location uksouth
+az storage container create --account-name $sa --name powershell --public-access blob
+az storage container create --account-name $sa --name bash       --public-access blob
+```
+
+## Full set
+
+Concatenated set of commands from above, bar the service principal and Azure AD group creation and assignment commands.
+
+```bash
+az group create --name arc_pilot --location uksouth --tags datacentre="Azure Citadel" city=Reading
+rgId=$(az group show --name arc_pilot --query id --output tsv)
+az policy assignment create --name inherit_tag_city --display-name "Inherit city tag from the resource group" --scope $rgId --policy cd3aa116-8754-49c9-a813-ad46512ece54 --assign-identity --location uksouth --params '{"tagName": {"value": "city"}}'
+az policy assignment create --name inherit_tag_datacentre --display-name "Inherit datacentre tag from the resource group" --scope $rgId --policy cd3aa116-8754-49c9-a813-ad46512ece54 --assign-identity --location uksouth --params '{"tagName": {"value": "datacentre"}}'
+az policy assignment non-compliance-message create --resource-group arc_pilot --name inherit_tag_city --message "Resource has not inherited the city tag"
+az policy assignment non-compliance-message create --resource-group arc_pilot --name inherit_tag_datacentre --message "Resource has not inherited the datacentre tag"
+az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-core
+az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-soc
+az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-linuxapp
+kv=arc-pilot-keyvault-$(terraform output --raw uniq)
+az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
+az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
+az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa
+sa=arcpilotsa$(terraform output --raw uniq)
+az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location uksouth
+az storage container create --account-name $sa --name powershell --public-access blob
+az storage container create --account-name $sa --name bash       --public-access blob
+```
+
+Service principal
+
+```bash
+az ad sp create-for-rbac --name arc_pilot --role "Azure Connected Machine Onboarding" --scopes $rgId
+```
+
+Azure AD Group retained separate
+
+```bash
+az ad group create --display-name "Azure Arc Admins" --mail-nickname "azurearcadmins"
+objectId=$(az ad group show --group "Azure Arc Admins" --query objectId --output tsv)
+az role assignment create --assignee $objectId --resource-group arc_pilot --role "Azure Connected Machine Resource Administrator"
+```
 
 ## Success criteria
 
