@@ -61,7 +61,7 @@ Choose one of the following:
 1. Create the Key Vault Extension
 
     ```bash
-    az connectedmachine extension create --name KeyVaultForLinux --publisher Microsoft.Azure.KeyVault --type KeyVaultForLinux --machine-name ubuntu-03 --resource-group arc_pilot --type-handler-version 2.0 --settings "{\"secretsManagementSettings\":{\"pollingIntervalInS\":\"60\",\"observedCertificates\":[\"https://$kv.vault.azure.net/secrets/$cert\"]},\"authenticationSettings\":{\"msiEndpoint\":\"http://localhost:40342/metadata/identity\"}}"
+    az connectedmachine extension create --name KeyVaultForLinux --publisher Microsoft.Azure.KeyVault --type KeyVaultForLinux --machine-name ubuntu-03 --resource-group arc_pilot --settings "{\"secretsManagementSettings\":{\"pollingIntervalInS\":\"60\",\"observedCertificates\":[\"https://$kv.vault.azure.net/secrets/$cert\"]},\"authenticationSettings\":{\"msiEndpoint\":\"http://localhost:40342/metadata/identity\"}}"
     ```
 
     The polling interval has been set to 60 seconds rather than the default 3600, or hourly.
@@ -202,7 +202,7 @@ Surround with single quotes.
 If the file will be present then keep it simple and just specify the filename.
 
 ```bash
-az connectedmachine extension create --name KeyVaultForLinux --publisher Microsoft.Azure.KeyVault --type KeyVaultForLinux --machine-name ubuntu-02 --resource-group arc_pilot --type-handler-version 2.0 --settings settings.json
+az connectedmachine extension create --name KeyVaultForLinux --publisher Microsoft.Azure.KeyVault --type KeyVaultForLinux --machine-name ubuntu-02 --resource-group arc_pilot --settings settings.json
 ```
 
 ## Resources
