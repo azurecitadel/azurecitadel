@@ -82,42 +82,44 @@ New-AzConnectedMachineExtension -MachineName "win-03" -Name CustomScriptExtensio
 
 ### ARM
 
-azuredeploy.json:
+custom_script_windows.json:
 
 ```json
 {
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "vmName": {
-            "type": "string"
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "name": "[concat(parameters('vmName'),'/CustomScriptExtension')]",
+      "type": "Microsoft.HybridCompute/machines/extensions",
+      "location": "uksouth",
+      "apiVersion": "2019-08-02-preview",
+      "properties": {
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "autoUpgradeMinorVersion": true,
+        "settings": {},
+        "protectedSettings": {
+          "fileUris": [
+            "https://arcpilotsadfc4852d.blob.core.windows.net/powershell/custom_script_windows.ps1"
+          ],
+          "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File custom_script_windows.ps1"
         }
-    },
-    "resources": [
-        {
-            "name": "[concat(parameters('vmName'),'/CustomScriptExtension')]",
-            "type": "Microsoft.HybridCompute/machines/extensions",
-            "location": "uksouth",
-            "apiVersion": "2019-08-02-preview",
-            "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "autoUpgradeMinorVersion": true,
-                "settings": {},
-                "protectedSettings": {
-                    "fileUris": [
-                      "https://arcpilotsadfc4852d.blob.core.windows.net/powershell/custom_script_windows.ps1"
-                    ],
-                    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File custom_script_windows.ps1"
-                }
-            }
-        }
-    ]
+      }
+    }
+  ]
 }
 ```
 
 Command:
 
 ```bash
-az deployment group create --template-file azuredeploy.json --parameters vmName=win-01 --resource-group arc_pilot
+az deployment group create --template-file custom_script_windows.json --parameters vmName=win-01 --resource-group arc_pilot
 ```
+
+You could further parameterise, e.g. add a parameter for the basename of the script URI.
