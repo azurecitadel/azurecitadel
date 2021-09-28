@@ -61,7 +61,8 @@ az monitor log-analytics workspace create --resource-group arc_pilot --location 
 ## Key Vault
 
 ```bash
-kv=arc-pilot-keyvault-$(terraform output --raw uniq)
+uniq=$(az account show --query id --output tsv | cut -f1 -d-)
+kv=arc-pilot-keyvault-$uniq
 az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
 az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
 az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa
@@ -70,7 +71,8 @@ az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file 
 ## Storage account
 
 ```bash
-sa=arcpilotsa$(terraform output --raw uniq)
+uniq=$(az account show --query id --output tsv | cut -f1 -d-)
+sa=arcpilotsa$uniq
 az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location uksouth
 az storage container create --account-name $sa --name powershell --public-access blob
 az storage container create --account-name $sa --name bash       --public-access blob
@@ -90,11 +92,12 @@ az policy assignment non-compliance-message create --resource-group arc_pilot --
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-core
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-soc
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-linuxapp
-kv=arc-pilot-$(terraform output --raw uniq)
+uniq=$(az account show --query id --output tsv | cut -f1 -d-)
+kv=arc-pilot-$uniq
 az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
 az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
 az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa
-sa=arcpilotsa$(terraform output --raw uniq)
+sa=arcpilotsa$uniq
 az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location uksouth
 az storage container create --account-name $sa --name powershell --public-access blob
 az storage container create --account-name $sa --name bash       --public-access blob

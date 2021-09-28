@@ -79,12 +79,18 @@ Skip this step if you do not have the appropriate Azure AD role to create AAD se
 
 This hack is not a test of your Key Vault skills, so please use the command blocks below.
 
-Run them in the **arc-onprem-servers** directory in your [bash](https://shell.azure.com/bash) environment.
+### Get a uniq value
+
+This will help ensure the FQDNs are unique.
+
+```bash
+uniq=$(az account show --query id --output tsv | cut -f1 -d-)
+```
 
 ### Create the key vault
 
 ```bash
-kv=arc-pilot-$(terraform output --raw uniq)
+kv=arc-pilot-$uniq
 az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
 ```
 
@@ -111,7 +117,7 @@ az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file 
 Create a storage account for custom scripts.
 
 ```bash
-sa=arcpilotsa$(terraform output --raw uniq)
+sa=arcpilotsa$uniq
 az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location uksouth
 ```
 

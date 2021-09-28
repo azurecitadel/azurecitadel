@@ -53,7 +53,7 @@ If you don't have that resource group and key vault then this command block will
 
 ```bash
 az group create --name arc_pilot --location uksouth
-uniq=$(head -20 /dev/random | md5sum | cut -c1-8)
+uniq=$(az account show --query id --output tsv | cut -f1 -d-)
 kv=arc-pilot-keyvault-$uniq
 az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
 ```
