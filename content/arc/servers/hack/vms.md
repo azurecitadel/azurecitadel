@@ -40,20 +40,25 @@ The VMs will need outgoing internet access.
 
 ## Terraform repo
 
-If you cannot create VMs outside of Azure then you'll create some onboardable VMs using a Terraform repo.
+If you cannot create VMs outside of Azure then you'll create some onboardable VMs using a Terraform repo. The repo will create servers with no Azure Agent and firewall rules blocking the IMDS endpoint.
 
 * Use the <https://github.com/terraform-azurerm-examples/arc-onprem-servers> repo's README file
+  * You will need an [SSH key](https://docs.microsoft.com/azure/virtual-machines/linux/mac-create-ssh-keys) for it to work
+  * Do not set the azcmagent or arc variables!
 * Create the "on prem" virtual machines ready for the manual onboarding tasks
-* You will need an [SSH key](https://docs.microsoft.com/azure/virtual-machines/linux/mac-create-ssh-keys)
-* Review the content of the onprem_servers resource group in the Azure Portal.
+  * Review the content of the onprem_servers resource group in the Azure Portal.
 
 This is not a Terraform training session so the readme file is intended to be usable by Terraform novices.
 
-**IMPORTANT!**: You should not do anything after this point directly with the Azure resources in the onprem\_servers resource group.
+⚠️ **_Do not interact directly with the Azure resources in the onprem\_servers resource group!_**
 
-These VMs represent VMs that exist outside of Azure, so think of them as on prem servers, e.g. VMs running in an ESXi cluster in a datacentre. As you work through you will access them via RDP or SSH and work at the OS level but you shouldn't configure anything in the portal or CLI that _directly_ accesses the VMs in the onprem_servers resource group az Azure resources, e.g. resetting passwords, installing extensions or applying policies.
+  **These VMs represent VMs that exist outside of Azure, so think of them as on prem servers, e.g. VMs running in an ESXi cluster in a datacentre.**
 
-> Hint: shut down these VMs in the portal when they are not needed so that they are deallocated and do not incur compute costs.
+  **You shouldn't configure anything in the portal or CLI that _directly_ accesses the VMs in the onprem_servers resource group az Azure resources, e.g. resetting passwords, installing extensions or applying policies.**
+
+  **The only thing you should do with these servers is log into them using the Bastion service.**
+
+Hint: You can also shut down these VMs in the portal when they are not needed so that they are deallocated and do not incur compute costs.
 
 ## Success criteria
 
