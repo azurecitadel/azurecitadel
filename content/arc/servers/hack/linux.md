@@ -41,7 +41,9 @@ If you are working as a team then ensure that the script generation and executio
     | platform | VMware vSphere |
     | cluster | POC |
 
-    > If you are using a non-Azure platform for your on prem VMs then feel free to change the tag values.
+    If you are using a non-Azure platform for your on prem VMs then feel free to change the tag values.
+
+    Hint: the generated script may need an edit...
 
 ## Onboard the linux VMs
 
@@ -49,6 +51,10 @@ On each on prem linux server:
 
 * Create a local script on each server called arc.sh
 * Run the arc.sh script as root, e.g. `sudo sh arc.sh`
+
+If you have used the default variables with the terraform repo then you will be using the Bastion service to connect:
+
+![Bastion](/arc/servers/images/bastion.png)
 
 ## Simple Resource Graph query
 
