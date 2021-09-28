@@ -124,10 +124,16 @@ You will need the Azure CLI for these checks. Log in and check you are in the co
 
     You should have Owner access, or Contributor plus User Access Administrator, which is fundamentally the same.
 
+1. Grab the service principal's appId
+
+    ```bash
+    appId=$(az ad sp list --filter "displayname eq 'http://archack-deleteme'" --query "[0].appId" --output tsv)
+    ```
+
 1. Remove the service principal
 
     ```bash
-    az ad sp delete --id http://archack-deleteme
+    az ad sp delete --id $appId
     ```
 
 ## Setup
