@@ -26,11 +26,13 @@ Providing the generated script and service principal credentials to others for e
 
 The very limited RBAC role given to the service principal is only capable of onboarding VMs and nothing more.
 
-This lab will emulate that script handover.
+This lab will emulate that script handover as it is closer to the workflow you would see in a professional services engagement.
 
 If you are working as a team then ensure that the script generation and execution are done by different people.
 
 ## Script generation
+
+**Your role is to create a working script for the linux admins to use.**
 
 * Provide a generated script that can be executed on multiple servers
 * Ensure the script uses the service principal that was created in the last lab
@@ -41,11 +43,13 @@ If you are working as a team then ensure that the script generation and executio
     | platform | VMware vSphere |
     | cluster | POC |
 
-    If you are using a non-Azure platform for your on prem VMs then feel free to change the tag values.
+    > If you are using a non-Azure platform for your on prem VMs then feel free to change the tag values.
 
-    Hint: the generated script may need an edit...
+💡 Hint: the generated script will need a little work. Copy into vscode notepad++ or another editor, make the changes and clean up.
 
 ## Onboard the linux VMs
+
+**As a linux admin, you will run the provided script on each of the VMs.**
 
 On each on prem linux server:
 
