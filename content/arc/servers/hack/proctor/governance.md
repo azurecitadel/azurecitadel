@@ -6,7 +6,7 @@ draft: true
 series:
  - arc-servers-hack-proctor
 weight: 160
-url: /arc/server/hack/governance/proctor
+url: /arc/servers/hack/governance/proctor
 ---
 
 ## Tasks
