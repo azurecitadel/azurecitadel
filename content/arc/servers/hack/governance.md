@@ -51,18 +51,12 @@ The Windows sys admins are pleased with the automated patching regime but they a
 
 ## Success criteria
 
-Tell your proctor:
-
-1. The required resource provider type
-1. The required outgoing connectivity and URL allowed listing
-1. What is the current per server per month price for UK South?
-
 Screen share with your proctor:
 
 1. Show the current Arc virtual machine compliance against ISO 27001:2013
 1. Show the current Arc virtual machine compliance against UK OFFICIAL/UK NHS
 1. Show the current Arc virtual machine compliance against Azure security baseline
-1. Show the policy assignment auditing whether _git_ is installed on Linux
+1. Show the policy assignment auditing whether _tree_ is installed on Linux
 1. Show the policy assignment auditing whether Windows servers need rebooting
 
 ## Resources
