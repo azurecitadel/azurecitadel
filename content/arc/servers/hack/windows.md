@@ -67,19 +67,49 @@ This section assumes you have used the Terraform repo with the defaults to creat
 
 > Note that the Terraform repo deploys Windows VMs into a workgroup rather than a domain and uses local admin accounts. The VM's registries have been modified to [allow local account tokens](https://docs.microsoft.com/windows-server/manage/windows-admin-center/support/troubleshooting#i-can-connect-to-some-servers-but-not-others).In a domain context then adding servers is much cleaner, supporting lists and AD search.
 
-You now have all of the WIndows servers
+You now have all of the Windows servers
 
 ## Azure hybrid center
 
 OK, enough handholding. Back to the challenge format.
 
+## Register with Azure
+
 * Register the gateway to Azure
   * The created service principal requires admin consent
-* Set up Azure Arc on all three servers
-* Check the Azure section in Settings
-* Check the arc_pilot resource group in the Azure portal
 
-> Note that you can pre-create the service principal if you need separation.
+⚠️Do not re-use the service principal that has the "Azure Connected Machine Onboarding" role.
+
+Allow the Azure wizard to create a new app registration. This app will be called `WindowsAdminCenter-https://<fqdn>`.
+
+![Register](/arc/servers/images/registerToAzure.png)
+
+⚠️ The app registration creation requires admin consent, and this is where you need to be Global Adminstrator or Privileged Role Administrator when you sign in to Azure on step 5.
+
+### Azure AD app
+
+For info, the automatically created app registration will have specific API permissions:
+
+* Azure Active Directory Graph
+  * Directory.AccessAsUser.All
+  * User.Read
+* Azure Service Management
+  * user_impersonation
+
+ It will also have a replyUri set for the application to work correctly. You can see this in the manifest for the app registration.
+
+ ```json
+"replyUrlsWithType": [
+        {
+                "url": "https://<fqdn>:6516/*",
+                "type": "Web"
+        }
+],
+ ```
+
+On your engagements it may make more sent to precreate the app with the api permissions replyUri set. If so, follow the [manual steps](https://docs.microsoft.com/windows-server/manage/windows-admin-center/azure/azure-integration#register-your-gateway-with-azure).
+
+## Onboard the three Windows VMs
 
 ## Success criteria
 
@@ -92,6 +122,7 @@ Screen share with your proctor to show that you achieved:
 
 * [Windows Admin Center](https://aka.ms/WindowsAdminCenter)
 * [Connect hybrid machines to Azure from Windows Admin Center](https://docs.microsoft.com/azure/azure-arc/servers/onboard-windows-admin-center)
+* [App Registration detail for Windows Admin Center](https://docs.microsoft.com/windows-server/manage/windows-admin-center/azure/azure-integration)
 * [Azure Arc docs](https://aka.ms/AzureArcDocs)
 * [Connect hybrid machines to Azure at scale](https://docs.microsoft.com/azure/azure-arc/servers/onboard-service-principal)
 * [Az.ConnectedMachine](https://docs.microsoft.com/azure/azure-arc/servers/onboard-powershell) module for PowerShell

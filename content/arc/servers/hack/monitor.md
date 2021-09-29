@@ -64,11 +64,11 @@ You are part of a Linux application team.
 * (Optional) Deploy a Data Collection Rule to collate any system errors and send to a Log Analytics Workspace
 * (Optional) Create an Azure Monitor Alert to notify the application team on an error
 
-## Integrate with Azure Security Center
+## Integrate with Azure Security Center (optional)
 
 * Enable Azure Security Center on your Azure Arc connected machines
 
-## Integrate with Azure Sentinel
+## Integrate with Azure Sentinel (optional)
 
 * Enable Azure Sentinel on your Azure Arc connected machines by configuring the Log Analytics agent to forward events to Azure Sentinel such as Common Event Format (CEF) or Syslog
 
@@ -79,6 +79,9 @@ Screen share with your proctor to show that you achieved:
 1. Azure Monitor Agent (AMA) is reporting heartbeat to your Log Analytics workspace
 1. Data Collection Rules are defined and associated correctly with the resources
 1. Data is being gathered from the Azure Arc-enabled machines
+
+Optional:
+
 1. Open Azure Security Center and view the Secure Score for your Azure arc connected machine
 1. From Azure Sentinel, view collected events from your Azure Arc connected machine
 
