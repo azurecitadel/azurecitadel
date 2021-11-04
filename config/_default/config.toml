@@ -16,20 +16,32 @@ canonifyURLs = true
   # Side menu is controlled via frontmatter
 
   [[menu.section]]
-    name = "Artificial Intelligence"
-    url = "/ai"
+    name = "ARM"
+    url = "/arm"
 
   [[menu.section]]
     name = "Azure Arc"
     url = "/arc"
 
   [[menu.section]]
+    name = "Azure Stack HCI"
+    url = "/arc"
+
+  [[menu.section]]
+    name = "Azure Virtual Desktop"
+    url = "/avd"
+
+  [[menu.section]]
     name = "CLI"
     url = "/cli"
 
   [[menu.section]]
-    name = "Policy"
-    url = "/policy"
+    name = "Enterprise Scale"
+    url = "/es"
+
+  [[menu.section]]
+    name = "Fundamentals"
+    url = "/fundamentals"
 
   [[menu.section]]
     name = "Marketplace"
@@ -40,12 +52,16 @@ canonifyURLs = true
     url = "/network"
 
   [[menu.section]]
-    name = "Packer & Ansible"
-    url = "/packeransible"
+    name = "Setup"
+    url = "/setup"
 
   [[menu.section]]
-    name = "WVD"
-    url = "/wvd"
+    name = "Terraform"
+    url = "/terraform"
+
+  [[menu.section]]
+    name = "Virtual Machines"
+    url = "/vm"
 
 [taxonomies]
   category = "categories"
