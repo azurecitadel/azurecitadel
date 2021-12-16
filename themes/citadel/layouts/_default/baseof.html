@@ -1,4 +1,5 @@
-<html prefix="og: http://ogp.me/ns#" lang="{{ .Language }}">
+<html data-color-mode="auto" data-light-theme="light" data-dark-theme="dark_dimmed" prefix="og: http://ogp.me/ns#" lang="{{ .Language }}">
+
 {{- partial "head.html" . -}}
 
 <body class="d-lg-flex">
@@ -6,12 +7,10 @@
 
     {{- partial "sidebar.html" . -}}
 
-    <main id="main" class="width-full">
-        <main class="container-xl px-3 px-md-6 my-4 my-lg-4 d-lg-flex">
-            <article class="markdown-body width-full">
-                {{- block "main" . }}{{- end }}
-            </article>
-        </main>
+    <main class="flex-1 min-width-0 overflow-y-scroll" style="height: 100vh;">
+        <div className="d-md-none">
+        </div>
+        {{- block "main" . }}{{- end }}
     </main>
 
     {{- partial "footer.html" . -}}

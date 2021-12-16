@@ -1,20 +1,35 @@
 {{ define "main" }}
 
-{{.Site.Home.Content}}
-
-<section class="container-xl pb-lg-4 my-8 px-3 px-md-6">
-	<div class="d-flex flex-wrap gutter gutter-xl-spacious">
-
-		{{ range .Site.Menus.section }}
-
-		<div class="d-flex flex-column col-12 col-sm-6 col-lg-3 pb-4">
-			<a class="btn-mktg flex-auto btn-outline-mktg btn-large-mktg ws-normal " href="{{ .URL }}"
-				title="{{ .Name }}">{{ .Name }}
-			</a>
+<section id="landing">
+	<div class="container-xl">
+		<div class="d-lg-flex flex-row-reverse flex-items-center">
+			<img class="width-full" alt="Azure Citadel Logo" src="{{ `default-og-image.png` | absURL }}" />
 		</div>
-
-		{{ end }}
 	</div>
 </section>
+
+<div class="container-xl px-3 px-md-6 my-4">
+
+	{{.Site.Home.Content}}
+
+	<section class="container-xl pb-lg-4 mt-6 px-3 px-md-6">
+		<div class="d-flex flex-wrap gutter gutter-xl-spacious">
+			{{ range $.Site.Data.frontpage.frontpage }}
+			<div class="d-flex flex-column col-12 col-sm-6 col-lg-4 pb-4">
+				<div class="flex-auto ws-normal">
+					<div class="d-flex flex-items-center">
+						<div class="mr-2">
+							{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}
+						</div>
+						<div>
+							<h3><a title="{{ .name }}" href="{{ .url }}">{{ .name }}</a></h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{ end }}
+		</div>
+	</section>
+</div>
 
 {{ end }}

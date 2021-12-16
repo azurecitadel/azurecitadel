@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@primer/css": "^19.1.0",
+    "@primer/octicons": "^16.2.0",
+    "highlight.js": "^11.4.0"
+  }
+}

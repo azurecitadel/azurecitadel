@@ -8,8 +8,7 @@ menu:
     identifier: 'policy-custom'
     parent: 'policy'
 aliases:
-    - aliases:
-    - /automation/policy/custom/
+  - /automation/policy/custom/
 ---
 
 ## Introduction
