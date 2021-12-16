@@ -20,7 +20,7 @@ Do not use the content directly for production workloads. There is no warranty o
 ## MIT license
 
 ```text
-Copyright (c) 2021
+Copyright (c) 2022
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

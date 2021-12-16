@@ -46,10 +46,10 @@ Use the Remote Container extension to open this project in VS Code, as shown in 
 
 ### Serve content
 
-Open a new terminal window in VS Code and tell Hugo to start serving the local content on localhost:1313
+Open a new terminal window in VS Code and tell Static Web Apps to start serving the local content
 
 ```bash
-hugo serve
+swa start http://localhost:1313 --run "hugo server"
 ```
 
 ![Run hugo serve](/about/contributing/remote-container-1-hugo-serve.png)
