@@ -14,7 +14,7 @@
   </div>
 
   <nav>
-    <ul class="ActionList" aria-label="Azure Citadel content list">
+    <ul class="ActionList pl-3 p-0" aria-label="Azure Citadel content list">
 
       {{ $currentPage := . }}
 
@@ -23,7 +23,7 @@
       {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
       {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
 
-      <li class="my-2 p-1 ActionList-item {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }} {{ if $isActive }}color-bg-inset{{ end }}" aria-haspopup="true">
+      <li class="my-2 ActionList-item {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }} {{ if $isActive }}color-bg-inset{{ end }}" aria-haspopup="true" style="margin-left: -20px; padding-left: 20px">
         {{ .Pre }}
         <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
           <summary class="outline-none">
@@ -40,7 +40,7 @@
           </summary>
 
           {{ if .HasChildren }}
-          <ul class="ActionList ActionList--subGroup pl-3 pb-3 pr-3" aria-labelledby="{{ .Name }}">
+          <ul class="ActionList ActionList--subGroup" aria-labelledby="{{ .Name }}">
             {{ range .Children }}
 
             {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
