@@ -6,7 +6,7 @@
     <main class="d-flex flex-auto flex-row width-full overflow-hidden" style="height: -webkit-fill-available">
         {{- partial "sidebar.html" . -}}
 
-        <div class="d-flex flex-column width-full overflow-auto" style="height: -webkit-fill-available">
+        <div class="d-flex flex-column width-full overflow-y-auto" style="height: -webkit-fill-available">
         {{- block "main" . }}{{- end }}
         </div>
     </main>
