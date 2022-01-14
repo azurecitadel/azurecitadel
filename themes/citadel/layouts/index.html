@@ -1,35 +1,38 @@
 {{ define "main" }}
 
-<section id="landing">
-	<div class="container-xl">
-		<div class="d-lg-flex flex-row-reverse flex-items-center">
-			<img class="width-full" alt="Azure Citadel Logo" src="{{ `default-og-image.png` | absURL }}" />
+<div class="d-flex flex-column container-xl width-full overflow-auto" style="height: 100vh; min-height: -webkit-fill-available;">
+	<section id="landing">
+		<div class="container-xl">
+			<div class="d-lg-flex flex-row-reverse flex-items-center">
+				<img class="width-full" alt="Azure Citadel Logo" src="{{ `default-og-image.png` | absURL }}" />
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
-<div class="container-xl px-3 px-md-6 my-4">
+	<div class="container-xl px-3 px-md-6 my-4">
 
-	{{.Site.Home.Content}}
+		{{.Site.Home.Content}}
 
-	<section class="container-xl pb-lg-4 mt-6 px-3 px-md-6">
-		<div class="d-flex flex-wrap gutter gutter-xl-spacious">
-			{{ range $.Site.Data.frontpage.frontpage }}
-			<div class="d-flex flex-column col-12 col-sm-6 col-lg-4 pb-4">
-				<div class="flex-auto ws-normal">
-					<div class="d-flex flex-items-center">
-						<div class="mr-2">
-							{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}
-						</div>
-						<div>
-							<h3><a title="{{ .name }}" href="{{ .url }}">{{ .name }}</a></h3>
+		<section class="container-xl pb-lg-4 mt-6 px-3 px-md-6">
+			<div class="d-flex flex-wrap gutter gutter-xl-spacious">
+				{{ range $.Site.Data.frontpage.frontpage }}
+				<div class="d-flex flex-column col-12 col-sm-6 col-lg-4 pb-4">
+					<div class="flex-auto ws-normal">
+						<div class="d-flex flex-items-center">
+							<div class="mr-2">
+								{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}
+							</div>
+							<div>
+								<h3><a title="{{ .name }}" href="{{ .url }}">{{ .name }}</a></h3>
+							</div>
 						</div>
 					</div>
 				</div>
+				{{ end }}
 			</div>
-			{{ end }}
-		</div>
-	</section>
+		</section>
+	</div>
 </div>
+
 
 {{ end }}
