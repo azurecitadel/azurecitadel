@@ -2,18 +2,13 @@
 
 {{- partial "head.html" . -}}
 
-<body class="d-lg-flex">
-    {{- partial "header.html" . -}}
+<body class="width-full overflow-hidden">
+    <main class="d-flex flex-auto flex-row width-full overflow-hidden" style="height: 100vh; min-height: -webkit-fill-available;">
+        {{- partial "sidebar.html" . -}}
 
-    {{- partial "sidebar.html" . -}}
-
-    <main class="flex-1 min-width-0 overflow-y-scroll" style="height: 100vh;">
-        <div className="d-md-none">
-        </div>
         {{- block "main" . }}{{- end }}
     </main>
 
-    {{- partial "footer.html" . -}}
 </body>
 
 {{- block "embedded-script" . }}{{- end }}
