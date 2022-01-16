@@ -18,6 +18,8 @@ When you are onboarding VMs at scale then it makes sense to prepare the target e
 
 There is an excellent page and 10 minute video on Azure Docs called [Plan and deploy Azure Arc-enabled servers](https://docs.microsoft.com/azure/azure-arc/servers/plan-at-scale-deployment). Watch the video when you get the opportunity.
 
+Go to [aka.ms/adopt/hybrid](https://aka/ms/adopt/hybrid) for a fuller set of Cloud Adoption Framework documentation for hybrid and multicloud.
+
 We will add a couple of simple tagging policies, and then add in a key vault with a self signed cert and the private SSH key if you created your on prem VMs in Azure. We'll also add in a couple of Azure Monitor workspaces.
 
 You will also create a service principal for the onboarding scripts with the right RBAC role.
@@ -151,6 +153,7 @@ As a stretch target, see how many roles there are for onboarding Azure Arc resou
 * <https://docs.microsoft.com/azure/key-vault/secrets/quick-create-cli>
 * <https://docs.microsoft.com/azure/azure-monitor/logs/quick-create-workspace>
 * <https://docs.microsoft.com/azure/security-center/security-center-enable-data-collection>
+* <https://aka/ms/adopt/hybrid>
 
 ## Next up
 

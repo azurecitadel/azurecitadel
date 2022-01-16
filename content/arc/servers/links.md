@@ -21,6 +21,7 @@ Here are the main links for Azure Arc:
 | [aka.ms/AzureArc](https://aka.ms/AzureArc) | Main product page |
 | [aka.ms/AzureArcLearn](https://aka.ms/AzureArcLearn) | Learning Paths |
 | [aka.ms/AzureArcDocs](https://aka.ms/AzureArcDocs) | Azure Docs for Arc |
+| [aka.ms/adopt/hybrid](https://aka.ms/adopt/hybrid) | Hybrid & multicloud - Cloud Adoption Framework for Azure |
 | [aka.ms/hybrid-estimator](https://aka.ms/hybrid-estimator) | Estimate costs for hybrid scenarios |
 
 ## Azure Arc Jumpstart

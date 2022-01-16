@@ -25,7 +25,7 @@ Alternatives approaches include:
 * leveraging [Update Management](https://docs.microsoft.com/azure/azure-arc/servers/onboard-update-management-machines)
 * using Azure Hybrid Services within [Windows Admin Center](https://docs.microsoft.com/azure/azure-arc/servers/onboard-windows-admin-center)
 
-We will default to using Windows Admin Center, but **if you do not have either the Global Administrator or Privileged Identity Administrator role in Azure AD then you should skip Windows Admin Center** and instead select one of the other approaches to onboard the three VMs.
+We will default to using Windows Admin Center, but **if you do not have either the Global Administrator or Privileged Identity Administrator role in Azure AD then you should skip Windows Admin Center** and instead select one of the other approaches to onboard the Windows VMs.
 
 This page will walk through the installation of Windows Admin Center in gateway mode and then discover the other Windows VMs. This will be full instructions rather than a challenge.
 
@@ -37,7 +37,7 @@ This section assumes you have used the Terraform repo with the defaults to creat
 
 ### Gateway Server
 
-1. RDP to win-01 using Bastion
+1. RDP to win-01
 1. Disable IEC in Server Manager
 1. Use Internet Explorer to install [Microsoft Edge](https://www.microsoft.com/edge)
     * Ensure you select the Windows Server 2019 version from the drop down
@@ -78,13 +78,13 @@ OK, enough handholding. Back to the challenge format.
 * Register the gateway to Azure
   * The created service principal requires admin consent
 
-⚠️Do not re-use the service principal that has the "Azure Connected Machine Onboarding" role.
+⚠️Do not re-use the service principal that has the "Azure Connected Machine Onboarding" role. You need to create a different appId and service principal for Windows Admin Center.
 
 Allow the Azure wizard to create a new app registration. This app will be called `WindowsAdminCenter-https://<fqdn>`.
 
 ![Register](/arc/servers/images/registerToAzure.png)
 
-⚠️ The app registration creation requires admin consent, and this is where you need to be Global Adminstrator or Privileged Role Administrator when you sign in to Azure on step 5.
+⚠️ The app registration creation requires admin consent, and this is where you need to be Global Administrator or Privileged Role Administrator when you sign in to Azure on step 5.
 
 ### Azure AD app
 
@@ -107,7 +107,7 @@ For info, the automatically created app registration will have specific API perm
 ],
  ```
 
-On your engagements it may make more sent to precreate the app with the api permissions replyUri set. If so, follow the [manual steps](https://docs.microsoft.com/windows-server/manage/windows-admin-center/azure/azure-integration#register-your-gateway-with-azure).
+On your engagements it may make more sense to precreate the app with the api permissions replyUri set. If so, follow the [manual steps](https://docs.microsoft.com/windows-server/manage/windows-admin-center/azure/azure-integration#register-your-gateway-with-azure).
 
 ## Onboard the three Windows VMs
 

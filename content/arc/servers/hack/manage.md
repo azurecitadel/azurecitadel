@@ -1,6 +1,6 @@
 ---
 title: "Management"
-description: "Use Azure Automanage to create a management baseline for the connected machines, enabling update management and inventory."
+description: "Use the preview Azure Automanage service to create a management baseline for the connected machines, enabling update management and inventory. Or use the services individually."
 layout: single
 draft: false
 menu:
@@ -25,9 +25,11 @@ Once your on prem machines are Azure Arc-enabled then you can also take advantag
 Please note that this is currently a preview service, and it does not yet cover all of the services in the diagram for Azure Arc VMs, but it is the fastest and simplest way to install the agents and benefit from:
 
 * configuration management
+* automation accounts
 * update management
 * change tracking and inventory
-* automation accounts
+
+Note that it is possible to configure all of the services individually. See the links in the [Resources](#Resources)section below.
 
 ## Pricing
 
@@ -100,6 +102,7 @@ Screen share with your proctor to show that you achieved:
 * [Operational compliance in Azure](https://docs.microsoft.com/azure/cloud-adoption-framework/manage/azure-management-guide/operational-compliance)
 * [Azure Automanage](https://docs.microsoft.com/azure/automanage/automanage-virtual-machines)
 * [Azure Automanage for Arc-enabled servers](https://docs.microsoft.com/azure/automanage/automanage-arc)
+* [Configuration management for Azure Arc-enabled servers](https://docs.microsoft.com/azure/architecture/hybrid/azure-arc-hybrid-config)
 * [An introduction to Azure Automation](https://docs.microsoft.com/azure/automation/automation-intro)
 * [Update Management overview](https://docs.microsoft.com/azure/automation/update-management/overview)
 * [Enable Update Management from am Automation Account](https://docs.microsoft.com/azure/automation/update-management/enable-from-automation-account)
