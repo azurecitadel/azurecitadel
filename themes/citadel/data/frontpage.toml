@@ -1,0 +1,47 @@
+[[frontpage]]
+name = "ARM"
+url = "/arm"
+
+[[frontpage]]
+name = "Azure Arc"
+url = "/arc"
+
+[[frontpage]]
+name = "Azure Stack HCI"
+url = "/arc"
+
+[[frontpage]]
+name = "Azure Virtual Desktop"
+url = "/avd"
+
+[[frontpage]]
+name = "CLI"
+url = "/cli"
+
+[[frontpage]]
+name = "Enterprise Scale"
+url = "/es"
+
+[[frontpage]]
+name = "Fundamentals"
+url = "/fundamentals"
+
+[[frontpage]]
+name = "Marketplace"
+url = "/marketplace"
+
+[[frontpage]]
+name = "Network"
+url = "/network"
+
+[[frontpage]]
+name = "Setup"
+url = "/setup"
+
+[[frontpage]]
+name = "Terraform"
+url = "/terraform"
+
+[[frontpage]]
+name = "Virtual Machines"
+url = "/vm"

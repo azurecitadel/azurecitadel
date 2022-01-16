@@ -1,0 +1,29 @@
+.details .octicon-chevron-down {
+    transform: rotateX(0);
+    transition: 250ms ease-out;
+}
+
+.details[open] > summary .octicon-chevron-down {
+    transform: rotateX(180deg);
+}
+
+.highlight {
+    position: relative;
+}
+
+div.copy-code-button {
+    display: none;
+    animation: fade-out 200ms both;
+}
+
+.highlight:hover div.copy-code-button {
+    display: block;
+    animation: fade-in 200ms both;
+}
+
+@media (min-width: 1280px) {
+    .toc {
+        position: sticky;
+        top: 24px;
+    }   
+}

@@ -9,60 +9,6 @@ enableGitInfo = true
 enableRobotsTXT = true
 canonifyURLs = true
 
-[menu]
-
-  # Home -> Sections
-  # menu.section appears on the Home Page under "Explore by section"
-  # Side menu is controlled via frontmatter
-
-  [[menu.section]]
-    name = "ARM"
-    url = "/arm"
-
-  [[menu.section]]
-    name = "Azure Arc"
-    url = "/arc"
-
-  [[menu.section]]
-    name = "Azure Stack HCI"
-    url = "/arc"
-
-  [[menu.section]]
-    name = "Azure Virtual Desktop"
-    url = "/avd"
-
-  [[menu.section]]
-    name = "CLI"
-    url = "/cli"
-
-  [[menu.section]]
-    name = "Enterprise Scale"
-    url = "/es"
-
-  [[menu.section]]
-    name = "Fundamentals"
-    url = "/fundamentals"
-
-  [[menu.section]]
-    name = "Marketplace"
-    url = "/marketplace"
-
-  [[menu.section]]
-    name = "Network"
-    url = "/network"
-
-  [[menu.section]]
-    name = "Setup"
-    url = "/setup"
-
-  [[menu.section]]
-    name = "Terraform"
-    url = "/terraform"
-
-  [[menu.section]]
-    name = "Virtual Machines"
-    url = "/vm"
-
 [taxonomies]
   category = "categories"
   tag = "tags"

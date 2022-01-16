@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "Run Static Web App",
+            "configurations": [
+                "Run SWA emulator"
+            ],
+            "presentation": {
+                "hidden": false,
+                "group": "",
+                "order": 1
+            }
+        }
+    ],
+    "configurations": [
+        {
+            "name": "Run SWA emulator",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "swa start ./public --run \"hugo -w\"",
+            "serverReadyAction": {
+                "pattern": "Azure Static Web Apps emulator started at http://localhost:([0-9]+)",
+                "uriFormat": "http://localhost:%s",
+                "action": "openExternally"
+            },
+            "presentation": {
+                "hidden": true,
+                "group": "",
+                "order": 3
+            }
+        }
+    ]
+}

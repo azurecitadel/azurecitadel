@@ -1,64 +1,93 @@
-<div class="sidebar d-none d-lg-block">
+<div class="d-none"></div>
 
-    <div class="d-flex flex-items-center p-4" style="z-index: 3;" id="citadel-logo">
+<div class="d-none d-lg-block bg-primary height-fit overflow-y-scroll pb-5 border-right col-4" style="max-width: 310px; height: -webkit-fill-available">
 
-        
-        <a href="{{.Site.BaseURL }}" class="h4-mktg text-white no-underline no-wrap pl-2 flex-auto">
-            <svg version="1.1" width="32" height="32" viewBox="0 0 64 64" class="octicon octicon-mark-github" aria-hidden="true">
-                <path d="M14.62 55H64L37.4 8.91l-8.1 22.25 15.56 18.5L14.62 55zM35.28 4.84l-19 15.95L0 48.98h14.68l20.6-44.14z"></path>
-            </svg>&nbsp;
-            Azure Citadel
-        </a>
-    </div>
+  <div class="d-flex flex-items-center p-4 color-bg-default" style="z-index: 3" id="citadel-logo" role="banner">
+    <a href="{{.Site.BaseURL }}" class="color-fg-default" aria-hidden="true" tabIndex="-1">
+      <svg version="1.1" width="32" height="32" viewBox="0 0 64 64" class="octicon" aria-hidden="true">
+        <path d="M14.62 55H64L37.4 8.91l-8.1 22.25 15.56 18.5L14.62 55zM35.28 4.84l-19 15.95L0 48.98h14.68l20.6-44.14z">
+        </path>
+      </svg>
+    </a>
+    <a href="{{.Site.BaseURL }}" class="f4 text-semibold color-fg-default no-underline no-wrap pl-2 flex-auto">
+      Azure Citadel
+    </a>
+  </div>
 
-    <ul class="sidebar-products">
-        <li><ul class="sidebar-categories list-style-none">
+  <nav>
+    <ul class="ActionList pl-3 p-0" aria-label="Azure Citadel content list">
 
-            {{ $currentPage := . }}
-            {{ range .Site.Menus.side }}
-            <li title="{{ .Name }}"
-                class="sidebar-category py-1 {{ if or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}active{{ end }}">
-                <details class="dropdown-withArrow details details-reset"
-                    {{ if or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}open=""
-                    {{ end }}>
-                    <summary>
-                        <div class="d-flex flex-justify-between">
-                            <a href="{{ .URL }}"
-                                class="pl-4 pr-2 py-2 f6 text-uppercase d-block flex-auto mr-3">{{ .Name }}</a>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="octicon flex-shrink-0 arrow mr-3"
-                                style="margin-top:7px" viewBox="0 0 16 16" width="16" height="16">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z">
-                                </path>
-                            </svg>
-                        </div>
-                    </summary>
+      {{ $currentPage := . }}
 
-                    {{ if .HasChildren }}
-                    <ul class="sidebar-articles list-style-none">
-                        {{ range .Children }}
-                        <li title="{{ .Name }}"
-                            class="sidebar-article {{ if $currentPage.HasMenuCurrent "side" . }}active{{ end }} {{ if $currentPage.IsMenuCurrent "side" . }}is-current-page{{ end }}">
-                            {{ .Pre }}<a href="{{ .URL }}" class="pl-4 pr-5 py-1">{{.Name}}</a>
+      {{ range .Site.Menus.side }}
 
-                            {{ if .HasChildren }}
-                            <ul class="sidebar-sub-articles list-style-none pl-4">
-                                {{ range .Children }}
-                                <li title="{{ .Name }}"
-                                    class="sidebar-sub-article {{ if $currentPage.HasMenuCurrent "side" . }}active{{ end }} {{ if $currentPage.IsMenuCurrent "side" . }}is-current-page{{ end }}">
-                                    {{ .Pre }}<a href="{{ .URL }}" class="pl-4 py-1">{{.Name}}</a>
-                                </li>
-                                {{ end }}
-                            </ul>
-                            {{ end }}
-                        </li>
-                        {{ end }}
-                    </ul>
-                    {{ end }}
-                </details>
-            </li>
+      {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
+      {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
+
+      <li class="my-2 ActionList-item {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }} {{ if $isActive }}color-bg-inset{{ end }}" aria-haspopup="true" style="margin-left: -20px; padding-left: 20px">
+        {{ .Pre }}
+        <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
+          <summary class="outline-none">
+            {{ if .HasChildren }}
+            <div class="ActionList-content">
+              <span class="ActionList-item-label {{ if $isCurrent }}color-fg-accent{{ end }}">{{ .Name }}</span>
+              <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
+            </div>
+            {{ else }}
+            <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content">
+              <span class="ActionList-item-label">{{ .Name }}</span>
+            </a>
             {{ end }}
-        </ul>
-    </ul></li>
+          </summary>
 
+          {{ if .HasChildren }}
+          <ul class="ActionList ActionList--subGroup" aria-labelledby="{{ .Name }}">
+            {{ range .Children }}
+
+            {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
+            {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
+
+            <li class="ActionList-item ActionList-item--subItem {{ if and $isCurrent (not .HasChildren) }}ActionList-item--navActive{{ end }} {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }}" aria-haspopup="true">
+              {{ .Pre }}
+              <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
+                <summary class="outline-none">
+                  {{ if .HasChildren }}
+                  <div class="ActionList-content">
+                    <span class="ActionList-item-label {{ if $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span>
+                    <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
+                  </div>
+                  {{ else }}
+                  <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content">
+                    <span class="ActionList-item-label">{{ .Name }}</span>
+                  </a>
+                  {{ end }}
+                </summary>
+
+                {{ if .HasChildren }}
+                <ul class="ActionList ActionList--subGroup" aria-labelledby="{{ .Name }}">
+                  {{ range .Children }}
+
+                  {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
+                  {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
+
+                  <li class="ActionList-item ActionList-item--subItem {{ if $isCurrent }}ActionList-item--navActive{{ end }}">
+                    {{ .Pre }}
+                    <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content">
+                      <span class="ActionList-item-label">{{ .Name }}</span>
+                    </a>
+                  </li>
+                  {{ end }}
+                </ul>
+                {{ end }}
+              </details>
+            </li>
+
+            {{ end }}
+          </ul>
+          {{ end }}
+      </li>
+
+      {{ end }}
+    </ul>
+  </nav>
 </div>

@@ -1,89 +1,86 @@
 {{ define "main" }}
 
-{{ partial "breadcrumbs.html" . }}
+<div class="container-xl p-3 p-md-6 width-full">
 
-<div class="mt-2 article-grid-container">
+    {{ partial "breadcrumbs.html" . }}
 
-    <div class="article-grid-head">
-        <div class="d-flex flex-items-baseline flex-justify-between mt-3">
-            <h1 class="border-bottom-0">{{.Title}}</h1>
-        </div>
+    <div class="d-flex flex-column flex-xl-row-reverse markdown-body">
 
-        <div class="lead-mktg">
-            <p>{{.Description}}</p>
-        </div>
-    </div>
-
-    <div class="article-grid-toc border-bottom border-xl-0 pb-4 mb-5 pb-xl-0 mb-xl-0">
-        <div class="article-grid-toc-content">
-
+        <div class="toc p-3 flex-self-start">
             <h3 id="in-this-article" class="f5 mb-2">
-                <a class="link-gray-dark" href="#in-this-article">
+                <a class="" href="#in-this-article">
                     Contents
                 </a>
             </h3>
-            {{ .TableOfContents }}
+            <div class="f6">{{ .TableOfContents }}</div>
         </div>
-    </div>
 
-    <div id="article-contents" class="article-grid-body">
-        {{.Content}}
+        <div class="overflow-hidden">
+            <h1 class="border-bottom-0">{{.Title}}</h1>
+            <p>{{.Description}}</p>
 
-        {{ if isset .Params "series" }}
-            {{ $seriesTitle := index .Params.series 0 }}
-            {{ $currentLink := .Permalink }}
-            {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
+            <div>
+            {{.Content}}
 
-            {{ range $index, $page := $wholeSeries }}
-                {{ if eq $currentLink $page.Permalink }}
-                {{ if gt $index 0 }}
-                    {{ .Scratch.Set "prevInSeries" (index $wholeSeries (sub $index 1)) }}
-                {{ end }}
-                {{ if lt $index (sub (len $wholeSeries) 1) }}
-                    {{ .Scratch.Set "nextInSeries" (index $wholeSeries (add $index 1)) }}
-                {{ end }}
-                {{ end }}
-            {{ end }}
+            {{ if isset .Params "series" }}
+                {{ $seriesTitle := index .Params.series 0 }}
+                {{ $currentLink := .Permalink }}
+                {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
 
-            {{ range (index .Site.Taxonomies.series ($.Param "menu.side.identifier")).Pages.ByWeight }}
-                <a class="link-with-intro Bump-link--hover no-underline" href="{{.Permalink}}">
-                    <h4 class="link-with-intro-title">{{.Title}}</h4>
-                </a>
-                <p class="link-with-intro-intro">
-                    {{.Description}}
-                </p>
-            {{ end }}
-
-            <nav class="paginate-container" aria-label="Pagination">
-                <div class="pagination">
-                {{ with index .Scratch.Values "prevInSeries" }}
-                    <a class="previous_page" rel="next" href="{{ .Permalink }}" aria-label="Previous Page">{{ .Title }}</a>
-                {{ else }}
-                    <span class="previous_page" aria-disabled="true">Previous</span>
+                {{ range $index, $page := $wholeSeries }}
+                    {{ if eq $currentLink $page.Permalink }}
+                    {{ if gt $index 0 }}
+                        {{ .Scratch.Set "prevInSeries" (index $wholeSeries (sub $index 1)) }}
+                    {{ end }}
+                    {{ if lt $index (sub (len $wholeSeries) 1) }}
+                        {{ .Scratch.Set "nextInSeries" (index $wholeSeries (add $index 1)) }}
+                    {{ end }}
+                    {{ end }}
                 {{ end }}
 
-                <a class="text-gray-light" href="." aria-label="Top">{{ .Name}}</a>
-
-                {{ with index .Scratch.Values "nextInSeries" }}
-                    <a class="next_page" rel="next" href="{{ .Permalink }}" aria-label="Next Page">{{ .Title }}</a>
-                {{ else }}
-                    <span class="next_page" aria-disabled="true">Next</span>
-                {{ end }}
+                {{ range (index .Site.Taxonomies.series ($.Param "menu.side.identifier")).Pages.ByWeight }}
+                <div class="box Box-row--hover-gray px-3 mt-3">
+                    <a title="{{.Title}}" href="{{.Permalink}}">
+                        <h4>{{.Title}}</h4>
+                    </a>
+                    <p>
+                        {{.Description}}
+                    </p>
                 </div>
-            </nav>
+                {{ end }}
 
-        {{ end }}
+                <nav class="paginate-container" aria-label="Pagination">
+                    <div class="pagination">
+                        {{ with index .Scratch.Values "prevInSeries" }}
+                        <a class="previous_page" rel="next" href="{{ .Permalink }}" aria-label="Previous Page">{{ .Title
+                            }}</a>
+                        {{ else }}
+                        <span class="previous_page" aria-disabled="true">Previous</span>
+                        {{ end }}
 
-        <hr />
+                        <a class="text-gray-light" href="." aria-label="Top">{{ .Name}}</a>
 
-        <div class="contribution">
-            <h4>Help us improve</h4>
-            <p class="text-gray f6">Azure Citadel is a community site built on GitHub, please contribute and send a pull request</p>
-            <a class="btn btn-outline" href="https://github.com/azurecitadel/azurecitadel/edit/main/content/{{ with .File }}{{ .Path }}{{ end }}">
-              <svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-git-pull-request" aria-hidden="true"><path fill-rule="evenodd" d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z"></path></svg>
-              Make a change
-            </a>
-          </div>
+                        {{ with index .Scratch.Values "nextInSeries" }}
+                        <a class="next_page" rel="next" href="{{ .Permalink }}" aria-label="Next Page">{{ .Title }}</a>
+                        {{ else }}
+                        <span class="next_page" aria-disabled="true">Next</span>
+                        {{ end }}
+                    </div>
+                </nav>
+
+                {{ end }}
+
+                <hr />
+
+                <div class="contribution">
+                    <h4>Help us improve</h4>
+                    <p class="text-gray f6">Azure Citadel is a community site built on GitHub, please contribute and send a pull request</p>
+                    <a class="btn btn-outline" href="https://github.com/azurecitadel/azurecitadel/edit/main/content/{{ with .File }}{{ .Path }}{{ end }}">
+                        {{- partial "octicon" (dict "icon" "git-pull-request" "height" 16) -}}&nbsp;Make a change
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

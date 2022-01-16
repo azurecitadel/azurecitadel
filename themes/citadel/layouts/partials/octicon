@@ -1,0 +1,7 @@
+{{ $octicon := .icon }}
+{{ $class := print "octicon-" $octicon }}
+{{ $height := .height }}
+{{ $match := "<svg (.*)?>(.*)</svg>" }}
+
+{{ $replaceWith := printf `<svg fill="currentColor" style="display: inline-block; user-select: none; vertical-align: middle" class="octicon %s" ${1}>${2}</svg>` $class }}
+{{ return (replaceRE $match $replaceWith (print "/node_modules/@primer/octicons/build/build/svg/" $octicon "-" $height ".svg" | readFile) | safeHTML) }}

@@ -1,21 +1,32 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
+# Find the Dockerfile for mcr.microsoft.com/azure-functions/python:3.0-python3.8-core-tools at this URL
+# https://github.com/Azure/azure-functions-docker/blob/dev/host/3.0/buster/amd64/python/python38/python38-core-tools.Dockerfile
+FROM mcr.microsoft.com/azure-functions/python:3.0-python3.8-core-tools
 
-# To fully customize the contents of this image, use the following Dockerfile instead:
-# https://github.com/microsoft/vscode-dev-containers/tree/v0.122.1/containers/alpine-3.10-git/.devcontainer/Dockerfile
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-alpine3.10
+# Copy library scripts to execute
+COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 
-ENV HUGO_VERSION 0.73.0
+# Install Node.js and Azure Static Web Apps CLI
+ARG NODE_VERSION="lts/*"
+ENV NVM_DIR="/usr/local/share/nvm" \
+    NVM_SYMLINK_CURRENT=true \
+    PATH="${NVM_DIR}/current/bin:${PATH}"
+RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
+    && su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1" \
+    && su vscode -c "umask 0002 && npm install --cache /tmp/empty-cache -g @azure/static-web-apps-cli" \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends hugo
+
+ENV HUGO_VERSION 0.90.1
 ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
 
-# Install Hugo
 RUN set -x && \
-  apk add --update wget ca-certificates libc6-compat g++ && \
   wget https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} && \
   tar xzf ${HUGO_BINARY} && \
   rm -r ${HUGO_BINARY} && \
-  mv hugo /usr/bin && \
-  apk del wget ca-certificates && \
-  rm /var/cache/apk/*
+  mv hugo /usr/bin
+
+# [Optional] Uncomment this line to install global node packages.
+# RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
