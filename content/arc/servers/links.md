@@ -26,7 +26,7 @@ Here are the main links for Azure Arc:
 
 ## Azure Arc Jumpstart
 
-The [Azure Arc Jumpstart]((https://azurearcjumpstart.io)) site is highly recommended for going a little deeper with many of the capabilities that Azure Arc provides. It covers:
+The [Azure Arc Jumpstart](https://aka.ms/azurearcjumpstart) site is highly recommended for going a little deeper with many of the capabilities that Azure Arc provides. It covers:
 
 * Azure Arc-enabled servers
 * Azure Arc-enabled SQL Server
