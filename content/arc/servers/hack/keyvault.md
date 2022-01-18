@@ -46,13 +46,13 @@ For the Key Vault Extension to work, you need to ensure that the managed identit
     kv=$(az keyvault list --resource-group arc_pilot --query [0].name --output tsv)
     ```
 
-1. Create the access policy
+1. Create the access policies
 
     ```bash
     for id in $managedIdentityIds; do az keyvault set-policy --name $kv --secret-permissions list get --resource-group arc_pilot --object-id $id; done
     ```
 
-> Note that you could add the managed identities into a security group and then use the objectId for the group as a single access policy or RBAC role assignment. This would be preferable if working at scale.
+    > Note that you could add the managed identities into a security group and then use the objectId for the group as a single access policy or RBAC role assignment. This is a more elegant approach when working at scale.
 
 ### Key Vault Extension
 
@@ -89,6 +89,15 @@ For the Key Vault Extension to work, you need to ensure that the managed identit
 
 The extension will poll the key vault secret every minute and will download updates to /var/lib/waagent/Microsoft.Azure.KeyVault.Store/ in PEM format. This directory is only accessible to root.
 
+1. SSH to the server
+
+1. Set the variables
+
+    ```bash
+    kv="<myKeyVaultName>"
+    cert="self-signed-cert"
+    ```
+
 1. Once the extension creation has succeeded then you can check the folder.
 
     ```bash
@@ -104,23 +113,25 @@ On Windows it will add to the specified certificateStoreName.
 
 You would usually have a cronjob to check for new certificates in that location and then run these install steps. We'll do it manually.
 
-### Set variables
+1. Set pem variable
 
-```bash
-pem=/var/lib/waagent/Microsoft.Azure.KeyVault.Store/$kv.$cert
-```
+    You should have the kv and cert variables from the previous step.
 
-### Convert from PEM to DER
+    ```bash
+    pem=/var/lib/waagent/Microsoft.Azure.KeyVault.Store/$kv.$cert
+    ```
 
-```bash
-sudo openssl x509 -outform der -in $pem -out /usr/local/share/ca-certificates/$cert.crt
-```
+1. Convert from PEM to DER
 
-### Update CA certificates
+    ```bash
+    sudo openssl x509 -outform der -in $pem -out /usr/local/share/ca-certificates/$cert.crt
+    ```
 
-```bash
-sudo update-ca-certificates
-```
+1. Update CA certificates
+
+    ```bash
+    sudo update-ca-certificates
+    ```
 
 ## Success criteria
 
