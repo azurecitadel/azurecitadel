@@ -24,7 +24,7 @@ To start a GitHub Codespace:
 
 * Navigate to [`azurecitadel/azurecitadel`](https://github.com/azurecitadel/azurecitadel)
 * Select **Code**
-* Select **Open with Codepspaces**
+* Select **Open with Codespaces**
 * Select **New codespace** (or choose an existing one)
 
 This will launch an online, cloud-backed instance of Visual Studio Code in your browser.
