@@ -26,28 +26,33 @@ This is a guided lab rather than a challenge.
 
 For the Key Vault Extension to work, you need to ensure that the managed identity has access to get the secret. (Remember that certificates are uploaded into the certificate, key and secret areas of a key vault. The certificate part is just the public part, whereas the secret includes everything.)
 
-If you don't have Azure AD role to create a group then you can do individual assignments, but if you can create a group then this is arguably the more elegant approach.
+1. List the managed identities
 
-Choose one of the following:
+    Display a table of the Azure Arc-enabled servers and their managed identities.
 
-1. Individual access policy per managed identity
+    ```bash
+    az connectedmachine list --resource-group arc_pilot --query "[].{name:name, identity:identity.principalId}" --output table
+    ```
+
+1. Create a variable with the objectIds for the managed identities
+
+    ```bash
+    managedIdentityIds=$(az connectedmachine list --resource-group arc_pilot --query "[].identity.principalId" --output tsv)
+    ```
+
+1. Get the key vault name
 
     ```bash
     kv=$(az keyvault list --resource-group arc_pilot --query [0].name --output tsv)
-    managedIdentityIds=$(az connectedmachine list --resource-group arc_pilot --query "[].identity.principalId" --output tsv)
+    ```
+
+1. Create the access policy
+
+    ```bash
     for id in $managedIdentityIds; do az keyvault set-policy --name $kv --secret-permissions list get --resource-group arc_pilot --object-id $id; done
     ```
 
-1. All managed identities in a security group
-
-    ```bash
-    kv=$(az keyvault list --resource-group arc_pilot --query [0].name --output tsv)
-    groupId=$(az ad group create --display-name "Azure Arc-enabled servers" --mail-nickname arcservers --description "Managed identities for Azure Arc connected machines." --query objectId --output tsv)
-    managedIdentityIds=$(az connectedmachine list --resource-group arc_pilot --query "[].identity.principalId" --output tsv)
-    for id in $managedIdentityIds; do az ad group member add --group "Azure Arc-enabled servers" --member-id $id; done
-    az ad group member list --group "Azure Arc-enabled servers" --query [].appId
-    az keyvault set-policy --name $kv --secret-permissions list get --resource-group arc_pilot --object-id $groupId
-    ```
+> Note that you could add the managed identities into a security group and then use the objectId for the group as a single access policy or RBAC role assignment. This would be preferable if working at scale.
 
 ### Key Vault Extension
 
@@ -88,7 +93,7 @@ The extension will poll the key vault secret every minute and will download upda
 
     ```bash
     sudo ls /var/lib/waagent/Microsoft.Azure.KeyVault.Store/
-    sudo cat /var/lib/waagent/Microsoft.Azure.KeyVault.Store/arc-pilot-dfc4852d.self-signed-cert
+    sudo cat /var/lib/waagent/Microsoft.Azure.KeyVault.Store/$kv.$cert
     ```
 
     Note the secret's version is included in the full filename. The short form is a symbolic link to the latest of these files.
@@ -102,13 +107,13 @@ You would usually have a cronjob to check for new certificates in that location 
 ### Set variables
 
 ```bash
-pem=/var/lib/waagent/Microsoft.Azure.KeyVault.Store/arc-pilot-dfc4852d.self-signed-cert
+pem=/var/lib/waagent/Microsoft.Azure.KeyVault.Store/$kv.$cert
 ```
 
 ### Convert from PEM to DER
 
 ```bash
-sudo openssl x509 -outform der -in $pem -out /usr/local/share/ca-certificates/self-signed-cert.crt
+sudo openssl x509 -outform der -in $pem -out /usr/local/share/ca-certificates/$cert.crt
 ```
 
 ### Update CA certificates
@@ -124,7 +129,7 @@ Screen share with your proctor to prove:
 * one of your linux VMs has the certificate
 
   ```bash
-   openssl x509 -in  /usr/local/share/ca-certificates/self-signed-cert.crt -inform der -noout -text
+   openssl x509 -in  /usr/local/share/ca-certificates/$cert.crt -inform der -noout -text
    ```
 
 * one of your Windows VMs has the certificate in the store (stretch)
