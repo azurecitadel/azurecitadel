@@ -19,8 +19,8 @@
             "type": "node-terminal",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "command": "swa start ./public --run \"hugo -w\"",
-            "preLaunchTask": "install dependencies",
+            "command": "swa start ./public",
+            "preLaunchTask": "hugo watch",
             "serverReadyAction": {
                 "pattern": "Azure Static Web Apps emulator started at http://localhost:([0-9]+)",
                 "uriFormat": "http://localhost:%s",
