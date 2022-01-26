@@ -33,6 +33,43 @@
 				}
 			],
 			"label": "hugo: Serve site"
+		},
+		{
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"ci"
+			],
+			"label": "install dependencies"
+		},
+		{
+			"type": "shell",
+			"command": "hugo",
+			"args": [
+				"-w"
+			],
+			"isBackground": true,
+			"problemMatcher": [
+				{
+					"severity": "error",
+					"fileLocation": "absolute",
+					"owner": "hugo",
+					"pattern": {
+						"regexp": "template: (.*):(\\d+): (.*)",
+						"file": 1,
+						"location": 2,
+						"message": 3,
+						"loop": true
+					},
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": "Start building sites",
+						"endsPattern": "Watching for config changes in"
+					}
+				}
+			],
+			"dependsOn": "install dependencies",
+			"label": "hugo watch"
 		}
 	]
 }

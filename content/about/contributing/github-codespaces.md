@@ -29,6 +29,6 @@ To start a GitHub Codespace:
 
 This will launch an online, cloud-backed instance of Visual Studio Code in your browser.
 
-You can open a terminal and run `hugo serve` as if you were running locally.
+You can open a terminal and run `hugo serve` as if you were running locally. You may need to install dependencies with `npm install`.
 
 You can [learn more about Codespaces](https://github.com/features/codespaces) from the official documentation.
