@@ -33,6 +33,14 @@
 				}
 			],
 			"label": "hugo: Serve site"
+		},
+		{
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"ci"
+			],
+			"label": "install dependencies"
 		}
 	]
 }

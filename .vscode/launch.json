@@ -20,6 +20,7 @@
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "command": "swa start ./public --run \"hugo -w\"",
+            "preLaunchTask": "install dependencies",
             "serverReadyAction": {
                 "pattern": "Azure Static Web Apps emulator started at http://localhost:([0-9]+)",
                 "uriFormat": "http://localhost:%s",
