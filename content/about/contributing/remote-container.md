@@ -44,9 +44,17 @@ Use the Remote Container extension to open this project in VS Code, as shown in 
 
 {{< youtube id="g6UACfsHKKM" autoplay="false">}}
 
+### Install Dependencies
+
+Open a new terminal window in VS Code and run the following command to install dependencies
+
+```bash
+npm install
+```
+
 ### Serve content
 
-Open a new terminal window in VS Code and tell Static Web Apps to start serving the local content
+In the terminal window, tell Static Web Apps to start serving the local content
 
 ```bash
 swa start http://localhost:1313 --run "hugo server"
