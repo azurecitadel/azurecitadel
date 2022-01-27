@@ -1,13 +1,14 @@
 ---
-title: "Creating an Offer in Partner Center"
+title: "Lab 1 - Create Offer in Partner Center"
 author: [ "Mike Ormond" ]
-description: "HOL1 - Creating a SaaS Offer in Partner Center"
 date: 2022-01-25
 weight: 10
 menu:
   side:
-    parent: marketplace-saas-hol
+    parent: marketplace-saas-offer-hols
     identifier: marketplace-saas-offer-hol1
+series:
+ - marketplace-saas-hols    
 ---
 
 ## Prerequisites
@@ -188,3 +189,5 @@ In this short exercise, you will check your work by performing the first action 
 **Congratulation!** You have finished this lab.
 
 If you are in a live class setting, please raise your hand in Microsoft Teams to indicate you are done with the lab.
+
+---
