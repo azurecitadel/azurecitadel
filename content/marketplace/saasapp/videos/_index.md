@@ -1,5 +1,5 @@
 ---
-title: "Publish a SaaS Offer"
+title: "SaaS Offer Video Series"
 author: [ "Mike Ormond" ]
 description: "SaaS Offers"
 date: 2021-01-06
@@ -8,7 +8,7 @@ style: list
 menu:
   side:
     parent: marketplace
-    identifier: marketplace-saas-offer
+    identifier: marketplace-saas-offer-videos
 ---
 
 ## Introduction

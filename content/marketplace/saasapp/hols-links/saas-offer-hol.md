@@ -6,7 +6,7 @@ date: 2022-01-25
 weight: 20
 menu:
   side:
-    parent: marketplace-saas-offer
+    parent: marketplace-saas-offer-hols-linked
     identifier: marketplace-saas-offer-hol
 ---
 

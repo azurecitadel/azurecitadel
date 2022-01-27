@@ -1,5 +1,5 @@
 ---
-title: "SaaS Offer Labs"
+title: "SaaS Offer HOLs (Option 2 - Links)"
 author: [ "Mike Ormond" ]
 description: "SaaS Offers"
 date: 2021-01-06
@@ -8,7 +8,7 @@ style: list
 menu:
   side:
     parent: marketplace
-    identifier: marketplace-saas-hol
+    identifier: marketplace-saas-offer-hols-linked
 ---
 
 ## Introduction
