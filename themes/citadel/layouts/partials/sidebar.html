@@ -30,7 +30,7 @@
           <summary class="outline-none">
             {{ if .HasChildren }}
             <div class="ActionList-content">
-              <span class="ActionList-item-label {{ if $isCurrent }}color-fg-accent{{ end }}">{{ .Name }}</span>
+              <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if $isCurrent }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
               <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
             </div>
             {{ else }}
@@ -50,10 +50,11 @@
             <li class="ActionList-item ActionList-item--subItem {{ if and $isCurrent (not .HasChildren) }}ActionList-item--navActive{{ end }} {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }}" aria-haspopup="true">
               {{ .Pre }}
               <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
-                <summary class="outline-none">
+                <summary class="outline-none">                  
                   {{ if .HasChildren }}
                   <div class="ActionList-content">
-                    <span class="ActionList-item-label {{ if $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span>
+                    <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
+                    <!-- <span class="ActionList-item-label {{ if $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span> -->
                     <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
                   </div>
                   {{ else }}
