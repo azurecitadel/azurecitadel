@@ -3,6 +3,7 @@ title: "SaaS Offer Hands On Labs"
 author: [ "Mike Ormond" ]
 description: "Hands On Labs for creating SaaS Offers in marketplace"
 date: 2022-01-25
+PublishDate: 2050-01-01
 weight: 20
 menu:
   side:
@@ -12,7 +13,7 @@ menu:
 
 ## Prerequisites
 
-* A [Partner Center](https://partner.microsoft.com/en-us/dashboard) account
+* A [Partner Center](https://partner.microsoft.com/dashboard) account
 * An Azure account and access to the [Azure portal](https://portal.azure.com/)
 * Visual Studio 2022 (any version)
 * Git (optional)

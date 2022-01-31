@@ -13,14 +13,14 @@ series:
 
 ## Prerequisites
 
-1. An offer configured in [Partner Center](https://partner.microsoft.com/en-us/dashboard) as per Lab 1
-1. An Azure account and access to the [Azure portal](https://portal.azure.com/)
-1. Visual Studio 2022 (any version)
-1. Git (optional)
+* An offer configured in [Partner Center](https://partner.microsoft.com/dashboard) as per Lab 1
+* An Azure account and access to the [Azure portal](https://portal.azure.com/)
+* Visual Studio 2022 (any version)
+* Git (optional)
 
 ## Introduction
 
-In this lab, you will build on what you accomplished in [Lab 1: Creating a SaaS Offer in Partner Center](../lab1-create-pc-offer/README.md). You will deploy a landing page and integrate it with your Partner Center SaaS Offer, enabling publishing of the offer and purchasing the offer in the **Preview** stage of the publication pipeline.
+In this lab, you will build on what you accomplished in [Lab 1: Creating a SaaS Offer in Partner Center](../saas-hol1). You will deploy a landing page and integrate it with your Partner Center SaaS Offer, enabling publishing of the offer and purchasing the offer in the **Preview** stage of the publication pipeline.
 
 > **Completion of this lab is required for the following labs in the series to work properly.**
 
@@ -192,7 +192,7 @@ Now that you have deployed your application, you can configure the **Technical c
 
 You will be directed to the top of the Offer overview, where you may watch the publication process as it occurs. You must refresh the page to see status updates. You only want to publish as far as the **Publisher signoff** section. When the test links appear under that section, **DO NOT** press the **Go Live** button.
 
-![Offer overview](../lab-images/02.png)
+![Offer overview](../../../images/saas-hol-02.png)
 
 You will need to hit refresh for awhile as your offer goes through the publish stages.
 
@@ -202,7 +202,7 @@ This section exists to let you know that it will take some time before your offe
 
 To check your offers' publication status, go to the offer's **Overview** page. Look for links under the **Publisher signoff** section as shown below. Refresh the **Overview** page to get updates on your offer during the publication process.
 
-![Offer Overview](../lab-images/01.png)
+![Offer Overview](../../../images/saas-hol-01.png)
 
 > **Note:** If you are in a live workshop event, please raise your hand in Microsoft Teams to indicate you are done with the lab to this point. You will be coming back to finish the rest of Lab 2 later in the workshop.
 
