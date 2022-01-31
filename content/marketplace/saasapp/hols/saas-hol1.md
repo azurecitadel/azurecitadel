@@ -13,12 +13,10 @@ series:
 
 ## Prerequisites
 
-* A [Partner Center](https://partner.microsoft.com/en-us/dashboard) account
+* A [Partner Center](https://partner.microsoft.com/dashboard) account
 * An Azure account and access to the [Azure portal](https://portal.azure.com/)
 
 ## Introduction
-
-These labs are meant to be done sequentially. They build on one another, so begin at the beginning to walk through all the labs.
 
 In this lab you will use your Partner Center account to create a **test** SaaS offer with a single plan. This offer will be used for development and testing purposes.
 
