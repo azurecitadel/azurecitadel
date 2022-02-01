@@ -1,9 +1,9 @@
 ---
 title: "SaaS Offer Video Series"
 author: [ "Mike Ormond" ]
-description: "SaaS Offers"
+description: "SaaS Offer Videos"
 date: 2021-01-06
-weight: 70
+weight: 80
 style: list
 menu:
   side:

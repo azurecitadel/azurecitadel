@@ -1,9 +1,10 @@
 ---
 title: "SaaS Offer HOLs"
 author: [ "Mike Ormond" ]
-description: "SaaS Offers"
+description: "SaaS Offer HOLs"
 date: 2021-01-06
 weight: 70
+style: list
 menu:
   side:
     parent: marketplace
