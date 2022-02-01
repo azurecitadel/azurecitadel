@@ -17,4 +17,14 @@ The *SaaS App offer* differs from the *Virtual Machine offer* and *Azure App off
 
 ## Content
 
-The content for this section is still under construction.
+These learning modules are designed to help you speed your time to publish your SaaS offer to the Microsoft commercial marketplace.
+
+## Resources
+
+* [Create a SaaS offer](https://docs.microsoft.com/azure/marketplace/create-new-saas-offer)
+* [Use Azure Table storage to manage commercial marketplace leads](https://docs.microsoft.com/azure/marketplace/partner-center-portal/commercial-marketplace-lead-management-instructions-azure-table)
+* [Build the landing page for your transactable SaaS offer in the commercial marketplace](https://docs.microsoft.com/azure/marketplace/azure-ad-transactable-saas-landing-page)
+* [Implementing a webhook on the SaaS service](https://docs.microsoft.com/azure/marketplace/partner-center-portal/pc-saas-fulfillment-webhook)
+* [SaaS fulfillment APIs in the Microsoft commercial marketplace](https://docs.microsoft.com/azure/marketplace/partner-center-portal/pc-saas-fulfillment-apis)
+
+## Sections

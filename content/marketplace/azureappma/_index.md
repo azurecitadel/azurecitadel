@@ -33,4 +33,4 @@ Transact *Managed Application offers* are billed either a flat monthly rate or u
 * [Plan an Azure managed application for an Azure application offer](https://docs.microsoft.com/azure/marketplace/plan-azure-app-managed-app)
 * [Managed application metered billing](https://docs.microsoft.com/azure/marketplace/azure-app-metered-billing)
 
-## Content
+## Sections

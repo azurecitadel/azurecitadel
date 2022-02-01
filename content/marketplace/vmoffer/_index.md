@@ -23,4 +23,4 @@ Transact *VM offers* are billed on a usage-based PAYG (Pay As You Go) model. Eac
 
 * [Plan a virtual machine offer](https://docs.microsoft.com/azure/marketplace/marketplace-virtual-machines)
 
-## Content
+## Sections

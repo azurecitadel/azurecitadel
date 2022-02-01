@@ -19,3 +19,5 @@ The *SaaS App offer* differs from the *Virtual Machine offer* and *Azure App off
 ## Content
 
 The content for this section is still under construction.
+
+## Sections
