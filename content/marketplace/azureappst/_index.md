@@ -32,4 +32,4 @@ When a customer 'purchases' a *Solution Template offer*, resources will be deplo
 * [Plan an Azure Application offer for the commercial marketplace](https://docs.microsoft.com/azure/marketplace/plan-azure-application-offer)
 * [Plan a solution template for an Azure application offer](https://docs.microsoft.com/azure/marketplace/plan-azure-app-solution-template)
 
-## Content
+## Sections

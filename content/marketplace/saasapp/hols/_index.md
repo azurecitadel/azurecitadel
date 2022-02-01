@@ -4,7 +4,6 @@ author: [ "Mike Ormond" ]
 description: "SaaS Offers"
 date: 2021-01-06
 weight: 70
-style: list
 menu:
   side:
     parent: marketplace
@@ -17,6 +16,8 @@ The *SaaS App offer* differs from the *Virtual Machine offer* and *Azure App off
 
 ## Content
 
+These learning modules are designed to help you speed your time to publish your SaaS offer to the Microsoft commercial marketplace.
+
 These labs are meant to be done sequentially. They build on one another, so begin at the beginning to walk through all the labs.
 
 ## Resources
@@ -26,3 +27,5 @@ These labs are meant to be done sequentially. They build on one another, so begi
 * [Build the landing page for your transactable SaaS offer in the commercial marketplace](https://docs.microsoft.com/azure/marketplace/azure-ad-transactable-saas-landing-page)
 * [Implementing a webhook on the SaaS service](https://docs.microsoft.com/azure/marketplace/partner-center-portal/pc-saas-fulfillment-webhook)
 * [SaaS fulfillment APIs in the Microsoft commercial marketplace](https://docs.microsoft.com/azure/marketplace/partner-center-portal/pc-saas-fulfillment-apis)
+
+## Sections
