@@ -105,7 +105,7 @@ The following is based on the instructions [Test a virtual machine image](https:
 1. On the home page, select Create a resource, search for “Template Deployment”, and select Create.
 1. Choose "Build your own template in the editor".
 
-   ![Create VM from ARM Template](/marketplace/images/create-from-template.png)
+   ![Create VM from ARM Template](/marketplace/_images/create-from-template.png)
 
 1. Replace the contents of the editor with the JSON from [this file](../scripts/deploy-user-provided-image.json) and hit **Save**
 1. You will need to provide parameter values for the following
@@ -151,7 +151,7 @@ The following is based on the instructions [Test a virtual machine image](https:
 1. Run the Certification Test Tool and enter the required information (test name, platform, auth type, DNS name for the VM to be tested etc)
 1. On completion you will be presented with a set of test results. Review the results and ensure you take any necessary action before submitting a final image for certification.
 
-   ![The VM test tool results](/marketplace/images/vm-test-tool.png)
+   ![The VM test tool results](/marketplace/_images/vm-test-tool.png)
 
 1. In these labs we will be submitting a VM offer to the marketplace but only to the preview stage for testing purposes. We will not submit for final certification.
 

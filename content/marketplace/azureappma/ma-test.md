@@ -45,7 +45,7 @@ It is important that we vaidate our ARM template before publishing. There are a 
       Test-AzTemplate -TemplatePath \path\to\template_to_be_tested
       ```
 
-      ![Arm template test toolkit output sample](/marketplace/images/arm-ttk.png)
+      ![Arm template test toolkit output sample](/marketplace/_images/arm-ttk.png)
    2. Review the results and address any issues
 
 ## Resources

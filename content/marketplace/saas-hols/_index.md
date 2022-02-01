@@ -1,7 +1,7 @@
 ---
 title: "SaaS Offer HOLs"
 author: [ "Mike Ormond" ]
-description: "SaaS Offer HOLs"
+description: "Hands on labs for SaaS Offers"
 date: 2021-01-06
 weight: 70
 style: list

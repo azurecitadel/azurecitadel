@@ -20,7 +20,7 @@ We will not follow this approach here but the principles are the same. Instead w
 
 ## Review the ARM Template
 
-The template we will deploy can be [found here](/marketplace/scripts/mainTemplate.json). Take some time to familiarise yourself with the template. It will deploy a Linux Azure Function App on the serverless / consumption plan. This requires three services to be deployed:
+The template we will deploy can be [found here](/marketplace/_scripts/mainTemplate.json). Take some time to familiarise yourself with the template. It will deploy a Linux Azure Function App on the serverless / consumption plan. This requires three services to be deployed:
 
 * a Storage account
 * an App Service Plan
@@ -36,7 +36,7 @@ The first thing we will do is test that the ARM template works and deploys the s
 1. On the home page, select Create a resource, search for “Template Deployment”, and select Create.
 1. Choose "Build your own template in the editor".
 
-   ![Create VM from ARM Template](/marketplace/images/create-from-template.png)
+   ![Create VM from ARM Template](/marketplace/_images/create-from-template.png)
 
 1. Replace the contents of the editor with the JSON from the ARM template file and hit **Save**
 1. Select the Subcription and Resource Group as required.
@@ -46,8 +46,8 @@ The first thing we will do is test that the ARM template works and deploys the s
 
 ### Test using the CLI (Option 2)
 
-1. If you have cloned this repo, navigate to the folder containing the `mainTemplate.json` file. Something like `/azurecitadel/content/marketplace/scripts`.
-1. Otherwise, create a file called mainTemplate.json and paste the contents of the [mainTemplate.json file](/marketplace/scripts/mainTemplate.json). Save the file.
+1. If you have cloned this repo, navigate to the folder containing the `mainTemplate.json` file. Something like `/azurecitadel/content/marketplace/_scripts`.
+1. Otherwise, create a file called mainTemplate.json and paste the contents of the [mainTemplate.json file](/marketplace/_scripts/mainTemplate.json). Save the file.
 1. Create a new resource group using the Azure CLI:
 
    ```bash

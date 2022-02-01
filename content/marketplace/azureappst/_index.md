@@ -1,7 +1,7 @@
 ---
 title: "Publish a Solution Template"
 author: [ "Mike Ormond" ]
-description: "Azure Apps Offer"
+description: "Lab walkthrough of publishing a Solution Template Offer"
 date: 2021-06-20
 weight: 50
 style: list
