@@ -51,8 +51,7 @@ In order to publish offers in the commercial marketplace your account will need 
 
 ## Resources
 
-* [Create a commercial marketplace account in Partner Center
-](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account)
+* [Create a commercial marketplace account in Partner Center](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account)
 * [Manage your commercial marketplace account in Partner Center](https://docs.microsoft.com/azure/marketplace/partner-center-portal/manage-account)
 * [Microsoft Partner Portal](https://partner.microsoft.com/)
 * [Partner Center Homepage](https://partner.microsoft.com/dashboard/home)

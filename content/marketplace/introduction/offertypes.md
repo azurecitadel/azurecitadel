@@ -1,7 +1,7 @@
 ---
 title: "Offer Types"
 author: [ "Mike Ormond" ]
-description: "commercial marketplace offer types for applications"
+description: "Commercial marketplace offer types"
 date: 2021-01-06
 weight: 20
 menu:
