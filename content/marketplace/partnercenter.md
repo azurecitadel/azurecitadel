@@ -43,11 +43,11 @@ In order to publish offers in the commercial marketplace your account will need 
 1. To check you have the right permissions visit **Account Settings -> User Management**
 2. Search for your username in the users tab and confirm you have the "Developer" role assignment.
 
-   ![Check your role in Partner Center](/marketplace/images/partnercenter-developer-role-check.png)
+   ![Check your role in Partner Center](/marketplace/_images/partnercenter-developer-role-check.png)
 
 3. As a final check, confirm you can create a **New Offer** on the **Commercial Marketplace -> Overview** tab
 
-   ![Create a new offer in Partner Center](/marketplace/images/partnercenter-new-offer.png)
+   ![Create a new offer in Partner Center](/marketplace/_images/partnercenter-new-offer.png)
 
 ## Resources
 

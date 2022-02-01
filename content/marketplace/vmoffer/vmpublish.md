@@ -20,7 +20,7 @@ Now that we have the "technical assets" prepared for our offer, we can proceed t
 
 1. At the top of the screen, Select: New Offer -> Azure Virtual Machine
 
-   ![Create a new offer in Partner Center](/marketplace/images/partnercenter-new-offer.png)
+   ![Create a new offer in Partner Center](/marketplace/_images/partnercenter-new-offer.png)
 
 1. Enter an `Offer ID` and `Offer alias`. The `Offer ID` must be unique within your account. The `Offer alias` is a friendly name for use within Partner Center.
 
