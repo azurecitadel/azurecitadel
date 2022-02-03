@@ -60,7 +60,7 @@ Here we define how the offer will appear in the marketplace - the offer listing 
     1. Complete the required fields with name, email and phone
 1. Marketplace media
     1. Only the Large logo is required
-    1. You can use your own image or the [image here](../../images/logo.png)
+    1. You can use your own image or the [image here](../../_images/logo.png)
 
          > Be sure to **Save draft** before exiting the page
 
@@ -121,7 +121,7 @@ This is what all the work in the previous sections was leading up to. This is wh
 1. `Recommended VM Sizes` - for a real offer we could recommend optimal VM sizes for our offer. There's no need to complete this for the lab.
 1. `Open ports` - add port 80 as follows
 
-   ![Open http port](../../images/partnercenter-open-ports.png)
+   ![Open http port](../../_images/partnercenter-open-ports.png)
 
 1. `Properties` - leave `Supports accelerated networking` unchecked
 1. `Generations` - leave `Generation type` as "Generation 1"
@@ -161,13 +161,13 @@ We are now ready to review and publish (to a preview audience) the offer we have
 
 1. Select "Review and publish" at the top of the page. You should see a summary like the below:
 
-   ![Publish summary screenshot](../../images/partnercenter-publish-summary.png)
+   ![Publish summary screenshot](../../_images/partnercenter-publish-summary.png)
 
 1. If any of the sections are not marked as "Complete", go back and review.
 1. Select "Publish" at the top of the page.
 1. This will start the publish process. It will take a few hours before the preview becomes available.
 
-   ![Publish status screenshot](../../images/partnercenter-publish-status.png)
+   ![Publish status screenshot](../../_images/partnercenter-publish-status.png)
 
 1. Note the "Publisher signoff" stage in the process. This is a manual step where the publisher must confirm approval before the offer is fully published in the marketplace.
 

@@ -21,9 +21,9 @@ The following offer types are available through Partner Center for ISV solutions
 * [Azure Apps offer - Managed Application](https://docs.microsoft.com/azure/marketplace/marketplace-managed-apps)
 * [Container image offer](https://docs.microsoft.com/azure/marketplace/marketplace-containers)
 * [IoT Edge module offer](https://docs.microsoft.com/azure/marketplace/iot-edge-module)
-* [SaaS app offer](https://docs.microsoft.com/azure/marketplace/plan-saas-offer)
+* [SaaS offer](https://docs.microsoft.com/azure/marketplace/plan-saas-offer)
 
-In these labs we will focus on three main offer types; **Virtual Machine**, **Azure Apps** and **SaaS app** offers. These offer types are transactable through the commercial marketplace and require deeper integration in order to publish.
+In these labs we will focus on three main offer types; **Virtual Machine**, **Azure Application** and **SaaS** offers. These offer types are transactable through the commercial marketplace and require deeper integration in order to publish.
 
 ## Virtual Machine Offer
 
@@ -45,8 +45,8 @@ The *Azure Apps offer* has two distinct flavours; *solution template* and *manag
 
    For further information, see [Publishing an Azure Application - Managed Application Offer](../../azureappma/)
 
-## SaaS App Offer
+## SaaS Offer
 
-The *SaaS App offer* differs from the *Virtual Machine offer* and *Azure App offer* as no resources are deployed in the customer subscription. As such, the publisher must charge both for the software licence and the underlying Azure resource costs used to deliver the solution. *SaaS App offers* can be listed in both the *Azure Marketplace* and *AppSource*.
+The *SaaS offer* differs from the *Virtual Machine offer* and *Azure App offer* as no resources are deployed in the customer subscription. As such, the publisher must charge both for the software licence and the underlying Azure resource costs used to deliver the solution. *SaaS offers* can be listed in both the *Azure Marketplace* and *AppSource*.
 
-For further information, see [Publishing a SaaS Application Offer](../../saasapp/videos/)
+For further information, see [Publishing a SaaS Offer](../../saas-videos/)
