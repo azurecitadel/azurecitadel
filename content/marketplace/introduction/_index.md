@@ -22,7 +22,7 @@ This lab will introduce you to some of the essential concepts and terminology of
 ## Resources
 
 * [The commercial marketplace documentation](https://docs.microsoft.com/azure/marketplace/overview)
-* [What is Partner Center](https://support.microsoft.com/help/4499930/partner-center-overview)
+* [What is Partner Center](https://docs.microsoft.com/partner-center/overview)
 * [Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/)
 * [AppSource](https://appsource.microsoft.com/)
 
@@ -36,6 +36,6 @@ This lab introduces some fundamental concepts and how to choose the best offer t
 * [Publishing a VM Offer](../vmoffer/)
 * [Publishing an Azure Application Solution Template Offer](../azureappst/)
 * [Publishing an Azure Application - Managed Application Offer](../azureappma/)
-* [Publishing a SaaS Application Offer](../saasapp/)
+* [Publishing a SaaS Offer](../saas-videos/)
 
 ## Introduction Sections

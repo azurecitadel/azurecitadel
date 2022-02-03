@@ -192,7 +192,7 @@ Now that you have deployed your application, you can configure the **Technical c
 
 You will be directed to the top of the Offer overview, where you may watch the publication process as it occurs. You must refresh the page to see status updates. You only want to publish as far as the **Publisher signoff** section. When the test links appear under that section, **DO NOT** press the **Go Live** button.
 
-![Offer overview](../../../images/saas-hol-02.png)
+![Offer overview](../../../_images/saas-hol-02.png)
 
 You will need to hit refresh for awhile as your offer goes through the publish stages.
 
@@ -202,7 +202,7 @@ This section exists to let you know that it will take some time before your offe
 
 To check your offers' publication status, go to the offer's **Overview** page. Look for links under the **Publisher signoff** section as shown below. Refresh the **Overview** page to get updates on your offer during the publication process.
 
-![Offer Overview](../../../images/saas-hol-01.png)
+![Offer Overview](../../../_images/saas-hol-01.png)
 
 > **Note:** If you are in a live workshop event, please raise your hand in Microsoft Teams to indicate you are done with the lab to this point. You will be coming back to finish the rest of Lab 2 later in the workshop.
 

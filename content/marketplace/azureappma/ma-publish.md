@@ -62,7 +62,7 @@ Here we define how the offer will appear in the marketplace - the offer listing 
     1. Complete the required fields with name, email and phone
 1. Marketplace media
     1. Only the Large logo is required
-    1. You can use your own image or the [image here](../../images/logo-ma.png)
+    1. You can use your own image or the [image here](../../_images/logo-ma.png)
 
         > Be sure to **Save draft** before exiting the page
 
@@ -185,13 +185,13 @@ We are now ready to review and publish (to a preview audience) the offer we have
 
 1. Select "Review and publish" at the top of the page. You should see a summary like the below:
 
-   ![Publish summary screenshot](../../images/partnercenter-publish-summary-st.png)
+   ![Publish summary screenshot](../../_images/partnercenter-publish-summary-st.png)
 
 1. If any of the sections are not marked as "Complete", go back and review.
 1. Select "Publish" at the top of the page.
 1. This will start the publish process. It will take a few hours before the preview becomes available.
 
-   ![Publish status screenshot](../../images/partnercenter-publish-status.png)
+   ![Publish status screenshot](../../_images/partnercenter-publish-status.png)
 
 1. Note the "Publisher signoff" stage in the process. This is a manual step where the publisher must confirm approval before the offer is fully published in the marketplace.
 

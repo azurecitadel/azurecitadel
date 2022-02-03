@@ -107,7 +107,7 @@ The following is based on the instructions [Test a virtual machine image](https:
 
    ![Create VM from ARM Template](/marketplace/_images/create-from-template.png)
 
-1. Replace the contents of the editor with the JSON from [this file](../scripts/deploy-user-provided-image.json) and hit **Save**
+1. Replace the contents of the editor with the JSON from [this file](../../_scripts/deploy-user-provided-image.json) and hit **Save**
 1. You will need to provide parameter values for the following
 
    Parameter | Comment
