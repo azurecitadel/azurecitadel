@@ -21,6 +21,7 @@
             "cwd": "${workspaceFolder}",
             "command": "swa start ./public",
             "preLaunchTask": "hugo watch",
+            "postDebugTask": "kill hugo",
             "serverReadyAction": {
                 "pattern": "Azure Static Web Apps emulator started at http://localhost:([0-9]+)",
                 "uriFormat": "http://localhost:%s",

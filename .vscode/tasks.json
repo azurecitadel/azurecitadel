@@ -70,6 +70,21 @@
 			],
 			"dependsOn": "install dependencies",
 			"label": "hugo watch"
+		},
+		{
+			"label": "kill hugo",
+			"type": "shell",
+			"command": "kill",
+			"args": [
+				{
+					"value": "$(ps -ef | grep -e ' hugo -w$' | tr -s ' ' | cut -d ' ' -f2)",
+					"quoting": "weak"
+				}
+			],
+			"presentation": {
+				"echo": false,
+				"reveal": "silent"
+			}
 		}
 	]
 }
