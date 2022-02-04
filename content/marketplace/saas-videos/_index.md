@@ -2,6 +2,8 @@
 title: "SaaS Offer Video Series"
 author: [ "Mike Ormond" ]
 description: "A video series for SaaS Offers"
+aliases: 
+  - /marketplace/saasapp
 date: 2021-01-06
 weight: 80
 style: list
