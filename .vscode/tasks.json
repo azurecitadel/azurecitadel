@@ -2,6 +2,12 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "End hugo watch",
+			"command": "echo ${input:terminate}",
+			"type": "shell",
+			"problemMatcher": []
+		},
+		{
 			"type": "hugo",
 			"task": "",
 			"group": "build",
@@ -70,6 +76,14 @@
 			],
 			"dependsOn": "install dependencies",
 			"label": "hugo watch"
+		}
+	],
+	"inputs": [
+		{
+			"id": "terminate",
+			"type": "command",
+			"command": "workbench.action.tasks.terminate",
+			"args": "terminateAll"
 		}
 	]
 }
