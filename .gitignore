@@ -42,3 +42,6 @@ tags
 
 # Coc configuration directory
 .vim
+
+# npm
+package-lock.json
