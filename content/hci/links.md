@@ -8,7 +8,7 @@ menu:
     parent: hci
     identifier: hci-links
 series:
- - arc
+ - hci
 weight: 20
 ---
 
