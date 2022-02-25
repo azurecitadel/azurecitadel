@@ -13,7 +13,7 @@ Ensure that you're doing over HTTPS
 
 ```bash
 LOCATION=westeurope
-CLUSTER_REPO=jasoncabot-ms/arc-for-kubernetes
+CLUSTER_REPO=azurecitadel/arc-for-kubernetes
 az k8s-configuration create \
     --name cluster-config \
     --cluster-name Arc-K3s-Demo \

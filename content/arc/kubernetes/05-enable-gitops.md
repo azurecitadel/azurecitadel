@@ -35,7 +35,7 @@ You will have to set up [namespaces](https://docs.microsoft.com/azure/azure-arc/
 
 You should create a namespace called `podinfo-app` that podinfo can be deployed into but without running `kubectl`.
 
-You can look at the [sample cluster config](https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/cluster-config) as a baseline for cluster-wide components that are likely to be required for later challenges.
+You can look at the [sample cluster config](https://github.com/azurecitadel/arc-for-kubernetes/tree/main/cluster-config) as a baseline for cluster-wide components that are likely to be required for later challenges.
 
 ### Developer
 
@@ -69,6 +69,6 @@ A [sample application - podinfo](/arc/kubernetes/assets/podinfo.yaml) manifest h
 * [Enable GitOps](https://docs.microsoft.com/azure/azure-arc/kubernetes/tutorial-use-gitops-connected-cluster)
 * [namespaces and RBAC](https://docs.microsoft.com/azure/azure-arc/kubernetes/tutorial-use-gitops-connected-cluster#create-a-configuration)
 * [GitOps Operator Parameters](https://docs.microsoft.com/azure/azure-arc/kubernetes/tutorial-use-gitops-connected-cluster#options-supported-in----operator-params)
-* [Sample Cluster Config](https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/cluster-config)
+* [Sample Cluster Config](https://github.com/azurecitadel/arc-for-kubernetes/tree/main/cluster-config)
 * [AAD Pod Identity](https://azure.github.io/aad-pod-identity/docs/getting-started/installation/#quick-install)
 * [Cert Manager](https://cert-manager.io/docs/installation/#default-static-install)

@@ -28,7 +28,7 @@ You have heard that Azure Arc can help you so **let's go and deploy some cluster
 1. [Create an organisation](https://github.com/account/organizations/new?coupon=&plan=team_free) in GitHub for your team
 1. Add all of the team members' GitHub IDs to the team
 1. Generate a **team repository** (called `arc-for-kubernetes`) in your new GitHub organisation
-    1. Generate it from the _Use this template_ button in the [hack template project](https://github.com/jasoncabot-ms/arc-for-kubernetes)
+    1. Generate it from the _Use this template_ button in the [hack template project](https://github.com/azurecitadel/arc-for-kubernetes)
 1. Ensure everyone can collaborate on the arc-for-kubernetes repo
 
 ## Success Criteria
@@ -42,6 +42,6 @@ The purpose of this challenge is to get your team set up and ready to work toget
 ## References
 
 * [GitHub](https://github.com)
-* [Azure Arc for Kubernetes Hack Template](https://github.com/jasoncabot-ms/arc-for-kubernetes)
+* [Azure Arc for Kubernetes Hack Template](https://github.com/azurecitadel/arc-for-kubernetes)
 * [What is Azure Arc](https://azure.microsoft.com/services/azure-arc/#product-overview)
 * [What is Azure Arc for Kubernetes?](https://docs.microsoft.com/azure/azure-arc/kubernetes/overview)

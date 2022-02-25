@@ -47,7 +47,7 @@ gh repo create $GITHUB_ORG/arc-for-kubernetes \
     --description "Organisation for the Azure Arc for Kubernetes Hack" \
     -y \
     --public \
-    --template jasoncabot-ms/arc-for-kubernetes
+    --template azurecitadel/arc-for-kubernetes
 cd arc-for-kubernetes
 
 ```
@@ -243,11 +243,11 @@ az rest \
     --body "{\"api\":{\"requestedAccessTokenVersion\":2}, \"identifierUris\":[\"api://${APP_ID}\"], \"spa\":{\"redirectUris\":$REDIRECT_URIS}}"
 
 LOCATION=uksouth
-gh workflow run 01-app-infra.yml -f credentials=AZURE_CREDENTIALS_${LOCATION^^} -f aad_admin_objectid="${DBA_OBJECT_ID}" -f app_id="${APP_ID}" 
+gh workflow run 01-app-infra.yml -f credentials=AZURE_CREDENTIALS_${LOCATION^^} -f aad_admin_objectid="${DBA_OBJECT_ID}" -f app_id="${APP_ID}"
 
 
 LOCATION=westeurope
-gh workflow run 01-app-infra.yml -f credentials=AZURE_CREDENTIALS_${LOCATION^^} -f aad_admin_objectid="${DBA_OBJECT_ID}" -f app_id="${APP_ID}" 
+gh workflow run 01-app-infra.yml -f credentials=AZURE_CREDENTIALS_${LOCATION^^} -f aad_admin_objectid="${DBA_OBJECT_ID}" -f app_id="${APP_ID}"
 
 # Fill these in manually
 UKSOUTH_RUN_ID=1098617734
@@ -275,11 +275,10 @@ git push -u origin main
 
 Follow the Steps here to allow access to SQL Server and deploy the database schema
 
-* <https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/01-app-setup#4-create-sql-schema>
+* <https://github.com/azurecitadel/arc-for-kubernetes/tree/main/01-app-setup#4-create-sql-schema>
 
 ## Challenge 5
 
 Enable Azure AD + Discussion
 
 ## Challenge 6
-

@@ -12,7 +12,7 @@ Ensure that you are in a tenant without a policy restricting the creation of a p
 
 Just run through the steps listed here:
 
-<https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/00-setup>
+<https://github.com/azurecitadel/arc-for-kubernetes/tree/main/00-setup>
 
 Should pretty much just be copy/paste for each location name
 

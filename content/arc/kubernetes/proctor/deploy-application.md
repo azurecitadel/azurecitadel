@@ -18,7 +18,7 @@ See the sample manifests for how to deploy without using `kubectl apply`
 
 Just run through the steps listed here:
 
-<https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/01-app-setup>
+<https://github.com/azurecitadel/arc-for-kubernetes/tree/main/01-app-setup>
 
 ## Set up App Dev repo
 
@@ -27,7 +27,7 @@ Create a new (private?) repository on GitHub
 ```bash
 LOCATION=westeurope
 RESOURCE_GROUP=arc4k8s-$LOCATION
-DEVELOPER_REPO=jasoncabot-ms/arc-for-k8s-app
+DEVELOPER_REPO=<gitHubUsername>/<repoName>
 az k8s-configuration create \
     -n arc-for-k8s-app \
     -c Arc-K3s-Demo \
@@ -129,7 +129,7 @@ az role assignment create --role "Virtual Machine Contributor" --assignee-object
 
 ```
 
-You can check managed identity by logging into a UI pod and retrieving an access token that can be checked at https://jwt.ms
+You can check managed identity by logging into a UI pod and retrieving an access token that can be checked at <https://jwt.ms>
 
 ```bash
 kubectl --kubeconfig ~/.kube/$RESOURCE_GROUP.config exec -it -n app-dev-arc reviewer-ui-XXXXXXXX-YYYYY -- /bin/bash
@@ -137,4 +137,4 @@ kubectl --kubeconfig ~/.kube/$RESOURCE_GROUP.config exec -it -n app-dev-arc revi
 curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fmanagement.azure.com%2F' -H Metadata:true -s
 ```
 
-Another way this might fail is if the VMs system assigned managed identity doesn't have permissions to read the managed identity. This may occur if you didn't 
+Another way this might fail is if the VMs system assigned managed identity doesn't have permissions to read the managed identity. This may occur if you didn't.

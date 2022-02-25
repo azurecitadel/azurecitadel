@@ -45,7 +45,7 @@ There is no technical reason why these have to be in separate regions except the
 
 ### Deployment
 
-The **team repository** that you created (from the template) has a [GitHub action](https://devblogs.microsoft.com/premier-developer/github-actions-overview/) already set up for [deploying an unmanaged k3s cluster](https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/00-setup) by Rancher to Azure.
+The **team repository** that you created (from the template) has a [GitHub action](https://devblogs.microsoft.com/premier-developer/github-actions-overview/) already set up for [deploying an unmanaged k3s cluster](https://github.com/azurecitadel/arc-for-kubernetes/tree/main/00-setup) by Rancher to Azure.
 
 * Deploy a cluster to each of the three locations
 
@@ -82,5 +82,5 @@ If you want to give yourself a fuller challenge then go for it!
 
 * [Accessing a Kubernetes cluster](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable)
 * [Using GitHub Actions to deploy Infrastructure](https://docs.microsoft.com/azure/azure-resource-manager/templates/deploy-github-actions)
-* [Team repository README](https://github.com/jasoncabot-ms/arc-for-kubernetes)
+* [Team repository README](https://github.com/azurecitadel/arc-for-kubernetes)
 * [Traefik Ingress Controller](https://doc.traefik.io/traefik/providers/kubernetes-ingress)

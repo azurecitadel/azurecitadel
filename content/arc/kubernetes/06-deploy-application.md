@@ -24,11 +24,11 @@ This is the flagship review application that currently is running in a number of
 
 ### Cluster Administrator
 
-Set up a platform service to issue certificates for application developers. A good choice would be to set up a cluster wide certificate issuer from Lets Encrypt for free TLS certs. You can use the [reference deployment of a Lets Encrypt Cluster Issuer](https://github.com/jasoncabot-ms/arc-for-kubernetes/blob/main/cluster-config/cluster-issuer.yaml)
+Set up a platform service to issue certificates for application developers. A good choice would be to set up a cluster wide certificate issuer from Lets Encrypt for free TLS certs. You can use the [reference deployment of a Lets Encrypt Cluster Issuer](https://github.com/azurecitadel/arc-for-kubernetes/blob/main/cluster-config/cluster-issuer.yaml)
 
-Set up a service to assign Azure AD identities to workloads running in the cluster. This can be achieved by deploying [pod identity](https://github.com/Azure/aad-pod-identity) for Kubernetes. There are [two sample manifests](https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/cluster-config).
+Set up a service to assign Azure AD identities to workloads running in the cluster. This can be achieved by deploying [pod identity](https://github.com/Azure/aad-pod-identity) for Kubernetes. There are [two sample manifests](https://github.com/azurecitadel/arc-for-kubernetes/tree/main/cluster-config).
 
-Deploy the required infrastructure (DB, Storage and Application Registration) resources using a [GitHub Action](https://github.com/jasoncabot-ms/arc-for-kubernetes/tree/main/01-app-setup).
+Deploy the required infrastructure (DB, Storage and Application Registration) resources using a [GitHub Action](https://github.com/azurecitadel/arc-for-kubernetes/tree/main/01-app-setup).
 
 **Stretch** Discuss how you could deploy Azure Infrastructure outside of Kubernetes using the same repository and GitOps approach
 
@@ -51,4 +51,5 @@ After running the GitHub action to deploy the infrastructure you can find your s
 
 * [Use GitOps with Azure Arc for Kubernetes](https://docs.microsoft.com/azure/azure-arc/kubernetes/use-gitops-with-helm#overview-of-using-gitops-and-helm-with-azure-arc-enabled-kubernetes)
 * [Managed Identity](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview)
-* [Deploy Azure Resources](https://github.com/jasoncabot-ms/arc-for-kubernetes)
+
+* [Deploy Azure Resources](https://github.com/azurecitadel/arc-for-kubernetes)
