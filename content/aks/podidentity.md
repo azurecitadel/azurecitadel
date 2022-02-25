@@ -117,3 +117,6 @@ We'll create the vnet, identity, key vault and storage account.
     az network private-endpoint dns-zone-group create --endpoint-name alphaKeyvaultEndpoint --name alphaKeyvault --private-dns-zone "privatelink.vault.azure.net" --zone-name vault
     az role assignment create --scope $keyvaultId --assignee-object-id $identityPrincipalId --role "Key Vault Secrets User"
     ```
+
+
+Testing of a change after migration
