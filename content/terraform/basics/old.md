@@ -1,12 +1,8 @@
 ---
-title: "Terraform Workflow"
+title: "Old - keep for the config files..."
 date: 2021-01-21
 author: [ "Richard Cheney" ]
-description: "What is Terraform and what is the basic workflow? Take your first steps using Terraform in the Cloud Shell to deploy a resource group and container."
-weight: 1
-menu:
-  side:
-    parent: 'terraform-basics'
+draft: true
 ---
 
 ## Introduction
