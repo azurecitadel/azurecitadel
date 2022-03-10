@@ -17,14 +17,18 @@ Combining these gives a very functional way of accessing virtual machines in Azu
 
 In this lab you will:
 
-* use Terraform to spin up the example environment
-* authenticate to the Windows Server 2022 Azure Edition virtual machine using AAD
-* connect with the native Windows remote desktop tool via Azure Bastion
-* authenticate to the Ubuntu 20.04 virtual machine using AAD
-* connect with SSH from either Windows or WSL2 via Azure Bastion
-* set variables using the instance meetadata service
-* access an example secret from the keyvault using the virtual machine's managed identity
+* use Terraform to spin up the lab environment
+* connect to the Windows Server 2022 Azure Edition virtual machine via Azure Bastion
+  * authenticate using Azure Active Directory
+  * using the native Windows remote desktop tool
+* connect to the Ubuntu 20.04 virtual machine via Azure Bastion
+  * authenticate using Azure Active Directory
+  * using openssh from either Windows or WSL2
+* explore basic automation integration
+  * set variables using the instance metadata service
+  * access an example secret from the key vault using the virtual machine's managed identity
 * access a "management" application using a tunnel via Azure Bastion
+* clean up
 
 ## Pre-requirements
 
@@ -32,9 +36,8 @@ You will need
 
 * to be Owner on an Azure subscription
 
-* an [SSH key pair](https://docs.microsoft.com/en-gb/azure/virtual-machines/linux/mac-create-ssh-keys#create-an-ssh-key-pair), e.g.:
-  * It will use `~/.ssh/id_rsa.pub` by default
-* [Terraform](https://www.terraform.io/downloads) and the [Azure Cli](https://docs.microsoft.com/cli/azure/install-azure-cli)
+* an [SSH key pair](https://docs.microsoft.com/en-gb/azure/virtual-machines/linux/mac-create-ssh-keys#create-an-ssh-key-pair) (defaults to `~/.ssh/id_rsa.pub`)
+* [Terraform](https://www.terraform.io/downloads) and the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)
 
 If you want to use a completely separate SSH key pair for this lab then you can create one using the following command:
 
@@ -46,7 +49,7 @@ Then specify `admin_ssh_public_key_file = "~/.ssh/bastion.pub"` in  terraform.tf
 
 ## Create resources
 
-You will need [Terraform](https://www.terraform.io/downloads). Note that this section may be run from the [Cloud Shell](https://shell.azure.com).
+Note that this section may be run from the [Cloud Shell](https://shell.azure.com), but we recommend that you [setup](https://azurecitadel.com/setup) and use your own bash environment.
 
 1. Clone the repo
 
@@ -132,7 +135,7 @@ All of the resources are created in a single resource group.
 | SSH Key | ubuntu-ssh-public-key | ~/.ssh/id_rsa.pub |
 | VM | ubuntu | Ubuntu 20.04 with AAD and Azure tools |
 | VM | windows | Windows 2022 Server Azure Edition with AAD and Azure tools |
-| Key Vault | bastion-\<uniq>-kv | Secrets: windows password, private SSH key |
+| Key Vault | bastion-_\<uniq>_-kv | Secrets: windows password, private SSH key, sql connection string |
 
 Plus associated NSGs, NICs, OS disks etc.
 
@@ -140,11 +143,13 @@ Plus associated NSGs, NICs, OS disks etc.
 
 Use the native Windows RDP client via Azure Bastion to access the Windows server. Authenticate with your AAD credentials.
 
-The command to initiate an RDP session **can only be used from a Windows client**, e.g. Windows 10 / Windows 11. (Note that there are also PowerShell cmdlets to connect via Bastion.)
+The command to initiate an RDP session **can only be used from a Windows client**, e.g. Windows 10 / Windows 11.
+
+> PowerShell cmdlets for Azure Bastion are available but are not covered in this lab.
 
 1. Copy the command
 
-    Run a `terraform output` command to display the command, and then copy the result.
+    Run a `terraform output` command to display the command, and then copy the result. Run this from the directory that you originally cloned and ran `terraform apply` from.
 
     ```shell
     terraform output rdp_to_windows_server
@@ -178,7 +183,7 @@ The command to initiate an RDP session **can only be used from a Windows client*
 
 1. RDP
 
-    Run the command you copied earlier. You will then be prompted to re-authenticate using your AAD credentials to access the desktop.
+    Run the `az network bastion rdp` command you copied earlier. You'll be prompted to re-authenticate using your AAD credentials before you can access the desktop.
 
     ![authenticate](../images/authenticate.png)
 
@@ -207,7 +212,9 @@ The command to initiate an RDP session **can only be used from a Windows client*
         ```
 
     * Open a PowerShell 7 (x64) terminal from the remote desktop session's Start menu
-    * Paste the command
+    * Paste the PowerShell command
+
+        You will authenticate as the managed identity and retrieve the secret from the key vault.
 
         ![Example secret via PowerShell](../images/example_secret_powershell.png)
 
@@ -217,13 +224,15 @@ The command to initiate an RDP session **can only be used from a Windows client*
         Server=tcp:myserver.database.windows.net,1433;Database=myDataBase;User ID=mylogin@myserver;Password=myPassword;Trusted_Connection=False;Encrypt=True;
         ```
 
-    The managed identity retrieved the secret from the key vault. This is a very useful pattern when using a config management server and you need to be able to add keys, secrets and certs into your automation.
+    The managed identity successfully retrieved the secret. This is a very useful pattern when using a config management server and you need to be able to add keys, secrets and certs into your automation without compromising security.
 
 1. Disconnect from the remote desktop session
 
 ## SSH
 
-You can also SSH via Azure Bastion to your linux VM and authenticate using AAD. This command works from both Windows (which now has the native [openssh](https://docs.microsoft.com/windows-server/administration/openssh/openssh_overview) client) and from linux systems such as WSL2.
+Now you will SSH via Azure Bastion to the linux VM and authenticate using AAD.
+
+This command works from both Windows (which now has the native [openssh](https://docs.microsoft.com/windows-server/administration/openssh/openssh_overview) client) and from linux systems such as WSL2.
 
 1. Copy the command
 
@@ -238,15 +247,15 @@ You can also SSH via Azure Bastion to your linux VM and authenticate using AAD. 
     ```
 
 1. Open a PowerShell terminal on your machine
-1. Paste the command
+1. Paste the `az network bastion ssh` command
 
     You may be prompted to re-authenticate using your AAD credentials if the token needs refreshing.
 
     ![ssh](../images/ssh.png)
 
-    Note that you are logged in as your Azure AD UPN.
+    Note that you are logged in as your Azure AD user principal name.
 
-1. Use the IMDS
+1. Use the Instance Metadata Service (IMDS)
 
     _Optional._
 
@@ -258,24 +267,35 @@ You can also SSH via Azure Bastion to your linux VM and authenticate using AAD. 
     curl -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | jq
     ```
 
-    Here are some useful example commands to set variables from the IMDS:
+    There is some useful information in there which may be useful in scripts.
 
-    ```shell
-    # Straight IMDS uri call
-    image_reference=$(curl -sSLH Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/compute/storageProfile/imageReference?api-version=2021-02-01")
+    Here are some example techniques to set variables from the IMDS output JSON.
 
-    # Extracting a sub-value using jq
-    subscription_id=$(curl -sSLH Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/compute/?api-version=2021-02-01" | jq -r .subscriptionId)
+    * straight IMDS REST API call
 
-    # Slurping the metadata into a variable and use it as a here string
-    imds=$(curl -sSLH Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/?api-version=2021-02-01")
-    id=$(jq -r .compute.resourceId <<< $imds)
-    subscription_id=$(jq -r .compute.subscriptionId <<< $imds)
-    resource_group_name=$(jq -r .compute.resourceGroupName <<< $imds)
-    resource_group_id=${id%%/providers/Microsoft.Compute/*}
-    ```
+      ```shell
+      image_reference=$(curl -sSLH Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/compute/storageProfile/imageReference?api-version=2021-02-01")
+      ```
 
-1. Check identity access to the secret
+    * extracting a sub-value using jq
+
+      ```shell
+      subscription_id=$(curl -sSLH Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/compute/?api-version=2021-02-01" | jq -r .subscriptionId)
+      ```
+
+    * slurping the JSON into a variable used as a here string
+
+      ```shell
+      imds=$(curl -sSLH Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance/?api-version=2021-02-01")
+      id=$(jq -r .compute.resourceId <<< $imds)
+      subscription_id=$(jq -r .compute.subscriptionId <<< $imds)
+      resource_group_name=$(jq -r .compute.resourceGroupName <<< $imds)
+      resource_group_id=${id%%/providers/Microsoft.Compute/*}
+      ```
+
+      This approach has a modest speed gain.
+
+1. Check managed identity access to the secret
 
     _Optional._
 
@@ -300,8 +320,6 @@ You can also SSH via Azure Bastion to your linux VM and authenticate using AAD. 
         ```text
         Server=tcp:myserver.database.windows.net,1433;Database=myDataBase;User ID=mylogin@myserver;Password=myPassword;Trusted_Connection=False;Encrypt=True;
         ```
-
-    Again, this is very useful when automating on config management servers.
 
 ## Tunneling
 
@@ -337,6 +355,8 @@ You should still be on the Ubuntu VM as your AAD credentials. Spin up a simple w
     Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
     ```
 
+    > You may need to press the enter key again to return to the prompt.
+
 1. Exit the SSH session
 
     ```shell
@@ -363,7 +383,9 @@ On your machine, start up the tunnel and then access the site via the browser. T
 
     The resource port is the one used on the VM. It will be mapped to the `--port` value.
 
-1. Paste the command
+1. Paste the `az network bastion tunnel` command
+
+    The Windows Terminal below shows the tunnel created in WSL2, but it also works at the Windows OS level.
 
     ![Tunnel](../images/tunnel.png)
 
@@ -371,9 +393,11 @@ On your machine, start up the tunnel and then access the site via the browser. T
 
     Open up a browser and go to <http://localhost:8080>.
 
+    If you see the basic web page below then you have traversed the tunnel through Azure Bastion and accessed the web page running on the virtual machine.
+
     ![Web Page](../images/web_page.png)
 
-    If you see the basic web page above then you have successfully traversed the tunnel through Azure Bastion and you have accessed the web page running on the virtual machine.
+    **Success!**
 
 ## Cleanup
 
