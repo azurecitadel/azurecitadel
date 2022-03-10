@@ -375,6 +375,16 @@ On your machine, start up the tunnel and then access the site via the browser. T
 
     If you see the basic web page above then you have successfully traversed the tunnel through Azure Bastion and you have accessed the web page running on the virtual machine.
 
+## Cleanup
+
+You can use Terraform to remove all of the resources.
+
+```shell
+terraform destroy
+```
+
+Alternatively, delete the resource group manually with the CLI or Azure portal.
+
 ## Summary
 
 The combination of Azure AD authentication for virtual machines, native client access through Azure Bastion and managed identity is potent.
