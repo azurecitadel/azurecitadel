@@ -1,5 +1,5 @@
 ---
-title: "Publish a VM Offer"
+title: "Publish a VM Offer HOL"
 author: [ "Mike Ormond" ]
 description: "Lab walkthrough of publishing a VM Offer"
 date: 2021-01-06

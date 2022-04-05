@@ -1,5 +1,5 @@
 ---
-title: "Publish a Managed App"
+title: "Publish a Managed App HOL"
 author: [ "Mike Ormond" ]
 description: "Lab walkthrough of publishing a Managed Application Offer"
 date: 2021-01-06

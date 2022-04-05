@@ -1,5 +1,5 @@
 ---
-title: "Publish a Solution Template"
+title: "Publish a Solution Template HOL"
 author: [ "Mike Ormond" ]
 description: "Lab walkthrough of publishing a Solution Template Offer"
 date: 2021-06-20
