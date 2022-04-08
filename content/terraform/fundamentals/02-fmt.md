@@ -1,10 +1,10 @@
 ---
-title: "terraform fmt"
+title: "Format"
 date: 2021-02-16
 slug: fmt
 draft: true
 author: [ "Richard Cheney" ]
-description: "Create a variables.tf and main.tf. Use terraform fmt to automatically format the files."
+description: "Create a variables.tf and main.tf. Use `terraform fmt` to automatically format the files."
 weight: 2
 menu:
   side:
@@ -52,7 +52,9 @@ In this lab you will
 
 ## main.tf
 
-1. Copy and paste the initial main.tf
+Create the initial main.tf.
+
+1. Copy the code block
 
     ```go
     resource azurerm_resource_group basics {
@@ -61,6 +63,8 @@ In this lab you will
     }
     ```
 
+1. Select the main.tf file in the editor's file browser
+1. Paste
 1. Save the file
 
 ## terraform fmt
@@ -68,6 +72,10 @@ In this lab you will
 The format used within Terraform files is called HashiCorp Configuration Language or HCL for short. The formatting of these files is very standardised and  has been hardcoded into the terraform binary itself. (It is based on the principles of gofmt, which is not that surprising as terraform is written in Go.)
 
 1. Run `terraform fmt`
+
+    ```shell
+    terraform fmt
+    ```
 
     The command will find all valid *.tf files in the current working directory and will format them correctly.
 
@@ -90,7 +98,7 @@ The format used within Terraform files is called HashiCorp Configuration Languag
 
 ## Create a variables.tf
 
-1. Copy and paste
+1. Copy and paste into variables.tf
 
     ```go
     variable "resource_group_name" {
@@ -103,6 +111,12 @@ The format used within Terraform files is called HashiCorp Configuration Languag
 1. Save the file
 
 1. Rerun `terraform fmt` and reselect the file in the editor.
+
+    ```shell
+    terraform fmt
+    ```
+
+    > The up cursor key recalls previous commands.
 
     You'll see the value for the type argument, `string` does not need quotes.
 

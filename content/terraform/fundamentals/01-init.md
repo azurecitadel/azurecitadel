@@ -1,10 +1,10 @@
 ---
-title: "terraform init"
+title: "Initialise"
 date: 2021-02-16
 slug: init
 draft: true
 author: [ "Richard Cheney" ]
-description: "Initialising a terraform environment to download providers and modules."
+description: "Use `terraform init` to initialise a terraform environment, downloading providers and modules."
 weight: 1
 menu:
   side:
@@ -32,6 +32,8 @@ In this short lab you will
     ```shell
     mkdir terraform-basics
     ```
+
+    > Use `CTRL`+`SHIFT`+`V` to paste as plain text  into the Cloud Shell's terminal.
 
 1. Change to the directory
 
@@ -151,6 +153,10 @@ commands will detect it and remind you to do so if necessary.</span>
 
 1. Run `terraform providers`
 
+    ```shell
+    terraform providers
+    ```
+
     The `terraform providers` command shows the required providers, their sources and the version constraints. This command becomes more useful when we start to make use of modules.
 
     ```text
@@ -159,7 +165,12 @@ commands will detect it and remind you to do so if necessary.</span>
     └── provider[registry.terraform.io/hashicorp/azurerm] ~> 2.96
     ```
 
-1. Run `terraform version`
+1. Run `terraform version` again
+
+    ```shell
+    terraform version
+    ```
+
 
     Confirms the version of the terraform binary and the providers.
 

@@ -1,10 +1,10 @@
 ---
-title: "terraform plan"
+title: "Plan"
 date: 2021-02-16
 slug: plan
 draft: true
 author: [ "Richard Cheney" ]
-description: "Start working with terraform.tfvars to specify your variable values and then use terraform plan to display the actions that Terraform will take."
+description: "Start working with terraform.tfvars to specify your variable values and then use `terraform plan` to display the actions that Terraform will take."
 weight: 4
 menu:
   side:
@@ -54,14 +54,17 @@ Your files should currently look like this:
 
     ```go
     variable "resource_group_name" {
-      type    = string
-      default = "terraform-basics"
+      description = "Name for the resource group"
+      type        = string
+      default     = "terraform-basics"
     }
 
     variable "location" {
-      type    = string
-      default = "West Europe"
+      description = "Azure region"
+      type        = string
+      default     = "West Europe"
     }
+
     ```
 
 * main.tf
@@ -87,7 +90,7 @@ When planning a deployment then you usually **specify** the values for those var
     touch terraform.tfvars
     ```
 
-    Click on the refresh
+1. Click on the refresh icon in the editor's file explorer
 
 1. Specify the location
 

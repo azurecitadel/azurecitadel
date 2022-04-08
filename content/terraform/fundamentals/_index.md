@@ -1,6 +1,6 @@
 ---
-title: "Terraform - Basics"
-description: "Learn the fundamentals of using Terraform to deploy Azure resources."
+title: "Fundamentals"
+description: "Get to grips with using Terraform to deploy Azure resources."
 date: 2021-01-21
 draft: true
 weight: 1

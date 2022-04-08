@@ -1,10 +1,10 @@
 ---
-title: "terraform validate"
+title: "Validate"
 date: 2021-02-16
 slug: validate
 draft: true
 author: [ "Richard Cheney" ]
-description: "Use terraform validate to confirm that the files are syntactically and logically sound. Add a new variable to variables.tf."
+description: "Use `terraform validate` to confirm that the files are syntactically and logically sound. Add a new variable to variables.tf."
 weight: 3
 menu:
   side:
@@ -53,8 +53,9 @@ Your files should currently look like this:
 
     ```go
     variable "resource_group_name" {
-      type    = string
-      default = "terraform-basics"
+      description = "Name for the resource group"
+      type        = string
+      default     = "terraform-basics"
     }
     ```
 
@@ -116,9 +117,11 @@ Up to this point you could progress by simply copying the code blocks and follow
 
 Update the configuration to match the requirements below.
 
-* New variable, `location`, defaulting to `West Europe`
-* Update the resource group to use the value of the variable
-* Confirm the formatting and validation
+* Create a new variable named **location**
+* Default the value to **West Europe**
+* Add a description for the variable: **Azure region**
+* Update the resource group to use the location variable
+* Format and validate your files
 
 This challenge is fairly simple, but if you do get stuck then the start of the next lab will show a valid configuration.
 
