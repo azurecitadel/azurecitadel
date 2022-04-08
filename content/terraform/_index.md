@@ -1,6 +1,6 @@
 ---
 title: "Terraform"
-description: "Labs for using Terraform to deploy Azure resources"
+description: "Infrastructure as code labs, deploying Azure resources using Terraform."
 date: 2021-02-01
 draft: false
 menu:
@@ -27,16 +27,37 @@ aliases:
  - /automation/terraform-new/lab8
 ---
 
-## Introduction
+## New labs!
 
-This is a placeholder page for the Terraform 0.14 labs.
+**Finally! We have some new labs for Terraform 1.x and the 3.x azurerm provider.**
 
-We know that the Terraform labs are some of the most popular on the old Citadel site, and we want to take this opportunity to refresh the content as we move it over. There is so much more functionality now available in the newer versions of Terraform so it is a well overdue update. Plus we have developed preferred ways to bootstrap environments, leverage split state and look at options for organising and manageing Terraform environments during their lifecycle.
+Explore the fundamentals series to get to grips with some of the Terraform basics.
 
-We will release new content in batches as it is created. Bear with us!
+## Planned
+
+The intention is to add to these. Current planned set is:
+
+* bootstrapping example environments e.g.
+  * Cloud Shell
+  * Windows Subsystem for Linux + Visual Studio Code
+  * Share production (remote state and service principals)
+  * Config management server (Packer, Azure Compute Gallery, Managed Identity, Bastion)
+  * CI/CD with GitHub
+  * CI/CD with Azure DevOps
+  * CI/CD with Terraform CLoud
+* modules
+  * using
+  * creating
+  * publishing
+* advanced syntax (e.g. for_each, dynamics, objects, provisioners, templates etc.)
+* calling REST APIs using provisioners
+
+Some will work as a series, whilst others will act as reference material.
+
+Is there something specific you would like to see? Add a reply to the [discussion](https://github.com/azurecitadel/azurecitadel/discussions/7#discussioncomment-326980) and we'll take a look.
 
 ## Previous labs
 
-If you want to use the old content in the meantime then head over to:
+Looking for the original set of Terraform labs on Azure Citadel? You'll find them at <https://archive.azurecitadel.com/automation/terraform>.
 
-* **<https://archive.azurecitadel.com/automation/terraform>**
+## Content
