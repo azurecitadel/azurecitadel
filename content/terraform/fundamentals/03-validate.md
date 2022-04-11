@@ -2,7 +2,7 @@
 title: "Validate"
 date: 2021-02-16
 slug: validate
-draft: true
+draft: false
 author: [ "Richard Cheney" ]
 description: "Use `terraform validate` to confirm that the files are syntactically and logically sound. Add a new variable to variables.tf."
 weight: 3
@@ -104,6 +104,8 @@ Your files should currently look like this:
     ```shell
     terraform validate
     ```
+
+    Example output:
 
     {{< raw >}}
 <pre style="color:white; background-color:black">

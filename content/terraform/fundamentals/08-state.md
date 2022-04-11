@@ -1,10 +1,10 @@
 ---
-title: "Working with state"
+title: "Managing state"
 date: 2021-04-06
 slug: state
-draft: true
+draft: false
 author: [ "Richard Cheney" ]
-description: "Manipulate state with refresh, import, move and taint."
+description: "Common lifecycle management areas that deal with state with refresh, ignore, move and taint."
 weight: 8
 menu:
   side:
@@ -17,11 +17,13 @@ layout: single
 
 ## Overview
 
+One of Terraform's strengths is lifecycle management. If you
+
 In this lab you will
 
 * refresh the local state file
-* import a resource that was manually created in the portal
-* rename nodes in the state file to avoid unnecessary deletions
+* learn how to tolerate certain changes using lifecycle ignore
+* fix Terraform identification issues with move
 * taint a single resource to force a recreation
 
 ## Starting point
@@ -188,7 +190,7 @@ Outputs:
 </span>fqdn = &quot;http://terraform-basics-c3818179.uksouth.azurecontainer.io&quot;
 ip_address = &quot;20.108.130.109&quot;
 </pre>
-    {{< /raw >}}
+{{< /raw >}}
 
 1. Display the updated state
 
@@ -212,13 +214,13 @@ resource &quot;azurerm_resource_group&quot; &quot;basics&quot;</span> {
 </pre>
 {{< /raw >}}
 
-    The state file is now up to date.
+    The state file is now up to date. It can be beneficial for state to be kept current, particularly if you are using read only remote states or scripting
 
-## Handling updates
+## Handling changes
 
-Ideally, the resource groups managed by Terraform will not be subject to manual changes. However, in the real world this is a common occurrence and you will need to update the config to handle it.
+Ideally, the resource groups managed by Terraform will not be subject to manual changes. However, in the real world this is a common occurrence and you may need to update the config to handle it.
 
-Let's see the impact of the new tag.
+Let's use a common example, to see the impact when someone adds a new tag.
 
 1. Run a plan
 
@@ -268,7 +270,7 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
     1. Add the tag definition into the files
     1. Ignore certain changes
 
-### Update the config to match
+### Update
 
 OK, one approach is to update the files to match the reality. The aim is to get to the point where a `terraform plan` shows that there are no changes to be made.
 
@@ -291,11 +293,13 @@ OK, one approach is to update the files to match the reality. The aim is to get 
 
 1. Check for a clean plan
 
-   ```shell
-   terraform plan
-   ```
+    ```shell
+    terraform plan
+    ```
 
-   {{< raw >}}
+    Example output:
+
+    {{< raw >}}
 <pre style="color:white; background-color:black">
 <span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
 <span style="font-weight:bold;">azurerm_container_group.example: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
@@ -307,7 +311,7 @@ and found no differences, so no changes are needed.
 </pre>
 {{< /raw >}}
 
-### Ignore changes
+### Ignore
 
 The other approach is to force Terraform to ignore certain resource attributes using [lifecycle](https://www.terraform.io/language/meta-arguments/lifecycle) blocks.
 
@@ -347,16 +351,228 @@ The other approach is to force Terraform to ignore certain resource attributes u
     >
     > Another example if Azure Application Gateway if being used as an Application Gateway Ingress Controller (AGIC) by AKS. In this configuration the App Gateway is reconfigured dynamically using Kubernetes annotations.
 
-## Import
+## Renaming
 
-**YOU ARE HERE**
+Sometimes you need to tweak the Terraform identifiers. It may be a straight rename, a shift from a single resource to using *count* or *for_each* or moving something to and from a module. This section will go through a simple example.
+
+1. Check for a clean plan
+
+    ```shell
+    terraform plan
+    ```
+
+    Example output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.example: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+
+<span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+</pre>
+{{< /raw >}}
+
+1. List out the identifiers in state
+
+    ```shell
+    terraform state list
+    ```
+
+    Example output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+azurerm_container_group.example
+azurerm_resource_group.basics
+</pre>
+{{< /raw >}}
+
+    We will change the *azurerm_container_group.example* to *azurerm_container_group.basics*.
+
+1. Update main.tf
+
+    Change the label for the azurerm_container_group identifier from **"example"** to **"basics"**.
+
+1. Rerun plan
+
+   ```shell
+   terraform plan
+   ```
+
+   You should see validation errors. Refactor the two outputs.
+
+1. Rerun plan
+
+   ```shell
+   terraform plan
+   ```
+
+   You should see the container group will be deleted and recreated.
+
+1. Rename the identifier in state
+
+    The move command is `terraform state mv <source> <dest>`.
+
+    ```shell
+    terraform state mv azurerm_container_group.example azurerm_container_group.basics
+    ```
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+Move &quot;azurerm_container_group.example&quot; to &quot;azurerm_container_group.basics&quot;
+Successfully moved 1 object(s).
+</pre>
+{{< /raw >}}
+
+    > Hint: If you are specifying a for_each identifier, then escape the quotes, e.g. `azurerm_resource_name.example[\"name\"]`.
+
+1. Check for a clean plan
+
+    ```shell
+    terraform plan
+    ```
+
+    Example output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+
+<span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+</pre>
+{{< /raw >}}
+
+## Tainting
+
+You may find a situation when one of your resources has failed. Or you may wish for it to be recreated, but Terraform sees no need to do so based on the config files. (For example if you have changed the contents of a script uri.)
+
+If so, then use `terraform taint` to force the resource to be recreated.
+
+1. Check for a clean plan
+
+    ```shell
+    terraform plan
+    ```
+
+    Example output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+
+<span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+</pre>
+{{< /raw >}}
+
+1. List out the identifiers
+
+    ```shell
+    terraform state list
+    ```
+
+    Example output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+azurerm_container_group.basics
+azurerm_resource_group.basics
+</pre>
+{{< /raw >}}
+
+1. Taint the container group
+
+    Force the container group to be recreated as an example.
+
+    ```shell
+    terraform taint azurerm_container_group.basics
+    ```
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+Resource instance azurerm_container_group.basics has been marked as tainted.
+</pre>
+{{< /raw >}}
+
+1. Plan
+
+    ```shell
+    terraform plan
+    ```
+
+    Example output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+<span style="color:red;">-</span>/<span style="color:lime;">+</span> destroy and then create replacement
+
+Terraform will perform the following actions:
+
+<span style="font-weight:bold;">  # azurerm_container_group.basics</span> is tainted, so must be <span style="font-weight:bold;"></span><span style="font-weight:bold;color:red;">replaced</span>
+<span style="color:red;">-</span>/<span style="color:lime;">+</span> resource &quot;azurerm_container_group&quot; &quot;basics&quot; {
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>exposed_port        = [
+          <span style="color:red;">-</span> {
+              <span style="color:red;">-</span> port     = 80
+              <span style="color:red;">-</span> protocol = &quot;TCP&quot;
+            },
+        ] <span style="color:yellow;">-&gt;</span> (known after apply)
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>fqdn                = &quot;terraform-basics-c3818179.uksouth.azurecontainer.io&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>id                  = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>ip_address          = &quot;20.108.130.109&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>ip_address_type     = &quot;Public&quot; <span style="color:yellow;">-&gt;</span> &quot;public&quot;
+        <span style="font-weight:bold;"></span>name                = &quot;terraform-basics&quot;
+      <span style="color:red;">-</span> <span style="font-weight:bold;"></span>tags                = {} <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
+        <span style="filter: contrast(70%) brightness(190%);color:dimgray;"># (5 unchanged attributes hidden)</span>
+
+      <span style="color:yellow;">~</span> container {
+          <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>commands                     = [] <span style="color:yellow;">-&gt;</span> (known after apply)
+          <span style="color:red;">-</span> <span style="font-weight:bold;"></span>environment_variables        = {} <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
+            <span style="font-weight:bold;"></span>name                         = &quot;inspectorgadget&quot;
+          <span style="color:red;">-</span> <span style="font-weight:bold;"></span>secure_environment_variables = (sensitive value)
+            <span style="filter: contrast(70%) brightness(190%);color:dimgray;"># (3 unchanged attributes hidden)</span>
+
+            <span style="filter: contrast(70%) brightness(190%);color:dimgray;"># (1 unchanged block hidden)</span>
+        }
+    }
+
+<span style="font-weight:bold;">Plan:</span> 1 to add, 0 to change, 1 to destroy.
+
+<span style="font-weight:bold;">Changes to Outputs:</span>
+  <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>fqdn       = &quot;http://terraform-basics-c3818179.uksouth.azurecontainer.io&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
+  <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>ip_address = &quot;20.108.130.109&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
+<span style="filter: contrast(70%) brightness(190%);color:dimgray;">
+─────────────────────────────────────────────────────────────────────────────</span>
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run &quot;terraform apply&quot; now.
+</pre>
+{{< /raw >}}
+
+1. Apply
+
+    ```shell
+    terraform apply --auto-approve
+    ```
+
+    The Azure Container Instance will be recreated.
 
 ## Summary
 
-You have started to use the Terraform console, and made use of locals and outputs.
+Terraform can make life simpler in terms of lifecycle management and seeing the planned impact of configuration changes, but it is useful to know how to use the tools to manage these scenarios.
 
-Being able to navigate the documentation is a key skill. You will also find plenty of sample configurations and blog pages for Terraform.
-
-Finally, check the documentation for the [Azure Resource Manager REST APIs](https://docs.microsoft.com/rest/api/resources/) as they can sometimes add insight where the resources closely match the properties in the REST API calls.
-
-In the next lab we will add another provider, use locals and add an output.
+In the next lab we will handle the import of a resource that has been created outside of Terraform and bring it into state safely.

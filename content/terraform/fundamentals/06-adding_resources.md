@@ -2,7 +2,7 @@
 title: "Adding resources"
 date: 2021-04-06
 slug: adding_resources
-draft: true
+draft: false
 author: [ "Richard Cheney" ]
 description: "Use the azurerm documentation to add a resource to your configuration."
 weight: 6
@@ -109,7 +109,7 @@ There is a short URL for the azure provider's resource documentation.
 
 1. Select the **azurerm_resource_group** resource
 
-    ![azurerm_resource_group](/terraform/basics/images/azurerm_resource_group_docs.png)
+    ![azurerm_resource_group](/terraform/fundamentals/images/azurerm_resource_group_docs.png)
 
     This is the documentation page for the resource group you've already created.
 
@@ -122,7 +122,7 @@ In the next section you will add a new azurerm_container_group resource to creat
 1. Filter to "container" on the [aka.ms/terraform](https://aka.ms/terraform) page
 1. Select the **azurerm_container_group** resource
 
-    ![azurerm_container_group](/terraform/basics/images/azurerm_container_group_docs.png)
+    ![azurerm_container_group](/terraform/fundamentals/images/azurerm_container_group_docs.png)
 
     This is a more complex resource with a larger number of arguments and attributes.
 
@@ -239,11 +239,11 @@ Here are the requirements.
 
 1. Browse the portal and find the URL for the container instance
 
-    ![ACI in the portal](/terraform/basics/images/azure_container_instance_demo.png)
+    ![ACI in the portal](/terraform/fundamentals/images/azure_container_instance_demo.png)
 
 1. Open a new tab in the browser and go to the site
 
-    ![Inspector Gadget](/terraform/basics/images/inspectorgadget1.png)
+    ![Inspector Gadget](/terraform/fundamentals/images/inspectorgadget1.png)
 
 If your screen is similar to the one above then you have been successful! If not then check if your config differs from the one shown at the start of the next lab. (Note that the value of your prefix should be different.)
 

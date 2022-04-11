@@ -2,7 +2,7 @@
 title: "Format"
 date: 2021-02-16
 slug: fmt
-draft: true
+draft: false
 author: [ "Richard Cheney" ]
 description: "Create a variables.tf and main.tf. Use `terraform fmt` to automatically format the files."
 weight: 2
