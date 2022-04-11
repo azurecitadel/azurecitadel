@@ -2,7 +2,7 @@
 title: "Plan"
 date: 2021-02-16
 slug: plan
-draft: true
+draft: false
 author: [ "Richard Cheney" ]
 description: "Start working with terraform.tfvars to specify your variable values and then use `terraform plan` to display the actions that Terraform will take."
 weight: 4

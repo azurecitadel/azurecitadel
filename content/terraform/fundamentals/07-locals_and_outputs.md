@@ -2,7 +2,7 @@
 title: "Locals and outputs"
 date: 2021-04-06
 slug: locals_and_outputs
-draft: true
+draft: false
 author: [ "Richard Cheney" ]
 description: "Use locals and functions to generate a unique value, and add a couple of outputs."
 weight: 7
@@ -146,12 +146,14 @@ We could use one of the other providers in the [Terraform Registry](https://regi
     terraform state list
     ```
 
-    Output:
+    Example output:
 
-    ```text
-    azurerm_container_group.example
-    azurerm_resource_group.basics
-    ```
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+azurerm_container_group.example
+azurerm_resource_group.basics
+</pre>
+{{< /raw >}}
 
 1. Open the Terraform console
 
@@ -171,9 +173,11 @@ We could use one of the other providers in the [Terraform Registry](https://regi
 
     Expected hash:
 
-    ```json
-    "f72017485fbf6423499baf9b240daa14f5f095a1"
-    ```
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+"f72017485fbf6423499baf9b240daa14f5f095a1"
+</pre>
+{{< /raw >}}
 
     If you use the up arrow to recall the command you can see if will always return the same hash.
 
@@ -187,15 +191,17 @@ We could use one of the other providers in the [Terraform Registry](https://regi
 
     Example response:
 
-    ```json
-    {
-      "id" = "/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics"
-      "location" = "uksouth"
-      "name" = "terraform-basics"
-      "tags" = tomap({})
-      "timeouts" = null /* object */
-    }
-    ```
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+{
+  "id" = "/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics"
+  "location" = "uksouth"
+  "name" = "terraform-basics"
+  "tags" = tomap({})
+  "timeouts" = null /* object */
+}
+</pre>
+{{< /raw >}}
 
 1. Drill down to the id attribute
 
@@ -205,9 +211,11 @@ We could use one of the other providers in the [Terraform Registry](https://regi
 
     Example response:
 
-    ```json
-    "/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics"
-    ```
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+"/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics"
+</pre>
+{{< /raw >}}
 
 1. Retest *sha1* with the resourceId
 
@@ -217,9 +225,11 @@ We could use one of the other providers in the [Terraform Registry](https://regi
 
     Example output:
 
-    ```json
-    "c3818179c2946e2352e5210e826239e65f5c3396"
-    ```
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+"c3818179c2946e2352e5210e826239e65f5c3396"
+</pre>
+{{< /raw >}}
 
     That is a little long. Eight characters should be sufficient to make it unique.
 
@@ -240,9 +250,11 @@ We could use one of the other providers in the [Terraform Registry](https://regi
 
     Example output:
 
-    ```json
-    "c3818179"
-    ```
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+"c3818179"
+</pre>
+{{< /raw >}}
 
     Success!
 
@@ -398,5 +410,7 @@ OK, time for another little **challenge** section.
 ## Summary
 
 You have started to use the Terraform console, and made use of locals and outputs.
+
+You will use both of these more and more as your Terraform code becomes more ambitious. Locals are important for readability as the expressions become more complex. Outputs are useful at this level, but really become important as you start creating your own modules.
 
 In the next section we will manipulate state a little using imports, refresh, renames and taints.

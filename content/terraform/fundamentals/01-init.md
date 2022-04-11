@@ -2,7 +2,7 @@
 title: "Initialise"
 date: 2021-02-16
 slug: init
-draft: true
+draft: false
 author: [ "Richard Cheney" ]
 description: "Use `terraform init` to initialise a terraform environment, downloading providers and modules."
 weight: 1
@@ -80,7 +80,7 @@ In this short lab you will
 
     Click on the main editor pain and paste using `CTRL`+`V`.
 
-    ![provider.tf](/terraform/basics/images/provider.tf.png)
+    ![provider.tf](/terraform/fundamentals/images/provider.tf.png)
 
     The circle next to the file name indicates that the file has unsaved changes.
 
@@ -109,6 +109,8 @@ In this short lab you will
     ```shell
     terraform init
     ```
+
+    Example output:
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
@@ -144,10 +146,12 @@ commands will detect it and remind you to do so if necessary.</span>
 
     Example output:
 
-    ```text
-    .terraform/providers/registry.terraform.io/hashicorp/azurerm/2.96.0/linux_amd64/terraform-provider-azurerm_v2.96.0_x5
-    .terraform.lock.hcl
-    ```
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+.terraform/providers/registry.terraform.io/hashicorp/azurerm/2.96.0/linux_amd64/terraform-provider-azurerm_v2.96.0_x5
+.terraform.lock.hcl
+</pre>
+{{< /raw >}}
 
     The azure provider has been downloaded and a [dependency lock file](https://www.terraform.io/language/files/dependency-lock) has been created.
 
@@ -159,11 +163,15 @@ commands will detect it and remind you to do so if necessary.</span>
 
     The `terraform providers` command shows the required providers, their sources and the version constraints. This command becomes more useful when we start to make use of modules.
 
-    ```text
-    Providers required by configuration:
-    .
-    └── provider[registry.terraform.io/hashicorp/azurerm] ~> 2.96
-    ```
+    Example output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+Providers required by configuration:
+.
+└── provider[registry.terraform.io/hashicorp/azurerm] ~> 2.96
+</pre>
+{{< /raw >}}
 
 1. Run `terraform version` again
 
@@ -171,14 +179,7 @@ commands will detect it and remind you to do so if necessary.</span>
     terraform version
     ```
 
-
     Confirms the version of the terraform binary and the providers.
-
-    ```text
-    Terraform v1.1.6
-    on linux_amd64
-    + provider registry.terraform.io/hashicorp/azurerm v2.96.0
-    ```
 
 ## Summary
 

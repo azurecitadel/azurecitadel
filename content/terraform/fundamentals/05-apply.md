@@ -2,7 +2,7 @@
 title: "Apply"
 date: 2021-04-06
 slug: apply
-draft: true
+draft: false
 author: [ "Richard Cheney" ]
 description: "Apply your configuration to create resources and then examine the state file."
 weight: 5
@@ -144,9 +144,11 @@ Once Terraform has applied changes then it stores the current state as JSON in a
 
     Expected output:
 
-    ```text
-    azurerm_resource_group.basics
-    ```
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+azurerm_resource_group.basics
+</pre>
+{{< /raw >}}
 
     Note that the ident used for the Terraform resources is based in the resource type and the chosen name, i.e. `azurerm_resource_group.basics`. This needs to be unique for all resources in the state file.
 
@@ -158,14 +160,19 @@ Once Terraform has applied changes then it stores the current state as JSON in a
 
     Example output:
 
-    ```text
-    # azurerm_resource_group.basics:
-    resource "azurerm_resource_group" "basics" {
-        id       = "/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics"
-        location = "uksouth"
-        name     = "terraform-basics"
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+<span style="font-weight:bold;"># azurerm_resource_group.basics:
+resource &quot;azurerm_resource_group&quot; &quot;basics&quot; </span> {
+    id       = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics&quot;
+    location = &quot;uksouth&quot;
+    name     = &quot;terraform-basics&quot;
+    tags     = {
+        &quot;source&quot; = &quot;terraform&quot;
     }
-    ```
+}
+</pre>
+{{< /raw >}}
 
 1. View the state file
 

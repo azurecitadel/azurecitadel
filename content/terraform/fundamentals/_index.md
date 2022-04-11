@@ -2,7 +2,7 @@
 title: "Fundamentals"
 description: "Get to grips with using Terraform to deploy Azure resources."
 date: 2021-01-21
-draft: true
+draft: false
 weight: 1
 menu:
   side:
