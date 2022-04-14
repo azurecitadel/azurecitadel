@@ -29,7 +29,7 @@ In this short lab you will
 
 1. Create a directory
 
-    ```shell
+    ```bash
     mkdir terraform-basics
     ```
 
@@ -37,7 +37,7 @@ In this short lab you will
 
 1. Change to the directory
 
-    ```shell
+    ```bash
     cd terraform-basics
     ```
 
@@ -45,7 +45,7 @@ In this short lab you will
 
     The Azure Cloud Shell includes the integrated open source [Monaco editor](https://docs.microsoft.com/azure/cloud-shell/using-cloud-shell-editor).
 
-    ```shell
+    ```bash
     code provider.tf
     ```
 
@@ -58,17 +58,13 @@ In this short lab you will
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -80,13 +76,13 @@ In this short lab you will
 
     Click on the main editor pain and paste using `CTRL`+`V`.
 
-    ![provider.tf](/terraform/fundamentals/images/provider.tf.png)
-
     The circle next to the file name indicates that the file has unsaved changes.
 
 1. Save the file
 
     Click on the ellipsis (*...*) and select Save, or use `CTRL`+`S`.
+
+    ![provider.tf](/terraform/fundamentals/images/provider.tf.png)
 
 1. Close the editor
 
@@ -96,17 +92,21 @@ In this short lab you will
 
 1. Run `terraform version`
 
-    ```shell
+    ```bash
     terraform version
     ```
 
-    The cloud shell [container image](https://docs.microsoft.com/azure/cloud-shell/features) includes the terraform binary. In later labs you will see how to install the terraform binary for other scenarios.
+    You may ignore any message saying that your Terraform version is out of date.
+
+    The cloud shell [container image](https://docs.microsoft.com/azure/cloud-shell/features) includes the terraform binary and you cannot update it.
+
+    In later labs you will see how to install the terraform binary for other scenarios where you do have full control over the versions.
 
 1. Run `terraform init`
 
     This is the first of the key commands in the Terraform workflow.
 
-    ```shell
+    ```bash
     terraform init
     ```
 
@@ -117,9 +117,9 @@ In this short lab you will
 <span style="font-weight:bold;">Initializing the backend...</span>
 
 <span style="font-weight:bold;">Initializing provider plugins...</span>
-- Finding hashicorp/azurerm versions matching &quot;~&gt; 2.96&quot;...
-- Installing hashicorp/azurerm v2.96.0...
-- Installed hashicorp/azurerm v2.96.0 (signed by HashiCorp)
+- Finding hashicorp/azurerm versions matching &quot;~&gt; 3.1&quot;...
+- Installing hashicorp/azurerm v3.1.0...
+- Installed hashicorp/azurerm v3.1.0 (signed by HashiCorp)
 
 Terraform has created a lock file <span style="font-weight:bold;">.terraform.lock.hcl</span> to record the provider
 selections it made above. Include this file in your version control repository
@@ -140,7 +140,7 @@ commands will detect it and remind you to do so if necessary.</span>
 
 1. List the new files
 
-    ```shell
+    ```bash
     find .terraform* -type f
     ```
 
@@ -148,7 +148,7 @@ commands will detect it and remind you to do so if necessary.</span>
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
-.terraform/providers/registry.terraform.io/hashicorp/azurerm/2.96.0/linux_amd64/terraform-provider-azurerm_v2.96.0_x5
+.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.1.0/linux_amd64/terraform-provider-azurerm_v3.1.0_x5
 .terraform.lock.hcl
 </pre>
 {{< /raw >}}
@@ -157,7 +157,7 @@ commands will detect it and remind you to do so if necessary.</span>
 
 1. Run `terraform providers`
 
-    ```shell
+    ```bash
     terraform providers
     ```
 
@@ -169,13 +169,13 @@ commands will detect it and remind you to do so if necessary.</span>
 <pre style="color:white; background-color:black">
 Providers required by configuration:
 .
-└── provider[registry.terraform.io/hashicorp/azurerm] ~> 2.96
+└── provider[registry.terraform.io/hashicorp/azurerm] ~> 3.1
 </pre>
 {{< /raw >}}
 
 1. Run `terraform version` again
 
-    ```shell
+    ```bash
     terraform version
     ```
 

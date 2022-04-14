@@ -33,17 +33,13 @@ Your files should currently look like this:
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -61,7 +57,7 @@ Your files should currently look like this:
 
 * main.tf
 
-    ```hcl
+    ```go
     resource "azurerm_resource_group" "basics" {
       name     = var.name
       location = "West Europe"
@@ -74,7 +70,7 @@ Your files should currently look like this:
 
     The terraform validate command checks for syntax errors or internal logical inconsistencies in the files.
 
-    ```shell
+    ```bash
     terraform validate
     ```
 
@@ -86,12 +82,12 @@ Your files should currently look like this:
 ╷
 │ Error:</span> Reference to undeclared input variable
 <span style="color:red;">│</span>
-<span style="color:red;">|</span>   on main.tf line 2, in resource "azurerm_resource_group" "basics":
+<span style="color:red;">│</span>   on main.tf line 2, in resource "azurerm_resource_group" "basics":
 <span style="color:red;">│</span>    2:   name     = var.name
 <span style="color:red;">│</span>
 <span style="color:red;">│</span> An input variable with the name "name" has not been declared.
 <span style="color:red;">│</span> This variable can be declared with a variable "name" {} block.
-<span style="color:red;">╵</span>
+<span style="color:red;">│</span>
 </pre>
 {{< /raw >}}
 
@@ -101,7 +97,7 @@ Your files should currently look like this:
 1. Correct the variable name to `var.resource_group_name`
 1. Revalidate
 
-    ```shell
+    ```bash
     terraform validate
     ```
 
@@ -115,9 +111,9 @@ Your files should currently look like this:
 
 ## Add a variable
 
-Up to this point you could progress by simply copying the code blocks and following the instructions, but now it is time to deal with the first **challenge section**!
+Up to this point you could progress by simply copying the code blocks and following the instructions, but now it is time to deal with the first challenge section!
 
-Update the configuration to match the requirements below.
+💪 **Challenge**: Update the configuration to match the requirements below.
 
 * Create a new variable named **location**
 * Default the value to **West Europe**

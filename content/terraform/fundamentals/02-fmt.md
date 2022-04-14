@@ -22,6 +22,29 @@ In this lab you will
 * create a variables.tf and a main.tf
 * use `terraform fmt` to tidy them up
 
+## Starting point
+
+Your files should currently look like this:
+
+* provider.tf
+
+    ```go
+    terraform {
+      required_providers {
+        azurerm = {
+          source  = "hashicorp/azurerm"
+          version = "~>3.1"
+        }
+      }
+    }
+
+    provider "azurerm" {
+      features {}
+
+      storage_use_azuread = true
+    }
+    ```
+
 ## Open the editor
 
 1. Open the [Cloud Shell](https://shell.azure.com)
@@ -30,13 +53,13 @@ In this lab you will
 
 1. Change to your working directory
 
-    ```shell
+    ```bash
     cd ~/terraform-basics
     ```
 
 1. Create empty variables.tf and main.tf files
 
-    ```shell
+    ```bash
     touch variables.tf main.tf
     ```
 
@@ -44,7 +67,7 @@ In this lab you will
 
 1. Open the Monaco editor
 
-    ```shell
+    ```bash
     code .
     ```
 
@@ -73,13 +96,17 @@ The format used within Terraform files is called HashiCorp Configuration Languag
 
 1. Run `terraform fmt`
 
-    ```shell
+    ```bash
     terraform fmt
     ```
 
-    The command will find all valid *.tf files in the current working directory and will format them correctly.
+    The command will find all valid *.tf files in the current working directory and will format them correctly. The command outputs the filenames of any modified files.
 
-    The command outputs the filenames of any modified files.
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+main.tf
+</pre>
+{{< /raw >}}
 
 1. Reselect the main.tf
 
@@ -91,7 +118,7 @@ The format used within Terraform files is called HashiCorp Configuration Languag
 
     ```go
     resource "azurerm_resource_group" "basics" {
-      name     = "terraform-basics"
+      name     = var.name
       location = "West Europe"
     }
     ```
@@ -112,7 +139,7 @@ The format used within Terraform files is called HashiCorp Configuration Languag
 
 1. Rerun `terraform fmt` and reselect the file in the editor.
 
-    ```shell
+    ```bash
     terraform fmt
     ```
 

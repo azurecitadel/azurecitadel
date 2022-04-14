@@ -34,17 +34,13 @@ Your files should look similar to this:
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -70,16 +66,7 @@ Your files should look similar to this:
       type        = string
       default     = "terraform-basics"
     }
-
-    variable "prefix" {
-      description = "Prefix string to ensure FQDNs are globally unique"
-      type        = string
-      default     = "richeney"
-    }
-
     ```
-
-    > ⚠️ You should have a different default value for *prefix*.
 
 * main.tf
 
@@ -91,8 +78,11 @@ Your files should look similar to this:
     resource "azurerm_resource_group" "basics" {
       name     = var.resource_group_name
       location = var.location
-      tags = {
-        source = "terraform"
+
+      lifecycle {
+        ignore_changes = [
+          tags,
+        ]
       }
     }
 
@@ -100,7 +90,7 @@ Your files should look similar to this:
       name                = var.container_group_name
       location            = azurerm_resource_group.basics.location
       resource_group_name = azurerm_resource_group.basics.name
-      ip_address_type     = "public"
+      ip_address_type     = "Public"
       dns_name_label      = "${var.container_group_name}-${local.uniq}"
       os_type             = "Linux"
 
@@ -123,20 +113,31 @@ Your files should look similar to this:
       location                 = azurerm_resource_group.basics.location
       account_tier             = "Standard"
       account_replication_type = "LRS"
-      allow_blob_public_access = true
-      is_hns_enabled           = true
-      min_tls_version          = "TLS1_2"
-      nfsv3_enabled            = true
+
+      allow_nested_items_to_be_public = false
+      is_hns_enabled                  = true
+      nfsv3_enabled                   = true
     }
     ```
 
     > ⚠️ Your storage account name will be different.
 
+* outputs.tf
+
+    ```go
+    output "ip_address" {
+      value = azurerm_container_group.basics.ip_address
+    }
+
+    output "fqdn" {
+      value = "http://${azurerm_container_group.basics.fqdn}"
+    }
+    ```
+
 * terraform.tfvars
 
     ```go
     location = "UK South"
-
     ```
 
     > You may have set a different value for *location*.
@@ -146,6 +147,10 @@ Your files should look similar to this:
 Before we clean up the environment, take a look at how commenting blocks and renaming files can change the behaviour of the CLI commands.
 
 1. Comment out the container instance
+
+    You can comment individual lines by prepending with either `#` or `//`.
+
+    You can comment multiple lines by surrounding the block with `/*` and `*/`, as shown below.
 
     ```text
     /*
@@ -172,9 +177,11 @@ Before we clean up the environment, take a look at how commenting blocks and ren
     */
     ```
 
+    > Users of vscode can also highlight multiple lines and use the `CTRL`+`K`,`CTRL`+`C` chord to comment, and `CTRL`+`K`,`CTRL`+`U` to uncomment.
+
 1. terraform plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -184,13 +191,15 @@ Before we clean up the environment, take a look at how commenting blocks and ren
 
    When Terraform runs its commands it is looking at all files in the current directory that match `*.tf`. You can rename file suffixes and it will ignore those files.
 
-   ```shell
+   Rename the outputs files so that it is completely ignored in the diff.
+
+   ```bash
    mv outputs.tf outputs.tf.ignore
    ```
 
 1. terraform plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -256,17 +265,19 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
 </pre>
 {{< /raw >}}
 
-    The resource is no longer in the config and so Terraform plans to remove it. This reinforces Terraform's strengths and power in lifecycle management.
+    The resource is no longer in the config and so Terraform plans to remove it.
 
-    > Some of you will be familiar with ARM templates or Bicep and the standard *incremental* mode, which contributes resources. Terraform behaviour is closer to the less common *complete* mode.
+    > Some of you will be familiar with ARM templates or Bicep and the standard *incremental* mode, which only ever **contributes** resources idempotently. If you were to remove resources from the resources array in an ARM template then those resources would remain in the resource group and would have to be manually deleted.
+    >
+    > The Terraform behaviour here is closer to the less commonly used *complete* mode in ARM / Bicep.
 
 1. Apply the change
 
-    ```shell
+    ```bash
     terraform apply
     ```
 
-    Approve the change.
+    Approve the change. The container group will be deleted.
 
 ## terraform destroy
 
@@ -274,7 +285,7 @@ We'll finish with a command that you will use rarely in production. The `terrafo
 
 1. Destroy the environment
 
-    ```shell
+    ```bash
     terraform destroy
     ```
 
@@ -307,7 +318,7 @@ Terraform will perform the following actions:
       <span style="color:red;">-</span> <span style="font-weight:bold;"></span>account_kind                      = &quot;StorageV2&quot; <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
       <span style="color:red;">-</span> <span style="font-weight:bold;"></span>account_replication_type          = &quot;LRS&quot; <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
       <span style="color:red;">-</span> <span style="font-weight:bold;"></span>account_tier                      = &quot;Standard&quot; <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
-      <span style="color:red;">-</span> <span style="font-weight:bold;"></span>allow_blob_public_access          = true <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
+      <span style="color:red;">-</span> <span style="font-weight:bold;"></span>allow_nested_items_to_be_public   = true <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
       <span style="color:red;">-</span> <span style="font-weight:bold;"></span>enable_https_traffic_only         = true <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
       <span style="color:red;">-</span> <span style="font-weight:bold;"></span>id                                = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot; <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
       <span style="color:red;">-</span> <span style="font-weight:bold;"></span>infrastructure_encryption_enabled = false <span style="filter: contrast(70%) brightness(190%);color:dimgray;">-&gt;</span> <span style="filter: contrast(70%) brightness(190%);color:dimgray;">null</span>
@@ -417,4 +428,4 @@ azurerm_resource_group.basics: Destruction complete after 15s
 
 Done! 😊
 
-You have learnt how to initialise Terraform, installs providers, format and validate HCL files, how to add resources and plan and apply your configs. You have also worked with simple expressions, locals and outputs, manipulated the state file - including an import - and then managed the destroy phase.
+You have learnt how to initialise Terraform, install providers, format and validate HCL files, how to add resources and plan and apply your configs. You have also worked with simple expressions, locals and outputs, manipulated the state file - including an import - and then managed the destroy phase.

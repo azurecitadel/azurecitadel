@@ -34,17 +34,13 @@ Your files should currently look like this:
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -89,7 +85,7 @@ Your files should currently look like this:
 
 1. Apply the configuration
 
-    ```shell
+    ```bash
     terraform apply
     ```
 
@@ -121,9 +117,9 @@ Terraform will perform the following actions:
   Terraform will perform the actions described above.
   Only 'yes' will be accepted to approve.
 
-  Enter a value: yes
+  <span style="font-weight:bold;">Enter a value:</span> yes
 
-azurerm_resource_group.basics: Creating...
+<span style="font-weight:bold;">azurerm_resource_group.basics: Creating...
 azurerm_resource_group.basics: Creation complete after 0s [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]
 
 <span style="color:lime;">Apply complete! Resources: 1 added, 0 changed, 0 destroyed.</span>
@@ -138,7 +134,7 @@ Once Terraform has applied changes then it stores the current state as JSON in a
 
 1. List the resources in the state file
 
-    ```shell
+    ```bash
     terraform state list
     ```
 
@@ -154,7 +150,7 @@ azurerm_resource_group.basics
 
 1. Display the attributes for a resource
 
-    ```shell
+    ```bash
     terraform state show azurerm_resource_group.basics
     ```
 
@@ -176,7 +172,7 @@ resource &quot;azurerm_resource_group&quot; &quot;basics&quot; </span> {
 
 1. View the state file
 
-    ```shell
+    ```bash
     jq . < terraform.tfstate
     ```
 

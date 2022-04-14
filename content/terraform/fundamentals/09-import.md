@@ -39,17 +39,13 @@ Your files should look similar to this:
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -100,8 +96,8 @@ Your files should look similar to this:
       name                = var.container_group_name
       location            = azurerm_resource_group.basics.location
       resource_group_name = azurerm_resource_group.basics.name
-      ip_address_type     = "public"
-      dns_name_label      = "${var.prefix}-${var.container_group_name}"
+      ip_address_type     = "Public"
+      dns_name_label      = "${var.container_group_name}-${local.uniq}"
       os_type             = "Linux"
 
       container {
@@ -135,7 +131,6 @@ Your files should look similar to this:
 
     ```go
     location = "UK South"
-
     ```
 
     > You may have set a different value for *location*.
@@ -144,14 +139,16 @@ Your files should look similar to this:
 
 Use the portal to create a storage account in the *terraform-basics* resource group.
 
-1. [Create a storage account in the portal](https://portal.azure.com/#create/Microsoft.StorageAccount-ARM) (open in a new tab)
-    * Select the *terraform-basics* resource group
-    * Select the same region as the resource group
-    * Create a valid and unique storage account name
-    * Change redundancy to LRS
-    * In the Advanced tab
+1. [Create a storage account in the portal](https://portal.azure.com/#create/Microsoft.StorageAccount-ARM) (open in a new tab or window)
+    * Basics tab
+        * Select the correct subscription
+        * Select the *terraform-basics* resource group
+        * Create a valid and unique storage account name
+        * Select the same region as the resource group, e.g. *UK South*
+        * Leave the Performance as the default, *Standard*
+        * Change redundancy to LRS
+    * Advanced tab
         * Disable blob public access
-        * Default to AAD authentication
         * Enable hierarchical namespace
         * Enable NFS v3
     * In the Networking tab
@@ -183,7 +180,7 @@ Use the portal to create a storage account in the *terraform-basics* resource gr
 
     Bash:
 
-    ```shell
+    ```bash
     saId=$(az storage account list --resource-group terraform-basics --query "[0].id" --output tsv)
     ```
 
@@ -195,20 +192,20 @@ Use the portal to create a storage account in the *terraform-basics* resource gr
 
     This will set the variables to the resource ID of the first storage account found in the resource group.
 
-## Import into state
+## Check for no diff
 
 1. Check *terraform plan* is clean
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
-    Expected output:
+    Desired output:
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
 <span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
-<span style="font-weight:bold;">azurerm_container_group.example: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
 
 <span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
 
@@ -217,7 +214,83 @@ and found no differences, so no changes are needed.
 </pre>
 {{< /raw >}}
 
-    ⚠️ It is not recommended to import resources unless the Terraform config, state file and Azure reality all match.
+    ⚠️ Do not attempt to import resources unless the Terraform config, state file and Azure reality all match. There should be no diff.
+
+1. Apply with refresh only (if required)
+
+    If you get the following output then run the refresh only as advised.
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+
+<span style="font-weight:bold;"></span><span style="font-weight:bold;color:aqua;">Note:</span><span style="font-weight:bold;"> Objects have changed outside of Terraform</span>
+
+Terraform detected the following changes made outside of Terraform since the
+last &quot;terraform apply&quot;:
+
+<span style="font-weight:bold;">  # azurerm_container_group.basics</span> has changed
+  <span style="color:yellow;">~</span> resource &quot;azurerm_container_group&quot; &quot;basics&quot; {
+        <span style="font-weight:bold;"></span>id                  = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics&quot;
+        <span style="font-weight:bold;"></span>name                = &quot;terraform-basics&quot;
+      <span style="color:lime;">+</span> <span style="font-weight:bold;"></span>tags                = {}
+        <span style="filter: contrast(70%) brightness(190%);color:dimgray;"># (9 unchanged attributes hidden)</span>
+
+      <span style="color:yellow;">~</span> container {
+          <span style="color:lime;">+</span> <span style="font-weight:bold;"></span>environment_variables        = {}
+            <span style="font-weight:bold;"></span>name                         = &quot;inspectorgadget&quot;
+          <span style="color:lime;">+</span> <span style="font-weight:bold;"></span>secure_environment_variables = (sensitive value)
+            <span style="filter: contrast(70%) brightness(190%);color:dimgray;"># (4 unchanged attributes hidden)</span>
+
+            <span style="filter: contrast(70%) brightness(190%);color:dimgray;"># (1 unchanged block hidden)</span>
+        }
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+<span style="filter: contrast(70%) brightness(190%);color:dimgray;">
+─────────────────────────────────────────────────────────────────────────────</span>
+
+<span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
+
+Your configuration already matches the changes detected above. If you'd like
+to update the Terraform state to match, create and apply a refresh-only plan:
+  terraform apply -refresh-only
+</pre>
+{{< /raw >}}
+
+    * Run the apply refresh:
+
+        ```bash
+        terraform apply --refresh-only
+        ```
+
+    * Rerun `terraform plan` to confirm there is no diff.
+
+        ```bash
+        terraform plan
+        ```
+
+    Expected output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+
+<span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+</pre>
+{{< /raw >}}
+
+## Import into state
+
+Now that you have confirmed that there is no diff, you can create the resource block and import.
 
 1. Create an empty resource block
 
@@ -238,17 +311,18 @@ and found no differences, so no changes are needed.
    ```
 
    * Copy the example into your main.tf
-   * Set the name to your storage account's name
-   * Set the references to the resource group to *azurerm_resource_group.basics*
-   * Set the Terraform identifier to *import_example*
 
-   > You would usually set the identifier to your preferred name. Please keep it as *import_example* for this lab.
-   >
-   > Don't worry that the other arguments do not match your created resource yet.
+       > Note that the block above deviates from the docs page
+       > * resource group references have been updated to *azurerm_resource_group.basics*.
+       > * identifier label has been set to *import_example*. You would usually set the identifier to your preferred name. Please keep it as *import_example* for this lab.
+
+   * Set the name to your storage account's name
+
+       > Don't worry that the other arguments do not match your created resource yet.
 
 1. Import the resource
 
-    ```shell
+    ```bash
     terraform import azurerm_storage_account.import_example $saId
     ```
 
@@ -270,8 +344,8 @@ your Terraform state and will henceforth be managed by Terraform.
 
 1. List the identifiers
 
-    ```shell
-    terraform state show azurerm_storage_account.import_example
+    ```bash
+    terraform state list
     ```
 
     Expected output:
@@ -286,7 +360,7 @@ azurerm_storage_account.import_example
 
 1. Show the imported config
 
-    ```shell
+    ```bash
     terraform state show azurerm_storage_account.import_example
     ```
 
@@ -300,7 +374,7 @@ resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; </span> 
     account_kind                      = &quot;StorageV2&quot;
     account_replication_type          = &quot;LRS&quot;
     account_tier                      = &quot;Standard&quot;
-    allow_blob_public_access          = true
+    allow_nested_items_to_be_public   = false
     enable_https_traffic_only         = true
     id                                = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot;
     infrastructure_encryption_enabled = false
@@ -389,13 +463,13 @@ resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; </span> 
 </pre>
 {{< /raw >}}
 
-## Update the config files
+## Check the diff
 
 OK, so the state looks good, but run a `terraform plan` and you'll see we have more to do.
 
 1. Run a plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -417,7 +491,7 @@ Terraform will perform the following actions:
 <span style="color:red;">-</span>/<span style="color:lime;">+</span> resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; {
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>access_tier                       = &quot;Hot&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>account_replication_type          = &quot;LRS&quot; <span style="color:yellow;">-&gt;</span> &quot;GRS&quot;
-      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>allow_blob_public_access          = true <span style="color:yellow;">-&gt;</span> false
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>allow_nested_items_to_be_public   = false <span style="color:yellow;">-&gt;</span> true
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>id                                = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>is_hns_enabled                    = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
       <span style="color:lime;">+</span> <span style="font-weight:bold;"></span>large_file_share_enabled          = (known after apply)
@@ -575,9 +649,9 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
 
     The good news is that it is pretty quick to deconstruct the output and work out what is important, and experience helps.
 
-    First of all, ignore those lines that include `(known after apply)`. The only ones that we need to pay attention to are those which have changes, deletes or adds where the target state is shown as a literal string.
+    First of all, ignore those lines that include `(known after apply)`. The only ones that we need to pay attention to are those which have changes, deletes or adds where the target state is shown as a specific value such as a literal string or boolean.
 
-    The output below has been manually truncated to help you to focus on what is important. Add the initial state for these to the config files and you should eventually get to a clean plan.
+    The output below has been manually truncated to help you to focus on what is important. Update the config files with the correct arguments and you should eventually get to a clean plan with no diff.
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
@@ -586,7 +660,7 @@ Terraform will perform the following actions:
 <span style="font-weight:bold;">  # azurerm_storage_account.import_example</span> must be <span style="font-weight:bold;"></span><span style="font-weight:bold;color:red;">replaced</span>
 <span style="color:red;">-</span>/<span style="color:lime;">+</span> resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; {
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>account_replication_type          = &quot;LRS&quot; <span style="color:yellow;">-&gt;</span> &quot;GRS&quot;
-      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>allow_blob_public_access          = true <span style="color:yellow;">-&gt;</span> false
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>allow_nested_items_to_be_public   = false <span style="color:yellow;">-&gt;</span> true
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>is_hns_enabled                    = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>min_tls_version                   = &quot;TLS1_2&quot; <span style="color:yellow;">-&gt;</span> &quot;TLS1_0&quot;
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>nfsv3_enabled                     = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
@@ -605,30 +679,101 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
 </pre>
 {{< /raw >}}
 
-    That is a more manageable set.
+    That is a more manageable set. Let's get to work.
+
+## Update the config files
+
+1. Update the replication type
+
+    The plan included:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>account_replication_type          = &quot;LRS&quot; <span style="color:yellow;">-&gt;</span> &quot;GRS&quot;</span>
+</pre>
+{{< /raw >}}
+
+     Update account_replication_type string value to *LRS*.
+
+
+    ```go
+      account_replication_type = "LRS"
+    ```
+
+1. Add the public blob access boolean
+
+    The plan included:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>allow_nested_items_to_be_public  = false <span style="color:yellow;">-&gt;</span> true
+</pre>
+{{< /raw >}}
+
+    Add the allow_blob_public_access argument and set the boolean value to false. (Default is true.)
+
+    ```go
+    allow_nested_items_to_be_public = false
+    ```
+
+1. Check on progress
+
+    Run a diff.
+
+    ```bash
+    terraform plan
+    ```
+
+    You should see that those two changes are no longer planned. Making progress!
 
 1. Update the main.tf to match
 
-    OK, this is a **challenge** section where you will need to update the storage account resource block until you get a clean plan.
+    💪 **Challenge**: update the storage account resource block until you get a clean plan
 
-    To start you off, the first two changes are:
+    OK, so we've done two together. TIme for you to finish off the remainder:
 
-    1. Update account_replication_type to *LRS*
-    1. Set allow_blob_public_access to *true*
+     {{< raw >}}
+<pre style="color:white; background-color:black">
+Terraform will perform the following actions:
 
-    The `terraform state show` output is a great reference, as is the [documentation page](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account).
+<span style="font-weight:bold;">  # azurerm_storage_account.import_example</span> must be <span style="font-weight:bold;"></span><span style="font-weight:bold;color:red;">replaced</span>
+<span style="color:red;">-</span>/<span style="color:lime;">+</span> resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; {
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>is_hns_enabled                    = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>min_tls_version                   = &quot;TLS1_2&quot; <span style="color:yellow;">-&gt;</span> &quot;TLS1_0&quot;
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>nfsv3_enabled                     = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
+
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>tags                              = {
+          <span style="color:lime;">+</span> &quot;environment&quot; = &quot;staging&quot;
+        }
+    }
+
+<span style="font-weight:bold;">Plan:</span> 1 to add, 0 to change, 1 to destroy.
+<span style="filter: contrast(70%) brightness(190%);color:dimgray;">
+─────────────────────────────────────────────────────────────────────────────</span>
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run &quot;terraform apply&quot; now.
+</pre>
+{{< /raw >}}
+
+    References:
+
+    * the [azurerm_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) documentation page
+    * the `terraform state show azurerm_storage_account.import_example` output
 
     Check on your progress by periodically saving the file and rerunning`terraform plan`. (You may notice that `terraform plan` also validates the files first.)
 
     If you get stuck then a working config is shown at the start of the next lab.
 
-1. Confirm that *terraform plan* is clean
+1. Check for no diff
 
-    ```shell
+    Confirm that *terraform plan* is clean
+
+    ```bash
     terraform plan
     ```
 
-    Expected output:
+    Example output:
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
@@ -647,7 +792,7 @@ and found no differences, so no changes are needed.
 
     Check that the formatting is as it should be.
 
-    ```shell
+    ```bash
     terraform fmt
     ```
 
@@ -664,5 +809,7 @@ main.tf
 Importing resources is a little messy, but is a useful skill to have as a Terraform admin.
 
 It can be a useful way to add in the config for complex resources. For example, the documentation for Azure Application Gateway is difficult to decipher given the range of options and possible configuration. You may find it simpler to provision the resource using the portal and then import the config.
+
+The good news is that Microsoft employees have released a preview of Azure Terrafy ([aztfy](https://github.com/azure/aztfy)) as per this [blog post](https://techcommunity.microsoft.com/t5/azure-tools-blog/announcing-azure-terrafy-and-azapi-terraform-provider-previews/ba-p/3270937).
 
 In the next lab we will destroy the config and tidy up.

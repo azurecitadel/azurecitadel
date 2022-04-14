@@ -34,17 +34,13 @@ Your files should still look like this:
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -89,19 +85,21 @@ Your files should still look like this:
 
 There is a short URL for the azure provider's resource documentation.
 
-1. Browse to [aka.ms/terraform](https://aka.ms/terraform)
+1. Browse to [aka.ms/terraform](https://aka.ms/terraform) in a new tab
 
-    Commit the short URL to memory! You'll be using it often.
+    Commit this short URL to memory! You'll be using it often.
 
     Note the azurerm version drop down at the top of the page. Default is the latest version.
+
+    ❔*Which terraform CLI command shows the azurerm provider version currently in use?*
 
     > You can also search at the top of the screen for azuread and azurestack providers. Move from the Overview tab to the Documentation tab to see the matching view for those providers.
 
     The available **resources** and **data sources** for Azure Resource Manager are shown on the left, along with a filter.
 
-    A resource will create a resource, a sub-resource or an association between resources.
+    * A **resource** will create a resource, a sub-resource or an association between resources.
 
-    A data source allows the azurerm provider to interrogate existing resources and and make use of their attributes. (An example of a common data source is [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) which exports the client_id, tenant_id, subscription_id and object_id attributes.)
+    * A **data source** allows the azurerm provider to interrogate existing resources and and make use of their attributes. (An example of a common data source is [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) which exports the client_id, tenant_id, subscription_id and object_id attributes.)
 
 1. Filter the resources on the left
 
@@ -179,18 +177,26 @@ In the next section you will add a new azurerm_container_group resource to creat
 
 ## Challenge
 
-In this **challenge** section you will add an azurerm_container_group resource. Use the example config on the documentation page as your starting point.
+💪 **Challenge**: Add an azurerm_container_group resource.
 
-Here are the requirements.
+Use the example config on the documentation page as your starting point. Here are the requirements.
 
 ### variables.tf
 
-* Create a new variable, *container_group_name*, defaulting to "terraform-basics"
-* Add another variable, *prefix* and set to a set of eight characters
+* Create a new variable, *`container_group_name`*
+  * Description: `Name of the container group`
+  * Default: `terraform-basics`
+* Add another variable, *`prefix`*
+  * Description: `Prefix string to ensure FQDNs are globally unique`
+  * No default
 
-    This will be used to help make sure that the FQDN for the container is globally unique.
+### terraform.tfvars
 
-    In the example screenshots the default is set to `richeney`. Choose a different value.
+* Set the value for *prefix*
+  * In the example screenshots the value has been set to `richeney`
+  * Choose a different value that is unique to you
+
+    > Recommended: no more than eight lowercase alphabetical characters
 
 ### main.tf
 
@@ -198,44 +204,61 @@ Here are the requirements.
 
     i.e., `resource "azurerm_container_group" "example" {`
 
-* Create within your existing resource group, and in the matching location
+* Specify your existing resource group, and use the resource group's location
 * Use the new *container_group_name* variable for the resource name
 
     This would use the "bare" format, i.e. `var.container_group_name`
 
 * The DNS label should concatenate the *prefix* and the *container_group_name*
 
-    The [interpolation](https://www.terraform.io/language/expressions/strings#interpolation) format is `"${var.prefix}-${var.container_group_name}"`.
+    The interpolation format is `"${var.prefix}-${var.container_group_name}"`.
 
-* Use the Inspector Gadget image
+    > [Interpolation](https://www.terraform.io/language/expressions/strings#interpolation) allows us to generate more complex expressions. Terraform knows to evaluate the variables surrounded with `${}` to get their values.
 
-    The value for the image argument should be `"jelledruyts/inspectorgadget:latest"`
+* Use the Inspector Gadget image for the container
 
-* Reduce the memory requirement to 1GB
-* Set the container port to 80 (HTTP)
+  * name: `inspectorgadget`
+  * image: `"jelledruyts/inspectorgadget:latest"`
+
+    > The [Inspector Gadget](https://github.com/jelledruyts/InspectorGadget) image should be the only container in the container group.
+
+  * Reduce the memory requirement to 1GB
+  * Set the container port to 80 (HTTP)
 * No tags
 
-> If you get completely stuck then the start of the next lab has a working config.
+Don't forget to save all of your files.
 
-### Terraform workflow
+> ⚠️ If you get completely stuck then the start of the next lab has a working config.
 
-1. Run through the terraform workflow
+## Terraform workflow
 
-    ```shell
+Run through the terraform workflow.
+
+1. Format the files
+
+    ```bash
     terraform fmt
     ```
 
-    ```shell
+1. Validate the config
+
+    ```bash
     terraform validate
     ```
 
-    ```shell
+1. Check the plan
+
+    ```bash
     terraform plan
     ```
 
-    ```shell
+1. Apply the changes
+
+    ```bash
     terraform apply
     ```
+
+## Confirm the container is working
 
 1. Browse the portal and find the URL for the container instance
 
@@ -251,8 +274,10 @@ If your screen is similar to the one above then you have been successful! If not
 
 You successfully updated the config and added a resource.
 
-Being able to navigate the documentation is a key skill. You will also find plenty of sample configurations and blog pages for Terraform.
+Being able to navigate the documentation is a key skill when you are adding and modifying resources. You will also need to have a good working understanding of Azure, how the resources work and relate to each other.
 
-Finally, check the documentation for the [Azure Resource Manager REST APIs](https://docs.microsoft.com/rest/api/resources/) as they can sometimes add insight where the resources closely match the properties in the REST API calls.
+In addition to the official documentation, you will also find plenty of sample configurations and blog pages for Terraform.
+
+If you find the documentation is a little vague on an argument and its possible values then check the documentation for the [Azure Resource Manager REST APIs](https://docs.microsoft.com/rest/api/resources/) as they can sometimes add insight where the resources closely match the properties found in those REST API calls.
 
 In the next lab we will use locals and add an output.

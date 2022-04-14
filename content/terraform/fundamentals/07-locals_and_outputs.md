@@ -34,17 +34,13 @@ Your files should look similar to this:
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -74,12 +70,8 @@ Your files should look similar to this:
     variable "prefix" {
       description = "Prefix string to ensure FQDNs are globally unique"
       type        = string
-      default     = "richeney"
     }
-
     ```
-
-    > ⚠️ You should have a different default value for *prefix*.
 
 * main.tf
 
@@ -93,7 +85,7 @@ Your files should look similar to this:
       name                = var.container_group_name
       location            = azurerm_resource_group.basics.location
       resource_group_name = azurerm_resource_group.basics.name
-      ip_address_type     = "public"
+      ip_address_type     = "Public"
       dns_name_label      = "${var.prefix}-${var.container_group_name}"
       os_type             = "Linux"
 
@@ -116,16 +108,20 @@ Your files should look similar to this:
 
     ```go
     location = "UK South"
-
+    prefix = "richeney"
     ```
 
-    > You may have set a different value for *location*.
+    > ⚠️ You should have specified a different value for *prefix*. You may have used a different value for *location*.
 
-## Using the console
+## Functions
 
 In this section we will remove the var.prefix and instead use a substring of a predictable hash. This will give us sufficient random characters to add to properties such as FQDNs and be confident that they will be globally unique.
 
-We could use one of the other providers in the [Terraform Registry](https://registry.terraform.io/browse/providers) such as [random_id](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id), but using a predictable hash is closer in behaviour to the commonly used *uniqueString()* function in ARM templates. The resourceId of a resource group is commonly used as a seed.
+Using a hash substring is closer in behaviour to the commonly used *uniqueString()* function in ARM templates. The resourceId of a resource group is commonly used as a seed. It contains the subscription ID, so meets the uniqueness requirement, yet will always produce the same result in your config even if you were to destroy the environment and start again, which is a good fit for idempotency.
+
+> If you wanted to have a newly generated random string each time then look at [random_id](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id), which is in the random provider available in the [Terraform Registry](https://registry.terraform.io/browse/providers).
+
+OK, let's work out how to find the right function and
 
 1. Search on "terraform functions" in your browser
 
@@ -138,11 +134,15 @@ We could use one of the other providers in the [Terraform Registry](https://regi
 
     The sha1 encryption is not the strongest from a security perspective, but we only need this to provide a hash from the given string.
 
-    The format is `sha1("string")`.
+The function call is `sha1("string")`.
+
+## Terraform console
+
+We now know the function and how to call it. Test it out in the Terraform console.
 
 1. List the objects in state
 
-    ```shell
+    ```bash
     terraform state list
     ```
 
@@ -155,19 +155,21 @@ azurerm_resource_group.basics
 </pre>
 {{< /raw >}}
 
+    The correct Terraform identifier for the resource group is `azurerm_resource_group.basics`. You will need that later when working out how to get the resource ID for the resource group.
+
 1. Open the Terraform console
 
-    ```shell
+    ```bash
     terraform console
     ```
 
     This is an interactive console which is ideal for testing expressions and interpolation and for interrogating the state.
 
-    > You use `CTRL`+`D` to exit the console.
+    > Use `CTRL`+`D` at an empty prompt to exit the console. This is the end of file (EOF) character.
 
 1. Test the *sha1* function
 
-    ```shell
+    ```bash
     sha1("This is a string")
     ```
 
@@ -185,7 +187,7 @@ azurerm_resource_group.basics
 
     Remember when you looked at the documentation page for azurerm_resource_group that id was one of the attributes.
 
-    ```shell
+    ```bash
     azurerm_resource_group.basics
     ```
 
@@ -205,7 +207,7 @@ azurerm_resource_group.basics
 
 1. Drill down to the id attribute
 
-    ```shell
+    ```bash
     azurerm_resource_group.basics.id
     ```
 
@@ -217,9 +219,11 @@ azurerm_resource_group.basics
 </pre>
 {{< /raw >}}
 
+    > Your response will contain a different subscription ID.
+
 1. Retest *sha1* with the resourceId
 
-    ```shell
+    ```bash
     sha1(azurerm_resource_group.basics.id)
     ```
 
@@ -233,7 +237,11 @@ azurerm_resource_group.basics
 
     That is a little long. Eight characters should be sufficient to make it unique.
 
+    > Your response will be different as your resource group ID contains a different subscription ID.
+
 1. Find a suitable function
+
+    💪 Mini **challenge**!
 
     Search for a Terraform function to take a substring.
 
@@ -244,7 +252,7 @@ azurerm_resource_group.basics
 
     Enter the following into the `terraform console`:
 
-    ```shell
+    ```bash
     substr(sha1(azurerm_resource_group.basics.id), 0, 8)
     ```
 
@@ -256,19 +264,19 @@ azurerm_resource_group.basics
 </pre>
 {{< /raw >}}
 
-    Success!
+    Your output will be unique to you. It will also be entirely predictable. We have the right expression.
 
 1. Exit the console
 
     Use `CTRL`+`d` to leave the console prompt and go back to the shell.
 
-You have used the console for some simple expressions. OK, so `substr(sha1(azurerm_resource_group.basics.id), 0, 8)` is the expression we want to use as a suffix. Let's declare the local.
+The console is great for forming and testing expressions. We have settled on `substr(sha1(azurerm_resource_group.basics.id), 0, 8)` which will be used as a suffix. Let's declare the local.
 
 ## Locals
 
-The variables we have been using so far are more accurately called input variables, i.e. `var.<variable_name>`. In terms of ARM or Bicep templates they would be called parameters.
+The variables we have been using so far are more accurately called input variables, i.e. `var.<variable_name>`. (Close to the *parameters* in ARM and Bicep templates.)
 
-It is common to place more complex expression into locals so that the main resource and data source blocks are more readable.
+It is common to place more complex expression into locals so that the main resource and data source blocks are more readable. (Much like the *variables* in ARM and Bicep templates.)
 
 We'll define a local variable for the unique value, and call it *uniq*. Local variables are defined in a locals block.
 
@@ -276,7 +284,7 @@ We'll define a local variable for the unique value, and call it *uniq*. Local va
 
     ```go
     locals {
-      uniq = sha1(azurerm_resource_group.basics.id)
+      uniq = substr(sha1(azurerm_resource_group.basics.id), 0, 8)
     }
     ```
 
@@ -292,7 +300,7 @@ We'll define a local variable for the unique value, and call it *uniq*. Local va
 
 1. Delete the prefix variable
 
-    This is no longer required.
+    This is no longer required. Remove it from variables.tf and terraform.tfvars.
 
 ## Outputs
 
@@ -304,19 +312,19 @@ The convention with Terraform is to place all outputs in a file called outputs.t
 
 1. Open the console
 
-    ```shell
+    ```bash
     terraform console
     ```
 
 1. Query the Azure Container Instance
 
-    ```shell
+    ```bash
     azurerm_container_group.example
     ```
 
 1. Use dot notation to get the public IPv4 address
 
-    ```shell
+    ```bash
     azurerm_container_group.example.ip_address
     ```
 
@@ -332,30 +340,40 @@ The convention with Terraform is to place all outputs in a file called outputs.t
 
 ### fqdn
 
-OK, time for another little **challenge** section.
+OK, time for another little challenge section.
 
-* Add another output, called *fqdn*.
+💪 **Challenge**: Add the *fqdn* output.
+
+* Add another output, called *fqdn*
 * Set the value to the azurerm_container_group's fqdn attribute, prefixed with `http://`.
 
 ## Terraform workflow
 
-1. Run through the terraform workflow
+Run through the terraform workflow.
 
-    ```shell
+1. Format the files
+
+    ```bash
     terraform fmt
     ```
 
-    ```shell
+1. Validate the config
+
+    ```bash
     terraform validate
     ```
 
-    ```shell
+1. Check the plan
+
+    ```bash
     terraform plan
     ```
 
     ⚠️ Note that the ACI will be deleted and recreated due to the name change.
 
-    ```shell
+1. Apply the changes
+
+    ```bash
     terraform apply
     ```
 
@@ -365,13 +383,13 @@ OK, time for another little **challenge** section.
 
 * Display all outputs
 
-    ```shell
+    ```bash
     terraform output
     ```
 
 * Display a single output
 
-    ```shell
+    ```bash
     terraform output fqdn
     ```
 
@@ -379,7 +397,7 @@ OK, time for another little **challenge** section.
 
     Bash:
 
-    ```shell
+    ```bash
     ip_address=$(terraform output -raw ip_address)
     ```
 
@@ -391,12 +409,18 @@ OK, time for another little **challenge** section.
 
 * Read all objects as JSON / Powershell object
 
-    This is slightly more advanced, but can be useful when dealing with arrays and objects.
+    This is slightly more advanced.
+
+    If you are dealing with more complex arrays and objects tjen you can read the whole output into a JSON string in Bash, or an object in PowerShell.
+
+    You can then view the whole object, or drill in using jq and object dot notation respectively.
 
     Bash:
 
     ```bash
     outputs=$(terraform output -json)
+    jq -Mc . <<< $outputs
+    jq . <<< $outputs
     jq -r .ip_address.value <<< $outputs
     ```
 
@@ -404,6 +428,8 @@ OK, time for another little **challenge** section.
 
     ```powershell
     $outputs = (terraform output -json | ConvertFrom-Json)
+    $outputs
+    $outputs | ConvertTo-Json
     ($outputs).ip_address.value
     ```
 
@@ -411,6 +437,6 @@ OK, time for another little **challenge** section.
 
 You have started to use the Terraform console, and made use of locals and outputs.
 
-You will use both of these more and more as your Terraform code becomes more ambitious. Locals are important for readability as the expressions become more complex. Outputs are useful at this level, but really become important as you start creating your own modules.
+You will use both of these more and more as your Terraform code becomes more ambitious. Locals are important for readability as the expressions become more complex. Outputs are useful at this level, but become far more important when you start creating your own modules.
 
 In the next section we will manipulate state a little using imports, refresh, renames and taints.

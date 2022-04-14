@@ -17,7 +17,7 @@ layout: single
 
 ## Overview
 
-One of Terraform's strengths is lifecycle management. If you
+One of Terraform's strengths is lifecycle management. Knowing how to work with the Terraform state is important.
 
 In this lab you will
 
@@ -37,17 +37,13 @@ Your files should look similar to this:
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -92,8 +88,8 @@ Your files should look similar to this:
       name                = var.container_group_name
       location            = azurerm_resource_group.basics.location
       resource_group_name = azurerm_resource_group.basics.name
-      ip_address_type     = "public"
-      dns_name_label      = "${var.prefix}-${var.container_group_name}"
+      ip_address_type     = "Public"
+      dns_name_label      = "${var.container_group_name}-${local.uniq}"
       os_type             = "Linux"
 
       container {
@@ -127,7 +123,6 @@ Your files should look similar to this:
 
     ```go
     location = "UK South"
-
     ```
 
     > You may have set a different value for *location*.
@@ -140,7 +135,7 @@ You can always update the local state file (terraform.tfstate) using `terraform 
 
 1. Check the current state for the resource group
 
-    ```shell
+    ```bash
     terraform state show azurerm_resource_group.basics
     ```
 
@@ -166,7 +161,7 @@ resource &quot;azurerm_resource_group&quot; &quot;basics&quot;</span> {
 
 1. Redisplay the state
 
-    ```shell
+    ```bash
     terraform state show azurerm_resource_group.basics
     ```
 
@@ -174,7 +169,7 @@ resource &quot;azurerm_resource_group&quot; &quot;basics&quot;</span> {
 
 1. Refresh the state file
 
-    ```shell
+    ```bash
     terraform refresh
     ```
 
@@ -194,7 +189,7 @@ ip_address = &quot;20.108.130.109&quot;
 
 1. Display the updated state
 
-    ```shell
+    ```bash
     terraform state show azurerm_resource_group.basics
     ```
 
@@ -214,7 +209,9 @@ resource &quot;azurerm_resource_group&quot; &quot;basics&quot;</span> {
 </pre>
 {{< /raw >}}
 
-    The state file is now up to date. It can be beneficial for state to be kept current, particularly if you are using read only remote states or scripting
+    The state file is now up to date. It can be beneficial for state to be kept current, particularly if you are using read only remote states or extracting values via scripting.
+
+    > You may find that running a `terraform plan` soon after a `terraform apply` shows some additional detail that is not in state such as the formation of empty arrays and lists etc. The plan will alert you to this and prompts you to run `terraform apply --refresh-only` to fully sync up.
 
 ## Handling changes
 
@@ -224,7 +221,7 @@ Let's use a common example, to see the impact when someone adds a new tag.
 
 1. Run a plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -260,19 +257,19 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
 </pre>
 {{< /raw >}}
 
-    If you were to run `terraform apply` now, then Terraform will remove the tag and make sure the environment matches the definition in the config files.
+    If you were to run `terraform apply` now, then Terraform would remove the *source* tag and make sure the environment matches the definition in the config files.
 
-    **This is declarative infrastructure as code, so reverting "drift" to match the files is expected behaviour.**
+    ℹ️ **This is declarative infrastructure as code, so reverting "drift" to match the files is expected behaviour.**
 
     You have three options
 
-    1. Run `terraform apply` and revert the manual change
-    1. Add the tag definition into the files
-    1. Ignore certain changes
+    1. **Revert**: Run `terraform apply` and revert the manual change
+    1. **Update**: Add the **source** tag and value into the config
+    1. **Ignore**: Update the config to ignore certain changes, i.e. tag updates
 
 ### Update
 
-OK, one approach is to update the files to match the reality. The aim is to get to the point where a `terraform plan` shows that there are no changes to be made.
+The second approach is to update the files to match the reality. The aim is to update the config to the point where a `terraform plan` shows that there are no changes to be made.
 
 1. Add the tag
 
@@ -293,7 +290,7 @@ OK, one approach is to update the files to match the reality. The aim is to get 
 
 1. Check for a clean plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -313,7 +310,7 @@ and found no differences, so no changes are needed.
 
 ### Ignore
 
-The other approach is to force Terraform to ignore certain resource attributes using [lifecycle](https://www.terraform.io/language/meta-arguments/lifecycle) blocks.
+The other approach is to force Terraform to ignore certain resource attributes using [lifecycle](https://www.terraform.io/language/meta-arguments/lifecycle) blocks.S
 
 1. Revert the resource group block
 
@@ -351,13 +348,35 @@ The other approach is to force Terraform to ignore certain resource attributes u
     >
     > Another example if Azure Application Gateway if being used as an Application Gateway Ingress Controller (AGIC) by AKS. In this configuration the App Gateway is reconfigured dynamically using Kubernetes annotations.
 
+1. Confirm that no changes will be made
+
+    ```bash
+    terraform plan
+    ```
+
+    Example output:
+
+    {{< raw >}}
+<pre style="color:white; background-color:black">
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.example: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+
+<span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+</pre>
+{{< /raw >}}
+
+    > The process where the plan creates an in-memory state from the provider calls and then compares against the config files is called a *diff*. The ignore statements specifies any attributes to be excluded from the diff.
+
 ## Renaming
 
 Sometimes you need to tweak the Terraform identifiers. It may be a straight rename, a shift from a single resource to using *count* or *for_each* or moving something to and from a module. This section will go through a simple example.
 
 1. Check for a clean plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -377,7 +396,7 @@ and found no differences, so no changes are needed.
 
 1. List out the identifiers in state
 
-    ```shell
+    ```bash
     terraform state list
     ```
 
@@ -398,7 +417,7 @@ azurerm_resource_group.basics
 
 1. Rerun plan
 
-   ```shell
+   ```bash
    terraform plan
    ```
 
@@ -406,17 +425,19 @@ azurerm_resource_group.basics
 
 1. Rerun plan
 
-   ```shell
+   ```bash
    terraform plan
    ```
 
    You should see the container group will be deleted and recreated.
 
+   ⚠️ ***Do not run*** `terraform apply`***!!***
+
 1. Rename the identifier in state
 
     The move command is `terraform state mv <source> <dest>`.
 
-    ```shell
+    ```bash
     terraform state mv azurerm_container_group.example azurerm_container_group.basics
     ```
 
@@ -431,7 +452,7 @@ Successfully moved 1 object(s).
 
 1. Check for a clean plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -457,7 +478,7 @@ If so, then use `terraform taint` to force the resource to be recreated.
 
 1. Check for a clean plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -477,7 +498,7 @@ and found no differences, so no changes are needed.
 
 1. List out the identifiers
 
-    ```shell
+    ```bash
     terraform state list
     ```
 
@@ -494,7 +515,7 @@ azurerm_resource_group.basics
 
     Force the container group to be recreated as an example.
 
-    ```shell
+    ```bash
     terraform taint azurerm_container_group.basics
     ```
 
@@ -506,7 +527,7 @@ Resource instance azurerm_container_group.basics has been marked as tainted.
 
 1. Plan
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -565,7 +586,7 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
 
 1. Apply
 
-    ```shell
+    ```bash
     terraform apply --auto-approve
     ```
 

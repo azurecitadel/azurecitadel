@@ -14,6 +14,8 @@ menu:
 
 This is a set of short and simple labs to introduce you to the Terraform workflow, the basics of the HCL file format and where to find documentation for the azurerm provider types.
 
+The series is based on the Terraform v1.x and azurerm provider v3.x.
+
 ## Pre-reqs
 
 Everything will be run within the bash version of the Azure Cloud Shell which already has Terraform installed and maintained for you, so all you need for these labs is an active Azure subscription.

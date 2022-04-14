@@ -34,17 +34,13 @@ Your files should currently look like this:
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "~>2.96"
+          version = "~>3.1"
         }
       }
     }
 
     provider "azurerm" {
-      features {
-        resource_group {
-          prevent_deletion_if_contains_resources = true
-        }
-      }
+      features {}
 
       storage_use_azuread = true
     }
@@ -86,7 +82,7 @@ When planning a deployment then you usually **specify** the values for those var
 
 1. Create a terraform.tfvars file
 
-    ```shell
+    ```bash
     touch terraform.tfvars
     ```
 
@@ -100,7 +96,7 @@ When planning a deployment then you usually **specify** the values for those var
 
     In the example below I have used my local region:
 
-    ```shell
+    ```bash
     location = "UK South"
     ```
 
@@ -114,7 +110,7 @@ When planning a deployment then you usually **specify** the values for those var
 
     This is one of the most commonly used terraform commands, and shows which resources will be create, destroyed, modified or recreated.
 
-    ```shell
+    ```bash
     terraform plan
     ```
 
@@ -151,4 +147,4 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
 
 You have started using the terraform.tfvar and have displayed the output from `terraform plan`.
 
-In the next lab we will finally created something and explore the state file.
+In the next lab we will finally create something and will then explore the state file.
