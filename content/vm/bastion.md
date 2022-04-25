@@ -418,3 +418,5 @@ Azure Bastion's native client access is a far better way of accessing your Azure
 Add in AAD auth and you can manage access with conditional access and MFA. Limit who can access by assigning the Virtual Machine Administrator Login and Virtual Machine User Login roles to the right scope points for the right Azure AD security groups. In the example repo we add this in using a standard Terraform resource type, but you could use Azure Policy and the _deploy if not exist (DINE)_ effect to auto-install the extensions.
 
 Many of you use linux and Windows machines as jumpboxes, or configuration management hosts. Using the instance metadata service and managed identity access to other Azure Resource such as Azure Key Vault, Azure Storage, Shared Image Gallery etc. opens up a number of automation possibilities.
+
+The [best practices for virtual machine remote access](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/plan-for-virtual-machine-remote-access) in the [Cloud Adoption Framework](https://aka.ms/caf) are recommended reading.
