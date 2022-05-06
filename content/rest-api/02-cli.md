@@ -20,7 +20,7 @@ The easiest way to test REST API calls is with the Azure CLI's `az rest` command
 
 Here are the steps to read a resource group, delete it, recreate it and then update the tags.
 
-## Pre-req
+## Pre-reqs
 
 The lab starts with an empty resource group.
 
@@ -39,9 +39,18 @@ The lab starts with an empty resource group.
 
 ## Token
 
-There is no need to get the token with the `az rest` command. Once you have authenticated and can run `az account show` then it will continue to use the cached token.
+There is no need to get the token with the `az rest` command.
 
-> Tokens are stored in `~/.azure/msal_token_cache.json`
+1. Authenticate with `az login`
+1. Check context with `az account show`
+
+> The CLI will cache the token in ~/.azure/msal_token_cache.json.
+
+You can also display the token with `az account get-access-token --query accessToken`.
+
+> The token is a standard JSON web token. Paste the value into <https://jwt.ms> to view the claims.
+
+See `az login --help` for examples if authenticating as a service principal or managed identity.
 
 ## Get
 
@@ -160,7 +169,7 @@ The update uses `PATCH` and also requires a JSON request body. We'll use a varia
     )
     ```
 
-    The last command uses a heredoc.
+    The last command uses a heredoc with a variable. There are other ways of dynamically generating JSON, e.q. `jq`.
 
 1. Use `az rest` to patch
 
@@ -169,3 +178,9 @@ The update uses `PATCH` and also requires a JSON request body. We'll use a varia
     ```bash
     az rest --method patch --body "$body" --uri $uri
     ```
+
+The resource group's tags will be updated.
+
+## Summary
+
+You have used the REST API via the Azure CLI's `az rest` command to show, delete, recreate and update a resource.
