@@ -39,6 +39,8 @@ The [Azure Web PubSub](https://docs.microsoft.com/azure/azure-web-pubsub/) docum
 
 There is also a link in the Reference section to the [REST API](https://docs.microsoft.com/rest/api/webpubsub/).
 
+Check through the documentation, the URI definition, the parameters and the examples to understand how the API call needs to be made. It will help to refer back to the documentation as you use the code blocks below.
+
 ## Construct the URI
 
 Use the `az rest` command to automatically handle access tokens.
@@ -208,6 +210,8 @@ Use the `az rest` command to automatically handle access tokens.
     }
     ```
 
+    ⚠️ *What changes have been made from the example?*
+
 1. Check the resource
 
     Check the output JSON to make sure that it has been created correctly. Review the resource in the portal.
@@ -226,4 +230,6 @@ Use the `az rest` command to automatically handle access tokens.
 
 ## Summary
 
-You have worked through an example of how to find the REST API documentation and form the URI and request body for a resource create or update.
+You have worked through a simple example of how to find the REST API documentation and form the URI and request body for a resource create or update.
+
+You are ready to use AzAPI.
