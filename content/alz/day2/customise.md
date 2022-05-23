@@ -5,19 +5,19 @@ layout: single
 draft: false
 weight: 4
 series:
- - es-hack-day2
+ - alz-hack-day2
 menu:
   side:
-    parent: es-hack-day2
+    parent: alz-hack-day2
 ---
 
 ## Introduction
 
-Day two is about customising that default Enterprise Scale deployment that you created using the Deploy to Azure button on day one. Yous should know have a working design to meet the Azure Baristas requirements.
+Day two is about customising that default Azure Landing Zones deployment that you created using the Deploy to Azure button on day one. By now you will have a working design that has been approved in principal.
 
-Your task for today's hacking is to manually customise the deployment, so think of it as a proof of concept area to demonstrate the bespoke deployment for the Azure Baristas customer.
+Your task for today's hacking is to manually customise the deployment, so think of it as a proof of concept area to demonstrate the bespoke deployment for the Azure Baristas customer and prove that Azure Landing Zones are flexible enough to align with their business needs.
 
-Refer back to the [customer requirements](/es/day1/baristas). They wouldn't be the first customers to have a few late additions for you to include into the design!
+Refer back to the [customer requirements](/alz/day1/baristas). They wouldn't be the first customers to have a few late additions for you to include into the design!
 
 ## Management Groups
 
@@ -45,9 +45,9 @@ Refer back to the [customer requirements](/es/day1/baristas). They wouldn't be t
 
 ## Policy guidance
 
-The remainder of this page is for Az\ure Policy, which is the largest area for customisation as it is extensively used in Enterprise Scale. The next section has a list of Azure Policy requirements pulled from the scenario for ease of reference.
+The remainder of this page is for Az\ure Policy, which is the largest area for customisation as it is extensively used in Azure Landing Zone. The next section has a list of Azure Policy requirements pulled from the scenario for ease of reference.
 
-1. Note that some of the requirements may be met by the default set of policies defined as part of the Enterprise Scale deployment.
+1. Note that some of the requirements may be met by the default set of policies defined as part of the Azure Landing Zones deployment.
 1. Some of the policies - or ones that are close to the requirement - can be found in the list of in-built policies, in the samples, or in the community repo.
 1. If you can't find an exact match then as part of the day 2 customisation you will need to create custom policies that are tweaked variant of policies that are close.
 

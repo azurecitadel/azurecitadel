@@ -7,6 +7,10 @@ name = "Azure Arc"
 url = "/arc"
 
 [[frontpage]]
+name = "Azure Landing Zones"
+url = "/alz"
+
+[[frontpage]]
 name = "Azure Stack HCI"
 url = "/arc"
 
@@ -17,10 +21,6 @@ url = "/avd"
 [[frontpage]]
 name = "CLI"
 url = "/cli"
-
-[[frontpage]]
-name = "Enterprise Scale"
-url = "/es"
 
 [[frontpage]]
 name = "Fundamentals"

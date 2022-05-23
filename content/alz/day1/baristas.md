@@ -5,10 +5,10 @@ layout: single
 draft: false
 weight: 4
 series:
- - es-hack-day1
+ - alz-hack-day1
 menu:
   side:
-    parent: es-hack-day1
+    parent: alz-hack-day1
 ---
 
 ## Company background & information
@@ -24,7 +24,7 @@ menu:
 * Around 10,000 VMs worldwide
 * Due to COVID-19 – heavy investment in online shop/website as main revenue stream for business
   * Developed by teams across the globe – local teams focus on regional specific features/offers/promos
-  * Another development team is developing a separate payment service which is subject to PCI-DSS which will be used by the online shop/website
+  * Another development team is developing a separate payment service which is subject to PCI-DSS which will be used by the online shop/website
 * Global MPLS connecting all sites with regional DC hubs acting as internet breakout points. No local breakouts at each site
 * Already utilising Microsoft 365 services (EOL, SharePoint, Teams etc.)
 

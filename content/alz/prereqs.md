@@ -1,24 +1,24 @@
 ---
 title: "Prereqs"
-description: "Attending an Enterprise Scale partner hack? Get these done before it starts and then check you have the right access."
+description: "Attending an Azure Landing Zones partner hack? Get these done before it starts and then check you have the right access."
 layout: single
 weight: 1
 draft: false
 series:
- - es
+ - alz
 menu:
   side:
-    parent: es
-    identifier: es-prereqs
+    parent: alz
+    identifier: alz-prereqs
 aliases:
-    - /es/hack/prereqs/
-    - /es/hack/checks/
+    - /alz/hack/prereqs/
+    - /alz/hack/checks/
 ---
 
 
 ## Subscriptions
 
-_**IMPORTANT**_: **You will need three subscriptions** (absolute minimum of two) **to deploy Enterprise Scale. All subscriptions need to be in the same tenant.**
+_**IMPORTANT**_: **You will need three subscriptions** (absolute minimum of two) **to deploy an Azure Landing Zone. All subscriptions need to be in the same tenant.**
 
 Minimum RBAC permissions required at root scope (i.e. above Tenant Root Group):
 
@@ -143,13 +143,13 @@ az account management-group delete --name eshack-deleteme
 
 ## Pre-reading
 
-If you are attending an Enterprise Scale partner hack and need a basic overview of using git, or a grounding in the basic concepts in Enterprise Scale, then use these links:
+If you are attending an Azure Landing Zones partner hack and need a basic overview of using git, or a grounding in the basic concepts in Azure Landing Zones, then use these links:
 
 | **Page** | **Description** |
 |---|---|
 | [Git 101 Basics](https://www.youtube.com/watch?v=WBg9mlpzEYU) | Grounding on Git with Scott Hanselman |
 | [Git Pull Requests Explained](https://www.youtube.com/watch?v=Mfz8NQncwiQ) | Pull requests or PRs in Git |
-| [Enterprise Scale Learning Path](https://docs.microsoft.com//learn/paths/enterprise-scale-architecture/) | Microsoft Learn modules for Enterprise Scale |
+| [Azure Landing Zones Learning Path](https://docs.microsoft.com//learn/paths/enterprise-scale-architecture/) | Microsoft Learn modules for Azure Landing Zones |
 
 ## Next steps
 

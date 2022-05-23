@@ -5,15 +5,15 @@ layout: single
 draft: false
 weight: 5
 series:
- - es-hack-day1
+ - alz-hack-day1
 menu:
   side:
-    parent: es-hack-day1
+    parent: alz-hack-day1
 ---
 
 ## Introduction
 
-Day one is about working through the Azure Baristas scenario and their particular requirements to produce a custom architecture for their enterprise scale deployment.
+Day one is about working through the Azure Baristas scenario and their particular requirements to produce a custom architecture for their Azure Landing Zone deployment.
 
 ## Rename subscriptions
 
@@ -29,12 +29,12 @@ This will make it easier to assign the correct one in the wizard.
 
 ## Deploy to Azure
 
-Deploy the default Enterprise Scale implementation:
+Deploy the default Azure Landing Zones implementation:
 
-1. Make sure that you have completed all of the [prereqs](/es/prereqs/) before starting
+1. Make sure that you have completed all of the [prereqs](/alz/prereqs/) before starting
     * The prereqs include the [tenant level RBAC permissions](https://github.com/Azure/Enterprise-Scale/blob/main/docs/EnterpriseScale-Setup-azure.md)
-1. Go into the main [Enterprise Scale](https://aka.ms/enterprisescale) repo
-1. Click on [Deploy Reference Implementation]()
+1. Go into the main [Azure Landing Zone](https://aka.ms/alz/repo) repo
+1. Read through until you get to [Deploying Enterprise-Scale Architecture in your own environment](https://github.com/Azure/Enterprise-Scale/#deploying-enterprise-scale-architecture-in-your-own-environment)
 1. Click on the Contoso **Deploy to Azure** button
 1. Follow the wizard in the portal, deselecting vWAN
 

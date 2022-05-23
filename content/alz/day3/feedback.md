@@ -5,10 +5,10 @@ layout: single
 draft: true
 weight: 3
 series:
- - es-hack-day3
+ - alz-hack-day3
 menu:
   side:
-    parent: es-hack-day3
+    parent: alz-hack-day3
 ---
 
 ## Introduction
