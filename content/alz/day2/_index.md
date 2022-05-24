@@ -26,7 +26,7 @@ draft: false
 
 | **Time** | **Description**
 |---|---|
-| 12:00 - 12:30 | Azure Data Landing Zones accelerator |
+| 13:00 - 13:30 | Azure Data Landing Zones accelerator |
 | 14:00 - 14:30 | Product group update and futures |
 
 ## Content
