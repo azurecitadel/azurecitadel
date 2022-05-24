@@ -19,6 +19,7 @@ These are the main links to remember!
 | Link | Description |
 |---|---|
 | <https://aka.ms/alz> | What is an Azure landing zone? (Docs) |
+| <https://aka.ms/alz/learn> | Microsoft Learn learning path |
 | <https://aka.ms/alz/repo> | The main Azure Landing Zones repo on GitHub |
 | <https://aka.ms/alz/arm> | Repo page for ARM template ALZ deployment |
 | <https://aka.ms/alz/bicep> | Bicep modules |
