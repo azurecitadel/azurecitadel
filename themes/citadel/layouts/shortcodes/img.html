@@ -1,0 +1,11 @@
+{{/* Allows light and dark images based on prefers-color-scheme. */}}
+
+{{ $dark  := .Get "dark" }}
+{{ $light := .Get "light" }}
+{{ $src := .Get "src" }}
+
+<picture>
+  {{ with $dark }}<source media="(prefers-color-scheme: dark)" srcset="{{ $dark }}">{{ end }}
+  {{ with $light }}<source media="(prefers-color-scheme: light)" srcset="{{ $light }}">{{ end }}
+  <img alt="{{ .Get "alt" }}" src="{{ with $src }}{{ $src }}{{ else }}{{ default $dark $light }}{{ end }}">
+</picture>

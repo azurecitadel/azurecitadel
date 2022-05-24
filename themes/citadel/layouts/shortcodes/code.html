@@ -1,0 +1,7 @@
+{{/* Create codeblock with uris */}}
+
+{{ $file := .Get "file" | readFile }}
+{{ $lang := .Get "lang" }}
+{{ $lang = $lang | default "text" }}
+
+{{ (print "```" $lang "\n" $file "\n```") | markdownify }}
