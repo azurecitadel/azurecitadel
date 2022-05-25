@@ -47,8 +47,9 @@ The main repo, including built-ins, samples, community contributions and the Azu
 | - [built-in-policies](https://github.com/Azure/azure-policy/tree/master/built-in-policies) | - built-in Azure Policies |
 | - [samples](https://github.com/Azure/azure-policy/tree/master/samples) | - Azure Policy samples |
 | [github.com/Azure/Community-Policy](https://github.com/Azure/Community-Policy) | Community Policy repo |
+| [AzPolicyAdvertizer](https://www.azadvertizer.net/azpolicyadvertizer_all.html) | Useful unofficial tool to search on available policies |
 | [Azure Policy definition structure](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure) | Reference documentation for the Azure Policy JSON definitions |
-| <https:/azurecitadel.com/policy> | Our labs for creating custom policies and initiatives |
+| <https:/azurecitadel.com/policy> | Lab showcasing the authoring of a custom policies from scratch |
 
 ## Azure RBAC Roles
 
