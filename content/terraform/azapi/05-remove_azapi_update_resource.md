@@ -12,6 +12,7 @@ menu:
 series:
  - terraform-azapi
 layout: single
+draft: true
 ---
 
 ## Introduction
