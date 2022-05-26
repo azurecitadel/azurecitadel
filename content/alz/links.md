@@ -56,3 +56,11 @@ The main repo, including built-ins, samples, community contributions and the Azu
 Sometimes you will need to create custom RBAC roles to meet customer requirements.
 
 * <https://docs.microsoft.com/azure/role-based-access-control/custom-roles>
+
+## Additional Infrastructure as Code links
+
+* [How does ALZ-Bicep Implement Azure Policies?](https://github.com/Azure/ALZ-Bicep/wiki/PolicyDeepDive)
+* [Deploy Azure landing zones by using Terraform](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/deploy-landing-zones-with-terraform)
+* YouTube video discussing Bicep deployments for Azure Landing Zones
+
+    {{< youtube id="GkImpboYwBE" >}}
