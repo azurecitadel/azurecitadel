@@ -4,7 +4,7 @@ date: 2021-02-16
 slug: remove_azapi_update_resource
 draft: false
 author: [ "Richard Cheney" ]
-description: "Safely remove an azapi_update_resource block once the property is supported in the azurerm provider."
+description: "Coming soon. Safely remove an azapi_update_resource block once the property is supported in the azurerm provider."
 weight: 5
 menu:
   side:
@@ -12,7 +12,7 @@ menu:
 series:
  - terraform-azapi
 layout: single
-draft: true
+draft: false
 ---
 
 ## Introduction

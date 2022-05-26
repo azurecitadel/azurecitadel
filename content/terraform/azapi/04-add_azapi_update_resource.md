@@ -4,7 +4,7 @@ date: 2021-02-16
 slug: azapi_resource
 draft: false
 author: [ "Richard Cheney" ]
-description: "Add an azapi_update_resource block into your Terraform config to configure properties that are not yet supported in the azurerm provider."
+description: "Coming soon. Add an azapi_update_resource block into your Terraform config to configure properties that are not yet supported in the azurerm provider."
 weight: 4
 menu:
   side:
@@ -12,7 +12,7 @@ menu:
 series:
  - terraform-azapi
 layout: single
-draft: true
+draft: false
 ---
 
 ## Introduction
