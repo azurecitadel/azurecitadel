@@ -1,7 +1,7 @@
 ---
-title: "Using azapi_resource"
-date: 2021-02-16
-slug: add_azapi_resource
+title: "azapi_resource"
+date: 2021-05-30
+slug: azapi_resource
 draft: false
 author: [ "Richard Cheney" ]
 description: "Add an azapi_resource block into your Terraform config to create the Web PubSub resource."
@@ -111,7 +111,7 @@ In this lab we will use jsonencode, but for large sections of JSON then using fi
 
         azapi = {
           source  = "azure/azapi"
-          version = "=0.1.0"
+          version = "=0.3.0"
         }
       }
     }
@@ -239,5 +239,7 @@ Terraform uses the azapi provider to create the Web PubSub resource.
 ## Summary
 
 You have successfully used the azapi provider to create a resource via the REST API.
+
+> Note that you can also use azapi_resource to create child resources. An example would be the [Web Pub Sub Hubs](https://docs.microsoft.com/rest/api/webpubsub/controlplane/web-pub-sub-hubs/create-or-update). The parent_id in this case would be the Web Pub Sub resource ID rather than the resource ID for the  resource group.
 
 Let's go forward in time a couple of months, to the release of v2.94, and see how to switch from azapi to a native resource definition.

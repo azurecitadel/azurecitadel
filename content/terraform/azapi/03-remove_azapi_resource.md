@@ -1,6 +1,6 @@
 ---
 title: "Removing azapi_resource"
-date: 2021-02-16
+date: 2021-05-30
 slug: remove_azapi_resource
 draft: false
 author: [ "Richard Cheney" ]
@@ -25,19 +25,56 @@ layout: single
 | 2022-01-28 | [azurerm v2.94: new resource `azurerm_web_pubsub`](https://github.com/hashicorp/terraform-provider-azurerm/blob/ef11feb07db2b5fa96d79384cbcdc4e6309922fb/CHANGELOG.md) |
 | 2022-02-07 | Switch to native support for the resource |
 
-The new azurerm release has support for Web PubSub. Time to switch to the native resource.
-
-## Pre-reqs
-
-1. Azure subscription
-1. Microsoft.SignalRService provider is registered
-1. Existing resource group
-
-> The examples use "myResourceGroup"
-
-## azurerm_web_pubsub
-
 With v2.94, the azurerm provider has caught up a little and has its first version of the resources and data sources for the Azure Web PubSub Service. <https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/web_pubsub>
+
+Time to switch to the native resource and clean up our temporary azapi_resource.
+
+## Starting configuration
+
+Your main.tf file should be similar to this:
+
+```json
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=2.93"
+    }
+
+    azapi = {
+      source  = "azure/azapi"
+      version = "=0.3.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+
+provider "azapi" {}
+
+resource "azurerm_resource_group" "azapi_labs" {
+  name     = "azapi_labs"
+  location = "West Europe"
+}
+
+resource "azapi_resource" "webpubsub" {
+  type      = "Microsoft.SignalRService/WebPubSub@2021-10-01"
+  name      = "azapi-labs-richeney"
+  parent_id = azurerm_resource_group.azapi_labs.id
+  location  = azurerm_resource_group.azapi_labs.location
+
+  body = jsonencode({
+    sku = {
+      name = "Free_F1"
+      capacity = 1
+    }
+  })
+}
+```
+
+> ⚠️ You should have a different value for your azapi_resource.webpubsub.name.
 
 ## Update the main.tf
 
@@ -55,7 +92,7 @@ With v2.94, the azurerm provider has caught up a little and has its first versio
 
         azapi = {
           source  = "azure/azapi"
-          version = "=0.1.0"
+          version = "=0.3.0"
         }
       }
     }
@@ -137,6 +174,21 @@ Running `terraform apply` will fail as the resource exists.
     ```bash
     terraform state rm azapi_resource.webpubsub
     ```
+
+1. List the identifiers
+
+    ```bash
+    terraform state list
+    ```
+
+    Expected output:
+
+    ```text
+    azurerm_resource_group.azapi_labs
+    azurerm_web_pubsub.webpubsub
+    ```
+
+    Sure enough, the azapi_resource has been cleared up. We are fully azurerm native.
 
 Running `terraform plan` will confirm that there are no planned changes.
 

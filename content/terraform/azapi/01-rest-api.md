@@ -1,10 +1,10 @@
 ---
-title: "Creating a Web PubSub resource with the REST API"
-date: 2021-02-16
+title: "Using the REST API"
+date: 2021-05-30
 slug: rest-api
 draft: false
 author: [ "Richard Cheney" ]
-description: "Work out how to create your resource with the REST API before trying to use the Terraform AzAPI provider."
+description: "Work out how to create a Web PubSub resource with the REST API before trying to use the Terraform AzAPI provider."
 weight: 1
 menu:
   side:
