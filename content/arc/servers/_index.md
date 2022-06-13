@@ -1,6 +1,6 @@
 ---
 title: "Azure Arc-enabled Servers"
-description: "Two day challenge hack going deeper on operations and management for Azure Arc-enabled servers and Azure Arc-enabled SQL servers."
+description: "Two day challenge hack going deeper on operations and management for Azure Arc-enabled servers."
 draft: false
 menu:
   side:
@@ -15,9 +15,9 @@ weight: 3
 
 This is a two day hack to get you skilled up in the various aspects of using Azure Arc to onboard VMs outside of Azure and leverage the management plane and range of services to transform how you manage your hybrid estates.
 
-The hack is used in the UK to enable partners, but you are absolutely free to reuse the content yourself as it is 100% public. The hack is a challenge hack, so each section gives you a number of challenges to meet, plus a set of links for your reference. As you complete each section you will screen share with your proctor to confirm the success criteria has been met before moving on to the next section.
+> The hack is used in the UK to enable partners and those partners will make use of Azure Passes with pre-created resources to accelerate the hack. You are absolutely free to reuse the content yourself as it is 100% public, including the repository used to create the "on prem" resources.
 
-**Please make sure that you have met the [prereqs](/arc/servers/prereqs) before attending.**
+The hack is a challenge hack, so each section gives you a number of challenges to meet, plus a set of links for your reference. As you complete each section you will screen share with your proctor to confirm the success criteria has been met before moving on to the next section.
 
 ## Scenario
 
@@ -30,4 +30,3 @@ The imperative is to move to a more elegant hybrid management and operations mod
 You have been tasked to help work with them on a pilot of a few Windows and Linux (Ubuntu) servers to evaluate how the hybrid model could work from a deployment, configuration and management perspective, and whether there are opportunities to move away from some of the legacy management tooling. The outcome of the pilot will determine how the teams will initially work and scale from the small number of servers in the pilot to the wider estate.
 
 ## Content
-
