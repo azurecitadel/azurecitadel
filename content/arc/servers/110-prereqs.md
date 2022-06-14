@@ -19,7 +19,7 @@ weight: 110
 
 1. [Azure Arc product page](https://azure.microsoft.com/services/azure-arc/#product-overview)
 1. [Azure Arc-enabled servers overview](https://docs.microsoft.com/azure/azure-arc/servers/overview) (including the video)
-1. Explore the [Hybrid and Multicloud area](https://https://aka.ms/adopt/hybrid) for the Cloud Adoption Framework
+1. Explore the [hybrid and multicloud scenario](https://aka.ms/adopt/hybrid) for the Cloud Adoption Framework
 
 ## Azure subscription
 
