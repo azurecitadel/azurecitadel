@@ -50,6 +50,12 @@ The Windows sys admins are pleased with the automated patching regime but they a
 
 * audit Azure Arc-enabled Windows servers that should be rebooted
 
+## Security
+
+The security team are concerned about the increased risk of VM compromise if Linux passwd file permissions are writable by a group-owner. The require permissions set to 0644 for the passwd file and want to audit this.
+
+* audit Azure Arc-enabled Linux servers that do not have passwd file permissions set to 0644
+
 ## Success criteria
 
 Screen share with your proctor:
@@ -59,6 +65,7 @@ Screen share with your proctor:
 1. Show the current Arc virtual machine compliance against Azure security baseline
 1. Show the policy assignment auditing whether _tree_ is installed on Linux
 1. Show the policy assignment auditing whether Windows servers need rebooting
+1. Show the policy assignment auditing passwd file permissions for Linux servers
 
 ## Resources
 
