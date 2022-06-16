@@ -9,10 +9,7 @@ weight: 160
 url: /arc/servers/governance/proctor
 ---
 
-## Tasks
+## Security
 
-Text
+`Audit Linux machines that do not have the passwd file permissions set to 0644` is a policy definition included within the `UK OFFICIAL and UK NHS`.
 
-## Success criteria
-
-* Text

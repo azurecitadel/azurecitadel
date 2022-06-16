@@ -19,9 +19,9 @@ The [operational compliance](https://docs.microsoft.com/azure/cloud-adoption-fra
 
 ![Azure Automanage](/arc/servers/images/azureAutomanage.png)
 
-The good news is that Azure Automanage simplifies management by bringing these various services together under best practice configurations covering both Production and Test/Dev scenarios.
+Azure Automanage simplifies management by bringing these various services together under best practice configurations covering both Production and Test/Dev scenarios.
 
-Once your on prem machines are Azure Arc-enabled then you can also take advantage of Automanage as you go beyond monitoring, alerting and security. For Azure-Arc VMs it has the benefit of installing the older MMA and Dependency agents. This hack does not use them for logs and metrics (preferring to use the AMA agents), but they are currently used for other functionality such as change and update management.
+Once your on prem machines are Azure Arc-enabled, you can take advantage of Automanage as you go beyond monitoring, alerting and security. For Azure-Arc VMs it has the benefit of installing the older MMA and Dependency agents. This hack does not use them for logs and metrics (preferring to use the AMA agents), but they are currently used for other functionality such as change and update management.
 
 Please note that this is currently a preview service, and it does not yet cover all of the services in the diagram for Azure Arc VMs, but it is the fastest and simplest way to install the agents and benefit from:
 
@@ -34,7 +34,7 @@ Note that it is possible to configure all of the services individually. See the 
 
 ## Pricing
 
-Note that everything we have done with Azure Arc so far has been free, if you ignore the  costs relating to other Azure services such as additional Azure Monitor workspace usage.
+Everything we have done with Azure Arc so far has been free, if you ignore the costs relating to other Azure services such as additional Azure Monitor workspace usage.
 
 Be aware that using Azure Policy guest configuration (including Azure Automation change tracking, inventory, state configuration) has a monthly per server [Azure Arc price](https://azure.microsoft.com/pricing/details/azure-arc/).
 
@@ -42,14 +42,14 @@ Be aware that using Azure Policy guest configuration (including Azure Automation
 
 Configure:
 
+* Create a new Automation Account to use for Automanage called `arc-pilot-automanage`
 * Enable Automanage on the 6 Azure Arc-enabled VMs
-  * create a new Automation Account called arc-pilot-automanage
 
-* What is the difference between Prod and Test/Dev configurations?
+* What is the difference between Production and Dev / Test configuration profiles?
 * Which services are not yet available for Azure Arc-enabled servers?
-* Which services can be customised?
+* Which services can be customised using a custom profile?
 
-It will take a little while for the servers to become configured and the associated services to propgate and send data. Once complete then explore one of the Windows Azure Arc-enabled VMs.
+It will take up to 30 minutes for the servers to become configured and the associated services to propgate and send data. Once complete then explore one of the Windows Azure Arc-enabled VMs.
 
 * Which additional Azure Policies have been applied?
 * Which additional extensions have been installed?
@@ -58,13 +58,15 @@ It will take a little while for the servers to become configured and the associa
 
 ## Update Management
 
+Automanage will deploy and Automation Account and connect the Arc-enabled VMs to it.
+
 * Schedule update deployments
   * _arc-windows-security-weekly_
   * _arc-windows-full-monthly_
   * _arc-linux-security-weekly_
   * _arc-linux-full-monthly_
 * Report update compliance
-* Trigger an update deployment and measure its success
+* Trigger a one time update deployment and measure its success
 * Write a Log Analytics query (optional) to report on
   * the installed Windows Updates
   * the required Windows Updates
@@ -73,13 +75,13 @@ It will take a little while for the servers to become configured and the associa
 
 The change tracking is more interesting once the servers have been configured for a longer period of time, but we can force a change through
 
-* Review the Inventory on a linux VM
-* Install the _tree_ package on one of the linux VMs
+* Review the Inventory on a Linux VM
+* Install the _tree_ package on one of the Linux VMs
   * For Ubuntu: `sudo apt update && sudo apt install tree`
 * Review the change tracking
   * Explore the settings
 * Write a Log Analytics query (optional) to report on
-  * the Python software versions on the linux Azure Arc-enabled servers
+  * the Python software versions installed on the Linux Azure Arc-enabled servers
 
 ## Azure Monitor Workbooks
 
@@ -94,8 +96,8 @@ Screen share with your proctor to show that you achieved:
 1. Report on the current update compliance state for all Azure Arc virtual machines
 1. Show the inventory and update history
     * software and services on Windows
-    * software and linux daemons , Windows Services and Linux Daemons display in the inventory
-    * show the change in installed software
+    * Windows Services and Linux Daemons display in the inventory
+    * show a change in installed software
 1. Show update compliance with an Azure Monitor Workbook
 
 ## Resources
@@ -112,5 +114,5 @@ Screen share with your proctor to show that you achieved:
 * [Manage inventory collection from VMs](https://docs.microsoft.com/azure/automation/change-tracking/manage-inventory-vms)
 * [Discover what software is installed on your VMs](https://docs.microsoft.com/azure/automation/automation-tutorial-installed-software)
 * [Azure Monitor Workbooks](https://docs.microsoft.com/azure/azure-monitor/visualize/workbooks-overview)
-* [GitHub - Azure Monitor Community repository (Workbook, Queries and Alerts)](https://github.com/microsoft/AzureMonitorCommunity)
+* [GitHub - Azure Monitor Community repository (sample Workbooks, Queries and Alerts)](https://github.com/microsoft/AzureMonitorCommunity)
 * [Azure Arc pricing](https://azure.microsoft.com/pricing/details/azure-arc/)
