@@ -75,6 +75,4 @@ The tooling required for this partner hack is lightweight. It is possible to com
 
 * Others
 
-    For those of you making use of the content here - welcome! - then you will need your own "on prem" VMs to onboard.
-
-    Check the [On Prem VMs](../onprem-vms) page before proceeding.
+    For those of you making use of the content here - welcome! - then you will need your own ["on prem" VMs](../onprem-vms) to onboard.

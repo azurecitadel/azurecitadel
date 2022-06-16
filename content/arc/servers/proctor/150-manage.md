@@ -26,30 +26,13 @@ Wait until the status shows configured. Some of the services will still take som
 
 ## Update Management
 
-* Create an Automation account
+* Find the Automation account created by Automanage
 
-  This step may no longer be needed as one gets created as a hidden microsoft.automanage/account, but I'm not sure that can be used for multiple servers. It may need a standard Automation Account for that.
-
-  In the portal, navigate to **Automation Accounts** and **Create**.
-
-  * Name: `arc-automation`
-  * Resource group: `arc-hack`
-  * Create Azure Run As account: `Yes`
-
-* Enable Update Management for the Azure Arc virtual machines
-
-  * Servers - Azure Arc - open one of the Arc-enabled servers
-  * Select Update Management
-  * Manage multiple machines
-    * The main automation account will be selected
-
-  Open the blade for the Automation Account and select **Update management**.
-
-  Select the `arc-hack-workspace-team1` Log Analytics workspace created in the previous labs, and **Enable**.
+  From the Automation accounts page, open the new Automation account created by Automanage
 
 * Schedule an update deployment for a weekly security update and full update monthly
 
-  Reselect the Update management pane, **Schedule update deployment**.
+  Select the Update management pane, **Schedule update deployment**.
 
   | Field | Value |
   |---|---|
@@ -90,15 +73,13 @@ Wait until the status shows configured. Some of the services will still take som
 
 ## Inventory
 
-* Enable Inventory for the Azure Arc virtual machines
+* Find the Automation account created by Automanage
 
-  Open the blade for the Automation Account and select **Inventory** from Configuration Management.
-
-  Select the `arc-hack-workspace-team1` Log Analytics workspace created in the previous labs, and **Enable**.
+  From the Automation accounts page, open the new Automation account created by Automanage
 
 * Review the software and services inventory
 
-  Reselect the Inventory pane, check **Machines**, **Software**, **Windows Registry**, **Windows Services** and **Linux Daemons** tabs.
+  Select the Inventory pane, check **Machines**, **Software**, **Windows Registry**, **Windows Services** and **Linux Daemons** tabs.
 
 * (optional) Install additional software to an Azure Arc virtual machine, view the software in the Inventory
 
@@ -108,7 +89,7 @@ Wait until the status shows configured. Some of the services will still take som
 
 * (optional) Write a Log Analytics query to report the installed Windows Updates and the needed Windows Updates on Azure Arc connected Windows virtual machines
 
-  In the portal, navigate to **Log Analytics workspace** and open `arc-hack-workspace-team1`.
+  In the portal, navigate to **Log Analytics workspace** and open the workspace created by Automanage.
 
   Open **Logs** from General.
 
@@ -161,7 +142,7 @@ Wait until the status shows configured. Some of the services will still take som
 
 * Create an update assessment Workbook to visualize update compliance and detail missing updates
 
-  An `Update Assessment.json` sample Workbook is available in the GitHub Azure Monitor Community here: [Github.com/microsoft/AzureMonitorCommunity/Azure Services/Azure Monitor/Workbooks](https://github.com/microsoft/AzureMonitorCommunity/blob/master/Azure%20Services/Azure%20Monitor/Workbooks/Update%20Assessment.json)
+  An `Update Assessment.json` sample Workbook is available in the GitHub Azure Monitor Community here: [https://github.com/microsoft/AzureMonitorCommunity/tree/master/Azure%20Services/Azure%20Monitor/Workbooks](https://github.com/microsoft/AzureMonitorCommunity/blob/master/Azure%20Services/Azure%20Monitor/Workbooks/Update%20Assessment.json)
 
   In the portal, navigate to **Monitor**.
 
@@ -169,7 +150,7 @@ Wait until the status shows configured. Some of the services will still take som
 
   Paste the contents of the `Update Assessment.json` template into the editor (replace any existing content within the input field). Check the **Template Type** is set to `Gallery Template`.
 
-  **Apply** the changes, select **Workspace:** `arc-hack-workspace-team1` and **Servers:** `All`, then **Done Editing**.
+  **Apply** the changes, select **Workspace:** `(the workspace created by Automanage)` and **Servers:** `All`, then **Done Editing**.
 
   A preview of the Update Assessment Workbook will display and should be populated with compliance data. If not, check the **Workspace** and **Servers** scopes.
 
