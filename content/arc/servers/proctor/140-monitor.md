@@ -74,6 +74,57 @@ You are part of the Security Operations Centers (SOC) team.
     | where EventLog == "Security"
     ```
 
+## Dashboarding
+
+As you go through this section, note the queries you use.
+
+### Log Management
+Produce a query to highlight which machines are reporting to the Log Analytics Workspace.
+
+```
+Heartbeat
+| summarize LastContact=max(TimeGenerated) by Computer
+```
+
+
+### Update Management
+
+Produce a query to highlight which machines require updates. (N.B. you will need to use `summarize` and `arg_max`)
+
+```
+Update
+| summarize arg_max(TimeGenerated, *) by Computer, Title, Classification, UpdateID
+| where UpdateState == "Needed" 
+| summarize MissingUpdatesCount = count() by Computer 
+```
+
+### Arc Management
+
+Produce a query highlighting if our estate is compliant with the Virtual Machine extensions. (N.B. you will need to use Azure Resource Graph)
+
+```
+PolicyResources
+| where type == 'microsoft.policyinsights/policystates'
+| extend policyAssignmentScope=tostring(properties.policyAssignmentScope),
+policySetDefinitionName=tostring(properties.policySetDefinitionName),
+policyDefinitionName=tostring(properties.policyDefinitionName),
+subscriptionId=tostring(subscriptionId),
+ComplianceState=tostring(properties.complianceState)
+| summarize PoliciesDefinitions=dcount(policyDefinitionName), PolicyInitiatives=dcount(policySetDefinitionName), NonCompliantResources=countif(ComplianceState=="NonCompliant")
+```
+
+```
+resources
+| where type == "microsoft.compute/virtualmachines/extensions"
+| where name == "MicrosoftMonitoringAgent"
+| extend computerId = strcat("/",strcat_array(array_slice(todynamic(split(id,"/")),1,8),"/"))
+| project computerId
+```
+
+### Azure Monitor Workbook
+Create an Azure Monitor Workbook showcasing your KQL queries. In addition, 
+
+
 ### Cost Management team
 
 You are part of the Cost Management team and performing an exercise on reducing costs.
