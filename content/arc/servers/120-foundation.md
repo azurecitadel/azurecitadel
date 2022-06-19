@@ -3,7 +3,7 @@ title: Foundation
 description: "Plan for deployment and prepare the target resource group for your Arc servers."
 slug: foundation
 layout: single
-draft: false
+draft: true
 menu:
   side:
     parent: arc-servers

@@ -23,7 +23,7 @@ weight: 110
 
 ## Azure subscription
 
-> **Note that teams attending a UK [Azure Arc for Servers partner hack](https://aka.ms/AzureArcforServersPartnerHack) will be provided with subscriptions.** You will be invited as Guest Users to a new tenant and will be assigned as Global Admins and Owners.
+> ⚠️ **Note that teams attending a UK [Azure Arc for Servers partner hack](https://aka.ms/AzureArcforServersPartnerHack) will be provided with subscriptions.** You will be invited as Guest Users to a new tenant and will be assigned as Global Admins and Owners.
 
 1. Azure subscription
 

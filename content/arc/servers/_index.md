@@ -29,4 +29,6 @@ The imperative is to move to a more elegant hybrid management and operations mod
 
 You have been tasked to help work with them on a pilot of a few Windows and Linux (Ubuntu) servers to evaluate how the hybrid model could work from a deployment, configuration and management perspective, and whether there are opportunities to move away from some of the legacy management tooling. The outcome of the pilot will determine how the teams will initially work and scale from the small number of servers in the pilot to the wider estate.
 
+World Wide Importers wish to adhere to the Azure Landing Zones within the Cloud Adoption Framework.
+
 ## Content
