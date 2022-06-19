@@ -1,25 +1,23 @@
 ---
-title: Foundation
-description: "Plan for deployment and prepare the target resource group for your Arc servers."
-slug: foundation
+title: Finalise
+description: "Some additional stuff."
+slug: scenario
 layout: single
 draft: true
 menu:
   side:
     parent: arc-servers
-    identifier: arc-servers-foundation
+    identifier: arc-servers-finalise
 series:
  - arc-servers
-weight: 120
+weight: 123
 ---
 
 ## Introduction
 
-When you are onboarding VMs at scale then it makes sense to prepare the target environment first. As this is a small pilot then everything will be configured on a single resource group.
+Some more stuff.
 
-There is an excellent page and 10 minute video on Azure Docs called [Plan and deploy Azure Arc-enabled servers](https://docs.microsoft.com/azure/azure-arc/servers/plan-at-scale-deployment). Watch the video when you get the opportunity.
-
-Go to [aka.ms/adopt/hybrid](https://aka/ms/adopt/hybrid) for a fuller set of Cloud Adoption Framework documentation for hybrid and multicloud.
+## To do
 
 We will add a couple of simple tagging policies, and then add in a key vault with a self signed cert and the private SSH key if you created your on prem VMs in Azure. We'll also add in a couple of Azure Monitor workspaces.
 

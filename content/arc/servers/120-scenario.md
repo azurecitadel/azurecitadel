@@ -1,0 +1,45 @@
+---
+title: Scenario
+description: "Your customer, World Wide Importers, would like a small proof of concept before moving forwardwith a larger Azure Arc project. Get the background and their initial requirements."
+slug: scenario
+layout: single
+draft: false
+menu:
+  side:
+    parent: arc-servers
+    identifier: arc-servers-scenario
+series:
+ - arc-servers
+weight: 120
+---
+
+## Introduction
+
+You are working with a company called Wide World Importers. They are already using Azure with their identities synced to Azure AD. They have migrated a number of existing systems and deployed some new cloud native workloads. The cloud team has quickly skilled up on the platform and makes good use of the Azure's management tooling, automation and governance.
+
+The company also has a sizeable on prem estate which is mainly virtual machines plus a few physical x86 servers. They have concerns that they do not know the full inventory of these on prem systems. There is a growing focus on compliancy and governance and there is a business risk in being non-compliant on those legacy servers.
+
+The imperative is to move to a more elegant hybrid management and operations model. The plan is to merge the teams and upskill those who have been working purely with the on prem systems.
+
+You have been tasked to help work with them on a pilot of a few Windows and Linux (Ubuntu) servers to evaluate how the hybrid model could work from a deployment, configuration and management perspective, and whether there are opportunities to move away from some of the legacy management tooling. The outcome of the pilot will determine how the teams will initially work and scale from the small number of servers in the pilot to the wider estate.
+
+World Wide Importers wish to adhere to the Azure Landing Zones within the Cloud Adoption Framework.
+
+## Foundation
+
+When you are onboarding VMs at scale then it makes sense to prepare the target environment first. As this is a small pilot then everything will be configured on a single resource group.
+
+There is an excellent page and 10 minute video on Azure Docs called [Plan and deploy Azure Arc-enabled servers](https://docs.microsoft.com/azure/azure-arc/servers/plan-at-scale-deployment). Watch the video when you get the opportunity.
+
+Go to [aka.ms/adopt/hybrid](https://aka/ms/adopt/hybrid) for a fuller set of Cloud Adoption Framework documentation for hybrid and multicloud.
+
+## Resources
+
+* <https://docs.microsoft.com/azure/azure-arc/servers/plan-at-scale-deployment>
+* <https://docs.microsoft.com/governance/policy/assign-policy-portal>
+* <https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#tags>
+* <https://aka/ms/adopt/hybrid>
+
+## Next up
+
+Let's start with a vanilla deployment of the Azure Landing Zones.
