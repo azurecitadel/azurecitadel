@@ -1,6 +1,6 @@
 ---
 title: Scenario
-description: "Your customer, World Wide Importers, would like a small proof of concept before moving forwardwith a larger Azure Arc project. Get the background and their initial requirements."
+description: "Your customer, World Wide Importers, would like a small proof of concept before moving forward with a larger Azure Arc project. Get the background and their initial requirements."
 slug: scenario
 layout: single
 draft: false
