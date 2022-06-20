@@ -10,7 +10,7 @@ menu:
     identifier: arc-servers-monitor
 series:
  - arc-servers
-weight: 140
+weight: 150
 ---
 
 ## Introduction

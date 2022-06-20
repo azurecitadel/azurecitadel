@@ -1,16 +1,16 @@
 ---
-title: "Management"
-description: "Use the preview Azure Automanage service to create a management baseline for the connected machines, enabling update management and inventory. Or use the services individually."
-slug: manage
+title: "Azure Automanage"
+description: "Use the Azure Automanage service to create a management baseline for the connected machines, enabling update management and inventory. Or use the services individually."
+slug: automanage
 layout: single
 draft: false
 menu:
   side:
     parent: arc-servers
-    identifier: arc-servers-manage
+    identifier: arc-servers-automanage
 series:
  - arc-servers
-weight: 150
+weight: 140
 ---
 
 ## Introduction
