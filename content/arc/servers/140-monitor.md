@@ -65,6 +65,25 @@ You are part of a Linux application team.
 * (Optional) Deploy a Data Collection Rule to collate any system errors and send to a Log Analytics Workspace
 * (Optional) Create an Azure Monitor Alert to notify the application team on an error
 
+## Dashboarding
+
+As you go through this section, note the queries you use.
+
+### Log Management
+ ta
+### Update Management
+
+Produce a query to highlight which machines require updates. (N.B. you will need to use `summarize` and `arg_max`)
+
+### Arc Management
+
+Produce a query highlighting if our estate is compliant with the Virtual Machine extensions. (N.B. you will need to use Azure Resource Graph)
+
+### Azure Monitor Workbook
+Create an Azure Monitor Workbook showcasing your KQL queries. Feel free to use graphs or charts.
+
+![Azure Monitor Workbook](/arc/servers/images/monitorWorkbook.png)
+
 ## Integrate with Azure Security Center (optional)
 
 * Enable Azure Security Center on your Azure Arc connected machines
