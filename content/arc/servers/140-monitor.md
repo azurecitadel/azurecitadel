@@ -70,7 +70,8 @@ You are part of a Linux application team.
 As you go through this section, note the queries you use.
 
 ### Log Management
- ta
+Produce a query to highlight which machines are reporting to the Log Analytics Workspace.
+
 ### Update Management
 
 Produce a query to highlight which machines require updates. (N.B. you will need to use `summarize` and `arg_max`)
