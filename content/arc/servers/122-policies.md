@@ -15,11 +15,17 @@ weight: 122
 
 ## Introduction
 
-Whilst the Azure Landing Zones repo allows customisation in terms of policy assignments etc.,
+The Azure Landing Zones creates a useful set of default platform resources, policies and RBAC role assignments. The Azure Monitor for VMs is useful as it applies to both Azure and Azure Arc-enabled Servers and will install the MMA agent and the Dependency agent.
+
+However, the VM monitoring landscape is moving at the moment and the desire is to move towards the Azure Monitor Agent (AMA) for collecting metrics and data. The new agent does not have full parity with the older agents, but for metrics and data it is more flexible, supporting multiple data collection rules.
+
+The *Deploy if Not Exists* policies are useful to help automate configuration of resources, and therefore World Wide Importers would like to use additional policy assignments to automate the installation of the extension.
+
+Before we move through the [Overview](#overview) for this lab, quickly step through background information on the available policy definitions and key elements of policy assignments.
 
 ## Policy Definitions
 
-There are a number of other custom and built-in policies that are applicable to Azure Arc-enabled Servers. (In addition, the Guest Configuration policies can apply to Azure Arc-enabled Servers, as we'll explore in a later lab.)
+There are a number of other custom and built-in policies that are applicable to Azure Arc-enabled Servers.
 
 1. Select the Azure Landing Zones management group
 1. Filter Categories to
@@ -28,92 +34,113 @@ There are a number of other custom and built-in policies that are applicable to 
     * Security Center
 1. Search on "*Arc*"
 
-    > Note that *arc" will also bring up policies containing search etc.
+    The screenshot below shows a selection of the Azure Arc related policies and policy initiatives.
 
     {{< img light="/arc/servers/images/arc_policies-light.png" dark="/arc/servers/images/arc_policies-dark.png" alt="Additional policies applicable to Azure Arc-enabled Servers" >}}
 
-Below are some of the policy initiatives and the initiatives within them.
+    In addition, the policies in the Guest Configuration category can be used with Azure Arc-enabled Servers as well as Azure servers. You will explore this in the later [Governance](./governance) lab.
 
-* **Configure Windows machines to run Azure Monitor Agent and associate them to a Data Collection Rule**
-  * **Configure Windows virtual machines to run Azure Monitor Agent using system-assigned managed identity**
-  * **Configure Windows virtual machine scale sets to run Azure Monitor Agent using system-assigned managed identity**
-  * **Configure Windows Arc-enabled machines to run Azure Monitor Agent**
-  * **Configure Windows Machines to be associated with a Data Collection Rule**
-* **Configure Linux machines to run Azure Monitor Agent and associate them to a Data Collection Rule**
-  * **Configure Linux virtual machines to run Azure Monitor Agent with system-assigned managed identity-based authentication**
-  * **Configure Linux virtual machine scale sets to run Azure Monitor Agent with system-assigned managed identity-based authentication**
-  * **Configure Linux Arc-enabled machines to run Azure Monitor Agent**
-  * **Configure Linux Machines to be associated with a Data Collection Rule**
-* [Preview]: Deploy Microsoft Defender for Endpoint agent
-  * [Preview]: Deploy Microsoft Defender for Endpoint agent on Windows virtual machines
-  * [Preview]: Deploy Microsoft Defender for Endpoint agent on Linux virtual machines
-  * [Preview]: Deploy Microsoft Defender for Endpoint agent on Windows Azure Arc machines
-  * [Preview]: Deploy Microsoft Defender for Endpoint agent on Linux hybrid machines
-* [Preview]: Configure virtual and Arc-enabled machines to create the default Microsoft Defender for Cloud pipeline
-  * Assign Built-In User-Assigned Managed Identity to Virtual Machines
-  * Configure Linux virtual machines to run Azure Monitor Agent with user-assigned managed identity-based authentication
-  * Configure Windows virtual machines to run Azure Monitor Agent with user-assigned managed identity-based authentication
-  * [Preview]: Configure supported Linux virtual machines to automatically install the Azure Security agent
-  * [Preview]: Configure supported Windows machines to automatically install the Azure Security agent
-  * [Preview]: Configure machines to automatically create the Azure Security Center pipeline for Azure Monitor Agent
-  * [Preview]: Configure Association to link virtual machines to default Azure Security Center Data Collection Rule
-  * Configure Linux Arc-enabled machines to run Azure Monitor Agent
-  * Configure Windows Arc-enabled machines to run Azure Monitor Agent
-  * [Preview]: Configure supported Linux Arc machines to automatically install the Azure Security agent
-  * [Preview]: Configure supported Windows Arc machines to automatically install the Azure Security agent
-  * [Preview]: Configure Arc machines to automatically create the Security Center pipeline for Azure Monitor Agent
-  * [Preview]: Configure Association to link Arc machines to default Azure Security Center Data Collection Rule
-* Individual policies for Azure Security agent
-  * [Preview]: Configure supported Linux Arc machines to automatically install the Azure Security agent
-  * [Preview]: Configure supported Windows Arc machines to automatically install the Azure Security agent
-  * [Preview]: Azure Security agent should be installed on your Linux Arc machines
-  * [Preview]: Azure Security agent should be installed on your Windows Arc machines
-* **Individual policies for Change Tracking extension**
-  * [Preview]: **Configure ChangeTracking Extension for Linux Arc machines**
-  * [Preview]: **Configure ChangeTracking Extension for Windows Arc machines**
-  * [Preview]: **ChangeTracking extension should be installed on your Linux Arc machine**
-  * [Preview]: **ChangeTracking extension should be installed on your Windows Arc machine**
+    > Note that searching on  *arc" will also bring up policies containing search etc. Ignore these.
 
-In this lab we will be assigning the ones that are in bold.
+    **In this lab we will assign the two policy initiatives for the Azure Monitor Agent.**
 
 ## Policy Assignments
 
-Policy assignments have a number of components:
+Before we move on, let's quickly cover some of the key components involved in Policy assignments:
 
-* name, display name and description
-* id of the policy or policy initiative
+* assignment info (name, display name, description)
+* policy or policy initiative id (or name)
 * scope
 * parameters
-* managed identity
-  * system or user assigned
-  * identity scope and role
-  * location
+* managed identity (system or user assigned, identity scope, role and location)
 
-> The managed identities are used by the template deployments in *deploy if not exist* policies.
+    > The managed identity definition is only needed by the template deployments in *deploy if not exist* policies.
 
-The Azure documentation has a maintained index of the built-in [policies](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies) and [policy initiatives](https://docs.microsoft.com/azure/governance/policy/samples/built-in-initiatives), which then links to the definitions in the [Azure Policy GitHub repo](https://github.com/Azure/azure-policy). Alternatively, search the Policy definitions in the portal.
+The Azure documentation has a maintained index of the built-in [policies](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies) and [policy initiatives](https://docs.microsoft.com/azure/governance/policy/samples/built-in-initiatives), which then links to the definitions in the [Azure Policy GitHub repo](https://github.com/Azure/azure-policy). Alternatively, you can search the Policy definitions using the CLIs or the portal.
 
-For the remainder of the lab you will assign the following three Policy Initiatives at the Landing Zones management group.
+## Lab Overview
 
-1. Configure Linux machines to run Azure Monitor Agent and associate them to a Data Collection Rule
+### Required Policy Initiatives
 
-   Requires an existing Data Collection Rule.
+The pilot requires these two Policy Initiatives to be assigned at the Landing Zones management group.
 
-2. Configure Windows machines to run Azure Monitor Agent and associate them to a Data Collection Rule
+1. **Configure Linux machines to run Azure Monitor Agent and associate them to a Data Collection Rule**
+    * Configure Linux virtual machines to run Azure Monitor Agent using system-assigned managed identity
+    * Configure Linux virtual machine scale sets to run Azure Monitor Agent using system-assigned managed identity
+    * Configure Linux Arc-enabled machines to run Azure Monitor Agent
+    * Configure Linux Machines to be associated with a Data Collection Rule
 
-   Requires an existing Data Collection Rule.
+      > You will be guided in the assignment for this initiative.
 
-3. Configure ChangeTracking extension on Arc machines
+1. **Configure Windows machines to run Azure Monitor Agent and associate them to a Data Collection Rule**
+    * Configure Windows virtual machines to run Azure Monitor Agent using system-assigned managed identity
+    * Configure Windows virtual machine scale sets to run Azure Monitor Agent using system-assigned managed identity
+    * Configure Windows Arc-enabled machines to run Azure Monitor Agent
+    * Configure Windows Machines to be associated with a Data Collection Rule
 
-   Needs defining as a custom policy initiative.
+      > You will assign the second yourself.
+
+### Required Resources
+
+There are a few additional resources that need to be in place before the policy initiatives can be assigned.
+
+* Resource Group
+
+    The Azure Monitor Agent related resources for the POC will be placed into a single resource group named `azure_monitor_agent`.
+
+* Data Collection Rule
+
+    The Data Collection Rule is the definition that glues agent based data collection with the destinations for metrics and logs. Within a DCR you define which *data sources* will be collected and added to *streams*. The *streams* are then linked to the *destinations* via the *data flows*.
+
+    > The DCRs allow more granularity and flexibility in making sure the right metrics and logs are distributed to the right workspaces. The newer model permits more precision in data retention and RBAC controls. You will be creating additional Data Collection Rules (or DCRs) in the Monitoring lab.
+
+    In this lab you will create a baseline DCR called `default_data_collection_rule` using the default example used in the [create REST API call for data collection rules](https://docs.microsoft.com/en-gb/rest/api/monitor/data-collection-rules/create#create-or-update-data-collection-rule).
+
+* Log Analytics Workspace
+
+    We will create a Log Analytics workspace called arc-pilot-core as the destination for the log streams in the default DCR.
+
+    Also create a couple of others that will be needed in the [Monitoring](./monitoring) lab later.
+
+  * **`arc-pilot-core`**
+  * `arc-pilot-soc`
+  * `arc-pilot-linuxapp`
+
+## Resource Group
+
+1. Create a resource group
+
+    ```bash
+    az group create --name azure_monitor_agent --location westeurope
+    ```
+
+1. Grab the resource ID
+
+    ```bash
+    rg_id=$(az group show --name azure_monitor_agent --query id --output tsv)
+    ```
+
+## Log Analytic Workspaces
+
+1. Create the `arc-pilot-core` workspace
+
+    ```bash
+    az monitor log-analytics workspace create --workspace-name arc-pilot-core --resource-group azure_monitor_agent --location westeurope
+    ```
+
+1. Repeat for `arc-pilot-soc`
+1. Repeat for `arc-pilot-linuxapp`
+1. Get the workspace resource id for *arc-pilot-core*
+
+   ```bash
+   workspace_id=$(az monitor log-analytics workspace show --workspace-name arc-pilot-core --resource-group azure_monitor_agent --query id --output tsv)
+   ```
 
 ## Data Collection Rule (DCR)
 
-There are some simple Azure Monitor Agent policies that do nothing more than deploy the AMA extension, but World Wide Importers wish to use the policy initiatives that automatically link to the default alz-logging-workspace.
+You will use the [REST API](https://docs.microsoft.com/rest/api/monitor/data-collection-rules/create) to create the DCR.
 
-In this lab you will use the REST API to create the DCR. (You could create the DCR in different ways but the JSON body for the REST API call is relatively simple to understand.
-
-First, create a Data Collection Rule (DCR) based on the default example used in the [create REST API call for data collection rules](https://docs.microsoft.com/en-gb/rest/api/monitor/data-collection-rules/create#create-or-update-data-collection-rule).
+You could create the DCR in a number of different ways but the JSON body for the REST API call is self contained and relatively simple to use compared to the multiple CLI commands.
 
 1. Create the body
 
@@ -121,27 +148,24 @@ First, create a Data Collection Rule (DCR) based on the default example used in 
 
     {{< code lang=json file="/content/arc/servers/dcr.json" >}}
 
-    > The data sources are added to the three streams. The streams are then linked to the destination(s) via the data flows.
-
 1. Display the workspace resource id
 
-   ```bash
-   az monitor log-analytics workspace show --resource-group alz-logging --workspace-name alz-log-analytics --query id --output tsv
-   ```
+    ```bash
+    echo $workspace_id
+    ```
 
-   Copy the result to the clipboard.
-
+1. Copy the value to the clipboard
 1. Edit the body
 
-    Edit the dcr.json file. Line 86 has a placeholder, `your_default_workspace_resource_id`. Paste the resource ID from the clipboard to replace it.
+    Edit the dcr.json file. Line 86 has a placeholder, `your_default_workspace_resource_id`.
 
-    For example:
+    Paste the resource ID from the clipboard to replace it. For example:
 
     ```json
         "destinations": {
           "logAnalytics": [
             {
-              "workspaceResourceId": "/subscriptions/dc36c76c-b092-4e9b-b194-46805b82b2aa/resourceGroups/alz-logging/providers/Microsoft.OperationalInsights/workspaces/alz-log-analytics",
+              "workspaceResourceId": "/subscriptions/dc36c76c-b092-4e9b-b194-46805b82b2aa/resourceGroups/azure_monitor_agent/providers/Microsoft.OperationalInsights/workspaces/arc-pilot-core",
               "name": "centralWorkspace"
             }
           ]
@@ -154,17 +178,7 @@ First, create a Data Collection Rule (DCR) based on the default example used in 
     dcr_name=default_data_collection_rule
     ```
 
-1. Create a resource group
-
-    Also grab the resource ID for the resource group.
-
-    ```bash
-    rgId=$(az group create --name azure_monitor_agent --location westeurope --query id --output tsv)
-    ```
-
 1. Construct the URI
-
-    As per the [REST API documentation](https://docs.microsoft.com/rest/api/monitor/data-collection-rules/create).
 
     ```bash
     uri="https://management.azure.com/${rgId}/providers/Microsoft.Insights/dataCollectionRules/${dcr_name}?api-version=2021-04-01"
@@ -182,17 +196,41 @@ First, create a Data Collection Rule (DCR) based on the default example used in 
    dcr_id=$(az monitor data-collection rule show --name $dcr_name --resource-group azure_monitor_agent --query id --output tsv)
    ```
 
-## Azure Monitor Agent for Linux
+## Constructing policy assignments
 
-Take the *Configure Linux machines to run Azure Monitor Agent and associate them to a Data Collection Rule* policy initiative as an example.
+The simplest way to assign policies is via the portal, but it is recommended that you take the time to work out how to assign policies via scripting or templates. Here we will do so for the Azure CLI.
 
-The simplest way to assign is via the portal, but take the time to work out how to do it via scripting or templates.
+### Missing assignment values
 
-You can get most of the info straight from the [JSON policy  definition](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policySetDefinitions/Monitoring/AzureMonitor_LinuxPlatform_EnableDCR.json), but we'll see how to get it from the portal or from CLI commands.
+The command to assign a deploy if not exists (dine) policy is:
+
+```bash
+az policy assignment create --name \<assignment_name> \
+  --display-name "Display name" \
+  --description "Description" \
+  --policy-set-definition \<policy_initiative_name> \
+  --scope \<assignment_scope> \
+  --mi-system-assigned \
+  --location \<managed_instance_location> \
+  --identity-scope \<managed_instance_rbac_role_assignment_scope> \
+  --role \<managed_instance_rbac_role_assignment_role_definition_name> \
+  --params \<parameter_value_json_string_or_file>
+```
+
+> You can use a user assigned managed identity instead of a system assigned managed identity. One reason is to allows those with Contributor access to assign dine policies.
+
+We are missing the following argument values:
+
+* the scope for the policy assignment (and managed identity role assignment)
+* the policy initiative name
+* the managed identity role
+* the required parameter names and values
+
+You can get most of the info straight from the [JSON policy definition](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policySetDefinitions/Monitoring/AzureMonitor_LinuxPlatform_EnableDCR.json), but we'll run through how to get those from the portal or from CLI commands.
 
 ### Scope
 
-1. Set a scope variable
+1. Set the `scope` variable
 
     The assignment scope is the Landing Zones management group.
 
@@ -233,10 +271,64 @@ The name (or id) of the initiative is the GUID.
     a15f3269-2e10-458c-87a4-d5989e678a73  [Preview]: Configure machines to automatically install the Azure Monitor and Azure Security agents on virtual machines
     ```
 
-1. Set the variable
+1. Set the `policy_initiative_name` variable
 
     ```bash
     policy_initiative_name=118f04da-0375-44d1-84e3-0fd9e1849403
+    ```
+
+### Managed Identity Role
+
+Refer to the [built-in RBAC roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles).
+
+The default managed identity role is *[Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#contributor)*.
+
+For extensions you can be a little more specific and use either *[Azure Connected Machine Resource Administrator](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#azure-connected-machine-resource-administrator)* (Azure Arc-enabled VMs only) or *[Log Analytics Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#log-analytics-contributor)* (for both Azure and Azure Arc extensions). The policy initiative contains policies for both types of VMs so use `Log Analytics Contributor`.
+
+Here is the role definition showing the wildcard actions for extension on both `Microsoft.Compute/virtualmachines` and `Microsoft.HybridCompute/machines`.
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Log Analytics Contributor can read all monitoring data and edit monitoring settings. Editing monitoring settings includes adding the VM extension to VMs; reading storage account keys to be able to configure collection of logs from Azure Storage; adding solutions; and configuring Azure diagnostics on all Azure resources.",
+  "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/92aaf0da-9dab-42b6-94a3-d43ce8d16293",
+  "name": "92aaf0da-9dab-42b6-94a3-d43ce8d16293",
+  "permissions": [
+    {
+      "actions": [
+        "*/read",
+        "Microsoft.ClassicCompute/virtualMachines/extensions/*",
+        "Microsoft.ClassicStorage/storageAccounts/listKeys/action",
+        "Microsoft.Compute/virtualMachines/extensions/*",
+        "Microsoft.HybridCompute/machines/extensions/write",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Insights/diagnosticSettings/*",
+        "Microsoft.OperationalInsights/*",
+        "Microsoft.OperationsManagement/*",
+        "Microsoft.Resources/deployments/*",
+        "Microsoft.Resources/subscriptions/resourcegroups/deployments/*",
+        "Microsoft.Storage/storageAccounts/listKeys/action",
+        "Microsoft.Support/*"
+      ],
+      "notActions": [],
+      "dataActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Log Analytics Contributor",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+> Note that you can also use custom roles, and you can also select a managed identity assignment scope that is different to the policy assignment scope.
+
+1. Set the `role` variable
+
+    ```bash
+    role="Log Analytics Contributor"
     ```
 
 ### Parameters
@@ -269,6 +361,16 @@ The name (or id) of the initiative is the GUID.
     - dcrResourceId
     ```
 
+1. Show the workspace_id
+
+    The parameter value will be the workspace resource ID for `arc-pilot-core`. You captured to a variable earlier in the lab.
+
+    ```bash
+    echo $workspace_id
+    ```
+
+1. Copy to the clipboard
+
 1. Create a params file
 
     Create a file called params.json and paste in the JSON from the code block below.
@@ -277,7 +379,11 @@ The name (or id) of the initiative is the GUID.
 
     ⚠️ Update `your_default_workspace_resource_id` with the resource ID of the workspace as before.
 
-### Assign the policy initiative
+## Assign the Linux policy initiative
+
+### Assign
+
+Now that you have all of the constituent argument values, construct the command to assign the policy initiative:
 
 ```bash
 az policy assignment create --name azure_monitor_for_linux \
@@ -286,17 +392,13 @@ az policy assignment create --name azure_monitor_for_linux \
   --policy-set-definition $policy_initiative_name \
   --scope $scope \
   --mi-system-assigned --location westeurope \
-  --identity-scope $scope --role "Log Analytics Contributor"\
+  --identity-scope $scope --role "$role" \
   --params params.json
 ```
 
-The managed identity role can be a custom role, but it is simplest to use [built-in RBAC roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles).
-
-The default is *[Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#contributor)*. For extensions then you can be a little more specific and use use *[Azure Connected Machine Resource Administrator](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#azure-connected-machine-resource-administrator)* but this cannot add extensions to Azure VMs. The recommendation here is to use *[Log Analytics Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#log-analytics-contributor)* which can install both Azure and Azure Arc extensions.
-
 > Note that policy initiatives used to be called policy sets.
 
-### Check the assignment
+### Check
 
 1. Open the portal, navigate to Policy and view [Assignments](https://portal.azure.com/#view/Microsoft_Azure_Policy/PolicyMenuBlade/~/Assignments)
 1. Click on *Configure Azure Monitor Agent and DCR for Linux VMs*
@@ -315,9 +417,22 @@ The default is *[Contributor](https://docs.microsoft.com/azure/role-based-access
 
 ## Azure Monitor Agent for Windows
 
-YOU ARE HERE
+Over to you!
 
-## Change Tracking extension
+1. Assign the *Configure Windows machines to run Azure Monitor Agent and associate them to a Data Collection Rule* policy initiative to the Landing Zones scope.
+
+## Success criteria
+
+Show your proctor:
+
+* The azure_monitor_agent resource group and resources
+  * arc-pilot-core
+  * arc-pilot-linuxapp
+  * arc-pilot-soc
+  * default_data_collection_rule
+* The two policy initiative assignments
+  * Parameter values
+  * Managed identity configuration
 
 ## Next Steps
 

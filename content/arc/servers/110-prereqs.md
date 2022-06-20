@@ -59,7 +59,7 @@ The tooling required for this partner hack is lightweight. It is possible to com
 ## References
 
 * <https://azure.microsoft.com/services/azure-arc/#product-overview>
-* <https://https://aka.ms/adopt/hybrid>
+* <https://aka.ms/adopt/hybrid>
 * <https://docs.microsoft.com/azure/azure-arc/servers/>
 * <https://docs.microsoft.com/azure/azure-arc/servers/agent-overview#prerequisites>
 * <https://docs.microsoft.com/azure/virtual-machines/linux/quotas>
@@ -69,7 +69,7 @@ The tooling required for this partner hack is lightweight. It is possible to com
 
 * Azure Arc for Servers partner hack
 
-    For those of you attending an Azure Arc for Servers partner hack then you should now be good to go. We have pre-configured everything else for you so that you can make the best use of your time.
+    ⚠️ For those of you attending an Azure Arc for Servers partner hack then you should now be good to go. We have pre-configured everything else for you so that you can make the best use of your time.
 
     We'll see you when the hack starts. The kick off meeting will be in the General channel within the dedicated *Azure Arc for Servers partner hack* team.
 
