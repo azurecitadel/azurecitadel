@@ -23,6 +23,31 @@ For linux it is downloaded to a directory and you then install. (This last stage
 
 This is a guided lab rather than a challenge.
 
+## Create a key vault
+
+1. Get a uniq value
+
+    This will help ensure the FQDNs are unique.
+
+    ```bash
+    uniq=$(az account show --query id --output tsv | cut -f1 -d-)
+    ```
+
+1. Create the key vault
+
+    ```bash
+    kv=arc-pilot-$uniq
+    az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
+    ```
+
+1.  Create a self signed certificate
+
+    The certificate will be used in the Key Vault Extension lab.
+
+    ```bash
+    az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
+    ```
+
 ## Access policy
 
 For the Key Vault Extension to work, you need to ensure that the managed identity has access to get the secret. (Remember that certificates are uploaded into the certificate, key and secret areas of a key vault. The certificate part is just the public part, whereas the secret includes everything.)

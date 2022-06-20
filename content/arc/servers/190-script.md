@@ -17,6 +17,22 @@ weight: 190
 
 Many of you will be familiar with the custom script extension, and will be pleased to hear that these are also supported on your Windows and linux Arc-enabled servers.
 
+## Storage account
+
+Create a storage account for custom scripts.
+
+```bash
+sa=arcpilotsa$uniq
+az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location westeurope
+```
+
+Add a couple of containers.
+
+```bash
+az storage container create --account-name $sa --name powershell --public-access blob
+az storage container create --account-name $sa --name bash       --public-access blob
+```
+
 ## Portal
 
 Use the extension via the portal to add some software to one of the Windows servers.

@@ -45,7 +45,7 @@ It needs to specifically be assigned that role to be picked up in the portal whe
 
 ```bash
 az ad group create --display-name "Azure Arc Admins" --mail-nickname "azurearcadmins"
-objectId=$(az ad group show --group "Azure Arc Admins" --query objectId --output tsv)
+objectId=$(az ad group show --group "Azure Arc Admins" --query id --output tsv)
 az role assignment create --assignee $objectId --resource-group arc_pilot --role "Azure Connected Machine Resource Administrator"
 ```
 
