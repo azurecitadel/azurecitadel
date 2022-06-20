@@ -74,57 +74,6 @@ You are part of the Security Operations Centers (SOC) team.
     | where EventLog == "Security"
     ```
 
-## Dashboarding
-
-As you go through this section, note the queries you use.
-
-### Log Management
-Produce a query to highlight which machines are reporting to the Log Analytics Workspace.
-
-```
-Heartbeat
-| summarize LastContact=max(TimeGenerated) by Computer
-```
-
-
-### Update Management
-
-Produce a query to highlight which machines require updates. (N.B. you will need to use `summarize` and `arg_max`)
-
-```
-Update
-| summarize arg_max(TimeGenerated, *) by Computer, Title, Classification, UpdateID
-| where UpdateState == "Needed" 
-| summarize MissingUpdatesCount = count() by Computer 
-```
-
-### Arc Management
-
-Produce a query highlighting if our estate is compliant with the Virtual Machine extensions. (N.B. you will need to use Azure Resource Graph)
-
-```
-PolicyResources
-| where type == 'microsoft.policyinsights/policystates'
-| extend policyAssignmentScope=tostring(properties.policyAssignmentScope),
-policySetDefinitionName=tostring(properties.policySetDefinitionName),
-policyDefinitionName=tostring(properties.policyDefinitionName),
-subscriptionId=tostring(subscriptionId),
-ComplianceState=tostring(properties.complianceState)
-| summarize PoliciesDefinitions=dcount(policyDefinitionName), PolicyInitiatives=dcount(policySetDefinitionName), NonCompliantResources=countif(ComplianceState=="NonCompliant")
-```
-
-```
-resources
-| where type == "microsoft.compute/virtualmachines/extensions"
-| where name == "MicrosoftMonitoringAgent"
-| extend computerId = strcat("/",strcat_array(array_slice(todynamic(split(id,"/")),1,8),"/"))
-| project computerId
-```
-
-### Azure Monitor Workbook
-Create an Azure Monitor Workbook showcasing your KQL queries. In addition, 
-
-
 ### Cost Management team
 
 You are part of the Cost Management team and performing an exercise on reducing costs.
@@ -169,9 +118,217 @@ You are part of a Linux application team.
   * **Alerts** on the left hand menu
   * Create a log alert to alert on the errors
 
-## Integrate with Azure Security Center
+## Dashboarding
 
-* Enable Azure Security Center on your Azure Arc connected machines
+As you go through this section, note the queries you use.
+
+### Log Management
+Produce a query to highlight which machines are reporting to the Log Analytics Workspace.
+
+```
+Heartbeat
+| summarize LastContact=max(TimeGenerated) by Computer
+```
+
+### Update Management
+
+Produce a query to highlight which machines require updates. (N.B. you will need to use `summarize` and `arg_max`)
+
+```
+Update
+| summarize arg_max(TimeGenerated, *) by Computer, Title, Classification, UpdateID
+| where UpdateState == "Needed" 
+| summarize MissingUpdatesCount = count() by Computer 
+```
+
+### Arc Management
+
+Produce a query highlighting if our estate is compliant with the Virtual Machine extensions. (N.B. you will need to use Azure Resource Graph)
+
+```
+PolicyResources
+| where type == 'microsoft.policyinsights/policystates'
+| extend policyAssignmentScope=tostring(properties.policyAssignmentScope),
+policySetDefinitionName=tostring(properties.policySetDefinitionName),
+policyDefinitionName=tostring(properties.policyDefinitionName),
+subscriptionId=tostring(subscriptionId),
+ComplianceState=tostring(properties.complianceState)
+| summarize PoliciesDefinitions=dcount(policyDefinitionName), PolicyInitiatives=dcount(policySetDefinitionName), NonCompliantResources=countif(ComplianceState=="NonCompliant")
+```
+
+```
+resources
+| where type == "microsoft.compute/virtualmachines/extensions"
+| extend computerId = strcat("/",strcat_array(array_slice(todynamic(split(id,"/")),1,8),"/"))
+| summarize countif(name=="MicrosoftMonitoringAgent") by computerId
+```
+
+### Azure Monitor Workbook
+Create an Azure Monitor Workbook showcasing your KQL queries. Feel free to use graphs or charts.
+
+![Azure Monitor Workbook](/arc/servers/images/monitorWorkbook.png)
+
+```
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# Azure Arc Dashboard"
+      },
+      "name": "text - 0"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "Heartbeat\r\n| summarize LastContact=max(TimeGenerated) by ResourceId",
+        "size": 4,
+        "timeContext": {
+          "durationMs": 86400000
+        },
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "/subscriptions/679bfca2-ae52-45e8-b890-c26560f2eca0/resourceGroups/arcHack/providers/Microsoft.OperationalInsights/workspaces/arcHack-mma"
+        ],
+        "gridSettings": {
+          "labelSettings": [
+            {
+              "columnId": "ResourceId",
+              "label": "VM"
+            },
+            {
+              "columnId": "LastContact",
+              "label": "Last Contact"
+            }
+          ]
+        }
+      },
+      "name": "query - 1"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "resources\r\n| where type == \"microsoft.compute/virtualmachines/extensions\"\r\n| extend computerId = strcat(\"/\",strcat_array(array_slice(todynamic(split(id,\"/\")),1,8),\"/\"))\r\n| summarize countif(name==\"MicrosoftMonitoringAgent\") by computerId",
+        "size": 1,
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources",
+        "crossComponentResources": [
+          "/subscriptions/679bfca2-ae52-45e8-b890-c26560f2eca0"
+        ],
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "countif_",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "0",
+                    "representation": "3",
+                    "text": ""
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "success",
+                    "text": ""
+                  }
+                ]
+              }
+            }
+          ],
+          "labelSettings": [
+            {
+              "columnId": "computerId",
+              "label": "VM"
+            },
+            {
+              "columnId": "countif_",
+              "label": "MMA Status"
+            }
+          ]
+        }
+      },
+      "customWidth": "50",
+      "name": "query - 2"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "Update\r\n| summarize arg_max(TimeGenerated, *) by Computer, Title, Classification, UpdateID, _ResourceId\r\n| where UpdateState == \"Needed\" \r\n| summarize MissingUpdatesCount = count() by Computer, _ResourceId",
+        "size": 1,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "/subscriptions/679bfca2-ae52-45e8-b890-c26560f2eca0/resourceGroups/arcHack/providers/Microsoft.OperationalInsights/workspaces/arcHack-mma"
+        ],
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "Computer",
+              "formatter": 5
+            },
+            {
+              "columnMatch": "MissingUpdatesCount",
+              "formatter": 8,
+              "formatOptions": {
+                "min": 0,
+                "max": 10,
+                "palette": "red"
+              }
+            },
+            {
+              "columnMatch": "countif_",
+              "formatter": 18,
+              "formatOptions": {
+                "thresholdsOptions": "icons",
+                "thresholdsGrid": [
+                  {
+                    "operator": "==",
+                    "thresholdValue": "0",
+                    "representation": "3",
+                    "text": ""
+                  },
+                  {
+                    "operator": "Default",
+                    "thresholdValue": null,
+                    "representation": "success",
+                    "text": ""
+                  }
+                ]
+              }
+            }
+          ],
+          "labelSettings": [
+            {
+              "columnId": "_ResourceId",
+              "label": "VM"
+            },
+            {
+              "columnId": "MissingUpdatesCount",
+              "label": "Missing Updates"
+            }
+          ]
+        }
+      },
+      "customWidth": "50",
+      "name": "query - 2 - Copy"
+    }
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
+```
+
+## Integrate with Microsoft Defender for Cloud
+
+* Enable Microsoft Defender for Cloud on your Azure Arc connected machines
 
   * In the Azure portal, navigate to the Security Center blade, select **Security solutions**, and then in the **Add data sources** section select **Non-Azure servers**.
   * On the **Add new non-Azure servers** blade, select the **+ Add Servers** button referencing the Log Analytics workspace you created in the previous task.
