@@ -263,11 +263,11 @@ The assignment scope is the Landing Zones management group. Copy the ID.
 
 The management group resource ID format is `/providers/Microsoft.Management/managementGroups/<id>`.
 
-#### **Azure Landing Zones management group resource ID**
+{{< flash >}}
+Azure Landing Zones management group resource ID:
 
-```text
-/providers/Microsoft.Management/managementGroups/alz-landingzones
-```
+**/providers/Microsoft.Management/managementGroups/alz-landingzones**
+{{< /flash >}}
 
 ### Policy initiative name
 
@@ -285,11 +285,11 @@ The name (or id) of the initiative is the GUID. How do you find the name of a po
 
 1. Copy the definition ID and remove the path
 
-#### **Policy initiative name**
+{{< flash >}}
+Policy initiative name:
 
-```text
-118f04da-0375-44d1-84e3-0fd9e1849403
-```
+**118f04da-0375-44d1-84e3-0fd9e1849403**
+{{< /flash >}}
 
 ### Managed identity role(s)
 
@@ -312,14 +312,14 @@ You will need to define the right set of [RBAC roles](https://docs.microsoft.com
 
 1. Click on *Cancel*
 
-#### **List of role assignments (permissions)**
+{{< flash >}}
+List of role assignments (permissions):
 
-```text
-Virtual Machine Contributor
-Azure Connected Machine Resource Administrator
-Monitoring Contributor
-Log Analytics Contributor
-```
+* **Virtual Machine Contributor**
+* **Azure Connected Machine Resource Administrator**
+* **Monitoring Contributor**
+* **Log Analytics Contributor**
+{{< /flash >}}
 
 ### Parameter name
 
@@ -345,11 +345,11 @@ You also need to know which parameters need to be specified and what the paramet
 
 1. Click on *Cancel*
 
-#### **Parameter name**
+{{< flash >}}
+Parameter name:
 
-```text
-dcrResourceId
-```
+**dcrResourceId**
+{{< /flash >}}
 
 ### Parameter value for dcrResourceId
 
