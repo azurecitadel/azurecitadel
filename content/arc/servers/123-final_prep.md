@@ -102,9 +102,16 @@ The *azcmagent* tags will be configured as the VMs are onboarded in the next lab
 
 Skip this step if you do not have the appropriate Azure AD role to create AAD security groups.
 
+### Azure Arc Admins
+
 1. Create a security group called *Azure Arc Admins*
 1. Add all of the users in your team
 1. Assign with a role suitable for administering Azure Arc for Server resources
+
+    > 💡 Azure Arc-enabled Servers are sometimes called Azure Connected Machines...
+
+### Empty groups
+
 1. Create three additional security Groups
     * *Security Operations Center*
     * *Cost Management*
@@ -121,6 +128,10 @@ Show the proctor:
 1. Resource group name, location, tags and resources
 1. Policy assignments
 1. RBAC assignment for *Azure Arc Admins*
+
+## Resources
+
+* <https://docs.microsoft.com/azure/role-based-access-control/built-in-roles>
 
 ## Next up
 
