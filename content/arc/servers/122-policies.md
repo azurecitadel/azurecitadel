@@ -140,6 +140,13 @@ You could create the DCR in a number of different ways but the JSON body for the
 
     Create a file called dcr.json and paste in the JSON from the code block below.
 
+    {{< details "How do I create files in Cloud Shell with the Monaco editor?" >}}
+
+1. Edit the file using `code dcr.json`
+1. Save the file with `CTRL`+`S`
+1. Close the editor with `CTRL`+`Q`
+    {{< /details >}}
+
     {{< code lang=json file="/content/arc/servers/dcr.json" >}}
 
 1. Display the workspace resource id
@@ -196,6 +203,8 @@ You could create the DCR in a number of different ways but the JSON body for the
     az rest --method put --uri $uri --body @dcr.json
     ```
 
+1. Extend the CLI with
+
 1. Get the resource ID for the DCR
 
    ```bash
@@ -206,24 +215,24 @@ You could create the DCR in a number of different ways but the JSON body for the
 
 The simplest way to assign policies is via the portal, but it is recommended that you take the time to work out how to assign policies via scripting or templates. Here we will do so for the Azure CLI.
 
-### Missing assignment values
+The `az policy assignment create` command will create the policy assignment, but we need some additional argument values.
+
+{{< details "More detail..." >}}
 
 The command to assign a deploy if not exists (dine) policy is:
 
 ```bash
-az policy assignment create --name \<assignment_name> \
+az policy assignment create --name <assignment_name> \
   --display-name "Display name" \
   --description "Description" \
-  --policy-set-definition \<policy_initiative_name> \
-  --scope \<assignment_scope> \
+  --policy-set-definition <policy_initiative_name> \
+  --scope <assignment_scope> \
   --mi-system-assigned \
-  --location \<managed_instance_location> \
-  --identity-scope \<managed_instance_rbac_role_assignment_scope> \
-  --role \<managed_instance_rbac_role_assignment_role_definition_name> \
-  --params \<parameter_value_json_string_or_file>
+  --location <managed_instance_location> \
+  --identity-scope <managed_instance_rbac_role_assignment_scope> \
+  --role <managed_instance_rbac_role_assignment_role_definition_name> \
+  --params <parameter_value_json_string_or_file>
 ```
-
-> You can use a user assigned managed identity instead of a system assigned managed identity. One reason is to allows those with Contributor access to assign dine policies.
 
 We are missing the following argument values:
 
@@ -232,13 +241,27 @@ We are missing the following argument values:
 * the managed identity role
 * the required parameter names and values
 
-You can get most of the info straight from the [JSON policy definition](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policySetDefinitions/Monitoring/AzureMonitor_LinuxPlatform_EnableDCR.json), but we'll run through how to get those from the portal or from CLI commands.
+> Note that you could use a user assigned managed identity, instead of the system assigned managed identity shown here. (One reason to do this is to enable policy assignments by those who only have Contributor access.)
+
+{{< /details >}}
+
+You can get most of the required values straight from the [JSON policy definition](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policySetDefinitions/Monitoring/AzureMonitor_LinuxPlatform_EnableDCR.json), but we'll run through how to get those from the portal or from CLI commands.
+
+We'll set those as variables and use them in the `az policy assignment create` command.
+
+Let's start with `--scope $scope`.
 
 ### Scope
 
-1. Set the `scope` variable
+#### Management groups
 
-    The assignment scope is the Landing Zones management group.
+The assignment scope is the Landing Zones management group.
+
+The management group resource ID format is `/providers/Microsoft.Management/managementGroups/<id>`.
+
+#### Set the variable
+
+1. Set the `scope` variable
 
     ```text
     scope=/providers/Microsoft.Management/managementGroups/alz-landingzones
@@ -246,7 +269,9 @@ You can get most of the info straight from the [JSON policy definition](https://
 
 ### Policy Initiative name
 
-The name (or id) of the initiative is the GUID.
+The name (or id) of the initiative is the GUID. How do you find the name of a policy or policy initiative?
+
+#### Finding the name in the portal
 
 1. Open the portal and go to [Policy definitions](https://portal.azure.com/#view/Microsoft_Azure_Policy/PolicyMenuBlade/~/Definitions)
 1. Filter on
@@ -257,6 +282,8 @@ The name (or id) of the initiative is the GUID.
     {{< img light="/arc/servers/images/policy_initiative_definition-light.png" dark="/arc/servers/images/policy_initiative_definition-dark.png" alt="Policy initiative definition" >}}
 
     The name or ID of the policy initiative is the GUID highlighted in red.
+
+#### Finding the name in the portal
 
 1. Alternatively, use the CLI to find the name
 
@@ -277,6 +304,8 @@ The name (or id) of the initiative is the GUID.
     a15f3269-2e10-458c-87a4-d5989e678a73  [Preview]: Configure machines to automatically install the Azure Monitor and Azure Security agents on virtual machines
     ```
 
+#### Set the variable
+
 1. Set the `policy_initiative_name` variable
 
     ```bash
@@ -285,12 +314,19 @@ The name (or id) of the initiative is the GUID.
 
 ### Managed Identity Role
 
+#### Which role should I use?
+
 Refer to the [built-in RBAC roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles).
 
 The default managed identity role is *[Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#contributor)*.
 
-For extensions you can be a little more specific and use either *[Azure Connected Machine Resource Administrator](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#azure-connected-machine-resource-administrator)* (Azure Arc-enabled VMs only) or *[Log Analytics Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#log-analytics-contributor)* (for both Azure and Azure Arc extensions). The policy initiative contains policies for both types of VMs so use `Log Analytics Contributor`.
+However, we should aim for least privilege, even for managed identties.
 
+For extensions you can be a little more specific and use either *[Azure Connected Machine Resource Administrator](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#azure-connected-machine-resource-administrator)* (Azure Arc-enabled VMs only) or *[Log Analytics Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#log-analytics-contributor)* (for both Azure and Azure Arc extensions).
+
+The policy initiative contains policies for both types of VMs so use `Log Analytics Contributor`.
+
+{{< details "More detail..." >}}
 Here is the role definition showing the wildcard actions for extension on both `Microsoft.Compute/virtualmachines` and `Microsoft.HybridCompute/machines`.
 
 ```json
@@ -331,6 +367,10 @@ Here is the role definition showing the wildcard actions for extension on both `
 
 > Note that you can also use custom roles, and you can also select a managed identity assignment scope that is different to the policy assignment scope.
 
+{{< /details >}}
+
+#### Set the variable
+
 1. Set the `role` variable
 
     ```bash
@@ -338,6 +378,18 @@ Here is the role definition showing the wildcard actions for extension on both `
     ```
 
 ### Parameters
+
+#### What do we need to do?
+
+For the parameters, you will need valid parameter values JSON. This can be passed in as a string or placed in a file.
+
+You also need to know which parameters need to be specified and what the parameter values should be.
+
+Let's work through it.
+
+#### What parameter needs to be included?
+
+We'll grab the parameter name from the portal.
 
 1. Return to the policy initiative definition in the portal
 1. Click on *Parameters*
@@ -353,7 +405,11 @@ Here is the role definition showing the wildcard actions for extension on both `
 
     The parameter's name is `dcrResourceId`.
 
-1. Alternatively, use the Azure CLI
+#### Can I use the Azure CLI rather than the portal?
+
+1. Show the parameter keys for a policy definition
+
+    Use the keys() function in a JMESPATH query in the Azure CLI to see the parameter name.
 
     ```bash
     az policy set-definition show --name $policy_initiative_name --query "keys(parameters)" --output yaml
@@ -367,6 +423,8 @@ Here is the role definition showing the wildcard actions for extension on both `
     - dcrResourceId
     ```
 
+#### What parameter value do I need for _dcrResourceId_?
+
 1. Show the workspace_id
 
     The parameter value will be the workspace resource ID for `arc-pilot-core`. You captured to a variable earlier in the lab.
@@ -376,6 +434,8 @@ Here is the role definition showing the wildcard actions for extension on both `
     ```
 
 1. Copy to the clipboard
+
+#### How do I create a file?
 
 1. Create a params file
 
