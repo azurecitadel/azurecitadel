@@ -187,7 +187,7 @@ You could create the DCR in a number of different ways but the JSON body for the
     The two variables are then inserted into the URI path.
 
     ```bash
-    uri="https://management.azure.com/${rgId}/providers/Microsoft.Insights/dataCollectionRules/${dcr_name}?api-version=2021-04-01"
+    uri="https://management.azure.com/${rg_id}/providers/Microsoft.Insights/dataCollectionRules/${dcr_name}?api-version=2021-04-01"
     ```
 
 1. Call the REST API using the Azure CLI
