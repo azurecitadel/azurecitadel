@@ -114,12 +114,6 @@ There are a few additional resources that need to be in place before the policy 
     az group create --name azure_monitor_agent --location westeurope
     ```
 
-1. Grab the resource ID
-
-    ```bash
-    rg_id=$(az group show --name azure_monitor_agent --query id --output tsv)
-    ```
-
 ## Log Analytic Workspaces
 
 1. Create the `arc-pilot-core` workspace
@@ -174,11 +168,23 @@ You could create the DCR in a number of different ways but the JSON body for the
 
 1. Set a name for the DCR.
 
+    We'll start to construct the URI for the REST API call. First define the name of the resource.
+
     ```bash
     dcr_name=default_data_collection_rule
     ```
 
+1. Grab the resource ID for the resource group
+
+    Second, get the resource ID for the resource group.
+
+    ```bash
+    rg_id=$(az group show --name azure_monitor_agent --query id --output tsv)
+    ```
+
 1. Construct the URI
+
+    The two variables are then inserted into the URI path.
 
     ```bash
     uri="https://management.azure.com/${rgId}/providers/Microsoft.Insights/dataCollectionRules/${dcr_name}?api-version=2021-04-01"
