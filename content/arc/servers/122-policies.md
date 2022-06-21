@@ -425,12 +425,12 @@ We'll grab the parameter name from the portal.
 
 #### What parameter value do I need for _dcrResourceId_?
 
-1. Show the workspace_id
+You need the resource ID for the data collection rule you just created.
 
-    The parameter value will be the workspace resource ID for `arc-pilot-core`. You captured to a variable earlier in the lab.
+1. Show the resource ID for the DCR
 
     ```bash
-    echo $workspace_id
+    az monitor data-collection rule show --name default_data_collection_rule --resource-group azure_monitor_agent --query id --output tsv
     ```
 
 1. Copy to the clipboard
@@ -443,7 +443,7 @@ We'll grab the parameter name from the portal.
 
     {{< code lang=json file="/content/arc/servers/params.json" >}}
 
-    ⚠️ Update `your_default_workspace_resource_id` with the resource ID of the workspace as before.
+    ⚠️ Update `your_data_collection_rule_resource_id` with the resource ID of the workspace as before.
 
 ## Assign the Linux policy initiative
 
