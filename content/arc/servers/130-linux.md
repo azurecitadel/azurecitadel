@@ -17,7 +17,7 @@ weight: 130
 
 There are a number of ways to onboard VMs at scale. Some are detailed in the [Azure docs for Arc](https://aka.ms/AzureArcDocs) and there are more still in the [Azure Arc Jumpstart](https://azurearcjumpstart.io/azure_arc_jumpstart/azure_arc_servers/).
 
-For the linux VMs we will use the portal to generate a script which can then be used on multiple servers.
+For the linux VMs in this lab, we will [use the portal](https://docs.microsoft.com/en-gb/azure/azure-arc/servers/onboard-service-principal#generate-the-installation-script-from-the-azure-portal) to generate a script which can then be used on multiple servers.
 
 This is a good fit with linux VMs as the on prem linux admins will usually have their own preferred tooling for remote execution of scripts on multiple hosts. It could be simple scripted sftp and ssh commands, or something more industrial such as Ansible, Chef, Puppet, Salt etc.
 
