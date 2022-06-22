@@ -1,13 +1,12 @@
 ---
-title: Foundation
-description: "Plan for deployment and prepare the target resource group for your Arc servers."
-slug: onprem-vms
+title: Final prep
+description: "Create a target resource group and a service principal with the \"Azure Connected Machine Onboarding\" role."
 layout: single
 draft: false
 series:
  - arc-servers-hack-proctor
-weight: 120
-url: /arc/servers/foundation/proctor
+weight: 123
+url: /arc/servers/final_prep/proctor
 ---
 
 ## Resource Group
@@ -59,26 +58,6 @@ az monitor log-analytics workspace create --resource-group arc_pilot --location 
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-linuxapp
 ```
 
-## Key Vault
-
-```bash
-uniq=$(az account show --query id --output tsv | cut -f1 -d-)
-kv=arc-pilot-keyvault-$uniq
-az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
-az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
-az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa
-```
-
-## Storage account
-
-```bash
-uniq=$(az account show --query id --output tsv | cut -f1 -d-)
-sa=arcpilotsa$uniq
-az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location uksouth
-az storage container create --account-name $sa --name powershell --public-access blob
-az storage container create --account-name $sa --name bash       --public-access blob
-```
-
 ## Full set
 
 Concatenated set of commands from above, bar the service principal and Azure AD group creation and assignment commands.
@@ -93,15 +72,6 @@ az policy assignment non-compliance-message create --resource-group arc_pilot --
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-core
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-soc
 az monitor log-analytics workspace create --resource-group arc_pilot --location uksouth --workspace-name arc-poc-linuxapp
-uniq=$(az account show --query id --output tsv | cut -f1 -d-)
-kv=arc-pilot-$uniq
-az keyvault create --name $kv --retention-days 7 --resource-group arc_pilot --location uksouth
-az keyvault certificate create --name self-signed-cert --vault-name $kv --policy "$(az keyvault certificate get-default-policy)"
-az keyvault secret set --name arc-pilot-private-ssh-key --vault-name $kv --file ~/.ssh/id_rsa
-sa=arcpilotsa$uniq
-az storage account create --name $sa --sku Standard_LRS --resource-group arc_pilot --location uksouth
-az storage container create --account-name $sa --name powershell --public-access blob
-az storage container create --account-name $sa --name bash       --public-access blob
 ```
 
 Service principal
@@ -131,9 +101,6 @@ az role assignment create --assignee $objectId --resource-group arc_pilot --role
 1. RBAC assignments
     1. Service principal with "Azure Connected Machine Onboarding"
     1. Group called "Azure Arc Admins" with "Azure Connected Machine Resource Administrator"
-1. Key Vault secrets
-    1. arc-pilot-private-ssh-key
-    1. self-signed-cert
 
 ## Stretch discussion
 

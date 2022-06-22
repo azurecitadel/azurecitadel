@@ -5,7 +5,7 @@ layout: single
 draft: false
 series:
  - arc-servers-hack-proctor
-weight: 140
+weight: 150
 url: /arc/servers/monitor/proctor
 ---
 
@@ -137,8 +137,8 @@ Produce a query to highlight which machines require updates. (N.B. you will need
 ```
 Update
 | summarize arg_max(TimeGenerated, *) by Computer, Title, Classification, UpdateID
-| where UpdateState == "Needed" 
-| summarize MissingUpdatesCount = count() by Computer 
+| where UpdateState == "Needed"
+| summarize MissingUpdatesCount = count() by Computer
 ```
 
 ### Arc Management

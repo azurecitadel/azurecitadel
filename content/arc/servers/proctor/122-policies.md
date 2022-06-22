@@ -1,7 +1,6 @@
 ---
 title: Additional Policies
 description: "Explore some of the other built-in and custom policies for Azure Arc-enabled servers. Create a Data Collection Rule via the REST API and then assign additional policies."
-slug: policies
 layout: single
 draft: false
 series:
