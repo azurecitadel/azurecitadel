@@ -381,22 +381,51 @@ OK,. we have all of the information that we need to create the command.
 
 Now that you have all of the constituent argument values, construct the command to assign the policy initiative:
 
-```bash
-az policy assignment create --name azure_monitor_for_linux \
-  --display-name "Configure Azure Monitor Agent and DCR for Linux VMs" \
-  --description "Configure Azure Monitor Agent on Linux VMs and associate to a Data Collection Rule" \
-  --policy-set-definition 118f04da-0375-44d1-84e3-0fd9e1849403 \
-  --scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
-  --mi-system-assigned --location westeurope \
-  --identity-scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
-   --role "Virtual Machine Contributor" \
-   --role "Azure Connected Machine Resource Administrator" \
-   --role "Monitoring Contributor" \
-   --role "Log Analytics Contributor" \
-  --params params.json
-```
+1. Create the assignment
 
-> Note that policy initiatives used to be called policy sets. The `--role` argument may be used multiple times.
+    ```bash
+    az policy assignment create --name azure_monitor_for_linux \
+      --display-name "Configure Azure Monitor Agent and DCR for Linux VMs" \
+      --description "Configure Azure Monitor Agent on Linux VMs and associate to a Data Collection Rule" \
+      --policy-set-definition 118f04da-0375-44d1-84e3-0fd9e1849403 \
+      --scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
+      --mi-system-assigned --location westeurope \
+      --identity-scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
+      --role "Azure Connected Machine Resource Administrator" \
+      --params params.json
+    ```
+
+    > Policy initiatives used to be called policy sets. Be warned that the command will not complain if you use the `--role` argument multiple times, but it will only assign the last `--role` specified.
+
+1. Add the *Log Analytics Contributor* role
+
+    ```bash
+      az policy assignment identity assign --name azure_monitor_for_linux \
+      --scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
+      --system-assigned \
+      --identity-scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
+      --role "Log Analytics Contributor"
+    ```
+
+1. Add the *Monitoring Contributor* role
+
+    ```bash
+      az policy assignment identity assign --name azure_monitor_for_linux \
+      --scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
+      --system-assigned \
+      --identity-scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
+      --role "Monitoring Contributor"
+    ```
+
+1. Add the *Virtual Machine Contributor* role
+
+    ```bash
+      az policy assignment identity assign --name azure_monitor_for_linux \
+      --scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
+      --system-assigned \
+      --identity-scope /providers/Microsoft.Management/managementGroups/alz-landingzones \
+      --role "Virtual Machine Contributor"
+    ```
 
 ### Check
 
@@ -417,7 +446,9 @@ az policy assignment create --name azure_monitor_for_linux \
 
 ## Azure Monitor Agent for Windows
 
-Over to you!
+⚠️ *Over to you! You've done the policy assignment for the Linux initiative. Repeat for the Windows version.*
+
+> 💡 You'll have to dig out the name of the initiative and check the required permissions are the same.
 
 1. Assign the *Configure Windows machines to run Azure Monitor Agent and associate them to a Data Collection Rule* policy initiative to the Landing Zones scope.
 

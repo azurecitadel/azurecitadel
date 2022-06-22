@@ -1,12 +1,12 @@
 ---
-title: "Management"
-description: "Create a management baseline for the connected machines. Enable update management and inventory."
+title: "Azure Automanage"
+description: "Use the Azure Automanage service to create a management baseline for the connected machines, enabling update management and inventory. Or use the services individually."
 layout: single
 draft: false
 series:
  - arc-servers-hack-proctor
-weight: 150
-url: /arc/servers/manage/proctor
+weight: 140
+url: /arc/servers/automanage/proctor
 ---
 
 ## Azure Automanage
