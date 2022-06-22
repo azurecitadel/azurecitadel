@@ -61,9 +61,15 @@ If you have used the default variables with the terraform repo then you will be 
 
 ![Bastion](/arc/servers/images/bastion.png)
 
+## Verify the VMs are onboarded
+
+After the agent is installed, verify that the server has successfully connected in the Azure portal in the Azure Arc service, [Servers blade](https://aka.ms/hybridmachineportal).
+
 ## Simple Resource Graph query
 
 One of the benefits of onboarding on prem VMs to Azure is the core management plane organisation and reporting. The Kusto queries in Resource Graph Explorer is great for reporting across multiple subscriptions and resource groups.
+
+If you are new to Resource Graph, the [quickstart with Azure Portal](https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-portal) is a great place to begin.
 
 * Create and save a simple Resource Graph query that lists the connected machines
 
@@ -104,6 +110,7 @@ Stretch targets:
 ## Resources
 
 * <https://docs.microsoft.com/azure/azure-arc/servers/onboard-service-principal>
+* <https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-portal>
 * <https://docs.microsoft.com/azure/governance/resource-graph/>
 * <https://docs.microsoft.com/azure/data-explorer/kusto/concepts/>
 * <https://docs.microsoft.com/azure/azure-monitor/visualize/workbooks-overview>
