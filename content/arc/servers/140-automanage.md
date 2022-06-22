@@ -1,16 +1,16 @@
 ---
-title: "Management"
-description: "Use the preview Azure Automanage service to create a management baseline for the connected machines, enabling update management and inventory. Or use the services individually."
-slug: manage
+title: "Azure Automanage"
+description: "Use the Azure Automanage service to create a management baseline for the connected machines, enabling update management and inventory. Or use the services individually."
+slug: automanage
 layout: single
 draft: false
 menu:
   side:
     parent: arc-servers
-    identifier: arc-servers-manage
+    identifier: arc-servers-automanage
 series:
  - arc-servers
-weight: 150
+weight: 140
 ---
 
 ## Introduction
@@ -30,8 +30,6 @@ Please note that this is currently a preview service, and it does not yet cover 
 * update management
 * change tracking and inventory
 
-Note that it is possible to configure all of the services individually. See the links in the [Resources](#Resources)section below.
-
 ## Pricing
 
 Everything we have done with Azure Arc so far has been free, if you ignore the costs relating to other Azure services such as additional Azure Monitor workspace usage.
@@ -40,11 +38,11 @@ Be aware that using Azure Policy guest configuration (including Azure Automation
 
 ## Azure Automanage
 
-Configure:
+Automanage can be enabled through the *Automanage - Azure machine best practices* resource in the Azure Portal. This quick start will create a managed Log Analytics workspace, Automation account and Recovery Services vault for Automanage.
 
-* Create a new Automation Account to use for Automanage called `arc-pilot-automanage`
+Enable and configure:
+
 * Enable Automanage on the 6 Azure Arc-enabled VMs
-
 * What is the difference between Production and Dev / Test configuration profiles?
 * Which services are not yet available for Azure Arc-enabled servers?
 * Which services can be customised using a custom profile?
@@ -56,11 +54,15 @@ It will take up to 30 minutes for the servers to become configured and the assoc
 * Explore the Insights in the Monitoring blade
 * Explore the Inventory on the Operations blade
 
+> Note, the Log Analytics Workspace, Automation Account and Recovery Vault can be customized when [creating a custom profile using ARM templates](https://docs.microsoft.com/en-us/azure/automanage/virtual-machines-custom-profile#create-a-custom-profile-using-azure-resource-manager-templates).
+
 ## Update Management
 
 Automanage will deploy and Automation Account and connect the Arc-enabled VMs to it.
 
-* Schedule update deployments
+Use Update Management within the Automation Account created by Automanage to schedule updates for the VMs managed by Automanage.
+
+* Create and schedule update deployments
   * _arc-windows-security-weekly_
   * _arc-windows-full-monthly_
   * _arc-linux-security-weekly_
@@ -75,6 +77,8 @@ Automanage will deploy and Automation Account and connect the Arc-enabled VMs to
 
 The change tracking is more interesting once the servers have been configured for a longer period of time, but we can force a change through
 
+Use Inventory within the Automation Account created by Automanage to report on changes within the VMs managed by Automanage.
+
 * Review the Inventory on a Linux VM
 * Install the _tree_ package on one of the Linux VMs
   * For Ubuntu: `sudo apt update && sudo apt install tree`
@@ -85,13 +89,17 @@ The change tracking is more interesting once the servers have been configured fo
 
 ## Azure Monitor Workbooks
 
+Azure Monitor workbooks can provide visual dashboards for many aspects of operational management.
+
+The [Azure Monitor Community repository](https://github.com/microsoft/AzureMonitorCommunity) has many samples to get you started with basic and advanced workbooks.
+
 * Create an update assessment Workbook to visualize update compliance and detail missing updates
 
 ## Success criteria
 
 Screen share with your proctor to show that you achieved:
 
-1. Successfully Automanaged Azure Arc VMs
+1. Successfully onboarded the Azure Arc VMs with Automanage
 1. Deployment schedules are in place for both security and full updates
 1. Report on the current update compliance state for all Azure Arc virtual machines
 1. Show the inventory and update history

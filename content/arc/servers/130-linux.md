@@ -17,7 +17,7 @@ weight: 130
 
 There are a number of ways to onboard VMs at scale. Some are detailed in the [Azure docs for Arc](https://aka.ms/AzureArcDocs) and there are more still in the [Azure Arc Jumpstart](https://azurearcjumpstart.io/azure_arc_jumpstart/azure_arc_servers/).
 
-For the linux VMs we will use the portal to generate a script which can then be used on multiple servers.
+For the linux VMs in this lab, we will [use the portal](https://docs.microsoft.com/en-gb/azure/azure-arc/servers/onboard-service-principal#generate-the-installation-script-from-the-azure-portal) to generate a script which can then be used on multiple servers.
 
 This is a good fit with linux VMs as the on prem linux admins will usually have their own preferred tooling for remote execution of scripts on multiple hosts. It could be simple scripted sftp and ssh commands, or something more industrial such as Ansible, Chef, Puppet, Salt etc.
 
@@ -61,9 +61,15 @@ If you have used the default variables with the terraform repo then you will be 
 
 ![Bastion](/arc/servers/images/bastion.png)
 
+## Verify the VMs are onboarded
+
+After the agent is installed, verify that the server has successfully connected in the Azure portal in the Azure Arc service, [Servers blade](https://aka.ms/hybridmachineportal).
+
 ## Simple Resource Graph query
 
 One of the benefits of onboarding on prem VMs to Azure is the core management plane organisation and reporting. The Kusto queries in Resource Graph Explorer is great for reporting across multiple subscriptions and resource groups.
+
+If you are new to Resource Graph, the [quickstart with Azure Portal](https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-portal) is a great place to begin.
 
 * Create and save a simple Resource Graph query that lists the connected machines
 
@@ -104,6 +110,7 @@ Stretch targets:
 ## Resources
 
 * <https://docs.microsoft.com/azure/azure-arc/servers/onboard-service-principal>
+* <https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-portal>
 * <https://docs.microsoft.com/azure/governance/resource-graph/>
 * <https://docs.microsoft.com/azure/data-explorer/kusto/concepts/>
 * <https://docs.microsoft.com/azure/azure-monitor/visualize/workbooks-overview>

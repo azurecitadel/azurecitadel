@@ -19,6 +19,8 @@ In this final preparation lab you will create the `arc_pilot` resource group, pl
 
 You'll also add some tagging inheritance policies and a couple of (optional) security groups in Azure Active Directory.
 
+> The *Azure Connected Machine Onboarding* role allows *Microsoft.HybridCompute* and *Microsoft.GuestConfiguration* guest actions. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#azure-connected-machine-onboarding) for more information.
+
 ## Resource Group
 
 1. Create a resource group called `arc_pilot` for onboarding
@@ -45,7 +47,9 @@ You'll also add some tagging inheritance policies and a couple of (optional) sec
 
     ⚠️ Make sure that you take a copy of the JSON output as it includes the clientId/appId and the clientSecret/password.
 
-    > The portal will look for service principals with the *Azure Connected Machine Onboarding* role when generating scripts.## Policy assignments
+    > The portal will look for service principals with the *Azure Connected Machine Onboarding* role when generating scripts.
+    
+## Policy assignments
 
 The pilot evaluation team have decided to initially use a couple of tags at the resource group level that they want the resources to inherit.
 
@@ -102,9 +106,16 @@ The *azcmagent* tags will be configured as the VMs are onboarded in the next lab
 
 Skip this step if you do not have the appropriate Azure AD role to create AAD security groups.
 
+### Azure Arc Admins
+
 1. Create a security group called *Azure Arc Admins*
 1. Add all of the users in your team
 1. Assign with a role suitable for administering Azure Arc for Server resources
+
+    > 💡 Azure Arc-enabled Servers are sometimes called Azure Connected Machines...
+
+### Empty groups
+
 1. Create three additional security Groups
     * *Security Operations Center*
     * *Cost Management*
@@ -121,6 +132,11 @@ Show the proctor:
 1. Resource group name, location, tags and resources
 1. Policy assignments
 1. RBAC assignment for *Azure Arc Admins*
+
+## Resources
+
+* <https://docs.microsoft.com/azure/role-based-access-control/built-in-roles>
+* <https://docs.microsoft.com/en-us/azure/azure-arc/servers/onboard-service-principal>
 
 ## Next up
 
