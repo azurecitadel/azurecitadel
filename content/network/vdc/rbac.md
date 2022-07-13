@@ -17,7 +17,7 @@ aliases:
 
 A critical part of any data centre - whether on-premises or in the cloud - is managing identity. In this section of the lab, we will look at two of the primary mechanisms for managing identity in the virtual data centre: Azure Active Directory (AAD) and Role Based Access Control (RBAC). We will use Azure AD to create users and groups and then use RBAC to assign roles and access to resources for these groups.
 
-In this lab, we will create three groups of users, as shown in figure 23:
+In this lab, we will create three groups of users, as shown in figure 25:
 
 ![VDC Users and Groups](/network/vdc/images/Identity.jpg)
 
