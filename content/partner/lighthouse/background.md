@@ -13,21 +13,21 @@ series:
  - partner-lighthouse
 ---
 
-## In short
+## In brief
 
 Azure Lighthouse and Partner Admin Link (PAL) can be combined by managed service providers to help maximise their partner attached Azure Consumed Revenue (ACR) numbers.
 
 Why is that important?
 
-There is a new Microsoft solutions partner program for FY23 and those partners aiming to gain the new Azure designations will need to get a minimum of 70 on the relevant partner score. The partner score is comprised of five categories. None of those can be zero even if the total score from the other categories totals 70 or more.
+There is a new Microsoft solutions partner program for FY23. Partners aiming to gain the new Azure designations will need to get a minimum of 70 on the relevant partner score. The partner score is comprised of five categories. None of those can be zero even if the total score from the other categories totals 70 or more.
 
-Two categories relate to certs, and three categories are ACR based. The criteria demonstrates a partner's ability to:
+Two of the categories relate to certs, but the remaining three categories are ACR based and therefore relevant to these pages. The criteria in those categories demonstrate a partner's ability to:
 
 1. add new customers
 1. increase customer ACR beyond assumed natural growth levels
 1. deploy workloads other than IaaS VMs
 
-The partner attach mechanisms for tracking that ACR are
+The partner attach mechanisms for Azure partners to track customer ACR are
 
 * Cloud Solution Partner (CSP)
 * Digital Partner of Record (DPOR)
@@ -63,60 +63,46 @@ Partners working towards the new partner designations will need to get a minimum
 
 The details are on the [Solutions partner for all Azure areas](https://docs.microsoft.com/partner-center/solutions-partner-azure) page, but at a high level:
 
-* The **Skilling** category is based on certifications, and require specific [intermediate](https://docs.microsoft.com/partner-center/solutions-partner-azure#intermediate-certifications) and [advanced](https://docs.microsoft.com/partner-center/solutions-partner-azure#advanced-certifications) depending on the designation, and we'll ignore these on this page
+* The **Skilling** category is based on certifications, and require specific [intermediate](https://docs.microsoft.com/partner-center/solutions-partner-azure#intermediate-certifications) and [advanced](https://docs.microsoft.com/partner-center/solutions-partner-azure#advanced-certifications) depending on the designation
 
 * The **Performance** and **Customer success** categories will look for [net customer adds](https://docs.microsoft.com/partner-center/solutions-partner-azure#net-customer-adds), [usage growth](https://docs.microsoft.com/partner-center/solutions-partner-azure#usage-growth) and [deployments](https://docs.microsoft.com/partner-center/solutions-partner-azure#deployments) of Azure services more advanced than a VM
 
 Your current partner score can be found in Partner Center. Navigate to the [solutions partner page](https://partner.microsoft.com/dashboard/insights/mpninsights/solutionspartner?source=docs) in the Insights workspace.
 
+> Note that Partner Insights reporting avoids double counting. For instance, telemetry associated with both CSP and PAL will only show as CSP.
+
 ## Partner attached ACR
 
-Azure Consumed Revenue (ACR) is the primary metric used on Azure. Telemetry is collected from all customer accounts for billing and usage reporting. The ACR can be attached to a partner via a number of mechanisms. Some are more applicable to other types of partners, e.g. the Marketplace attached ACR for Independent Solution Vendors (ISVs) and will be ignored here.
+Azure Consumed Revenue (ACR) is the primary metric used on Azure. Telemetry is automatically collected from all customer accounts for billing and usage reporting.
 
-The partner score uses the following partner attach mechanisms for recognising ACR influence from services partners:
+The ACR can be attached to a partner via a number of mechanisms. For Azure managed service providers, the three mechanisms are CSP, DPOR and PAL.
 
-1. Cloud Solution Provider
+### Cloud Solution Provider
 
-    All ACR from [Cloud Solution Provider](https://docs.microsoft.com/partner-center/csp-overview) (CSP) subscriptions are recognised for partners involved in the transaction path in both the direct and indirect (provider/reseller) models.
+ACR from [Cloud Solution Provider](https://docs.microsoft.com/partner-center/csp-overview) (CSP) subscriptions is automaticall recognised for all partners involved in the transaction path.
 
-    CSP recognition is automatic.
+Applies to both direct and indirect (provider/reseller) CSP models.
 
-1. Digital Partner of Record
+### Digital Partner of Record
 
-    A customer may associate one services partner to an Enterprise Agreement (EA) subscription using [Digital Partner of Record](https://docs.microsoft.com/partner-center/link-partner-id-for-azure-performance-pal-dpor#link-to-a-partner-id-with-dpor) (DPOR). This is intended to link the partner whose professional services have had the most impact on the Azure services and associated customer outcomes.
+Customers may use [Digital Partner of Record](https://docs.microsoft.com/partner-center/link-partner-id-for-azure-performance-pal-dpor#link-to-a-partner-id-with-dpor) (DPOR) to associate a services partner to an Enterprise Agreement (EA) subscription.
 
-    DPOR recognition is configured by the customer. The customer can also remove a partner, or change the partner. Note that only one partner at a time may be linked.
+The intent is to recognise the partner whose professional services have had the most impact on the Azure services and associated customer outcomes.
 
-1. Partner Admin Link
+DPOR is configured by the customer. Only one partner can have DPOR on a subscription.
 
-    The security principals (users and service principals) involved in providing a managed service can be linked using Partner Admin Link (PAL). When the security principals are linked with the partners Microsoft Partner Network ID (MPN ID) then the partner is associated to the telemetry for the Azure resources.
+### Partner Admin Link
 
-    Note that it is the partner (not the customer) that links using PAL. PAL supports all offer types (e.g. EA, CSP, PAYG) and supports more complex scenarios with multiple partners providing managed services in the same subscription. The customer enables access in one of two methods:
+Partner Admin Link (PAL) recognises the impact of managed services into customer subscriptions.
 
-    1. partner RBAC assignments
+The customer first allows the partner access to manage their resources via either
 
-    * creating member users and/or service principals in their AAD directory and providing the credentials
-    * inviting guest users from the partner's AAD directory over B2B
-    * creating RBAC assignments for any of the the above security principals (including multi-tenanted service principals)
+* traditional RBAC role assignments created for security principals (users, invited guests or service principals) used by the partner, or
+* by delegating subscription(s) or resource group(s) with a partner's Azure Lighthouse service provider offer
 
-    1. Azure Lighthouse
+The security principals with access may then be linked using Partner Admin Link (PAL) to the partner's Microsoft Partner Network ID (MPN ID). The partner is then associated with the telemetry for the Azure resources that those security principals can see.
 
-    * delegating one or more subscriptions and/or resource groups to a partner
-    * the definition includes the authorisations, lists of security principals and the roles they will be have
-
-> Note that there is a natural order of precedence in the Partner Insights area where multiple ACR attach mechanisms have been leveraged.
->
-> For example, if a customer has a few CSP subscriptions from a partner, plus it is using Azure Lighthouse and PAL for a managed service on those subscriptions and some other EA subscriptions, then both PAL and CSP will be reported.
->
-> The CSP number will cover the CSP subscriptions, whilst PAL will only reflect the ACR that may be attached from the non-CSP subscriptions. The approach avoids double counting.
-
-## Linking IDs with PAL
-
-You can user [Partner Admin Link](https://aka.ms/partneradminlink) to associate the security principals that have access to customer environments to a partner's Microsoft Partner ID (MPNID). From that point onwards the ACR for the customer's Azure resources - those visible to the security principal - is attached to the partner.
-
-One major benefit to MSPs with Azure Lighthouse is that there is far less PAL linking required. Traditional methods require linking security principals in each and every customer context, whilst the multi-tenancy and resource projections from Azure Lighthouse require only the security principals in the MSP's tenant to be linked. And once they are linked then subsequent customer adds using the same Lighthouse definition will be automatically associated to the MPN ID.
-
-The next page will go into more depth on this area to help clarify.
+The PAL process itself does not involve the customer. Permission is implicit in the RBAC assignments or Lighthouse delegations. PAL may be used with all subscription offer types (e.g. EA, CSP, PAYG) and is a more flexible and granular system that supports more complex multiple partner scenarios.
 
 ## Publishing to the Marketplace
 
