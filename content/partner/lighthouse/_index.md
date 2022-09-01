@@ -19,20 +19,20 @@ This has more importance with the changes to the partner program this financial 
 
 The list of roles that are eligible for recognition is also changing this year and the Reader role will no longer be recognised for PAL partner attached ACR.
 
-These pages start with some theory to help you understand
+These pages start with some theory to help you
 
-* the partner program, criteria and mechanisms
-* then a deeper dive into PAL and Azure Lighthouse to understand the benefits and nuances
+* understand the partner program, criteria and partner attached ACR mechanisms
+* dive deeper into PAL and Azure Lighthouse to understand the benefits and nuances
 
-    > If you are short on time then just read the _In Short_ section at the top and then jump to the next page.
+    > Short on time? Just read the __In Brief section at the top and then jump to the next page.
     >
     > For those who want a little more detail (and links to the official Microsoft docs) then keep scrolling down.
 
-Finally we will walk through a couple of examples:
+Finally we will walk through some examples:
 
 * a minimal config
 * a more complex configuration with additional roles elevated via Privileged Identity Management
 
-Both examples use the Support Request Contributor role which is eligible for partner earned credit and therefore for PAL recognition in FY23.
+The examples use the Support Request Contributor role which is eligible for partner earned credit and therefore for PAL recognition in FY23.
 
 ## Content
