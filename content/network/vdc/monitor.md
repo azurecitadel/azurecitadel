@@ -17,29 +17,6 @@ aliases:
 
 In this section, we will explore some of the monitoring options we have in Azure and how those can be used to troubleshoot and diagnose issues in a VDC environment. The first tool we will look at is *Network Watcher*. Network Watcher is a collection of tools available to monitor and troubleshoot issues with network connectivity in Azure, including packet capture, NSG flow logs and IP flow verify.
 
-## Enabling Network Watcher
-
-Before we can use the tools in this section, we must first enable Network Watcher. To do this, follow these steps:
-
-**1)** In the Azure portal, expand the left hand menu and then click *All Services*. In the filter bar, type 'Network Watcher' and then click on the Network Watcher service.
-
-**2)** You should see your Azure subscription listed in the right hand pane - find your region and then click on the'...' on the right hand side. Click 'Enable Network Watcher':
-
-![Enabling Network Watcher](/network/vdc/images/NetWatcher1.jpg)
-
-**Figure 16:** Enabling Network Watcher
-
-**3)** On the left hand side of screen under 'Monitoring', click on 'Topology'. Select your subscription and then the resource group 'VDC-Hub' and 'Hub_Vnet'. You will see a graphical representation of the topology on the screen:
-
-![Network Topology](/network/vdc/images/NetWatcherTopo.jpg)
-
-**Figure 17:** Network Topology View in Network Watcher
-
-**4)** A useful feature of Network Watcher is the ability to view network related subscription limits and track your resource utilisation against these. In the left hand menu, select 'Network Subscription Limit'. You will see a list of resources, including virtual networks, public IP addresses and more:
-
-![Network Subscription Limits](/network/vdc/images/SubLimits.jpg)
-
-**Figure 18:** Network Related Subscription Limits
 
 ## NSG Flow Logs
 
