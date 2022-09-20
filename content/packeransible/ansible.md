@@ -421,4 +421,4 @@ We will also move from static to dynamic inventories.
 * <https://docs.ansible.com/ansible/latest/modules/debug_module.html>
 * <https://docs.microsoft.com/azure/virtual-machines/windows/instance-metadata-service>
 * <https://ansible-docs.readthedocs.io/zh/stable-2.0/rst/playbooks_variables.html#using-variables-about-jinja2>
-* <https://spacelift.io/blog/ansible-variables
+* <https://spacelift.io/blog/ansible-variables>
