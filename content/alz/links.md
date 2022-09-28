@@ -18,14 +18,16 @@ These are the main links to remember!
 
 | Link | Description |
 |---|---|
-| <https://aka.ms/alz> | What is an Azure landing zone? (Docs) |
+| <https://aka.ms/adopt> | Cloud Adoption Framework |
+| <https://aka.ms/alz> | What is an Azure landing zone? |
+| <https://aka.ms/alz/isv> | ISV considerations for Azure Landing Zones  |
 | <https://aka.ms/alz/learn> | Microsoft Learn learning path |
 | <https://aka.ms/alz/repo> | The main Azure Landing Zones repo on GitHub |
-| <https://aka.ms/alz/arm> | Repo page for ARM template ALZ deployment |
 | <https://aka.ms/alz/bicep> | Bicep modules |
 | <https://aka.ms/alz/bicep/wiki> | Bicep module wiki |
 | <https://aka.ms/alz/tf> | Terraform module  |
-| <https://aka.ms/alz/tf/wiki> | Terraform module wiki
+| <https://aka.ms/alz/tf/wiki> | Terraform module wiki |
+| <http://aka.ms/waf> | Well Architected Framework |
 
 ## Additional info
 
