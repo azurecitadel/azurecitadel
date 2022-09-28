@@ -17,33 +17,22 @@ series:
 
 As mentioned in the previous page, the customer allows partner access to manage their resources via either
 
-* traditional RBAC role assignments created for security principals (users, invited guests or service principals) used by the partner, or
-* by delegating subscription(s) or resource group(s) with a partner's Azure Lighthouse service provider offer
+* traditional RBAC role assignments in the customer tenant, or
+* by delegating with an Azure Lighthouse service provider offer
 
 ### Traditional RBAC role assignments
 
-Historically, managed service providers have accessed the customer environments individually. The traditional access methods require switching to a customer directory. Multiple customers can be managed, but only one at any one time. Accessing the resources uses an identity that resides in their tenancy, and that is what PAL links to your MPNID.
-
-This creates friction as managed service consultants need to switch to each customer directory in turn and link their IDs whilst in that context.
-
-There is no simple reporting mechanism to know which admins are linked in which customer contexts so it is not easy to manage for partner vendor managers.
+Historically, managed service providers have accessed customer environments one at a time. The identities that resides in the customer tenant. To PAL link, the managed service consultants need to switch to each customer directory in turn and link their IDs whilst in that context.
 
 ### Azure Lighthouse
 
-Azure Lighthouse is a more recent service designed ground up by Microsoft in tandem with key managed service providers to provide a true multi-tenant management experience.
+Azure Lighthouse is a more recent service designed to provide a true multi-tenant management experience. The delegations project customer resources into the managed service provider's tenancy. The subscription filter extends so you can filter on tenant in addition to subscription.
 
-The direction of travel is reversed with Lighthouse; rather than admins authenticating to another directory to access the customer resources, the customer resources are delegated and projected back to the managed service provider's tenancy. The subscription filter extends so you can filter on tenant and/or subscription to give you the flexibility to zone in on a single customer, or view all resources across all customers.
-
-The Lighthouse definitions contain an authorisations list of the security principals (including security groups) and their RBAC roles. [Best practice](https://docs.microsoft.com/azure/lighthouse/concepts/tenants-users-roles#best-practices-for-defining-users-and-roles) recommends the use of security groups and service principals. As those identities reside in the provider's tenancy then PAL linking is only done once. With Lighthouse:
-
-* PAL linking is massively reduced
-* Simpler to track who is and isn't linked
-* Reduces the risk of losing associated ACR if employees leave
-* ACR for new customers using the same Azure Lighthouse service will automatically flow through
-
-> Note that there are some [role limitations](https://docs.microsoft.com/azure/lighthouse/concepts/tenants-users-roles#role-support-for-azure-lighthouse) with Azure Lighthouse.
+The authorisations list the security principals (including groups) and RBAC [roles](https://docs.microsoft.com/azure/lighthouse/concepts/tenants-users-roles#role-support-for-azure-lighthouse). The objectIds belong to the provider's tenancy, so PAL linking is only done once. ACR for new customers (using the same linked objectIds) is automatically recognised.
 
 ### Partner Admin Link recommendations
+
+General recommendations for PAL:
 
 * Include [roles eligible for partner earned credit](https://docs.microsoft.com/partner-center/azure-roles-perms-pec) (PEC)
 * Link all admins
@@ -51,9 +40,9 @@ The Lighthouse definitions contain an authorisations list of the security princi
 * For traditional access, [link in all customer contexts](https://docs.microsoft.com/azure/cost-management-billing/manage/link-partner-id#frequently-asked-questions), even for guest IDs
 
 {{< flash >}}
-Read on for more detail on PAL, security principals, resource projection and the nuances of Lighthouse versus traditional access methods.
+**To recap, combine PAL with Lighthouse, but make sure there is a PEC eligible role in the list of permanent authorisations.**
 
-Or move straight to the [next page](../minimal).
+Move on to the [next page](../minimal), or read on for more detail on PEC eligible roles, PAL, security principals, resource projection and the nuances of Lighthouse versus traditional access methods.
 {{< /flash >}}
 
 ## Roles eligible for partner earned credit
@@ -100,7 +89,7 @@ A few things to remember:
 
     The ACR attributable to the managed service is based on the security principals and their RBAC role assignments.
 
-    If the role assignment is for certain resource groups only then the ACR will reflect that. It won't natch the total for the subscription scope.
+    If the role assignment is for certain resource groups only then the ACR will reflect that. It won't match the total for the subscription scope.
 
 * Link multiple security principals
 
@@ -142,6 +131,8 @@ If you are using one of the traditional methods to gain access to a customer env
 This only need to be done once per ID, but if there are 10 admins and 45 customers then it is 450 associations. If you are also using a service principal in each customer then you have another 45 associations to make via PAL.
 
 With Azure Lighthouse your authorisations list would probably include a security group (containing the 10 admins) and a separate authorisation for the service principal. All of the security principals are in your tenant. Link the 10 admins and the service principal to the MPNID and you are done.
+
+> Note that there are some [role limitations](https://docs.microsoft.com/azure/lighthouse/concepts/tenants-users-roles#role-support-for-azure-lighthouse) with Azure Lighthouse.
 
 ## Publishing to the Marketplace
 

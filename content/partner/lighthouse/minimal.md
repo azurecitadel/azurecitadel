@@ -23,9 +23,25 @@ OK, enough talk. Let's quickly recap what we're trying to do by combining Azure 
 * Make sure that the security principals are linked
 * Receive the ACR recognition for the positive impact of the service in customer subscriptions
 
-## Content
+## In brief
 
-In this lab you will
+The example [minimal definition]((https://github.com/richeney/lighthouse/blob/main/minimal.json) ) has three roles in the permanent authorisations:
+
+* [Reader](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#reader)
+* [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor)
+* [Managed Services Registration Assignment Delete](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role)
+
+{{< flash >}}
+**Recap:**
+
+1. **Include a PEC eligible role such as Support Request Contributor**
+1. **Include the assignment delete role**
+1. **PAL link the security principals in the authorisations list**
+
+If you are comfortable with Lighthouse and PAL then move on to the [next page](../service_principal).
+
+If not then read on for more detail on how to create your own definition, delegate resources and PAL link IDs.
+{{< /flash >}}
 
 1. Azure Lighthouse definitions
     1. review an example minimal definition
@@ -39,7 +55,10 @@ In this lab you will
 
 ## Minimal managed service
 
-In this section we'll take a look at an example Azure Lighthouse definition for a minimal managed service and how it looks in the portal.
+In this section
+
+1. review an example minimal definition
+1. customise your own definition
 
 ### Example ARM template
 
@@ -143,7 +162,7 @@ As defined by the following authorizations array:
 
 The **principalId** is the objectId for the user, service principal or security group. The **principalDisplayName** is cosmetic.
 
-The **roleDefinitionId** is the GUIDs for the [Azure RBAC built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles). Here they are pulled from the variables section for readability.
+The **roleDefinitionId** is the GUIDs for the [Azure RBAC built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles). The template uses variables for readability.
 
 ```json
 "variables": {
@@ -154,6 +173,8 @@ The **roleDefinitionId** is the GUIDs for the [Azure RBAC built-in roles](https:
 ```
 
 The [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor) role has an action, `Microsoft.Support/*`, which makes the role [eligible for partner earned credit](https://docs.microsoft.com/s/partner-center/azure-roles-perms-pec) (PEC).
+
+All PEC eligible roles include write and/or delete actions. Read actions are insufficient for PEC eligibility.
 
 Another important role in the authorizations array is [Managed Services Registration Assignment Delete Role](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role). This allows the managed services provider to [delete assignments](https://docs.microsoft.com/azure/lighthouse/how-to/remove-delegation#service-providers) assigned to their tenant. Without that role you would be forced to ask the customer to delete the assignment.
 
@@ -182,33 +203,63 @@ Use the example template as your starting point.
 
 ## Customer
 
-The following screens are seen from the perspective of a customer.
-
 {{< flash >}}
 ⚠️ It is recommended to have your own test customer subscription (in its own tenant) for Azure Lighthouse testing and demos.
 {{< /flash >}}
 
-Here I have logged in to my Lighthouse Customer tenant.
+In this section, as the customer, I:
+
+1. create the managed service offer from the template
+1. delegate a subscription
+
+{{< youtube id="QTGBOAjbHhc" >}}
 
 ### Create a definition
 
 1. Click on [Service provider offers](https://portal.azure.com/#view/Microsoft_Azure_CustomerHub/ServiceProvidersBladeV2/~/providers) in Azure Lighthouse's service providers area
 1. Click on **Add offer** and **Add via template**
-
-1. Drag and drop the template.
-
-***YOU ARE HERE***
+1. Drag and drop the template, or browse to the file
+1. Deploy to create the definition
+1. View the offer in the [Service provider offers](https://portal.azure.com/#view/Microsoft_Azure_CustomerHub/ServiceProvidersBladeV2/~/providers) list
+1. View the details
+1. View the role assignments
 
 ### Create an assignment
 
-I need some pictures and text.
+1. Click on either Delegations in the blade, or on the **`+`** next to an offer
+1. Select your subscriptions or resource groups
+1. Check the disclaimer box
+1. Delegate
 
 ### Alternatives
 
-I personally recommend the manual portal creation to partners who are onboarding new customers as it is quick and is a good way to demystify the process for customers. It is also reassuring to see the inbuilt roles and
+I personally recommend the manual portal creation to partners who are onboarding new customers as it is quick and is a good way to demystify the process for customers. It is also reassuring to see the inbuilt roles and to know that
 
 There are other ways to [onboard customers via templates](https://docs.microsoft.com/azure/lighthouse/how-to/onboard-customer) such as PowerShell cmdlets and .
 
 You may also [publish Managed Service offers to the Azure Marketplace](https://docs.microsoft.com/azure/lighthouse/how-to/publish-managed-services-offers).
 
 The definition creation steps can be performed on behalf of the customer by partners in CSP subscriptions through their Admin Of Behalf Of (AOBO) permissions. CSP partners with AOBO can also parameterise a `Microsoft.ManagedServices/registrationAssignments` resource to automate the delegation.
+
+## Managed services provider
+
+In this section:
+
+1. see the multi-tenanted experience
+1. check that IDs are PAL linked
+
+### Multi-tenancy
+
+kjh
+
+### PAL linking
+
+jhg
+
+## References
+
+kjh
+
+## Next
+
+On the next page we'll look at service principals and the User Access Administrator role for assigning roles to managed identities.
