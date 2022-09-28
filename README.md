@@ -11,7 +11,7 @@ Example commands for Ubuntu 20.04, run from the local directory for the cloned r
 1. Install npm
 
     ```bash
-    sudo apt update && sudo apt install npm
+    sudo apt update && sudo apt install -y npm
     ```
 
 1. Install the npm modules
