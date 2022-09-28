@@ -40,9 +40,9 @@ PAL is the focus of these pages. PAL is the recommended way to recognise managed
 This is important for any managed services that only have Reader roles within the list of Permanent authorisations.
 
 {{< flash >}}
-Read on for more detail on the solutions partner program, designations and partner score and partner attach ACR mechanisms. Plus all of the links.
+**To recap, ACR recognition is more important than ever for partners, and PAL can help. But a Reader role is not enough for recognition. You need to have a role eligible for partner earned credit.**
 
-Or move straight to the [next page](../combining).
+Move to the [next page](../combining), or read on if you want more detail on the solutions partner program, designations and partner score and partner attach ACR mechanisms. (Plus all of the links.)
 {{< /flash >}}
 
 ## Microsoft Solutions Partner program
