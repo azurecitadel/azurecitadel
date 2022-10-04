@@ -3,7 +3,7 @@ title: "Example minimal configuration"
 date: 2022-08-11
 author: [ "Richard Cheney" ]
 description: "An example Lighthouse definition with a minimal set of managed service roles that are also valid for ACR recognition via PAL."
-draft: true
+draft: false
 weight: 3
 menu:
   side:
@@ -23,29 +23,27 @@ OK, enough talk. Let's quickly recap what we're trying to do by combining Azure 
 * Make sure that the security principals are linked
 * Receive the ACR recognition for the positive impact of the service in customer subscriptions
 
-## In brief
+### In brief
 
-The example [minimal definition]((https://github.com/richeney/lighthouse/blob/main/minimal.json) ) has three roles in the permanent authorisations:
-
-* [Reader](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#reader)
-* [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor)
-* [Managed Services Registration Assignment Delete](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role)
+The example [minimal definition]((https://github.com/richeney/lighthouse/blob/main/minimal.json) ) has three roles in the permanent authorisations, [Reader](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#reader), [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor) and [Managed Services Registration Assignment Delete](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role).
 
 {{< flash >}}
-**Recap:**
+**Important to remember:**
 
-1. **Include a PEC eligible role such as Support Request Contributor**
-1. **Include the assignment delete role**
-1. **PAL link the security principals in the authorisations list**
+1. **Include a PEC eligible role such as Support Request Contributorin your authorizations**
+1. **PAL link the security principals in the authorizations list**
+    * Applies to service provider offers added via _Add offer > Add via Template_
+    * PAL link service principals where possible
+    * PAL link users when adding to security groups in the authorizations
+1. **Don't forget to include the assignment delete role**
 
-If you are comfortable with Lighthouse and PAL then move on to the [next page](../service_principal).
-
-If not then read on for more detail on how to create your own definition, delegate resources and PAL link IDs.
 {{< /flash >}}
 
-1. Azure Lighthouse definitions
-    1. review an example minimal definition
-    1. customise your own definition
+### Lab flow
+
+1. Azure Lighthouse definition
+    1. review the example minimal definition
+    1. customise your own service definition template
 1. As the customer
     1. create the managed service offer from the template
     1. delegate a subscription
@@ -172,7 +170,7 @@ The **roleDefinitionId** is the GUIDs for the [Azure RBAC built-in roles](https:
 }
 ```
 
-The [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor) role has an action, `Microsoft.Support/*`, which makes the role [eligible for partner earned credit](https://docs.microsoft.com/s/partner-center/azure-roles-perms-pec) (PEC).
+The [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor) role has an action, `Microsoft.Support/*`, which makes the role [eligible for partner earned credit](https://docs.microsoft.com/partner-center/azure-roles-perms-pec) (PEC).
 
 All PEC eligible roles include write and/or delete actions. Read actions are insufficient for PEC eligibility.
 
@@ -212,8 +210,6 @@ In this section, as the customer, I:
 1. create the managed service offer from the template
 1. delegate a subscription
 
-{{< youtube id="QTGBOAjbHhc" >}}
-
 ### Create a definition
 
 1. Click on [Service provider offers](https://portal.azure.com/#view/Microsoft_Azure_CustomerHub/ServiceProvidersBladeV2/~/providers) in Azure Lighthouse's service providers area
@@ -250,16 +246,87 @@ In this section:
 
 ### Multi-tenancy
 
-kjh
+Wait for delegation to complete. Propogation can take a few minutes and you may need to log out and back in again.
+
+1. Open the portal
+1. View [My Customers](https://portal.azure.com/#view/Microsoft_Azure_CustomerHub/MyCustomersBladeV2/~/customers) (Azure Lighthouse > Manage your customers)
+
+    {{< img light="/partner/images/customers_light.png" dark="/partner/images/customers_dark.png" alt="My customers" >}}
+
+3. Check the delegations
+
+    {{< img light="/partner/images/delegations_light.png" dark="/partner/images/delegations_dark.png" alt="Delegations" >}}
+
+4. Click on the directory filter at the top of the portal
+
+    {{< img light="/partner/images/filter_light.png" dark="/partner/images/filter_dark.png" alt="Directory filter" >}}
+
+    Note that the directory filter now include two levels, for directories (tenants) and subscriptions.
+
+    > Explore creating and saving advanced filters.
+
+5. Browse resource groups or a resource type to view cross-tenant
+
+    {{< img light="/partner/images/resource_groups_light.png" dark="/partner/images/resource_groups_dark.png" alt="Multi-tenant Resource Groups" >}}
+
+    > Note that directory or tenant is not yet available as a column. It is recommended to modify the cosmetic subscription names to include a customer identifer.
+
+6. Browse [Virtual machines](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines)
+
+    In the example below you can see the three VMs in my Lighthouse Customer subscription.
+
+    {{< img light="/partner/images/vms_light.png" dark="/partner/images/vms_dark.png" alt="Multi-tenant Virtual machines" >}}
+
+    The authorisations in effect are Reader and Support Contributor. (Attempting to start the VM would correctly fail.)
+
+7. Raising a support ticket
+
+    **Don't create unnecessary support tickets! This screenshot included for completeness.**
+
+    In the screenshot below you can see that the reader and support contributor roles are enabling the creating of support tickets.
+
+    {{< img light="/partner/images/support_light.png" dark="/partner/images/support_dark.png" alt="Multi-tenant support ticket" >}}
+
+Enabling the multi-tenancy with Azure Lighthouse opens up opportunities with the visibility across resources. Improve support in your managed services, report across your customers with Azure Resource Graph queries and automate at scale via scripting and infrastructure as code.
 
 ### PAL linking
 
-jhg
+The Azure Lighthouse definition includes the PEC eligible Support Contributor role, but the customer's ACR won't be attached without PAL linking as the definition was created from a template.
+
+Ideally, each user in the security groups specified in the definition's authorisation should use [Partner Admin Link](https://aka.ms/partneradminlink) to link their ID to the Microsoft Partner Network ID (MPN ID).
+
+1. Click on [Settings](https://portal.azure.com/#settings/directory) in the portal
+1. Click on [Microsoft partner network](https://portal.azure.com/#view/Microsoft_Azure_Billing/ManagementPartnerBlade) in the useful links at the bottom left
+1. Enter your MPN ID
+
+    {{< img light="/partner/images/pal_light.png" dark="/partner/images/pal_dark.png" alt="Multi-tenant Virtual machines" >}}
+
+    > Note that the MPN ID must be a location based ID, not a v-org ID.
+
+1. Click _Link a partner ID_
+
+Done! It's that easy.
+
+Linking only needs to be done once for each ID. Note that there is no way to report on which users in the MSP tenant have linked their ID.
 
 ## References
 
-kjh
+* [Creating Azure Lighthouse definitions](https://learn.microsoft.com/azure/lighthouse/how-to/onboard-customer)
+* [Example minimal definition](https://github.com/richeney/lighthouse/blob/main/minimal.json)
+* [Azure RBAC built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles)
+    * [Reader](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#reader)
+    * [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor)
+    * [Managed Services Registration Assignment Delete](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role)
+* [Roles eligible for partner earned credit](https://docs.microsoft.com/partner-center/azure-roles-perms-pec)
+* [Partner Admin Link](https://aka.ms/partneradminlink)
+* [Publish Managed Service offers to the Azure Marketplace](https://docs.microsoft.com/azure/lighthouse/how-to/publish-managed-services-offers)
+
+
 
 ## Next
 
-On the next page we'll look at service principals and the User Access Administrator role for assigning roles to managed identities.
+On the next page we'll look at using service principals in Azure Lighthouse definitions, show how to use PowerShell or the Azure CLI to authenticate and PAL link.
+
+We'll also look at the User Access Administrator role for assigning roles to managed identities.
+
+**Coming soon!**

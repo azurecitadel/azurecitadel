@@ -3,7 +3,7 @@ title: "Combining Lighthouse and PAL"
 date: 2022-08-11
 author: [ "Richard Cheney" ]
 description: "How combining Partner Admin Link with Azure Lighthouse differs to traditional access."
-draft: true
+draft: false
 weight: 2
 menu:
   side:

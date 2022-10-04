@@ -1,7 +1,7 @@
 ---
 title: "Lighthouse and Partner Admin Link"
 description: "Use Azure Lighthouse for your multi-tenanted managed service delivery and combine with Partner Admin Link to maximise your partner attached ACR for the partner score."
-draft: true
+draft: false
 menu:
   side:
     parent: partner
@@ -31,6 +31,7 @@ These pages start with some theory to help you
 Finally we will walk through some examples:
 
 * a minimal config
+* an expanded version with a service principal for Terraform deployment
 * a more complex configuration with additional roles elevated via Privileged Identity Management
 
 The examples use the Support Request Contributor role which is eligible for partner earned credit and therefore for PAL recognition in FY23.
