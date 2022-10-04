@@ -3,7 +3,7 @@ title: "Background"
 date: 2022-08-11
 author: [ "Richard Cheney" ]
 description: "A quick overview of the key updates to the partner program for FY23 and ACR based criteria within the partner score."
-draft: true
+draft: false
 weight: 1
 menu:
   side:
