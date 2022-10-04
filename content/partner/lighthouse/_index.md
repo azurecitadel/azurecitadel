@@ -1,6 +1,6 @@
 ---
 title: "Lighthouse and Partner Admin Link"
-description: "Use Azure Lighthouse for your multi-tenanted managed service delivery and combine with Partner Admin Link to maximise your partner attached ACR for the partner score."
+description: "Use Azure Lighthouse for your multi-tenanted managed service delivery and combine with Partner Admin Link."
 draft: false
 menu:
   side:
@@ -13,11 +13,9 @@ weight: 3
 
 ## Introduction
 
-We have helped a number of partners to make the most of Azure Lighthouse and Partner Admin Link so that they are fully recognising the impact they have within customer subscriptions via their managed services.
+Combining Azure Lighthouse and Partner Admin Link helps Microsoft to recognising the impact that your managed services have within customer subscriptions.
 
-This has more importance with the changes to the partner program this financial year as partners need to maximise their ACR to help achieve the partner score threshold.
-
-The list of roles that are eligible for recognition is also changing this year and the Reader role will no longer be recognised for PAL partner attached ACR.
+This has more importance with the changes to the partner program this financial year, and the focus on roles that are eligible for recognition.
 
 These pages start with some theory to help you
 
