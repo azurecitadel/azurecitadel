@@ -15,11 +15,11 @@ series:
 
 ## In brief
 
-Azure Lighthouse and Partner Admin Link (PAL) can be combined by managed service providers to help maximise their partner attached Azure Consumed Revenue (ACR) numbers.
+Combining the use of Azure Lighthouse and Partner Admin Link (PAL) is a great way for partners  to demonstrate the positive impact their managed services have in customer accounts.
 
 Why is that important?
 
-There is a new Microsoft solutions partner program for FY23. Partners aiming to gain the new Azure designations will need to get a minimum of 70 on the relevant partner score. The partner score is comprised of five categories. None of those can be zero even if the total score from the other categories totals 70 or more.
+There is a new Microsoft solutions partner program for FY23. Partners aiming to gain the new Azure designations will need to get a minimum of 70 on the relevant partner score. The partner score in all five categories and then sum those scores.
 
 Two of the categories relate to certs, but the remaining three categories are ACR based and therefore relevant to these pages. The criteria in those categories demonstrate a partner's ability to:
 
@@ -27,7 +27,7 @@ Two of the categories relate to certs, but the remaining three categories are AC
 1. increase customer ACR beyond assumed natural growth levels
 1. deploy workloads other than IaaS VMs
 
-The partner attach mechanisms for Azure partners to track customer ACR are
+Microsoft uses a number of partner attach mechanisms to identify and recognise partners who drive Azure customer success. Microsoft can attribute influence and Azure consumed revenue to  services partners using:
 
 * Cloud Solution Partner (CSP)
 * Digital Partner of Record (DPOR)
@@ -35,12 +35,10 @@ The partner attach mechanisms for Azure partners to track customer ACR are
 
 PAL is the focus of these pages. PAL is the recommended way to recognise managed services from partners into Azure subscriptions, and can be used across all subscription offer types including Enterprise Agreement and Pay As You Go.
 
-**⚠️ There is a change to PAL for this FY as ACR will only be recognised from managed services that include roles that are eligible for partner earned credit.**
-
-This is important for any managed services that only have Reader roles within the list of Permanent authorisations.
+The Azure consumed revenue is associated based on the account's permissions (Azure role) and scope (subscription, resource group, resource). There is a publicly available page showing the roles that are eligible. (Note that Reader roles are not eligible.)
 
 {{< flash >}}
-**To recap, ACR recognition is more important than ever for partners, and PAL can help. But a Reader role is not enough for recognition. You need to have a role eligible for partner earned credit.**
+**To recap, ACR recognition is important for Microsoft to recognise partners who drive Azure success. PAL is one of the association methods, and needs an eligible role assignment for recognition.**
 
 Move to the [next page](../combining), or read on if you want more detail on the solutions partner program, designations and partner score and partner attach ACR mechanisms. (Plus all of the links.)
 {{< /flash >}}
@@ -87,9 +85,7 @@ Applies to both direct and indirect (provider/reseller) CSP models.
 
 Customers may use [Digital Partner of Record](https://docs.microsoft.com/partner-center/link-partner-id-for-azure-performance-pal-dpor#link-to-a-partner-id-with-dpor) (DPOR) to associate a services partner to an Enterprise Agreement (EA) subscription.
 
-The intent is to recognise the partner whose professional services have had the most impact on the Azure services and associated customer outcomes.
-
-DPOR is configured by the customer. Only one partner can have DPOR on a subscription.
+The intent is to recognise the partner whose professional services have had the most impact on the Azure services and associated customer outcomes. DPOR is configured by the customer. Only one partner can have DPOR on a subscription.
 
 ### Partner Admin Link
 
