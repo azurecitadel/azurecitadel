@@ -116,7 +116,7 @@ A few things to remember:
 
 * Guest IDs need to be linked in each customer context
 
-    As per the technical notes above, a guest ID may use the same email address and authentication to access all of the directories, but don't be fooled into thinking that once you;ve linked it that it will be linked for all of those customers. You will need to switch to each customer context and link.
+    As per the technical notes above, a guest ID may use the same email address and authentication to access all of the directories, but don't be mistaken in thinking that once you've linked the ID that it will be linked for all of those customers. You still need to switch to each customer context and link.
 
     There is an objectId in each tenantId where the security principal has been invited, and it is that tenantId/objectId that is linked to the MPNID by PAL.
 

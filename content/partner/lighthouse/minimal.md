@@ -17,11 +17,12 @@ series:
 
 OK, enough talk. Let's quickly recap what we're trying to do by combining Azure Lighthouse and Partner Admin Link.
 
-* Maintain a minimal managed service definition
+* Create a managed service definition for Azure Lighthouse
 * Ensure it includes a permanent PEC eligible role
-* Use Azure Lighthouse to project the resources back to our home tenant
-* Make sure that the security principals are linked
+* Delegate customer resources and project them back to the MSP tenant
+* Make sure that the MSP's security principals are linked using PAL
 * Receive the ACR recognition for the positive impact of the service in customer subscriptions
+
 
 ### In brief
 
@@ -30,7 +31,7 @@ The example [minimal definition]((https://github.com/richeney/lighthouse/blob/ma
 {{< flash >}}
 **Important to remember:**
 
-1. **Include a PEC eligible role such as Support Request Contributorin your authorizations**
+1. **Include a PEC eligible role such as Support Request Contributor in your authorizations**
 1. **PAL link the security principals in the authorizations list**
     * Applies to service provider offers added via _Add offer > Add via Template_
     * PAL link service principals where possible
