@@ -19,9 +19,9 @@ Combining the use of Azure Lighthouse and Partner Admin Link (PAL) is a great wa
 
 Why is that important?
 
-There is a new Microsoft solutions partner program for FY23. Partners aiming to gain the new Azure designations will need to get a minimum of 70 on the relevant partner score. The partner score in all five categories and then sum those scores.
+There is a new Microsoft solutions partner program for FY23. Partners aiming to gain the new Azure designations will need to score in all categories for that designation, and the sum of those scores must reach a minimum of 70.
 
-Two of the categories relate to certs, but the remaining three categories are ACR based and therefore relevant to these pages. The criteria in those categories demonstrate a partner's ability to:
+Some categories relate to certificates, but the remaining categories are ACR based and therefore relevant to these pages. The criteria in those categories demonstrate a partner's ability to:
 
 1. add new customers
 1. increase customer ACR beyond assumed natural growth levels
@@ -45,13 +45,16 @@ Move to the [next page](../combining), or read on if you want more detail on the
 
 ## Microsoft Solutions Partner program
 
-The [Microsoft solutions partner](https://docs.microsoft.com/partner-center/introduction-to-pcs) program has been introduced for FY23, replacing the Cloud Platform competency program. As an Azure partner you will be working towards one (or more) of the three Azure designations:
+The [Microsoft solutions partner](https://docs.microsoft.com/partner-center/introduction-to-pcs) program has been introduced for FY23, replacing the Cloud Platform competency program. As an Azure partner you will be working towards one (or more) of the Azure designations:
 
 * [Solutions partner for Infrastructure](https://partner.microsoft.com/training/assets/collection/solutions-partner-for-infrastructure-azure#/)
+* [Solutions partner for Security](https://partner.microsoft.com/training/assets/collection/solutions-partner-for-security#/)
 * [Solutions partner for Digital and App Innovation](https://partner.microsoft.com/training/assets/collection/solutions-partner-for-digital-and-app-innovation-azure#/)
 * [Solutions partner for Data and AI](https://partner.microsoft.com/training/assets/collection/solutions-partner-for-data-and-ai-azure#/)
 
-Partners working towards the new partner designations will need to get a minimum of 70 points for their [partner capability score](https://docs.microsoft.com/partner-center/partner-capability-score), with points coming from *all* five categories:
+Partners working towards the new partner designations will need to get a minimum of 70 points for their [partner capability score](https://docs.microsoft.com/partner-center/partner-capability-score), with points coming from *all* categories for that designation. (The number of categories varies by designation, as does the criteria.)
+
+For example, here is the set of categories for Solutions partner for Infrastructure:
 
 1. **Performance**
 1. **Skilling** – Intermediate certifications
@@ -73,7 +76,7 @@ Your current partner score can be found in Partner Center. Navigate to the [solu
 
 Azure Consumed Revenue (ACR) is the primary metric used on Azure. Telemetry is automatically collected from all customer accounts for billing and usage reporting.
 
-The ACR can be attached to a partner via a number of mechanisms. For Azure managed service providers, the three mechanisms are CSP, DPOR and PAL.
+The ACR can be associated with a partner via a number of mechanisms. For Azure managed service providers, the three mechanisms are CSP, DPOR and PAL.
 
 ### Cloud Solution Provider
 
@@ -112,6 +115,7 @@ There is no need to use Partner Admin Link to associate security principals in M
 
 * [Microsoft solutions partner](https://docs.microsoft.com/partner-center/introduction-to-pcs)
   * [Solutions partner for Infrastructure](https://partner.microsoft.com/training/assets/collection/solutions-partner-for-infrastructure-azure#/)
+  * [Solutions partner for Security](https://partner.microsoft.com/training/assets/collection/solutions-partner-for-security#/)
   * [Solutions partner for Digital and App Innovation](https://partner.microsoft.com/training/assets/collection/solutions-partner-for-digital-and-app-innovation-azure#/)
   * [Solutions partner for Data and AI](https://partner.microsoft.com/training/assets/collection/solutions-partner-for-data-and-ai-azure#/)
 * [Partner capability score](https://docs.microsoft.com/partner-center/partner-capability-score)
