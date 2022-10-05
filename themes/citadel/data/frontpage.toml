@@ -1,8 +1,4 @@
 [[frontpage]]
-name = "ARM"
-url = "/arm"
-
-[[frontpage]]
 name = "Azure Arc"
 url = "/arc"
 
@@ -33,6 +29,10 @@ url = "/marketplace"
 [[frontpage]]
 name = "Network"
 url = "/network"
+
+[[frontpage]]
+name = "Partner"
+url = "/partner"
 
 [[frontpage]]
 name = "Setup"
