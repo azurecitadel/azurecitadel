@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Azure Static Web Apps (Old)
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
   check_source_repo:
     runs-on: ubuntu-latest
     outputs:
-      source_repo: ${{ steps.step1.outputs.source_repo }}    
+      source_repo: ${{ steps.step1.outputs.source_repo }}
     steps:
       - id: step1
         run: |
