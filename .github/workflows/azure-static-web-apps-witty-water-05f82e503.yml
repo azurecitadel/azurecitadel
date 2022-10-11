@@ -1,4 +1,4 @@
-name: Azure Static Web Apps (Old)
+name: Azure Static Web Apps CI/CD
 
 on:
   push:
@@ -38,12 +38,12 @@ jobs:
       - name: Set staging environment base URL
         if: (github.event_name == 'pull_request' && github.event.action != 'closed')
         run:
-          echo "baseURL = \"https://jolly-coast-0e6fb7503-${{ github.event.number }}.westeurope.azurestaticapps.net/\"" > ./config/production/config.toml
+          echo "baseURL = \"https://witty-water-05f82e503-${{ github.event.number }}.westeurope.azurestaticapps.net/\"" > ./config/production/config.toml
 
       - name: Set production environment base URL
         if: github.event_name == 'push'
         run:
-          echo "baseURL = \"https://www.azurecitadel.com/\"" > ./config/production/config.toml
+          echo "baseURL = \"https://internal.azurecitadel.com/\"" > ./config/production/config.toml
 
       - name: Setup NodeJS 16
         uses: actions/setup-node@v1
@@ -66,8 +66,8 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_JOLLY_COAST_0E6FB7503 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_WATER_05F82E503 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           app_location: "public"
           api_location: "api"
@@ -81,7 +81,7 @@ jobs:
     steps:
       - name: Close Pull Request
         id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v0.0.1-preview
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_JOLLY_COAST_0E6FB7503 }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_WATER_05F82E503 }}
           action: "close"
