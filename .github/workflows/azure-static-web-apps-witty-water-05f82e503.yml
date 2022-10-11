@@ -43,7 +43,7 @@ jobs:
       - name: Set production environment base URL
         if: github.event_name == 'push'
         run:
-          echo "baseURL = \"https://internal.azurecitadel.com/\"" > ./config/production/config.toml
+          echo "baseURL = \"https://www.azurecitadel.com/\"" > ./config/production/config.toml
 
       - name: Setup NodeJS 16
         uses: actions/setup-node@v1
