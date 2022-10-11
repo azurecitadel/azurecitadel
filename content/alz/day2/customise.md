@@ -58,6 +58,7 @@ It is common to define custom policies at a high point in the management group s
 * Require built-in platform regulatory compliance security checks and reporting for all production environments
   * ISO27001 & CIS for all environments except Sandbox subscriptions
   * PCI-DSS for the payment system
+* Ensure no resources for the Germany operation are created outside of the Germany public cloud regions
 * Need to be able to report costs for each continent & country easily
 * All subnets must be protected by NSGs
 * All resources and resource groups must be tagged with the following Tags (at a minimum):
@@ -66,6 +67,7 @@ It is common to define custom policies at a high point in the management group s
   * IT-Owner-Contact
   * Service-Application
 * Activity Logs for all subscriptions and diagnostics settings for all resources must be sent to Log Analytics workspace
+* Prevent the creation of Azure HDInsight clusters
 * No M-Series or LS-Series VMs can be deployed
   * Except for the SAP environments
 * Transparent Data Encryption should be enabled on all Azure SQL DBs
