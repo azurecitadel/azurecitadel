@@ -69,15 +69,13 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_STONE_096522003 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # App source code path
-          api_location: "api" # Api source code path - optional
-          output_location: "public" # Built app content directory - optional
-          ###### End of Repository/Build Configurations ######
+          app_location: "public"
+          api_location: "api"
+          skip_app_build: true
 
   close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    needs: check_source_repo
+    if: needs.check_source_repo.outputs.source_repo	== 'azurecitadel/azurecitadel' && (github.event_name == 'pull_request' && github.event.action == 'closed')
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
