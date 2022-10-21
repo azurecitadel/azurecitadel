@@ -26,9 +26,9 @@ The two key links are
 
 ## Azure Hybrid Benefit and Extended Support Updates
 
-## Changes to Azure Hybrid Benefit
+One of the most important announcements was commercial with the updated to Azure Hybrid Benefit.
 
-One of the most important announcements was commercial. You can now leverage Windows Server Datacenter licences with Software Assurance, and use with the new updates tp Azure Hybrid Benefit to deploy Azure Stack HCI, Azure Kubernetes Service (AHS) on Azure Stack HCI and unlimited Windows Server guest operating systems.
+If you have Windows Server Datacenter licences with Software Assurance then you can now deploy Azure Stack HCI, Azure Kubernetes Service (AHS) on Azure Stack HCI and unlimited Windows Server guest operating systems. And all at no additional licensing cost.
 
 * [Maximize your Windows Server investments with new benefits and more flexibility](https://cloudblogs.microsoft.com/windowsserver/2022/10/12/maximize-your-windows-server-investments-with-new-benefits-and-more-flexibility/)
 
