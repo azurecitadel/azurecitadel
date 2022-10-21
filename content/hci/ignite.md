@@ -1,5 +1,5 @@
 ---
-title: "Updates from Microsot Ignite 2022"
+title: "Updates from Microsoft Ignite 2022"
 description: "Set of links to the new Azure Stack HCI updates announced at Ignite."
 layout: single
 draft: false
