@@ -70,6 +70,6 @@ The link is prefiltered to the hybrid and multicloud content, but you will find 
 
 ## Changes to Azure Hybrid Benefit
 
-And last but definitely not least...:
+And last but definitely not least...
 
 * [Maximize your Windows Server investments with new benefits and more flexibility](https://cloudblogs.microsoft.com/windowsserver/2022/10/12/maximize-your-windows-server-investments-with-new-benefits-and-more-flexibility/)
