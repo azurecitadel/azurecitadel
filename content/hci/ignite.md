@@ -37,7 +37,7 @@ Combine with free Extended Support Updates:
 * [Free Extended Security Updates (ESU) through Azure Stack HCI](https://learn.microsoft.com/en-us/azure-stack/hci/manage/azure-benefits-esu)
 * [Lifecycle FAQ - Extended Security Updates](https://learn.microsoft.com/en-us/lifecycle/faq/extended-security-updates)
 
-Also look for Azure Arc Boost Program (AABP) and recently announced changes to Azure Migration and Modernization Program (AMMP) to help support POCs and initial deployments.
+Also look for Azure Arc Boost Program ([AABP](https://aka.ms/aabpblog)) and recently announced changes to Azure Migration and Modernization Program ([AMMP](https://www.microsoft.com/azure/partners/ammp)) to support hybrid and multi-cloud deployments using Azure Arc & Azure security foundations.
 
 ## Partner Resource Catalog
 
