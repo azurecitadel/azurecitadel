@@ -24,6 +24,21 @@ The two key links are
 
     Great summary blog post from Cosmos Darwin, Principal PM Manager on the Azure Edge & Platform team.
 
+## Azure Hybrid Benefit and Extended Support Updates
+
+## Changes to Azure Hybrid Benefit
+
+One of the most important announcements was commercial. You can now leverage Windows Server Datacenter licences with Software Assurance, and use with the new updates tp Azure Hybrid Benefit to deploy Azure Stack HCI, Azure Kubernetes Service (AHS) on Azure Stack HCI and unlimited Windows Server guest operating systems.
+
+* [Maximize your Windows Server investments with new benefits and more flexibility](https://cloudblogs.microsoft.com/windowsserver/2022/10/12/maximize-your-windows-server-investments-with-new-benefits-and-more-flexibility/)
+
+Combine with free Extended Support Updates:
+
+* [Free Extended Security Updates (ESU) through Azure Stack HCI](https://learn.microsoft.com/en-us/azure-stack/hci/manage/azure-benefits-esu)
+* [Lifecycle FAQ - Extended Security Updates](https://learn.microsoft.com/en-us/lifecycle/faq/extended-security-updates)
+
+Also look for Azure Arc Boost Program (AABP) and recently announced changes to Azure Migration and Modernization Program (AMMP) to help support POCs and initial deployments.
+
 ## Partner Resource Catalog
 
 There is a great set of resources available to partners in the [Partner Resource Catalog](https://www.microsoft.com/azure/partners/resources?pr=hybrid-multicloud).
@@ -67,9 +82,3 @@ The link is prefiltered to the hybrid and multicloud content, but you will find 
 * [Windows Admin Center in the Azure Portal](https://cloudblogs.microsoft.com/windowsserver/2022/06/15/preview-of-windows-admin-center-for-azure-arc-enabled-infrastructure/)
 * [Manage Azure Arc-enabled Servers using Windows Admin Center in Azure](https://learn.microsoft.com/windows-server/manage/windows-admin-center/azure/manage-arc-hybrid-machines)
 * [Windows Admin Center for Azure Virtual Machines is now generally available](https://cloudblogs.microsoft.com/windowsserver/2022/10/12/windows-admin-center-for-azure-virtual-machines-is-now-generally-available/)
-
-## Changes to Azure Hybrid Benefit
-
-And last but definitely not least...
-
-* [Maximize your Windows Server investments with new benefits and more flexibility](https://cloudblogs.microsoft.com/windowsserver/2022/10/12/maximize-your-windows-server-investments-with-new-benefits-and-more-flexibility/)
