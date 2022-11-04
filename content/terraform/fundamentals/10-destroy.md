@@ -117,6 +117,7 @@ Your files should look similar to this:
       allow_nested_items_to_be_public = false
       is_hns_enabled                  = true
       nfsv3_enabled                   = true
+      public_network_access_enabled   = false
     }
     ```
 

@@ -149,12 +149,13 @@ Use the portal to create a storage account in the *terraform-basics* resource gr
         * Change redundancy to LRS
     * Advanced tab
         * Disable blob public access
+          * Deselect *Allow enabling public access on containers*
         * Enable hierarchical namespace
         * Enable NFS v3
     * In the Networking tab
         * Disable public access and use private access
 
-    > Skip the private endpoint creation for simplicity.
+          Ignore the additional steps to specify a virtual network or private endpoint. (The storage account will not be accessed in this lab.)
 
 1. Click on *Review and create*
 
@@ -164,19 +165,21 @@ Use the portal to create a storage account in the *terraform-basics* resource gr
 
 1. Click on *Create*
 
-    Deployment should take a few seconds. Navigate to the resource.
+    Deployment should take a few seconds. Navigate to the resource once deployment has succeeded.
 
     ![Storage Account overview](/terraform/fundamentals/images/storage_account_overview.png)
 
-1. Note the resource ID in the JSON view
+1. Click on *JSON View*
+
+1. View the resource ID
 
     ![Storage Account JSON view](/terraform/fundamentals/images/storage_account_jsonview.png)
 
-    You will need the resource ID for the import command in the next section.
+    You will need the resource ID for the import command in the next section. However we'll set a variable using the CLIs and use that later in the lab.
 
 1. Set a variable for the resource ID
 
-    You can also use CLI commands to set a variable, e.g.
+    Use either Bash or PowerSHell to set a variable with the storage account's resource ID.
 
     Bash:
 
@@ -194,6 +197,10 @@ Use the portal to create a storage account in the *terraform-basics* resource gr
 
 ## Check for no diff
 
+{{< flash >}}
+⚠️ Never attempt to import resources unless the Terraform config, state file and Azure reality all match. There should be no diff.
+{{< /flash >}}
+
 1. Check *terraform plan* is clean
 
     ```bash
@@ -204,8 +211,8 @@ Use the portal to create a storage account in the *terraform-basics* resource gr
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
-<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
-<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
 
 <span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
 
@@ -214,16 +221,18 @@ and found no differences, so no changes are needed.
 </pre>
 {{< /raw >}}
 
-    ⚠️ Do not attempt to import resources unless the Terraform config, state file and Azure reality all match. There should be no diff.
+If you get the output above then you can skip the next section and go straight to the [import](#import-into-state).
 
-1. Apply with refresh only (if required)
+## Refresh state (***only if required***)
 
-    If you get the following output then run the refresh only as advised.
+{{< flash >}}
+⚠️ This section ***only*** applies if you got output from `terraform plan` similar to below.
+{{< /flash >}}
 
-    {{< raw >}}
+{{< raw >}}
 <pre style="color:white; background-color:black">
-<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
-<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
 
 <span style="font-weight:bold;"></span><span style="font-weight:bold;color:aqua;">Note:</span><span style="font-weight:bold;"> Objects have changed outside of Terraform</span>
 
@@ -232,7 +241,7 @@ last &quot;terraform apply&quot;:
 
 <span style="font-weight:bold;">  # azurerm_container_group.basics</span> has changed
   <span style="color:yellow;">~</span> resource &quot;azurerm_container_group&quot; &quot;basics&quot; {
-        <span style="font-weight:bold;"></span>id                  = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics&quot;
+        <span style="font-weight:bold;"></span>id                  = &quot;/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics&quot;
         <span style="font-weight:bold;"></span>name                = &quot;terraform-basics&quot;
       <span style="color:lime;">+</span> <span style="font-weight:bold;"></span>tags                = {}
         <span style="filter: contrast(70%) brightness(190%);color:dimgray;"># (9 unchanged attributes hidden)</span>
@@ -247,7 +256,7 @@ last &quot;terraform apply&quot;:
         }
     }
 
-
+terraform apply -refresh-only
 Unless you have made equivalent changes to your configuration, or ignored the
 relevant attributes using ignore_changes, the following plan may include
 actions to undo or respond to these changes.
@@ -258,28 +267,28 @@ actions to undo or respond to these changes.
 
 Your configuration already matches the changes detected above. If you'd like
 to update the Terraform state to match, create and apply a refresh-only plan:
-  terraform apply -refresh-only
+
 </pre>
 {{< /raw >}}
 
-    * Run the apply refresh:
+1. Follow the advice and refresh the state file
 
-        ```bash
-        terraform apply --refresh-only
-        ```
+    ```bash
+    terraform apply --refresh-only
+    ```
 
-    * Rerun `terraform plan` to confirm there is no diff.
+1. Rerun `terraform plan` to confirm there is now no diff
 
-        ```bash
-        terraform plan
-        ```
+    ```bash
+    terraform plan
+    ```
 
-    Expected output:
+    Desired output:
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
-<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
-<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
 
 <span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
 
@@ -330,10 +339,10 @@ Now that you have confirmed that there is no diff, you can create the resource b
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
-<span style="font-weight:bold;">azurerm_storage_account.import_example: Importing from ID &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot;...</span>
+<span style="font-weight:bold;">azurerm_storage_account.import_example: Importing from ID &quot;/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot;...</span>
 <span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">azurerm_storage_account.import_example: Import prepared!</span>
 <span style="color:lime;">  Prepared azurerm_storage_account for import</span>
-<span style="font-weight:bold;">azurerm_storage_account.import_example: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818]</span>
+<span style="font-weight:bold;">azurerm_storage_account.import_example: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818]</span>
 <span style="color:lime;">
 Import successful!
 
@@ -375,8 +384,9 @@ resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; </span> 
     account_replication_type          = &quot;LRS&quot;
     account_tier                      = &quot;Standard&quot;
     allow_nested_items_to_be_public   = false
+    cross_tenant_replication_enabled  = false
     enable_https_traffic_only         = true
-    id                                = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot;
+    id                                = &quot;/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot;
     infrastructure_encryption_enabled = false
     is_hns_enabled                    = true
     location                          = &quot;uksouth&quot;
@@ -399,6 +409,7 @@ resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; </span> 
     primary_table_host                = &quot;richeney27182818.table.core.windows.net&quot;
     primary_web_endpoint              = &quot;https://richeney27182818.z33.web.core.windows.net/&quot;
     primary_web_host                  = &quot;richeney27182818.z33.web.core.windows.net&quot;
+    public_network_access_enabled     = false
     queue_encryption_key_type         = &quot;Service&quot;
     resource_group_name               = &quot;terraform-basics&quot;
     secondary_access_key              = (sensitive value)
@@ -477,9 +488,9 @@ OK, so the state looks good, but run a `terraform plan` and you'll see we have m
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
-<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
-<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
-<span style="font-weight:bold;">azurerm_storage_account.import_example: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818]</span>
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_storage_account.import_example: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818]</span>
 
 Terraform used the selected providers to generate the following execution
 plan. Resource actions are indicated with the following symbols:
@@ -492,10 +503,10 @@ Terraform will perform the following actions:
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>access_tier                       = &quot;Hot&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>account_replication_type          = &quot;LRS&quot; <span style="color:yellow;">-&gt;</span> &quot;GRS&quot;
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>allow_nested_items_to_be_public   = false <span style="color:yellow;">-&gt;</span> true
-      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>id                                = &quot;/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>cross_tenant_replication_enabled  = false <span style="color:yellow;">-&gt;</span> true
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>id                                = &quot;/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>is_hns_enabled                    = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
       <span style="color:lime;">+</span> <span style="font-weight:bold;"></span>large_file_share_enabled          = (known after apply)
-      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>min_tls_version                   = &quot;TLS1_2&quot; <span style="color:yellow;">-&gt;</span> &quot;TLS1_0&quot;
         <span style="font-weight:bold;"></span>name                              = &quot;richeney27182818&quot;
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>nfsv3_enabled                     = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>primary_access_key                = (sensitive value)
@@ -514,6 +525,7 @@ Terraform will perform the following actions:
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>primary_table_host                = &quot;richeney27182818.table.core.windows.net&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>primary_web_endpoint              = &quot;https://richeney27182818.z33.web.core.windows.net/&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>primary_web_host                  = &quot;richeney27182818.z33.web.core.windows.net&quot; <span style="color:yellow;">-&gt;</span> (known after apply)
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>public_network_access_enabled     = false <span style="color:yellow;">-&gt;</span> true
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>secondary_access_key              = (sensitive value)
       <span style="color:lime;">+</span> <span style="font-weight:bold;"></span>secondary_blob_connection_string  = (sensitive value)
       <span style="color:lime;">+</span> <span style="font-weight:bold;"></span>secondary_blob_endpoint           = (known after apply)
@@ -661,9 +673,10 @@ Terraform will perform the following actions:
 <span style="color:red;">-</span>/<span style="color:lime;">+</span> resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; {
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>account_replication_type          = &quot;LRS&quot; <span style="color:yellow;">-&gt;</span> &quot;GRS&quot;
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>allow_nested_items_to_be_public   = false <span style="color:yellow;">-&gt;</span> true
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>cross_tenant_replication_enabled  = false <span style="color:yellow;">-&gt;</span> true
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>is_hns_enabled                    = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
-      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>min_tls_version                   = &quot;TLS1_2&quot; <span style="color:yellow;">-&gt;</span> &quot;TLS1_0&quot;
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>nfsv3_enabled                     = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>public_network_access_enabled     = false <span style="color:yellow;">-&gt;</span> true
 
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>tags                              = {
           <span style="color:lime;">+</span> &quot;environment&quot; = &quot;staging&quot;
@@ -738,9 +751,10 @@ Terraform will perform the following actions:
 
 <span style="font-weight:bold;">  # azurerm_storage_account.import_example</span> must be <span style="font-weight:bold;"></span><span style="font-weight:bold;color:red;">replaced</span>
 <span style="color:red;">-</span>/<span style="color:lime;">+</span> resource &quot;azurerm_storage_account&quot; &quot;import_example&quot; {
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>cross_tenant_replication_enabled  = false <span style="color:yellow;">-&gt;</span> true
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>is_hns_enabled                    = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
-      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>min_tls_version                   = &quot;TLS1_2&quot; <span style="color:yellow;">-&gt;</span> &quot;TLS1_0&quot;
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>nfsv3_enabled                     = true <span style="color:yellow;">-&gt;</span> false <span style="color:red;"># forces replacement</span>
+      <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>public_network_access_enabled     = false <span style="color:yellow;">-&gt;</span> true
 
       <span style="color:yellow;">~</span> <span style="font-weight:bold;"></span>tags                              = {
           <span style="color:lime;">+</span> &quot;environment&quot; = &quot;staging&quot;
@@ -777,9 +791,9 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
 
     {{< raw >}}
 <pre style="color:white; background-color:black">
-<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics]</span>
-<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
-<span style="font-weight:bold;">azurerm_storage_account.import_example: Refreshing state... [id=/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818]</span>
+<span style="font-weight:bold;">azurerm_resource_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_container_group.basics: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.ContainerInstance/containerGroups/terraform-basics]</span>
+<span style="font-weight:bold;">azurerm_storage_account.import_example: Refreshing state... [id=/subscriptions/9b7a166a-267f-45a5-b480-7a04cfc1edf6/resourceGroups/terraform-basics/providers/Microsoft.Storage/storageAccounts/richeney27182818]</span>
 
 <span style="font-weight:bold;"></span><span style="font-weight:bold;color:lime;">No changes.</span><span style="font-weight:bold;"> Your infrastructure matches the configuration.</span>
 
