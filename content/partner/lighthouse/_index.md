@@ -7,7 +7,9 @@ menu:
     parent: partner
     identifier: partner-lighthouse
 aliases:
+  - /partners/lighthouse
   - /partner/pal
+  - /partners/pal
 weight: 3
 ---
 

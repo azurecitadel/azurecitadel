@@ -7,4 +7,6 @@ draft: false
 menu:
   side:
     identifier: partner
+aliases:
+  - /partners
 ---
