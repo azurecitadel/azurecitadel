@@ -1,5 +1,5 @@
 ---
-title: "Example minimal configuration"
+title: "Minimal Lighthouse definition"
 date: 2022-08-11
 author: [ "Richard Cheney" ]
 description: "An example Lighthouse definition with a minimal set of managed service roles that are also valid for ACR recognition via PAL."
@@ -13,34 +13,29 @@ series:
  - partner-lighthouse
 ---
 
-## Introduction
-
-OK, enough talk. Let's quickly recap what we're trying to do by combining Azure Lighthouse and Partner Admin Link.
-
-* Create a managed service definition for Azure Lighthouse
-* Ensure it includes a permanent PEC eligible role
-* Delegate customer resources and project them back to the MSP tenant
-* Make sure that the MSP's security principals are linked using PAL
-* Receive the ACR recognition for the positive impact of the service in customer subscriptions
-
-
-### In brief
-
-The example [minimal definition]((https://github.com/richeney/lighthouse/blob/main/minimal.json) ) has three roles in the permanent authorisations, [Reader](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#reader), [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor) and [Managed Services Registration Assignment Delete](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role).
+## Recap
 
 {{< flash >}}
-**Important to remember:**
-
-1. **Include a PEC eligible role such as Support Request Contributor in your authorizations**
-1. **PAL link the security principals in the authorizations list**
-    * Applies to service provider offers added via _Add offer > Add via Template_
-    * PAL link service principals where possible
-    * PAL link users when adding to security groups in the authorizations
-1. **Don't forget to include the assignment delete role**
-
+1. **Include a PEC eligible role** (such as Support Request Contributor) **in your authorizations**
+1. **Include the assignment delete role**
+1. **Use security groups and service principals in the authorizations**
+    * *Avoid specifying individual users as this leads to unneccessary definition updates*
+1. **PAL link the individual users and service principals**
 {{< /flash >}}
 
-### Lab flow
+You will then receive the ACR recognition for the positive impact of the service in those customer subscriptions.
+
+> ⚠️ When onboarding new users, simply add them to the security group and create the PAL link. There is no need to update the Azure Lighthouse definition if you are using security groups.
+
+## Lab flow
+
+The example [minimal definition](https://github.com/richeney/lighthouse/blob/main/minimal.json) in the lab has three roles in the permanent authorisations:
+
+* [Reader](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#reader)
+* [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor) (PEC eligible)
+* [Managed Services Registration Assignment Delete](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role)
+
+In this lab:
 
 1. Azure Lighthouse definition
     1. review the example minimal definition
@@ -52,14 +47,14 @@ The example [minimal definition]((https://github.com/richeney/lighthouse/blob/ma
     1. see the multi-tenanted experience
     1. check that PAL is linked
 
-## Minimal managed service
+## Azure Lighthouse definition
 
 In this section
 
-1. review an example minimal definition
+1. review the example minimal definition
 1. customise your own definition
 
-### Example ARM template
+### Example template
 
 The [minimal definition](https://github.com/richeney/lighthouse/blob/main/minimal.json) below can be found in my [lighthouse repo](https://github.com/richeney/lighthouse).
 
@@ -80,21 +75,21 @@ The [minimal definition](https://github.com/richeney/lighthouse/blob/main/minima
             "properties": {
                 "registrationDefinitionName": "Basic Support Service",
                 "description": "Azure support services for call logging and call management (L0/L1).",
-                "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f",
+                "managedByTenantId": "3c584bbd-915f-4c70-9f2e-7217983f22f6",
                 "authorizations": [
                     {
-                        "principalIdDisplayName": "Azure Lighthouse Admins",
-                        "principalId": "b3333b16-f8de-4624-ad57-52b494d82fc4",
+                        "principalIdDisplayName": "Managed Service Management",
+                        "principalId": "9d2b2ec1-a465-431f-91d3-546f97b8fb26",
                         "roleDefinitionId": "[variables('ManagedServicesRegistrationAssignmentDeleteRole')]"
                     },
                     {
                         "principalIdDisplayName": "Managed Service Consultants",
-                        "principalId": "11a297dd-edbf-49b6-a935-968f147415e1",
+                        "principalId": "30f86a83-b2a9-477a-90d6-23e51042839a",
                         "roleDefinitionId": "[variables('Reader')]"
                     },
                     {
                         "principalIdDisplayName": "Managed Service Consultants",
-                        "principalId": "11a297dd-edbf-49b6-a935-968f147415e1",
+                        "principalId": "30f86a83-b2a9-477a-90d6-23e51042839a",
                         "roleDefinitionId": "[variables('SupportRequestContributor')]"
                     }
                 ]
@@ -104,13 +99,9 @@ The [minimal definition](https://github.com/richeney/lighthouse/blob/main/minima
 }
 ```
 
-### Service provider offer
+### Main properties
 
-Here is the Details tab for same example as viewed in the portal.
-
-{{< img light="/partner/images/minimal_managed_service_offer_light.png" dark="/partner/images/minimal_managed_service_offer_dark.png" alt="Minimal managed service offer" >}}
-
-The details match the properties in the `Microsoft.ManagedServices/registrationDefinitions` resource:
+Here are the main top level properties for the `Microsoft.ManagedServices/registrationDefinitions` resource:
 
 ```json
 "resources": [
@@ -121,7 +112,7 @@ The details match the properties in the `Microsoft.ManagedServices/registrationD
         "properties": {
             "registrationDefinitionName": "Basic Support Service",
             "description": "Azure support services for call logging and call management (L0/L1).",
-            "managedByTenantId": "655f0684-29ae-466e-8324-2ab22497254f"
+            "managedByTenantId": "3c584bbd-915f-4c70-9f2e-7217983f22f6"
         }
     }
 ]
@@ -129,39 +120,40 @@ The details match the properties in the `Microsoft.ManagedServices/registrationD
 
 The **registrationDefinitionName** and **description** are cosmetic. The delegated resources will be projected to this the service provider's **managedByTenantId**.
 
-> Note that the actual resource name is a GUID. Here we generate a predictable GUID using the function based on a seed string.
+> Note that the actual resource name is a GUID. Here we generate a predictable GUID using a function that takes a seed string.
 
-### Role assignments
+This is how the Details tab will look in the portal.
 
-Here is the matching Role Assignments tab:
+{{< img light="/partner/images/minimal_managed_service_offer_light.png" dark="/partner/images/minimal_managed_service_offer_dark.png" alt="Minimal managed service offer" >}}
 
-{{< img light="/partner/images/minimal_role_assignments_light.png" dark="/partner/images/minimal_role_assignments_dark.png" alt="Minimal role assignments" >}}
 
-As defined by the following authorizations array:
+### Authorizations array
+
+The template has the following authorizations array. The **principalId** is the objectId for the user, service principal or security group. The **principalDisplayName** is cosmetic.
 
 ```json
 "authorizations": [
     {
-        "principalIdDisplayName": "Azure Lighthouse Admins",
-        "principalId": "b3333b16-f8de-4624-ad57-52b494d82fc4",
+        "principalIdDisplayName": "Managed Service Management",
+        "principalId": "9d2b2ec1-a465-431f-91d3-546f97b8fb26",
         "roleDefinitionId": "[variables('ManagedServicesRegistrationAssignmentDeleteRole')]"
     },
     {
         "principalIdDisplayName": "Managed Service Consultants",
-        "principalId": "11a297dd-edbf-49b6-a935-968f147415e1",
+        "principalId": "30f86a83-b2a9-477a-90d6-23e51042839a",
         "roleDefinitionId": "[variables('Reader')]"
     },
     {
         "principalIdDisplayName": "Managed Service Consultants",
-        "principalId": "11a297dd-edbf-49b6-a935-968f147415e1",
+        "principalId": "30f86a83-b2a9-477a-90d6-23e51042839a",
         "roleDefinitionId": "[variables('SupportRequestContributor')]"
     }
 ]
 ```
 
-The **principalId** is the objectId for the user, service principal or security group. The **principalDisplayName** is cosmetic.
 
-The **roleDefinitionId** is the GUIDs for the [Azure RBAC built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles). The template uses variables for readability.
+
+The **roleDefinitionId** is the GUID for the [Azure RBAC built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles). The template uses variables for readability.
 
 ```json
 "variables": {
@@ -171,40 +163,42 @@ The **roleDefinitionId** is the GUIDs for the [Azure RBAC built-in roles](https:
 }
 ```
 
-The [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor) role has an action, `Microsoft.Support/*`, which makes the role [eligible for partner earned credit](https://docs.microsoft.com/partner-center/azure-roles-perms-pec) (PEC).
+The [Support Request Contributor](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#support-request-contributor) role has an action, `Microsoft.Support/*`, which makes the role [eligible for partner earned credit](https://docs.microsoft.com/partner-center/azure-roles-perms-pec) (PEC). All PEC eligible roles include write and/or delete actions. Read actions are insufficient for PEC eligibility.
 
-All PEC eligible roles include write and/or delete actions. Read actions are insufficient for PEC eligibility.
+Another important role in the authorizations array is the [Managed Services Registration Assignment Delete Role](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role). This allows the managed services provider to [delete assignments](https://docs.microsoft.com/azure/lighthouse/how-to/remove-delegation#service-providers) assigned to their tenant. Without that role you would be forced to ask the customer to delete the assignment.
 
-Another important role in the authorizations array is [Managed Services Registration Assignment Delete Role](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#managed-services-registration-assignment-delete-role). This allows the managed services provider to [delete assignments](https://docs.microsoft.com/azure/lighthouse/how-to/remove-delegation#service-providers) assigned to their tenant. Without that role you would be forced to ask the customer to delete the assignment.
+Note that there are limitations in the [role support for Azure Lighthouse](https://docs.microsoft.com/azure/lighthouse/concepts/tenants-users-roles#role-support-for-azure-lighthouse). You can only use in-built roles. You cannot use roles with dataActions. Owner cannot be used, and User Access Administrator is limited to assigning a defined set of roles to managed identities.
 
-> Note that there are limitations in the [role support for Azure Lighthouse](https://docs.microsoft.com/azure/lighthouse/concepts/tenants-users-roles#role-support-for-azure-lighthouse). You can only use in-built roles. You cannot use roles with dataActions. Owner cannot be used, and User Access Administrator is limited to assigning a defined set of roles to managed identities.
+This is how the Role Assignments tab would look in the portal:
 
-### Customise your own
+{{< img light="/partner/images/minimal_role_assignments_light.png" dark="/partner/images/minimal_role_assignments_dark.png" alt="Minimal role assignments" >}}
 
-Use the example template as your starting point.
 
-> ⚠️ Please do not run the example template without customising it first!
+
+## Customise your definition
+
+{{< flash >}}
+⚠️ Please do not run the example template without customising it first! Use the example template as your starting point.
 
 1. Save it locally and edit in your favourite editor.
 
-    > If you haven't got a favourite then we recommend [Visual Studio Code](HTTPS://aka.ms/vscode) with the [Azure Resource Manager (ARM) Tools extension](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools).
+    We recommend [Visual Studio Code](HTTPS://aka.ms/vscode) with the [Azure Resource Manager (ARM) Tools extension](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools).
 
 1. Update the `managedByTenantId` to match your [tenantId](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview)
 1. Update the cosmetic descriptions
 1. Create your own [AAD security groups](https://portal.azure.com/#view/Microsoft_AAD_IAM/GroupsManagementMenuBlade/~/AllGroups) for
-    1. Lighthouse Offer Admins, and
-    1. Lighthouse Managed Service Consultants
+    1. Managed Service Managers
+    1. Managed Service Consultants
 
-    > You are not limited to these groups or descriptions. They are just used as an example.
+    You are not limited to these groups or descriptions. They are just used as an example.
 
 1. Update the descriptions and objectIds in your template to match
 1. Save your changes to a new filename e.g. myServiceOffer.json
+{{< /flash >}}
 
 ## Customer
 
-{{< flash >}}
 ⚠️ It is recommended to have your own test customer subscription (in its own tenant) for Azure Lighthouse testing and demos.
-{{< /flash >}}
 
 In this section, as the customer, I:
 
@@ -232,9 +226,7 @@ In this section, as the customer, I:
 
 I personally recommend the manual portal creation to partners who are onboarding new customers as it is quick and is a good way to demystify the process for customers. It is also reassuring to see the inbuilt roles and to know that
 
-There are other ways to [onboard customers via templates](https://docs.microsoft.com/azure/lighthouse/how-to/onboard-customer) such as PowerShell cmdlets and .
-
-You may also [publish Managed Service offers to the Azure Marketplace](https://docs.microsoft.com/azure/lighthouse/how-to/publish-managed-services-offers).
+There are other ways to [onboard customers via templates](https://docs.microsoft.com/azure/lighthouse/how-to/onboard-customer). You may also [publish Managed Service offers to the Azure Marketplace](https://docs.microsoft.com/azure/lighthouse/how-to/publish-managed-services-offers).
 
 The definition creation steps can be performed on behalf of the customer by partners in CSP subscriptions through their Admin Of Behalf Of (AOBO) permissions. CSP partners with AOBO can also parameterise a `Microsoft.ManagedServices/registrationAssignments` resource to automate the delegation.
 
@@ -327,7 +319,3 @@ Linking only needs to be done once for each ID. Note that there is no way to rep
 ## Next
 
 On the next page we'll look at using service principals in Azure Lighthouse definitions, show how to use PowerShell or the Azure CLI to authenticate and PAL link.
-
-We'll also look at the User Access Administrator role for assigning roles to managed identities.
-
-**Coming soon!**
