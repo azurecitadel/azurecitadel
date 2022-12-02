@@ -28,6 +28,7 @@ Before we move through the [Overview](#overview) for this lab, quickly step thro
 There are a number of other custom and built-in policies that are applicable to Azure Arc-enabled Servers.
 
 1. Select the Azure Landing Zones management group
+1. Select **Policy | Definitions**
 1. Filter Categories to
     * Azure Arc
     * Monitoring
