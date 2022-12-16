@@ -82,3 +82,13 @@ The link is prefiltered to the hybrid and multicloud content, but you will find 
 * [Windows Admin Center in the Azure Portal](https://cloudblogs.microsoft.com/windowsserver/2022/06/15/preview-of-windows-admin-center-for-azure-arc-enabled-infrastructure/)
 * [Manage Azure Arc-enabled Servers using Windows Admin Center in Azure](https://learn.microsoft.com/windows-server/manage/windows-admin-center/azure/manage-arc-hybrid-machines)
 * [Windows Admin Center for Azure Virtual Machines is now generally available](https://cloudblogs.microsoft.com/windowsserver/2022/10/12/windows-admin-center-for-azure-virtual-machines-is-now-generally-available/)
+
+## Azure Stack blog page updates:
+
+A few select blog posts from the [Azure Stack blog page](https://techcommunity.microsoft.com/t5/azure-stack-blog/bg-p/AzureStackBlog) from calendar Q4:
+
+* [Tag based Segmentation with Azure Stack HCI](https://techcommunity.microsoft.com/t5/azure-stack-blog/tag-based-segmentation-with-azure-stack-hci/ba-p/3657446)
+* [AKS on Azure Stack HCI and Windows Server - November 2022 update](https://techcommunity.microsoft.com/t5/azure-stack-blog/aks-on-azure-stack-hci-and-windows-server-november-2022-update/ba-p/3679297)
+* [Windows Admin Center version 2211 is now generally available!](https://techcommunity.microsoft.com/t5/windows-admin-center-blog/windows-admin-center-version-2211-is-now-generally-available/ba-p/3695758)
+* [What’s new for Azure Stack HCI in Windows Admin Center v2211](https://techcommunity.microsoft.com/t5/azure-stack-blog/what-s-new-for-azure-stack-hci-in-windows-admin-center-v2211/ba-p/3696262)
+* [Accelerate your edge workloads with affordable NVIDIA GPU-powered Azure Stack HCI solutions](https://techcommunity.microsoft.com/t5/azure-stack-blog/accelerate-your-edge-workloads-with-affordable-nvidia-gpu/ba-p/3692795)
