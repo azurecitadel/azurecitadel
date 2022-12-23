@@ -3,7 +3,7 @@ title: "Prereqs"
 description: "Attending an Azure Arc for Servers hack? If so then complete these first. And please - do so before the start of the hack!"
 slug: prereqs
 layout: single
-draft: false
+draft: true
 menu:
   side:
     parent: arc-servers

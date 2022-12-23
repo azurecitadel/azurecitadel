@@ -1,7 +1,7 @@
 ---
-title: Final prep
-description: "Create a target resource group and a service principal with the \"Azure Connected Machine Onboarding\" role."
-slug: final_prep
+title: Arc Pilot resource group
+description: "Create a service principal for onboarding, plus a few resources and tag inheritance policies."
+slug: arc_pilot
 layout: single
 draft: false
 menu:
@@ -15,13 +15,15 @@ weight: 123
 
 ## Introduction
 
-In this final preparation lab you will create the `arc_pilot` resource group, plus a service principal for the onboarding scripts. The service principal must have the *Azure Connected Machine Onboarding* role.
+In this preparation lab you will create the `arc_pilot` resource group, plus a service principal for the onboarding scripts. The service principal must have the *Azure Connected Machine Onboarding* role.
 
 You'll also add some tagging inheritance policies and a couple of (optional) security groups in Azure Active Directory.
 
 > The *Azure Connected Machine Onboarding* role allows *Microsoft.HybridCompute* and *Microsoft.GuestConfiguration* guest actions. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#azure-connected-machine-onboarding) for more information.
 
-## Resource Group
+The last section covers
+
+## Resource group
 
 1. Create a resource group called `arc_pilot` for onboarding
 
@@ -37,7 +39,8 @@ You'll also add some tagging inheritance policies and a couple of (optional) sec
     rgId=$(az group show --name arc_pilot --query id --output tsv)
     ```
 
-## Service Principal
+
+## Service principal
 
 1. Create a service principal with the *Azure Connected Machine Onboarding* role
 
@@ -48,19 +51,31 @@ You'll also add some tagging inheritance policies and a couple of (optional) sec
     ⚠️ Make sure that you take a copy of the JSON output as it includes the clientId/appId and the clientSecret/password.
 
     > The portal will look for service principals with the *Azure Connected Machine Onboarding* role when generating scripts.
-    
-## Policy assignments
+
+## Azure Arc Admins
+
+1. Create a security group called *Azure Arc Admins*
+1. Add all of the users in your team
+1. Assign with a role to the resource group that is suitable for administering Azure Arc-enabled Server resources
+
+    > 💡 Hint: Azure Arc-enabled Servers are sometimes called Azure Connected Machines...
+
+## Tag inheritance
 
 The pilot evaluation team have decided to initially use a couple of tags at the resource group level that they want the resources to inherit.
 
+The tag inheritance policies may be deployed at a higher scope in production, e.g. at the subscription scope for a subscription dedicated for hybrid machines, as one component of a wider tagging strategy.
+
 | Tag | Value | Source |
 |---|---|---|
+||||
 | datacentre | Azure Citadel | Inherited from resource group |
 | city | Reading | Inherited from resource group |
 | platform | | azcmagent |
 | cluster | | azcmagent |
+||||
 
-The *azcmagent* tags will be configured as the VMs are onboarded in the next lab.
+⚠️The values for the platform and cluster tags will be configured when using the azcmagent to onboard the hybrid VMs.
 
 1. Assign the tag inheritance for datacentre
 
@@ -102,42 +117,23 @@ The *azcmagent* tags will be configured as the VMs are onboarded in the next lab
     --message "Resource has not inherited the city tag"
     ```
 
-## Azure AD Groups
-
-Skip this step if you do not have the appropriate Azure AD role to create AAD security groups.
-
-### Azure Arc Admins
-
-1. Create a security group called *Azure Arc Admins*
-1. Add all of the users in your team
-1. Assign with a role suitable for administering Azure Arc for Server resources
-
-    > 💡 Azure Arc-enabled Servers are sometimes called Azure Connected Machines...
-
-### Empty groups
-
-1. Create three additional security Groups
-    * *Security Operations Center*
-    * *Cost Management*
-    * *Linux App Dev*
-
-  These may be left empty for the moment.
-
-> You can choose to complete this in the portal. If you have more time then automate.
-
 ## Success criteria
 
 Show the proctor:
 
-1. Resource group name, location, tags and resources
-1. Policy assignments
-1. RBAC assignment for *Azure Arc Admins*
+1. the resource group name, location, tags and resources
+1. the RBAC assignment for *Azure Arc Admins*
+1. your tag inheritance policy assignments
 
 ## Resources
 
-* <https://docs.microsoft.com/azure/role-based-access-control/built-in-roles>
-* <https://docs.microsoft.com/en-us/azure/azure-arc/servers/onboard-service-principal>
+* <https://learn.microsoft.com/azure/role-based-access-control/built-in-roles>
+* <https://learn.microsoft.com/azure/azure-arc/servers/onboard-service-principal>
+* <https://learn.microsoft.com/azure/templates/microsoft.authorization/policyassignments?pivots=deployment-language-bicep>
+* <https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_policy_assignment>
 
-## Next up
+## Next
 
-We have on prem servers and a target environment. Let's onboard the linux VMs.
+In this lab you assigned a few more resources and policies. A combination of the Azure portal and CLI were used, but you could automate using Bicep or Terraform. Remember that policy initiatives were previously named policy sets.
+
+In the next lab you will look at the Azure Monitor Agent and enable VM Insights via policy.

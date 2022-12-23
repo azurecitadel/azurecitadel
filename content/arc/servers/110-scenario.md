@@ -1,6 +1,6 @@
 ---
 title: Scenario
-description: "Your customer, World Wide Importers, would like a small proof of concept before moving forward with a larger Azure Arc project. Get the background and their initial requirements."
+description: "Your customer, Wide World Importers, would like a small proof of concept before moving forward with a larger Azure Arc project. Get the background and their initial requirements."
 slug: scenario
 layout: single
 draft: false
@@ -10,7 +10,7 @@ menu:
     identifier: arc-servers-scenario
 series:
  - arc-servers
-weight: 120
+weight: 110
 ---
 
 ## Introduction
@@ -21,9 +21,9 @@ The company also has a sizeable on prem estate which is mainly virtual machines 
 
 The imperative is to move to a more elegant hybrid management and operations model. The plan is to merge the teams and upskill those who have been working purely with the on prem systems.
 
-You have been tasked to help work with them on a pilot of a few Windows and Linux (Ubuntu) servers to evaluate how the hybrid model could work from a deployment, configuration and management perspective, and whether there are opportunities to move away from some of the legacy management tooling. The outcome of the pilot will determine how the teams will initially work and scale from the small number of servers in the pilot to the wider estate.
+You have been tasked to help work with them on a pilot of a few POC Windows and Linux (Ubuntu) servers to evaluate how the hybrid model could work from a deployment, configuration and management perspective, and whether there are opportunities to move away from some of the legacy management tooling. The outcome of the pilot will determine how the teams will initially work and scale from the small number of servers in the pilot to the wider estate.
 
-World Wide Importers wishes to adhere to the Azure Landing Zones within the Cloud Adoption Framework. Also included in the POC requirement
+Wide World Importers wishes to adhere to the Azure Landing Zones within the Cloud Adoption Framework. Also included in the POC requirement
 
 * use Azure Monitor Agent for logs and metrics
 * evaluate the Automanage service
@@ -46,10 +46,11 @@ Go to [aka.ms/adopt/hybrid](https://aka.ms/adopt/hybrid) for a fuller set of Clo
 
 ## Next up
 
-The next three labs will cover target environment preparation:
+The next few labs will cover target environment preparation:
 
-1. Azure Landing Zones
+1. Default deployment of an Azure Landing Zone
 1. Additional policy assignments for Azure Arc-enabled Servers
+1. Custom policy creation for additional extension installation
 1. Target resource group and service principal for onboarding
 
-Let's start with a vanilla deployment of the Azure Landing Zones.
+Let's start with the default deployment of the Azure Landing Zones.

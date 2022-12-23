@@ -1,6 +1,6 @@
 ---
 title: "Scale Onboarding for Linux"
-description: "Onboarding multiple Linux servers with a service principal, then connecting with the azcmagent."
+description: "Use a service principal and Bash script to onboard a linux VM and install the azcmagent."
 slug: linux
 layout: single
 draft: false
@@ -17,11 +17,13 @@ weight: 130
 
 There are a number of ways to onboard VMs at scale. Some are detailed in the [Azure docs for Arc](https://aka.ms/AzureArcDocs) and there are more still in the [Azure Arc Jumpstart](https://azurearcjumpstart.io/azure_arc_jumpstart/azure_arc_servers/).
 
-For the linux VMs in this lab, we will [use the portal](https://docs.microsoft.com/en-gb/azure/azure-arc/servers/onboard-service-principal#generate-the-installation-script-from-the-azure-portal) to generate a script which can then be used on multiple servers.
+For the first linux VM in this lab, we will [use the portal](https://docs.microsoft.com/en-gb/azure/azure-arc/servers/onboard-service-principal#generate-the-installation-script-from-the-azure-portal) to generate a script which **can then be used on multiple servers**.
 
 This is a good fit with linux VMs as the on prem linux admins will usually have their own preferred tooling for remote execution of scripts on multiple hosts. It could be simple scripted sftp and ssh commands, or something more industrial such as Ansible, Chef, Puppet, Salt etc.
 
 ## Handover
+
+**TODO: Picture with two people - script generation, script running.**
 
 Providing the generated script and service principal credentials to others for execution is not considered a security issue.
 
@@ -29,11 +31,11 @@ The very limited RBAC role given to the service principal is only capable of onb
 
 This lab will emulate that script handover as it is closer to the workflow you would see in a professional services engagement.
 
-If you are working as a team then ensure that the script generation and execution are done by different people.
+**If you are working as a team then ensure that the script generation and execution are done by different people.**
 
 ## Script generation
 
-**Your role is to create a working script for the linux admins to use.**
+**As the cloud consultant, your role is to create a Bash script for the linux admins.**
 
 * Provide a generated script that can be executed on multiple servers
 * Ensure the script uses the service principal that was created in the last lab
@@ -50,16 +52,12 @@ If you are working as a team then ensure that the script generation and executio
 
 ## Onboard the linux VMs
 
-**As a linux admin, you will run the provided script on each of the VMs.**
+**As a linux admin, you will run the provided script on the first of the linux VMs.**
 
 On each on prem linux server:
 
 * Create a local script on each server called arc.sh
 * Run the arc.sh script as root, e.g. `sudo sh arc.sh`
-
-If you have used the default variables with the terraform repo then you will be using the Bastion service to connect:
-
-![Bastion](/arc/servers/images/bastion.png)
 
 ## Verify the VMs are onboarded
 

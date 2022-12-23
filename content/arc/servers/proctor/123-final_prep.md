@@ -50,6 +50,14 @@ az role assignment create --assignee $objectId --resource-group arc_pilot --role
 
 If they cannot create security groups then each person should get assigned. They may choose Contributor instead, but this is also a test of least privilege so the specified role is more apt.
 
+## Empty groups
+
+```bash
+az ad group create --display-name "Security Operations Center" --mail-nickname "soc"
+az ad group create --display-name "Cost Management" --mail-nickname "cost_management"
+az ad group create --display-name "Linux App Dev" --mail-nickname "linux_app_dev"
+```
+
 ## Azure Monitor Workspace
 
 ```bash
@@ -84,6 +92,9 @@ Azure AD Group retained separate
 
 ```bash
 az ad group create --display-name "Azure Arc Admins" --mail-nickname "azurearcadmins"
+az ad group create --display-name "Security Operations Center" --mail-nickname "soc"
+az ad group create --display-name "Cost Management" --mail-nickname "cost_management"
+az ad group create --display-name "Linux App Dev" --mail-nickname "linux_app_dev"
 objectId=$(az ad group show --group "Azure Arc Admins" --query objectId --output tsv)
 az role assignment create --assignee $objectId --resource-group arc_pilot --role "Azure Connected Machine Resource Administrator"
 ```

@@ -3,7 +3,7 @@ title: "Azure Automanage"
 description: "Use the Azure Automanage service to create a management baseline for the connected machines, enabling update management and inventory. Or use the services individually."
 slug: automanage
 layout: single
-draft: false
+draft: true
 menu:
   side:
     parent: arc-servers
