@@ -10,7 +10,7 @@ menu:
     identifier: arc-servers-assign
 series:
  - arc-servers
-weight: 125
+weight: 135
 ---
 
 ## Introduction
@@ -37,7 +37,7 @@ We will look more closely at Microsoft Defender for Cloud and Microsoft Defender
 
 * Assign the two individual policies
 * Assign the MDE agent deployment initative
-* Use automation to assign -  not the portal
+* Use automation to assign - not the portal
 
 It is up to you whether you use the CLI, PowerShell, REST, ARM, Bicep or Terraform. You'll find links to the quickstarts [below](#resources).
 

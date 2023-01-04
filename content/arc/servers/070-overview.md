@@ -10,7 +10,7 @@ menu:
     identifier: arc-servers-overview
 series:
  - arc-servers
-weight: 115
+weight: 070
 ---
 
 ## Setup

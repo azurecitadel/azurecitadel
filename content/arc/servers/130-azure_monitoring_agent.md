@@ -10,7 +10,7 @@ menu:
     identifier: arc-servers-ama
 series:
  - arc-servers
-weight: 124
+weight: 130
 ---
 
 ## Introduction
@@ -60,6 +60,8 @@ The default policy assignments continue to deploy the legacy agents whilst some 
     The *dataCollectionRuleName* parameter value will default to `ama-vmi-default`.
 
     The definition will prefix the *dataCollectionRuleName* with `MSVMI-` and suffix it with `-dcr`, so the default DCR name will be `MSVMI-ama-vmi-default-dcr`.
+
+    The
 
 {{< flash >}}
 ⚠️ Don't deploy the policy initiative via the portal even though that would be quicker.

@@ -2,7 +2,7 @@
 title: "Azure Automanage"
 description: "Use the Azure Automanage service to create a management baseline for the connected machines, enabling update management and inventory. Or use the services individually."
 layout: single
-draft: false
+draft: true
 series:
  - arc-servers-hack-proctor
 weight: 140

@@ -1,6 +1,6 @@
 ---
 title: Arc Pilot resource group
-description: "Create a service principal for onboarding, plus a few resources and tag inheritance policies."
+description: "Create a target resource group, plus a few resources and tag inheritance policies."
 slug: arc_pilot
 layout: single
 draft: false
@@ -10,12 +10,12 @@ menu:
     identifier: arc-servers-arc_pilot
 series:
  - arc-servers
-weight: 123
+weight: 125
 ---
 
 ## Introduction
 
-In this preparation lab you will create the `arc_pilot` resource group, plus a service principal for the onboarding scripts. The service principal must have the *Azure Connected Machine Onboarding* role.
+In this preparation lab you will create the `arc_pilot` resource group. You will be onboarding your on prem VMs into this  resource group later in the hack.
 
 You'll also add some tagging inheritance policies and a couple of (optional) security groups in Azure Active Directory.
 
@@ -32,25 +32,6 @@ The last section covers
     ```bash
     az group create --name arc_pilot --location westeurope --tags datacentre="Azure Citadel" city=Reading
     ```
-
-1. Grab the resource group id
-
-    ```bash
-    rgId=$(az group show --name arc_pilot --query id --output tsv)
-    ```
-
-
-## Service principal
-
-1. Create a service principal with the *Azure Connected Machine Onboarding* role
-
-    ```bash
-    az ad sp create-for-rbac --name arc_pilot --role "Azure Connected Machine Onboarding" --scopes $rgId
-    ```
-
-    ⚠️ Make sure that you take a copy of the JSON output as it includes the clientId/appId and the clientSecret/password.
-
-    > The portal will look for service principals with the *Azure Connected Machine Onboarding* role when generating scripts.
 
 ## Azure Arc Admins
 

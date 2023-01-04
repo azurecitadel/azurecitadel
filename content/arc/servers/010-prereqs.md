@@ -12,7 +12,7 @@ series:
  - arc-servers
 aliases:
  - /arc/prereqs
-weight: 105
+weight: 010
 ---
 
 ## Introduction
@@ -32,6 +32,8 @@ The hack is designed for partners who want to understand how they can standardis
 It is possible to complete the whole hack using nothing but the **Azure portal** and **Cloud Shell**? Well yes, just about, but that is not our recommendation.
 
 Why not? You will find a few limitations with Cloud Shell as you work through the labs. The Cloud Shell sessions are ephemeral, and are subjecy to timeouts and disconnections. The public IP address for the containers will change. (These need to be added to firewalls for access to VMs and Key Vaults.)
+
+If you are using Cloud Shell then use the Bash experience (rather than PowerShell) for these labs. It is recommended to use a new tab with <https://shell.azure.com>, and make sure you're familiar with the [Monaco editor](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor).
 
 Therefore we we have a fuller config that we recommend for the hacks. Read on to get set up.
 

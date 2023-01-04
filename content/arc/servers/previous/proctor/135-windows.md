@@ -2,7 +2,7 @@
 title: "Scale Onboarding for Windows"
 description: "Onboarding multiple Windows servers using Windows Admin Center."
 layout: single
-draft: false
+draft: true
 series:
  - arc-servers-hack-proctor
 weight: 135

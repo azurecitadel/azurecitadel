@@ -3,7 +3,7 @@ title: "Scale Onboarding for Windows"
 description: "Onboarding multiple Windows servers using Windows Admin Center."
 slug: windows
 layout: single
-draft: false
+draft: true
 menu:
   side:
     parent: arc-servers

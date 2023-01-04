@@ -3,7 +3,7 @@ title: "Scale Onboarding for Linux"
 description: "Use a service principal and Bash script to onboard a linux VM and install the azcmagent."
 slug: linux
 layout: single
-draft: false
+draft: true
 menu:
   side:
     parent: arc-servers

@@ -2,7 +2,7 @@
 title: "Scale Onboarding for Linux"
 description: "Onboarding multiple Linux and WIndows servers with a service principal, then automate connecting with the azcmagent."
 layout: single
-draft: false
+draft: true
 series:
  - arc-servers-hack-proctor
 weight: 130

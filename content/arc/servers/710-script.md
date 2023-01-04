@@ -10,7 +10,7 @@ menu:
     identifier: arc-servers-script
 series:
  - arc-servers
-weight: 190
+weight: 710
 ---
 
 ## Introduction

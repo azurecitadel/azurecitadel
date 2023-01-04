@@ -10,7 +10,7 @@ menu:
     identifier: arc-servers-scenario
 series:
  - arc-servers
-weight: 110
+weight: 050
 ---
 
 ## Introduction

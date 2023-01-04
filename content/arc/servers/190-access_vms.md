@@ -1,26 +1,26 @@
 ---
-title: On prem VM access and code tunnels
-description: "Check you can access your Windows and Linux on prem virtual machines. Test out code tunnels."
-slug: on_prem_vms
+title: Access your on prem VMs
+description: "Check you can access your Windows and Linux on prem virtual machines. Plus additional info for Cloud Shell and Code Tunnels."
+slug: access_vms
 layout: single
 draft: false
 menu:
   side:
     parent: arc-servers
-    identifier: arc-servers-on_prem_vms
+    identifier: arc-servers-access_vms
 series:
  - arc-servers
-weight: 129
+weight: 190
 ---
 
 ## Introduction
 
-Before we start onboarding the on prem VMs, let's make sure you can access them successfully.
+Before we start onboarding the on prem VMs, let's make sure you can access them successfully. This page also has some additional info for using Cloud Shell and Code Tunnels for those of you who are not comfortable editing files on Linux using native editors such as vi or nano.
 
 {{< flash >}}
-This page only applies to Azure Arc partner hacks. If you are on a partner hack then you have been provided with three linux servers and three Windows servers. Check that your team has access to the server names plus the provided admin username and password.
+This page only applies to Azure Arc partner hacks. If you are on a partner hack then you have been provided with three Linux servers and three Windows servers. Check that your team has access to the server names plus the provided admin username and password.
 
-Not sure where to find the info? Ask your proctor!
+**Whoever successfully accesses the VMs will be considered the customer's on prem admin team for the next few onboarding labs.** If someone has been driving the creation of the target landing zone then this is an opportunity for someone else to take the wheel.
 {{< /flash >}}
 
 If you are just running through the materials yourself then you will need some servers to onboard. The recommendation is to use a demo cluster on prem, e.g. linux and windows guests running on VMware vSphere or Hyper-V. Or provision VMs in GCP or AWS.
@@ -74,11 +74,31 @@ You have been provided with an SSH key pair in the onprem_ssh_keys resource grou
 
     ![Successful SSH connection](/arc/servers/images/ssh.jpg)
 
-## Code Tunnels (optional)
+{{< flash >}}
+If you can access your Windows and Linux VMs and you are comfortable using the native editing tools, changing file permissions and runnning Bash and PowerShell scripts then you can move straight on to the onboarding labs.
 
-If you are proficient enough on Linux - able to create and edit files with vi or nano, change file permissions, run scripts etc. - then this section is not aimed at you and is optional.
+If you are not comfortable editing on Linux then the following sections on [Cloud Shell](#monaco-editor-in-cloud-shell) and [Code Tunnels](#code-tunnels) may help. (After all, these labs are not intended as a test of your Linux prowess.) Three is also a little [test script](#test-script-optional) so you can check.
+{{< /flash >}}
 
-If you are not comfortable on Linux then using code tunnels may make creating and running scripts a little simpler. (After all, these labs are not intended as a test of your Linux prowess.)
+## Monaco editor in Cloud Shell
+
+If you are using Cloud Shell (<https://shell.azure.com>) then the [Monaco editor](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor) is highly recommended. Note that the Cloud Shell has an icon for uploading files to your home directory.
+
+Type `code .` at the prompt to start up the editor for the current directory.
+
+![Monaco editor](/arc/servers/images/monaco_editor.png)
+
+* `CTRL`+`S` to save a file
+
+    Unsaved files have a large dot in the tab.
+
+    You will be prompted to enter a filename.
+
+* `CTRL`+`Q` to close the editor
+
+## Code Tunnels
+
+If you are working direct from your laptop (i.e. not on a Cloud Shell) and you are not comfortable on Linux then using code tunnels may make creating and running scripts a little simpler.
 
 > Note that code tunnels are unrelated to Azure Arc. This is a Visual Studio Code remote development feature.
 
@@ -148,15 +168,21 @@ This is only done once, but only take a minute or two per server.
 
     Note that the configured machine name has been remembered.
 
+    > 💡 Don't forget that Terminasl supports multiple tabs.
+
 1. Browser session
 
     Click on the link to use vscode across the tunnel.
 
     ![Browser](/arc/servers/images/code_tunnel-browser.png)
 
+You now have a useful Explorer on the left - `CTRL`+`SHIFT`+`E`, or **View | Explorer**. The Explorer supports file drag and drop.
+
+Open the integrated Terminal with `CTRL`+`'`, or **View | Terminal**.
+
 ### Code Tunnel in Visual Studio Code
 
-Alternatively you can also open the session in vscode. You may want to open a new window.
+Alternatively you can also open the session in the full Visual Studio Code client. You may want to open a new window.
 
 1. Start up the `code tunnel`
 1. Bring up the Command Palette (`Ctrl`+`SHIFT`+`P`, or View | Command Palette)
@@ -178,7 +204,6 @@ Alternatively you can also open the session in vscode. You may want to open a ne
 
 If you want to check that you can create and run a script then follow these steps.
 
-1. Create a directory, *archack*, in the explorer
 1. Create a file, test.sh
 1. Paste in the code block below
 
@@ -193,13 +218,7 @@ If you want to check that you can create and run a script then follow these step
     > Bash scripts usually have `#!/bin/bash` or `#!/usr/bin/env bash` on the first line. This is called the shebang.
 
 1. Save with `CTRL`+`S`
-1. Open the integrated Terminal (`CTRL`+`'`, or View | Terminal)
-1. Change directory
-
-    ```bash
-    cd ~/archack
-    ```
-
+1. Switch to the terminal
 1. Add execute permissions
 
     ```bash

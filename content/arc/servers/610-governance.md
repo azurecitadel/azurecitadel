@@ -10,7 +10,7 @@ menu:
     identifier: arc-servers-governance
 series:
  - arc-servers
-weight: 160
+weight: 610
 ---
 
 ## Introduction
