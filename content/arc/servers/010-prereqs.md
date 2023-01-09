@@ -21,7 +21,7 @@ It is important that you can hit the grounds running when you attend one of the 
 
 There will be a brief level set at the start of day one, but there is an assumption that you will have a core understanding of Azure Landing Zones and the Azure Arc hybrid capabilities. See the [Required reading](#required-reading) section for recommended links.
 
-The hack is designed for partners who want to understand how they can standardise their target landing zones for multiple customers with hybrid environments. There is a focus on multi-tenancy. scale andf automation and therefore the tooling is important. Whilst we understand that different people have different preferences in tooling, we have made a few assumptions to make effective use of the limited time, and that includes the use of bash commands to accelerate deployments. Check the Recommended
+The hack is designed for partners who want to understand how they can standardise their target landing zones for multiple customers with hybrid environments. There is a focus on multi-tenancy, scale and automation and therefore the tooling is important. Whilst we understand that different people have different preferences in tooling, we have made a few assumptions to make effective use of the limited time and that includes the use of bash commands to accelerate deployments. Check the Recommended
 
 {{< flash >}}
 ⚠️ Complete this page before you attend the hack.
@@ -31,7 +31,7 @@ The hack is designed for partners who want to understand how they can standardis
 
 It is possible to complete the whole hack using nothing but the **Azure portal** and **Cloud Shell**? Well yes, just about, but that is not our recommendation.
 
-Why not? You will find a few limitations with Cloud Shell as you work through the labs. The Cloud Shell sessions are ephemeral, and are subjecy to timeouts and disconnections. The public IP address for the containers will change. (These need to be added to firewalls for access to VMs and Key Vaults.)
+Why not? You will find a few limitations with Cloud Shell as you work through the labs. The Cloud Shell sessions are ephemeral, and are subject to timeouts and disconnections. The public IP address for the containers will change (these need to be added to firewalls for access to VMs and Key Vaults.)
 
 If you are using Cloud Shell then use the Bash experience (rather than PowerShell) for these labs. It is recommended to use a new tab with <https://shell.azure.com>, and make sure you're familiar with the [Monaco editor](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor).
 
