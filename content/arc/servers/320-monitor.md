@@ -1,6 +1,6 @@
 ---
 title: "Monitoring"
-description: "Configure the new Azure Monitor agent and Data Collection Rules. Optionally integrate with Azure Security Center and Azure Sentinel."
+description: "Configure the new Azure Monitor agent and Data Collection Rules. Optionally integrate with 'Microsoft Defender for Cloud' and Azure Sentinel."
 slug: monitor
 layout: single
 draft: false
@@ -85,9 +85,9 @@ Create an Azure Monitor Workbook showcasing your KQL queries. Feel free to use g
 
 ![Azure Monitor Workbook](/arc/servers/images/monitorWorkbook.png)
 
-## Integrate with Azure Security Center (optional)
+## Integrate with Microsoft Defender for Cloud (optional)
 
-* Enable Azure Security Center on your Azure Arc connected machines
+* Enable 'Microsoft Defender for Cloud' on your Azure Arc connected machines
 
 ## Integrate with Azure Sentinel (optional)
 
@@ -103,7 +103,7 @@ Screen share with your proctor to show that you achieved:
 
 Optional:
 
-1. Open Azure Security Center and view the Secure Score for your Azure arc connected machine
+1. Open 'Microsoft Defender for Cloud' and view the Secure Score for your Azure arc connected machine
 1. From Azure Sentinel, view collected events from your Azure Arc connected machine
 
 ## Resources
