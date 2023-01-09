@@ -15,11 +15,11 @@ weight: 070
 
 ## Landing Zone preparation
 
-Before onboarding your on prem servers as Az\ure Arc-enabled Servers, prepare your hybrid landing zone.
+Before onboarding your on prem servers as Azure Arc-enabled Servers, prepare your hybrid landing zone.
 
 ![Landing Zone preparation](/arc/servers/images/overview_prep.png)
 
-These are follow along labs to ensure that the environments are configured consistently.
+These are "follow along" labs to ensure that the environments are configured consistently.
 
 * Deploy a standard Azure Landing Zone
 * Create the Arc Pilot resource group with tagging policies and RBAC role assignments
@@ -28,11 +28,11 @@ These are follow along labs to ensure that the environments are configured consi
 
 ## Scale Onboarding
 
-THis is a simple split lab to mirror a common onboarding scenario.
+This is a simple split lab to mirror a common onboarding scenario.
 
 ![Scale Onboarding](/arc/servers/images/overview_onboard.png)
 
-* Create a service principal and generate scale onboarding scripts for the admins to use
+* Create a service principal and generate scale onboarding scripts for the server admins to use
 * As the server admins, run the scripts to complete onboarding
 
 ## Management & Governance
@@ -45,23 +45,23 @@ This is the core of the hack, with a number of challenge labs to explore.
 * Workbooks
 * Monitoring with AMA and DCRs
 * Security integration
-* Use SSH for both Windows and Linux
-* Deploy Windows Admin Center in the portal
-* Demonstrate guest configuration policies for hybrid machines
+* SSH for both Windows and Linux
+* Windows Admin Center in the portal
+* Guest Configuration policies for hybrid machines
 
 {{< flash >}}
-This is the point we'd like to see all attendees reach.
+This is the point we'd like to see all attendees reach for hack completion.
 {{< /flash >}}
 
 ## Stretch labs
 
-Additional set of extension focused labs for those who've moved through the core labs quickly.
+This is an additional set of optional standalone labs for those who've moved through the core labs quickly. They are focused on additional extension functionality. Order is unimportant.
 
 ![Stretch labs](/arc/servers/images/overview_stretch.png)
 
 * Deploy a script to multiple servers using Custom Script Extension
 * Push a CA certificate into Key Vault and configure VMs to watch for cert rotation
-* Integrate the azcmagent's managed identity to show how to integrate with ARM, Key Vault and PaaS services
+* Integrate the managed identity with ARM, Key Vault and PaaS services
 
 ## Next
 
