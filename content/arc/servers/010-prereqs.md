@@ -19,13 +19,25 @@ weight: 010
 
 It is important that you can hit the grounds running when you attend one of the Azure Arc partner hacks.
 
+{{< flash >}}
+If you are attending a UK Azure Arc Partner Hack:
+
+* you will be invited into a tenant for the hack
+* You will also be Owner on a new Azure Pass subscription
+* resources have been pre-configured
+* details for connecting to your "on prem" servers will be provided
+
+**What do you need to do?**:
+
+* make sure you have the right tooling
+* have done the pre-reading
+
+⚠️ Please complete this page before you attend the hack!
+{{< /flash >}}
+
 There will be a brief level set at the start of day one, but there is an assumption that you will have a core understanding of Azure Landing Zones and the Azure Arc hybrid capabilities. See the [Required reading](#required-reading) section for recommended links.
 
-The hack is designed for partners who want to understand how they can standardise their target landing zones for multiple customers with hybrid environments. There is a focus on multi-tenancy, scale and automation and therefore the tooling is important. Whilst we understand that different people have different preferences in tooling, we have made a few assumptions to make effective use of the limited time and that includes the use of bash commands to accelerate deployments. Check the Recommended
-
-{{< flash >}}
-⚠️ Complete this page before you attend the hack.
-{{< /flash >}}
+The hack is designed for partners who want to understand how they can standardise their target landing zones for multiple customers with hybrid environments. There is a focus on multi-tenancy, scale and automation and therefore the tooling is important. Whilst we understand that different people have different preferences in tooling, we have made a few assumptions to make effective use of the limited time and that includes the use of bash commands to accelerate deployments.
 
 ## Minimal config
 
@@ -166,6 +178,10 @@ The hack will assume that you have a base understanding of Azure, Azure Arc, the
 
 ## Next
 
-⚠️ For those of you attending an Azure Arc for Servers partner hack then you should now be good to go. We have pre-configured everything else for you so that you can make the best use of your time.
+{{< flash >}}
+For those of you attending an Azure Arc partner hack then you should now be good to go. We'll see you when the hack starts.
 
-We'll see you when the hack starts. The kick off meeting will be in the General channel within the dedicated *Azure Arc for Servers partner hack* team.
+The kick off meeting will be in the General channel within the dedicated *Azure Arc Partner Hack* team.
+
+⚠️ Don't read the next lab page until instructed!
+{{< flash >}}

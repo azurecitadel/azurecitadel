@@ -2,12 +2,13 @@
 title: Final prep
 description: "Create a target resource group and a service principal with the \"Azure Connected Machine Onboarding\" role."
 layout: single
-draft: false
+draft: true
 series:
  - arc-servers-hack-proctor
 weight: 123
 url: /arc/servers/final_prep/proctor
 ---
+
 
 ## Resource Group
 

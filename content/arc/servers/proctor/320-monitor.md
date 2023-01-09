@@ -5,13 +5,19 @@ layout: single
 draft: false
 series:
  - arc-servers-hack-proctor
-weight: 150
+weight: 320
 url: /arc/servers/monitor/proctor
 ---
+
+{{< flash >}}
+**TO BE UPDATED**
+{{< /flash >}}
 
 ## Azure Monitoring Agent (AMA)
 
 * Deploy the new Azure Monitoring Agent to our virtual machines
+
+    **Should be already done by the policy, but if not...***
 
     To be installed via Extension - either via PowerShell, CLI or ARM template:
     [Install the Azure Monitor agent (preview)](https://docs.microsoft.comazure/azure-monitor/agents/azure-monitor-agent-install)

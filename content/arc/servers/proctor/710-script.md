@@ -5,7 +5,7 @@ layout: single
 draft: false
 series:
  - arc-servers-hack-proctor
-weight: 190
+weight: 710
 url: /arc/servers/script/proctor
 ---
 

@@ -23,7 +23,7 @@ In this challenge, we will deploy the new agent. After the onboarding process, w
 
 ## Azure Monitor Agent (AMA)
 
-* Deploy the Azure Monitoring Agent to our virtual machines via your preferred CLI
+* Confirm the Azure Monitoring Agent is on our virtual machines via the Extensions pane
 * Confirm the virtual machine's AMA agents are communicating to an Azure Monitor workspace
 
   > Hint: query for the _heartbeat_

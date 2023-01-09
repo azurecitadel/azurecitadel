@@ -15,7 +15,12 @@ weight: 070
 
 ## Setup
 
-TODO: ADD IN VISIO
+
+
+## References
+
+* <https://learn.microsoft.com/en-gb/azure/azure-arc/servers/plan-evaluate-on-azure-virtual-machine>
+* <https://github.com/terraform-azurerm-examples/arc-onprem-servers>
 
 ## Next
 
