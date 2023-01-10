@@ -29,7 +29,7 @@ Wide World Importers have asked for some additional policy and policy initiative
 | \[Preview]: Deploy Microsoft Defender for Endpoint agent | Security Center | Initiative |
 ||||
 
-The Microsoft Defender for Endpoint (MDE) agent has hisatorically been a standalone agent install and was seperately licenced. The direction of travel is towards Azure Arc being used as the framework for agent extensibility and with billing simplified through the Azure's Cost Management amd Billing mechanisms.
+The Microsoft Defender for Endpoint (MDE) agent has historically been a standalone agent install and was separately licenced. The direction of travel is towards Azure Arc being used as the framework for agent extensibility and with billing simplified through the Azure's Cost Management and Billing mechanisms.
 
 We will look more closely at Microsoft Defender for Cloud and Microsoft Defender for Endpoint in later labs.
 
