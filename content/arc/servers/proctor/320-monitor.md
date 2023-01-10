@@ -15,7 +15,7 @@ url: /arc/servers/monitor/proctor
 
 ## Azure Monitoring Agent (AMA)
 
-* Deploy the new Azure Monitoring Agent to our virtual machines
+* Confirm the Azure Monitoring Agent is on our virtual machines via the Extensions pane
 
     **Should be already done by the policy, but if not...***
 
@@ -126,7 +126,9 @@ You are part of a Linux application team.
 
 ## Dashboarding
 
-As you go through this section, note the queries you use.
+As you go through this section, note the queries you use; as we are using solutions not enabled yet for Azure Monitoring Agent, the focus is on the Microsoft Monitoring Agent (MicrosoftMonitoringAgent and OmsAgentForLinux).
+
+**UPDATE FOR AMA?**
 
 ### Log Management
 Produce a query to highlight which machines are reporting to the Log Analytics Workspace.
@@ -164,9 +166,9 @@ ComplianceState=tostring(properties.complianceState)
 
 ```
 resources
-| where type == "microsoft.compute/virtualmachines/extensions"
-| extend computerId = strcat("/",strcat_array(array_slice(todynamic(split(id,"/")),1,8),"/"))
-| summarize countif(name=="MicrosoftMonitoringAgent") by computerId
+| where type == "microsoft.hybridcompute/machines/extensions"
+| extend vm=tostring(split(id,"/")[8])
+| summarize countif(name in ("MicrosoftMonitoringAgent","OMSAgentForLinux")) by vm
 ```
 
 ### Azure Monitor Workbook
