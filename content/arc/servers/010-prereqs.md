@@ -73,6 +73,9 @@ This has richer functionality, is stable for long sessions and will use your nor
     ```
 
 * Install [Windows Terminal](https://aka.ms/terminal)
+
+    If you cannot install from the Microsoft Store then follow the [alternative instructions](https://learn.microsoft.com/windows/terminal/install).
+
 * Open the Ubuntu profile in **Windows Terminal**
 
     You will be prompted to [create a local username and password](https://learn.microsoft.com/windows/wsl/setup/environment#set-up-your-linux-username-and-password) on first use.
