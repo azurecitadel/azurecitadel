@@ -1,6 +1,6 @@
 ---
 title: "Hack Overview"
-description: "Brief overview of the hack flow"
+description: "Brief overview covering the flow of labs within this hack."
 slug: overview
 layout: single
 draft: false

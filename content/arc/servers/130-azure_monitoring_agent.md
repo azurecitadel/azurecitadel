@@ -61,7 +61,7 @@ The default policy assignments continue to deploy the legacy agents whilst some 
 
     The definition will prefix the *dataCollectionRuleName* with `MSVMI-` and suffix it with `-dcr`, so the default DCR name will be `MSVMI-ama-vmi-default-dcr`.
 
-    The
+    The *enableProcessesAndDependencies* boolean defaults to *false*.
 
 {{< flash >}}
 ⚠️ Don't deploy the policy initiative via the portal even though that would be quicker.
@@ -71,7 +71,7 @@ We want to know how to automate this so will step through the process as an exam
 
 ## Log Analytics workspace
 
-When you looked at the policy initiative, the only required partameter values was a workspace ID.
+When you looked at the policy initiative, the only required parameter values was a workspace ID.
 
 Create a workspace in the arc_pilot resource group.
 
@@ -137,8 +137,14 @@ Return to the policy definition view and we'll do a **partial** deployment to vi
       --mi-system-assigned --location westeurope \
       --identity-scope $scope \
       --role "Azure Connected Machine Resource Administrator" \
-      --params "{\"logAnalyticsWorkspace\": {\"value\":\"$workspace_id\"}}"
+      --params "{\"logAnalyticsWorkspace\": {\"value\":\"$workspace_id\"}, \"enableProcessesAndDependencies\": {\"value\": true}}"
     ```
+
+    {{< flash >}}
+Setting the *enableProcessesAndDependencies* boolean to *true* installs the Dependency agent.
+
+The policies automatically set the agent's *enableAMA* property to *true*.
+{{< /flash >}}
 
     You can only assign a single role when creating policy assignments via the Azure CLI.
 
@@ -203,6 +209,6 @@ Show the proctor:
 
 ## Next
 
-In this lab you assigned a few more resources and policies. A combination of the Azure portal and CLI were used, but you could automate using Bicep or Terraform. Remember that policy initiatives were previously named policy sets.
+The policy initiative is a great way to deploy the new Azure Monitoring Agent at scale, and you can also
 
 In the next lab you will assign more policy initiatives for deploying additional extensions to hybrid machines.
