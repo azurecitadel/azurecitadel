@@ -122,7 +122,7 @@ This has richer functionality, is stable for long sessions and will use your nor
     az login
     ```
 
-    The familiar browser authantication workflow should start. (The Azure CLI documentation will also open up.)
+    The familiar browser authentication workflow should start. (The Azure CLI documentation will also open up.)
 
 * Show your current subscription context
 
@@ -164,11 +164,11 @@ OK, your system is good to go!
 
 ## Required reading
 
-The hack will assume that you have a base understanding of Azure, Azure Arc, the Cloud Adoption Framework and Azure Landing Zones for hybrid and multicloud environments.
+The hack will assume that you have a base understanding of Azure, Azure Arc, the Cloud Adoption Framework and Azure Landing Zones for hybrid and multi-cloud environments.
 
 1. [Azure Arc product page](https://azure.microsoft.com/services/azure-arc/#product-overview)
 1. [Azure Arc-enabled servers overview](https://docs.microsoft.com/azure/azure-arc/servers/overview) (including the video)
-1. Explore the [hybrid and multicloud scenario](https://aka.ms/adopt/hybrid) for the Cloud Adoption Framework
+1. Explore the [hybrid and multi-cloud scenario](https://aka.ms/adopt/hybrid) for the Cloud Adoption Framework
 
 ## References
 

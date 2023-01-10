@@ -26,7 +26,6 @@ You have been tasked to help work with them on a pilot of a few POC Windows and 
 Wide World Importers wishes to adhere to the Azure Landing Zones within the Cloud Adoption Framework. Also included in the POC requirement
 
 * use Azure Monitor Agent for logs and metrics
-* evaluate the Automanage service
 * demonstrate that on prem governance can be enabled
 
 ## Foundation
@@ -35,7 +34,7 @@ When you are onboarding VMs at scale then it makes sense to prepare the target e
 
 There is an excellent page and 10 minute video on Azure Docs called [Plan and deploy Azure Arc-enabled servers](https://docs.microsoft.com/azure/azure-arc/servers/plan-at-scale-deployment). Watch the video when you get the opportunity.
 
-Go to [aka.ms/adopt/hybrid](https://aka.ms/adopt/hybrid) for a fuller set of Cloud Adoption Framework documentation for hybrid and multicloud.
+Go to [aka.ms/adopt/hybrid](https://aka.ms/adopt/hybrid) for a fuller set of Cloud Adoption Framework documentation for hybrid and multi-cloud.
 
 ## Resources
 

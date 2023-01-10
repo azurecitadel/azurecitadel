@@ -36,7 +36,7 @@ We will look more closely at Microsoft Defender for Cloud and Microsoft Defender
 ## Challenge
 
 * Assign the two individual policies
-* Assign the MDE agent deployment initative
+* Assign the MDE agent deployment initiative
 * Use automation to assign - not the portal
 
 It is up to you whether you use the CLI, PowerShell, REST, ARM, Bicep or Terraform. You'll find links to the quickstarts [below](#resources).
@@ -45,7 +45,7 @@ It is up to you whether you use the CLI, PowerShell, REST, ARM, Bicep or Terrafo
 
 If you have time
 
-* add the two individual policies into a custom policy initative and assign that instead
+* add the two individual policies into a custom policy initiative and assign that instead
 
 Policy initiatives are more flexible than multiple individual policies as you can add new policies to them. And they make it easier to report and manage from a compliancy perspective.
 
@@ -56,7 +56,7 @@ Policy initiatives are more flexible than multiple individual policies as you ca
 Show your proctor that you have:
 
 * assigned the policies to check that the MMA is *not* installed
-* assigned the policy initative to install the MDE
+* assigned the policy initiative to install the MDE
 
 Stretch:
 
@@ -84,7 +84,7 @@ Show how you:
 
 ## Next Steps
 
-OK, you should now have a target environment with a decent starting set of policies and initatives, Azure AD groups, RBAC role assignments and some default resources.
+OK, you should now have a target environment with a decent starting set of policies and initiatives, Azure AD groups, RBAC role assignments and some default resources.
 
 It is preferable to configure the target environment before onboarding VMs as the policy engine will take care of extension installation and configuration. Remediating non-compliant resources is a slower process.
 
@@ -92,7 +92,7 @@ It is preferable to configure the target environment before onboarding VMs as th
 Key questions:
 
 * what is your preferred automation for deploying Azure Landing Zones for customers migrating to Azure?
-* what will you offer as a default suggested target environment for your customer's hybrid and multicloud estates?
+* what will you offer as a default suggested target environment for your customer's hybrid and multi-cloud estates?
 * what supporting collateral will hybrid engagements need for
   * go to market
   * customer workshops

@@ -15,7 +15,7 @@ weight: 520
 
 ## Introduction
 
-It is now possible to run Windows Admin Center in the Azure Portal with no need to install any gateway servers in your hybrid or multicloud locations. Wide Wold Importers would like to see what functionality is available.
+It is now possible to run Windows Admin Center in the Azure Portal with no need to install any gateway servers in your hybrid or multi-cloud locations. Wide Wold Importers would like to see what functionality is available.
 
 ## Challenge
 
