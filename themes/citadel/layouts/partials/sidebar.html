@@ -1,6 +1,6 @@
 <div class="d-none"></div>
 
-<div class="d-none d-lg-block bg-primary height-fit overflow-y-scroll pb-5 border-right col-4" style="max-width: 310px; height: -webkit-fill-available">
+<div class="d-none d-lg-block bg-primary height-fit overflow-y-scroll pb-5 border-right col-4" style="max-width: 310px; height: 100%">
 
   <div class="d-flex flex-items-center p-4 color-bg-default" style="z-index: 3" id="citadel-logo" role="banner">
     <a href="{{.Site.BaseURL }}" class="color-fg-default" aria-hidden="true" tabIndex="-1">
@@ -50,7 +50,7 @@
             <li class="ActionList-item ActionList-item--subItem {{ if and $isCurrent (not .HasChildren) }}ActionList-item--navActive{{ end }} {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }}" aria-haspopup="true">
               {{ .Pre }}
               <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
-                <summary class="outline-none">                  
+                <summary class="outline-none">
                   {{ if .HasChildren }}
                   <div class="ActionList-content">
                     <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
