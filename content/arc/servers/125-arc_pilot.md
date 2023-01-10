@@ -58,6 +58,12 @@ The tag inheritance policies may be deployed at a higher scope in production, e.
 
 ⚠️The values for the platform and cluster tags will be configured when using the azcmagent to onboard the hybrid VMs.
 
+1. Grab the resource group ID
+
+    ```bash
+    rgId=$(az group show --name arc_pilot --query id --output tsv)
+    ```
+
 1. Assign the tag inheritance for datacentre
 
     ```bash
