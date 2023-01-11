@@ -64,6 +64,7 @@ Screen share with your proctor to show your
 ## Resources
 
 * <https://aka.ms/hybridmachineportal>
+* <https://aka.ms/mustlearnkql>
 * <https://learn.microsoft.com/azure/governance/resource-graph/first-query-portal>
 * <https://learn.microsoft.com/azure/azure-arc/servers/resource-graph-samples>
 * <https://learn.microsoft.com/azure/data-explorer/kusto/concepts/>
