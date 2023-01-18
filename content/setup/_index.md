@@ -24,96 +24,97 @@ If you do not have a GitHub ID already then sign up.
 
 If you are working on MacOS or a Linux distro then you can just use Bash in your preferred terminal. Skip the WSL step and install the [binaries](#binaries).
 
-## Windows 10
+## Windows 10 / 11
 
 We recommend using the **Windows Subsystem for Linux** (WSL) and installing the binaries into linux rather than at the Windows OS level. This page assumes that you will take that route.
 
-> If your personal preference is to work within Windows and to use PowerShell then we understand. You can install both [git](https://gitforwindows.org/) and [az](https://docs.microsoft.com/cli/azure/install-azure-cli-windows?tabs=azure-cli) at the OS level instead and then skip to [vscode](#visual-studio-code). However you should be aware that you won't be able to use some of the examples in the labs as they are based on Ubuntu 20.04 running in WSL and use pipelines in Bash.
+> If your personal preference is to work within Windows and to use PowerShell then we understand. You can install both [git](https://gitforwindows.org/) and [az](https://docs.microsoft.com/cli/azure/install-azure-cli-windows?tabs=azure-cli) at the OS level instead and then skip to [vscode](#visual-studio-code). However you should be aware that you won't be able to use some of the examples in the labs as they are based on Ubuntu 22.04 running in WSL and use pipelines in Bash.
 
-* [Install Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10)
+* [Install Windows Subsystem for Linux](https://learn.microsoft.com/en-gb/windows/wsl/install)
 
-If you have no preference on a distro then we recommend [Ubuntu 20.04](https://www.microsoft.com/p/ubuntu/9nblggh4msv6). Where the prereqs mention installing into Ubuntu then this assumes WSL.
+    Run as Administrator.
+
+    ```powershell
+    wsl --install
+    ```
+
+    You will be guided to set up a local admin ID and password.
 
 ## Binaries
 
-Install
+* Install
+  * git
+  * jq
+  * tree
+  * stress
 
-* git
-* jq
-* tree
-* stress
+  E.g., for Ubuntu/Debian:
 
-E.g., for Ubuntu/Debian:
+  ```bash
+  sudo apt update && sudo apt install jq git tree stress
+  ```
 
-```bash
-sudo apt update && sudo apt install jq git tree stress
-```
+* Checks
 
-> Includes WSL. Use equivalent yum or zypper commands on other distros.
+    ```bash
+    git
+    jq --help
+    tree ~
+    stress
+    ```
 
-Checks:
-
-```bash
-git
-jq --help
-tree ~
-stress
-```
-
-> You may want to add `export JQ_COLORS="1;90:0;35:0;35:0;91:0;33:1;37:1;37"` to your ~/.bashrc file to improve the colours.
+    > You may want to add `export JQ_COLORS="1;90:0;35:0;35:0;91:0;33:1;37:1;37"` to your ~/.bashrc file to improve the colours.
 
 ## Azure CLI
 
-You will need the Azure CLI.
-
 * [Install the Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli-linux?pivots=apt)
 
-Checks:
+* Checks:
 
-```bash
-az version
-az login
-az account show --output jsonc
-az account show --output json | jq -r .user.name
-```
+    ```bash
+    az version
+    az login
+    az account show --output jsonc
+    az account show --output json | jq -r .user.name
+    ```
 
 ## Windows Terminal
 
-For standard CLI use we favour the Windows Terminal on Windows 10. It will pick up on all of your WSL distros as well as creating profiles for Command Prompt, PowerShell and Cloud Shell.
+For standard CLI use we favour the Windows Terminal on Windows. It will pick up on all of your WSL distros as well as creating profiles for Command Prompt, PowerShell and Cloud Shell.
 
-* [Install Windows Terminal](https://docs.microsoft.com/windows/terminal/get-started)
+* [Install Windows Terminal](https://aka.ms/terminal)
+
+    Refer to the [Windows Terminal documentation] if you wish to customise.
 
 ## Visual Studio Code
 
 Visual Studio Code (vscode) is assumed as our default IDE.
 
 * [Install Visual Studio Code](https://code.visualstudio.com/download)
+* Install the [Remote Development extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+  * Open extensions (`CTRL`+`SHIFT`+`X`)
+  * Search `ms-vscode-remote.vscode-remote-extensionpack`
+  * Install
+* Checks
+  * Open Ubuntu in Windows Terminal
+  * Open vscode for the current directory
 
-## Remote Development in WSL
+      ```bash
+      code .
+      ```
 
-For Windows 10 WSL users only. All others can [skip](#visual-studio-code-extensions).
+    The vscode engine will be automatically downloaded upon first run, and then Visual Studio Code will open on the desktop.
 
-Integrate vscode with WSL so you can use the application as a front end which connects to the vscode engine running. Install the Remote Development for WSL and then open from the subsystem.
-
-* Install the Remote Development extension pack
-  * `CTRL`+`SHIFT`+`X` to bring up Extensions
-  * Search on `ms-vscode-remote.vscode-remote-extensionpack` and install
-* Close vscode
-
-* Open Ubuntu in Windows Terminal
-* Type `code .` to open up vscode with the extension, installing the vscode-engine.
-
-Check:
-
-* Is "WSL: \<distro>" shown at the bottom left?
-* Open Source Control (`CTRL`+`SHIFT`+`G`)
-* Click on the ellipsis (*...*) at the top of the sidebar
-* Click on *Show Git Output*
-* Does the top of the output look similar to this?
+  * Is "WSL: \<distro>" shown at the bottom left?
+  * Open Source Control (`CTRL`+`SHIFT`+`G`)
+  * Click on the ellipsis (*...*) on the Source Control sidebar
+  * Click on *Show Git Output*
+  * Does the top of the output look similar to this?
 
     ```text
-    Looking for git in: git
-    Using git 2.25.1 from git
+    [info] Log level: Info
+    [info] Validating found git in: "git"
+    [info] Using git "2.34.1" from "git"
     ```
 
 ## Visual Studio Code Extensions
@@ -124,70 +125,34 @@ Check:
 
     | **Extension** | **Shortcode** |
     |---|---|
-    | Azure Account | ms-vscode.azure-account |
-    | Azure Resource Manager tools | msazurermtools.azurerm-vscode-tools |
-    | Azure Policy | azurepolicy.azurepolicyextension |
-    | Hashicorp Terraform | hashicorp.terraform |
-    | JSON Tools | eriklynd.json-tools |
-    | Live Share | ms-vsliveshare.vsliveshare |
+    | [Azure Account](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account) | ms-vscode.azure-account |
+    | [Azure Resource Manager tools](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools) | msazurermtools.azurerm-vscode-tools |
+    | [Hashicorp Terraform](https://marketplace.visualstudio.com/items?itemName=hashicorp.terraform) | hashicorp.terraform |
+    | [JSON Tools](https://marketplace.visualstudio.com/items?itemName=eriklynd.json-tools) | eriklynd.json-tools |
 
 ## Terraform
 
-You can either install it manually or using the provided script.
-
-* Manual
-  * [Download Terraform](https://www.terraform.io/downloads.html)
-  * Move the binary to a directory
-  * Make it executable
-  * Ensure the directory is in your path
-
--- or --
-
-* Scripted
-
-    Use the following command on Ubuntu to install into /usr/local/bin:
+* Install [Terraform](https://developer.hashicorp.com/terraform/cli/install/apt)
+* Check:
 
     ```bash
-    curl -sSL https://aka.ms/hashicorp/install.sh | sudo -E bash -s terraform
+    terraform --version
     ```
-
-    > The script uses sudo so you will be prompted for your password. (Unless you have set /etc/sudoers for passwordless sudo.)
-
-Check:
-
-```bash
-terraform --version
-```
 
 ## Packer
 
-The install process is the same for Packer as it is for Terraform.
+Only required for the virtual machine imaging labs.
 
-* Manual
-  * [Download Packer](https://www.packer.io/downloads)
-  * Move the binary to a directory
-  * Make it executable
-  * Ensure the directory is in your path
+* Install [Packer](https://developer.hashicorp.com/packer/downloads)
+* Check:
 
--- or --
-
-* Scripted
-
-    Use the following command on Ubuntu to install into /usr/local/bin:
-
-    ```bash
-    curl -sSL https://aka.ms/hashicorp/install.sh | sudo -E bash -s packer
-    ```
-
-Check:
-
-```bash
-packer --version
-```
+  ```bash
+  packer --version
+  ```
 
 ## Ansible
 
-Ansible is used in a few of the labs.  per the [Ansible docs](https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html#microsoft-azure-guide), Ansible on Azure is installed using the Python installer, pip. It is preinstalled in the Cloud Shell's container image.
+Ansible is used in a few of the labs. As per the [Ansible docs](https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html#microsoft-azure-guide), Ansible on Azure is installed using the Python installer, pip. It is preinstalled in the Cloud Shell's container image.
 
 * Install PIP
 
