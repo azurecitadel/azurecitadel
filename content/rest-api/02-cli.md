@@ -56,7 +56,7 @@ See `az login --help` for examples if authenticating as a service principal or m
 
 Another benefit of the `az rest` command is that `{subscriptionId}` in all of the references will be replace by the value of `az account show --query id`.
 
-1. View the [Resource Groups - Get](https://docs.microsoft.com/rest/api/resources/resource-groups/get) documentation
+1. View the [Resource Groups - Get](https://learn.microsoft.com/rest/api/resources/resource-groups/get) documentation
 
     See the example:
 
@@ -92,7 +92,7 @@ Another benefit of the `az rest` command is that `{subscriptionId}` in all of th
 
 The delete uses the same uri. You specify the `DELETE` method.
 
-1. View the [Resource Groups - Delete](https://docs.microsoft.com/rest/api/resources/resource-groups/delete) documentation
+1. View the [Resource Groups - Delete](https://learn.microsoft.com/rest/api/resources/resource-groups/delete) documentation
 1. Use `az rest` to delete
 
     ```bash
@@ -105,9 +105,9 @@ The delete uses the same uri. You specify the `DELETE` method.
 
 The create uses `PUT`, and requires a request body.
 
-1. View the [Resource Groups - Create Or Update](https://docs.microsoft.com/rest/api/resources/resource-groups/delete) documentation
+1. View the [Resource Groups - Create Or Update](https://learn.microsoft.com/rest/api/resources/resource-groups/create-or-update) documentation
 
-    Use the *In this article* link to jump to the [Request Body](https://docs.microsoft.com/rest/api/resources/resource-groups/create-or-update#request-body) and the [Examples](https://docs.microsoft.com/rest/api/resources/resource-groups/create-or-update#request-body)
+    Use the *In this article* link to jump to the [Request Body](https://learn.microsoft.com/rest/api/resources/resource-groups/create-or-update#request-body) and the [Examples](https://learn.microsoft.com/rest/api/resources/resource-groups/create-or-update#examples)
 
     The example JSON request body for resource groups is simple:
 
@@ -139,9 +139,9 @@ The create uses `PUT`, and requires a request body.
 
 The update uses `PATCH` and also requires a JSON request body. We'll use a variable in the JSON and update the tags.
 
-1. View the [Resource Groups - Update](https://docs.microsoft.com/rest/api/resources/resource-groups/update) documentation
+1. View the [Resource Groups - Update](https://learn.microsoft.com/rest/api/resources/resource-groups/update) documentation
 
-    Note the [ResourceGroupPatchable](https://docs.microsoft.com/rest/api/resources/resource-groups/update#resourcegrouppatchable) section. This is a subset of the overall resource group properties.
+    Note the [ResourceGroupPatchable](https://learn.microsoft.com/rest/api/resources/resource-groups/update#resourcegrouppatchable) section. This is a subset of the overall resource group properties.
 
     For instance, you cannot update the location as that would force a deletion and recreation for the resource group.
 
@@ -169,7 +169,7 @@ The update uses `PATCH` and also requires a JSON request body. We'll use a varia
     )
     ```
 
-    The last command uses a heredoc with a variable. There are other ways of dynamically generating JSON, e.q. `jq`.
+    The last command uses a heredoc with a variable. There are other ways of dynamically generating JSON, e.g. `jq`.
 
 1. Use `az rest` to patch
 

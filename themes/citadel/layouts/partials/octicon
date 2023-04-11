@@ -3,5 +3,8 @@
 {{ $height := .height }}
 {{ $match := "<svg (.*)?>(.*)</svg>" }}
 
+{{ $iconPath := printf "node_modules/@primer/octicons/build/svg/%s-%d.svg" $octicon $height }}
+{{ $icon := readFile $iconPath | default (printf "<!-- Icon not found: %s -->" $iconPath) }}
+
 {{ $replaceWith := printf `<svg fill="currentColor" style="display: inline-block; user-select: none; vertical-align: middle" class="octicon %s" ${1}>${2}</svg>` $class }}
-{{ return (replaceRE $match $replaceWith (print "/node_modules/@primer/octicons/build/build/svg/" $octicon "-" $height ".svg" | readFile) | safeHTML) }}
+{{ return (replaceRE $match $replaceWith $icon | safeHTML) }}
