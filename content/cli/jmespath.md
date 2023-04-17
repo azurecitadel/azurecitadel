@@ -513,7 +513,7 @@ For example, here is the command to generate a table listing out the objectIds i
 az ad group list --output table --query "[?securityEnabled].{name:displayName, description:description, objectId:objectId}"
 ```
 
-Note the `[?securityEnabled]`.  (You can also convert booleans to strings, e.g. `[? to_string(securityEnabled) == 'true']`.)
+Note the `[?securityEnabled]`.  (You could also convert booleans to strings, e.g. `[? to_string(securityEnabled) == 'true']`.)
 
 Resulting table:
 
@@ -527,6 +527,8 @@ Key Vault Secrets       Those with access to update Key Vault secrets    74fa1c0
 Virtual Machine Admins  Admins for the Virtual Machines                  88515d1f-e386-4a23-afcc-79b0124805f9
 ```
 
+If you wanted to invert the result then you would use `[?!(securityEnabled)]` rather than `[?securityEnabled]` within the query.
+
 ## Pipes
 
 As in Bash, we can use pipes in our JMESPATH queries to get to the desired point.  As a simple example, compare the following:
@@ -539,6 +541,112 @@ az vm list --output tsv --query "[?name == 'vmName']|[0]"
 The VM name should be unique within that subscription and resource group, so the first will provide the array slice containing only one element.  In the second command we pull out just that first element, so the JSON output from that command will have stripped out the surrounding square braces.
 
 Pipes are very useful when combining filters with multi-selects, and also the functions shown below.
+
+## Sorting
+
+The syntax for sorting output can be a little counterintuitive. This section will use a couple of commands I used when generating custom RBAC roles.
+
+Let's take the simple form first, piping a filtered array with just one set of values through to a straight sort:
+
+```bash
+az provider operation show --namespace Microsoft.HybridCompute --query "resourceTypes[].operations[?!(isDataAction)][].name | sort(@)" --output tsv
+```
+
+Note the `| sort(@)` at the end of the query.
+
+Example output:
+
+```text
+Microsoft.HybridCompute/locations/operationresults/read
+Microsoft.HybridCompute/locations/operationstatus/read
+Microsoft.HybridCompute/locations/privateLinkScopes/read
+Microsoft.HybridCompute/locations/updateCenterOperationResults/read
+Microsoft.HybridCompute/machines/UpgradeExtensions/action
+Microsoft.HybridCompute/machines/assessPatches/action
+Microsoft.HybridCompute/machines/delete
+Microsoft.HybridCompute/machines/extensions/delete
+Microsoft.HybridCompute/machines/extensions/read
+Microsoft.HybridCompute/machines/extensions/write
+Microsoft.HybridCompute/machines/hybridIdentityMetadata/read
+Microsoft.HybridCompute/machines/installPatches/action
+Microsoft.HybridCompute/machines/patchAssessmentResults/read
+Microsoft.HybridCompute/machines/patchAssessmentResults/softwarePatches/read
+Microsoft.HybridCompute/machines/patchInstallationResults/read
+Microsoft.HybridCompute/machines/patchInstallationResults/softwarePatches/read
+Microsoft.HybridCompute/machines/read
+Microsoft.HybridCompute/machines/write
+Microsoft.HybridCompute/operations/read
+Microsoft.HybridCompute/osType/agentVersions/latest/read
+Microsoft.HybridCompute/osType/agentVersions/read
+Microsoft.HybridCompute/privateLinkScopes/delete
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/delete
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/read
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/updatePrivateEndpointProperties/action
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/validate/action
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/write
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnections/delete
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnections/read
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnections/write
+Microsoft.HybridCompute/privateLinkScopes/read
+Microsoft.HybridCompute/privateLinkScopes/write
+```
+
+What if you are using objects? Then you use `sort_by` instead. Here is an example, sorting an object with two fields, name and dataAction:
+
+```bash
+az provider operation show --namespace Microsoft.HybridCompute --query "sort_by(resourceTypes[].operations[].{action:name, dataAction:isDataAction}, &action) --output table
+```
+
+The sort_by takes two functions. The first is the JSON to be sorted. The second is the expression for the field used for the sorting. The is prepended with an ampersand so that it is evaluated later.
+
+You can also use it with pipes. For instance, if you wanted to take the previous command and also sort by the dataAction (which is a boolean) then extend the query with `| sort_by(@, &to_string(dataAction))`. The first field is `@`, which is a placeholder for the whole JSON passed through the pipe. The second field is again prepended with the ampersand, and then sorts by dataAction. (You can only sort by strings and numbers, so this additional converts the type from boolean to string before sorting.) Full command:
+
+```bash
+az provider operation show --namespace Microsoft.HybridCompute --query "sort_by(resourceTypes[].operations[].{action:name, dataAction:isDataAction}, &action)|sort_by(@, &to_string(dataAction))" --output table
+```
+
+Example output:
+
+```text
+Action                                                                                                             DataAction
+-----------------------------------------------------------------------------------------------------------------  ------------
+Microsoft.HybridCompute/locations/operationresults/read                                                            False
+Microsoft.HybridCompute/locations/operationstatus/read                                                             False
+Microsoft.HybridCompute/locations/privateLinkScopes/read                                                           False
+Microsoft.HybridCompute/locations/updateCenterOperationResults/read                                                False
+Microsoft.HybridCompute/machines/UpgradeExtensions/action                                                          False
+Microsoft.HybridCompute/machines/assessPatches/action                                                              False
+Microsoft.HybridCompute/machines/delete                                                                            False
+Microsoft.HybridCompute/machines/extensions/delete                                                                 False
+Microsoft.HybridCompute/machines/extensions/read                                                                   False
+Microsoft.HybridCompute/machines/extensions/write                                                                  False
+Microsoft.HybridCompute/machines/hybridIdentityMetadata/read                                                       False
+Microsoft.HybridCompute/machines/installPatches/action                                                             False
+Microsoft.HybridCompute/machines/patchAssessmentResults/read                                                       False
+Microsoft.HybridCompute/machines/patchAssessmentResults/softwarePatches/read                                       False
+Microsoft.HybridCompute/machines/patchInstallationResults/read                                                     False
+Microsoft.HybridCompute/machines/patchInstallationResults/softwarePatches/read                                     False
+Microsoft.HybridCompute/machines/read                                                                              False
+Microsoft.HybridCompute/machines/write                                                                             False
+Microsoft.HybridCompute/operations/read                                                                            False
+Microsoft.HybridCompute/osType/agentVersions/latest/read                                                           False
+Microsoft.HybridCompute/osType/agentVersions/read                                                                  False
+Microsoft.HybridCompute/privateLinkScopes/delete                                                                   False
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/delete                                  False
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/read                                    False
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/updatePrivateEndpointProperties/action  False
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/validate/action                         False
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnectionProxies/write                                   False
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnections/delete                                        False
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnections/read                                          False
+Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnections/write                                         False
+Microsoft.HybridCompute/privateLinkScopes/read                                                                     False
+Microsoft.HybridCompute/privateLinkScopes/write                                                                    False
+Microsoft.HybridCompute/locations/publishers/extensionTypes/versions/read                                          True
+Microsoft.HybridCompute/machines/WACloginAsAdmin/action                                                            True
+Microsoft.HybridCompute/machines/login/action                                                                      True
+Microsoft.HybridCompute/machines/loginAsAdmin/action                                                               True
+```
 
 ## Additional Functions
 
