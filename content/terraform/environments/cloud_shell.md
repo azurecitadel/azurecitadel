@@ -34,7 +34,7 @@ Cons:
 
 These are just some of the advantages of using Azure Cloud Shell for running Terraform. To learn more about how to configure and use Terraform in Azure Cloud Shell, read on.
 
-## Example run through
+## Accessing Cloud Shell
 
 You can access the Azure Cloud Shell in multiple ways, most commonly via **`>_`** icon at the top of the Azure portal or via <https://shell.azure.com>.
 
@@ -54,19 +54,29 @@ You can access the Azure Cloud Shell in multiple ways, most commonly via **`>_`*
 
     Note that the command output includes `user.cloudShellID: true`. It is assumed that you have Owner or Contributor on the subscription.
 
-1. Download the example repo
+## Create example files
+
+We'll run through a quick example, creating a resource group.
+
+1. Make a working directory
 
     ```bash
-    git clone https://github.com/richeney/terraform-envs
+    mkdir terraform-envs
     ```
 
-1. Switch to the Terraform folder
+1. Switch to it
 
     ```bash
     cd ~/terraform-envs
     ```
 
-1. List out the files
+1. Create empty files
+
+    ```bash
+    touch provider.tf variables.tf main.tf outputs.tf
+    ```
+
+1. List the files
 
     ```bash
     ls -l
@@ -78,13 +88,81 @@ You can access the Azure Cloud Shell in multiple ways, most commonly via **`>_`*
    code .
    ```
 
-1. Click on the provider.tf file
+1. Select the provider.tf file in the file explorer pane
 
-    ![Monaco editor in Azure Cloud Shell](/terraform/environments/images/cloud_shell.png)
+    Note that the filename is now shown above the editing pane.
+
+1. Paste the code below in the editing pane on the right
+
+    **provider.tf**
+
+    ```go
+    terraform {
+      required_providers {
+        azurerm = {
+          source  = "hashicorp/azurerm"
+          version = ">=3.50.0"
+        }
+      }
+    }
+
+    provider "azurerm" {
+      features {}
+    }
+    ```
+
+    Use `CTRL`+`V` to paste, or `CTRL`+`SHIFT`+`V` to paste as text.
 
     Note the syntax highlighting.
 
-    Common short cuts are `CTRL`+`S` to save and `CTRL`+`Q` to quit.
+    ![Monaco editor in Azure Cloud Shell](/terraform/environments/images/cloud_shell.png)
+
+1. Save
+
+    Press `CTRL`+`S` to save.
+
+    Unsaved files have a dot on the filename tab. This will disappear once saved.
+
+1. Repeat for the other files
+
+    **variables.tf**
+
+    ```go
+    variable "resource_group_name" {
+      description = "Name for the resource group."
+      type        = string
+      default     = "myExampleResourceGroup"
+    }
+
+    variable "location" {
+      description = "Azure region."
+      type        = string
+      default     = "UK South"
+    }
+    ```
+
+    **main.tf**
+
+    ```go
+    resource "azurerm_resource_group" "example" {
+      name     = var.resource_group_name
+      location = var.location
+    }
+    ```
+
+    **outputs.tf**
+
+    ```go
+    output "id" {
+      value = azurerm_resource_group.example.id
+    }
+    ```
+
+    Don't forget to use `CTRL`+`S`.
+
+## Terraform workflow
+
+Run through the standard Terraform workflow.
 
 1. Initialise
 
@@ -108,11 +186,11 @@ You can access the Azure Cloud Shell in multiple ways, most commonly via **`>_`*
     terraform apply
     ```
 
-    Respond "yes" when prompted to create the empty resource group. The resource ID will be output.
+    Respond "yes" when prompted to create the empty resource group.
 
 1. Destroy
 
-        ```bash
+    ```bash
     terraform destroy
     ```
 
@@ -120,7 +198,9 @@ You can access the Azure Cloud Shell in multiple ways, most commonly via **`>_`*
 
 ## Summing up
 
-Great for the quick and dirty work, and for use in training. If you are doing a lot of work then you may want a fuller config. In the next environment we'll
+Cloud Shell is great for the quick and dirty work, and for use in training. It has most of what you need, and is always accessible if you have a network connection.
+
+However, if you are doing a lot of work then you may want a fuller setup directly on your machine. In the next environment we'll
 
 - install a set of tools
 - deploy using a service principal

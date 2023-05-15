@@ -25,7 +25,9 @@ Terraform is a popular tool for managing infrastructure as code across multiple 
 
 These features will help you to write, test and deploy Terraform configurations in a consistent and secure way, especially if you are working in a team.
 
-## Windows Subsystem for Linux
+## Tooling
+
+### Windows Subsystem for Linux
 
 Using Terraform is more natural in a bash environment.
 
@@ -57,32 +59,52 @@ For Windows 11 users we highly recommend installing the Windows Subsystem for Li
 
     These commands will install the terraform open source binary, the Azure CLI plus jq and jo which are commonly used for querying or generating JSON. Plus a few prereqs.
 
-## Visual Studio Code
+### Visual Studio Code
 
-Visual Studio Code is a great IDE for working with Terraform configs, and has extensions for linting, syntax highlighting, snippets ad connecting using remotely through to other environments including the WSL subsystem.
+Visual Studio Code is a great IDE for working with Terraform configs, and has extensions for linting, syntax highlighting, snippets, plus connecting using remotely through to other environments including the WSL subsystem.
 
-1. Install Visual Studio Code
+1. Install [Visual Studio Code](https://code.visualstudio.com/download)
+1. Install the [Remote Development extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 
+    The Remote Development extension pack allows you to open any folder in a container, on a remote machine, or in the Windows Subsystem for Linux (WSL) and take advantage of VS Code's full feature set.
 
-Visual
-VSCode Extensions for Terraform on Azure
-VSCode is a powerful and versatile code editor that supports many languages and extensions. For Terraform on Azure, we recommend installing the following extensions:
+1. Install the [Hashicorp Terraform](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform) extension
 
-Azure Account: This extension lets you sign in to your Azure account and access your subscriptions and resources from VSCode.
-Azure Terraform: This extension provides syntax highlighting, code completion, formatting, validation and testing for Terraform files that target Azure.
-HashiCorp Terraform: This extension enhances the Terraform language support in VSCode with features such as code navigation, references, hovers and more.
-WSL for Running Terraform on Windows
-WSL is a feature that allows you to run Linux command-line tools and applications on Windows 10. WSL can be used to install and run Terraform on Windows without requiring a virtual machine or a dual-boot setup. WSL also integrates well with VSCode, allowing you to edit files and run commands from the same environment.
+    The HashiCorp Terraform Extension for Visual Studio Code (VS Code) with the Terraform Language Server adds editing features for Terraform files such as syntax highlighting, IntelliSense, code navigation, code formatting, module explorer, etc.
 
-Service Principals for Authenticating Terraform on Azure
+### Windows Terminal
+
+1. Install [Windows Terminal](https://aka.ms/terminal)
+
+    Refer to the [Windows Terminal documentation](https://aka/ms/terminaldocs) if you wish to customise.
+
+    You may wish to configure settings, e.g. set the default profile to Ubuntu and default terminal application to Windows Terminal.
+
+## Service Principal
+
 Service principals are identities that can be used to authenticate and authorize applications or scripts to access Azure resources. Service principals are recommended for running Terraform on Azure in a non-interactive way, such as in a CI/CD pipeline or a scheduled task. Service principals can be assigned specific roles and permissions to limit the scope of access and reduce the risk of accidental or malicious changes.
 
-Remote State for Collaborating with Terraform on Azure
+It is possible to create a service principal and role assignment in one command, but we'll do it step by step for clarity.
+
+1. Open the Ubuntu profile in Terminal
+1. Log in to Azure
+
+    ```bash
+    az login
+    az account show --output jsonc
+    ```
+
+    Check you're in the right subscription.
+
+1. Create a service principal
+
+    ```bash
+
+    ```
+
+## Remote State
+
 Remote state is a feature that allows you to store the state of your Terraform configuration in a remote location, such as an Azure storage account. Remote state enables collaboration among team members by ensuring that everyone is working with the same version of the state. Remote state also provides security and durability by encrypting and backing up the state data.
-
-In this blog post, we will walk you through the steps of setting up these features and using them to create and manage Azure resources with Terraform. We will also provide links to supporting documentation and best practices along the way. Let’s get started!
-
-
 
 ## Links
 
