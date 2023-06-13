@@ -148,6 +148,10 @@ Here is how the role would look in the portal:
 
 Creating a PAL link for service principals make a lot of sense as they do not hand in their notice!
 
+The partner will then be recognised for the ACR if the service principal has a PEC eligible role in the authorizations.
+
+### Azure CLI
+
 1. Retrieve the appId and tenantId
 
     ```bash
@@ -193,6 +197,7 @@ Creating a PAL link for service principals make a lot of sense as they do not ha
       }
     ]
 
+> ℹ️ Using a system assigned managed identity? Just use `az login --identity` on the trusted compute to authenticate.
 
 1. Create the partner admin link
 
@@ -216,8 +221,58 @@ Creating a PAL link for service principals make a lot of sense as they do not ha
 
     Note that PAL links the service principal (tenantId/objectId) to the partnerId.
 
-The partner will then be recognised for the ACR if the service principal has a PEC eligible role in the authorizations.
+
+### REST API
+
+Here is some additional information for those who don't have the Azure CLI installed.
+
+I was helping a partner with a Managed Application and shows how to use the undocumented REST API to create the Partner Admin Link to your MPN ID.
+
+This example is for a system assigned managed identity on a RHEL linux server. 
+
+1. Install jq
+
+    ```bash
+    sudo dnf install jq -y
+    ```
+
+1. Use the Instance Metadata Service to get a token
+
+    ```bash
+    token=$(curl -sSL -H "Metadata:true" 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/' | jq -r .access_token)
+    ```
+
+1. Define the REST API uri
+
+    ```bash
+    mpnid=31415927 
+    ```
+    
+    ⚠️ Set the mpnid variable to your location based Microsoft Partner ID.
+
+1. Create the PAL link
+
+    ```bash
+    curl --silent \
+      --header "Authorization: Bearer ${token}" \
+      --header "Content-Type: application/json" \
+      --data '{"partnerId": "'${mpnid}'"}' \
+      --request PUT \
+      "https://management.azure.com/providers/microsoft.managementpartner/partners/${mpnid}?api-version=2018-02-01"
+    ```
+
+    Using the example MPN ID, the JSON payload would be:
+
+    ```json
+    {"partnerId": "31415927"}
+    ```  
+
+    And the uri would be:
+
+    ```text
+    "https://management.azure.com/providers/microsoft.managementpartner/partners/31415927?api-version=2018-02-01"
+    ```
 
 ## Next
 
-On the next page we will look at an example with Privileged Identity Management
+On the next page we will look at an example with Privileged Identity Management.
