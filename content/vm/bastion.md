@@ -30,7 +30,83 @@ In this lab you will:
 * access a "management" application using a tunnel via Azure Bastion
 * clean up
 
-## Pre-requirements
+## AAD authentication
+
+Before we build the environment, spend a few mintes to understand the requirements for AAD auth on Azure VMs, as specified on these pages:
+
+- [Log in to a Windows virtual machine in Azure by using Azure AD](https://docs.microsoft.com/azure/active-directory/devices/howto-vm-sign-in-azure-ad-windows)
+- [Log in to a Linux virtual machine in Azure by using Azure AD and OpenSSH](https://docs.microsoft.com/azure/active-directory/devices/howto-vm-sign-in-azure-ad-linux)
+
+### Windows checklist
+
+- [x] Supported OS level - Windows Server 2019 or Windows 10 1809 and later VM, e.g.
+
+  ```c
+  publisher = "MicrosoftWindowsServer"
+  offer     = "WindowsServer"
+  sku       = "2022-datacenter-azure-edition"
+  version   = "latest"
+  ```
+
+- [x] System assigned managed identity enabled on the VM
+- [x] AADLoginForWindows extension added to the VM
+
+  ```c
+  publisher = "Microsoft.Azure.ActiveDirectory"
+  type      = "AADLoginForWindows"
+  ```
+
+- [x] RBAC role assignment on the VM (or higher scope), either
+  - Virtual Machine Administrator Login
+  - Virtual Machine User Login
+- [x] Member user (guest IDs not supported)
+- [x] Outgoing 443 permitted to specific URIs
+
+Example call (Windows OS level)
+```bash
+az login
+az extension add --name bastion
+az network bastion rdp --name myBastion --resource-group myBastionRG --target-resource-id <myVMID> --enable-mfa true
+```
+
+Login using RDP, specifying the userid in `user@domain.com` format.
+
+### Linux checklist
+
+- [x] [Supported Linux distribution](https://learn.microsoft.com/azure/active-directory/devices/howto-vm-sign-in-azure-ad-linux#supported-linux-distributions-and-azure-regions), e.g.
+
+  ```c
+  publisher = "canonical"
+  offer     = "0001-com-ubuntu-server-focal"
+  sku       = "20_04-lts-gen2"
+  version   = "latest"
+  ```
+
+- [x] System assigned managed identity enabled on the VM
+- [x] AADSSHLoginForLinux extension added to the VM
+
+  ```c
+  publisher = "Microsoft.Azure.ActiveDirectory"
+  type      = "AADSSHLoginForLinux"
+  ```
+
+  (Installs the aadsshlogin or aadsshlogin-selinx package.)
+
+- [x] RBAC role assignment on the VM (or higher scope), either
+  - Virtual Machine Administrator Login
+  - Virtual Machine User Login
+- [x] Member user (guest IDs not supported)
+- [x] Outgoing 443 permitted to specific URIs
+
+Example connection:
+
+```bash
+az login
+az extension add --name ssh
+az ssh vm --name myVM --resource-group myResourceGroup
+```
+
+## Pre-requirements for Terraform example
 
 You will need
 
@@ -327,7 +403,7 @@ The core SSH and RDP commands will be all that most admins will need. But what i
 
 Let's use the example of Jenkins, which runs a web UI defaulting to port 8080. We'll emulate that with a simple HTML page.
 
-### Web Server
+### Create a basic web server
 
 You should still be on the Ubuntu VM as your AAD credentials. Spin up a simple web server.
 
@@ -343,10 +419,10 @@ You should still be on the Ubuntu VM as your AAD credentials. Spin up a simple w
     sudo curl https://raw.githubusercontent.com/terraform-azurerm-examples/bastion/main/index.html --output /web/index.html
     ```
 
-1. Start the web server on port 8080 as a background process
+1. Start the web server on port 8080
 
     ```shell
-    sudo /usr/bin/python3 -m http.server --directory /web 8080 &
+    sudo /usr/bin/python3 -m http.server --directory /web 8080
     ```
 
     Expected output:
@@ -355,37 +431,30 @@ You should still be on the Ubuntu VM as your AAD credentials. Spin up a simple w
     Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
     ```
 
-    > You may need to press the enter key again to return to the prompt.
-
-1. Exit the SSH session
-
-    ```shell
-    exit
-    ```
+1. Keep this session open
 
 ### Tunnel
 
-On your machine, start up the tunnel and then access the site via the browser. This should work on Windows, linux and WSL2.
+On your machine, start up the tunnel and then access the site via the browser. 
 
-1. Copy the command
-
-    Copy the command shown by terraform output.
+1. Open a **new terminal session** and go back into your Terraform folder
+1. Display the tunnel command
 
     ```shell
     terraform output tunnel_to_linux_server
     ```
 
-    Example command
+    Copy the command between the prompts.
+
+    Example command format:
 
     ```shell
     az network bastion tunnel --name bastion --resource-group bastion --target-resource-id <vmid> --resource-port 8080 --port 8080
     ```
 
-    The resource port is the one used on the VM. It will be mapped to the `--port` value.
+    The `resource port` is the one on the VM. It will be mapped to the `--port` value.
 
-1. Paste the `az network bastion tunnel` command
-
-    The Windows Terminal below shows the tunnel created in WSL2, but it also works at the Windows OS level.
+1. Run the `az network bastion tunnel` command at the OS level
 
     ![Tunnel](../images/tunnel.png)
 
