@@ -23,7 +23,7 @@ jobs:
           else
             SOURCE_REPO="$(jq -r .pull_request.head.repo.full_name ${GITHUB_EVENT_PATH})"
           fi
-          echo "::set-output name=source_repo::$SOURCE_REPO"
+          echo "source_repo=$SOURCE_REPO" >> $GITHUB_OUTPUT
 
   build_and_deploy_job:
     needs: check_source_repo
@@ -44,7 +44,7 @@ jobs:
         run:
           echo "baseURL = \"https://www.azurecitadel.com/\"" > ./config/production/config.toml
       - name: Setup NodeJS 16
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Install dependencies
