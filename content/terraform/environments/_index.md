@@ -1,7 +1,7 @@
 ---
 title: "Environments"
 description: "Example environments commonly used when deploying infrastructure as code to Azure via Terraform."
-date: 2023-04-11
+date: 2024-01-01
 draft: false
 weight: 10
 menu:

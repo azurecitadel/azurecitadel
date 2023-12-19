@@ -1,10 +1,10 @@
 ---
 title: "Service principals and remote state"
-date: 2023-04-11
+date: 2024-01-01
 draft: false
 author: [ "Richard Cheney" ]
 description: "Develop in teams using Visual Studio Code, Windows Subsystem for Linux, service principals and remote state."
-weight: 2
+weight: 3
 menu:
   side:
     parent: 'terraform-envs'

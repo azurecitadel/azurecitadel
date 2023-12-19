@@ -1,10 +1,10 @@
 ---
 title: "Managed Identity with Jenkins"
-date: 2023-04-11
+date: 2024-01-01
 draft: false
 author: [ "Richard Cheney" ]
 description: "Deploy Jenkins to an Azure Virtual Machine and deploy using the VM's system assigned managed identity."
-weight: 4
+weight: 5
 menu:
   side:
     parent: 'terraform-envs'

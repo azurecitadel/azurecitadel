@@ -1,6 +1,6 @@
 ---
 title: "Cloud Shell"
-date: 2023-04-11
+date: 2024-01-01
 draft: false
 author: [ "Richard Cheney" ]
 description: "Use the Azure Cloud Shell if you are looking for the quickest way to run Terraform on Azure."
@@ -15,34 +15,33 @@ layout: single
 
 ## Overview
 
-Azure Cloud Shell is a browser-based shell that provides access to various tools and services for managing Azure resources, and includes common binaries including git, az, jq and terraform.
+Azure Cloud Shell is a browser-based shell that provides access to various tools and services for managing Azure resources, and includes common binaries including git, az, jq and terraform in its container image.
 
-The Cloud Shell is ideal for quick demos, small test and dev projects, or for training groups as the barrier for entry is so low. Many of the labs on this site assume Cloud Shell as it reduces the pre-reqs to almost nothing.
+The Cloud Shell is ideal for quick demos, small test and dev projects, or for training groups. Many of the labs on this site assume Cloud Shell as it simplifies the pre-reqs.
 
 Pros:
 
-- Azure Cloud Shell automatically has the latest version of Terraform installed. You don't have to worry about downloading, installing, or updating Terraform on your local machine.
-- Azure Cloud Shell automatically uses information from the current Azure subscription. You don't have to configure or authenticate Terraform to access your Azure resources.
-- Azure Cloud Shell saves the Terraform state file in highly available Azure Storage. You don't have to manage or backup the state file locally or on a remote server.
-- Azure Cloud Shell features the Monaco editor which includes syntax highlighting for Hashicorp Configuration Language (HCL) format files.
+- Cloud Shell includes a recent version of Terraform
+- Cloud Shell will automatically authenticate
+- Cloud Shell saves the state file in Azure Storage blob
+- Cloud Shell has the Monaco editor, with syntax highlighting for HCL files
 
 Cons:
 
-- Single user only; not designed for teams.
-- No control over Terraform version as the binary is part of the Cloud Shell container image.
-- No sudo capability.
-
-These are just some of the advantages of using Azure Cloud Shell for running Terraform. To learn more about how to configure and use Terraform in Azure Cloud Shell, read on.
+- Single user only; not designed for teams
+- No control over Terraform version
+- No sudo
+- Unsuited to long sessions due to timeouts
 
 ## Accessing Cloud Shell
 
-You can access the Azure Cloud Shell in multiple ways, most commonly via **`>_`** icon at the top of the Azure portal or via <https://shell.azure.com>.
+Access the Azure Cloud Shell via **`>_`** at the top of the Azure portal or via <https://shell.azure.com>.
 
 1. Open [Cloud Shell](https://shell.azure.com)
 
     These labs assume the Bash experience.
 
-    If you are using Cloud Shell for the first time then you will be prompted to create the Azure Storage Account used for persisting the home directory and cloudshell mount.
+    Upon first use, you'll be prompted to create the Storage Account used to persist the home directory and cloudshell mount.
 
 1. Check your subscription context.
 
