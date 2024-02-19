@@ -1,10 +1,10 @@
 ---
 title: "Cloud Shell"
-date: 2024-01-01
+date: 2024-02-19
 draft: false
 author: [ "Richard Cheney" ]
 description: "Use the Azure Cloud Shell if you are looking for the quickest way to run Terraform on Azure."
-weight: 1
+weight: 10
 menu:
   side:
     parent: 'terraform-envs'

@@ -1,7 +1,7 @@
 ---
 title: "Environments"
 description: "Example environments commonly used when deploying infrastructure as code to Azure via Terraform."
-date: 2024-01-01
+date: 2024-02-19
 draft: false
 weight: 10
 menu:
@@ -17,5 +17,7 @@ There are many ways to use Terraform with Azure, so here are a few options. Whet
 For consistency we will use the same source repo all the way through, and make use of environment variables.
 
 Wherever applicable we will be making use of OpenID Connect to securely federate the security principals with other identity providers such as GitHub and Terraform Cloud.
+
+**More pages coming soon...**
 
 ## Environments

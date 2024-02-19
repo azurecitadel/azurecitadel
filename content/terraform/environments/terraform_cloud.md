@@ -1,10 +1,10 @@
 ---
 title: "Terraform Cloud"
-date: 2024-01-01
-draft: false
+date: 2024-04-01
+draft: true
 author: [ "Richard Cheney" ]
 description: "Keep your repo, state and pipelines outside of Azure. Deploy with OpenId Connect"
-weight: 6
+weight: 80
 menu:
   side:
     parent: 'terraform-envs'

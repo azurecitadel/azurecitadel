@@ -1,10 +1,10 @@
 ---
-title: "Install terraform and Visual Studio Code"
-date: 2024-01-01
+title: "Install Terraform tooling"
+date: 2024-02-19
 draft: false
 author: [ "Richard Cheney" ]
-description: "Get the right tooling on your machine to work with Terraform."
-weight: 2
+description: "Get the right software installed on your machine to work more effectively with Terraform."
+weight: 20
 menu:
   side:
     parent: 'terraform-envs'
@@ -15,37 +15,42 @@ layout: single
 
 ## Overview
 
-Cloud Shell is useful for simple tasks, but if you are working with Terraform more frequently then it is recommended to install a set of tools for richer functionality, and greater stability during longer sessions.
+Cloud Shell is useful for simple tasks, but if you are working with Terraform more frequently then it is recommended to install a set of tools for richer functionality, and to give you greater stability during longer sessions.
 
 In this page you will install:
 
-- Terminal software
-- the terraform binary
-- Azure CLI
 - Visual Studio Code
-- recommended extensions
+  - plus recommended extensions for Terraform
+- terminal software
+- git
+- terraform
+- Azure CLI
+- jq
+- GitHub CLI
 
-This is not a prescriptive configuration. Experienced users will pick a preferred combination of operating system, IDE, extensions, terminal, etc. This is just a set of examples for those who would like a little guidance. This page includes options for:
+> This is not a prescriptive configuration. Experienced users will pick a preferred combination of operating system, IDE, extensions, terminal, etc. This is just a set of useful examples for those who would like a little guidance.
+
+Choose *one* of the following:
 
 1. Windows with Ubuntu
 
-    Ubuntu 20.04 will be installed in WSL2 on either Windows 10 or Windows 11. Terraform will be installed for use in Bash, plus a few other binaries. Windows Terminal.
+    Ubuntu 20.04 installed in WSL2 on either Windows 10 or Windows 11. Terraform installed for use in Bash, plus a few other binaries. Uses Windows Terminal.
 
-    Jump to the [Windows with Ubuntu](#windows-with-ubuntu) section.
+    If this is you then jump to the [Windows with Ubuntu](#windows-with-ubuntu) section.
 
 1. Windows with PowerShell
 
-    Terraform will be installed at the Windows 10 or Windows 11 OS level. Windows Terminal. WSL2 is not required.
+    Terraform installed at the Windows 10 or Windows 11 OS level. Uses Windows Terminal, and winget for installs. WSL2 is not required, nor is jq as PowerShell has full object handling.
 
-    You may need to translate example Bash commands found in the labs to their PowerShell equivalents.
+    You may need to translate any example Bash commands found in the labs to their PowerShell equivalents.
 
-    Jump to the [Windows with PowerShell](#windows-with-powershell) section.
+    If this is you then jump to the [Windows with PowerShell](#windows-with-powershell) section.
 
 1. macOS
 
     Install terraform into the default zsh shell on macOS.
 
-    Jump to the [macOS](#macos) section.
+    If this is you then jump to the [macOS](#macos) section.
 
 ## Windows with Ubuntu
 
@@ -76,12 +81,12 @@ This is not a prescriptive configuration. Experienced users will pick a preferre
     sh -c 'echo "deb [arch=`dpkg --print-architecture` signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com `lsb_release -cs` main" | sudo tee /etc/apt/sources.list.d/hashicorp.list'
     sh -c 'echo "deb [arch=`dpkg --print-architecture` signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ `lsb_release -cs` main" | sudo tee /etc/apt/sources.list.d/azure-cli.list'
     sudo chmod go+r /usr/share/keyrings/hashicorp-archive-keyring.gpg /usr/share/keyrings/microsoft.gpg
-    sudo apt update && sudo apt install terraform azure-cli jq jo -y
+    sudo apt update && sudo apt install git terraform azure-cli jq -y
     ```
 
-    These commands will install the terraform open source binary, the Azure CLI plus jq and jo which are commonly used for querying or generating JSON. Plus a few prereqs.
+    These commands will install the terraform open source binary, the Azure CLI plus jq and git.
 
-    If you want to customise the colours to match the jsonc output of the Azure CLI then add the following line into your ~/.zshrc file:
+    If you want to customise the colours to match the jsonc output of the Azure CLI then add the following line into your ~/.bashrc file:
 
     ```text
     export JQ_COLORS="1;90:1;34:0;34:1;36:0;33:1;37:1;37"
@@ -111,19 +116,46 @@ This is not a prescriptive configuration. Experienced users will pick a preferre
 
     If not then install [Windows Terminal](https://aka.ms/terminal). Refer to the [Windows Terminal documentation](https://aka/ms/terminaldocs) if you wish to customise.
 
-1. Azure CLI
-
-    Install the Azure CLI using [PowerShell](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=powershell#install-or-update) or [winget](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=winget#install-or-update).
-
 1. Install the terraform binary
 
     Download either x86 or ARM64 from the [downloads](https://developer.hashicorp.com/terraform/install#Windows) page.
 
+1. Winget
+
+    Newer versions of Windows 11 also have winget by default. It is the Windows Package Manager.
+
+    Open a PowerShell windows using Windows Terminal and type `winget` to check if it is there.
+
+    If Winget is not installed there then install the [App Installer on the Microsoft Store](https://www.microsoft.com/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab). (There are other [install options](https://learn.microsoft.com/windows/package-manager/winget/) available.)
+
+1. Git
+
+    ```powershell
+    winget install --exact --id "Git.Git" --accept-source-agreements --accept-package-agreements --silent
+    ```
+
+1. GitHub CLI
+
+    ```powershell
+    winget install --exact --id "GitHub.cli" --silent
+    ```
+
+1. Terraform
+
+    ```powershell
+    winget install --exact --id "Hashicorp.Terraform" --silent
+    ```
+1. Azure CLI
+
+    ```powershell
+    winget install --exact --id "Microsoft.AzureCLI" --silent
+    ```
+
 1. Visual Studio Code
 
-    Download [Visual Studio Code](https://code.visualstudio.com/download) and install.
-
-    Or install using winget with `winget install vscode`.
+    ```powershell
+    winget install --exact --id "Visual Studio Code" --source msstore --accept-package-agreements
+    ```
 
 1. Install the Hashicorp Terraform extension
 
@@ -132,7 +164,6 @@ This is not a prescriptive configuration. Experienced users will pick a preferre
 1. Go to [next steps](#next-steps)
 
 ## macOS
-
 
 1. Homebrew
 
@@ -154,10 +185,16 @@ This is not a prescriptive configuration. Experienced users will pick a preferre
 
     Appearance > General > Theme: Minimal
 
-1. Azure CLI
+1. Git
 
     ```zsh
-    brew install azure-cli
+    brew install git
+    ```
+
+1. GitHub CLI
+
+    ```zsh
+    brew install gh
     ```
 
 1. Install the terraform binary
@@ -165,6 +202,12 @@ This is not a prescriptive configuration. Experienced users will pick a preferre
     ```zsh
     brew tap hashicorp/tap
     brew install hashicorp/tap/terraform
+    ```
+
+1. Azure CLI
+
+    ```zsh
+    brew install azure-cli
     ```
 
 1. Install jq
@@ -232,4 +275,4 @@ As a test, open up your terminal and check the following commands:
 
 This configuration is great if you are working solo. You could recreate the config used in the last lab and deploy if you wish to test. Note that you would have to login using the Azure CLI before running a plan or apply as it will use your Azure CLI token by default.
 
-On the next page you will take your environment a step further using service principals and remote state. This is far more common for production environments, and when you are working in a team.
+On the next page you will configure GitHub for use with a terraform config.
