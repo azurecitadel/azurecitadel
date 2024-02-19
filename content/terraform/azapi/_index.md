@@ -3,7 +3,7 @@ title: "Using AzAPI"
 description: "Bridge any gaps in the Terraform AzureRM provider (and the Go SDK for Azure) with the Terraform AzAPI provider."
 date: 2021-05-04
 draft: false
-weight: 7
+weight: 50
 menu:
   side:
     identifier: 'terraform-azapi'
