@@ -105,7 +105,7 @@ The delete uses the same uri. You specify the `DELETE` method.
 
 The create uses `PUT`, and requires a request body.
 
-1. View the [Resource Groups - Create Or Update](https://docs.microsoft.com/rest/api/resources/resource-groups/delete) documentation
+1. View the [Resource Groups - Create Or Update](https://learn.microsoft.com/en-us/rest/api/resources/resource-groups/create-or-update) documentation
 
     Use the *In this article* link to jump to the [Request Body](https://docs.microsoft.com/rest/api/resources/resource-groups/create-or-update#request-body) and the [Examples](https://docs.microsoft.com/rest/api/resources/resource-groups/create-or-update#request-body)
 
