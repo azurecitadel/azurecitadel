@@ -107,7 +107,7 @@ The create uses `PUT`, and requires a request body.
 
 1. View the [Resource Groups - Create Or Update](https://learn.microsoft.com/rest/api/resources/resource-groups/create-or-update) documentation
 
-    Use the *In this article* link to jump to the [Request Body](https://learn.microsoft.com/rest/api/resources/resource-groups/create-or-update#request-body) and the [Examples](https://learn.microsoft.com/rest/api/resources/resource-groups/create-or-update#request-body)
+    Use the *In this article* link to jump to the [Request Body](https://learn.microsoft.com/rest/api/resources/resource-groups/create-or-update#request-body) and the [Examples](https://learn.microsoft.com/rest/api/resources/resource-groups/create-or-update#examples)
 
     The example JSON request body for resource groups is simple:
 
@@ -169,7 +169,7 @@ The update uses `PATCH` and also requires a JSON request body. We'll use a varia
     )
     ```
 
-    The last command uses a heredoc with a variable. There are other ways of dynamically generating JSON, e.q. `jq`.
+    The last command uses a heredoc with a variable. There are other ways of dynamically generating JSON, e.g. `jq`.
 
 1. Use `az rest` to patch
 
