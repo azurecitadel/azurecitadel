@@ -187,4 +187,4 @@ For those of you attending an Azure Arc partner hack then you should now be good
 The kick off meeting will be in the General channel within the dedicated *Azure Arc Partner Hack* team.
 
 ⚠️ Don't read the next lab page until instructed!
-{{< flash >}}
+{{< /flash >}}
