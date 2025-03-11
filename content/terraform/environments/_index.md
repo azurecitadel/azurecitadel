@@ -1,5 +1,5 @@
 ---
-title: "Environments"
+title: "Working Environments for Terraform"
 description: "Example environments commonly used when deploying infrastructure as code to Azure via Terraform."
 date: 2024-02-19
 draft: false
@@ -12,12 +12,13 @@ menu:
 
 ## Overview
 
-There are many ways to use Terraform with Azure, so here are a few options. Whethere you are working alone or in a team, demoing or deploying to production, running interactively or in a pipeline then this section will give a terse description of the pros and cons, and simple steps.
+Cloud Shell is definitely useful for simple tasks, but it is not always stable for longer sessions.
 
-For consistency we will use the same source repo all the way through, and make use of environment variables.
+Here's a recommended set of tools to install on your laptop to give you a much richer set of functionality when working with Terraform. The instructions help you to install some or all of Visual Studio Code,
+terminal software, git, terraform, the Azure CLI, jq, and the GitHub CLI.
 
-Wherever applicable we will be making use of OpenID Connect to securely federate the security principals with other identity providers such as GitHub and Terraform Cloud.
-
-**More pages coming soon...**
+> This is not a prescriptive configuration. Experienced users will no doubt have their own preferred combination of operating system, IDE, extensions, terminal, etc. This is just a set of useful examples for those who would like a little guidance. Software naturally varies by operating system.
 
 ## Environments
+
+Pick one of the following.
