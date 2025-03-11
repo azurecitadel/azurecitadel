@@ -689,4 +689,13 @@ There are a whole host of [functions](http://jmespath.org/specification.html#bui
 
   Use these to force the output of an expression to fit a certain data type.
 
+  List of VM SKUs that support Encryption at Host:
+
+  ```bash
+  query="[?to_string(capabilities[?name == 'EncryptionAtHostSupported'].value) == '[\"True\"]'].name"
+  az vm list-skus --location uksouth --resource-type virtualMachines --query "$query" --output jsonc
+  ```
+
+  > Note that certain conversion functions such as to_boolean() are not currently available in the version of JMESPATH used by the Azure CLI. This is a workaround.
+
 In the next section we will have some example integrations with Bash scripting.
