@@ -31,7 +31,7 @@ Example commands for Ubuntu 20.04, run from the local directory for the cloned r
 
     ```bash
     hugo_binary=hugo_extended_${hugo_version}_Linux-64bit.deb
-    wget https://github.com/spf13/hugo/releases/download/v$hugo_version/$hugo_binary
+    wget https://github.com/gohugoio/hugo/releases/download/v$hugo_version/$hugo_binary
     ```
 
 1. Install hugo

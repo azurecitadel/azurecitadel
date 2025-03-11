@@ -23,7 +23,7 @@ ENV HUGO_VERSION 0.90.1
 ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
 
 RUN set -x && \
-  wget https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} && \
+  wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} && \
   tar xzf ${HUGO_BINARY} && \
   rm -r ${HUGO_BINARY} && \
   mv hugo /usr/bin
