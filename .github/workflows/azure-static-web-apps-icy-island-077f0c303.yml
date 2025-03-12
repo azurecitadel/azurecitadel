@@ -35,7 +35,6 @@ jobs:
     if: needs.check_source_repo.outputs.source_repo == 'azurecitadel/azurecitadel' && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
     runs-on: ubuntu-latest
     name: Build Job
-
     permissions:
       id-token: write
       contents: read
@@ -94,7 +93,6 @@ jobs:
           api_location: "api"
           skip_app_build: true
           # github_id_token: $\{{ steps.idtoken.outputs.result }}
-
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
