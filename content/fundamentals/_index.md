@@ -1,6 +1,6 @@
 ---
 title: "Fundamentals"
-description: "New to Azure and don't know where to start? Let Azure Dan show you in this introductory video.
+description: "New to Azure and don't know where to start? Let Azure Dan show you in this introductory video."
 author: [ "Dan Baker" ]
 layout: single
 menu:
