@@ -1,6 +1,6 @@
 ---
 title: "Fundamentals"
-description: "New to Azure and don't know where to start? Let Azure Dan show you in this introductory video."
+description: "New to Azure and don't know where to start? Let Azure Dan show you in this introductory video.
 author: [ "Dan Baker" ]
 layout: single
 menu:
@@ -14,9 +14,8 @@ In this session I will take you on a whirlwind tour of Azure and build out a num
 
 {{< youtube id="e10zHCoF4n0" autoplay="false">}}
 
-> Note: This was recorded from a live stream, as such, video quality may be reduced
+> Note: This was recorded from a live stream on 3rd Jun 2020. Video quality is a little low.
 
 ## Resources
 
-* [Download the Slides](https://1drv.ms/p/s!AtMM4n9Lb8PKkeglFr3uuW6OsHLoww?e=tWDR1h)
 * [Microsoft Learn](https://docs.microsoft.com/learn/paths/azure-fundamentals/)
