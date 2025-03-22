@@ -1,89 +1,117 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "End hugo watch",
-			"command": "echo ${input:terminate}",
-			"type": "shell",
-			"problemMatcher": []
-		},
-		{
-			"type": "hugo",
-			"task": "",
-			"group": "build",
-			"problemMatcher": [],
-			"label": "hugo: Build site"
-		},
-		{
-			"type": "hugo",
-			"task": "server",
-			"group": "build",
-			"isBackground": true,
-			"problemMatcher": [
-				{
-					"severity": "error",
-					"fileLocation": "absolute",
-					"owner": "hugo",
-					"pattern": {
-						"regexp": "template: (.*):(\\d+): (.*)",
-						"file": 1,
-						"location": 2,
-						"message": 3,
-						"loop": true
-					},
-					"background": {
-						"activeOnStart": true,
-						"beginsPattern": "Change detected, rebuilding site",
-						"endsPattern": "Total in \\d+ ms"
-					}
-				}
-			],
-			"label": "hugo: Serve site"
-		},
-		{
-			"type": "shell",
-			"command": "npm",
-			"args": [
-				"ci"
-			],
-			"label": "install dependencies"
-		},
-		{
-			"type": "shell",
-			"command": "hugo",
-			"args": [
-				"-w"
-			],
-			"isBackground": true,
-			"problemMatcher": [
-				{
-					"severity": "error",
-					"fileLocation": "absolute",
-					"owner": "hugo",
-					"pattern": {
-						"regexp": "template: (.*):(\\d+): (.*)",
-						"file": 1,
-						"location": 2,
-						"message": 3,
-						"loop": true
-					},
-					"background": {
-						"activeOnStart": true,
-						"beginsPattern": "Start building sites",
-						"endsPattern": "Watching for config changes in"
-					}
-				}
-			],
-			"dependsOn": "install dependencies",
-			"label": "hugo watch"
-		}
-	],
-	"inputs": [
-		{
-			"id": "terminate",
-			"type": "command",
-			"command": "workbench.action.tasks.terminate",
-			"args": "terminateAll"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "End hugo watch",
+      "command": "echo ${input:terminate}",
+      "type": "shell",
+      "problemMatcher": []
+    },
+    {
+      "type": "hugo",
+      "task": "",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "hugo: Build site"
+    },
+    {
+      "type": "hugo",
+      "task": "server",
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "severity": "error",
+          "fileLocation": "absolute",
+          "owner": "hugo",
+          "pattern": {
+            "regexp": "template: (.*):(\\d+): (.*)",
+            "file": 1,
+            "location": 2,
+            "message": 3,
+            "loop": true
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Change detected, rebuilding site",
+            "endsPattern": "Total in \\d+ ms"
+          }
+        }
+      ],
+      "label": "hugo: Serve site"
+    },
+    {
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "ci"
+      ],
+      "label": "install dependencies"
+    },
+    {
+      "type": "shell",
+      "command": "hugo",
+      "args": [
+        "-w"
+      ],
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "severity": "error",
+          "fileLocation": "absolute",
+          "owner": "hugo",
+          "pattern": {
+            "regexp": "template: (.*):(\\d+): (.*)",
+            "file": 1,
+            "location": 2,
+            "message": 3,
+            "loop": true
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Start building sites",
+            "endsPattern": "Watching for config changes in"
+          }
+        }
+      ],
+      "dependsOn": "install dependencies",
+      "label": "hugo watch"
+    },
+    {
+      "type": "func",
+      "label": "func: host start",
+      "command": "host start",
+      "problemMatcher": "$func-node-watch",
+      "isBackground": true,
+      "dependsOn": "npm install (functions)",
+      "options": {
+        "cwd": "${workspaceFolder}/api"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "npm install (functions)",
+      "command": "npm install",
+      "options": {
+        "cwd": "${workspaceFolder}/api"
+      }
+    },
+    {
+      "type": "shell",
+      "label": "npm prune (functions)",
+      "command": "npm prune --production",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/api"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "terminate",
+      "type": "command",
+      "command": "workbench.action.tasks.terminate",
+      "args": "terminateAll"
+    }
+  ]
 }

@@ -1,37 +1,45 @@
 {
-    "version": "0.2.0",
-    "compounds": [
-        {
-            "name": "Run Static Web App",
-            "configurations": [
-                "Run SWA emulator"
-            ],
-            "presentation": {
-                "hidden": false,
-                "group": "",
-                "order": 1
-            }
-        }
-    ],
-    "configurations": [
-        {
-            "name": "Run SWA emulator",
-            "type": "node-terminal",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "command": "swa start ./public",
-            "preLaunchTask": "hugo watch",
-            "postDebugTask": "End hugo watch",
-            "serverReadyAction": {
-                "pattern": "[swa] Azure Static Web Apps emulator started at http://localhost:([0-9]+)",
-                "uriFormat": "http://localhost:%s",
-                "action": "openExternally"
-            },
-            "presentation": {
-                "hidden": true,
-                "group": "",
-                "order": 3
-            }
-        }
-    ]
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Run Static Web App",
+      "configurations": [
+        "Run SWA emulator"
+      ],
+      "presentation": {
+        "hidden": false,
+        "group": "",
+        "order": 1
+      }
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Run SWA emulator",
+      "type": "node-terminal",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "command": "swa start ./public",
+      "preLaunchTask": "hugo watch",
+      "postDebugTask": "End hugo watch",
+      "serverReadyAction": {
+        "pattern": "[swa] Azure Static Web Apps emulator started at http://localhost:([0-9]+)",
+        "uriFormat": "http://localhost:%s",
+        "action": "openExternally"
+      },
+      "presentation": {
+        "hidden": true,
+        "group": "",
+        "order": 3
+      }
+    },
+    {
+      "name": "Attach to Node Functions",
+      "type": "node",
+      "request": "attach",
+      "restart": true,
+      "port": 9229,
+      "preLaunchTask": "func: host start"
+    }
+  ]
 }
