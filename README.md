@@ -101,9 +101,27 @@ Instructions taken from the [Hugo readme](https://github.com/gohugoio/hugo?tab=r
 
     The resulting files will be written to ~/go/bin and the directory should be added to your path.
 
+## Set hold
+
+To ensure apt doesn't update to the most recent, mark the package.
+
+1. Set hold
+
+    ```shell
+    sudo apt-mark hold hugo
+    ```
+
+1. List the holds
+
+    ```shell
+    sudo apt-mark showhold
+    ```
+
 ## Run Hugo
 
 1. Check location and version
+
+    You may need to refresh the session if the path has changed.
 
     ```shell
     which hugo && hugo version
