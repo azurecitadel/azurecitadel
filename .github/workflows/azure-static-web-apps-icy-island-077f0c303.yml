@@ -79,9 +79,8 @@ jobs:
           app_location: "public"
           api_location: "api"
           skip_app_build: true
-          # github_id_token: $\{{ steps.idtoken.outputs.result }}
-
-
+        env:
+          AZURE_STATIC_WEB_APPS_APP_INSIGHTS_CONNECTION_STRING: ${{ secrets.AZURE_STATIC_WEB_APPS_APP_INSIGHTS_CONNECTION_STRING }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
