@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@microsoft/applicationinsights-web": "^3.3.6",
     "@primer/css": "^19.1.0",
     "@primer/octicons": "^16.2.0",
     "highlight.js": "^11.4.0"

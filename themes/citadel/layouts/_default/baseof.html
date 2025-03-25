@@ -1,30 +1,19 @@
-<html data-color-mode="auto" data-light-theme="light" data-dark-theme="dark_dimmed" prefix="og: http://ogp.me/ns#" lang="{{ .Language }}">
+<html data-color-mode="auto" data-light-theme="light" data-dark-theme="dark_dimmed" prefix="og: http://ogp.me/ns#"
+  lang="{{ .Language }}">
 
 {{- partial "head.html" . -}}
 
 <body class="width-full overflow-hidden">
-    <main class="d-flex flex-auto flex-row width-full overflow-hidden" style="height: 100%">
-        {{- partial "sidebar.html" . -}}
+  <main class="d-flex flex-auto flex-row width-full overflow-hidden" style="height: 100%">
+    {{- partial "sidebar.html" . -}}
 
-        <div class="d-flex flex-column width-full overflow-y-auto" style="height: 100%">
-        {{- block "main" . }}{{- end }}
-        </div>
-    </main>
+    <div class="d-flex flex-column width-full overflow-y-auto" style="height: 100%">
+      {{- block "main" . }}{{- end }}
+    </div>
+  </main>
 
 </body>
 
 {{- block "embedded-script" . }}{{- end }}
-
-<head>
-    <!-- Other head content -->
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://js.monitor.azure.com/scripts/b/ai.2.min.js";
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        c[a]("setInstrumentationKey", "814c15ff-d60f-44f1-a80c-ace8fbaeb6d5");
-      })(window,document,"appInsights","script");
-    </script>
-  </head>
 
 </html>
