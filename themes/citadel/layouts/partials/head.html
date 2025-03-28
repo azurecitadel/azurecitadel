@@ -26,7 +26,7 @@
          // onInit: null, // Once the application insights instance has loaded and initialized this callback function will be called with 1 argument -- the sdk instance (DON'T ADD anything to the sdk.queue -- As they won't get called)
          // sri: false, // Custom optional value to specify whether fetching the snippet from integrity file and do integrity check
          cfg: { // Application Insights Configuration
-            connectionString: "{{ getenv "AZURE_STATIC_WEB_APPS_APP_INSIGHTS_CONNECTION_STRING" }}",
+            connectionString: "InstrumentationKey=814c15ff-d60f-44f1-a80c-ace8fbaeb6d5;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/;ApplicationId=3efb26ea-4268-486b-9504-c39bdb9edb51",
          }
       });
    </script>
