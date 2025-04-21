@@ -5,5 +5,6 @@ date: 2021-02-01
 draft: false
 menu:
   side:
+    parent: archive
     identifier: 'network'
 ---

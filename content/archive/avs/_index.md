@@ -5,6 +5,7 @@ author: [ "Richard Cheney" ]
 layout: single
 menu:
   side:
+    parent: archive
     identifier: avs
 ---
 

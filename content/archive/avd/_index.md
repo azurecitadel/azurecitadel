@@ -3,9 +3,9 @@ title: "Azure Virtual Desktop"
 description: "Azure Virtual Desktop (AVD) is one of the hottest services on Azure right now. Here is a great video series and links to our favourite resources."
 author: [ "Dan Baker", "George Wood" ]
 layout: single
-toc: 3
 menu:
   side:
+    parent: archive
     identifier: avd
 ---
 
