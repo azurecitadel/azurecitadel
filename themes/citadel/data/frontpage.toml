@@ -3,36 +3,36 @@ name = "Azure Arc"
 url = "/arc"
 
 [[frontpage]]
+name = "Azure CLI"
+url = "/cli"
+
+[[frontpage]]
 name = "Azure Landing Zones"
 url = "/alz"
+
+[[frontpage]]
+name = "Azure Policy"
+url = "/policy"
 
 [[frontpage]]
 name = "Azure Stack HCI"
 url = "/arc"
 
 [[frontpage]]
-name = "Azure Virtual Desktop"
-url = "/avd"
-
-[[frontpage]]
-name = "CLI"
-url = "/cli"
-
-[[frontpage]]
-name = "Fundamentals"
-url = "/fundamentals"
-
-[[frontpage]]
 name = "Marketplace"
 url = "/marketplace"
 
 [[frontpage]]
-name = "Network"
-url = "/network"
+name = "Packer & Ansible"
+url = "/packeransible"
 
 [[frontpage]]
 name = "Partner"
 url = "/partner"
+
+[[frontpage]]
+name = "REST API"
+url = "/rest-api"
 
 [[frontpage]]
 name = "Setup"

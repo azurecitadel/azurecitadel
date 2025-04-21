@@ -1,5 +1,5 @@
 ---
-title: "Policy"
+title: "Azure Policy"
 description: "Governance Labs for Azure Policy"
 menu:
   side:
