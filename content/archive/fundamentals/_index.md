@@ -5,6 +5,7 @@ author: [ "Dan Baker" ]
 layout: single
 menu:
   side:
+    parent: archive
     identifier: fundamentals
 ---
 

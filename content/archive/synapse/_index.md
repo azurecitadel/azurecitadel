@@ -4,17 +4,16 @@ url: "/analytics/synapse/sap"
 author: [ "Mahesh Balija" ]
 description: "SAP integration with Azure Synapse Analytics"
 date: 2021-01-06
-weight: 60
 style: list
 menu:
   side:
-    parent: analytics
+    parent: archive
     identifier: sap-asa-integration
 ---
 
 ## SAP and Azure Synapse Analytics Integration Overview:
 
-Data is core currency!. Empowering the employees to make Data driven decisions is the key to the success of most of the organizations. Today data resides in disparate source systems. Integrating data from these disparate data sources poses huge challenge for most of the organizations. Azure Synapse Analytics simplifies the Data Integration, Data Analytics, Data Science, Reporting. Implementing the Cloud based Modern Data Warehouse on Azure is made easy through Azure Synapse Analytics. 
+Data is core currency!. Empowering the employees to make Data driven decisions is the key to the success of most of the organizations. Today data resides in disparate source systems. Integrating data from these disparate data sources poses huge challenge for most of the organizations. Azure Synapse Analytics simplifies the Data Integration, Data Analytics, Data Science, Reporting. Implementing the Cloud based Modern Data Warehouse on Azure is made easy through Azure Synapse Analytics.
 
 Integrating SAP data with wider organizational data and building analytics is critical. We have created this 5 part series for integrating the SAP data with other data sources, building Analytics, Predictive Modeling, Reporting using Azure Synapse Analytics.
 
@@ -26,7 +25,7 @@ In this session we will set the business context, outline challenges in SAP data
 
 {{< youtube id="uSKIQPHuXBM" autoplay="false">}}
 
-### Episode 2: Technical Overview of SAP and Azure Synapse Analytics integration 
+### Episode 2: Technical Overview of SAP and Azure Synapse Analytics integration
 
 In this session we will walk through a sample reference architecture and the technical overview.
 

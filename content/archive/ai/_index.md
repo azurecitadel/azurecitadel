@@ -3,9 +3,9 @@ title: "AI"
 description: "Azure offers a wide range of artificial intelligence based services. This video will describe some of these, from the AI trained models embedded into Azure services, to pretrained services and frameworks to train your own."
 author: [ "Dan Baker" ]
 layout: single
-toc: 3
 menu:
   side:
+    parent: archive
     identifier: ai
 ---
 
