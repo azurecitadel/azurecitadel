@@ -18,7 +18,10 @@ aliases:
 
 If you do not have a GitHub ID already then sign up.
 
-* [Join GitHub](https://github.com/join)
+* [Join GitHub](https://github.com/join) if you don't have an ID already
+* Make sure you have the [GitHub CLI](https://cli.github.com/) installed
+
+Check you can login with `gh auth login` and `gh auth status`.
 
 ## MacOS or Linux
 
