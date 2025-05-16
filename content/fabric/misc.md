@@ -22,4 +22,4 @@ See the [Fabric API](https://learn.microsoft.com/rest/api/fabric/articles/) and 
 
 Note that the fabricId is inexplicably unavailable via the [Azure REST API](https://learn.microsoft.com/en-us/rest/api/microsoftfabric/fabric-capacities/list-by-resource-group) (and therefore `az fabric capacity list` or Terraform's [azurerm_fabric_capacity](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/fabric_capacity)).
 
-As a side noe, the EOL on non-Windows systems is CRLF on preview version 0.2.0. You can work around this in scripts by using jq, e.g. `fabricId=$(fab get .capacities/shared.Capacity -q . | jq -r .fabricId)`.
+As a side noe, the EOL on non-Windows systems is CRLF on preview version 0.2.0. You can work around this in scripts by using jq, e.g. `fabricId=$(fab get .capacities/example.Capacity -q . | jq -r .fabricId)`.

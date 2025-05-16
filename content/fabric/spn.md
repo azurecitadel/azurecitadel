@@ -9,7 +9,7 @@ menu:
     identifier: fabric-spn
 series:
  - fabric_terraform_administrator
-weight: 30
+weight: 35
 ---
 
 ## Introduction
