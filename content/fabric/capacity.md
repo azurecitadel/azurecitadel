@@ -86,7 +86,8 @@ You cannot assign a guest user as a Capacity Admin.
 
 You can also view and modify capacities in the Admin Portal if you have the Fabric Administrator role in Entra. This is one of the easiest places to set any Contributors on a Fabric capacity.
 
-- [https://app.powerbi.com](https://app.powerbi.com?experience=fabric-developer)
+- Open [Fabric Portal](https://app.powerbi.com?experience=fabric-developer)
+  - click on the bottom left to toggle between Power BI and Fabric experiences
 - click on the Settings cog at the top right
 - Admin Portal
 - Capacity settings
