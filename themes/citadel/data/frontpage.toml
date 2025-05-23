@@ -23,6 +23,10 @@ name = "Marketplace"
 url = "/marketplace"
 
 [[frontpage]]
+name = "Microsoft Fabric"
+url = "/fabric"
+
+[[frontpage]]
 name = "Packer & Ansible"
 url = "/packeransible"
 
@@ -33,10 +37,6 @@ url = "/partner"
 [[frontpage]]
 name = "REST API"
 url = "/rest-api"
-
-[[frontpage]]
-name = "Setup"
-url = "/setup"
 
 [[frontpage]]
 name = "Terraform"
