@@ -94,6 +94,8 @@ This step is recommended but you will need the appropriate permissions to create
 
 ## Enable use within Fabric
 
+### Configure Developer settings in Tenant settings
+
 - Open [Fabric Portal](https://app.powerbi.com?experience=fabric-developer)
   - click on the bottom left to toggle between Power BI and Fabric experiences
 - click on the Settings cog at the top right
@@ -106,7 +108,66 @@ This step is recommended but you will need the appropriate permissions to create
   - the entire organisation
   - a specific security group (preferred)
 
-  ![Screenshot of the Fabric Admin Portal showing the new security group in the developer settings](/fabric/images/adminPortal_capacity_list.png)
+  ![Screenshot of the Fabric Admin Portal showing the new security group in the developer settings](/fabric/images/adminPortal_developer_settings.png)
+
+### Add access to the capacity (F-SKU only)
+
+You can either add it as an Administrator to the F-SKU or a Contributor.
+
+#### Administrator
+
+1. Variables
+
+    ```shell
+    identity_name="fabric_terraform_provider"
+    identity_resource_group="terraform"
+    capacity_name="example"
+    capacity_resource_group="fabric"
+    ```
+
+1. Work out the extended administrators property
+
+    ```shell
+    identityObjectId=$(az identity show --name fabric_terraform_provider --resource-group terraform --query principalId -otsv)
+    current=$(az fabric capacity show --name example --resource-group fabric --query administration.members -ojson)
+    updated=$(jq -c --arg oid "$identityObjectId" '. + [$oid]|{members: .}' <<< $current)
+    ```
+
+    Note that in the administrators array you must specify the
+
+    - user principal name (UPN) for users
+    - object ID for workload identities (service principals and managed identities)
+
+1. Update the Fabric SKU
+
+    ```shell
+    az fabric capacity update --name example --resource-group fabric --administration $updated
+    ```
+
+    Example output:
+
+    ```json
+    {
+      "administration": {
+        "members": [
+          "admin@MngEnvMCAP520989.onmicrosoft.com",
+          "806dac5a-24b9-49ae-8e2b-4b777e8eaaf8"
+        ]
+      },
+      "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/fabric/providers/Microsoft.Fabric/capacities/example",
+      "location": "UK South",
+      "name": "example",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "fabric",
+      "sku": {
+        "name": "F2",
+        "tier": "Fabric"
+      },
+      "state": "Active",
+      "tags": {},
+      "type": "Microsoft.Fabric/capacities"
+    }
+    ```
 
 ## Azure RBAC role assignments
 
@@ -117,7 +178,7 @@ The identity needs to be able to write to the storage account's prod container f
     ```shell
     objectId=$(az identity show --name fabric_terraform_provider --resource-group $rg --query principalId -otsv)
     storageAccountId=$(az storage account list --resource-group terraform --query "[?starts_with(name, 'terraformfabric')]|[0].id" -otsv)
-    az role assignment create --assignee-object-id $objectId --assignee-principal-type ServicePrincipal --scope "$storage_account_id/blobServices/default/containers/prod" --role "Storage Blob Data Contributor"
+    az role assignment create --assignee-object-id $objectId --assignee-principal-type ServicePrincipal --scope "$storageAccountId/blobServices/default/containers/prod" --role "Storage Blob Data Contributor"
     ```
 
 1. **Assign additional roles as required** (optional)
@@ -129,13 +190,14 @@ The identity needs to be able to write to the storage account's prod container f
     az role assignment create --assignee-object-id $objectId --assignee-principal-type ServicePrincipal --scope "$scope" --role "Contributor"
     ```
 
-    ⚠️ The next section is optional and a little lengthy, so feel free to skip to [Next](#next).
-
 ## Entra ID app roles (optional)
 
-You can also add app roles to the managed identity. This is not as common, and requires REST API calls if you're not using PowerShell. This section requires jq.
+You can also add app roles to the managed identity for use with Microsoft Graph and other APIs. As an example, here are the steps to add _User.ReadBasic.All_ and _Group.Read.All_ if you want to use the data sources in the azuread provider.
 
-Here are the steps to add _User.ReadBasic.All_, _Group.Read.All_, if you want to use the data sources in the azuread provider.
+⚠️ This section is entirely optional and a little lengthy, so feel free to skip to [Next](#next).
+
+
+This configuration is not as common for managed identities as it is for service principals. It requires a few REST API calls if you're not using PowerShell. This section makes use of jq.
 
 1. **Get the objectId for the Graph App ID**
 
