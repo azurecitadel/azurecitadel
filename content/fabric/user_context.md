@@ -1,6 +1,6 @@
 ---
 title: "User context"
-description: "Configure the user context and test locally in a workspace."
+description: "Configure the user context for using the fabric Terraform provider with selected API permissions within user impersonation."
 layout: single
 draft: false
 menu:
