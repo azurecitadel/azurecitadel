@@ -1,6 +1,6 @@
 ---
 title: "Managed Identity"
-description: "Configure a managed identity for use with the Fabric provider."
+description: "Configure a managed identity ready for use with the fabric Terraform provider in a pipeline context."
 layout: single
 draft: false
 menu:

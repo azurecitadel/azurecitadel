@@ -1,6 +1,6 @@
 ---
 title: "Terraform"
-description: "Run the Terraform workflow in the user context and modify the config."
+description: "Run the Terraform workflow in the user context and modify the config with a simple RBAC assignment. "
 layout: single
 draft: false
 menu:
