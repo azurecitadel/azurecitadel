@@ -14,13 +14,13 @@ weight: 10
 
 ## Quick check
 
-1. Authenticate with the Fabric CLI
+1. Check your Fabric CLI authentication status
 
     ```shell
-    fab auth login
+    fab auth status
     ```
 
-    Think you're already logged in? Check current authentication status with `fab auth status`.
+    Not logged in? Log in with `fab auth login`.
 
 1. List the available capacities.
 
