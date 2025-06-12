@@ -1,5 +1,5 @@
 ---
-title: "GitLab"
+title: "GitLab pipeline for Microsoft Fabric"
 description: "See how GitLab differs from GitHub when configuring OpenID Connect and workflows."
 layout: single
 draft: false
@@ -14,7 +14,7 @@ weight: 50
 
 ## Introduction
 
-There are numerous cloud Git platforms that could host your Microsoft Fabric deployment workflows. The two most commonly used on Azure are the first party products, i.e. GitHub Actions and Azure DevOps pipelines, but OpenID Connect is part of the OAuth2.0 open standard and supports a wide range of third party platforms.
+There are numerous cloud Git platforms that could host your Microsoft Fabric deployment workflows. The two most commonly used on Azure are the first party products, i.e. GitHub Actions and Azure DevOps pipelines, but you have a far greater range of options as OpenID Connect is part of the OAuth2.0 open standard and enjoys wide support. One of those is GitLab, and this page will explore how you integrate GitLab and Microsoft Fabric
 
 In practice most workload identities serve a specific purpose and you will normally see a single federated credential representing a 1:1 relationship between the trusted identity provider (IdP) and the context. However, the platform does support up to ten federated credentials so no problem with adding one.
 

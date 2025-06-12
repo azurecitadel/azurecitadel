@@ -1,5 +1,5 @@
 ---
-title: "GitHub Actions"
+title: "GitHub Actions for Microsoft Fabric"
 description: "Configure OpenID Connect and GitHub Actions variables and test your repo's CI/CD pipeline."
 layout: single
 draft: false

@@ -1,5 +1,5 @@
 ---
-title: "Fabric Capacity"
+title: "Using a Fabric Capacity"
 description: "You will need a Fabric capacity for this quickstart. List T-, P, and F-SKUs with the Fabric CLI and understand access to F-SKUs."
 layout: single
 draft: false

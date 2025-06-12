@@ -1,6 +1,6 @@
 ---
-title: "User context"
-description: "Configure the user context for using the fabric Terraform provider with selected API permissions within user impersonation."
+title: "Config for solo Terraform development"
+description: "Configure the the user context so that you can begin using the fabric Terraform provider in a solo context. Configure selected API permissions within user impersonation. and expose the API endpoint."
 layout: single
 draft: false
 menu:

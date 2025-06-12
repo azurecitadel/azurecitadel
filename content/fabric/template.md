@@ -1,5 +1,5 @@
 ---
-title: "GitHub template"
+title: "Create a repo from a GitHub template"
 description: "Create a repo in GitHub from the template and then clone it locally."
 layout: single
 draft: false
