@@ -1,5 +1,5 @@
 ---
-title: "Remote State"
+title: "Configure a Remote State"
 description: "Configure a storage account for use as a remote state in Terraform."
 layout: single
 draft: false
