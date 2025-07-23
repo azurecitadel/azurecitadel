@@ -1,5 +1,5 @@
 ---
-title: "Using a Fabric Capacity"
+title: "Fabric Capacity"
 description: "You will need a Fabric capacity for this quickstart. List T-, P, and F-SKUs with the Fabric CLI and understand access to F-SKUs."
 layout: single
 draft: false
@@ -51,9 +51,9 @@ As per the table above, you have three SKU options to create a for Fabric capaci
     Example commands to create an F2 SKU:
 
     ```bash
-    az group create --name "fabric" --location "UK South"
+    az group create --name "rg-fabric" --location "UK South"
     upn=$(az ad signed-in-user show --query userPrincipalName -otsv)
-    az fabric capacity create --capacity-name "example" --resource-group "fabric" --location "UK South" --sku "{name:F2,tier:Fabric}" --administration "{members:[${upn}]}"
+    az fabric capacity create --capacity-name "example" --resource-group "rg-fabric" --location "UK South" --sku "{name:F2,tier:Fabric}" --administration "{members:[${upn}]}"
     ```
 
 1. **Premium Per User Capacity (P-SKU)**
@@ -171,7 +171,7 @@ When automating, one of the easiest ways to list the capacities available to you
           ]
         }
       },
-      "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/fabric/providers/Microsoft.Fabric/capacities/example",
+      "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/rg-fabric/providers/Microsoft.Fabric/capacities/example",
       "name": "example",
       "type": "Microsoft.Fabric/capacities",
       "location": "UK South",
