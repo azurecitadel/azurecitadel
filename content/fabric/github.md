@@ -9,7 +9,7 @@ menu:
     identifier: fabric-github
 series:
  - fabric_terraform_administrator
-weight: 40
+weight: 60
 
 ---
 

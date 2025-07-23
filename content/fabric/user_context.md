@@ -1,5 +1,5 @@
 ---
-title: "Config for solo Terraform development"
+title: "Configure an app reg for development"
 description: "Configure the the user context so that you can begin using the fabric Terraform provider in a solo context. Configure selected API permissions within user impersonation. and expose the API endpoint."
 layout: single
 draft: false
@@ -40,19 +40,26 @@ In this section you will:
 1. add on delegated API permissions for the Power BI service (which is also used by Fabric) and the Microsoft Graph
 1. create an API endpoint
 1. authenticate against the API endpoint as a target
-1. Confirm Terraform access using the template repo
 
 At the bottom of the page you will find a summary of the commands for speed.
 
 ## Create the app reg
 
+1. Define an identifier URI
+
+    ℹ️ Updated as the URI now needs to comply with <https://aka.ms/identifier-uri-formatting-error>.
+
+    ```shell
+    domain=$(az account show --query tenantDefaultDomain -otsv | tr "[[:upper:]]" "[[:lower:]]")
+    name=fabric_terraform_provider
+    uri="api://$domain/$name"
+    ```
+
 1. Create the app reg itself.
 
     ```shell
-    az ad app create --display-name fabric_terraform_provider --identifier-uris api://fabric_terraform_provider
+    az ad app create --display-name $name --identifier-uris $uri
     ```
-
-    Note that we will use the identifier URI api://fabric_terraform_provider throughout this page.
 
     [Microsoft Entra admin center](https://entra.microsoft.com/#home) > App registrations > All applications > filter to `fabric_terraform_provider`
 
@@ -61,7 +68,7 @@ At the bottom of the page you will find a summary of the commands for speed.
 1. Add the delegated API permissions
 
     ```shell
-    az ad app update --id api://fabric_terraform_provider --required-resource-accesses @files/manifest.scope.json
+    az ad app update --id $uri --required-resource-accesses @files/manifest.scope.json
     ```
 
     ![Screenshot showing the addition of delegated API permissions in Microsoft Entra admin center.](/fabric/images/user_context_delegated_api_permissions.png)
@@ -73,13 +80,13 @@ At the bottom of the page you will find a summary of the commands for speed.
     Define a scope
 
     ```shell
-    az ad app update --id api://fabric_terraform_provider --set api=@files/api.expose.json
+    az ad app update --id $uri --set api=@files/api.expose.json
     ```
 
     Add pre-authorizations for Azure CLI, PowerShell and Power BI
 
     ```shell
-    az ad app update --id api://fabric_terraform_provider --set api=@files/api.preauthorize.json
+    az ad app update --id $uri --set api=@files/api.preauthorize.json
     ```
 
     ![Screenshot showing the API exposure settings in Microsoft Entra admin center.](/fabric/images/user_context_expose.png)
@@ -87,7 +94,7 @@ At the bottom of the page you will find a summary of the commands for speed.
 1. Add yourself as owner
 
     ```shell
-    az ad app owner add --id api://fabric_terraform_provider --owner-object-id $(az ad signed-in-user show --query id -otsv)
+    az ad app owner add --id $uri --owner-object-id $(az ad signed-in-user show --query id -otsv)
     ```
 
     The app reg will now show in the default Owned Applications tab.
@@ -101,7 +108,7 @@ This section has been included in case you want to do a full comparison of the c
 1. Show full output for the app reg
 
     ```shell
-    az ad app show --id api://fabric_terraform_provider --output jsonc
+    az ad app show --id $uri --output jsonc
     ```
 
     Example output
@@ -166,7 +173,7 @@ This section has been included in case you want to do a full comparison of the c
       "groupMembershipClaims": null,
       "id": "<objectId>",
       "identifierUris": [
-        "api://fabric_terraform_provider"
+        "api://contoso.com/fabric_terraform_provider"
       ],
       "info": {
         "logoUrl": null,
@@ -255,24 +262,36 @@ This section has been included in case you want to do a full comparison of the c
     }
     ```
 
-## Full set of commands
+## Full set
 
-Again, for ease of use here are the full commands to configure the user context app reg.
+Here is the full set of commands using inline JSON, in case you need to run them outside of the context of these labs.
 
 ```shell
-az ad app create --display-name fabric_terraform_provider --identifier-uris api://fabric_terraform_provider
-az ad app update --id api://fabric_terraform_provider --required-resource-accesses @files/manifest.scope.json
-az ad app update --id api://fabric_terraform_provider --set api=@files/api.expose.json
-az ad app update --id api://fabric_terraform_provider --set api=@files/api.preauthorize.json
-az ad app owner add --id api://fabric_terraform_provider --owner-object-id $(az ad signed-in-user show --query id -otsv)
+name=fabric_terraform_provider
+uri="api://$(az account show --query tenantId -otsv)/$name"
+
+az ad app create --display-name $name --identifier-uris $uri
+az ad app update --id $uri --required-resource-accesses '[{"resourceAppId":"00000003-0000-0000-c000-000000000000","resourceAccess":[{"id":"e1fe6dd8-ba31-4d61-89e7-88639da4683d","type":"Scope"},{"id":"b340eb25-3456-403f-be2f-af7a0d370277","type":"Scope"}]},{"resourceAppId":"00000009-0000-0000-c000-000000000000","resourceAccess":[{"id":"4eabc3d1-b762-40ff-9da5-0e18fdf11230","type":"Scope"},{"id":"b2f1b2fa-f35c-407c-979c-a858a808ba85","type":"Scope"},{"id":"445002fb-a6f2-4dc1-a81e-4254a111cd29","type":"Scope"},{"id":"8b01a991-5a5a-47f8-91a2-84d6bfd72c02","type":"Scope"}]}]'
+echo "Added roles"
+az ad app update --id $uri --set api='{"acceptMappedClaims":null,"knownClientApplications":[],"oauth2PermissionScopes":[{"adminConsentDescription":"Allows connection to backend services for Microsoft Fabric Terraform Provider","adminConsentDisplayName":"Microsoft Fabric Terraform Provider","id":"1ca1271c-e2c0-437c-af9a-3a92e745a24d","isEnabled":true,"type":"User","userConsentDescription":"Allows connection to backend services for Microsoft Fabric Terraform Provider","userConsentDisplayName":"Microsoft Fabric Terraform Provider","value":"access"}],"preAuthorizedApplications":[],"requestedAccessTokenVersion":null}'
+echo "Added endpoint"
+az ad app update --id $uri --set api='{"acceptMappedClaims":null,"knownClientApplications":[],"oauth2PermissionScopes":[{"adminConsentDescription":"Allows connection to backend services for Microsoft Fabric Terraform Provider","adminConsentDisplayName":"Microsoft Fabric Terraform Provider","id":"1ca1271c-e2c0-437c-af9a-3a92e745a24d","isEnabled":true,"type":"User","userConsentDescription":"Allows connection to backend services for Microsoft Fabric Terraform Provider","userConsentDisplayName":"Microsoft Fabric Terraform Provider","value":"access"}],"preAuthorizedApplications":[{"appId":"871c010f-5e61-4fb1-83ac-98610a7e9110","delegatedPermissionIds":["1ca1271c-e2c0-437c-af9a-3a92e745a24d"]},{"appId":"00000009-0000-0000-c000-000000000000","delegatedPermissionIds":["1ca1271c-e2c0-437c-af9a-3a92e745a24d"]},{"appId":"1950a258-227b-4e31-a9cf-717495945fc2","delegatedPermissionIds":["1ca1271c-e2c0-437c-af9a-3a92e745a24d"]},{"appId":"04b07795-8ddb-461a-bbee-02f9e1bf7b46","delegatedPermissionIds":["1ca1271c-e2c0-437c-af9a-3a92e745a24d"]}],"requestedAccessTokenVersion":null}'
+echo "Authorised Azure CLI, PowerShell and PowerBI"
+az ad app owner add --id $uri --owner-object-id $(az ad signed-in-user show --query id -otsv)
+echo "Added owner"
+az ad app show --id $uri --output jsonc
+echo "App Registration created. Authenticate with:"
+echo "az login --scope $uri/.default"
 ```
+
+Slightly longer, but they do exactly the same.
 
 ## Authenticate to the scope
 
 1. Authenticate against your exposed API
 
     ```shell
-    az login --scope api://fabric_terraform_provider/.default --tenant $(az account show --query tenantId -otsv)
+    az login --scope api://$(az account show --query tenantId -otsv)/fabric_terraform_provider/.default
     ```
 
     > Note that there may be a slight delay for the previous commands to propagate. If this commands fails then wait 5 seconds and try again.

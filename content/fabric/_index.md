@@ -14,8 +14,11 @@ Microsoft Fabric is a powerful platform for data integration and analytics, and 
 
 [Fabric Admins](https://learn.microsoft.com/fabric/admin/microsoft-fabric-admin) have previously had the option of click-ops in the Microsoft Fabric portal or automating by driving the Fabric REST APIs. The landscape has changed with the general availability of both the [Terraform provider for Microsoft Fabric](https://blog.fabric.microsoft.com/blog/terraform-provider-for-microsoft-fabric-now-generally-available) and the [Fabric CLI](https://blog.fabric.microsoft.com/blog/fabric-cli-is-now-generally-available-explore-and-automate-microsoft-fabric-from-your-terminal), opening up new opportunities to manage your Fabric resources in line with your existing Terraform workflows. There are a few nuances compares to using Terraform with standard Azure resources but everything will become clearer when you follow our quickstart.
 
-These labs will guide you through setting up the prerequisites, such as ensuring you have a Fabric license and capacity, installing the Fabric extension for Azure CLI, and configuring a storage account for Terraform state with enforced RBAC. You'll also learn how to configure an app registration for user context, test Terraform configurations locally in a test workspace, and push your configurations into a GitHub repository. Additionally, we'll cover creating an OpenID Connect managed identity for the Fabric provider and understanding the GitHub workflow for deploying your infrastructure as code. By the end of these labs, you'll have a solid foundation for managing Microsoft Fabric resources using Terraform and the Fabric CLI.
+## Repos
 
-If you want quick links to the repos, then here is the [Fabric Terraform Provider Quickstart](https://github.com/richeney/fabric_terraform_provider_quickstart) and [Terraform Fabric Administrator Reference repo](https://github.com/richeney/terraform_fabric_administrator_reference).
+- [Fabric Terraform Provider Quickstart](https://github.com/richeney/fabric_terraform_provider_quickstart)
+- [Terraform Fabric Administrator Reference repo](https://github.com/richeney/terraform_fabric_administrator_reference)
 
 ## Labs
+
+Use the series of labs below to go steadily through the flow of working solo and developing a config, and then automating with a CI/CD workflow and workload identity. If you then want to shortcut then feel free to use the page I reference for [demos](./demo).

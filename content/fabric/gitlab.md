@@ -9,7 +9,7 @@ menu:
     identifier: fabric-gitlab
 series:
  - fabric_terraform_administrator
-weight: 50
+weight: 65
 ---
 
 ## Introduction

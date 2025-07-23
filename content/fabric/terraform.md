@@ -1,6 +1,6 @@
 ---
-title: "Using the fabric Terraform provider"
-description: "Run the Terraform workflow in the user context and modify the config with a simple RBAC assignment. "
+title: "Initial Terraform workflow"
+description: "Run the Terraform workflow in the user context and modify the config with a simple RBAC assignment."
 layout: single
 draft: false
 menu:

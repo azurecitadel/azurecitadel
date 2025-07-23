@@ -1,5 +1,5 @@
 ---
-title: "Set up a Managed Identity"
+title: "Configure a workload identity"
 description: "Configure a managed identity ready for use with the fabric Terraform provider in a pipeline context."
 layout: single
 draft: false
@@ -9,7 +9,7 @@ menu:
     identifier: fabric-mi
 series:
  - fabric_terraform_administrator
-weight: 35
+weight: 50
 ---
 
 ## Introduction
@@ -18,7 +18,7 @@ On this page we will create a managed identity that can be used by CI/CD pipelin
 
 Note that this will won't touch any CI/CD platform specifics until the following GitHub page. This will be a cleaner break point for those of you who want to look at Azure DevOps or GitLab as alternatives to using GitHub as we will follow a similar process.
 
-The process follows the [Creating an App Registration for the Service Principal context (SPN)](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/guides/auth_app_reg_spn) page but in a managed identity context.
+The process follows the [Creating an App Registration for the Service Principal context (SPN)](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/guides/auth_app_reg_spn) page but for a user assigned managed identity instead of a service principal.
 
 ## Service Principal / Managed Identity overview
 
@@ -59,6 +59,8 @@ We will create the user assigned managed identity in the same resource group as 
     ```shell
     rg=terraform
     loc=uksouth
+    managed_identity_name="mi-terraform"
+    management_subscription_id="<subscription_guid>"
     ```
 
 1. **Switch subscriptions** (optional)
@@ -192,10 +194,9 @@ The identity needs to be able to write to the storage account's prod container f
 
 ## Entra ID app roles (optional)
 
-You can also add app roles to the managed identity for use with Microsoft Graph and other APIs. As an example, here are the steps to add _User.ReadBasic.All_ and _Group.Read.All_ if you want to use the data sources in the azuread provider.
+You can also add app roles to the managed identity for use with Microsoft Graph and other APIs. As an example, here are the steps to add _User.Read.All_ and _Group.Read.All_ if you want to use the data sources in the azuread provider.
 
 ⚠️ This section is entirely optional and a little lengthy, so feel free to skip to [Next](#next).
-
 
 This configuration is not as common for managed identities as it is for service principals. It requires a few REST API calls if you're not using PowerShell. This section makes use of jq.
 
@@ -204,29 +205,27 @@ This configuration is not as common for managed identities as it is for service 
     The Graph App ID is a well known value and is consistent across all tenants, but the REST API calls need the objectId and this is unique within each tenant.
 
     ```shell
-    graphAppId="00000003-0000-0000-c000-000000000000"
-    graphObjectId=$(az ad sp show --id $graphAppId --query id -otsv)
+    graph_app_id="00000003-0000-0000-c000-000000000000"
+    graph_object_id=$(az ad sp show --id "$graph_app_id" --query id -otsv)
     ```
 
-1. **Query the service principal for Microsoft Graph to find the appRoleIds**
+1. **Set the roles**
 
     ```shell
-    appRoleIds=$(az ad sp show --id 00000003-0000-0000-c000-000000000000 --query "appRoles[?contains(\`['User.ReadBasic.All','Group.Read.All']\`, value)].id" -otsv)
+    roles="User.Read.All Group.Read.All"
     ```
 
-    This sets appRoleIds to
+    To display all possible roles:
 
-    ```text
-    5b567255-7703-4780-807c-7be8301ae99b
-    97235f07-e226-4f63-ace3-39588e11d3a1
+    ```shell
+    az ad sp show --id 00000003-0000-0000-c000-000000000000 --query "appRoles[].value" -otsv
     ```
-
-    > To display all possible appRoleIds, use `az ad sp show --id 00000003-0000-0000-c000-000000000000 --query "appRoles[].{id:id, value:value}" -oyamlc`
 
 1. **Set the main part of the URI**
 
     ```shell
-    uri="https://graph.microsoft.com/v1.0/servicePrincipals/${principalId}"
+    objectId=$(az identity show --name fabric_terraform_provider --resource-group $rg --query principalId -otsv)
+    uri="https://graph.microsoft.com/v1.0/servicePrincipals/${objectId}"
     ```
 
 1. **Create the app roles**
@@ -234,11 +233,13 @@ This configuration is not as common for managed identities as it is for service 
     Loop through the appRoleIs, generating the JSON body and calling the API**
 
     ```shell
-    for appRoleId in appRoleIds
+    for role in $roles
     do
-      body=$(jq -nc --arg principalId "$principalId" --arg resourceId "$graphObjectId" --arg appRoleId "$appRoleId" \
-        '{principalId: $principalId, resourceId: $resourceId, appRoleId: $appRoleId}')
-      az rest --method post --uri "$uri/appRoleAssignments" --body "$body"
+      app_role_id=$(az ad sp show --id $graph_app_id --query "appRoles[?value == '"$role"'].id" -otsv)
+      body=$(jq -nc --arg graph "$graph_object_id" --arg mi "$managed_identity_object_id" --arg role "$app_role_id" '{principalId:$mi,resourceId:$graph,appRoleId:$role}')
+      echo "Adding app role $role:"
+      jq . <<< $body
+      az rest --method post --uri "${uri}/appRoleAssignments" --body "$body"
     done
     ```
 
@@ -257,7 +258,7 @@ This configuration is not as common for managed identities as it is for service 
     Again the Azure CLI doesn't yet support viewing app roles with either `az identity` or `az ad sp`, so this is another REST API call.
 
     ```shell
-    az rest --method get --uri "$uri$?\$expand=appRoleAssignments" --query appRoleAssignments --output jsonc
+    az rest --method get --uri "$uri?\$expand=appRoleAssignments" --query appRoleAssignments --output jsonc
     ```
 
     Or go into the Entra admin portal

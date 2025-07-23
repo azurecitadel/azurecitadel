@@ -1,6 +1,6 @@
 ---
-title: "Expanding your Terraform config"
-description: "A few tips to build out your config. A collection of friendly URLs, tips of using the Fabric CLI and Terraform Model Context Protocol (MCP) server, plus the native Git integration for Fabric workspaces."
+title: "Expanding your config"
+description: "A few tips to build out your config. A collection of friendly URLs, useful tips using the Fabric CLI and Model Context Protocol (MCP) servers in vscode, plus the native Git integration for Fabric workspaces."
 layout: single
 draft: false
 menu:
@@ -9,7 +9,7 @@ menu:
     identifier: fabric-expanding
 series:
  - fabric_terraform_administrator
-weight: 80
+weight: 40
 
 ---
 
@@ -28,13 +28,130 @@ Resource number one is the provider documentation itself.
 
 Again, each resource and data source page will have information on whether the feature is preview or not, and whether it can be used by a service principal.
 
-Let's look at an example for [Event Streams](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/eventstream).
+Let's look at an example for [Copy Jobs](https://registry.terraform.io/providers/microsoft/fabric/latest/docs/resources/copy_job).
 
-![Screenshot of the Fabric Terraform provider documentation for the Event Stream resource](/fabric/images/fabricProvider_fabricEventStream.png)
+![Screenshot of the Fabric Terraform provider documentation for the Copy Job resource](/fabric/images/fabric_copy_job_definition.png)
 
-Many of the attributes are pretty simple and well described in the documentation and examples, but some of the more complex attributes such as the format of the definition JSON are not well documented.
+Many of the attributes are pretty simple and well described in the documentation and examples, but some of the more complex attributes - such as the definition here - are not well documented.
 
-How do you find out what the content of the definition JSON template should look like?
+So how would you find out what the content of the definition JSON template should look like? Let's see how MCP servers and the Fabric CLI can help us get there.
+
+## Model Context Protocol (MCP)
+
+{{< flash >}}
+[Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) servers can integrate with Visual Studio Code to enable enhanced context and tooling for infrastructure-as-code workflows. You can connect to MCP servers running locally (on your machine) or remotely (on another host or in the cloud). MCP servers support several connection types, including:
+
+- **http**: Connects to an MCP server over HTTP, suitable for remote or cloud-hosted servers
+- **stdio**: Communicates over standard input/output streams, often used for local processes
+- **docker**: Runs the MCP server inside a Docker container, isolating dependencies
+
+The main focus of MCP servers is to provide live data, such as up-to-date provider schemas, documentation, and code examples, which is great as the fabric Terraform provider is being updated frequently but still lacks some detailed examples. Using MCP servers for both Microsoft Docs and for Terraform Registry can be a potent combination with GitHub Copilot in Agent mode.
+{{< /flash >}}
+
+VS Code now supports MCP servers as first class resources and will either store the server config within an mcp.json in your roaming profile, or you can add that config as a `.vscode/mcp.json` file in your workspace.
+
+In this section you will add the Microsoft Docs MCP server into your profile settings via the GUI, and then add the Terraform MCP server into your workspace. Once configured then we will run through an example set of prompts for GitHub Copilot.
+
+## Microsoft Docs MCP server
+
+These steps are correct as of VS Code v1.102.1.
+
+1. Extensions (`CTRL`+`SHIFT`+`X`) > MCP Servers > [MCP Servers for agent mode](https://code.visualstudio.com/mcp)
+
+    ![Browsing the curated list of MCP servers on GitHub](/fabric/images/browse_mcp_servers.png)
+
+1. Click on [Install Microsoft Docs](vscode:mcp/install?%7B%22name%22%3A%22microsoft-docs%22%2C%22gallery%22%3Atrue%2C%22url%22%3A%22https%3A%2F%2Flearn.microsoft.com%2Fapi%2Fmcp%22%7D)
+1. Click on Install
+
+    ![Microsoft Learn Docs MCP server](/fabric/images/microsoft_docs_mcp_server.png)
+
+Remote http MCP servers are the simplest to set up.
+
+## Terraform MCP server
+
+⚠️ Note that this MCP server is in beta at the time of writing.
+
+### Docker
+
+The Terraform MCP server needs [docker](https://docs.docker.com/desktop) to be installed and running.
+
+You can test the MCP server will work at the terminal by using:
+
+```shell
+docker run --interactive --rm hashicorp/terraform-mcp-server
+```
+
+Once docker downloads the image then you will see the following message.
+
+```text
+HCP Terraform MCP Server running on stdio.
+```
+
+Use `CTRL`+`D` to exit and remove the container.
+
+### Configure
+
+You could also add the Terraform MCP server config into the roaming mcp.json profile (`%USERPROFILE%/AppData/Roaming/Code/User/mcp.json`) alongside the definition for the Microsoft Learn Docs MCP server, but we will create a workspace specific file instead so that you can see how to control which servers are available for which projects.
+
+1. Open the Explorer tab in Visual Studio Code (`CTRL`+`SHIFT`+`E`)
+1. Add .vscode/mcp.json
+
+    ```json
+    {
+        "servers": {
+            "terraform": {
+                "type": "stdio",
+                "command": "docker",
+                "args": [
+                    "run",
+                    "--interactive",
+                    "--rm",
+                    "hashicorp/terraform-mcp-server"
+                ]
+            }
+        }
+    }
+    ```
+
+This approach is common as there is a limit of 128 tools in the GitHub Copilot agent mode and you may need to be selective. As an example, you may add an npm MCP servers for a Node.JS workspace, but you don't need that generally. (The Microsoft Docs MCP server only uses one tool.)
+
+## Example Prompts
+
+You are now ready to use the MCP server right within the IDE. Here are a few example prompts for you to test with.
+
+1. Describe a resource
+
+    ```text
+    Describe the fabric_copy_job resource in the microsoft/fabric provider
+    ```
+
+    You may have to approve the use of the MCP server first time round and then you should see a similar response to the screenshot below.
+
+    ![GitHub Copilot using the Terraform MCP Server to describe a resource](/fabric/images/github_copilot_mcp_describe_the_fabric_copy_resource.png)
+
+1. Describe a valid definition for the resource
+
+    ```text
+    Use Microsoft Learn to describe a valid definition for this resource
+    ```
+
+    Add in the Microsoft Learn MCP server to get more definition.
+
+    ![The Microsoft Learn MCP server describing a valid definition for the resource](/fabric/images/github_copilot_mcp_valid_definition.png)
+
+    The MCP server has linked to an anchor within the copy job documentation for more detail.
+
+1. Create an example template
+
+    ```text
+    Generate a valid copyjob-content.json template including the token handlebars
+    ```
+
+    Agent mode can go further, generating files for you. Here it is creating an example template file for you to use as a starting point.
+
+    ![GitHub Copilot Agent creating an example template file for the definition](/fabric/images/github_copilot_mcp_create_template.png)
+
+Using GitHub Copilot Agent mode in combination with the MCP servers is a powerful combination to get you working faster. We have a valid template, but it is just an example. What if you have a manually created resource and you need to query it?
 
 ## Using the Fabric CLI
 
@@ -42,7 +159,7 @@ This is where the Fabric CLI is absolute gold dust. A common workflow is to manu
 
 1. **Create the resource manually**
 
-   In the Fabric portal, create your custom resource, such as an Event Stream and configure it as needed.
+   In the Fabric portal, create your custom resource, such as a Copy Job and configure it as needed.
 
 1. **Authenticate with the Fabric CLI**
 
@@ -179,49 +296,6 @@ Additional resources can be found here:
 
 - <https://github.com/RuiRomano/fabric-cli-powerbi-cicd-sample>
 - <https://github.com/murggu/fab-demos>
-
-## Model Context Protocol (MCP) for Terraform
-
-{{< flash >}}
-This is a more advanced area that involves running a Docker container so that you can run an MCP server locally for your GitHub Copilot to use as an extra tool in Agent mode. The server requests information directly from the Terraform registry so that your model can formulate responses using provider code and documentation as the source of truth. This can provide more detail and generate better config examples than you will get from the documentation pages alone.
-
-⚠️ Note that this is in beta at the time of writing.
-{{< /flash >}}
-
-The [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) is an open standard for describing and sharing model context in a consistent way. MCP helps teams collaborate and integrate tools more effectively by providing a common language for model context.
-
-HashiCorp provides an MCP server to support the Model Context Protocol within Terraform workflows. This server enables advanced collaboration, context sharing, and integration with other tools, enhancing the Terraform experience.
-
-As per the [MCP Server for Terraform Documentation](https://developer.hashicorp.com/terraform/docs/tools/mcp-server) you will need:
-
-- [Docker](https://docs.docker.com/desktop)
-- [Visual Studio Code with Copilot](https://code.visualstudio.com/docs) (or Cursor or Anthropic Claude Desktop)
-- [Enable MCP in VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers) (preview)
-  - [Enable the MCP support setting](vscode://settings/chat.mcp.enabled)
-  - Add .vscode/mcp.json
-
-      ```json
-      {
-        "servers": {
-            "terraform-mcp-server": {
-                "command": "docker",
-                "args": [
-                   "run",
-                   "-i",
-                   "--rm",
-                   "hashicorp/terraform-mcp-server:0.1.0"
-                ]
-            }
-        }
-      }
-      ```
-
-- Open vscode and Copilot in Agent Mode
-- Check on the tools to see the MCP Server in the list
-- The MCP server should then be used to augment your results
-- Force a direct reference using # and the tool name
-
-> ℹ️ Note that I have not tested this mode as there is a group policy prohibiting third party MCP servers. Arranging an exception.
 
 ## Git Integration with Microsoft Fabric
 

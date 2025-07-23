@@ -1,5 +1,5 @@
 ---
-title: "Configure a Remote State"
+title: "Set up a Remote State"
 description: "Configure a storage account for use as a remote state in Terraform."
 layout: single
 draft: false
@@ -44,8 +44,8 @@ The normal convention for the container is to name it tfstate. We will create tw
     - Set the resource group name and region
 
         ```shell
-        rg=terraform
-        loc=uksouth
+        rg="rg-terraform"
+        loc="uksouth"
         ```
 
         Feel free to set these to your own preferred values.
@@ -81,9 +81,10 @@ The normal convention for the container is to name it tfstate. We will create tw
 1. **Create the storage account**
 
     ```shell
-    storage_account_id=$(az storage account create --name $storage_account_name --resource-group $rg --location $loc \
+    az storage account create --name $storage_account_name --resource-group $rg --location $loc \
       --min-tls-version TLS1_2 --sku Standard_LRS --https-only true --default-action "Allow" --public-network-access "Enabled"  \
-      --allow-shared-key-access false --allow-blob-public-access false --query id -otsv)
+      --allow-shared-key-access false --allow-blob-public-access false
+    storage_account_id=$(az storage account show --name $storage_account_name --resource-group $rg --query id -otsv)
     ```
 
 1. **Enable versioning and soft delete**
@@ -129,8 +130,9 @@ If you check the Overview for your storage account then you'll see that most of 
 The commands above have been consolidated into the single code black below for ease of use.
 
 ```shell
-rg=terraform
-loc=uksouth
+rg="rg-terraform"
+loc="uksouth"
+
 subscriptionId=$(az account show --query id -otsv)
 az group create --name $rg --location $loc
 storage_account_name="terraformfabric$(az group show --name $rg --query id -otsv | sha1sum | cut -c1-8)"
