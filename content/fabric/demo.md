@@ -413,7 +413,7 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
 ## Links
 
 - [Terraform Provider for Microsoft Fabric: #1 Accelerating first steps using the CLIs](https://blog.fabric.microsoft.com/blog/terraform-provider-for-microsoft-fabric-1-accelerating-first-steps-using-the-clis)
-- [Terraform Provider for Microsoft Fabric: #2 Using MCP servers and Fabric CLI to help define your fabric resources](https://blog.fabric.microsoft.com/blog/terraform-provider-for-microsoft-fabric-2-using-mcp-servers-and-fabric-cli-to-help-define-your-fabric-resources)
+- [Terraform Provider for Microsoft Fabric: #2 Using MCP servers and Fabric CLI to help define your fabric resources](https://blog.fabric.microsoft.com/blog/terraform-provider-for-microsoft-fabric-2-using-the-terraform-mcp-server-and-fabric-cli-to-help-define-your-fabric-resources)
 - [Terraform Provider for Microsoft Fabric: #3 Creating a workload identity with Fabric permissions](https://blog.fabric.microsoft.com/blog/terraform-provider-for-microsoft-fabric-3-creating-a-workload-identity-with-fabric-permissions)
 - [Terraform Provider for Microsoft Fabric: #4 Deploying a fabric config with Terraform in GitHub Actions](https://blog.fabric.microsoft.com/blog/terraform-provider-for-microsoft-fabric-4-deploying-a-fabric-config-with-terraform-in-github-actions)
 
