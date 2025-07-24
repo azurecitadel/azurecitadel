@@ -187,7 +187,7 @@ Browse <https://aka.ms/terraform/fabric>
 
 Ready to move to CI/CD.
 
-## Fabric security settings
+## Fabric tenant settings
 
 Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all identities or a specified security group.
 
@@ -206,18 +206,19 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
 
     ```shell
     body=$(jq -nc --arg oid "$fabric_group_id" --arg name "$fabric_group_name" '{"enabled":true,"canSpecifySecurityGroups":true,"enabledSecurityGroups":[{"graphId":$oid,"name":$name}]}')
+    jq . <<< $body
     fab api --method post admin/tenantsettings/ServicePrincipalAccessGlobalAPIs/update -i "$body"
     fab api --method post admin/tenantsettings/ServicePrincipalAccessPermissionAPIs/update -i "$body"
     fab api --method post admin/tenantsettings/AllowServicePrincipalsCreateAndUseProfiles/update -i "$body"
     ```
 
-    The Fabric CLI is great for Fabric REST API calls. (`jq . <<< $body`)
+    The Fabric CLI is great for Fabric REST API calls.
 
     ```shell
     fab api --method get admin/tenantsettings --query "text.tenantSettings[?tenantSettingGroup == 'Developer settings']" | jq .
     ```
 
-## Managed identity
+## Managed identity and backend
 
 1. Create storage account and managed identity
 
@@ -243,6 +244,30 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
     az role assignment create --role "Storage Blob Data Contributor" --assignee $(az ad signed-in-user show --query id -otsv) --scope "$storage_account_id/blobServices/default/containers/dev"
     ```
 
+1. Add a backend.tf
+
+    ```shell
+1. Create a backend.tf
+
+    ```shell
+    cat - <<BACKEND > backend.tf
+    terraform {
+      backend "azurerm" {
+        subscription_id      = "$management_subscription_id"
+        resource_group_name  = "terraform"
+        storage_account_name = "$storage_account_name"
+        container_name       = "test"
+        key                  = "terraform.tfstate"
+        use_azuread_auth     = true
+      }
+    }
+    BACKEND
+    ```
+
+## Authorisations
+
+### Fabric
+
 1. Add to the Entra security group for Fabric
 
     ```shell
@@ -266,7 +291,7 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
 
     Effectively choose from Entra RBAC (admin on all), Azure RBAC (admin on specified), or Fabric RBAC (contributor on specified).
 
-## Additional authorisations
+### Azure RBAC
 
 1. Azure RBAC
 
@@ -276,6 +301,8 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
     ```
 
     Show in Azure portal.
+
+### Entra App Roles
 
 1. Entra app roles
 
@@ -310,7 +337,7 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
     Show in Entra portal under Enterprise Apps (Application type = Managed Identities). Other roles:
 
     ```shell
-    az ad sp show --id 00000003-0000-0000-c000-000000000000 --query "appRoles[].{id:id,value:value}" -oyamlc
+    az ad sp show --id 00000003-0000-0000-c000-000000000000 --query "appRoles[].value" -oyamlc
     ```
 
 ## GitHub
