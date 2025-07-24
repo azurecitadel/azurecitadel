@@ -6,15 +6,13 @@ draft: false
 
 ---
 
-## Prereqs
+## Authentication check
 
-### Log into the portals
+1. Portals (as admin ID)
 
-1. [Entra portal](https://entra.microsoft.com/#home) as admin ID
-1. [Azure portal](https://portal.azure.com) as admin ID
-1. [Fabric portal]()
-
-### Check the CLIs
+    - [Entra portal](https://entra.microsoft.com/#home)
+    - [Azure portal](https://portal.azure.com)
+    - [Fabric portal](https://app.powerbi.com/home?ctid=ac40fc60-2717-4051-a567-c0cd948f0ac9&experience=fabric-developer)
 
 1. Azure CLI
 
@@ -393,7 +391,7 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
 - [Terraform Provider for Microsoft Fabric: #4 Deploying a fabric config with Terraform in GitHub Actions](https://blog.fabric.microsoft.com/blog/terraform-provider-for-microsoft-fabric-4-deploying-a-fabric-config-with-terraform-in-github-actions)
 
 - <https://github.com/richeney/terraform_fabric_administrator_reference>
-- <https://azurecitadel.com/fabric> (later this week)
+- <https://azurecitadel.com/fabric>
 
 ## Cleanup
 
@@ -455,3 +453,18 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
 1. Clear the most recently used list in Azure Portal
 
 1. Check Workspaces in Fabric Admin Portal. May need to clean up Orphaned workspaces.
+
+## Confirmation
+
+```shell
+az account set --name "Terraform Fabric"
+az account show
+az group show --name "rg-fabric"
+az group show --name "rg-terraform"
+ll -d ~/git/demo
+gh repo view richeney/fabric_demo
+az ad app show --id api://$(az account show --query tenantId -otsv)/fabric_terraform_provider
+fab api --method get admin/tenantsettings --query "text.tenantSettings[?tenantSettingGroup == 'Developer settings']" | jq .
+fab ls -l
+fab ls -l .capacities
+```
