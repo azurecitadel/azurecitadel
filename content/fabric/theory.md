@@ -1,6 +1,6 @@
 ---
 title: "Theory"
-description: "Should you automate everything in Microsoft Fabric using Terraform. Probably not..."
+description: "Should you automate everything in Microsoft Fabric using Terraform? Probably not..."
 layout: single
 draft: false
 menu:

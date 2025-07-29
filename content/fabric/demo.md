@@ -1,12 +1,12 @@
 ---
 title: "Demo"
-description: "Set of copyable code blocks and demo reminders"
+description: "Demo script and code blocks"
 layout: single
 draft: false
 
 ---
 
-## Authentication check
+## Pre-demo checks
 
 1. Portals (as admin ID)
 
@@ -32,6 +32,23 @@ draft: false
     ```shell
     fab auth status
     ```
+
+1. Docker
+
+    Check Docker Desktop is already running. Check the Terraform MCP server will run.
+
+    ```shell
+    docker run --interactive --rm hashicorp/terraform-mcp-server
+    ```
+
+    This will also download the image and cache it.
+
+    If you see `Terraform MCP Server running on stdio` then all good. Press `Ctrl`+`D` to exit to the prompt.
+
+## Intro
+
+1. Use the <https://azurecitadel.com/fabric/theory> page to cover Fabric Admin vs workspace level CI/CD integration.
+1. Then move to Fabric Capacities - F-SKU, T-SKU, P-SKU
 
 ## Fabric Capacity
 
@@ -244,9 +261,6 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
     az role assignment create --role "Storage Blob Data Contributor" --assignee $(az ad signed-in-user show --query id -otsv) --scope "$storage_account_id/blobServices/default/containers/dev"
     ```
 
-1. Add a backend.tf
-
-    ```shell
 1. Create a backend.tf
 
     ```shell
@@ -309,20 +323,8 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
     App roles are hidden away, and only available via the REST API today.
 
     ```shell
-    entra_roles="['User.ReadBasic.All','Group.Read.All']"
-    graph_object_id=$(az ad sp show --id "00000003-0000-0000-c000-000000000000" --query id -otsv)
-    app_role_ids=$(az ad sp show --id 00000003-0000-0000-c000-000000000000 --query "appRoles[?contains(\`$entra_roles\`,
-    value)].id" -otsv)
-    for role in $app_role_ids
-    do
-      body=$(jq -nc --arg graph "$graph_object_id" --arg mi "$managed_identity_object_id" --arg role "$role" '{principalId:$mi,resourceId:$graph,appRoleId:$role}')
-      az rest --method post --uri "https://graph.microsoft.com/v1.0/servicePrincipals/${managed_identity_object_id}/appRoleAssignments" --body "$body"
-    done
-    ```
-
-   ```shell
     graph_app_id="00000003-0000-0000-c000-000000000000"
-    graph_object_id=$(az ad sp show --id "00000003-0000-0000-c000-000000000000" --query id -otsv)
+    graph_object_id=$(az ad sp show --id $graph_app_id --query id -otsv)
 
     for role in User.Read.All Group.Read.All
     do
@@ -469,7 +471,7 @@ Fabric Admin Portal > Tenant Settings > Developer settings. Allows either all id
     az ad app delete --id api://$(az account show --query tenantId -otsv)/fabric_terraform_provider
     ```
 
-1. Log out of az and fab and delete MSAL token cache
+1. Log out of az and fab and delete MSAL token cache (optional)
 
     ```shell
     fab auth logout
