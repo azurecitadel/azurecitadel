@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html data-color-mode="auto" data-light-theme="light" data-dark-theme="dark_dimmed" lang="{{ .Language }}">
+{{ partial "head.html" . }}
+<body class="width-full">
+  {{ block "main" . }}{{ end }}
+  <script>
+    // Reuse theme selection logic (light/dark) from main base
+    (function(){
+      const STORAGE_KEY='citadel-theme-mode';
+      const root=document.documentElement;
+      function systemPref(){return window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}
+      function stored(){try{return localStorage.getItem(STORAGE_KEY)}catch(e){return null}}
+      function apply(mode){const eff=mode==='dark'?'dark':'light';root.setAttribute('data-color-mode',eff);root.setAttribute('data-light-theme','light');root.setAttribute('data-dark-theme','dark_dimmed');}
+      apply(stored()||systemPref());
+    })();
+  </script>
+</body>
+</html>
