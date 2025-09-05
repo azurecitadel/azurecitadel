@@ -1,4 +1,7 @@
-<div class="d-flex flex-items-center">
+<div class="d-flex flex-items-center" style="gap:.75rem;">
+  <button id="sidebar-toggle" class="btn-octicon" aria-label="Toggle navigation" aria-expanded="true" aria-controls="sidebar-scroll" type="button" style="border:0;background:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;">
+    {{- partial "octicon" (dict "icon" "three-bars" "height" 16) -}}
+  </button>
   <nav class="breadcrumbs f5" aria-label="Breadcrumb">
     <ol>
       {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
@@ -21,3 +24,37 @@
     {{ end }}
   </nav>
 </div>
+<script>
+(function(){
+  const btn=document.getElementById('sidebar-toggle');
+  const wrapper=document.querySelector('.sidebar-wrapper');
+  const overlay=document.getElementById('sidebar-overlay');
+  if(!btn||!wrapper) return;
+  wrapper.classList.add('sidebar-can-hide');
+  function setState(open){
+    wrapper.classList.toggle('is-open', open);
+    wrapper.classList.toggle('is-hidden', !open);
+    btn.setAttribute('aria-expanded', open? 'true':'false');
+    if(window.innerWidth<992 && overlay){
+      overlay.classList.toggle('is-active', open);
+    } else if(overlay){
+      overlay.classList.remove('is-active');
+    }
+  }
+  function current(){ return wrapper.classList.contains('is-open'); }
+  btn.addEventListener('click',()=> setState(!current()));
+  document.addEventListener('click',e=>{
+    if(window.innerWidth>=992) return;
+    if(wrapper.contains(e.target) || btn.contains(e.target)) return;
+    if(current()) setState(false);
+  });
+  if(overlay){ overlay.addEventListener('click',()=>{ if(current()) setState(false); }); }
+  window.addEventListener('keydown',e=>{ if(e.key==='Escape' && current() && window.innerWidth<992) setState(false); });
+  function handleResize(){
+    if(window.innerWidth>=992){ setState(true); }
+    else { setState(false); }
+  }
+  window.addEventListener('resize',handleResize,{passive:true});
+  handleResize();
+})();
+</script>

@@ -1,16 +1,10 @@
 <div class="d-none"></div>
 
-<div class="d-none d-lg-block bg-primary height-fit pb-3 border-right col-4 d-flex flex-column" style="max-width: 310px; height: 100%">
+<div class="bg-primary pb-3 border-right d-flex flex-column sidebar-wrapper" style="width:310px; flex:0 0 310px; height:100%;">
 
-  <div class="flex-auto overflow-y-auto" style="min-height:0;">
+  <div class="flex-auto overflow-y-auto sidebar-scroll scroll-overlay" id="sidebar-scroll" style="min-height:0; height:100%;">
   <div class="d-flex flex-items-center p-4 color-bg-default" style="z-index: 3" id="citadel-logo" role="banner">
-    <a href="{{.Site.BaseURL }}" class="color-fg-default" aria-hidden="true" tabIndex="-1">
-      <svg version="1.1" width="32" height="32" viewBox="0 0 64 64" class="octicon" aria-hidden="true">
-        <path d="M14.62 55H64L37.4 8.91l-8.1 22.25 15.56 18.5L14.62 55zM35.28 4.84l-19 15.95L0 48.98h14.68l20.6-44.14z">
-        </path>
-      </svg>
-    </a>
-    <a href="{{.Site.BaseURL }}" class="f4 text-semibold color-fg-default no-underline no-wrap pl-2 flex-auto">
+    <a href="{{.Site.BaseURL }}" class="f4 text-semibold color-fg-default no-underline no-wrap flex-auto">
       Azure Citadel
     </a>
   </div>
@@ -98,11 +92,20 @@
       {{ end }}
     </ul>
   </nav>
-  </div><!-- end scroll region -->
   <div class="px-4 pt-3 mt-2 border-top color-border-muted small" id="theme-toggle-container" style="flex:0 0 auto;">
-    <div class="d-flex flex-items-center flex-justify-center" style="gap:8px" role="group" aria-label="Theme toggle">
-      <button class="btn-octicon theme-btn" aria-pressed="false" aria-label="Light theme" id="theme-light" title="Light" type="button">{{- partial "octicon" (dict "icon" "sun" "height" 16) -}}</button>
-      <button class="btn-octicon theme-btn" aria-pressed="false" aria-label="Dark theme" id="theme-dark" title="Dark" type="button">{{- partial "octicon" (dict "icon" "moon" "height" 16) -}}</button>
+    <div class="d-flex flex-justify-between flex-items-center" style="gap:8px" aria-label="Page controls">
+      <div class="d-flex flex-items-center" style="flex:1; justify-content:center;">
+        <div role="group" aria-label="Theme toggle" class="d-flex" style="gap:8px;">
+          <button class="btn-octicon theme-btn" aria-pressed="false" aria-label="Light theme" id="theme-light" title="Light" type="button">{{- partial "octicon" (dict "icon" "sun" "height" 16) -}}</button>
+          <button class="btn-octicon theme-btn" aria-pressed="false" aria-label="Dark theme" id="theme-dark" title="Dark" type="button">{{- partial "octicon" (dict "icon" "moon" "height" 16) -}}</button>
+        </div>
+      </div>
+      <div class="d-flex flex-items-center" style="flex:1; justify-content:center;">
+        {{ with .File }}
+          <a class="btn-octicon theme-btn" aria-label="Edit this page on GitHub" title="Edit this page" href="https://github.com/azurecitadel/azurecitadel/edit/main/content/{{ .Path }}">{{- partial "octicon" (dict "icon" "mark-github" "height" 16) -}}</a>
+        {{ end }}
+      </div>
     </div>
   </div>
+  </div><!-- end scroll region -->
 </div>

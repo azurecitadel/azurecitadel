@@ -16,8 +16,19 @@
         </div>
 
         <div class="flex-1 overflow-hidden">
-            <h1 class="border-bottom-0">{{.Title}}</h1>
-            <p>{{.Description}}</p>
+            <h1 class="border-bottom-0">{{ .Title }}</h1>
+            {{ if eq .Section "blog" }}
+            <div class="post-subtitle text-gray">
+                {{ with .Params.people }}
+                    {{ $author := index . 0 }}<span>{{ $author }}</span>
+                {{ end }}
+                {{ if and (.Date) (ne .Date.IsZero true) }}
+                    {{ if .Params.people }} &bull; {{ end }}
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+                {{ end }}
+            </div>
+            {{ end }}
+            <p>{{ .Description }}</p>
 
             <div>
             {{.Content}}
@@ -58,15 +69,6 @@
 
             {{ end }}
 
-            <hr />
-
-            <div class="contribution">
-                <h4>Help us improve</h4>
-                <p class="text-gray f6">Azure Citadel is a community site built on GitHub, please contribute and send a pull request</p>
-                <a class="btn btn-outline" href="https://github.com/azurecitadel/azurecitadel/edit/main/content/{{ with .File }}{{ .Path }}{{ end }}">
-                    {{- partial "octicon" (dict "icon" "git-pull-request" "height" 16) -}}&nbsp;Make a change
-                </a>
-            </div>
         </div>
     </div>
 </div>

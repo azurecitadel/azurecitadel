@@ -3,11 +3,12 @@
 
 {{- partial "head.html" . -}}
 
-<body class="width-full overflow-hidden">
-  <main class="d-flex flex-auto flex-row width-full overflow-hidden" style="height: 100%">
+<body class="width-full overflow-hidden" style="height:100vh;">
+  <main class="d-flex flex-row width-full" style="height:100%; min-height:0;">
     {{- partial "sidebar.html" . -}}
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-    <div class="d-flex flex-column width-full overflow-y-auto" style="height: 100%">
+  <div class="d-flex flex-column flex-1 width-full overflow-y-auto sidebar-scroll scroll-overlay" id="main-scroll" style="min-height:0;">
       {{- block "main" . }}{{- end }}
     </div>
   </main>
@@ -47,6 +48,14 @@
         mq.addEventListener('change',()=>{ if(!stored()){ apply(systemPref()); } });
       }
       window.addEventListener('storage',e=>{ if(e.key===STORAGE_KEY) apply(stored()||systemPref()); });
+    });
+  })();
+  // Scroll overlay show/hide for sidebar & main content
+  (function(){
+    const targets=[document.getElementById('sidebar-scroll'), document.getElementById('main-scroll')].filter(Boolean);
+    targets.forEach(el=>{
+      let to; const activate=()=>{el.classList.add('scrolling'); if(to) clearTimeout(to); to=setTimeout(()=>el.classList.remove('scrolling'),700);};
+      el.addEventListener('scroll',activate,{passive:true});
     });
   })();
 </script>

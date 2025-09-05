@@ -1,3 +1,32 @@
+#sidebar-scroll { padding-bottom:0.75rem; overflow-y:auto !important; }
+/* Accent design tokens */
+:root {
+    /* Seafoam green (Pantone-style approximation: 3248 C) */
+    --citadel-accent: #3FC9B0; /* base accent */
+    --citadel-accent-rgb: 63,201,176; /* for rgba composition */
+    --citadel-accent-subtle: #D5F8F1; /* subtle hover background */
+    --citadel-accent-active-bg: rgba(63,201,176,0.10); /* active press background */
+    --citadel-accent-strong: #269E86; /* stronger (darker) shade for emphasis */
+    --citadel-accent-strong-rgb: 38,158,134;
+}
+html[data-color-mode='dark'] {
+    --citadel-accent: #44D9BC; /* slightly brighter for dark contrast */
+    --citadel-accent-rgb: 68,217,188;
+    --citadel-accent-subtle: rgba(68,217,188,0.20);
+    --citadel-accent-active-bg: rgba(68,217,188,0.14);
+    --citadel-accent-strong: #33C5AA; /* strong variant tuned for dark */
+    --citadel-accent-strong-rgb: 51,197,170;
+}
+/* Map GitHub utility-like classes in sidebar to new accent tokens */
+.color-fg-accent { color: var(--citadel-accent-strong) !important; }
+html[data-color-mode='dark'] .color-fg-accent { color: var(--citadel-accent-strong) !important; }
+/* Inset background: neutral subtle canvas (reverted from accent) */
+.color-bg-inset { background: var(--color-canvas-subtle,#f6f8fa) !important; }
+html[data-color-mode='dark'] .color-bg-inset { background: var(--color-canvas-subtle,#161b22) !important; }
+/* Global link color theming */
+body a { color: var(--citadel-accent); text-decoration-color: var(--citadel-accent-subtle); }
+body a:hover, body a:focus { color: var(--citadel-accent-strong); }
+body a:active { color: var(--citadel-accent-strong); }
 .details .octicon-chevron-down {
     transform: rotateX(0);
     transition: 250ms ease-out;
@@ -28,6 +57,46 @@ div.copy-code-button {
     }
 }
 
+/* Ensure full-height flex layout so sidebar scroll region is constrained */
+html, body { height:100%; }
+body { margin:0; overflow:hidden; }
+/* Sidebar layout: ensure outer wrapper fills viewport and internal scroll region can overflow */
+.sidebar-wrapper { height:100%; min-height:0; flex:0 0 310px; display:flex; flex-direction:column; }
+/* Primary scroll region */
+.sidebar-wrapper > .sidebar-scroll { flex:1 1 auto; min-height:0; overflow-y:auto; }
+/* Fallback: allow wheel scroll even if parent styles override */
+#sidebar-scroll { -webkit-overflow-scrolling: touch; }
+
+/* Responsive sidebar toggle */
+.sidebar-can-hide { transition: transform .25s ease, box-shadow .25s ease; will-change: transform; }
+@media (max-width: 991.98px){
+        .sidebar-can-hide { position:fixed; top:0; left:0; bottom:0; z-index:1000; background:var(--color-canvas-default,#fff); box-shadow:0 0 0 1px var(--color-border-default,#d0d7de), 0 9px 28px rgba(0,0,0,.18); transform:translateX(-100%); }
+        html[data-color-mode='dark'] .sidebar-can-hide { background:var(--color-canvas-default,#0d1117); box-shadow:0 0 0 1px var(--color-border-default,#30363d), 0 9px 28px rgba(0,0,0,.48); }
+    .sidebar-can-hide.is-hidden { transform:translateX(-100%); box-shadow:none; }
+    .sidebar-can-hide.is-open { transform:translateX(0); }
+    body { overflow:hidden; }
+    /* Allow main content full width when sidebar hidden */
+    .sidebar-can-hide ~ #main-scroll { transition: filter .25s ease; }
+            .sidebar-can-hide.is-open ~ #main-scroll { filter:none; }
+                        .sidebar-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.10); opacity:0; transition: opacity .18s ease; z-index:999; pointer-events:none; }
+                        html[data-color-mode='dark'] .sidebar-overlay { background:rgba(0,0,0,0.24); }
+                .sidebar-overlay.is-active { opacity:1; pointer-events:auto; }
+}
+@media (min-width: 992px){
+    .sidebar-can-hide { transform:none !important; position:relative; box-shadow:none; }
+}
+/* Toggle button focus */
+#sidebar-toggle:focus-visible { outline:2px solid var(--citadel-accent-strong); border-radius:4px; outline-offset:2px; }
+html[data-color-mode='dark'] #sidebar-toggle:focus-visible { outline-color: var(--citadel-accent-strong); }
+
+/* Breadcrumb alignment + reset */
+.breadcrumbs ol { margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:.25rem; }
+.breadcrumbs li { list-style:none; }
+/* Slight optical nudge for hamburger to align with h1 text edge */
+#sidebar-toggle { margin-left:-2px; }
+#sidebar-toggle:hover { color: var(--citadel-accent-strong); }
+html[data-color-mode='dark'] #sidebar-toggle:hover { color: var(--citadel-accent-strong); }
+
 
 /* Blog summaries */
 .blog-summary h3 a { text-decoration:none; }
@@ -38,7 +107,7 @@ div.copy-code-button {
 /* Compact frontpage tiles */
 .frontpage-grid { display:flex; flex-wrap:wrap; align-items:stretch; gap:.4rem .55rem; }
 .frontpage-tile { background: var(--color-canvas-subtle,#f6f8fa); border:1px solid var(--color-border-default,#d0d7de); border-radius:6px; padding:.4rem .55rem .45rem; text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:.4rem; line-height:1.1; min-height:unset; box-sizing:border-box; transition: background .12s ease, border-color .12s ease; }
-.frontpage-tile:hover { background: var(--color-accent-subtle,#ddf4ff); border-color: var(--color-accent-emphasis,#0969da); }
+.frontpage-tile:hover { background: var(--citadel-accent-subtle); border-color: var(--citadel-accent); }
 .frontpage-tile .tile-title { font-weight:600; font-size:.68rem; line-height:1.05; display:inline-block; }
 @media (min-width: 1400px){ .frontpage-tile .tile-title { font-size:.7rem; } }
 
@@ -48,36 +117,39 @@ div.copy-code-button {
 #theme-toggle-container { font-size:12px; }
 #theme-toggle-container .theme-btn { background:none; border:0; padding:2px; cursor:pointer; color:var(--color-fg-subtle,#6e7781); transition:color .2s, transform .2s; }
 #theme-toggle-container .theme-btn:hover { color:var(--color-fg-default,#24292f); }
-#theme-toggle-container .theme-btn.is-active { color:var(--color-accent-fg,#0969da); transform:scale(1.15); }
+#theme-toggle-container a.theme-btn { text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+#theme-toggle-container a.theme-btn:hover { color:var(--citadel-accent-strong); transform:scale(1.1); }
+html[data-color-mode='dark'] #theme-toggle-container a.theme-btn:hover { color:var(--citadel-accent-strong); }
+#theme-toggle-container .theme-btn.is-active { color:var(--citadel-accent-strong); transform:scale(1.15); }
 html[data-color-mode='dark'] #theme-toggle-container .theme-btn { color:var(--color-fg-muted,#8b949e); }
-html[data-color-mode='dark'] #theme-toggle-container .theme-btn.is-active { color:var(--color-accent-fg,#58a6ff); }
-#theme-toggle-container .theme-btn:focus-visible { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:4px; }
-html[data-color-mode='dark'] #theme-toggle-container .theme-btn:focus-visible { outline-color: var(--color-accent-fg,#58a6ff); }
+html[data-color-mode='dark'] #theme-toggle-container .theme-btn.is-active { color:var(--citadel-accent); }
+#theme-toggle-container .theme-btn:focus-visible { outline:2px solid var(--citadel-accent); outline-offset:2px; border-radius:4px; }
+html[data-color-mode='dark'] #theme-toggle-container .theme-btn:focus-visible { outline-color: var(--citadel-accent); }
 
 /* Make entire blog summary tile clickable */
 .blog-summary { position:relative; }
 .blog-summary .stretched-link { position:absolute; inset:0; z-index:1; }
-.blog-summary .stretched-link:focus { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:4px; }
-html[data-color-mode='dark'] .blog-summary .stretched-link:focus { outline-color: var(--color-accent-fg,#58a6ff); }
+.blog-summary .stretched-link:focus { outline:2px solid var(--citadel-accent-strong); outline-offset:2px; border-radius:4px; }
+html[data-color-mode='dark'] .blog-summary .stretched-link:focus { outline-color: var(--citadel-accent-strong); }
 
 /* Stretched link for frontpage tiles */
 .frontpage-tile { position:relative; }
 .frontpage-tile .stretched-link { position:absolute; inset:0; z-index:1; }
-.frontpage-tile .stretched-link:focus { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:6px; }
-html[data-color-mode='dark'] .frontpage-tile .stretched-link:focus { outline-color: var(--color-accent-fg,#58a6ff); }
+.frontpage-tile .stretched-link:focus { outline:2px solid var(--citadel-accent-strong); outline-offset:2px; border-radius:6px; }
+html[data-color-mode='dark'] .frontpage-tile .stretched-link:focus { outline-color: var(--citadel-accent-strong); }
 
 /* Unified hover/active accent for tiles & blog summaries */
 .tile-hover-accent { transition: border-color .12s ease, background .12s ease; border:1px solid var(--color-border-default,#d0d7de); }
-.tile-hover-accent:hover { border-color: var(--color-accent-emphasis,#0969da); background: var(--color-accent-subtle,#ddf4ff); box-shadow:none; }
+.tile-hover-accent:hover { border-color: var(--citadel-accent-strong); background: var(--citadel-accent-subtle); box-shadow:none; }
 html[data-color-mode='dark'] .tile-hover-accent { border-color: var(--color-border-default,#30363d); }
-html[data-color-mode='dark'] .tile-hover-accent:hover { border-color: var(--color-accent-emphasis,#58a6ff); background: rgba(88,166,255,0.12); box-shadow:none; }
-.tile-hover-accent:active { border-color: var(--color-border-default,#d0d7de); background: rgba(9,105,218,0.06); }
-html[data-color-mode='dark'] .tile-hover-accent:active { border-color: var(--color-border-default,#30363d); background: rgba(88,166,255,0.08); }
+html[data-color-mode='dark'] .tile-hover-accent:hover { border-color: var(--citadel-accent-strong); background: var(--citadel-accent-subtle); box-shadow:none; }
+.tile-hover-accent:active { border-color: var(--color-border-default,#d0d7de); background: var(--citadel-accent-active-bg); }
+html[data-color-mode='dark'] .tile-hover-accent:active { border-color: var(--color-border-default,#30363d); background: var(--citadel-accent-active-bg); }
 /* Section list tiles (reuse blog/frontpage tile styling) */
 .section-tile { position:relative; }
 .section-tile .stretched-link { position:absolute; inset:0; z-index:1; }
-.section-tile .stretched-link:focus { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:6px; }
-html[data-color-mode='dark'] .section-tile .stretched-link:focus { outline-color: var(--color-accent-fg,#58a6ff); }
+.section-tile .stretched-link:focus { outline:2px solid var(--citadel-accent-strong); outline-offset:2px; border-radius:6px; }
+html[data-color-mode='dark'] .section-tile .stretched-link:focus { outline-color: var(--citadel-accent-strong); }
 /* Sidebar hover consistency */
 .ActionList .ActionList-item:hover > .ActionList-content,
 .ActionList .ActionList-item:hover > div.ActionList-content,
@@ -96,12 +168,12 @@ html[data-color-mode='dark'] .ActionList .ActionList-item--subItem:hover > .Acti
 /* Full-width hover highlight on li to avoid left grey strip */
 nav[aria-label="Primary navigation"] .ActionList-item:hover,
 nav[aria-label="Primary navigation"] .ActionList-item:focus-within {
-    background: var(--color-accent-subtle,#ddf4ff);
+    background: var(--color-canvas-subtle,#f6f8fa);
     border-radius:4px;
 }
 html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .ActionList-item:hover,
 html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .ActionList-item:focus-within {
-    background: rgba(88,166,255,0.12);
+    background: var(--color-canvas-subtle,#161b22);
 }
 /* Active root item vertical bar */
 nav[aria-label="Primary navigation"] .citadel-active-root {
@@ -113,15 +185,84 @@ nav[aria-label="Primary navigation"] .citadel-active-root::before {
     top:4px; bottom:4px; left:0;
     width:4px;
     border-radius:2px;
-    background: var(--color-accent-emphasis,#0969da);
+    background: var(--citadel-accent-strong);
 }
 html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .citadel-active-root::before {
-    background: var(--color-accent-emphasis,#58a6ff);
+    background: var(--citadel-accent-strong);
 }
+/* Nested active item bar (sub-level) */
+nav[aria-label="Primary navigation"] .ActionList-item--navActive {
+    position:relative;
+}
+nav[aria-label="Primary navigation"] .ActionList-item--navActive::before {
+    content:"";
+    position:absolute;
+    top:4px; bottom:4px; left:-4px; /* align with root bar offset (root li has padding-left) */
+    width:3px;
+    border-radius:2px;
+    background: var(--citadel-accent-strong);
+}
+html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .ActionList-item--navActive::before {
+    background: var(--citadel-accent-strong);
+}
+/* Series pagination links */
+.paginate-container .pagination a.previous_page,
+.paginate-container .pagination a.next_page,
+.paginate-container .pagination a:not([aria-disabled]) {
+    color: var(--citadel-accent);
+    text-decoration-color: var(--citadel-accent-subtle);
+    transition: color .15s ease;
+}
+.paginate-container .pagination a:hover,
+.paginate-container .pagination a:focus {
+    color: var(--citadel-accent-strong);
+}
+.paginate-container .pagination a:focus-visible { outline:2px solid var(--citadel-accent-strong); outline-offset:2px; border-radius:4px; }
+html[data-color-mode='dark'] .paginate-container .pagination a:focus-visible { outline-color: var(--citadel-accent-strong); }
+/* Middle 'Top' link should remain muted, not accent */
+.paginate-container .pagination a.text-gray-light {
+    color: var(--color-fg-muted,#57606a) !important;
+    text-decoration-color: currentColor;
+}
+html[data-color-mode='dark'] .paginate-container .pagination a.text-gray-light {
+    color: var(--color-fg-muted,#8b949e) !important;
+}
+/* Keep middle link muted even on hover/focus */
+.paginate-container .pagination a.text-gray-light:hover,
+.paginate-container .pagination a.text-gray-light:focus {
+    color: var(--color-fg-muted,#57606a) !important;
+}
+html[data-color-mode='dark'] .paginate-container .pagination a.text-gray-light:hover,
+html[data-color-mode='dark'] .paginate-container .pagination a.text-gray-light:focus {
+    color: var(--color-fg-muted,#8b949e) !important;
+}
+/* Overlay auto-hidden scrollbars (sidebar + main) */
+/* Apply to both legacy .sidebar-scroll and new generalized .scroll-overlay for backward compatibility */
+/* Use thin width so Firefox can still show a thumb when active; we hide it visually via transparent colors until scrolling */
+.scroll-overlay, .sidebar-scroll { scrollbar-width: thin; }
+.scroll-overlay::-webkit-scrollbar, .sidebar-scroll::-webkit-scrollbar { width:8px; background:transparent; }
+.scroll-overlay::-webkit-scrollbar-track, .sidebar-scroll::-webkit-scrollbar-track { background:transparent; }
+.scroll-overlay::-webkit-scrollbar-thumb, .sidebar-scroll::-webkit-scrollbar-thumb { background:transparent; border-radius:4px; transition: background .25s ease; }
+.scroll-overlay.scrolling::-webkit-scrollbar-thumb, .sidebar-scroll.scrolling::-webkit-scrollbar-thumb { background:rgba(140,149,159,0.4); }
+html[data-color-mode='dark'] .scroll-overlay.scrolling::-webkit-scrollbar-thumb, html[data-color-mode='dark'] .sidebar-scroll.scrolling::-webkit-scrollbar-thumb { background:rgba(110,118,129,0.5); }
+.scroll-overlay:hover::-webkit-scrollbar-thumb, .sidebar-scroll:hover::-webkit-scrollbar-thumb { background:rgba(140,149,159,0.35); }
+html[data-color-mode='dark'] .scroll-overlay:hover::-webkit-scrollbar-thumb, html[data-color-mode='dark'] .sidebar-scroll:hover::-webkit-scrollbar-thumb { background:rgba(110,118,129,0.45); }
+.scroll-overlay::-webkit-scrollbar-thumb:hover, .sidebar-scroll::-webkit-scrollbar-thumb:hover { background:rgba(140,149,159,0.55); }
+html[data-color-mode='dark'] .scroll-overlay::-webkit-scrollbar-thumb:hover, html[data-color-mode='dark'] .sidebar-scroll::-webkit-scrollbar-thumb:hover { background:rgba(110,118,129,0.6); }
+/* Firefox dynamic thumb */
+/* Resting state: fully transparent */
+.scroll-overlay:not(.scrolling):not(:hover), .sidebar-scroll:not(.scrolling):not(:hover) { scrollbar-color: transparent transparent; }
+/* Active (scrolling / hover) state: colored thumb */
+.scroll-overlay.scrolling, .sidebar-scroll.scrolling, .scroll-overlay:hover, .sidebar-scroll:hover { scrollbar-color: rgba(140,149,159,0.4) transparent; }
+html[data-color-mode='dark'] .scroll-overlay.scrolling, html[data-color-mode='dark'] .sidebar-scroll.scrolling, html[data-color-mode='dark'] .scroll-overlay:hover, html[data-color-mode='dark'] .sidebar-scroll:hover { scrollbar-color: rgba(110,118,129,0.5) transparent; }
+/* Blog post subtitle (author/date) */
+.post-subtitle { font-size:1.05rem; font-style:italic; margin-top:-12px; /* tighter to h1 */ padding-bottom:12px; /* extra gap before divider */ border-bottom:1px solid var(--color-border-muted,#d0d7de); margin-bottom:22px; line-height:1.25; }
+@media (min-width: 768px) { .post-subtitle { font-size:1.1rem; } }
+html[data-color-mode='dark'] .post-subtitle { border-bottom-color: var(--color-border-muted,#30363d); }
 /* Remove underline on hover/focus for sidebar nav only */
 nav[aria-label="Primary navigation"] .ActionList a:hover,
 nav[aria-label="Primary navigation"] .ActionList a:focus {
     text-decoration:none;
 }
-#theme-toggle-container .theme-btn:focus-visible { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:4px; }
-html[data-color-mode='dark'] #theme-toggle-container .theme-btn:focus-visible { outline-color: var(--color-accent-fg,#58a6ff); }
+#theme-toggle-container .theme-btn:focus-visible { outline:2px solid var(--citadel-accent-strong); outline-offset:2px; border-radius:4px; }
+html[data-color-mode='dark'] #theme-toggle-container .theme-btn:focus-visible { outline-color: var(--citadel-accent-strong); }
