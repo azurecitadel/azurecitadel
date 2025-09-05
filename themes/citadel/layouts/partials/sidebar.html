@@ -1,7 +1,8 @@
 <div class="d-none"></div>
 
-<div class="d-none d-lg-block bg-primary height-fit overflow-y-scroll pb-5 border-right col-4" style="max-width: 310px; height: 100%">
+<div class="d-none d-lg-block bg-primary height-fit pb-3 border-right col-4 d-flex flex-column" style="max-width: 310px; height: 100%">
 
+  <div class="flex-auto overflow-y-auto" style="min-height:0;">
   <div class="d-flex flex-items-center p-4 color-bg-default" style="z-index: 3" id="citadel-logo" role="banner">
     <a href="{{.Site.BaseURL }}" class="color-fg-default" aria-hidden="true" tabIndex="-1">
       <svg version="1.1" width="32" height="32" viewBox="0 0 64 64" class="octicon" aria-hidden="true">
@@ -14,81 +15,94 @@
     </a>
   </div>
 
-  <nav>
-    <ul class="ActionList pl-3 p-0" aria-label="Azure Citadel content list">
-
-      {{ $currentPage := . }}
-
-      {{ range .Site.Menus.side }}
-
-      {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
-      {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
-
-      <li class="my-2 ActionList-item {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }} {{ if $isActive }}color-bg-inset{{ end }}" aria-haspopup="true" style="margin-left: -20px; padding-left: 20px">
-        {{ .Pre }}
-        <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
-          <summary class="outline-none">
-            {{ if .HasChildren }}
-            <div class="ActionList-content">
-              <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if $isCurrent }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
-              <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
-            </div>
-            {{ else }}
-            <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content">
-              <span class="ActionList-item-label">{{ .Name }}</span>
-            </a>
-            {{ end }}
-          </summary>
-
-          {{ if .HasChildren }}
-          <ul class="ActionList ActionList--subGroup" aria-labelledby="{{ .Name }}">
-            {{ range .Children }}
-
-            {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
-            {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
-
-            <li class="ActionList-item ActionList-item--subItem {{ if and $isCurrent (not .HasChildren) }}ActionList-item--navActive{{ end }} {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }}" aria-haspopup="true">
-              {{ .Pre }}
-              <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
-                <summary class="outline-none">
-                  {{ if .HasChildren }}
-                  <div class="ActionList-content">
-                    <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
-                    <!-- <span class="ActionList-item-label {{ if $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span> -->
-                    <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
-                  </div>
-                  {{ else }}
-                  <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content">
-                    <span class="ActionList-item-label">{{ .Name }}</span>
-                  </a>
-                  {{ end }}
-                </summary>
-
-                {{ if .HasChildren }}
-                <ul class="ActionList ActionList--subGroup" aria-labelledby="{{ .Name }}">
-                  {{ range .Children }}
-
-                  {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
-                  {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
-
-                  <li class="ActionList-item ActionList-item--subItem {{ if $isCurrent }}ActionList-item--navActive{{ end }}">
-                    {{ .Pre }}
-                    <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content">
-                      <span class="ActionList-item-label">{{ .Name }}</span>
-                    </a>
-                  </li>
-                  {{ end }}
-                </ul>
-                {{ end }}
-              </details>
-            </li>
-
-            {{ end }}
-          </ul>
-          {{ end }}
+  <nav aria-label="Primary navigation">
+    {{ $currentPage := . }}
+    {{/* Collect all menu items; identifiers aren't consistently set so fall back to Name comparisons */}}
+    {{ $all := .Site.Menus.side }}
+    {{/* Hardcode Blog link since blog posts aren't in the side menu */}}
+    {{ $isBlog := eq $currentPage.Section "blog" }}
+    <ul class="ActionList pl-3 p-0" aria-label="Blog">
+  <li class="my-2 ActionList-item {{ if $isBlog }}citadel-active-root color-bg-inset{{ end }}" style="margin-left:-20px;padding-left:20px">
+        <a href="/blog/" class="ActionList-content" title="Blogs"><span class="ActionList-item-label {{ if $isBlog }}color-fg-accent{{ end }}">Blogs</span></a>
       </li>
+    </ul>
+    <hr class="m-0 mx-3 color-border-muted" />
 
+    {{/* Determine core items by excluding About & Archive (match by name, case-insensitive) */}}
+    {{ $core := where $all "Name" "not in" (slice "About" "Archive") }}
+    {{ $aboutItems := where $all "Name" "About" }}
+    {{ $archiveItems := where $all "Name" "Archive" }}
+
+    <ul class="ActionList pl-3 p-0 mt-2" aria-label="Learning paths">
+      {{ range $core }}
+        {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
+        {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
+  <li class="my-2 ActionList-item {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }} {{ if $isActive }}color-bg-inset{{ end }} {{ if $isCurrent }}citadel-active-root{{ end }}" style="margin-left:-20px;padding-left:20px" aria-haspopup="true">
+          <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
+            <summary class="outline-none">
+              {{ if .HasChildren }}
+              <div class="ActionList-content">
+                <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if $isCurrent }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
+                <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
+              </div>
+              {{ else }}
+              <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content"><span class="ActionList-item-label">{{ .Name }}</span></a>
+              {{ end }}
+            </summary>
+            {{ if .HasChildren }}
+            <ul class="ActionList ActionList--subGroup" aria-labelledby="{{ .Name }}">
+              {{ range .Children }}
+                {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
+                {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
+                <li class="ActionList-item ActionList-item--subItem {{ if and $isCurrent (not .HasChildren) }}ActionList-item--navActive{{ end }} {{ if .HasChildren }}ActionList-item--hasSubItem{{ end }}" aria-haspopup="true">
+                  <details class="details details-reset" {{ if $isActive}}open="true"{{ end }}>
+                    <summary class="outline-none">
+                      {{ if .HasChildren }}
+                        <div class="ActionList-content">
+                          <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
+                          <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
+                        </div>
+                      {{ else }}
+                        <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content"><span class="ActionList-item-label">{{ .Name }}</span></a>
+                      {{ end }}
+                    </summary>
+                    {{ if .HasChildren }}
+                      <ul class="ActionList ActionList--subGroup" aria-labelledby="{{ .Name }}">
+                        {{ range .Children }}
+                          {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
+                          {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
+                          <li class="ActionList-item ActionList-item--subItem {{ if $isCurrent }}ActionList-item--navActive{{ end }}">
+                            <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content"><span class="ActionList-item-label">{{ .Name }}</span></a>
+                          </li>
+                        {{ end }}
+                      </ul>
+                    {{ end }}
+                  </details>
+                </li>
+              {{ end }}
+            </ul>
+            {{ end }}
+          </details>
+        </li>
+      {{ end }}
+    </ul>
+
+    <hr class="m-0 mx-3 color-border-muted" />
+    <ul class="ActionList pl-3 p-0 mt-2" aria-label="Secondary">
+      {{ range (union $aboutItems $archiveItems) }}
+        {{ $isActive := or ($currentPage.HasMenuCurrent "side" .) ($currentPage.IsMenuCurrent "side" .) }}
+        {{ $isCurrent := $currentPage.IsMenuCurrent "side" . }}
+  <li class="my-2 ActionList-item {{ if $isActive }}color-bg-inset{{ end }} {{ if $isCurrent }}citadel-active-root{{ end }}" style="margin-left:-20px;padding-left:20px">
+          <a href="{{ .URL }}" class="ActionList-content" title="{{ .Name }}"><span class="ActionList-item-label {{ if $isCurrent }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
+        </li>
       {{ end }}
     </ul>
   </nav>
+  </div><!-- end scroll region -->
+  <div class="px-4 pt-3 mt-2 border-top color-border-muted small" id="theme-toggle-container" style="flex:0 0 auto;">
+    <div class="d-flex flex-items-center flex-justify-center" style="gap:8px" role="group" aria-label="Theme toggle">
+      <button class="btn-octicon theme-btn" aria-pressed="false" aria-label="Light theme" id="theme-light" title="Light" type="button">{{- partial "octicon" (dict "icon" "sun" "height" 16) -}}</button>
+      <button class="btn-octicon theme-btn" aria-pressed="false" aria-label="Dark theme" id="theme-dark" title="Dark" type="button">{{- partial "octicon" (dict "icon" "moon" "height" 16) -}}</button>
+    </div>
+  </div>
 </div>

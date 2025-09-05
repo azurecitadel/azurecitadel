@@ -12,24 +12,54 @@
 
 	{{.Site.Home.Content}}
 
-	<section class="container-xl pb-lg-4 mt-6 px-3 px-md-6">
-		<div class="d-flex flex-wrap gutter gutter-xl-spacious">
-			{{ range $.Site.Data.frontpage.frontpage }}
-			<div class="d-flex flex-column col-12 col-sm-6 col-lg-4 pb-4">
-				<div class="flex-auto ws-normal">
-					<div class="d-flex flex-items-center">
-						<div class="mr-2">
-							{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}
-						</div>
-						<div>
-							<h3><a title="{{ .name }}" href="{{ .url }}">{{ .name }}</a></h3>
-						</div>
-					</div>
-				</div>
+	{{/* Categories section removed as requested */}}
+
+	<section class="frontpage-categories mt-4" aria-label="Topic categories">
+		<h2 class="h3 mb-2">Explore Topics</h2>
+		{{/* Dynamically derived from side menu (exclude About, Archive, Blog) */}}
+		{{ $all := .Site.Menus.side }}
+		{{ $exclude := slice "About" "Archive" "Blog" }}
+		{{ $topics := where $all "Name" "not in" $exclude }}
+		<div class="frontpage-grid" role="list">
+			{{ range $topics }}
+			<div class="frontpage-tile tile-hover-accent box Box-row--hover-gray p-2 position-relative" role="listitem">
+				<a class="stretched-link text-decoration-none" href="{{ .URL }}" aria-label="Go to {{ .Name }}"></a>
+				<span class="tile-title d-block">{{ .Name }}</span>
 			</div>
 			{{ end }}
 		</div>
 	</section>
+
+	{{/* Blog summary section (moved below topics) */}}
+	{{ $blogSection := where .Site.RegularPages "Section" "blog" }}
+	{{ if gt (len $blogSection) 0 }}
+	<section class="mt-5" aria-label="Latest blog posts">
+		<h2 class="h3 mb-3">Latest Blog Posts</h2>
+		<div class="blog-summaries">
+		{{ range first 3 (sort $blogSection "Date" "desc") }}
+			<article class="blog-summary tile-hover-accent box Box-row--hover-gray p-3 mb-3 position-relative" itemscope itemtype="https://schema.org/BlogPosting">
+				<a class="stretched-link d-block text-decoration-none" href="{{ .Permalink }}" itemprop="url" aria-label="Read: {{ .Title }}"></a>
+				<header class="mb-2">
+					<h3 class="f3 lh-condensed mt-0 mb-1" itemprop="headline">{{ .Title }}</h3>
+					<div class="meta f6 text-gray" itemprop="author" itemscope itemtype="https://schema.org/Person">
+						{{ with .Params.people }}
+							{{ $author := index . 0 }}
+							<span itemprop="name">{{ $author }}</span>
+						{{ end }}
+						&bull;
+						<time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">{{ .Date.Format "02 Jan 2006" }}</time>
+					</div>
+				</header>
+				<div class="summary" itemprop="description">
+					{{ $paras := findRE "<p>[\\s\\S]*?</p>" .Content 1 }}
+					{{ if gt (len $paras) 0 }}{{ index $paras 0 | safeHTML }}{{ else }}<p>{{ .Summary }}</p>{{ end }}
+				</div>
+			</article>
+		{{ end }}
+		</div>
+		<p class="f6"><a href="/blog/">View all blog posts →</a></p>
+	</section>
+	{{ end }}
 </div>
 
 <script>
@@ -37,6 +67,7 @@
 		const { text } = await (await fetch(`/api/message`)).json();
 		document.querySelector('#name').textContent = text;
 	}());
+// (Removed iframe resize listener)
 </script>
 
 {{ end }}

@@ -14,6 +14,43 @@
 
 </body>
 
+<script>
+  (function(){
+    const STORAGE_KEY='citadel-theme-mode'; // persisted user choice
+    const root=document.documentElement;
+    function systemPref(){ return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'; }
+    function stored(){ try{return localStorage.getItem(STORAGE_KEY);}catch(e){return null;} }
+    function persist(v){ try{ localStorage.setItem(STORAGE_KEY,v);}catch(e){} }
+    function apply(mode){
+      const eff = mode==='dark' ? 'dark' : 'light';
+      root.setAttribute('data-color-mode', eff);
+      root.setAttribute('data-light-theme','light');
+      root.setAttribute('data-dark-theme','dark_dimmed');
+      root.classList.toggle('citadel-user-dark', eff==='dark');
+      root.classList.toggle('citadel-user-light', eff==='light');
+      updateButtons(eff);
+    }
+    function updateButtons(eff){
+      const lightBtn=document.getElementById('theme-light');
+      const darkBtn=document.getElementById('theme-dark');
+      if(lightBtn){ lightBtn.classList.toggle('is-active', eff==='light'); lightBtn.setAttribute('aria-pressed', eff==='light'); }
+      if(darkBtn){ darkBtn.classList.toggle('is-active', eff==='dark'); darkBtn.setAttribute('aria-pressed', eff==='dark'); }
+    }
+    document.addEventListener('DOMContentLoaded',function(){
+      apply(stored()||systemPref());
+      const btnLight=document.getElementById('theme-light');
+      const btnDark=document.getElementById('theme-dark');
+      if(btnLight) btnLight.addEventListener('click',()=>{ persist('light'); apply('light'); });
+      if(btnDark) btnDark.addEventListener('click',()=>{ persist('dark'); apply('dark'); });
+      if(window.matchMedia){
+        const mq=window.matchMedia('(prefers-color-scheme: dark)');
+        mq.addEventListener('change',()=>{ if(!stored()){ apply(systemPref()); } });
+      }
+      window.addEventListener('storage',e=>{ if(e.key===STORAGE_KEY) apply(stored()||systemPref()); });
+    });
+  })();
+</script>
+
 {{- block "embedded-script" . }}{{- end }}
 
 </html>
