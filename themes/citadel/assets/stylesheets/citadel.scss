@@ -75,6 +75,7 @@ html[data-color-mode='dark'] .tile-hover-accent:hover { border-color: var(--colo
 html[data-color-mode='dark'] .tile-hover-accent:active { border-color: var(--color-border-default,#30363d); background: rgba(88,166,255,0.08); }
 /* Section list tiles (reuse blog/frontpage tile styling) */
 .section-tile { position:relative; }
+.section-tile .stretched-link { position:absolute; inset:0; z-index:1; }
 .section-tile .stretched-link:focus { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:6px; }
 html[data-color-mode='dark'] .section-tile .stretched-link:focus { outline-color: var(--color-accent-fg,#58a6ff); }
 /* Sidebar hover consistency */
