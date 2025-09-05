@@ -9,8 +9,7 @@ enableGitInfo = true
 enableRobotsTXT = true
 canonifyURLs = true
 
-[taxonomies]
-  category = "categories"
+ [taxonomies]
   tag = "tags"
   series = "series"
   author = "people"
@@ -25,3 +24,5 @@ canonifyURLs = true
     lineNumbersInTable = true
     noClasses = false
     tabWidth = 2
+
+## (taxonomy block restored above)

@@ -25,5 +25,102 @@ div.copy-code-button {
     .toc {
         position: sticky;
         top: 24px;
-    }   
+    }
 }
+
+
+/* Blog summaries */
+.blog-summary h3 a { text-decoration:none; }
+.blog-summary h3 a:hover { text-decoration:underline; }
+.blog-summary .meta { font-style: italic; }
+.blog-summary .summary p { margin-bottom:0; }
+
+/* Compact frontpage tiles */
+.frontpage-grid { display:flex; flex-wrap:wrap; align-items:stretch; gap:.4rem .55rem; }
+.frontpage-tile { background: var(--color-canvas-subtle,#f6f8fa); border:1px solid var(--color-border-default,#d0d7de); border-radius:6px; padding:.4rem .55rem .45rem; text-decoration:none; color:inherit; display:inline-flex; align-items:center; gap:.4rem; line-height:1.1; min-height:unset; box-sizing:border-box; transition: background .12s ease, border-color .12s ease; }
+.frontpage-tile:hover { background: var(--color-accent-subtle,#ddf4ff); border-color: var(--color-accent-emphasis,#0969da); }
+.frontpage-tile .tile-title { font-weight:600; font-size:.68rem; line-height:1.05; display:inline-block; }
+@media (min-width: 1400px){ .frontpage-tile .tile-title { font-size:.7rem; } }
+
+/* Removed legacy category tile & iframe styles */
+
+/* Theme toggle */
+#theme-toggle-container { font-size:12px; }
+#theme-toggle-container .theme-btn { background:none; border:0; padding:2px; cursor:pointer; color:var(--color-fg-subtle,#6e7781); transition:color .2s, transform .2s; }
+#theme-toggle-container .theme-btn:hover { color:var(--color-fg-default,#24292f); }
+#theme-toggle-container .theme-btn.is-active { color:var(--color-accent-fg,#0969da); transform:scale(1.15); }
+html[data-color-mode='dark'] #theme-toggle-container .theme-btn { color:var(--color-fg-muted,#8b949e); }
+html[data-color-mode='dark'] #theme-toggle-container .theme-btn.is-active { color:var(--color-accent-fg,#58a6ff); }
+#theme-toggle-container .theme-btn:focus-visible { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:4px; }
+html[data-color-mode='dark'] #theme-toggle-container .theme-btn:focus-visible { outline-color: var(--color-accent-fg,#58a6ff); }
+
+/* Make entire blog summary tile clickable */
+.blog-summary { position:relative; }
+.blog-summary .stretched-link { position:absolute; inset:0; z-index:1; }
+.blog-summary .stretched-link:focus { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:4px; }
+html[data-color-mode='dark'] .blog-summary .stretched-link:focus { outline-color: var(--color-accent-fg,#58a6ff); }
+
+/* Stretched link for frontpage tiles */
+.frontpage-tile { position:relative; }
+.frontpage-tile .stretched-link { position:absolute; inset:0; z-index:1; }
+.frontpage-tile .stretched-link:focus { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:6px; }
+html[data-color-mode='dark'] .frontpage-tile .stretched-link:focus { outline-color: var(--color-accent-fg,#58a6ff); }
+
+/* Unified hover/active accent for tiles & blog summaries */
+.tile-hover-accent { transition: border-color .12s ease, background .12s ease; border:1px solid var(--color-border-default,#d0d7de); }
+.tile-hover-accent:hover { border-color: var(--color-accent-emphasis,#0969da); background: var(--color-accent-subtle,#ddf4ff); box-shadow:none; }
+html[data-color-mode='dark'] .tile-hover-accent { border-color: var(--color-border-default,#30363d); }
+html[data-color-mode='dark'] .tile-hover-accent:hover { border-color: var(--color-accent-emphasis,#58a6ff); background: rgba(88,166,255,0.12); box-shadow:none; }
+.tile-hover-accent:active { border-color: var(--color-border-default,#d0d7de); background: rgba(9,105,218,0.06); }
+html[data-color-mode='dark'] .tile-hover-accent:active { border-color: var(--color-border-default,#30363d); background: rgba(88,166,255,0.08); }
+/* Section list tiles (reuse blog/frontpage tile styling) */
+.section-tile { position:relative; }
+.section-tile .stretched-link:focus { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:6px; }
+html[data-color-mode='dark'] .section-tile .stretched-link:focus { outline-color: var(--color-accent-fg,#58a6ff); }
+/* Sidebar hover consistency */
+.ActionList .ActionList-item:hover > .ActionList-content,
+.ActionList .ActionList-item:hover > div.ActionList-content,
+.ActionList .ActionList-item:hover > details > summary .ActionList-content,
+.ActionList .ActionList-item--subItem:hover > .ActionList-content {
+        background: transparent; /* background now applied to li for full-width */
+    text-decoration: none;
+    border-radius:4px;
+}
+html[data-color-mode='dark'] .ActionList .ActionList-item:hover > .ActionList-content,
+html[data-color-mode='dark'] .ActionList .ActionList-item:hover > div.ActionList-content,
+html[data-color-mode='dark'] .ActionList .ActionList-item:hover > details > summary .ActionList-content,
+html[data-color-mode='dark'] .ActionList .ActionList-item--subItem:hover > .ActionList-content {
+        background: transparent;
+}
+/* Full-width hover highlight on li to avoid left grey strip */
+nav[aria-label="Primary navigation"] .ActionList-item:hover,
+nav[aria-label="Primary navigation"] .ActionList-item:focus-within {
+    background: var(--color-accent-subtle,#ddf4ff);
+    border-radius:4px;
+}
+html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .ActionList-item:hover,
+html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .ActionList-item:focus-within {
+    background: rgba(88,166,255,0.12);
+}
+/* Active root item vertical bar */
+nav[aria-label="Primary navigation"] .citadel-active-root {
+    position: relative;
+}
+nav[aria-label="Primary navigation"] .citadel-active-root::before {
+    content:"";
+    position:absolute;
+    top:4px; bottom:4px; left:0;
+    width:4px;
+    border-radius:2px;
+    background: var(--color-accent-emphasis,#0969da);
+}
+html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .citadel-active-root::before {
+    background: var(--color-accent-emphasis,#58a6ff);
+}
+/* Remove underline on hover/focus for sidebar nav only */
+nav[aria-label="Primary navigation"] .ActionList a:hover,
+nav[aria-label="Primary navigation"] .ActionList a:focus {
+    text-decoration:none;
+}
+#theme-toggle-container .theme-btn:focus-visible { outline:2px solid var(--color-accent-fg,#0969da); outline-offset:2px; border-radius:4px; }
+html[data-color-mode='dark'] #theme-toggle-container .theme-btn:focus-visible { outline-color: var(--color-accent-fg,#58a6ff); }
