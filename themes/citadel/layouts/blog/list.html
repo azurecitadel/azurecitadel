@@ -1,0 +1,97 @@
+{{ define "main" }}
+
+<div class="container-xl p-3 p-md-6 width-full">
+
+    {{ partial "breadcrumbs.html" . }}
+
+    <div class="markdown-body">
+        <h1 class="border-bottom-0">{{ .Title }}</h1>
+        <p class="lead">{{ .Description }}</p>
+
+        {{ .Content }}
+
+        {{ $paginator := .Paginate (where .Site.RegularPages "Section" "blog") }}
+        {{ if $paginator.Pages }}
+        
+        <div class="d-flex flex-wrap gutter gutter-xl-spacious mt-6">
+            {{ range $paginator.Pages }}
+            <div class="d-flex flex-column col-12 col-md-6 pb-4">
+                <div class="Box Box--condensed">
+                    <div class="Box-header">
+                        <h3 class="Box-title">
+                            <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+                        </h3>
+                    </div>
+                    <div class="Box-body">
+                        <!-- Author and Date -->
+                        <div class="d-flex flex-items-center text-gray f6 mb-3">
+                            <div class="d-flex flex-items-center mr-3">
+                                {{- partial "octicon" (dict "icon" "person" "height" 14) -}}
+                                <span class="ml-1">{{ if .Params.author }}{{ index .Params.author 0 }}{{ else }}Azure Citadel{{ end }}</span>
+                            </div>
+                            <div class="d-flex flex-items-center">
+                                {{- partial "octicon" (dict "icon" "calendar" "height" 14) -}}
+                                <span class="ml-1">{{ .Date.Format "January 2, 2006" }}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Description/Summary -->
+                        <div class="text-gray-dark mb-3">
+                            {{ if .Summary }}
+                                {{ .Summary }}
+                            {{ else }}
+                                {{ .Description }}
+                            {{ end }}
+                        </div>
+                        
+                        <!-- Tags -->
+                        {{ if .Params.tags }}
+                        <div>
+                            {{ range .Params.tags }}
+                            <span class="Label Label--secondary mr-1">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                    </div>
+                    <div class="Box-footer text-right">
+                        <a href="{{ .Permalink }}" class="btn btn-sm btn-outline">Read more</a>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- Pagination -->
+        {{ if gt $paginator.TotalPages 1 }}
+        <nav class="paginate-container mt-6" aria-label="Pagination">
+            <div class="pagination">
+                {{ if $paginator.HasPrev }}
+                <a class="previous_page" rel="prev" href="{{ $paginator.Prev.URL }}" aria-label="Previous Page">Previous</a>
+                {{ else }}
+                <span class="previous_page" aria-disabled="true">Previous</span>
+                {{ end }}
+
+                {{ range $paginator.Pagers }}
+                {{ if eq . $paginator }}
+                <em class="current" aria-label="Page {{ .PageNumber }}" aria-current="page">{{ .PageNumber }}</em>
+                {{ else }}
+                <a href="{{ .URL }}" aria-label="Page {{ .PageNumber }}">{{ .PageNumber }}</a>
+                {{ end }}
+                {{ end }}
+
+                {{ if $paginator.HasNext }}
+                <a class="next_page" rel="next" href="{{ $paginator.Next.URL }}" aria-label="Next Page">Next</a>
+                {{ else }}
+                <span class="next_page" aria-disabled="true">Next</span>
+                {{ end }}
+            </div>
+        </nav>
+        {{ end }}
+
+        {{ else }}
+        <p class="text-gray">No blog posts available yet.</p>
+        {{ end }}
+    </div>
+</div>
+
+{{ end }}

@@ -1,0 +1,70 @@
+<!-- Blog posts partial for main page -->
+<section class="container-xl pb-lg-4 mt-6 px-3 px-md-6">
+    <div class="d-flex flex-items-center mb-4">
+        <div class="mr-2">
+            {{- partial "octicon" (dict "icon" "rss" "height" 20) -}}
+        </div>
+        <h2 class="f3 mb-0">Latest Blog Posts</h2>
+    </div>
+    
+    {{ $recentPosts := where .Site.RegularPages "Section" "blog" | first 3 }}
+    {{ if $recentPosts }}
+    <div class="d-flex flex-wrap gutter gutter-xl-spacious">
+        {{ range $recentPosts }}
+        <div class="d-flex flex-column col-12 col-md-6 col-lg-4 pb-4">
+            <div class="Box Box--condensed">
+                <div class="Box-header">
+                    <h3 class="Box-title">
+                        <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+                    </h3>
+                </div>
+                <div class="Box-body">
+                    <!-- Author and Date -->
+                    <div class="d-flex flex-items-center text-gray f6 mb-3">
+                        <div class="d-flex flex-items-center mr-3">
+                            {{- partial "octicon" (dict "icon" "person" "height" 14) -}}
+                            <span class="ml-1">{{ if .Params.author }}{{ index .Params.author 0 }}{{ else }}Azure Citadel{{ end }}</span>
+                        </div>
+                        <div class="d-flex flex-items-center">
+                            {{- partial "octicon" (dict "icon" "calendar" "height" 14) -}}
+                            <span class="ml-1">{{ .Date.Format "Jan 2, 2006" }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- First paragraph preview -->
+                    <div class="text-gray-dark">
+                        {{ if .Summary }}
+                            {{ .Summary }}
+                        {{ else }}
+                            {{ .Description }}
+                        {{ end }}
+                    </div>
+                    
+                    <!-- Tags -->
+                    {{ if .Params.tags }}
+                    <div class="mt-3">
+                        {{ range first 3 .Params.tags }}
+                        <span class="Label Label--secondary mr-1">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+                <div class="Box-footer text-right">
+                    <a href="{{ .Permalink }}" class="btn btn-sm btn-outline">Read more</a>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    
+    <!-- View all posts link -->
+    <div class="text-center mt-4">
+        <a href="/blog/" class="btn btn-outline">
+            {{- partial "octicon" (dict "icon" "arrow-right" "height" 16) -}}
+            View all blog posts
+        </a>
+    </div>
+    {{ else }}
+    <p class="text-gray">No blog posts available yet.</p>
+    {{ end }}
+</section>

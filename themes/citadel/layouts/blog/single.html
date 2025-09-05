@@ -1,0 +1,65 @@
+{{ define "main" }}
+
+<div class="container-xl p-3 p-md-6 width-full">
+
+    {{ partial "breadcrumbs.html" . }}
+
+    <div class="d-flex flex-column flex-xl-row-reverse markdown-body">
+
+        <div class="toc p-3 flex-self-start">
+            <h3 id="in-this-article" class="f5 mb-2">
+                <a class="" href="#in-this-article">
+                    Contents
+                </a>
+            </h3>
+            <div class="f6">{{ .TableOfContents }}</div>
+        </div>
+
+        <div class="flex-1 overflow-hidden">
+            <h1 class="border-bottom-0">{{.Title}}</h1>
+            
+            <!-- Blog post metadata -->
+            <div class="mb-3 text-gray f6">
+                <div class="d-flex flex-items-center mb-2">
+                    {{- partial "octicon" (dict "icon" "calendar" "height" 16) -}}
+                    <span class="ml-2">{{ .Date.Format "January 2, 2006" }}</span>
+                </div>
+                {{ if .Params.author }}
+                <div class="d-flex flex-items-center mb-2">
+                    {{- partial "octicon" (dict "icon" "person" "height" 16) -}}
+                    <span class="ml-2">By {{ delimit .Params.author ", " " and " }}</span>
+                </div>
+                {{ end }}
+                {{ if .Params.tags }}
+                <div class="d-flex flex-items-center">
+                    {{- partial "octicon" (dict "icon" "tag" "height" 16) -}}
+                    <span class="ml-2">
+                        {{ range $index, $tag := .Params.tags }}
+                            {{ if $index }}, {{ end }}
+                            <a href="/tags/{{ $tag | urlize }}/">#{{ $tag }}</a>
+                        {{ end }}
+                    </span>
+                </div>
+                {{ end }}
+            </div>
+            
+            <p class="lead">{{.Description}}</p>
+
+            <div>
+            {{.Content}}
+            </div>
+
+            <hr />
+
+            <div class="contribution">
+                <h4>Help us improve</h4>
+                <p class="text-gray f6">Azure Citadel is a community site built on GitHub, please contribute and send a pull request</p>
+                <a class="btn btn-outline" href="https://github.com/azurecitadel/azurecitadel/edit/main/content/{{ with .File }}{{ .Path }}{{ end }}">
+                    {{- partial "octicon" (dict "icon" "git-pull-request" "height" 16) -}}&nbsp;Make a change
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ end }}
