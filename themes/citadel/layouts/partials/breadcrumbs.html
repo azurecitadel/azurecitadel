@@ -35,7 +35,7 @@
     wrapper.classList.toggle('is-open', open);
     wrapper.classList.toggle('is-hidden', !open);
     btn.setAttribute('aria-expanded', open? 'true':'false');
-    if(window.innerWidth<992 && overlay){
+  if(window.innerWidth<1280 && overlay){
       overlay.classList.toggle('is-active', open);
     } else if(overlay){
       overlay.classList.remove('is-active');
@@ -44,14 +44,14 @@
   function current(){ return wrapper.classList.contains('is-open'); }
   btn.addEventListener('click',()=> setState(!current()));
   document.addEventListener('click',e=>{
-    if(window.innerWidth>=992) return;
+    if(window.innerWidth>=1280) return;
     if(wrapper.contains(e.target) || btn.contains(e.target)) return;
     if(current()) setState(false);
   });
   if(overlay){ overlay.addEventListener('click',()=>{ if(current()) setState(false); }); }
-  window.addEventListener('keydown',e=>{ if(e.key==='Escape' && current() && window.innerWidth<992) setState(false); });
+  window.addEventListener('keydown',e=>{ if(e.key==='Escape' && current() && window.innerWidth<1280) setState(false); });
   function handleResize(){
-    if(window.innerWidth>=992){ setState(true); }
+    if(window.innerWidth>=1280){ setState(true); }
     else { setState(false); }
   }
   window.addEventListener('resize',handleResize,{passive:true});

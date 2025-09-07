@@ -10,6 +10,6 @@
     <source media="(prefers-color-scheme: dark)" srcset="{{ $dark }}">{{ end }}
     {{ with $light }}
     <source media="(prefers-color-scheme: light)" srcset="{{ $light }}">{{ end }}
-    <img alt="{{ .Get " alt" }}" src="{{ with $src }}{{ $src }}{{ else }}{{ default $dark $light }}{{ end }}">
+  <img alt="{{ .Get "alt" }}" src="{{ with $src }}{{ $src }}{{ else }}{{ default $dark $light }}{{ end }}">
   </picture>
 </p>
