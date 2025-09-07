@@ -9,6 +9,51 @@
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
   <div class="d-flex flex-column flex-1 width-full overflow-y-auto sidebar-scroll scroll-overlay" id="main-scroll" style="min-height:0;">
+      <header class="main-header container-xl px-3 px-md-6 width-full" role="banner" aria-label="Main header">
+        <div class="d-flex flex-items-center" style="gap:.75rem;">
+          {{- partial "breadcrumbs.html" . -}}
+          <div class="header-actions">
+            {{/* Series neighbors for header controls */}}
+            {{ if isset .Params "series" }}
+              {{ $seriesTitle := index .Params.series 0 }}
+              {{ $currentLink := .Permalink }}
+              {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
+              {{ range $index, $page := $wholeSeries }}
+                {{ if eq $currentLink $page.Permalink }}
+                  {{ if gt $index 0 }}
+                    {{ .Scratch.Set "prevInSeriesHeader" (index $wholeSeries (sub $index 1)) }}
+                  {{ end }}
+                  {{ if lt $index (sub (len $wholeSeries) 1) }}
+                    {{ .Scratch.Set "nextInSeriesHeader" (index $wholeSeries (add $index 1)) }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+            {{ with index .Scratch.Values "prevInSeriesHeader" }}
+              <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Previous in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</a>
+            {{ else }}
+              <span class="btn-octicon series-btn is-disabled" aria-disabled="true" title="No previous page">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</span>
+            {{ end }}
+            <button id="toc-toggle" class="btn-octicon toc-btn" type="button" aria-expanded="false" aria-controls="toc-flydown" title="Table of contents">TOC</button>
+            {{ with index .Scratch.Values "nextInSeriesHeader" }}
+              <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Next in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</a>
+            {{ else }}
+              <span class="btn-octicon series-btn is-disabled" aria-disabled="true" title="No next page">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</span>
+            {{ end }}
+          </div>
+        </div>
+      </header>
+      <div id="toc-flydown" aria-hidden="true"><div class="panel container-xl px-3 px-md-6 py-2"></div></div>
+      <!-- Image Lightbox Overlay -->
+      <div id="image-lightbox" aria-hidden="true">
+        <div class="ilb-backdrop" role="presentation"></div>
+        <figure class="ilb-content" role="dialog" aria-modal="true" aria-label="Image preview">
+          <div class="ilb-wrap">
+            <img alt="" />
+            <div class="ilb-caption" hidden></div>
+          </div>
+        </figure>
+      </div>
       {{- block "main" . }}{{- end }}
     </div>
   </main>
@@ -57,6 +102,121 @@
       let to; const activate=()=>{el.classList.add('scrolling'); if(to) clearTimeout(to); to=setTimeout(()=>el.classList.remove('scrolling'),700);};
       el.addEventListener('scroll',activate,{passive:true});
     });
+  })();
+
+  // Update TOC sticky offset to match dynamic main header height
+  (function(){
+    const root=document.documentElement;
+    function setOffset(){
+      const header=document.querySelector('.main-header');
+      if(!header) return;
+      const h = Math.ceil(header.getBoundingClientRect().height);
+      root.style.setProperty('--citadel-header-offset', h + 'px');
+    }
+    window.addEventListener('load', setOffset);
+    window.addEventListener('resize', setOffset, {passive:true});
+    const ro = window.ResizeObserver ? new ResizeObserver(()=>setOffset()) : null;
+    if(ro){ const header=document.querySelector('.main-header'); if(header) ro.observe(header); }
+  })();
+
+  // TOC flydown: build from on-page TOC and toggle in narrow mode
+  (function(){
+    const btn = document.getElementById('toc-toggle');
+    const fly = document.getElementById('toc-flydown');
+    if(!btn || !fly) return;
+    const panel = fly.querySelector('.panel');
+    function build(){
+      const tocInline = document.querySelector('.markdown-body .toc .f6');
+      if(!tocInline) return;
+      panel.innerHTML = '';
+      const clone = tocInline.cloneNode(true);
+      panel.appendChild(clone);
+    }
+    function setOpen(open){
+      fly.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open? 'true':'false');
+      fly.setAttribute('aria-hidden', open? 'false':'true');
+    }
+    btn.addEventListener('click', ()=>{
+      if(!panel.innerHTML) build();
+      setOpen(!fly.classList.contains('is-open'));
+    });
+    // Close on link click inside the panel (narrow mode)
+    fly.addEventListener('click', (e)=>{
+      const a = e.target.closest('a');
+      if(!a) return;
+      if(window.innerWidth<1280) setOpen(false);
+    });
+    document.addEventListener('click', (e)=>{
+  if(window.innerWidth>=1280) return; // only act in narrow mode
+      if(!fly.classList.contains('is-open')) return;
+      if(fly.contains(e.target) || btn.contains(e.target)) return;
+      setOpen(false);
+    });
+    window.addEventListener('keydown', (e)=>{
+  if(e.key==='Escape' && fly.classList.contains('is-open') && window.innerWidth<1280) setOpen(false);
+    });
+  })();
+
+  // Image lightbox: click images to open at native size within viewport
+  (function(){
+    const lb = document.getElementById('image-lightbox');
+    if(!lb) return;
+  const imgEl = lb.querySelector('img');
+  const caption = lb.querySelector('.ilb-caption');
+    const backdrop = lb.querySelector('.ilb-backdrop');
+    function open(src, alt){
+      imgEl.src = src;
+      imgEl.alt = alt||'';
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden','false');
+      if(caption){
+        const text = (alt||'').trim();
+        caption.textContent = text || '';
+        caption.toggleAttribute('hidden', !text);
+      }
+    }
+    function close(){
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden','true');
+  imgEl.removeAttribute('src');
+  if(caption){ caption.textContent=''; caption.setAttribute('hidden',''); }
+    }
+  backdrop.addEventListener('click', (e)=>{ e.stopPropagation(); close(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && lb.classList.contains('is-open')) close(); });
+  // Clicking anywhere on the overlay closes it
+  lb.addEventListener('click', (e)=>{ e.stopPropagation(); close(); });
+    // Delegate clicks on images inside main content
+    const main = document.getElementById('main-scroll');
+  if(main){
+      main.addEventListener('click', (e)=>{
+    // Ignore clicks while lightbox is open
+    if(lb && lb.classList.contains('is-open')) return;
+        const a = e.target.closest('a');
+        if(a && a.contains(e.target)) return; // don't override linked images
+        const img = e.target.closest('img');
+        if(!img) return;
+        // ignore emoji/utility images
+        if(img.src.includes('github.githubassets.com/images/icons/emoji')) return;
+        // choose largest srcset candidate if present
+        let src = img.currentSrc || img.src;
+        const srcset = img.getAttribute('srcset');
+        if(srcset){
+          try{
+            const candidates = srcset.split(',').map(s=>s.trim()).map(item=>{
+              const parts = item.split(' ');
+              const url = parts[0];
+              const w = parts.find(p=>p.endsWith('w'));
+              const width = w ? parseInt(w.replace('w',''),10) : 0;
+              return {url, width};
+            });
+            const best = candidates.sort((a,b)=>b.width-a.width)[0];
+            if(best && best.url) src = best.url;
+          }catch(err){ /* fall back to currentSrc */ }
+        }
+        open(src, img.alt || '');
+      });
+    }
   })();
 </script>
 

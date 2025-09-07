@@ -6,9 +6,9 @@
   max-width: calc(100% - 2rem);
 
   img {
-    width: auto;
-    height: auto;
-    max-height: 32rem;
+  width: auto;
+  height: auto;
+  max-height: 32rem; /* keep cap for procedural wrapper */
     padding: 0;
     box-shadow: var(--color-shadow-medium);
   }
@@ -20,7 +20,11 @@
 }
 
 .markdown-body img {
-  max-height: 32rem;
+  display: block;
+  height: auto;
+  width: auto;           /* use intrinsic width by default */
+  max-width: 100%;       /* but never exceed container width */
+  max-height: none;      /* allow tall images unless explicitly constrained elsewhere */
   padding: 0;
 }
 
