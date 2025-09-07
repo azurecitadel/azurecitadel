@@ -94,6 +94,13 @@
       }
       window.addEventListener('storage',e=>{ if(e.key===STORAGE_KEY) apply(stored()||systemPref()); });
     });
+    // Fallback: delegate clicks in case DOMContentLoaded timing prevented binding
+    document.addEventListener('click', function(e){
+      const light = e.target.closest && e.target.closest('#theme-light');
+      const dark = e.target.closest && e.target.closest('#theme-dark');
+      if(light){ persist('light'); apply('light'); }
+      else if(dark){ persist('dark'); apply('dark'); }
+    });
   })();
   // Scroll overlay show/hide for sidebar & main content
   (function(){
@@ -157,7 +164,6 @@
     window.addEventListener('keydown', (e)=>{
       if(e.key==='Escape' && fly.classList.contains('is-open') && window.innerWidth < BREAKPOINT) setOpen(false);
     });
-  })();
   })();
 
   // Image lightbox: click images to open at native size within viewport
