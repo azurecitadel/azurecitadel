@@ -1,4 +1,6 @@
-#sidebar-scroll { padding-bottom:0.75rem; overflow-y:auto !important; }
+#sidebar-scroll { padding-bottom:2rem; overflow-y:auto !important; }
+/* Ensure main content scroll container has some end padding */
+#main-scroll { padding-bottom:3rem; }
 /* Accent design tokens */
 :root {
     /* Seafoam green (Pantone-style approximation: 3248 C) */
@@ -23,10 +25,26 @@ html[data-color-mode='dark'] .color-fg-accent { color: var(--citadel-accent-stro
 /* Inset background: neutral subtle canvas (reverted from accent) */
 .color-bg-inset { background: var(--color-canvas-subtle,#f6f8fa) !important; }
 html[data-color-mode='dark'] .color-bg-inset { background: var(--color-canvas-subtle,#161b22) !important; }
-/* Global link color theming */
-body a { color: var(--citadel-accent); text-decoration-color: var(--citadel-accent-subtle); }
-body a:hover, body a:focus { color: var(--citadel-accent-strong); }
-body a:active { color: var(--citadel-accent-strong); }
+/* Ensure Primer ActionList accent variables match our accent within the sidebar nav */
+nav[aria-label="Primary navigation"] {
+    --color-accent-fg: var(--citadel-accent-strong);
+    --color-accent-emphasis: var(--citadel-accent-strong);
+    --color-accent-subtle: var(--citadel-accent-subtle);
+}
+html[data-color-mode='dark'] nav[aria-label="Primary navigation"] {
+    --color-accent-fg: var(--citadel-accent-strong);
+    --color-accent-emphasis: var(--citadel-accent-strong);
+    --color-accent-subtle: var(--citadel-accent-subtle);
+}
+/* Ensure default sidebar item label color is neutral; only .color-fg-accent should be highlighted */
+nav[aria-label="Primary navigation"] .ActionList-item-label { color: var(--color-fg-default,#24292f); }
+html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .ActionList-item-label { color: var(--color-fg-default,#c9d1d9); }
+/* Link color theming scoped to main content (prevents sidebar from inheriting accent by default) */
+#main-scroll a { color: var(--citadel-accent); text-decoration-color: var(--citadel-accent-subtle); }
+#main-scroll a:hover, #main-scroll a:focus { color: var(--citadel-accent-strong); }
+#main-scroll a:active { color: var(--citadel-accent-strong); }
+/* Light mode: slightly stronger default for readability in main content only */
+html[data-color-mode='light'] #main-scroll a { color: var(--citadel-accent-strong); }
 .details .octicon-chevron-down {
     transform: rotateX(0);
     transition: 250ms ease-out;
@@ -183,7 +201,7 @@ nav[aria-label="Primary navigation"] .citadel-active-root::before {
     content:"";
     position:absolute;
     top:4px; bottom:4px; left:0;
-    width:4px;
+    width:2px;
     border-radius:2px;
     background: var(--citadel-accent-strong);
 }
@@ -198,12 +216,20 @@ nav[aria-label="Primary navigation"] .ActionList-item--navActive::before {
     content:"";
     position:absolute;
     top:4px; bottom:4px; left:-4px; /* align with root bar offset (root li has padding-left) */
-    width:3px;
-    border-radius:2px;
+    width:1px;
+    border-radius:1px;
     background: var(--citadel-accent-strong);
 }
 html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .ActionList-item--navActive::before {
     background: var(--citadel-accent-strong);
+}
+/* If Primer draws the active bar via pseudo-element on the content, force its color to accent */
+/* If Primer draws the active bar via pseudo-element on the content, force its color to accent */
+nav[aria-label="Primary navigation"] .ActionList-item--navActive > .ActionList-content::after,
+nav[aria-label="Primary navigation"] .ActionList-item--navActive > .ActionList-content::before {
+    background: var(--citadel-accent-strong) !important;
+    border-color: var(--citadel-accent-strong) !important;
+    box-shadow: none !important;
 }
 /* Series pagination links */
 .paginate-container .pagination a.previous_page,

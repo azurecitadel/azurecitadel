@@ -36,11 +36,11 @@
             <summary class="outline-none">
               {{ if .HasChildren }}
               <div class="ActionList-content">
-                <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if $isCurrent }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
+                <a class="ActionList-item-label" title="{{ .Name }}" href="{{ .URL }}"><span class="{{ if or $isCurrent $isActive }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
                 <span class="ActionList-item-action ActionList-item-action--trailing">{{- partial "octicon" (dict "icon" "chevron-down" "height" 16) -}}</span>
               </div>
               {{ else }}
-              <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content"><span class="ActionList-item-label">{{ .Name }}</span></a>
+              <a title="{{ .Name }}" href="{{ .URL }}" class="ActionList-content"><span class="ActionList-item-label {{ if $isCurrent }}color-fg-accent{{ end }}">{{ .Name }}</span></a>
               {{ end }}
             </summary>
             {{ if .HasChildren }}
