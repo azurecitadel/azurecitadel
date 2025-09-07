@@ -121,6 +121,7 @@
 
   // TOC flydown: build from on-page TOC and toggle in narrow mode
   (function(){
+    const BREAKPOINT = 1280; // px, used for responsive TOC flydown
     const btn = document.getElementById('toc-toggle');
     const fly = document.getElementById('toc-flydown');
     if(!btn || !fly) return;
@@ -145,17 +146,18 @@
     fly.addEventListener('click', (e)=>{
       const a = e.target.closest('a');
       if(!a) return;
-      if(window.innerWidth<1280) setOpen(false);
+      if(window.innerWidth < BREAKPOINT) setOpen(false);
     });
     document.addEventListener('click', (e)=>{
-  if(window.innerWidth>=1280) return; // only act in narrow mode
+      if(window.innerWidth >= BREAKPOINT) return; // only act in narrow mode
       if(!fly.classList.contains('is-open')) return;
       if(fly.contains(e.target) || btn.contains(e.target)) return;
       setOpen(false);
     });
     window.addEventListener('keydown', (e)=>{
-  if(e.key==='Escape' && fly.classList.contains('is-open') && window.innerWidth<1280) setOpen(false);
+      if(e.key==='Escape' && fly.classList.contains('is-open') && window.innerWidth < BREAKPOINT) setOpen(false);
     });
+  })();
   })();
 
   // Image lightbox: click images to open at native size within viewport

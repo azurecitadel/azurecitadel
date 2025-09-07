@@ -288,7 +288,6 @@ html[data-color-mode='dark'] nav[aria-label="Primary navigation"] .ActionList-it
     background: var(--citadel-accent-strong);
 }
 /* If Primer draws the active bar via pseudo-element on the content, force its color to accent */
-/* If Primer draws the active bar via pseudo-element on the content, force its color to accent */
 nav[aria-label="Primary navigation"] .ActionList-item--navActive > .ActionList-content::after,
 nav[aria-label="Primary navigation"] .ActionList-item--navActive > .ActionList-content::before {
     background: var(--citadel-accent-strong) !important;
