@@ -1,0 +1,4 @@
+{{ $title := .Get "title" | default "Tab" }}
+<div class="ac-tab-panel" data-tab-panel data-title="{{ $title | htmlEscape }}">
+  {{ .Inner | markdownify }}
+</div>

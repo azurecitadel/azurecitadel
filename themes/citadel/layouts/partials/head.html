@@ -16,6 +16,15 @@
    "includePaths" (slice "node_modules")) }}
    <link rel="stylesheet" href="{{ $citadel.Permalink }}">
 
+   <!-- Print stylesheet -->
+   <link rel="stylesheet" href="{{ "stylesheets/print.css" | relURL }}" media="print">
+
+   <script>(function(){try{document.documentElement.classList.add('js');document.documentElement.classList.add('htmljs');}catch(e){}})();</script>
+
+   {{/* Tab + Mode shortcode assets */}}
+   <link rel="stylesheet" href="{{ "stylesheets/tabs.css" | relURL }}">
+   <script defer src="{{ "js/tabs.js" | relURL }}"></script>
+
    <script>(function(){try{var m=localStorage.getItem('citadel-theme-mode');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var mode=m|| (d?'dark':'light');var r=document.documentElement;r.setAttribute('data-color-mode',mode);if(mode==='dark'){r.classList.add('citadel-user-dark');}else{r.classList.add('citadel-user-light');}}catch(e){}})();</script>
 
    <script type="text/javascript">
