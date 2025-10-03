@@ -134,11 +134,18 @@
     if(!btn || !fly) return;
     const panel = fly.querySelector('.panel');
     function build(){
-      const tocInline = document.querySelector('.markdown-body .toc .f6');
+      const tocInline = document.querySelector('.markdown-body .toc');
       if(!tocInline) return;
       panel.innerHTML = '';
-      const clone = tocInline.cloneNode(true);
-      panel.appendChild(clone);
+      // Create a wrapper with same class to apply indentation styles
+      const wrapper = document.createElement('div');
+      wrapper.className = 'toc cloned';
+      // Find the inner list container (previously .f6) for compact typography
+      const inner = tocInline.querySelector('.f6');
+      const cloneSource = inner || tocInline;
+      const clone = cloneSource.cloneNode(true);
+      wrapper.appendChild(clone);
+      panel.appendChild(wrapper);
     }
     function setOpen(open){
       fly.classList.toggle('is-open', open);

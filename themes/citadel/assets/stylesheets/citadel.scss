@@ -198,6 +198,16 @@ html[data-color-mode='dark'] #toc-flydown .panel { background: var(--color-canva
 #toc-flydown.is-open { opacity:1; transform:none; pointer-events:auto; }
 @media (min-width: 1280px){ #toc-flydown { display:none !important; } }
 
+/* TOC indentation for flydown mirrors wide mode (ul inside .toc) */
+#toc-flydown .toc ul { list-style:none; margin:0; padding-left:0; }
+#toc-flydown .toc > ul > li { margin:2px 0; }
+#toc-flydown .toc ul ul { padding-left:16px; border-left:1px solid var(--color-border-muted,#d0d7de); margin-top:2px; }
+html[data-color-mode='dark'] #toc-flydown .toc ul ul { border-left-color: var(--color-border-default,#30363d); }
+#toc-flydown .toc a { text-decoration:none; display:inline-block; padding:2px 0; line-height:1.2; }
+#toc-flydown .toc a:hover { color: var(--citadel-accent-strong); }
+/* Slightly smaller font to conserve vertical space, matching .f6 scaling */
+#toc-flydown .toc { font-size:12px; }
+
 /* Image lightbox overlay */
 #image-lightbox { position:fixed; inset:0; z-index: 1001; display:none; }
 #image-lightbox.is-open { display:block; }
