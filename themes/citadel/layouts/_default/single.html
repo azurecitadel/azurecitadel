@@ -55,10 +55,25 @@
                 {{ end }}
             </div>
             {{ end }}
-            <p>{{ .Description }}</p>
+                        <p>{{ .Description }}</p>
 
-            <div>
-            {{.Content}}
+                        {{/* Print-only Table of Contents (duplicate of main TOC but inline under title) */}}
+                        <div class="print-toc" style="display:none;">
+                            <h2>Table of Contents</h2>
+                            <nav aria-label="Table of contents">{{ .TableOfContents }}</nav>
+                        </div>
+
+                        <div>
+                        {{.Content}}
+
+                        {{/* Print footer with canonical URL */}}
+                        <div class="print-footer" style="display:none;">
+                            <div>Source: <span class="source-url">{{ .Permalink }}</span></div>
+                            {{ with .Params.people }}<div>Author: {{ delimit . ", " }}</div>{{ end }}
+                            {{ if and (.Date) (ne .Date.IsZero true) }}<div>Published: {{ .Date.Format "02 Jan 2006" }}</div>{{ end }}
+                            <div>Printed: <span class="print-date"></span></div>
+                            <script>try{var e=document.querySelector('.print-footer .print-date');if(e){var d=new Date();e.textContent=d.toISOString().slice(0,10);}}catch(err){}</script>
+                        </div>
 
             {{ if isset .Params "series" }}
                 <nav class="paginate-container" aria-label="Pagination">

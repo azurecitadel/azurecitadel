@@ -1,0 +1,64 @@
+/* Print stylesheet: focuses on main article content only */
+@media print {
+  /* Reset layout to single column */
+  html, body { height:auto !important; overflow:visible !important; }
+  body { background:#fff !important; }
+  main, #main-scroll { display:block !important; height:auto !important; overflow:visible !important; }
+
+  /* Hide site chrome */
+  .sidebar-wrapper,
+  #sidebar-overlay,
+  .main-header,
+  #toc-flydown,
+  .toc-btn,
+  #toc-toggle,
+  .paginate-container,
+  .series-btn,
+  #image-lightbox { display:none !important; }
+
+  /* Layout adjustments */
+  .container-xl { max-width:100% !important; padding:0 12mm !important; }
+  .markdown-body { font-size:11pt; }
+
+  /* Show a print-only TOC injected in markup */
+  .print-toc { display:block !important; page-break-after:avoid; margin:0 0 12pt 0; border:1px solid #ccc; padding:8pt 10pt; background:#f9f9f9; }
+  .print-toc h2 { font-size:13pt; margin:0 0 6pt 0; }
+  .print-toc nav, .print-toc ul { margin:0; padding-left:18pt; }
+  .print-toc a { text-decoration:none; color:#000; }
+
+  /* Expand interactive components */
+  details[open] > summary { font-weight:600; }
+  details { page-break-inside:avoid; }
+
+  /* Tabs & modes: print only .is-active-panel; hide tablists */
+  .ac-tablist, .ac-modes .ac-tablist { display:none !important; }
+  [data-tab-panel], [data-mode-panel] { display:none !important; }
+  /* Show either class-marked active panel OR those still inline-visible (safety fallback) */
+  .is-active-panel,
+  [data-tab-panel][style*="display: block"],
+  [data-mode-panel][style*="display: block"] { display:block !important; border-top:1px solid #e0e0e0; padding-top:0.5rem; margin-top:0.75rem; }
+  .is-active-panel::before,
+  [data-tab-panel][style*="display: block"]::before,
+  [data-mode-panel][style*="display: block"]::before { content:attr(data-title); display:block; font-weight:600; margin:0 0 0.25rem 0; font-size:11pt; }
+
+  pre, code { page-break-inside:avoid; }
+  pre { border:1px solid #ddd !important; }
+
+  /* Links: append URL after text for external references */
+  a[href^="http"]:after { content:" (" attr(href) ")"; font-size:8pt; }
+  a[href^="#"]:after, a[href^="/"]:after { content:""; }
+
+  /* Print footer */
+  .print-footer { display:block !important; margin-top:24pt; padding-top:8pt; border-top:1px solid #ccc; font-size:8pt; color:#333; }
+  .print-footer .source-url { word-break:break-all; }
+
+  /* Avoid breaking headings directly after them */
+  h1, h2, h3, h4, h5, h6 { page-break-after:avoid; }
+  h1 { font-size:20pt; margin-top:0; }
+
+  /* Remove unneeded background/borders */
+  .flash, .notices, .alert { box-shadow:none !important; }
+
+  /* Images: scale to fit page width */
+  img { max-width:100% !important; page-break-inside:avoid; }
+}

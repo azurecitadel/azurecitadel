@@ -1,0 +1,16 @@
+.ac-tablist{display:flex;gap:.25rem;flex-wrap:wrap;margin-bottom:.6rem;border-bottom:1px solid var(--color-border-muted,#d0d7de)}
+.ac-tab{background:transparent;border:1px solid transparent;border-radius:6px 6px 0 0;padding:.4rem .75rem;font:inherit;cursor:pointer;color:var(--color-fg-muted,#57606a)}
+.ac-tab.is-active{background:var(--color-canvas-default,#fff);border-color:var(--color-border-default,#d0d7de);border-bottom-color:var(--color-canvas-default,#fff);color:var(--color-fg-default,#24292f);font-weight:600}
+.ac-tabs .ac-tab-panel,.ac-modes .ac-mode-panel{margin:0}
+.ac-modes{margin:1rem 0 1.25rem;padding:0;background:var(--color-canvas-default,#fff);}
+.ac-modes .ac-tablist{margin:0 0 .6rem 0;padding:0;border-bottom:1px solid var(--color-border-muted,#d0d7de);background:transparent;border-radius:0;}
+.ac-modes [data-mode-panel]{padding:.75rem .9rem .9rem;}
+.ac-modes pre{margin-top:.5rem}
+.ac-modes .ac-tab{border-radius:4px 4px 0 0;padding:.35rem .65rem;font-size:.9rem}
+.ac-modes .ac-tab.is-active{box-shadow:0 2px 0 0 var(--color-canvas-default,#fff);}
+
+/* Progressive enhancement: once JS loads (adds html.js) hide all panels except first until JS script activates selection */
+.htmljs .ac-tabs [data-tab-panel],
+.htmljs .ac-modes [data-mode-panel]{display:none}
+.htmljs .ac-tabs [data-tab-panel]:first-of-type,
+.htmljs .ac-modes [data-mode-panel]:first-of-type{display:block}
