@@ -1,24 +1,24 @@
 ---
 title: "Combining Lighthouse and PAL"
-date: 2022-08-11
+date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "How combining Partner Admin Link with Azure Lighthouse differs to traditional access."
 draft: false
 weight: 2
 menu:
   side:
-    parent: partner-lighthouse
-    identifier: partner-lighthouse-combining
+    parent: pal-lighthouse
+    identifier: pal-lighthouse-combining
 series:
- - partner-lighthouse
+ - pal-lighthouse
 ---
 
 ## In brief
 
-As mentioned in the previous page, the customer allows partner access to manage their resources via either
+There are two main options for customers to allows partners access to provide managed services on their Azure resources.
 
-* traditional RBAC role assignments in the customer tenant, or
-* by delegating with an Azure Lighthouse service provider offer
+1. Creating traditional RBAC role assignments in the customer tenant, or
+1. Delegating access with an Azure Lighthouse service provider offer
 
 ### Traditional RBAC role assignments
 

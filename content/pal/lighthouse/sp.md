@@ -7,10 +7,10 @@ draft: false
 weight: 4
 menu:
   side:
-    parent: partner-lighthouse
-    identifier: partner-lighthouse-sp
+    parent: pal-lighthouse
+    identifier: pal-lighthouse-sp
 series:
- - partner-lighthouse
+ - pal-lighthouse
 ---
 
 ## Introduction
@@ -142,7 +142,7 @@ Using variable like this does make the authorization section easier to understan
 
 Here is how the role would look in the portal:
 
-{{< img light="/partner/images/service_principal_role_light.png" dark="/partner/images/service_principal_role_dark.png" alt="Service principal role" >}}
+{{< img light="/pal/lighthouse/images/service_principal_role_light.png" dark="/pal/lighthouse/images/service_principal_role_dark.png" alt="Service principal role" >}}
 
 ## Linking service principals
 
@@ -228,7 +228,7 @@ Here is some additional information for those who don't have the Azure CLI insta
 
 I was helping a partner with a Managed Application and shows how to use the undocumented REST API to create the Partner Admin Link to your MPN ID.
 
-This example is for a system assigned managed identity on a RHEL linux server. 
+This example is for a system assigned managed identity on a RHEL linux server.
 
 1. Install jq
 
@@ -245,9 +245,9 @@ This example is for a system assigned managed identity on a RHEL linux server.
 1. Define the REST API uri
 
     ```bash
-    mpnid=31415927 
+    mpnid=31415927
     ```
-    
+
     ⚠️ Set the mpnid variable to your location based Microsoft Partner ID.
 
 1. Create the PAL link
@@ -265,7 +265,7 @@ This example is for a system assigned managed identity on a RHEL linux server.
 
     ```json
     {"partnerId": "31415927"}
-    ```  
+    ```
 
     And the uri would be:
 
