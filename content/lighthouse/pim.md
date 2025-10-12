@@ -7,10 +7,10 @@ draft: false
 weight: 5
 menu:
   side:
-    parent: pal-lighthouse
-    identifier: pal-lighthouse-pim
+    parent: lighthouse
+    identifier: lighthouse-pim
 series:
- - pal-lighthouse
+ - lighthouse
 ---
 
 ## Introduction

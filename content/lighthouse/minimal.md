@@ -7,10 +7,10 @@ draft: false
 weight: 3
 menu:
   side:
-    parent: pal-lighthouse
-    identifier: pal-lighthouse-minimal
+    parent: lighthouse
+    identifier: lighthouse-minimal
 series:
- - pal-lighthouse
+ - lighthouse
 ---
 
 ## Recap

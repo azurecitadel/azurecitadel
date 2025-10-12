@@ -7,10 +7,8 @@ draft: false
 weight: 1
 menu:
   side:
-    parent: pal-lighthouse
+    parent: archive
     identifier: pal-lighthouse-mcpp
-series:
- - pal-lighthouse
 aliases:
     - /mcpp
     - /partner/mcpp

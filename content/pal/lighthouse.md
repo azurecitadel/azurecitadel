@@ -1,16 +1,16 @@
 ---
-title: "Combining Lighthouse and PAL"
+title: "Azure Lighthouse & PAL"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
-description: "How combining Partner Admin Link with Azure Lighthouse differs to traditional access."
-draft: false
-weight: 2
+description: "Combining Partner Admin Link with Azure Lighthouse has some good benefits compared to more traditional PAL configurations."
+draft: true
+weight: 80
 menu:
   side:
-    parent: pal-lighthouse
-    identifier: pal-lighthouse-combining
+    parent: pal
+    identifier: pal-lighthouse
 series:
- - pal-lighthouse
+ - pal
 ---
 
 ## In brief
