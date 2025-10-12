@@ -9,6 +9,8 @@ menu:
     identifier: pal
 aliases:
   - /partner
+  - /partner/pal
   - /partneradminlink
   - /partners
+  - /partners/pal
 ---
