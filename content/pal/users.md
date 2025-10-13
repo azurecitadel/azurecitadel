@@ -99,40 +99,40 @@ When you have access to the customer's resources, use the Azure portal, PowerShe
 
   1. Install the Azure CLI's managementpartner extension.
 
-      ```shell
-      az extension add --name managementpartner
+      ```bash
+      az extension add --name "managementpartner"
       ```
 
   1. Sign in to the customer's tenant.
 
-      ```powershell
-      az login --tenant <tenantId>
+      ```bash
+      az login --tenant "<tenantId>"
       ```
 
   1. Create the Partner Admin Link.
 
-      ```powershell
-      az managementpartner create --partner-id <partnerId>
+      ```bash
+      az managementpartner create --partner-id "<partnerId>"
       ```
 
   1. Additional commands
 
       Display the partner ID.
 
-      ```powershell
+      ```bash
       az managementpartner show
       ```
 
       Update the partner ID.
 
-      ```powershell
-      az managementpartner update --partner-id <partnerId>
+      ```bash
+      az managementpartner update --partner-id "<partnerId>"
       ```
 
       Delete the Partner Admin Link.
 
-      ```powershell
-      az managementpartner delete --partner-id <partnerId>
+      ```bash
+      az managementpartner delete --partner-id "<partnerId>"
       ```
 
   {{< /mode >}}
