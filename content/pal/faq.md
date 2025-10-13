@@ -34,4 +34,4 @@ Selection of the questions:
 
 ## Additional questions
 
-Additional questions and guidance that are not already covered in the main FAQ or in the [Understanding Pal](./theory) will be added here.
+Additional questions and guidance that are not already covered in the main FAQ or in the [Understanding PAL](./theory) page will be added here.
