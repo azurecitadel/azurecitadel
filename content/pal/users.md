@@ -8,9 +8,11 @@ weight: 30
 menu:
   side:
     parent: pal
-    identifier: pal-user
+    identifier: pal-users
 series:
   - pal
+aliases:
+  - /pal/user
 ---
 
 ## In brief
