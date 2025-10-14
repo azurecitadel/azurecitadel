@@ -7,6 +7,15 @@
     "azureFunctions.projectLanguageModel": 4,
     "azureFunctions.preDeployTask": "npm prune (functions)",
     "cSpell.words": [
-        "authorised"
+        "AOBO",
+        "authorised",
+        "customise",
+        "Customise",
+        "customising",
+        "favourite",
+        "identifer",
+        "parameterise",
+        "Propogation",
+        "unneccessary"
     ]
 }

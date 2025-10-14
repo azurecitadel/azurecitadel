@@ -124,7 +124,7 @@ The **registrationDefinitionName** and **description** are cosmetic. The delegat
 
 This is how the Details tab will look in the portal.
 
-{{< img light="/pal/lighthouse/images/minimal_managed_service_offer_light.png" dark="/pal/lighthouse/images/minimal_managed_service_offer_dark.png" alt="Minimal managed service offer" >}}
+{{< img light="/lighthouse/images/minimal_managed_service_offer_light.png" dark="/lighthouse/images/minimal_managed_service_offer_dark.png" alt="Minimal managed service offer" >}}
 
 ### Authorizations array
 
@@ -168,7 +168,7 @@ Note that there are limitations in the [role support for Azure Lighthouse](https
 
 This is how the Role Assignments tab would look in the portal:
 
-{{< img light="/pal/lighthouse/images/minimal_role_assignments_light.png" dark="/pal/lighthouse/images/minimal_role_assignments_dark.png" alt="Minimal role assignments" >}}
+{{< img light="/lighthouse/images/minimal_role_assignments_light.png" dark="/lighthouse/images/minimal_role_assignments_dark.png" alt="Minimal role assignments" >}}
 
 ## Customise your definition
 
@@ -239,15 +239,15 @@ Wait for delegation to complete. Propogation can take a few minutes and you may 
 1. Open the portal
 1. View [My Customers](https://portal.azure.com/#view/Microsoft_Azure_CustomerHub/MyCustomersBladeV2/~/customers) (Azure Lighthouse > Manage your customers)
 
-    {{< img light="/pal/lighthouse/images/customers_light.png" dark="/pal/lighthouse/images/customers_dark.png" alt="My customers" >}}
+    {{< img light="/lighthouse/images/customers_light.png" dark="/lighthouse/images/customers_dark.png" alt="My customers" >}}
 
 3. Check the delegations
 
-    {{< img light="/pal/lighthouse/images/delegations_light.png" dark="/pal/lighthouse/images/delegations_dark.png" alt="Delegations" >}}
+    {{< img light="/lighthouse/images/delegations_light.png" dark="/lighthouse/images/delegations_dark.png" alt="Delegations" >}}
 
 4. Click on the directory filter at the top of the portal
 
-    {{< img light="/pal/lighthouse/images/filter_light.png" dark="/pal/lighthouse/images/filter_dark.png" alt="Directory filter" >}}
+    {{< img light="/lighthouse/images/filter_light.png" dark="/lighthouse/images/filter_dark.png" alt="Directory filter" >}}
 
     Note that the directory filter now include two levels, for directories (tenants) and subscriptions.
 
@@ -255,7 +255,7 @@ Wait for delegation to complete. Propogation can take a few minutes and you may 
 
 5. Browse resource groups or a resource type to view cross-tenant
 
-    {{< img light="/pal/lighthouse/images/resource_groups_light.png" dark="/pal/lighthouse/images/resource_groups_dark.png" alt="Multi-tenant Resource Groups" >}}
+    {{< img light="/lighthouse/images/resource_groups_light.png" dark="/lighthouse/images/resource_groups_dark.png" alt="Multi-tenant Resource Groups" >}}
 
     > Note that directory or tenant is not yet available as a column. It is recommended to modify the cosmetic subscription names to include a customer identifer.
 
@@ -263,7 +263,7 @@ Wait for delegation to complete. Propogation can take a few minutes and you may 
 
     In the example below you can see the three VMs in my Lighthouse Customer subscription.
 
-    {{< img light="/pal/lighthouse/images/vms_light.png" dark="/pal/lighthouse/images/vms_dark.png" alt="Multi-tenant Virtual machines" >}}
+    {{< img light="/lighthouse/images/vms_light.png" dark="/lighthouse/images/vms_dark.png" alt="Multi-tenant Virtual machines" >}}
 
     The authorisations in effect are Reader and Support Contributor. (Attempting to start the VM would correctly fail.)
 
@@ -273,7 +273,7 @@ Wait for delegation to complete. Propogation can take a few minutes and you may 
 
     In the screenshot below you can see that the reader and support contributor roles are enabling the creating of support tickets.
 
-    {{< img light="/pal/lighthouse/images/support_light.png" dark="/pal/lighthouse/images/support_dark.png" alt="Multi-tenant support ticket" >}}
+    {{< img light="/lighthouse/images/support_light.png" dark="/lighthouse/images/support_dark.png" alt="Multi-tenant support ticket" >}}
 
 Enabling the multi-tenancy with Azure Lighthouse opens up opportunities with the visibility across resources. Improve support in your managed services, report across your customers with Azure Resource Graph queries and automate at scale via scripting and infrastructure as code.
 
@@ -287,7 +287,7 @@ Ideally, each user in the security groups specified in the definition's authoris
 1. Click on [Microsoft partner network](https://portal.azure.com/#view/Microsoft_Azure_Billing/ManagementPartnerBlade) in the useful links at the bottom left
 1. Enter your MPN ID
 
-    {{< img light="/pal/lighthouse/images/pal_light.png" dark="/pal/lighthouse/images/pal_dark.png" alt="Multi-tenant Virtual machines" >}}
+    {{< img light="/lighthouse/images/pal_light.png" dark="/lighthouse/images/pal_dark.png" alt="Multi-tenant Virtual machines" >}}
 
     > Note that the MPN ID must be a location based ID, not a v-org ID.
 

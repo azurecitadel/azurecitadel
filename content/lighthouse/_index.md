@@ -36,6 +36,22 @@ This some example Azure Lighthouse templates that you can use as a reference poi
 - No support for RBAC role definitions with dataActions
 - Limited support (by design) for highly privileged role (i.e. no Owner, limited User Access Administrator)
 
+## Recommendations
+
+- Use Privileged Identity Management
+
+    Include an [Azure built-in role that is eligible for partner earned credit](https://learn.microsoft.com/partner-center/azure-roles-perms-pec) as one of the permanent roles, e.g. Support Request Contributor
+
+- Use Entra security groups and service principals in the authorisations
+
+    Avoid using individual user principals in the service offer's authorisations.
+
+    Updating a local security group for joiners and leavers is far easier than updating the service provider offer definition and version and then asking the customer to accept the change.
+
+- Create [Partner Admin Links](/pal) for all of the user and service principals in the home tenant.
+
+    Perform this as a one off task and then all security principals will automatically recognise the partner's influence in the customer accounts using those Azure Lighthouse service provider offers.
+
 ## Resources
 
 - [Azure Lighthouse documentation](https://learn.microsoft.com/azure/lighthouse/)
@@ -44,3 +60,5 @@ This some example Azure Lighthouse templates that you can use as a reference poi
 - [Azure Lighthouse limitations for the cross tenant management experience](https://learn.microsoft.com/azure/lighthouse/concepts/cross-tenant-management-experience#current-limitations)
 
 ## Templates
+
+Below are a set of template that will help you to get started with Azure Lighthouse.

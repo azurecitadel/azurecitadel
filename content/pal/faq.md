@@ -2,7 +2,7 @@
 title: "PAL FAQ"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
-description: "Frequently asked questions that we've heard from working in Microsoft's Global Partner Solutions team."
+description: "The Understanding PAL page helps to answer most of your questions on Partner Admin Link. Here you'll find a link to the main Microsoft FAQ for PAL, plus an option to ask more questions here."
 draft: false
 weight: 90
 menu:
@@ -35,3 +35,5 @@ Selection of the questions:
 ## Additional questions
 
 Additional questions and guidance that are not already covered in the main FAQ or in the [Understanding PAL](./theory) page will be added here.
+
+If you have a question then please jump to the [Partner Admin Link](https://github.com/azurecitadel/azurecitadel/discussions/132) discussions page and post it there. Note that the discussion is public so please ensure there is nothing sensitive in your posts. We reserve the right to delete posts.
