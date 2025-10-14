@@ -152,4 +152,12 @@ However, if you are providing a service in a CSP subscription which is is with a
 
 ## Next
 
+A reminder of the general recommendations for PAL
+
+- Include [roles eligible for partner earned credit](https://docs.microsoft.com/partner-center/azure-roles-perms-pec) (PEC)
+- Link all admins as part of your standard procedures
+- [Link service principals](https://docs.microsoft.com/azure/lighthouse/how-to/partner-earned-credit)
+- For traditional access, [link in all customer contexts](https://docs.microsoft.com/azure/cost-management-billing/manage/link-partner-id#frequently-asked-questions), even for guest IDs
+- For Azure Lighthouse, link in the service provider's home tenant
+
 OK, that is the core of the theory around Partner Admin Link. Hopefully it will have answered most of your questions about how it all hangs together. You will find a link to the official FAQ plus any additional questions that we receive. Next up is how to configure Partner Admin Link for users.

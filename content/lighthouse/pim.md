@@ -19,7 +19,7 @@ The final page in this series covers Privileged Identity Management (PIM), which
 
 Here is the example PIM definition in the portal:
 
-{{< img light="/pal/lighthouse/images/pim_roles_light.png" dark="/pal/lighthouse/images/pim_roles_dark.png" alt="Privileged Identity Management roles" >}}
+{{< img light="/lighthouse/images/pim_roles_light.png" dark="/lighthouse/images/pim_roles_dark.png" alt="Privileged Identity Management roles" >}}
 
 The permanent roles are the same set as the minimal example.
 
@@ -28,7 +28,7 @@ In addition there are a number of eligible roles. Hovering over the information 
 * Two of the roles - VM Contributor and Backup Contributor - do not require approval for elevation.
 * The more powerful Contributor role does need approval, from anyone in the Managed Services Management group.
 
-    {{< img light="/pal/lighthouse/images/pim_approval_light.png" dark="/pal/lighthouse/images/pim_approval_dark.png" alt="Privileged Identity Management approval" >}}
+    {{< img light="/lighthouse/images/pim_approval_light.png" dark="/lighthouse/images/pim_approval_dark.png" alt="Privileged Identity Management approval" >}}
 
 The example also has permanent roles for two different service principals, but they're not the focus of this page.
 
@@ -222,38 +222,38 @@ Only members of the Managed Service Consultants group will need to request a rol
 
 1. Navigate to **My customers | Delegations**
 
-    {{< img light="/pal/lighthouse/images/customer_delegations_light.png" dark="/pal/lighthouse/images/customer_delegations_dark.png" alt="My Customer | Delegations" >}}
+    {{< img light="/lighthouse/images/customer_delegations_light.png" dark="/lighthouse/images/customer_delegations_dark.png" alt="My Customer | Delegations" >}}
 
 1. Click on the role assignments for the required scope point
 1. Click on **Manage eligible roles**
 
-    {{< img light="/pal/lighthouse/images/manage_eligible_roles_light.png" dark="/pal/lighthouse/images/manage_eligible_roles_dark.png" alt="Manage eligible roles" >}}
+    {{< img light="/lighthouse/images/manage_eligible_roles_light.png" dark="/lighthouse/images/manage_eligible_roles_dark.png" alt="Manage eligible roles" >}}
 
 1. Click on **Activate** for the required role
 
-    {{< img light="/pal/lighthouse/images/activate_eligible_role_light.png" dark="/pal/lighthouse/images/activate_eligible_role_dark.png" alt="Activate eligible role" >}}
+    {{< img light="/lighthouse/images/activate_eligible_role_light.png" dark="/lighthouse/images/activate_eligible_role_dark.png" alt="Activate eligible role" >}}
 
 1. Verify your credentials with MFA if prompted
 1. Submit the request
 
-    {{< img light="/pal/lighthouse/images/submit_activation_request_light.png" dark="/pal/lighthouse/images/submit_activation_request_dark.png" alt="Submit activation request" >}}
+    {{< img light="/lighthouse/images/submit_activation_request_light.png" dark="/lighthouse/images/submit_activation_request_dark.png" alt="Submit activation request" >}}
 
     You will get a toast notification that "Your request is pending for approval" or that it has been activated.
 
 1. Managed Services Management members receive an email
 
-    {{< img light="/pal/lighthouse/images/approve_request_email_light.png" dark="/pal/lighthouse/images/approve_request_email_dark.png" alt="Approve request email" >}}
+    {{< img light="/lighthouse/images/approve_request_email_light.png" dark="/lighthouse/images/approve_request_email_dark.png" alt="Approve request email" >}}
 
 1. Follow the link and **Approve** or **Deny**
 
-    {{< img light="/pal/lighthouse/images/approve_request_light.png" dark="/pal/lighthouse/images/approve_request_dark.png" alt="Approve request " >}}
+    {{< img light="/lighthouse/images/approve_request_light.png" dark="/lighthouse/images/approve_request_dark.png" alt="Approve request " >}}
 
 1. Add justification text and **Confirm**
 1. View **Active assignments**
 
     It may take a few minutes for the approval to propagate.
 
-    {{< img light="/pal/lighthouse/images/active_assignments_light.png" dark="/pal/lighthouse/images/active_assignments_dark.png" alt="Active assignments" >}}
+    {{< img light="/lighthouse/images/active_assignments_light.png" dark="/lighthouse/images/active_assignments_dark.png" alt="Active assignments" >}}
 
 1. You now have the Contributor role on that specific scope until the end time
 1. Allow the role activation to timeout, or select **Deactivate** once the required work has been completed
