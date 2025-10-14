@@ -168,5 +168,3 @@ jobs:
 1. Click on **Run workflow**
 
 ## Next
-
-Next up we will look at creating a service principal from scratch dedicated to Partner Admin Link.

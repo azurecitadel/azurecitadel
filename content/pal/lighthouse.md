@@ -51,7 +51,7 @@ Recommendations:
 {{< flash >}}
 If the Managed Service offers are published into the Azure Marketplace then the customer influence is recognised via the Marketplace mechanism rather than using Partner Admin Link.
 
-See the dedicated [Azure Lighthouse](/lighthouse) area for more information.
+**See the dedicated [Azure Lighthouse](/lighthouse) area for more information.**
 {{< /flash >}}
 
 ## References
