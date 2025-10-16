@@ -1,5 +1,5 @@
 ---
-title: "Service Principals & PAL"
+title: "Service principals & PAL"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "Here is a short guide to creating Partner Admin Links for existing service principals."
