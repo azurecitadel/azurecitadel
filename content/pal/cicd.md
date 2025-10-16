@@ -1,5 +1,5 @@
 ---
-title: "CI/CD Pipelines & PAL"
+title: "CI/CD pipelines & PAL"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "Workload identities securely using OpenID Connect are becoming the prevailing standard. As they don't have client secrets then using a dedicated workflow is another approach to create a Partner Admin Link."
@@ -166,5 +166,3 @@ jobs:
 1. Click on **Actions**
 1. Select the **workflow**
 1. Click on **Run workflow**
-
-## Next

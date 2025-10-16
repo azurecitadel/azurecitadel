@@ -83,7 +83,7 @@ For users and guest IDs, the employee can authenticate in the customer's context
 {{< flash >}}
 Linking should be done in every customer context. At a technical level the link connects the Entra security principal's objectId (which belongs to the customer's tenantId) with the PartnerID.
 
-For example, if a user's ID (i.e. _first.last@partnername.com_) has ben invited as a guest into 30 different customers then they should switch to each of those 30 directories in turn and create the Partner Admin Link for the objectId in that tenant.
+For example, if a user's ID (i.e. _first.last@partnername.com_) has been invited as a guest into 30 different customers then they should switch to each of those 30 directories in turn and create the Partner Admin Link for the objectId in that tenant.
 {{< /flash >}}
 
 All are covered in the [User IDs & Pal](./users) page as well as the official [Link to a partner ID by using a PAL](https://learn.microsoft.com/partner-center/membership/link-partner-id-for-azure-performance-pal-dpor#link-to-a-partner-id-by-using-a-pal) page.
