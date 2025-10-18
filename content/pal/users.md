@@ -35,109 +35,111 @@ The information here is lifted straight from the main documentation which is fou
 When you have access to the customer's resources, use the Azure portal, PowerShell, or the Azure CLI to link your Partner ID to your user ID. Link the Partner ID in each customer tenant.
 
 {{< modes default="Portal" >}}
-  {{< mode title="Portal" >}}
+{{< mode title="Portal" >}}
 
-  First, ensure you have authenticated as the correct user and you are in the correct customer directory.
+{{< flash >}}
+**Important:** Ensure you have authenticated as the correct user and are in the correct customer directory before proceeding.
+{{< /flash >}}
 
-  1. Open the [Azure Portal](https://portal.azure.com).
-  1. Click on the [Settings](https://portal.azure.com/#settings/directory) icon at the top.
-  1. Select the [Microsoft partner network](https://portal.azure.com/#blade/Microsoft_Azure_Billing/managementpartnerblade) link in Useful Links at the bottom left.
+1. Open the [Azure Portal](https://portal.azure.com).
+1. Click on the [Settings](https://portal.azure.com/#settings/directory) icon at the top.
+1. Select the [Microsoft partner network](https://portal.azure.com/#blade/Microsoft_Azure_Billing/managementpartnerblade) link in Useful Links at the bottom left.
 
-      ![Microsoft partner network link on the Settings page in the Azure Portal](/pal/images/pal-mpn-dark.png)
+    ![Microsoft partner network link on the Settings page in the Azure ](/pal/images/pal-mpn-dark.png)
 
-  1. Enter your Partner ID.
+4. Enter your Partner ID.
 
-      ![Link to a partner ID](/pal/images/pal-link-dark.png)
+    ![Link to a partner ID](/pal/images/pal-link-dark.png)
 
-  1. Click on the **Link a partner ID** button to save.
+5. Click on the **Link a partner ID** button to save.
 
-  {{< /mode >}}
-  {{< mode title="PowerShell" >}}
+{{< /mode >}}
+{{< mode title="PowerShell" >}}
 
-  ### Use PowerShell to create the link
+### Use PowerShell to create the link
 
-  1. Install the [Az.ManagementPartner](https://www.powershellgallery.com/packages/Az.ManagementPartner/) PowerShell module.
+1. Install the [Az.ManagementPartner](https://www.powershellgallery.com/packages/Az.ManagementPartner/) PowerShell module.
 
-      ```powershell
-      Install-Module -Name Az.ManagementPartner -Repository PSGallery -Force
-      ```
+    ```powershell
+    Install-Module -Name Az.ManagementPartner -Repository PSGallery -Force
+    ```
 
-  1. Sign in to the customer's tenant.
+2. Sign in to the customer's tenant.
 
-      ```powershell
-      Connect-AzAccount -TenantId <tenantId>
-      ```
+    ```powershell
+    Connect-AzAccount -TenantId <tenantId>
+    ```
 
-  1. Create the Partner Admin Link.
+3. Create the Partner Admin Link.
 
-      ```powershell
-      New-AzManagementPartner -PartnerId <partnerId>
-      ```
+    ```powershell
+    New-AzManagementPartner -PartnerId <partnerId>
+    ```
 
-  1. Additional commands
+4. Additional commands
 
-      Display the partner ID.
+    Display the partner ID.
 
-      ```powershell
-      Get-AzManagementPartner
-      ```
+    ```powershell
+    Get-AzManagementPartner
+    ```
 
-      Update the partner ID.
+    Update the partner ID.
 
-      ```powershell
-      Update-AzManagementPartner -PartnerId <partnerId>
-      ```
+    ```powershell
+    Update-AzManagementPartner -PartnerId <partnerId>
+    ```
 
-      Delete the Partner Admin Link.
+    Delete the Partner Admin Link.
 
-      ```powershell
-      Remove-AzManagementPartner -PartnerId <partnerId>
-      ```
+    ```powershell
+    Remove-AzManagementPartner -PartnerId <partnerId>
+    ```
 
-  {{< /mode >}}
-  {{< mode title="Azure CLI" >}}
+{{< /mode >}}
+{{< mode title="Azure CLI" >}}
 
-  ### Use the Azure CLI to create the link
+### Use the Azure CLI to create the link
 
-  1. Install the Azure CLI's managementpartner extension.
+1. Install the Azure CLI's managementpartner extension.
 
-      ```bash
-      az extension add --name "managementpartner"
-      ```
+    ```bash
+    az extension add --name "managementpartner"
+    ```
 
-  1. Sign in to the customer's tenant.
+2. Sign in to the customer's tenant.
 
-      ```bash
-      az login --tenant "<tenantId>"
-      ```
+    ```bash
+    az login --tenant "<tenantId>"
+    ```
 
-  1. Create the Partner Admin Link.
+3. Create the Partner Admin Link.
 
-      ```bash
-      az managementpartner create --partner-id "<partnerId>"
-      ```
+    ```bash
+    az managementpartner create --partner-id "<partnerId>"
+    ```
 
-  1. Additional commands
+4. Additional commands
 
-      Display the partner ID.
+    Display the partner ID.
 
-      ```bash
-      az managementpartner show
-      ```
+    ```bash
+    az managementpartner show
+    ```
 
-      Update the partner ID.
+    Update the partner ID.
 
-      ```bash
-      az managementpartner update --partner-id "<partnerId>"
-      ```
+    ```bash
+    az managementpartner update --partner-id "<partnerId>"
+    ```
 
-      Delete the Partner Admin Link.
+    Delete the Partner Admin Link.
 
-      ```bash
-      az managementpartner delete --partner-id "<partnerId>"
-      ```
+    ```bash
+    az managementpartner delete --partner-id "<partnerId>"
+    ```
 
-  {{< /mode >}}
+{{< /mode >}}
 {{< /modes >}}
 
 

@@ -75,6 +75,18 @@
       root.classList.toggle('citadel-user-dark', eff==='dark');
       root.classList.toggle('citadel-user-light', eff==='light');
       updateButtons(eff);
+
+      // Update theme-responsive images immediately
+      const images = document.querySelectorAll('img[data-theme-responsive="true"]');
+      images.forEach(img => {
+        const lightSrc = img.getAttribute('data-light-src');
+        const darkSrc = img.getAttribute('data-dark-src');
+        if (eff === 'dark' && darkSrc) {
+          img.src = darkSrc;
+        } else if (eff === 'light' && lightSrc) {
+          img.src = lightSrc;
+        }
+      });
     }
     function updateButtons(eff){
       const lightBtn=document.getElementById('theme-light');

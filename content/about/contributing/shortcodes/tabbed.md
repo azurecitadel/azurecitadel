@@ -197,6 +197,317 @@ Get-AzContext | Format-List
   {{< /mode >}}
 {{< /modes >}}
 
+## Nested Shortcodes
+
+Both `tabs/tab` and `modes/mode` now support **nested shortcodes**! You can include `flash`, `img`, `details`, `button`, and other shortcodes within tab or mode panels.
+
+### Example: Modes with Nested Flash and Image
+
+````text
+{{</* modes default="Portal" */>}}
+  {{</* mode title="Portal" */>}}
+
+  {{</* flash */>}}
+  **Important:** Ensure you have the correct permissions before proceeding.
+  {{</* /flash */>}}
+
+  1. Open the Azure Portal
+  1. Navigate to Resource Groups
+
+  {{</* img light="/images/portal-light.png" dark="/images/portal-dark.png" alt="Azure Portal Resource Groups" */>}}
+
+  {{</* /mode */>}}
+
+  {{</* mode title="CLI" */>}}
+
+  {{</* flash */>}}
+  **Note:** Make sure Azure CLI is installed and authenticated.
+  {{</* /flash */>}}
+
+  ```bash
+  az group create --name mygroup --location westeurope
+  ```
+
+  {{</* /mode */>}}
+{{</* /modes */>}}
+````
+
+### Example: Tabs with Nested Details
+
+````text
+{{</* tabs default="Bash" */>}}
+  {{</* tab title="Bash" */>}}
+
+  ```bash
+  curl -X GET "https://api.example.com/data"
+  ```
+
+  {{</* details "Advanced Options" */>}}
+  You can add additional headers:
+  ```bash
+  curl -H "Authorization: Bearer token" -X GET "https://api.example.com/data"
+  ```
+  {{</* /details */>}}
+
+  {{</* /tab */>}}
+
+  {{</* tab title="PowerShell" */>}}
+
+  ```powershell
+  Invoke-RestMethod -Uri "https://api.example.com/data"
+  ```
+
+  {{</* details "Advanced Options" */>}}
+  You can add authentication:
+  ```powershell
+  $headers = @{ Authorization = "Bearer token" }
+  Invoke-RestMethod -Uri "https://api.example.com/data" -Headers $headers
+  ```
+  {{</* /details */>}}
+
+  {{</* /tab */>}}
+{{</* /tabs */>}}
+````
+
+**Working Example:**
+
+{{< tabs default="Bash" >}}
+{{< tab title="Bash" >}}
+
+```bash
+curl -X GET "https://api.example.com/data"
+```
+
+{{< details "Advanced Options" >}}
+You can add additional headers:
+```bash
+curl -H "Authorization: Bearer token" -X GET "https://api.example.com/data"
+```
+{{< /details >}}
+
+{{< /tab >}}
+
+{{< tab title="PowerShell" >}}
+
+```powershell
+Invoke-RestMethod -Uri "https://api.example.com/data"
+```
+
+{{< details "Advanced Options" >}}
+You can add authentication:
+```powershell
+$headers = @{ Authorization = "Bearer token" }
+Invoke-RestMethod -Uri "https://api.example.com/data" -Headers $headers
+```
+{{< /details >}}
+
+{{< /tab >}}
+{{< /tabs >}}
+
+## Comprehensive Nesting Example
+
+Here's an example showcasing all shortcodes that support nesting within modes:
+
+{{< modes default="Setup" >}}
+{{< mode title="Setup" >}}
+
+{{< flash >}}
+**Important:** This demonstrates nested shortcode functionality within modes.
+{{< /flash >}}
+
+### Getting Started
+
+1. First, review the prerequisites
+2. Choose your preferred method below
+3. Follow the detailed instructions
+
+{{< details "Prerequisites" >}}
+Before you begin, ensure you have:
+
+- Administrative access
+- Network connectivity
+- Required permissions
+
+{{< button url="https://docs.example.com/prereqs" text="View Full Prerequisites" class="btn-outline" >}}
+{{< /details >}}
+
+### Installation Methods
+
+{{< tabs default="Automated" >}}
+{{< tab title="Automated" >}}
+
+```bash
+./install.sh --auto
+```
+
+{{< details "Troubleshooting" >}}
+If the automated installation fails:
+
+```bash
+./install.sh --debug --verbose
+```
+
+Common issues:
+- Permission denied: Run with `sudo`
+- Network timeout: Check firewall settings
+{{< /details >}}
+
+{{< /tab >}}
+
+{{< tab title="Manual" >}}
+
+```bash
+# Step 1: Download
+wget https://example.com/installer.tar.gz
+
+# Step 2: Extract
+tar -xzf installer.tar.gz
+
+# Step 3: Install
+cd installer && make install
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+{{< /mode >}}
+
+{{< mode title="Configuration" >}}
+
+### Configuration Steps
+
+{{< flash type="warning" >}}
+**Warning:** Always backup your configuration before making changes.
+{{< /flash >}}
+
+{{< details "Configuration File Location" >}}
+The main configuration file is located at:
+
+- Linux: `/etc/myapp/config.yaml`
+- Windows: `C:\ProgramData\MyApp\config.yaml`
+- macOS: `/usr/local/etc/myapp/config.yaml`
+{{< /details >}}
+
+### Environment-Specific Settings
+
+{{< tabs default="Production" >}}
+{{< tab title="Production" >}}
+
+```yaml
+environment: production
+debug: false
+log_level: warn
+```
+
+{{< details "Security Considerations" >}}
+For production environments:
+
+- Enable SSL/TLS
+- Use strong authentication
+- Implement rate limiting
+- Monitor access logs
+
+{{< button url="https://docs.example.com/security" text="Security Best Practices" >}}
+{{< /details >}}
+
+{{< /tab >}}
+
+{{< tab title="Development" >}}
+
+```yaml
+environment: development
+debug: true
+log_level: debug
+```
+
+{{< details "Development Tools" >}}
+Additional tools for development:
+
+- Hot reload enabled
+- Debug endpoints available
+- Verbose logging active
+{{< /details >}}
+
+{{< /tab >}}
+{{< /tabs >}}
+
+{{< /mode >}}
+
+{{< mode title="Advanced" >}}
+
+### Advanced Features
+
+{{< flash type="info" >}}
+**Pro Tip:** These features require advanced configuration knowledge.
+{{< /flash >}}
+
+{{< details "Custom Extensions" >}}
+You can create custom extensions by:
+
+1. Creating a new module
+2. Implementing the required interface
+3. Registering with the plugin system
+
+{{< tabs default="Python" >}}
+{{< tab title="Python" >}}
+
+```python
+class CustomExtension(BaseExtension):
+    def initialize(self):
+        pass
+
+    def process(self, data):
+        return processed_data
+```
+
+{{< /tab >}}
+
+{{< tab title="JavaScript" >}}
+
+```javascript
+class CustomExtension extends BaseExtension {
+    initialize() {
+        // Setup code
+    }
+
+    process(data) {
+        return processedData;
+    }
+}
+```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+{{< button url="https://docs.example.com/extensions" text="Extension Development Guide" class="btn-primary" >}}
+{{< /details >}}
+
+### Performance Tuning
+
+{{< details "Database Optimization" >}}
+For better database performance:
+
+- Index frequently queried columns
+- Use connection pooling
+- Implement query caching
+
+{{< details "Query Examples" >}}
+Example optimized queries:
+
+```sql
+-- Good: Uses index
+SELECT * FROM users WHERE user_id = ?
+
+-- Bad: Full table scan
+SELECT * FROM users WHERE UPPER(username) = ?
+```
+{{< /details >}}
+
+{{< /details >}}
+
+{{< /mode >}}
+{{< /modes >}}
+
 ## Author Tips
 
 - Use a single consistent title form (e.g. "Bash" not "Bash Shell").

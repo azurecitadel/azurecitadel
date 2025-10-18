@@ -1,4 +1,4 @@
 {{ $title := .Get "title" | default "Mode" }}
 <div class="ac-mode-panel" data-mode-panel data-title="{{ $title | htmlEscape }}">
-  {{ .Inner | markdownify }}
+  {{ .Page.RenderString .Inner }}
 </div>

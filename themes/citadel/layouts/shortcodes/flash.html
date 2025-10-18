@@ -1,6 +1,5 @@
 <p>
 <div class="flash">
-  {{.Inner | markdownify}}
-
+  {{ .Page.RenderString .Inner }}
 </div>
 </p>
