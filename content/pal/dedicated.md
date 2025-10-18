@@ -15,11 +15,13 @@ series:
 
 ## Introduction
 
-There are scenarios where the partner has had influence on a set of resources, say a specific subscription, but the customer does not need the partner to have ongoing access. Historically these would have been recognised by a mechanism called Digital Partner of Record (DPOR) which has since been retired. Example scenarios:
+There are certain scenarios where the partner has had influence on a set of resources, say a specific subscription, but the customer does not need the partner to have ongoing access. Example scenarios:
 
-- Advisories
-- Proof of value pilots deployments handed over to the project team
-- Highly secured production environments that only assign contributor access to workload identities used in deployment pipelines
+- Consultative engagements (e.g. advisories) where contributor access was never required
+- Proof of value pilot deployments which have been subsequently handed over to the customer team
+- Highly secured production environments that only permit contributor access for workload identities, i.e. those used in CI/CD deployment pipelines
+
+Historically these scenarios may have been recognised by a mechanism called Digital Partner of Record but DPOR has been retired.
 
 On this page we will use a dedicated service principal that purely exists to "PAL tag" specific environments so that the partner receives the correct level of recognition.
 
