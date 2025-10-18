@@ -22,7 +22,7 @@ aliases:
 1. Authenticate in the customer context:
 
     - sign on as the user the customer created for you in their tenant, or
-    - if invited as a guest into their tenant then a) sign on and b} switch directory to the customer tenant
+    - if invited as a guest into their tenant then a) sign on and b) switch directory to the customer tenant
 
 1. Link your ID to the PartnerID using the CLI, PowerShell or the Azure Portal screen.
 
