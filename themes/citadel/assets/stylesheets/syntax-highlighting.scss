@@ -1,16 +1,37 @@
 /*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-from https://unpkg.com/highlight.js@9.15.8/styles/github.css
-
+GitHub.com style (updated for 2025)
+Enhanced code highlighting with improved contrast and spacing
 */
 
 .hljs {
   display: block;
   overflow-x: auto;
-  padding: 0.5em;
+  padding: 16px;
   color: var(--color-fg-default);
   background: var(--color-canvas-subtle);
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.45;
+  border: 1px solid var(--color-border-default);
+}
+
+/* Improve code block spacing */
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
 }
 
 .hljs-comment,
