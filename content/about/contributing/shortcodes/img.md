@@ -1,6 +1,6 @@
 ---
 title: "img"
-description: "Custom. Specify different images to match the system light and dark modes used by the Azure Citadel site theme."
+description: "Custom. GitHub-style responsive images that adapt to both system preference and manual theme toggle."
 menu:
   side:
     parent: 'shortcodes'
@@ -8,15 +8,30 @@ series:
  - shortcodes
 ---
 
-Inspired by the [GitHub post](https://github.blog/changelog/2022-05-19-specify-theme-context-for-images-in-markdown-beta/), this shortcode enables you to use light / dark mode appropriate images using the `prefers-color-scheme` feature.
+Inspired by [GitHub's theme-responsive images](https://github.blog/changelog/2022-05-19-specify-theme-context-for-images-in-markdown-beta/), this shortcode creates images that automatically switch between light and dark variants based on the current theme mode.
 
-## Example HTML
+**Key Features:**
+
+- ✅ Works with system `prefers-color-scheme`
+- ✅ Responds to manual theme toggle
+- ✅ GitHub-style styling with borders and hover effects
+- ✅ Cross-tab synchronization
+- ✅ Print-friendly (uses light version)
+
+## Example HTML Output
 
 ```html
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="/about/images/dark.png">
-  <img alt="Shows a sun in light mode and a moon in dark mode." src="/about/images/light.png">
-</picture>
+<p class="theme-responsive-image">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="/about/images/dark.png" data-dark-src="/about/images/dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="/about/images/light.png" data-light-src="/about/images/light.png">
+    <img alt="Shows a sun in light mode and a moon in dark mode."
+         src="/about/images/light.png"
+         data-light-src="/about/images/light.png"
+         data-dark-src="/about/images/dark.png"
+         data-theme-responsive="true">
+  </picture>
+</p>
 ```
 
 ## Hugo shortcode
@@ -25,7 +40,13 @@ Inspired by the [GitHub post](https://github.blog/changelog/2022-05-19-specify-t
 {{</* img light="/about/images/light.png" dark="/about/images/dark.png" alt="Shows a sun in light mode and a moon in dark mode." */>}}
 ```
 
-Pick any two named variables from `src`, `light` and `dark`. The `alt` text is optional but recommended for inclusivity.
+**Parameters:**
+
+- `light` - Image for light theme
+- `dark` - Image for dark theme
+- `src` - Fallback image (optional)
+- `alt` - Alt text (recommended for accessibility)
+- `class` - Additional CSS classes (optional)
 
 ## Example
 

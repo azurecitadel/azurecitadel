@@ -1,0 +1,73 @@
+/* GitHub-style theme-responsive images */
+
+.theme-responsive-image {
+  text-align: center;
+  margin: 16px 0;
+}
+
+.theme-responsive-image picture {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.theme-responsive-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-default);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s ease;
+}
+
+/* Dark mode adjustments */
+html[data-color-mode='dark'] .theme-responsive-image img {
+  border-color: var(--color-border-default);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover effect like GitHub */
+.theme-responsive-image img:hover {
+  border-color: var(--citadel-accent-strong);
+  cursor: zoom-in;
+}
+
+/* Ensure images load smoothly */
+.theme-responsive-image img[data-theme-responsive="true"] {
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+/* Loading state */
+.theme-responsive-image img[data-theme-responsive="true"]:not([src]),
+.theme-responsive-image img[data-theme-responsive="true"][src=""] {
+  opacity: 0.5;
+  background: var(--color-canvas-subtle);
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-responsive-image img[data-theme-responsive="true"]:not([src])::after,
+.theme-responsive-image img[data-theme-responsive="true"][src=""]::after {
+  content: "Loading...";
+  color: var(--color-fg-muted);
+  font-size: 14px;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .theme-responsive-image {
+    margin: 12px 0;
+  }
+
+  .theme-responsive-image img {
+    border-radius: 4px;
+  }
+}
+
+/* Print styles - always show light version */
+@media print {
+  .theme-responsive-image img[data-light-src] {
+    content: url(attr(data-light-src));
+  }
+}

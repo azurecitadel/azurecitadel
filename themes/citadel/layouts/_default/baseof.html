@@ -102,6 +102,63 @@
       else if(dark){ persist('dark'); apply('dark'); }
     });
   })();
+
+  // GitHub-style theme-responsive images
+  (function(){
+    function updateThemeResponsiveImages() {
+      const mode = document.documentElement.getAttribute('data-color-mode') || 'light';
+      const images = document.querySelectorAll('img[data-theme-responsive="true"]');
+
+      images.forEach(img => {
+        const lightSrc = img.getAttribute('data-light-src');
+        const darkSrc = img.getAttribute('data-dark-src');
+
+        if (mode === 'dark' && darkSrc) {
+          img.src = darkSrc;
+        } else if (mode === 'light' && lightSrc) {
+          img.src = lightSrc;
+        }
+      });
+
+      // Also update source elements in picture tags
+      const sources = document.querySelectorAll('source[data-light-src], source[data-dark-src]');
+      sources.forEach(source => {
+        const lightSrc = source.getAttribute('data-light-src');
+        const darkSrc = source.getAttribute('data-dark-src');
+
+        if (mode === 'dark' && darkSrc) {
+          source.srcset = darkSrc;
+        } else if (mode === 'light' && lightSrc) {
+          source.srcset = lightSrc;
+        }
+      });
+    }
+
+    // Update images when DOM loads
+    document.addEventListener('DOMContentLoaded', updateThemeResponsiveImages);
+
+    // Update images when theme changes
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-color-mode') {
+          updateThemeResponsiveImages();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-color-mode']
+    });
+
+    // Also listen for storage events (cross-tab sync)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'citadel-theme-mode') {
+        setTimeout(updateThemeResponsiveImages, 10);
+      }
+    });
+  })();
+
   // Scroll overlay show/hide for sidebar & main content
   (function(){
     const targets=[document.getElementById('sidebar-scroll'), document.getElementById('main-scroll')].filter(Boolean);

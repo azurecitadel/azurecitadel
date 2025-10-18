@@ -1,15 +1,31 @@
-{{/* Allows light and dark images based on prefers-color-scheme. */}}
+{{/*
+GitHub-style responsive images for light/dark themes.
+Works with both system preference and manual theme toggle.
+*/}}
 
 {{ $dark := .Get "dark" }}
 {{ $light := .Get "light" }}
 {{ $src := .Get "src" }}
+{{ $alt := .Get "alt" }}
+{{ $class := .Get "class" }}
 
-<p>
+{{ $fallbackSrc := $src }}
+{{ if not $fallbackSrc }}
+  {{ $fallbackSrc = $light | default $dark }}
+{{ end }}
+
+<p class="theme-responsive-image">
   <picture>
     {{ with $dark }}
-    <source media="(prefers-color-scheme: dark)" srcset="{{ $dark }}">{{ end }}
+    <source media="(prefers-color-scheme: dark)" srcset="{{ $dark }}" data-dark-src="{{ $dark }}">{{ end }}
     {{ with $light }}
-    <source media="(prefers-color-scheme: light)" srcset="{{ $light }}">{{ end }}
-  <img alt="{{ .Get "alt" }}" src="{{ with $src }}{{ $src }}{{ else }}{{ default $dark $light }}{{ end }}">
+    <source media="(prefers-color-scheme: light)" srcset="{{ $light }}" data-light-src="{{ $light }}">{{ end }}
+    <img
+      alt="{{ $alt }}"
+      src="{{ $fallbackSrc }}"
+      {{ with $light }}data-light-src="{{ . }}"{{ end }}
+      {{ with $dark }}data-dark-src="{{ . }}"{{ end }}
+      {{ with $class }}class="{{ . }}"{{ end }}
+      data-theme-responsive="true">
   </picture>
 </p>
