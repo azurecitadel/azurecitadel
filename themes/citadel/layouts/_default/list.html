@@ -12,7 +12,7 @@
         {{ .Content }}
     </div>
 
-    {{ $pages := .Pages.ByWeight }}
+    {{ $pages := .Pages.ByTitle }}
     {{ if gt (len $pages) 0 }}
     <section class="mt-4" aria-label="{{ .Title }} items">
         <div class="d-flex flex-column" role="list">
