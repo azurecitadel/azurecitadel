@@ -4,7 +4,7 @@ description: "Azure Landing Zones (ALZ) is Microsoft's recommended landing zone 
 menu:
   side:
     parent: archive
-    identifier: alz
+    identifier: archive-alz
 ---
 
 ## Introduction

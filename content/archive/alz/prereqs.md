@@ -8,8 +8,8 @@ series:
  - alz
 menu:
   side:
-    parent: alz
-    identifier: alz-prereqs
+    parent: archive-alz
+    identifier: archive-alz-prereqs
 aliases:
     - /alz/hack/prereqs/
     - /alz/hack/checks/

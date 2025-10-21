@@ -8,7 +8,7 @@ series:
  - alz
 menu:
   side:
-    parent: alz
+    parent: archive-alz
 ---
 
 **DRAFT**
