@@ -3,6 +3,7 @@ title: "Azure Landing Zones"
 description: "Azure Landing Zones (ALZ) is Microsoft's recommended landing zone architecture for the largest organisations. Landing zones sit within the Ready section of the Cloud Adoption Framework (CAF)."
 menu:
   side:
+    parent: archive
     identifier: alz
 ---
 
