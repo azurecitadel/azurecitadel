@@ -7,7 +7,7 @@ menu:
     parent: archive-alz
     identifier: archive-alz-hack-day2
 series:
- - alz
+ - alz-hack
 weight: 6
 draft: false
 ---
