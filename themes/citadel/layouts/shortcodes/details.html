@@ -3,7 +3,15 @@
     <span class="citadel-details-chevron">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</span>
     <span class="citadel-details-title">{{ .Get 0 }}</span>
   </div>
-  <div class="citadel-details-content border p-3 mt-2" style="display: none;">{{ .Page.RenderString .Inner }}</div>
+  <div class="citadel-details-content border p-3 mt-2" style="display: none;">
+    <div class="citadel-details-inner">{{ .Page.RenderString .Inner }}</div>
+    <div class="citadel-details-close-container">
+      <button class="citadel-details-close-btn btn-octicon" aria-label="Close details" title="Close">
+        {{- partial "octicon" (dict "icon" "x" "height" 16) -}}
+        <span class="ml-1">Close</span>
+      </button>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -52,6 +60,33 @@
   border-radius: 6px;
   margin-top: 0.5rem;
   box-shadow: var(--citadel-subtle-glow);
+  position: relative;
+}
+
+.citadel-details-close-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border-muted);
+}
+
+.citadel-details-close-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-fg-default);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.citadel-details-close-btn:hover {
+  background-color: var(--color-neutral-muted);
+  border-color: var(--color-border-emphasis);
 }
 </style>
 
@@ -61,6 +96,17 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.citadel-details').forEach(function(details) {
     const summary = details.querySelector('.citadel-details-summary');
     const content = details.querySelector('.citadel-details-content');
+    const closeBtn = details.querySelector('.citadel-details-close-btn');
+
+    function closeDetails() {
+      details.classList.remove('open');
+      content.style.display = 'none';
+    }
+
+    function openDetails() {
+      details.classList.add('open');
+      content.style.display = 'block';
+    }
 
     // Handle summary clicks
     summary.addEventListener('click', function(e) {
@@ -69,13 +115,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Toggle visibility
       if (details.classList.contains('open')) {
-        details.classList.remove('open');
-        content.style.display = 'none';
+        closeDetails();
       } else {
-        details.classList.add('open');
-        content.style.display = 'block';
+        openDetails();
       }
     });
+
+    // Handle close button clicks
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeDetails();
+      });
+    }
   });
 });
 </script>
