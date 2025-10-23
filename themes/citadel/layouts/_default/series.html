@@ -4,13 +4,44 @@
 
     <!-- main header (hamburger + breadcrumbs) now rendered globally in base layout -->
 
+    {{/* Compute series neighbors once so we can use in TOC header and footer */}}
+    {{ if isset .Params "series" }}
+        {{ $seriesTitle := index .Params.series 0 }}
+        {{ $currentLink := .Permalink }}
+        {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
+        {{ range $index, $page := $wholeSeries }}
+            {{ if eq $currentLink $page.Permalink }}
+                {{ if gt $index 0 }}
+                    {{ .Scratch.Set "prevInSeries" (index $wholeSeries (sub $index 1)) }}
+                {{ end }}
+                {{ if lt $index (sub (len $wholeSeries) 1) }}
+                    {{ .Scratch.Set "nextInSeries" (index $wholeSeries (add $index 1)) }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+
     <div class="d-flex flex-column flex-xl-row-reverse markdown-body">
 
-        <div class="toc p-3 flex-self-start">
-            <h3 id="in-this-article" class="f5 mb-2">
-                <a class="" href="#in-this-article">Table of Contents</a>
-            </h3>
-            <div class="f6">{{ .TableOfContents }}</div>
+        <div class="toc" style="flex: 0 0 300px; align-self: flex-start;">
+            <div style="position: sticky; top: 1rem; padding: 0.75rem; background: var(--color-canvas-default); border: 1px solid var(--color-border-default); border-radius: 6px; box-shadow: 0 2px 8px rgba(140,149,159,0.1);">
+                <div class="toc-header d-flex flex-items-center pb-2 mb-2 border-bottom color-border-muted">
+                    {{ with index .Scratch.Values "prevInSeries" }}
+                        <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Previous in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</a>
+                    {{ else }}
+                        <span class="btn-octicon series-btn is-disabled" aria-disabled="true" title="No previous page">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</span>
+                    {{ end }}
+                    <h3 id="in-this-article" class="f5 my-0">
+                        <a href="#in-this-article">Table of Contents</a>
+                    </h3>
+                    {{ with index .Scratch.Values "nextInSeries" }}
+                        <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Next in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</a>
+                    {{ else }}
+                        <span class="btn-octicon series-btn is-disabled" aria-disabled="true" title="No next page">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</span>
+                    {{ end }}
+                </div>
+                <div class="f6" style="max-height: calc(100vh - 8rem); overflow-y: auto;">{{ .TableOfContents }}</div>
+            </div>
         </div>
 
         <div class="flex-1 overflow-hidden">
@@ -21,22 +52,8 @@
             {{.Content}}
 
             {{ if isset .Params "series" }}
-                {{ $seriesTitle := index .Params.series 0 }}
-                {{ $currentLink := .Permalink }}
-                {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
-
-                {{ range $index, $page := $wholeSeries }}
-                    {{ if eq $currentLink $page.Permalink }}
-                    {{ if gt $index 0 }}
-                        {{ .Scratch.Set "prevInSeries" (index $wholeSeries (sub $index 1)) }}
-                    {{ end }}
-                    {{ if lt $index (sub (len $wholeSeries) 1) }}
-                        {{ .Scratch.Set "nextInSeries" (index $wholeSeries (add $index 1)) }}
-                    {{ end }}
-                    {{ end }}
-                {{ end }}
-
-                {{ range (index .Site.Taxonomies.series ($.Param "menu.side.identifier")).Pages.ByWeight }}
+                {{/* List child pages of this section */}}
+                {{ range .Pages.ByWeight }}
                 <div class="box Box-row--hover-gray px-3 mt-3">
                     <a title="{{.Title}}" href="{{.Permalink}}">
                         <h4>{{.Title}}</h4>

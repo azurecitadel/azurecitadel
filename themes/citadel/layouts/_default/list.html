@@ -12,7 +12,10 @@
         {{ .Content }}
     </div>
 
-    {{ $pages := .Pages.ByTitle }}
+    {{ $pages := .Pages.ByWeight }}
+    {{ if and (eq .Section "archive") (eq .RelPermalink "/archive/") }}
+        {{ $pages = .Pages.ByTitle }}
+    {{ end }}
     {{ if gt (len $pages) 0 }}
     <section class="mt-4" aria-label="{{ .Title }} items">
         <div class="d-flex flex-column" role="list">
