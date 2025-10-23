@@ -1,4 +1,81 @@
-<details class="details-overlay">
-  <summary class="btn">{{ .Get 0 }}</summary>
-  <div class="border p-3 mt-2">{{ .Inner }}</div>
-</details>
+<div class="details-overlay citadel-details">
+  <div class="citadel-details-summary">
+    <span class="citadel-details-chevron">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</span>
+    <span class="citadel-details-title">{{ .Get 0 }}</span>
+  </div>
+  <div class="citadel-details-content border p-3 mt-2" style="display: none;">{{ .Inner }}</div>
+</div>
+
+<style>
+.citadel-details {
+  margin: 1rem 0;
+}
+
+.citadel-details-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.citadel-details-summary::-webkit-details-marker {
+  display: none;
+}
+
+.citadel-details-chevron {
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.citadel-details.open .citadel-details-chevron {
+  transform: rotate(90deg);
+}
+
+.citadel-details-title {
+  white-space: nowrap;
+}
+
+:root {
+  --citadel-subtle-glow: 0 2px 8px rgba(140,149,159,0.1);
+}
+
+.citadel-details-content {
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  box-shadow: var(--citadel-subtle-glow);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Custom details implementation with divs
+  document.querySelectorAll('.citadel-details').forEach(function(details) {
+    const summary = details.querySelector('.citadel-details-summary');
+    const content = details.querySelector('.citadel-details-content');
+
+    // Handle summary clicks
+    summary.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Toggle visibility
+      if (details.classList.contains('open')) {
+        details.classList.remove('open');
+        content.style.display = 'none';
+      } else {
+        details.classList.add('open');
+        content.style.display = 'block';
+      }
+    });
+  });
+});
+</script>
