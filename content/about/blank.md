@@ -1,2 +1,0 @@
-title: "Blank"
-layout: blank
