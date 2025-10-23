@@ -5,7 +5,7 @@ layout: single
 draft: true
 weight: 8
 series:
- - alz
+ - alz-hack
 menu:
   side:
     parent: archive-alz

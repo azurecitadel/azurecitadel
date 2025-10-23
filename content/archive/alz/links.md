@@ -9,7 +9,7 @@ menu:
     parent: archive-alz
     identifier: archive-alz-links
 series:
- - alz
+ - alz-hack
 ---
 
 ## Main Azure Landing Zones Links
