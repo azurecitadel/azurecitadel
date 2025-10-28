@@ -21,11 +21,13 @@ What customers will see:
 - Revised region names in Azure Portal region selection menus
 {{< /flash>}}
 
-Here is how it looks today:
+This command pulls out the info for the UK regions.
 
 ```bash
 az account list-locations --query "[?starts_with(name, 'uk')]" --output jsonc
 ```
+
+Here is how it looked at the start of the month:
 
 ```json
 [
@@ -101,6 +103,82 @@ az account list-locations --query "[?starts_with(name, 'uk')]" --output jsonc
 ]
 ```
 
+And here is how it looks now:
+
+```json
+[
+  {
+    "availabilityZoneMappings": [
+      {
+        "logicalZone": "1",
+        "physicalZone": "uksouth-az1"
+      },
+      {
+        "logicalZone": "2",
+        "physicalZone": "uksouth-az2"
+      },
+      {
+        "logicalZone": "3",
+        "physicalZone": "uksouth-az3"
+      }
+    ],
+    "displayName": "UK South",
+    "id": "/subscriptions/a7484f13-d60f-4e5a-a530-fdaade38716a/locations/uksouth",
+    "metadata": {
+      "geography": "United Kingdom",
+      "geographyGroup": "UK",
+      "latitude": "50.941",
+      "longitude": "-0.799",
+      "pairedRegion": [
+        {
+          "id": "/subscriptions/a7484f13-d60f-4e5a-a530-fdaade38716a/locations/ukwest",
+          "name": "ukwest"
+        }
+      ],
+      "physicalLocation": "London",
+      "regionCategory": "Recommended",
+      "regionType": "Physical"
+    },
+    "name": "uksouth",
+    "regionalDisplayName": "(UK) UK South",
+    "type": "Region"
+  },
+  {
+    "displayName": "United Kingdom",
+    "id": "/subscriptions/a7484f13-d60f-4e5a-a530-fdaade38716a/locations/uk",
+    "metadata": {
+      "regionCategory": "Other",
+      "regionType": "Logical"
+    },
+    "name": "uk",
+    "regionalDisplayName": "United Kingdom",
+    "type": "Region"
+  },
+  {
+    "displayName": "UK West",
+    "id": "/subscriptions/a7484f13-d60f-4e5a-a530-fdaade38716a/locations/ukwest",
+    "metadata": {
+      "geography": "United Kingdom",
+      "geographyGroup": "UK",
+      "latitude": "53.427",
+      "longitude": "-3.084",
+      "pairedRegion": [
+        {
+          "id": "/subscriptions/a7484f13-d60f-4e5a-a530-fdaade38716a/locations/uksouth",
+          "name": "uksouth"
+        }
+      ],
+      "physicalLocation": "Cardiff",
+      "regionCategory": "Other",
+      "regionType": "Physical"
+    },
+    "name": "ukwest",
+    "regionalDisplayName": "(UK) UK West",
+    "type": "Region"
+  }
+]
+```
+
 The geographyGroup in the metadata is gaining more importance as data and operation sovereignty controls tighten for public cloud, with the EU Data Boundary relating to the EU and EFTA regions.
 
 Here is another useful command that shows all of the current physical regions as a table sorted by geographyGroup and geography.
@@ -154,8 +232,6 @@ Here is the resulting table in Markdown form.
 | Europe        | Sweden          | Gävle            | Sweden Central        | swedencentral        |
 | Europe        | Switzerland     | Zurich           | Switzerland North     | switzerlandnorth     |
 | Europe        | Switzerland     | Geneva           | Switzerland West      | switzerlandwest      |
-| Europe        | United Kingdom  | London           | UK South              | uksouth              |
-| Europe        | United Kingdom  | Cardiff          | UK West               | ukwest               |
 | Mexico        | Mexico          | Querétaro State  | Mexico Central        | mexicocentral        |
 | Middle East   | Israel          | Israel           | Israel Central        | israelcentral        |
 | Middle East   | Qatar           | Doha             | Qatar Central         | qatarcentral         |
@@ -164,6 +240,8 @@ Here is the resulting table in Markdown form.
 | South America | Brazil          | Sao Paulo State  | Brazil South          | brazilsouth          |
 | South America | Brazil          | Rio              | Brazil Southeast      | brazilsoutheast      |
 | South America | Chile           | Santiago         | Chile Central         | chilecentral         |
+| UK            | United Kingdom  | London           | UK South              | uksouth              |
+| UK            | United Kingdom  | Cardiff          | UK West               | ukwest               |
 | US            | United States   | Iowa             | Central US            | centralus            |
 | US            | United States   | Virginia         | East US               | eastus               |
 | US            | United States   | Virginia         | East US 2             | eastus2              |
