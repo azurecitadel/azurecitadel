@@ -5,11 +5,11 @@ layout: single
 weight: 1
 draft: false
 series:
- - alz
+ - alz-hack
 menu:
   side:
-    parent: alz
-    identifier: alz-prereqs
+    parent: archive-alz
+    identifier: archive-alz-prereqs
 aliases:
     - /alz/hack/prereqs/
     - /alz/hack/checks/

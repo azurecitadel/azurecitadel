@@ -8,7 +8,7 @@ series:
  - alz-hack-day3
 menu:
   side:
-    parent: alz-hack-day3
+    parent: archive-alz-hack-day3
 ---
 
 ## Introduction

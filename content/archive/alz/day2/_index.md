@@ -4,10 +4,10 @@ description: "Sessions on day two of the Azure Landing Zones hack, customising t
 layout: series
 menu:
   side:
-    parent: alz
-    identifier: alz-hack-day2
+    parent: archive-alz
+    identifier: archive-alz-hack-day2
 series:
- - alz
+ - alz-hack
 weight: 6
 draft: false
 ---

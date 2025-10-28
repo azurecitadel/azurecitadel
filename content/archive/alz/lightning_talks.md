@@ -5,10 +5,10 @@ layout: single
 draft: true
 weight: 8
 series:
- - alz
+ - alz-hack
 menu:
   side:
-    parent: alz
+    parent: archive-alz
 ---
 
 **DRAFT**
