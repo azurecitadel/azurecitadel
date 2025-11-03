@@ -1,0 +1,15 @@
+{{/*
+Shared Content Shortcode
+Usage: {{% shared-content "alz-prereqs" %}}
+Note: Use {{% %}} (percent signs) instead of {{< >}} to enable TableOfContents generation
+*/}}
+
+{{ $contentPath := .Get 0 }}
+{{ $sharedPage := .Site.GetPage (printf "/shared/%s" $contentPath) }}
+{{ if $sharedPage }}
+  {{ $sharedPage.RawContent }}
+{{ else }}
+  <div class="flash flash-error">
+    <strong>Error:</strong> Shared content "{{ $contentPath }}" not found.
+  </div>
+{{ end }}
