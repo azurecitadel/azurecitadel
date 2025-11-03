@@ -2,6 +2,7 @@
 title: "Basics"
 author: [ "Richard Cheney" ]
 description: "Create a simple hardcoded ARM template and deploy to Azure."
+draft: true
 menu:
   side:
     parent: arm-basics
