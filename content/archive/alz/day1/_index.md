@@ -10,8 +10,6 @@ series:
  - alz-hack
 weight: 5
 draft: false
-aliases:
-    - /alz/hack/agenda/
 ---
 
 ## Agenda

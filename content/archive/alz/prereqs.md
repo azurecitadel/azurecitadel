@@ -10,9 +10,6 @@ menu:
   side:
     parent: archive-alz
     identifier: archive-alz-prereqs
-aliases:
-    - /alz/hack/prereqs/
-    - /alz/hack/checks/
 ---
 
 
