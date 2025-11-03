@@ -4,6 +4,7 @@ description: "Hyperconverged virtualisation platforms for on premises virtual ma
 draft: false
 menu:
   side:
+    parent: archive
     identifier: hci
 ---
 
