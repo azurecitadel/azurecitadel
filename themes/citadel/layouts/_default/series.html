@@ -26,18 +26,54 @@
         <div class="toc" style="flex: 0 0 300px; align-self: flex-start;">
             <div style="position: sticky; top: 1rem; padding: 0.75rem; background: var(--color-canvas-default); border: 1px solid var(--color-border-default); border-radius: 6px; box-shadow: 0 2px 8px rgba(140,149,159,0.1);">
                 <div class="toc-header d-flex flex-items-center pb-2 mb-2 border-bottom color-border-muted">
-                    {{ with index .Scratch.Values "prevInSeries" }}
-                        <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Previous in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</a>
+                    {{ if isset .Params "series" }}
+                        {{/* Series Progress Indicator */}}
+                        {{ $seriesTitle := index .Params.series 0 }}
+                        {{ $currentLink := .Permalink }}
+                        {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
+                        {{ $currentIndex := 0 }}
+                        {{ range $index, $page := $wholeSeries }}
+                            {{ if eq $currentLink $page.Permalink }}
+                                {{ $currentIndex = $index }}
+                            {{ end }}
+                        {{ end }}
+                        <div class="series-progress-container">
+                            <div class="series-name">{{ .Title }}</div>
+                            <div class="series-controls">
+                                {{ with index .Scratch.Values "prevInSeries" }}
+                                    <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Previous in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</a>
+                                {{ else }}
+                                    <span class="btn-octicon series-btn is-disabled" aria-disabled="true" title="No previous page">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</span>
+                                {{ end }}
+                                <div class="series-progress" aria-label="Series progress: {{ add $currentIndex 1 }} of {{ len $wholeSeries }}">
+                                {{ range $index, $page := $wholeSeries }}
+                                    {{ $status := "future" }}
+                                    {{ if lt $index $currentIndex }}{{ $status = "completed" }}{{ end }}
+                                    {{ if eq $index $currentIndex }}{{ $status = "current" }}{{ end }}
+                                    {{ if eq $index $currentIndex }}
+                                        <div class="progress-bar progress-bar--{{ $status }}"
+                                             title="{{ $page.Title }}">
+                                        </div>
+                                    {{ else }}
+                                        <a href="{{ $page.Permalink }}"
+                                           class="progress-bar progress-bar--{{ $status }}"
+                                           title="{{ $page.Title }}"
+                                           aria-label="Go to {{ $page.Title }}">
+                                        </a>
+                                    {{ end }}
+                                {{ end }}
+                                </div>
+                                {{ with index .Scratch.Values "nextInSeries" }}
+                                    <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Next in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</a>
+                                {{ else }}
+                                    <span class="btn-octicon series-btn is-disabled" aria-disabled="true" title="No next page">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</span>
+                                {{ end }}
+                            </div>
+                        </div>
                     {{ else }}
-                        <span class="btn-octicon series-btn is-disabled" aria-disabled="true" title="No previous page">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</span>
-                    {{ end }}
-                    <h3 id="in-this-article" class="f5 my-0">
-                        <a href="#in-this-article">Table of Contents</a>
-                    </h3>
-                    {{ with index .Scratch.Values "nextInSeries" }}
-                        <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Next in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</a>
-                    {{ else }}
-                        <span class="btn-octicon series-btn is-disabled" aria-disabled="true" title="No next page">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</span>
+                        <h3 id="in-this-article" class="f5 my-0">
+                            <a href="#in-this-article">Table of Contents</a>
+                        </h3>
                     {{ end }}
                 </div>
                 <div class="f6" style="max-height: calc(100vh - 8rem); overflow-y: auto;">{{ .TableOfContents }}</div>
