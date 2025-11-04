@@ -35,7 +35,9 @@
 
     const storagePrefix = isTabs ? GROUP_KEY_PREFIX_TAB : GROUP_KEY_PREFIX_MODE;
     const storedGroup = localStorage.getItem(storagePrefix + groupId);
-    const defaultName = container.getAttribute('data-default');
+    const pageDefaults = container.getAttribute('data-page-defaults');
+    const pageDefaultsArray = pageDefaults ? pageDefaults.split(',').map(s=>norm(s)).filter(Boolean) : null;
+    const forceTabs = container.hasAttribute('data-force-tabs');
 
     const nav = document.createElement('div');
     nav.className = 'ac-tablist';
@@ -97,18 +99,27 @@
 
     function findIndexByKey(k){ return panelData.findIndex(pd=>pd.key===k); }
 
-    // Determine initial index
+    // Determine initial index with new priority system
     let initialIndex = 0;
     const globalChoice = localStorage.getItem(GLOBAL_KEY);
-    if(queryChoices && queryChoices.length){
+
+    if(forceTabs && pageDefaultsArray && pageDefaultsArray.length){
+      // Force tabs mode: page defaults always win
+      for(const pd of pageDefaultsArray){ const idx = findIndexByKey(pd); if(idx>=0){ initialIndex = idx; break; } }
+    } else if(queryChoices && queryChoices.length){
+      // URL parameters still take highest priority when not forcing
       for(const qc of queryChoices){ const idx = findIndexByKey(qc); if(idx>=0){ initialIndex = idx; break; } }
     } else if(storedGroup && findIndexByKey(storedGroup)>=0){
+      // User's stored preference for this specific group
       initialIndex = findIndexByKey(storedGroup);
     } else if(globalChoice && findIndexByKey(globalChoice)>=0){
+      // User's global preference
       initialIndex = findIndexByKey(globalChoice);
-    } else if(defaultName){
-      const dk = norm(defaultName); const di = findIndexByKey(dk); if(di>=0) initialIndex = di;
+    } else if(pageDefaultsArray && pageDefaultsArray.length){
+      // Page front matter defaults as fallback
+      for(const pd of pageDefaultsArray){ const idx = findIndexByKey(pd); if(idx>=0){ initialIndex = idx; break; } }
     }
+    // Final fallback: initialIndex remains 0 (first tab)
 
     // Register before activation so propagation can reach us if needed later.
     REGISTRY.push({

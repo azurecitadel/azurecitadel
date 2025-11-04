@@ -1,3 +1,7 @@
-<div class="ac-modes" data-modes {{ with .Get "id" }}data-modes-id="{{ . }}"{{ end }} {{ with .Get "default" }}data-default="{{ . }}"{{ end }}>
+{{/* New priority system: force_tabs overrides user preferences, otherwise user prefs take priority */}}
+{{ $pageTabDefaults := .Page.Params.tabs }}
+{{ $forceTabs := .Page.Params.force_tabs }}
+
+<div class="ac-modes" data-modes {{ with .Get "id" }}data-modes-id="{{ . }}"{{ end }} {{ if $pageTabDefaults }}data-page-defaults="{{ delimit $pageTabDefaults "," }}"{{ end }} {{ if $forceTabs }}data-force-tabs="true"{{ end }}>
   {{ .Page.RenderString .Inner }}
 </div>
