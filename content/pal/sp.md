@@ -11,6 +11,9 @@ menu:
     identifier: pal-sp
 series:
   - pal
+tabs:
+  - azure-cli
+force_tabs: true
 ---
 
 ## Introduction brief
@@ -27,7 +30,7 @@ This page assumes that there is an existing service principal that has existing 
 ⚠️ Note that you cannot create a Partner Admin Link for a service principal using the Azure Portal.
 {{< /flash >}}
 
-{{< modes default="PowerShell" >}}
+{{< modes >}}
   {{< mode title="PowerShell" >}}
 
   ### Use PowerShell to create the link for a service principal
