@@ -5,7 +5,7 @@ date: 2021-02-01
 draft: false
 menu:
   side:
-    identifier: 'terraform'
+    identifier: terraform
 aliases:
  - /automation/terraform
  - /automation/terraform/lab1

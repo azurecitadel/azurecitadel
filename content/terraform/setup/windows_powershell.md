@@ -7,10 +7,9 @@ description: "Choose this if you are a Windows user who's not comfortable with l
 weight: 30
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-setup
 series:
- - terraform-envs
-layout: single
+ - terraform-setup
 ---
 
 ## Introduction

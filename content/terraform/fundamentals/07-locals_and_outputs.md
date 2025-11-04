@@ -8,11 +8,9 @@ description: "Use locals and functions to generate a unique value, and add a cou
 weight: 7
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
-
 ---
 
 ## Overview

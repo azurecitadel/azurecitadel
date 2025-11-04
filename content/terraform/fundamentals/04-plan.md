@@ -8,11 +8,9 @@ description: "Start working with terraform.tfvars to specify your variable value
 weight: 4
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
-
 ---
 
 ## Overview

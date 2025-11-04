@@ -8,10 +8,9 @@ description: "Use `terraform init` to initialise a terraform environment, downlo
 weight: 1
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
 ---
 
 ## Overview

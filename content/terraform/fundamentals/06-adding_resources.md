@@ -8,11 +8,9 @@ description: "Use the azurerm documentation to add a resource to your configurat
 weight: 6
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
-
 ---
 
 ## Overview

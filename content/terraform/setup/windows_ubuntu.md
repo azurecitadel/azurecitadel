@@ -7,10 +7,9 @@ description: "The best of both worlds? Integrate Visual Studio Code with terrafo
 weight: 40
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-setup
 series:
- - terraform-envs
-layout: single
+ - terraform-setup
 ---
 
 ## Introduction
