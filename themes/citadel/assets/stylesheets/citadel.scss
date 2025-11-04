@@ -181,6 +181,95 @@ html[data-color-mode='dark'] .toc .series-btn:hover { color: var(--citadel-accen
 .toc .series-btn.is-disabled { color: var(--color-fg-muted,#6e7781); cursor:default; pointer-events:none; }
 html[data-color-mode='dark'] .toc .series-btn.is-disabled { color: var(--color-fg-muted,#8b949e); }
 
+/* Series Progress Indicator */
+.series-progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    margin: 0 4px;
+}
+
+.series-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-fg-default);
+    margin-bottom: 6px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.series-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.series-progress {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    height: 8px;
+    justify-content: center;
+    min-width: 100px; /* Ensure minimum width for bars */
+}
+
+.progress-bar {
+    height: 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    flex: 1;
+    min-width: 12px;
+    max-width: 25px;
+    background-color: #e0e0e0; /* Default background */
+}
+
+/* Current page bar (not clickable) */
+.progress-bar--current {
+    background: var(--citadel-accent);
+    transform: scaleY(1.2);
+    cursor: default;
+}
+
+/* Clickable progress bar states */
+.progress-bar--completed {
+    background: rgba(var(--citadel-accent-rgb), 0.5);
+}
+
+.progress-bar--completed:hover {
+    background: rgba(var(--citadel-accent-rgb), 0.7);
+    transform: scaleY(1.1);
+}
+
+.progress-bar--future {
+    background: var(--color-neutral-muted, #8b949e);
+}
+
+.progress-bar--future:hover {
+    background: var(--color-fg-subtle, #6e7781);
+    transform: scaleY(1.1);
+}
+
+/* Dark mode adjustments */
+html[data-color-mode='dark'] .progress-bar--completed {
+    background: rgba(var(--citadel-accent-rgb), 0.4);
+}
+
+html[data-color-mode='dark'] .progress-bar--completed:hover {
+    background: rgba(var(--citadel-accent-rgb), 0.6);
+}
+
+html[data-color-mode='dark'] .progress-bar--future {
+    background: var(--color-neutral-muted, #6e7781);
+}
+
+html[data-color-mode='dark'] .progress-bar--future:hover {
+    background: var(--color-fg-muted, #8b949e);
+}
+
 /* Header actions (narrow only): prev, TOC toggle, next */
 .main-header .header-actions { margin-left:auto; display:flex; align-items:center; gap:8px; }
 @media (min-width: 1280px){ .main-header .header-actions { display:none; } }
