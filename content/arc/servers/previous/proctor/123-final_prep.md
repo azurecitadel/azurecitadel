@@ -4,7 +4,7 @@ description: "Create a target resource group and a service principal with the \"
 layout: single
 draft: true
 series:
- - arc-servers-hack-proctor
+ - arc-servers-previous-hack-proctor
 weight: 123
 url: /arc/servers/final_prep/proctor
 ---

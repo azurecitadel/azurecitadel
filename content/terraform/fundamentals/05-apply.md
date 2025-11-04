@@ -8,11 +8,9 @@ description: "Apply your configuration to create resources and then examine the 
 weight: 5
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
-
 ---
 
 ## Overview

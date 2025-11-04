@@ -4,7 +4,7 @@ description: "Onboarding multiple Windows servers using Windows Admin Center."
 layout: single
 draft: true
 series:
- - arc-servers-hack-proctor
+ - arc-servers-previous-hack-proctor
 weight: 135
 url: /arc/servers/windows/proctor
 ---

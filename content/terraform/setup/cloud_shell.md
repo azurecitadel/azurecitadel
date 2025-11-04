@@ -7,10 +7,9 @@ description: "Use the Azure Cloud Shell if you are looking for the quickest way 
 weight: 10
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-setup
 series:
- - terraform-envs
-layout: single
+ - terraform-setup
 ---
 
 ## Overview

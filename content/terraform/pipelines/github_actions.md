@@ -7,10 +7,9 @@ description: "Deploy with a user assigned managed identity with YAML based GitHu
 weight: 50
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-pipelines
 series:
- - terraform-envs
-layout: single
+ - terraform-pipelines
 ---
 
 ## Overview

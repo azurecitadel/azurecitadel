@@ -6,7 +6,7 @@ draft: false
 weight: 1
 menu:
   side:
-    identifier: 'terraform-basics'
+    identifier: terraform-basics
     parent: 'terraform'
 ---
 

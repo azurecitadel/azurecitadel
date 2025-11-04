@@ -1,13 +1,13 @@
 ---
-title: "Working Environments for Terraform"
-description: "Example environments commonly used when deploying infrastructure as code to Azure via Terraform."
+title: "Get set up for Terraform"
+description: "Example working setups commonly used when deploying infrastructure as code to Azure via Terraform."
 date: 2024-02-19
 draft: false
 weight: 10
 menu:
   side:
-    identifier: 'terraform-envs'
-    parent: 'terraform'
+    identifier: terraform-setup
+    parent: terraform
 ---
 
 ## Overview

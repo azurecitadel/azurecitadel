@@ -7,10 +7,9 @@ description: "Set up your MacBook for using Terraform."
 weight: 20
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-setup
 series:
- - terraform-envs
-layout: single
+ - terraform-setup
 ---
 
 ## Install

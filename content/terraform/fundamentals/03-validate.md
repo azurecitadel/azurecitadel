@@ -8,11 +8,9 @@ description: "Use `terraform validate` to confirm that the files are syntactical
 weight: 3
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
-
 ---
 
 ## Overview

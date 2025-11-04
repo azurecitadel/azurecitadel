@@ -8,10 +8,9 @@ description: "Create a variables.tf and main.tf. Use `terraform fmt` to automati
 weight: 2
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
 
 ---
 
