@@ -68,7 +68,7 @@ jobs:
           hugo-version: '0.123.7'
           extended: true
       - name: Build
-        run: hugo --minify
+        run: hugo
       - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
