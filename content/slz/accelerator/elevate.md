@@ -7,10 +7,10 @@ draft: false
 weight: 20
 menu:
   side:
-    parent: alz-quickstart
-    identifier: alz-quickstart-elevate
+    parent: slz-accelerator
+    identifier: slz-accelerator-elevate
 series:
- - alz-quickstart
+  - slz-accelerator
 ---
 
-{{% shared-content "alz-elevate" %}}
+{{% shared-content "alz/accelerator/elevate" %}}
