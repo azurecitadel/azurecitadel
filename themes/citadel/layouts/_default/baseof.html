@@ -302,6 +302,74 @@
       });
     }
   })();
+
+  // Dynamic TOC: regenerate table of contents to include headers from shared content
+  (function(){
+    const tocContainer = document.getElementById('dynamic-toc');
+    if(!tocContainer) return;
+
+    function generateTOC() {
+      // Find all headers in the main content area
+      const contentArea = document.querySelector('.markdown-body .flex-1');
+      if(!contentArea) return;
+
+      const headers = contentArea.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      if(headers.length === 0) return;
+
+      // Build TOC HTML
+      let tocHTML = '<nav role="navigation"><ul>';
+      let currentLevel = 0;
+
+      headers.forEach((header, index) => {
+        const level = parseInt(header.tagName.charAt(1));
+        const text = header.textContent.trim();
+        const id = header.id || `heading-${index}`;
+
+        // Ensure header has an ID for linking
+        if(!header.id) header.id = id;
+
+        // Handle nesting levels
+        if(level > currentLevel) {
+          for(let i = currentLevel; i < level; i++) {
+            if(i > 0) tocHTML += '<ul>';
+          }
+        } else if(level < currentLevel) {
+          for(let i = level; i < currentLevel; i++) {
+            tocHTML += '</ul>';
+          }
+        }
+
+        tocHTML += `<li><a href="#${id}">${text}</a></li>`;
+        currentLevel = level;
+      });
+
+      // Close remaining ul tags
+      for(let i = 0; i < currentLevel; i++) {
+        tocHTML += '</ul>';
+      }
+      tocHTML += '</nav>';
+
+      // Replace or supplement existing TOC
+      const existingTOC = tocContainer.querySelector('nav');
+      if(existingTOC && headers.length > existingTOC.querySelectorAll('a').length) {
+        // More headers found than in existing TOC - replace it
+        existingTOC.outerHTML = tocHTML;
+      } else if(!existingTOC) {
+        // No existing TOC - add the generated one
+        tocContainer.innerHTML = tocHTML;
+      }
+    }
+
+    // Generate TOC after page load and when content changes
+    if(document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', generateTOC);
+    } else {
+      generateTOC();
+    }
+
+    // Also regenerate after a short delay to catch any async content loading
+    setTimeout(generateTOC, 100);
+  })();
 </script>
 
 {{- block "embedded-script" . }}{{- end }}

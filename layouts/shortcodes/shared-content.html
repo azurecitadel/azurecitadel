@@ -7,7 +7,7 @@ Note: Use {{% %}} (percent signs) instead of {{< >}} to enable TableOfContents g
 {{ $contentPath := .Get 0 }}
 {{ $sharedPage := .Site.GetPage (printf "/shared/%s" $contentPath) }}
 {{ if $sharedPage }}
-  {{ $sharedPage.RawContent }}
+  {{ $sharedPage.Content }}
 {{ else }}
   <div class="flash flash-error">
     <strong>Error:</strong> Shared content "{{ $contentPath }}" not found.
