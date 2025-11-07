@@ -6,9 +6,9 @@ title: "Azure Landing Zones - Bootstrap Process"
 
 ## Learning Path Context
 
+Hello!
+
 In the learning path, we'll walk through each step in detail and explain the architecture decisions behind the accelerator configuration. This provides a deeper understanding of the Azure Landing Zones framework.## Overview
-
-
 
 After completing the bootstrap, you can continue with:<COPILOT>
 
@@ -18,10 +18,10 @@ After completing the bootstrap, you can continue with:<COPILOT>
 
 Personas:
 
-* Global Admin in Entra
-* GitHub Admin
-* Bootstrapper
-* Platform Landing Zone Team
+- Global Admin in Entra
+- GitHub Admin
+- Bootstrapper
+- Platform Landing Zone Team
 
 Mention that the privileged RBAC role is needed only for the duration of the bootstrap. This is one persona. The persona running the bootstrap may be the same ID or someone else. Then the RBAC role assignment may be deleted and the Global Admin elevation removed.
 

@@ -7,10 +7,10 @@ draft: false
 weight: 10
 menu:
   side:
-    parent: alz-quickstart
-    identifier: alz-quickstart-prereqs
+    parent: slz-accelerator
+    identifier: slz-accelerator-prereqs
 series:
- - alz-quickstart
+  - slz-accelerator
 ---
 
-{{% shared-content "alz-prereqs" %}}
+{{% shared-content "alz/accelerator/prereqs" %}}

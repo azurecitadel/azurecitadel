@@ -42,7 +42,7 @@ For the bootstrap you will need
 
 1. Switch setting context at the top of the page to your organization
 
-    The URL will switch to <https://github.com/organizations/\<orgName\>/settings/profile>.
+    The URL will switch to `https://github.com/organizations/orgName/settings/profile`.
 
 1. Navigate to Developer Settings > Personal Access Tokens > Fine-grained tokens
 
@@ -111,13 +111,13 @@ Create a personal access token for the **private runners**
 1. Open [PowerShell 7](https://learn.microsoft.com/powershell/scripting/install/installing-powershell?view=powershell-7.4)
 1. Trust the
 
-    ```bash
+    ```powershell
     Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
     ```
 
 1. Install the ALZ module
 
-    ```bash
+    ```powershell
     Install-Module -Name ALZ -Scope CurrentUser
     ```
 
