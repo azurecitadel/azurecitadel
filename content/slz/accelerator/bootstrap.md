@@ -11,6 +11,9 @@ menu:
     identifier: slz-accelerator-bootstrap
 series:
   - slz-accelerator
+tabs:
+  - sovereign-landing-zone
+force_tabs: true
 ---
 
 {{% shared-content "alz/accelerator/bootstrap" %}}

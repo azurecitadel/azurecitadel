@@ -1,8 +1,8 @@
 ---
-title: "Initial"
+title: "Create an initial config"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
-description: "Create an initial config based on the examples."
+description: "Make a new branch, add  an initial Sovereign Landing Zone config based on the examples in the Terraform Registry, and then follow the approval workflow process."
 draft: false
 weight: 20
 menu:
@@ -11,6 +11,9 @@ menu:
     identifier: slz-deploy-initial
 series:
  - slz-deploy
+tabs:
+  - sovereignlandingzone
+force_tabs: true
 ---
 
 {{% shared-content "alz/deploy/initial" %}}
