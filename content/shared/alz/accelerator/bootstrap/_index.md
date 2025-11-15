@@ -4,26 +4,9 @@ title: "Azure Landing Zones - Bootstrap Process"
 ---
 
 
-## Learning Path Context
+## Overview
 
-Hello!
-
-In the learning path, we'll walk through each step in detail and explain the architecture decisions behind the accelerator configuration. This provides a deeper understanding of the Azure Landing Zones framework.## Overview
-
-After completing the bootstrap, you can continue with:<COPILOT>
-
-- [Initial Configuration](../initial/) - Setting up your first landing zone
-
-- [Demote](../demote/) - Removing elevated permissionsNeed an overview of the accelerator. Talk about the fact it is not mandatory. And we are using an empty config so that we can build it up.
-
-Personas:
-
-- Global Admin in Entra
-- GitHub Admin
-- Bootstrapper
-- Platform Landing Zone Team
-
-Mention that the privileged RBAC role is needed only for the duration of the bootstrap. This is one persona. The persona running the bootstrap may be the same ID or someone else. Then the RBAC role assignment may be deleted and the Global Admin elevation removed.
+A highly privileged RBAC role assignment was granted on the previous page to enable running this bootstrap. Once that has been run then this role assignment will be removed.
 
 All access after that will be based on GitHub repo permissions and the RBAC permissions for the managed identities used as federated workload identities bu the GitHub Actions CI/CD pipelines.
 
@@ -242,18 +225,12 @@ Note that the generated config for the bootstrap itself is considered ephemeral.
 However, you may wish to preserve the accelerator folder, including the inputs.yaml in the config folder plus the tools, bootstrap and starter configs downloaded and generated in the output folder.
 {{< /flash >}}
 
-## Azure
-
-<TODO VIDEO>
-
-## GitHub
-
-<TODO VIDEO>
-
-Include the branch security
-
 ## References
 
 * <https://aka.ms/alz>
 * <https://aka.ms/alz/accelerator/docs>
 * <https://github.com/Azure/alz-terraform-accelerator>
+
+## Next
+
+We can remove the privileged role now that the bootstrap has run.

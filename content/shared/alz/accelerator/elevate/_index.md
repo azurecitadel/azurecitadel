@@ -5,11 +5,29 @@ title: "Azure Landing Zones - Bootstrap Prereqs"
 
 ## Overview
 
-<COPILOT>
+{{< flash >}}
+The bootstrap process is a one-time operation that securely configures your Azure environment with the required workload identities and applies appropriate least privilege RBAC assignments. However, to execute this bootstrap, elevated privileges are temporarily required at the tenant root scope.
 
-## Elevate
+This elevation typically involves a Global Administrator either:
 
-\<TODO>
+- Elevating their own privileges to run the bootstrap process themselves, or
+- Temporarily elevating permissions for another user who will execute the bootstrap
+
+These elevated privileges are only needed for the bootstrap operation. Once complete, it's important to remove these temporary permissions. The labs include a [demotion step](../demote) that demonstrates how to safely remove the temporary privileged role assignment after the bootstrap has finished.
+{{< /flash >}}
+
+## Elevate the Global Administrator
+
+1. Log in to the [Azure Portal](https://portal.azure.com)
+1. Open [Microsoft Entra ID](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview)
+1. Navigate to Manage > [Properties](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Properties)
+
+    ![Elevating Global Administrator for RBAC role assignments](/shared/alz/accelerator/elevate/elevate.png)
+
+1. Toggle **Access management for Azure resources** to Yes
+1. Click on **Save**
+
+(This effectively gives the Global Administrator User Access Administrator at the root scope, `/`.)
 
 ## Assign the role for the bootstrap
 

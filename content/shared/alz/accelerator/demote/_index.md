@@ -5,8 +5,7 @@ title: "Azure Landing Zones - Bootstrap Demotion"
 
 ## Overview
 
-<COPILOT>
-<TODO> Switching persona info.
+The highly privilege role was only required for the bootstrap phase. If the bootstrap has run
 
 ## Remove the privileged RBAC role assignment
 
@@ -27,7 +26,14 @@ title: "Azure Landing Zones - Bootstrap Demotion"
 
 ## Remove the elevation
 
-\<TODO>
+1. Log in to the [Azure Portal](https://portal.azure.com)
+1. Open [Microsoft Entra ID](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview)
+1. Navigate to Manage > [Properties](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Properties)
+
+    ![Elevating Global Administrator for RBAC role assignments](/shared/alz/accelerator/demote/demote.png)
+
+1. Toggle **Access management for Azure resources** to No
+1. Click on **Save**
 
 ## References
 
