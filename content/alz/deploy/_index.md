@@ -1,6 +1,6 @@
 ---
-title: "Deploy"
-description: "Do you know what you are doing and just want to get on with the deployment? If so, go here"
+title: "Deploy an Azure Landing Zone"
+description: "Follow this guide to deploy an Azure Landing Zone using Azure Verified Modules"
 draft: false
 menu:
   side:
