@@ -303,18 +303,78 @@
     }
   })();
 
+  // Function to switch mode and scroll to header
+  window.switchToModeAndScroll = function(modeTitle, headerId) {
+    // Find and click the correct mode tab
+    const tabs = document.querySelectorAll('[data-modes] .ac-tab');
+    const targetTab = Array.from(tabs).find(tab => tab.textContent.trim() === modeTitle);
+
+    if(targetTab) {
+      targetTab.click();
+      // Wait a moment for the panel to become visible, then scroll
+      setTimeout(() => {
+        const targetHeader = document.getElementById(headerId);
+        if(targetHeader) {
+          targetHeader.scrollIntoView({behavior: 'smooth'});
+        }
+      }, 100);
+    }
+  };
+
   // Dynamic TOC: regenerate table of contents to include headers from shared content
   (function(){
     const tocContainer = document.getElementById('dynamic-toc');
     if(!tocContainer) return;
 
     function generateTOC() {
+      console.log('Generating TOC...');
       // Find all headers in the main content area
       const contentArea = document.querySelector('.markdown-body .flex-1');
       if(!contentArea) return;
 
-      const headers = contentArea.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      // Get all headers, but exclude those in inactive mode panels
+      let headers = Array.from(contentArea.querySelectorAll('h2, h3, h4, h5, h6')).filter(header => {
+        // Exclude TOC-related headers
+        if(header.id === 'in-this-article') return false;
+        if(header.textContent.trim() === 'Table of Contents') return false;
+
+        // Exclude headers inside the TOC container itself
+        if(header.closest('.toc')) return false;
+
+        // Check if header is inside a mode panel
+        const modePanel = header.closest('[data-mode-panel]');
+        if(modePanel) {
+          // Only include if the mode panel is visible (active)
+          return modePanel.style.display !== 'none';
+        }
+        // Include headers outside of mode panels
+        return true;
+      });
+
       if(headers.length === 0) return;
+
+      // First pass: Ensure all headers have proper unique IDs (regenerate every time)
+      headers.forEach((header, index) => {
+        const text = header.textContent.trim();
+        let baseId = text.toLowerCase().replace(/[^a-z0-9\\s-]/g, '').replace(/\\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || `heading-${index}`;
+
+        // Check if header is in a mode panel and make ID unique
+        const modePanel = header.closest('[data-mode-panel]');
+        if(modePanel) {
+          const modeTitle = modePanel.getAttribute('data-title') || 'mode';
+          const modePrefix = modeTitle.toLowerCase().replace(/[^a-z0-9\\s-]/g, '').replace(/\\s+/g, '-');
+          const newId = `${modePrefix}-${baseId}`;
+          if(header.id !== newId) {
+            header.id = newId;
+            console.log(`Set ID for mode header: ${header.id} (mode: ${modeTitle})`);
+          }
+        } else {
+          if(header.id !== baseId) {
+            header.id = baseId;
+            console.log(`Set ID for regular header: ${header.id}`);
+          }
+        }
+      });
 
       // Build TOC HTML
       let tocHTML = '<nav role="navigation"><ul>';
@@ -323,10 +383,7 @@
       headers.forEach((header, index) => {
         const level = parseInt(header.tagName.charAt(1));
         const text = header.textContent.trim();
-        const id = header.id || `heading-${index}`;
-
-        // Ensure header has an ID for linking
-        if(!header.id) header.id = id;
+        const id = header.id; // ID is now guaranteed to exist
 
         // Handle nesting levels
         if(level > currentLevel) {
@@ -339,7 +396,15 @@
           }
         }
 
-        tocHTML += `<li><a href="#${id}">${text}</a></li>`;
+        // Check if header is in a mode panel and add special click handler
+        const modePanel = header.closest('[data-mode-panel]');
+        const modeTitle = modePanel ? modePanel.getAttribute('data-title') : null;
+
+        if(modeTitle) {
+          tocHTML += `<li><a href="#${id}" onclick="switchToModeAndScroll('${modeTitle}', '${id}'); return false;">${text}</a></li>`;
+        } else {
+          tocHTML += `<li><a href="#${id}">${text}</a></li>`;
+        }
         currentLevel = level;
       });
 
@@ -349,14 +414,16 @@
       }
       tocHTML += '</nav>';
 
-      // Replace or supplement existing TOC
+      // Replace existing TOC content
       const existingTOC = tocContainer.querySelector('nav');
-      if(existingTOC && headers.length > existingTOC.querySelectorAll('a').length) {
-        // More headers found than in existing TOC - replace it
+      if(existingTOC) {
+        // Always replace the existing TOC content
         existingTOC.outerHTML = tocHTML;
-      } else if(!existingTOC) {
+        console.log('Replaced existing TOC with', headers.length, 'headers');
+      } else {
         // No existing TOC - add the generated one
         tocContainer.innerHTML = tocHTML;
+        console.log('Created new TOC with', headers.length, 'headers');
       }
     }
 
@@ -369,6 +436,44 @@
 
     // Also regenerate after a short delay to catch any async content loading
     setTimeout(generateTOC, 100);
+
+    // Regenerate TOC when mode tabs are clicked - use more specific detection
+    document.addEventListener('click', function(e) {
+      // Check if clicked element is a mode tab
+      if(e.target.classList.contains('ac-tab') && e.target.closest('.ac-modes')) {
+        console.log('Mode tab clicked, regenerating TOC...', e.target.textContent);
+        setTimeout(generateTOC, 100);
+      }
+    });
+
+    // Set up observer after a delay to ensure mode panels are ready
+    setTimeout(() => {
+      const observer = new MutationObserver(function(mutations) {
+        let shouldRegenerate = false;
+        mutations.forEach(function(mutation) {
+          if(mutation.type === 'attributes' && mutation.attributeName === 'style') {
+            const target = mutation.target;
+            if(target.hasAttribute('data-mode-panel')) {
+              console.log('Mode panel visibility changed:', target.getAttribute('data-title'));
+              shouldRegenerate = true;
+            }
+          }
+        });
+        if(shouldRegenerate) {
+          setTimeout(generateTOC, 100);
+        }
+      });
+
+      // Observe all mode panels
+      const modePanels = document.querySelectorAll('[data-mode-panel]');
+      console.log('Setting up observers for', modePanels.length, 'mode panels');
+      modePanels.forEach(panel => {
+        observer.observe(panel, { attributes: true, attributeFilter: ['style'] });
+      });
+    }, 200);
+
+    // Expose generateTOC globally for manual regeneration
+    window.regenerateTOC = generateTOC;
   })();
 </script>
 

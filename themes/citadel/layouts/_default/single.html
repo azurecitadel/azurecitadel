@@ -38,7 +38,7 @@
                                 {{ end }}
                             {{ end }}
                             <div class="series-progress-container">
-                                <div class="series-name">{{ .Title }}</div>
+                                <div class="series-name"><a href="javascript:void(0);" onclick="document.querySelector('h1')?.scrollIntoView({behavior:'smooth'})" style="color: inherit; text-decoration: none; cursor: pointer;">{{ .Title }}</a></div>
                                 <div class="series-controls">
                                     {{ with index .Scratch.Values "prevInSeries" }}
                                         <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Previous in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</a>

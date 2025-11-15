@@ -38,6 +38,7 @@
     const pageDefaults = container.getAttribute('data-page-defaults');
     const pageDefaultsArray = pageDefaults ? pageDefaults.split(',').map(s=>norm(s)).filter(Boolean) : null;
     const forceTabs = container.hasAttribute('data-force-tabs');
+    console.log('Container force-tabs attribute:', forceTabs, 'Page defaults array:', pageDefaultsArray);
 
     const nav = document.createElement('div');
     nav.className = 'ac-tablist';
@@ -46,6 +47,7 @@
     const panelData = panels.map((panel, idx)=>{
       const rawTitle = panel.getAttribute('data-title') || ('Tab '+(idx+1));
       const key = norm(rawTitle);
+      console.log('Panel', idx, '- Raw title:', rawTitle, 'Normalized key:', key);
       const btn = document.createElement('button');
       btn.type='button';
       btn.className='ac-tab';
@@ -103,11 +105,20 @@
     let initialIndex = 0;
     const globalChoice = localStorage.getItem(GLOBAL_KEY);
 
-    if(forceTabs && pageDefaultsArray && pageDefaultsArray.length){
-      // Force tabs mode: page defaults always win
-      for(const pd of pageDefaultsArray){ const idx = findIndexByKey(pd); if(idx>=0){ initialIndex = idx; break; } }
+    if(forceTabs){
+      // Force tabs mode: ignore all user preferences, use page defaults or first tab
+      console.log('Force tabs enabled. Page defaults:', pageDefaultsArray);
+      if(pageDefaultsArray && pageDefaultsArray.length){
+        for(const pd of pageDefaultsArray){
+          const idx = findIndexByKey(pd);
+          console.log('Checking page default:', pd, 'found index:', idx);
+          if(idx>=0){ initialIndex = idx; break; }
+        }
+      }
+      console.log('Force tabs final index:', initialIndex);
+      // If no page defaults found, stick with first tab (initialIndex = 0)
     } else if(queryChoices && queryChoices.length){
-      // URL parameters still take highest priority when not forcing
+      // URL parameters take highest priority when not forcing
       for(const qc of queryChoices){ const idx = findIndexByKey(qc); if(idx>=0){ initialIndex = idx; break; } }
     } else if(storedGroup && findIndexByKey(storedGroup)>=0){
       // User's stored preference for this specific group
