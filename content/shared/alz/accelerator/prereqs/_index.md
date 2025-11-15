@@ -6,31 +6,33 @@ title: "Azure Landing Zones - Bootstrap Prerequisites"
 
 ## Overview
 
-For the bootstrap you will need
+For the bootstrap you will need a few [prerequisites](https://azure.github.io/Azure-Landing-Zones/accelerator/userguide/1_prerequisites/github/) as summarised below. This page includes links to the official documentation, but you will also find the commands repeated here to save you jumping around too much.
 
-1. Access to an Azure tenant with one to three subscriptions
+{{< flash >}}
 
-    These will be used in the Platform Landing Zone area:
+1. Access to an Azure tenant with one to four [subscriptions](https://azure.github.io/Azure-Landing-Zones/accelerator/userguide/1_prerequisites/platform-subscriptions/) for use in the Platform Landing Zone area:
 
     * **management** (mandatory)
     * **connectivity** (recommended)
     * **identity**
     * **security**
 
-    It is assumed that the subscriptions will be under the Tenant Root Group in Management Groups.
-
-1. A GitHub organization
-
-    If you are an individual GitHub user then you can create an organization for free. For example, my GitHub organization for testing is `richeney-org`.
-
-    You will also need the ability to create personal access tokens in the context of your organization.
+    (It is assumed that the subscriptions will be directly under the Tenant Root Group in Management Groups.)
 
 1. An ID with Global Administrator
 
-    You will elevate the Global Admin and assign root level privileges for the duration of the bootstrap.
+    **Note that you will need to temporarily elevate a Global Administrator ID and assign root level privileges for the duration of the bootstrap.** (As per the elevate and demote pages in this series.)
 
-1. PowerShell with the ALZ module installed
+1. A GitHub organization
+
+    If you are an individual GitHub user then you can [create an organization](https://github.com/account/organizations/new) for free. For example, my GitHub organization for testing is `richeney-org`.
+
+    You will also need the ability to create [personal access tokens](#create-personal-access-tokens) in the context of your organization.
+
+1. PowerShell with the [ALZ module](#alz-powershell-module) installed
 1. [Visual Studio Code](https://aka.ms/vscode) with the [Hashicorp Terraform](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform) extension
+
+{{< /flash >}}
 
 ## Create personal access tokens
 
@@ -85,11 +87,11 @@ Create a personal access token for the **private runners**
 
 1. Click on **Generate new token**.
 
-    - Token Name: `Azure Landing Zone private runners`
-    - Description: `Long-term token used by the private runners`
-    - Resource Owner: **Switch to your organization**
-    - Expiration: Select no expiration.
-    - Repository access: All repositories
+    * Token Name: `Azure Landing Zone private runners`
+    * Description: `Long-term token used by the private runners`
+    * Resource Owner: **Switch to your organization**
+    * Expiration: Select no expiration.
+    * Repository access: All repositories
 
 1. Add **Repositories** permissions
 
@@ -106,7 +108,9 @@ Create a personal access token for the **private runners**
 1. Generate the token.
 1. Copy the token value and keep it somewhere safe.
 
-## ALZ
+## ALZ PowerShell module
+
+As per the [bootstrap](https://azure.github.io/Azure-Landing-Zones/accelerator/userguide/2_start/) page:
 
 1. Open [PowerShell 7](https://learn.microsoft.com/powershell/scripting/install/installing-powershell?view=powershell-7.4)
 1. Trust the
@@ -123,14 +127,18 @@ Create a personal access token for the **private runners**
 
     {{< details "Additional commands" >}}
 
-<TODO>
-
-Also want to be able to copy these
+If the module is already installed then you can run this command to check for an update.
 
 ```powershell
 Update-Module -Name ALZ
+```
+
+Check the version number(s):
+
+```powershell
 Get-InstalledModule -Name ALZ
 ```
+
 The ALZ PowerShell module is open source at <https://github.com/Azure/ALZ-PowerShell-Module>.
 
 {{< /details >}}
