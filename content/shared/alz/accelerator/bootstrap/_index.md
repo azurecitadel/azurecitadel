@@ -16,6 +16,8 @@ Reminder of the prereqs
 
 ## Create the accelerator area
 
+Switch to a PowerShell environment for the Azure Landing Zone Accelerator. (The following commands have been run in PowerShell 7 within Ubuntu 24.04.)
+
 1. Create the directory structure
 
     ```powershell
@@ -85,10 +87,15 @@ Reminder of the prereqs
 
 ## Run the bootstrap
 
-1. Move to the output folder and run the accelerato
+1. Move to the output folder
 
     ```powershell
     Set-Location "~/accelerator/output"
+    ```
+
+1. Run the accelerator
+
+    ```powershell
     Deploy-Accelerator -inputs "~/accelerator/config/inputs.yaml"
     ```
 

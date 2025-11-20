@@ -136,8 +136,16 @@ Update-Module -Name ALZ
 Check the version number(s):
 
 ```powershell
-Get-InstalledModule -Name ALZ
+Get-InstalledModule -Name ALZ -AllVersions
 ```
+
+Remove an older versions:
+
+```powershell
+Uninstall-Module -Name ALZ -RequiredVersion X.Y.Z
+```
+
+RequiredVersion should be set to the major.minor.patch that you are removing. It is recommended to have a. the latest version and b. only one version, or you may see an error from the ALZ Accelerator.
 
 The ALZ PowerShell module is open source at <https://github.com/Azure/ALZ-PowerShell-Module>.
 
