@@ -1,5 +1,5 @@
 <p>
-<div class="flash">
+<div class="flash flash-{{ .Get 0 | default "note" }}">
   {{ .Page.RenderString .Inner }}
 </div>
 </p>
