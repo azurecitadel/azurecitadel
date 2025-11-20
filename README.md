@@ -61,7 +61,7 @@ You will need to compile your own if installing v0.90.1 on aarch64 architecture.
 1. Set the variable
 
     ```shell
-    hugo_version=0.90.1
+    hugo_version=0.123.7
     ```
 
 ## Precompiled binary

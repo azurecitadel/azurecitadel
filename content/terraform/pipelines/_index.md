@@ -6,7 +6,7 @@ draft: true
 weight: 10
 menu:
   side:
-    identifier: 'terraform-envs'
+    identifier: 'terraform-pipelines'
     parent: 'terraform'
 ---
 

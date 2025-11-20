@@ -4,7 +4,7 @@ description: "Use the Azure Automanage service to create a management baseline f
 layout: single
 draft: true
 series:
- - arc-servers-hack-proctor
+ - arc-servers-previous-hack-proctor
 weight: 140
 url: /arc/servers/automanage/proctor
 ---

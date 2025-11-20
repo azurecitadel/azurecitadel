@@ -7,9 +7,8 @@ draft: true
 menu:
   side:
     parent: arc-servers
-    identifier: arc-servers-linux
 series:
- - arc-servers
+ - arc-servers-previous
 weight: 130
 ---
 

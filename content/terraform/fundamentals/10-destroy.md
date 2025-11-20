@@ -8,11 +8,9 @@ description: "Short lab to tear down the environment."
 weight: 10
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
-
 ---
 
 ## Overview

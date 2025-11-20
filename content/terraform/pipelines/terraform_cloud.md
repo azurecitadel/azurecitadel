@@ -7,10 +7,9 @@ description: "Keep your repo, state and pipelines outside of Azure. Deploy with 
 weight: 80
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-pipelines
 series:
- - terraform-envs
-layout: single
+ - terraform-pipelines
 ---
 
 ## Overview

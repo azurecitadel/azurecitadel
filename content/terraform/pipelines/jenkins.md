@@ -7,10 +7,9 @@ description: "Deploy Jenkins to an Azure Virtual Machine and deploy using the VM
 weight: 70
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-pipelines
 series:
- - terraform-envs
-layout: single
+ - terraform-pipelines
 ---
 
 ## Overview

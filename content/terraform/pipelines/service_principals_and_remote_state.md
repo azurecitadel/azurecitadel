@@ -7,10 +7,9 @@ description: "Production configurations use either a service principal or manage
 weight: 40
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-pipelines
 series:
- - terraform-envs
-layout: single
+ - terraform-pipelines
 ---
 
 ## Overview
