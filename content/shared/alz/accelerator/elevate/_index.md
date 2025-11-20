@@ -46,7 +46,7 @@ These elevated privileges are only needed for the bootstrap operation. Once comp
     assignee_object_id="$(az ad signed-in-user show --query id -otsv)"
     ```
 
-    ℹ️ Assumes that the Global Admin will also run the bootstrap. If not, set assignee_object_id to the correct object ID.
+    ⚠️ Assumes that the Global Admin will run the bootstrap. If not, set the assignee_object_id to the correct object ID.
 
 1. Create the temporary RBAC role assignment at the tenant root group
 

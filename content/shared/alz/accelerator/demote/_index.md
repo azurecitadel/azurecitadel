@@ -5,9 +5,11 @@ title: "Azure Landing Zones - Bootstrap Demotion"
 
 ## Overview
 
-The highly privilege role was only required for the bootstrap phase. If the bootstrap has run
+The highly privilege role was only required for the bootstrap phase. If the bootstrap has run then you may remove it.
 
 ## Remove the privileged RBAC role assignment
+
+These commands are run in a Bash environment.
 
 1. Variables
 
@@ -16,7 +18,7 @@ The highly privilege role was only required for the bootstrap phase. If the boot
     assignee_object_id="$(az ad signed-in-user show --query id -otsv)"
     ```
 
-    ℹ️ Assumes that the Global Admin will also run the bootstrap. If not, add in the correct object ID.
+    ⚠️ Assumes that the Global Admin ran the bootstrap. If not, set the assignee_object_id to the correct object ID.
 
 1. Create the temporary RBAC role assignment
 
