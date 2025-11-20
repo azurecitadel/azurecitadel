@@ -1,5 +1,5 @@
 ---
-title: "Create an initial config"
+title: "Create an initial ALZ config"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "Clone the repo locally and add an initial Azure Landing Zone config based on the examples in the Terraform Registry."
