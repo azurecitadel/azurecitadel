@@ -5,7 +5,7 @@ style: list
 weight: 7
 menu:
   side:
-    parent: 'Contributing'
+    parent: 'About'
     identifier: shortcodes
 series:
  - Contributing
