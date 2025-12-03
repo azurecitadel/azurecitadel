@@ -91,9 +91,26 @@
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Custom details implementation with divs
-  document.querySelectorAll('.citadel-details').forEach(function(details) {
+// Function to initialize details elements
+function initializeDetailsElements() {
+  const uninitializedDetails = document.querySelectorAll('.citadel-details:not([data-initialized])');
+  console.log('Initializing details elements:', uninitializedDetails.length);
+
+  uninitializedDetails.forEach(function(details) {
+    // Check if this details element is in a visible mode panel
+    const modePanel = details.closest('[data-mode-panel]');
+    if (modePanel) {
+      const isVisible = modePanel.style.display === 'block' || modePanel.classList.contains('is-active-panel');
+      console.log('Details in mode panel:', modePanel.getAttribute('data-title'), 'visible:', isVisible);
+      if (!isVisible) {
+        // Don't initialize details in hidden mode panels yet
+        return;
+      }
+    }
+
+    details.setAttribute('data-initialized', 'true');
+    console.log('Initializing details:', details);
+
     const summary = details.querySelector('.citadel-details-summary');
     const content = details.querySelector('.citadel-details-content');
     const closeBtn = details.querySelector('.citadel-details-close-btn');
@@ -110,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle summary clicks
     summary.addEventListener('click', function(e) {
+      console.log('Details summary clicked');
       e.preventDefault();
       e.stopPropagation();
 
@@ -124,11 +142,77 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle close button clicks
     if (closeBtn) {
       closeBtn.addEventListener('click', function(e) {
+        console.log('Details close button clicked');
         e.preventDefault();
         e.stopPropagation();
         closeDetails();
       });
     }
   });
+}
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', initializeDetailsElements);
+
+// Watch for mode panel visibility changes using event delegation
+function setupModeObserver() {
+  // Use a global observer to watch for style and class changes
+  const observer = new MutationObserver(function(mutations) {
+    let shouldReinitialize = false;
+
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes') {
+        const target = mutation.target;
+
+        // Check if this is a mode panel that became visible
+        if (target.hasAttribute('data-mode-panel')) {
+          console.log('Mode panel change detected:', target.getAttribute('data-title'), mutation.attributeName);
+          if (mutation.attributeName === 'style' && target.style.display === 'block') {
+            console.log('Mode panel became visible via style');
+            shouldReinitialize = true;
+          }
+          if (mutation.attributeName === 'class' && target.classList.contains('is-active-panel')) {
+            console.log('Mode panel became active via class');
+            shouldReinitialize = true;
+          }
+        }
+      }
+
+      // Also check for new nodes being added that might contain details
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            if (node.querySelector && (node.querySelector('.citadel-details') || node.hasAttribute('data-mode-panel'))) {
+              console.log('New content added with details or mode panels');
+              shouldReinitialize = true;
+            }
+          }
+        });
+      }
+    });
+
+    if (shouldReinitialize) {
+      console.log('Reinitializing details elements due to mode change');
+      setTimeout(initializeDetailsElements, 10);
+    }
+  });
+
+  // Observe the entire document for changes
+  observer.observe(document, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class']
+  });
+
+  console.log('Mode observer setup complete');
+}
+
+// Setup observer when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  setupModeObserver();
 });
+
+// Also initialize with a slight delay to catch dynamically loaded content
+setTimeout(initializeDetailsElements, 100);
 </script>

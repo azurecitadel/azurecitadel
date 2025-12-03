@@ -1,7 +1,24 @@
-{{/* Create codeblock with uris */}}
+{{/* Create codeblock with local files or remote URLs */}}
 
-{{ $file := .Get "file" | readFile }}
+{{ $file := .Get "file" }}
+{{ $url := .Get "url" }}
 {{ $lang := .Get "lang" }}
 {{ $lang = $lang | default "text" }}
 
-{{ (print "```" $lang "\n" $file "\n```") | markdownify }}
+{{ $content := "" }}
+{{ if $url }}
+  {{/* Strip angle brackets from URL if present */}}
+  {{ $url = $url | strings.TrimPrefix "<" | strings.TrimSuffix ">" }}
+  {{ $resource := resources.GetRemote $url }}
+  {{ if $resource.Err }}
+    {{ errorf "Failed to fetch remote file %s: %s" $url $resource.Err }}
+  {{ else }}
+    {{ $content = $resource.Content }}
+  {{ end }}
+{{ else if $file }}
+  {{ $content = $file | readFile }}
+{{ else }}
+  {{ errorf "Either 'file' or 'url' parameter is required" }}
+{{ end }}
+
+{{ (print "```" $lang "\n" $content "\n```") | markdownify }}
