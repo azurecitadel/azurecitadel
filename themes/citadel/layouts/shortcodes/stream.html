@@ -1,0 +1,39 @@
+{{/* Microsoft Stream video embed shortcode */}}
+{{ $id := .Get "id" }}
+{{ $height := .Get "height" | default "400" }}
+{{ $width := .Get "width" | default "100%" }}
+{{ $title := .Get "title" | default "Microsoft Stream Video" }}
+
+{{ if not $id }}
+  {{ errorf "Microsoft Stream video ID is required. Usage: {{< stream id=\"your-video-id\" >}}" }}
+{{ end }}
+
+<div class="stream-video-container" style="position: relative; width: 100%; margin: 1rem 0;">
+  <iframe src="https://web.microsoftstream.com/embed/video/{{ $id }}"
+          width="{{ $width }}"
+          height="{{ $height }}"
+          title="{{ $title }}"
+          frameborder="0"
+          allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+  </iframe>
+</div>
+
+<style>
+.stream-video-container {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(140,149,159,0.1);
+}
+
+.stream-video-container iframe {
+  border-radius: 6px;
+}
+
+/* Responsive video */
+@media (max-width: 768px) {
+  .stream-video-container iframe {
+    height: 250px;
+  }
+}
+</style>

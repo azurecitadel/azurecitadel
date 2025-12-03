@@ -8,15 +8,16 @@
       "problemMatcher": []
     },
     {
-      "type": "hugo",
-      "task": "",
+      "type": "shell",
+      "command": "hugo",
       "group": "build",
       "problemMatcher": [],
       "label": "hugo: Build site"
     },
     {
-      "type": "hugo",
-      "task": "server",
+      "type": "shell",
+      "command": "hugo",
+      "args": ["server"],
       "group": "build",
       "isBackground": true,
       "problemMatcher": [

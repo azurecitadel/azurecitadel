@@ -49,4 +49,18 @@
       </script>
       {{ end }}
 
+   {{/* Mermaid support - only load if mermaid shortcode is used */}}
+   {{ if (findRE "{{<\\s*mermaid" .RawContent 1) }}
+   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+   <script>
+      document.addEventListener('DOMContentLoaded', function() {
+         mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.classList.contains('citadel-user-dark') ? 'dark' : 'default',
+            securityLevel: 'loose'
+         });
+      });
+   </script>
+   {{ end }}
+
 </head>
