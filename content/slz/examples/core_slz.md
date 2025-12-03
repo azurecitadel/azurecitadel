@@ -7,9 +7,9 @@ draft: false
 weight: 10
 menu:
   side:
-    parent: alz-examples
+    parent: slz-examples
 series:
- - alz-examples
+ - slz-examples
 ---
 
 
