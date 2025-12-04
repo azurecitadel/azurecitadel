@@ -6,7 +6,10 @@ menu:
   side:
     parent: slz
     identifier: slz-deploy
-weight: 20
+weight: 2
+series:
+ - slz-deploy
+layout: series
 ---
 
 ## Content

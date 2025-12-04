@@ -4,6 +4,7 @@ date: 2025-11-20
 author: [ "Richard Cheney" ]
 description: "Documentation for Azure Policy definitions, initiatives, assignments, and custom role definitions within the Azure Landing Zones Library."
 weight: 30
+draft: true
 menu:
   side:
     parent: alz-library

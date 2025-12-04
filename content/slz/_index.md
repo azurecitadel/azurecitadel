@@ -5,6 +5,7 @@ draft: false
 menu:
   side:
     identifier: slz
+layout: list
 ---
 
 ## Introduction
@@ -15,6 +16,10 @@ The underlying ALZ platform leverages Azure Verified Modules (AVM) for infrastru
 
 These labs focus on deploying sovereign guardrails and understanding how to extend them with country or industry-specific packs. The [ALZ labs](/alz/) provide deeper context on the platform architecture and customization patterns that are equally relevant when working with SLZ.
 
+## Content
+
+<!-- SERIES_PAGES -->
+
 ### Prerequisites
 
 Before starting, you should be familiar with:
@@ -24,5 +29,3 @@ Before starting, you should be familiar with:
 - Basic understanding of sovereign cloud requirements
 
 This foundation is essential for implementing and customizing Sovereign Landing Zones effectively.
-
-## Content

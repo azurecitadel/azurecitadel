@@ -5,6 +5,7 @@ draft: false
 menu:
   side:
     identifier: alz
+layout: list
 ---
 
 ## Introduction
@@ -15,27 +16,35 @@ The introduction of the Azure Landing Zone Accelerator means you can quickly est
 
 The move to Azure Verified Modules (AVM) for modular and structured infrastructure deployment has been a game changer, especially when combined with the flexibility of the _alz_ Terraform provider.
 
+## Content
+
+<!-- SERIES_PAGES -->
+
+## Combining it with your own IP
+
 Historically you could have accused Azure Landing Zones of being monolithic, forcing you to choose between adopting and falling in line with the Microsoft approach, or forging your own path and developing your own platform landing zone infrastructure as code standards including policy.
 
 Now the combination of Azure Verified Modules and the Azure Landing Zone library approach allows you to build on the Microsoft managed IP, giving you the ability to extend, augmenting and override that baseline with your own IP and definitions for a true level of flexibility.
 
 These labs are designed for partners who need to deeply understand how ALZ works — particularly those with existing landing zone IP or custom Azure Policy guardrails. You'll learn how to integrate your assets alongside the Microsoft-maintained baseline and get the best of both worlds.
 
-### Expected knowledge
+## Expected Knowledge
 
 Before diving in, you should be familiar with:
 
-- Cloud Adoption Framework (CAF) and Platform Landing Zones (PLZ)
-- Application Landing Zones and Well-Architected Framework (WAF) principles
-- Basic Azure Policy and governance concepts
-- Terraform
-- GitHub
+{{< flash "note" >}}
+**Foundation Knowledge Required**
+{{< /flash >}}
 
-Understanding the Azure Landing Zone approach is a foundation that will help with
+- **Cloud Adoption Framework (CAF)** and Platform Landing Zones (PLZ) concepts
+- **Application Landing Zones** and Well-Architected Framework (WAF) principles
+- **Azure Policy** and governance fundamentals
+- **Terraform** infrastructure as code
+- **GitHub** workflows and CI/CD pipelines
 
-- standard platform landing zone deployments (ALZ / PLZ)
-- deploying Sovereign Landing Zones (SLZ)
+Understanding the Azure Landing Zone approach provides a solid foundation that will help with:
+
+- Standard platform landing zone deployments (ALZ / PLZ)
+- Deploying Sovereign Landing Zones (SLZ)
 - Azure Monitoring Baseline Alerts (AMBA)
 - AI Landing Zones (AI LZ) and other application landing zone accelerators
-
-## Content

@@ -4,6 +4,7 @@ date: 2025-11-20
 author: [ "Richard Cheney" ]
 description: "Common configuration examples demonstrating the interplay between the ALZ provider, ALZ module, architecture definitions, archetype assignments, and both local and remote libraries for Azure Landing Zones and Sovereign Landing Zone deployments."
 weight: 90
+draft: true
 menu:
   side:
     parent: slz-library

@@ -6,7 +6,12 @@ menu:
   side:
     parent: alz
     identifier: alz-library
-weight: 40
+weight: 4
+draft: true
+series:
+  - alz
+  - alz-library
+layout: series
 ---
 
 ## Content

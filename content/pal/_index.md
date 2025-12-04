@@ -13,6 +13,10 @@ aliases:
   - /partneradminlink
   - /partners
   - /partners/pal
+series:
+  - pal
+layout: series
+weight: 1
 ---
 
 ## Overview

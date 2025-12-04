@@ -4,6 +4,7 @@ date: 2025-11-20
 author: [ "Richard Cheney" ]
 description: "Documentation for archetype definitions within the Sovereign Landing Zones Library, including their structure, configuration, and usage patterns."
 weight: 40
+draft: true
 menu:
   side:
     parent: slz-library
