@@ -2,12 +2,15 @@
 title: "ALZ Accelerator"
 description: "Learn how to use the Azure Landing Zone Accelerator to get to a GitHub CI/CD configuration recommended by Microsoft."
 draft: false
-layout: list
+layout: series
+series:
+  - alz
+  - alz-accelerator
 menu:
   side:
     parent: alz
     identifier: alz-accelerator
-weight: 10
+weight: 1
 ---
 
 ## Introduction

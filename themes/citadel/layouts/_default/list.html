@@ -4,49 +4,116 @@
 
     <!-- main header (hamburger + breadcrumbs) now rendered globally in base layout -->
 
-    <div class="markdown-body">
-        <div class="mt-3">
-            <h1 class="border-bottom-0">{{ .Title }}</h1>
-        </div>
-        {{ with .Description }}<p>{{ . }}</p>{{ end }}
-        {{ .Content }}
-    </div>
+    <div class="d-flex flex-column flex-xl-row-reverse markdown-body">
 
-    {{ $pages := .Pages.ByWeight }}
-    {{ if and (eq .Section "archive") (eq .RelPermalink "/archive/") }}
-        {{ $pages = .Pages.ByTitle }}
-    {{ end }}
-    {{ if gt (len $pages) 0 }}
-    <section class="mt-4" aria-label="{{ .Title }} items">
-        <div class="d-flex flex-column" role="list">
-            {{ range $pages }}
-            <article class="section-tile tile-hover-accent box Box-row--hover-gray p-3 mb-3 mt-0 position-relative" role="listitem">
-                <a class="stretched-link d-block text-decoration-none" href="{{ .Permalink }}" aria-label="Open: {{ .Title }}"></a>
-                <h3 class="f4 lh-condensed mt-0 mb-2">{{ .Title }}</h3>
-                {{ if eq .Section "blog" }}
-                <div class="f6 text-gray mb-1">
-                    {{ with .Params.people }}
-                        {{ $author := index . 0 }}<span>{{ $author }}</span>
-                    {{ end }}
-                    {{ if and (.Date) (ne .Date.IsZero true) }}
-                        {{ if .Params.people }} &bull; {{ end }}
-                        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
-                    {{ end }}
-                </div>
-                {{ end }}
-                <div class="summary f5">
-                    {{ if .Description }}
-                        <p class="mb-0">{{ .Description }}</p>
-                    {{ else }}
-                        {{ $paras := findRE "<p>[\\s\\S]*?</p>" .Content 1 }}
-                        {{ if gt (len $paras) 0 }}{{ index $paras 0 | safeHTML }}{{ else }}<p class="mb-0">{{ .Summary }}</p>{{ end }}
-                    {{ end }}
-                </div>
-            </article>
-            {{ end }}
+        {{/* Placeholder for TOC space to maintain consistent indentation with series layout - only on wide screens */}}
+        <div class="d-none d-xl-block" style="flex: 0 0 300px; align-self: flex-start;">
         </div>
-    </section>
-    {{ end }}
+
+        <div class="flex-1 overflow-hidden">
+            <h1 class="border-bottom-0">{{ .Title }}</h1>
+            {{ with .Description }}<p>{{ . }}</p>{{ end }}
+
+            <div>
+            {{/* Check if content contains the SERIES_PAGES marker for splitting */}}
+            {{ $content := .Content }}
+            {{ if in $content "<!-- SERIES_PAGES -->" }}
+                {{/* Split content at the marker and insert child pages */}}
+                {{ $parts := split $content "<!-- SERIES_PAGES -->" }}
+                {{ index $parts 0 | safeHTML }}
+
+                {{ $pages := .Pages.ByWeight }}
+                {{ if and (eq .Section "archive") (eq .RelPermalink "/archive/") }}
+                    {{ $pages = .Pages.ByTitle }}
+                {{ end }}
+                {{ if gt (len $pages) 0 }}
+                <section class="mt-4" aria-label="{{ .Title }} items">
+                    <div class="d-flex flex-column" role="list">
+                        {{ range $pages }}
+                        {{ $highlightClass := "" }}
+                        {{ if .Params.highlight }}
+                            {{ $highlightClass = " box-highlight" }}
+                        {{ end }}
+                        <article class="section-tile tile-hover-accent box Box-row--hover-gray p-3 mb-3 mt-0 position-relative{{ $highlightClass }}" role="listitem">
+                            <a class="stretched-link d-block text-decoration-none" href="{{ .Permalink }}" aria-label="Open: {{ .Title }}"></a>
+                            <h3 class="f4 lh-condensed mt-0 mb-2">{{ .Title }}</h3>
+                            {{ if eq .Section "blog" }}
+                            <div class="f6 text-gray mb-1">
+                                {{ with .Params.people }}
+                                    {{ $author := index . 0 }}<span>{{ $author }}</span>
+                                {{ end }}
+                                {{ if and (.Date) (ne .Date.IsZero true) }}
+                                    {{ if .Params.people }} &bull; {{ end }}
+                                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                            <div class="summary f5">
+                                {{ if .Description }}
+                                    <p class="mb-0">{{ .Description }}</p>
+                                {{ else }}
+                                    {{ $paras := findRE "<p>[\\s\\S]*?</p>" .Content 1 }}
+                                    {{ if gt (len $paras) 0 }}{{ index $paras 0 | safeHTML }}{{ else }}<p class="mb-0">{{ .Summary }}</p>{{ end }}
+                                {{ end }}
+                            </div>
+                        </article>
+                        {{ end }}
+                    </div>
+                </section>
+                <div class="mt-5"></div>
+                {{ end }}
+
+                {{/* Render content after the marker */}}
+                {{ if gt (len $parts) 1 }}
+                    {{ index $parts 1 | safeHTML }}
+                {{ end }}
+            {{ else }}
+                {{/* No marker found, use original behavior */}}
+                {{ .Content }}
+
+                {{ $pages := .Pages.ByWeight }}
+                {{ if and (eq .Section "archive") (eq .RelPermalink "/archive/") }}
+                    {{ $pages = .Pages.ByTitle }}
+                {{ end }}
+                {{ if gt (len $pages) 0 }}
+                <section class="mt-4" aria-label="{{ .Title }} items">
+                    <div class="d-flex flex-column" role="list">
+                        {{ range $pages }}
+                        {{ $highlightClass := "" }}
+                        {{ if .Params.highlight }}
+                            {{ $highlightClass = " box-highlight" }}
+                        {{ end }}
+                        <article class="section-tile tile-hover-accent box Box-row--hover-gray p-3 mb-3 mt-0 position-relative{{ $highlightClass }}" role="listitem">
+                            <a class="stretched-link d-block text-decoration-none" href="{{ .Permalink }}" aria-label="Open: {{ .Title }}"></a>
+                            <h3 class="f4 lh-condensed mt-0 mb-2">{{ .Title }}</h3>
+                            {{ if eq .Section "blog" }}
+                            <div class="f6 text-gray mb-1">
+                                {{ with .Params.people }}
+                                    {{ $author := index . 0 }}<span>{{ $author }}</span>
+                                {{ end }}
+                                {{ if and (.Date) (ne .Date.IsZero true) }}
+                                    {{ if .Params.people }} &bull; {{ end }}
+                                    <time datetime="{{ .Date.Format "2006-01-2" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                            <div class="summary f5">
+                                {{ if .Description }}
+                                    <p class="mb-0">{{ .Description }}</p>
+                                {{ else }}
+                                    {{ $paras := findRE "<p>[\\s\\S]*?</p>" .Content 1 }}
+                                    {{ if gt (len $paras) 0 }}{{ index $paras 0 | safeHTML }}{{ else }}<p class="mb-0">{{ .Summary }}</p>{{ end }}
+                                {{ end }}
+                            </div>
+                        </article>
+                        {{ end }}
+                    </div>
+                </section>
+                {{ end }}
+            {{ end }}
+            </div>
+        </div>
+    </div>
 </div>
 
 {{ end }}

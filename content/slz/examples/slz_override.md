@@ -1,26 +1,32 @@
 ---
-title: "Azure Landing Zone library with overrides"
+title: "Sovereign Landing Zone library with overrides"
 date: 2025-12-03
 author: [ "Richard Cheney" ]
-description: "This is the default created by the accelerator. Uses the core ALZ library as above, but adds a local library to allow overrides on those core archetypes as well as a space to create additional assets."
+description: "This is the similar to the default created by the accelerator. Uses the maintained SLZ library as above, but adds a local library to allow overrides on the extended set of archetypes as well as a space to create additional assets."
 draft: false
 weight: 20
 menu:
   side:
-    parent: alz-examples
+    parent: slz-examples
 series:
- - alz-examples
+ - slz-examples
 highlight: true
 ---
 
 
+{{< flash "danger" >}}
+Need to rework this. See [here](https://azure.github.io/Azure-Landing-Zones/accelerator/startermodules/terraform-platform-landing-zone/options/slz/). It is designed to overwrite an existing local library.
+
+Run as a two step?
+{{< /flash >}}
+
 ## Description
 
-This configuration stacks a local override library in `./lib` which is stacked on top of the Azure Landing Zone.
+This configuration stacks a local override library in `./lib` which is stacked on top of the Sovereign Landing Zone.
 
 From a partner perspective this is great for defining specific archetype overrides for individual customers, and it also allows bespoke assets - e.g. custom policies or RBAC roles - to be added for that customer.
 
-The local library contains a set of uniquely named archetypes (using override files) and a different architecture name (`alz_custom` rather than `alz`). You would specify this architecture name in the module block.
+The local library contains a set of uniquely named archetypes (using override files) and a different architecture name (`slz_custom` rather than `slz`). You would specify this architecture name in the module block.
 
 ## Creating a local library
 
@@ -28,43 +34,51 @@ The local library contains a set of uniquely named archetypes (using override fi
 
 ## Architecture and Archetypes
 
-The architecture name is `alz_custom`, as defined in the local `alz_custom.alz_architecture_definition.yaml` that you'll find in `lib/architecture_definitions`.
+The architecture name is `slz_custom`, as defined in the local `slz_custom.alz_architecture_definition.yaml` that you'll find in `lib/architecture_definitions`.
 
 {{< mermaid >}}
 flowchart TD
-  alz["Azure Landing Zones
-(root)"]
-  alz --> decommissioned
+  slz["Sovereign Landing Zone
+(root, sovereign_root)"]
+  slz --> decommissioned
   decommissioned["Decommissioned
-(decommissioned_custom)"]
-  alz --> landingzones
+(decommissioned)"]
+  slz --> landingzones
   landingzones["Landing zones
-(landing_zones_custom)"]
+(landing_zones)"]
+  landingzones --> confidential_corp
+  confidential_corp["Confidential Corp
+(confidential_corp)"]
+  landingzones --> confidential_online
+  confidential_online["Confidential Online
+(confidential_online)"]
   landingzones --> corp
   corp["Corp
-(corp_custom)"]
+(corp)"]
   landingzones --> online
   online["Online
-(online_custom)"]
-  alz --> platform
+(online)"]
+  landingzones --> public
+  public["Public
+(public)"]
+  slz --> platform
   platform["Platform
-(platform_custom)"]
+(platform)"]
   platform --> connectivity
   connectivity["Connectivity
-(connectivity_custom)"]
+(connectivity)"]
   platform --> identity
   identity["Identity
-(identity_custom)"]
+(identity)"]
   platform --> management
   management["Management
-(management_custom)"]
+(management)"]
   platform --> security
   security["Security
-(security_custom)"]
-  alz --> sandbox
+(security)"]
+  slz --> sandbox
   sandbox["Sandbox
-(sandbox_custom)"]
-
+(sandbox)"]
 {{< /mermaid >}}
 
 Note that the architecture refers to the uniquely named custom override archetypes. Each archetype shortcode is now, for example, **corp_custom** rather than **corp**. This relates to the corresponding files in the `lib/archetype_definitions` folder, e.g. `corp_custom.alz_archetype_override.yaml`.

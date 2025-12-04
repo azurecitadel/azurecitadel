@@ -4,6 +4,7 @@ date: 2025-11-20
 author: [ "Richard Cheney" ]
 description: "Introduction to the Azure Landing Zones Library system, its components, and how they work together to provide standardized governance."
 weight: 10
+draft: true
 menu:
   side:
     parent: alz-library

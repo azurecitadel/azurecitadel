@@ -9,7 +9,7 @@ menu:
     identifier: arc-kubernetes
 series:
  - arc-kubernetes
-weight: 5
+weight: 3
 ---
 
 ## Introduction

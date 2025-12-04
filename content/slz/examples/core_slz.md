@@ -12,50 +12,15 @@ series:
  - slz-examples
 ---
 
+## Description
 
-{{< flash >}}
 The Sovereign Landing Zone (SLZ) is stacked on top of the core Azure Landing Zone (ALZ) library, and includes additional management groups and sovereign policy initiatives. Both libraries are maintained and provided by Microsoft.
 
 Note that we recommend the next example which adds a local custom override library.
-{{< /flash >}}
 
-{{< flash "warning" >}}
-Need to check if adding a custom library later breaks everything...
-{{< /flash >}}
+## Architecture and Archetypes
 
-### Provider block
-
-The path and ref arguments point at a semantic version release of the Microsoft maintained platform/alz library. Refer to the main page of [aka.ms/alz/library](https://aka.ms/alz/library) for up to date release version information.
-
-```terraform
-provider "alz" {
-  library_overwrite_enabled = true
-  library_references = [
-    {
-      path = "platform/slz"
-      ref  = "2025.10.1"
-    }
-  ]
-}
-```
-
-{{< flash "tip" >}}
-The URL path to that specific release in the library repo is <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz>.
-
-This page has a mermaid diagram of the management group hierarchy in the architecture file, plus lists of the archetypes, policy definitions, policy assignments and custom RBAC role definitions. Useful as a reference for your low level design documentation, or a reference when overriding archetypes.
-
-Note that the readme contains a superset of both the ALZ and SLZ assets.
-{{< /flash  >}}
-
-### Metadata
-
-Note that the [metadata](https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2025.10.1/platform/slz/alz_library_metadata.json) file for the Sovereign Landing Zone library shows the dependency on the Azure Landing Zone library it has been tested against. The SLZ and ALZ releases are kept in lockstep.
-
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2025.10.1/platform/slz/alz_library_metadata.json>" >}}
-
-### Architecture and Archetypes
-
-The [architecture](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json) name is `slz`and has the extended set of [archetypes](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.09.3/platform/slz/archetype_definitions).
+The architecture name is `slz` - as defined in the [slz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json) - and has the extended set of architectures needed for Sovereign Landing Zone.
 
 {{< mermaid >}}
 flowchart TD
@@ -110,18 +75,77 @@ Note:
   - public
 - the additional sovereign_root archetype at the top
 
-{{< details "Azure Landing Zones architecture" >}}
+## Provider block
 
-From <https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json>.
+As per the Azure Landing Zone example, the path and ref arguments point at a semantic version release of the Microsoft maintained platform/slz library.
 
+```terraform
+provider "alz" {
+  library_overwrite_enabled = true
+  library_references = [
+    {
+      path = "platform/slz"
+      ref  = "2025.10.1"
+    }
+  ]
+}
+```
+
+Refer to the main page of [aka.ms/alz/library](https://aka.ms/alz/library) for up to date release version information.
+
+## Metadata
+
+Remember that the Sovereign Landing Zone library is stacked on top of the Azure Landing Zone library.
+
+The [metadata](https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2025.10.1/platform/slz/alz_library_metadata.json) file for the Sovereign Landing Zone library shows the dependency on the Azure Landing Zone library. The SLZ and ALZ releases are kept (and tested) in lockstep.
+
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2025.10.1/platform/slz/alz_library_metadata.json>" >}}
+
+## Library
+
+The path and the ref (semantic version) in the provider block form parts of the url to the specific platform and release for the library. For example:
+
+```text
+https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz
+```
+
+The [Sovereign Landing Zones library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz) contains the additional assets. The [README page](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz/README.md) has a list of the archetypes, policy definitions, policy assignments and custom RBAC role definitions. This is useful as a reference for your low level design documentation, or a reference when overriding archetypes. Usefully it is a superset of both the Sovereign Landing Zone and Azure Landing Zone repos.
+
+You can get here more naturally by:
+
+- [aka.ms/alz/library](https://aka.ms/alz/library)
+- navigate to `platform/slz`
+
+By default you will see the information for the most recent release. You can also select a specific release:
+
+- click on the main branch drop down
+- switch to tags
+- select the release
+
+Note the URL in the address bar.
+
+## Architecture file
+
+The [slz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json) architecture definition mirrors the mermaid diagram above.
+
+{{< details "Sovereign Landing Zones architecture" >}}
 {{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json>" >}}
-
 {{< /details >}}
 
-{{< details "Policy Default Values" >}}
+The architecture files are uniquely identified and standalone. When you specify `slz` as the architecture_name then it matches against [slz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json). If your module still specified `alz` then it would still match up against the [alz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2025.09.3/platform/alz/architecture_definitions/alz.alz_architecture_definition.json) in the underlying Azure Landing Zone library.
 
-Default policy values are used consistently across multiple policy and policy initiatives in the archetypes.
+## Default policy values
 
-From <https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/alz_policy_default_values.json>.
+Default policy values are defined in [alz_policy_default_values.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/alz_policy_default_values.json).
+
+{{< details "SLZ Policy Default Values" >}}
 {{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/alz_policy_default_values.json>" >}}
+{{< /details >}}
+
+These value are used for consistency across multiple policy and policy initiatives in the archetypes.
+
+Note that you would need to check the same [alz_policy_default_values.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2025.09.3/platform/alz/alz_policy_default_values.json) file for the underlying Azure Landing Zone library.
+
+{{< details "ALZ Policy Default Values" >}}
+{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2025.09.3/platform/alz/alz_policy_default_values.json>" >}}
 {{< /details >}}

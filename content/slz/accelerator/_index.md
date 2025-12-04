@@ -7,7 +7,10 @@ menu:
   side:
     parent: slz
     identifier: slz-accelerator
-weight: 10
+weight: 1
+series:
+  - slz-accelerator
+layout: series
 ---
 
 ## Introduction

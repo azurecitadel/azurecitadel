@@ -3,7 +3,7 @@ title: "What is the Azure Landing Zone?"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "An overview for Azure Landing Zones and how they work with Azure Verified Modules."
-draft: false
+draft: true
 weight: 10
 menu:
   side:
