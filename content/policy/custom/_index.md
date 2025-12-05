@@ -3,6 +3,9 @@ title: "Creating Custom Policies"
 description: "Simple modifications to existing Policy samples are relatively simple. But what if you need to do something new? Follow these labs to get a deeper understanding of the policy structure and how to use aliases."
 draft: false
 weight: 2
+layout: series
+series:
+  - policy-custom
 menu:
   side:
     identifier: 'policy-custom'

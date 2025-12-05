@@ -4,6 +4,8 @@ author: [ "Mike Ormond" ]
 description: "Pre-requisites and overview."
 date: 2021-01-06
 weight: 10
+series:
+  - marketplace-vm-offer
 menu:
   side:
     parent: marketplace-vm-offer
@@ -35,17 +37,3 @@ In this lab we will create the technical assets required to publish a VM offer t
 ## Resources
 
 * [How to plan a virtual machine offer](https://docs.microsoft.com/azure/marketplace/marketplace-virtual-machines)
-
----
-
-{{< raw >}}
-  <nav class="paginate-container" aria-label="Pagination">
-    <div class="pagination">
-      <a class="previous_page" rel="next" href="../" aria-label="Previous Page">Publish a VM Offer</a>
-      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
-      <a class="text-gray-light" href="." aria-label="Top">Getting Started</a>
-      <a class="next_page" rel="next" href="../vmoffer-vm" aria-label="Next Page">Create VM Image</a>
-      <!-- <span class="next_page" aria-disabled="true">Next</span> -->
-    </div>
-  </nav>
-{{< /raw >}}

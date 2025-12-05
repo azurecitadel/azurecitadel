@@ -9,7 +9,6 @@ menu:
   side:
     parent: alz
     identifier: alz-examples
-weight: 5
 ---
 
 ## Examples

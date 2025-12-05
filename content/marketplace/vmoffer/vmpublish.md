@@ -4,6 +4,8 @@ author: [ "Mike Ormond" ]
 description: "Create the listing in Partner Center and publish the offer."
 date: 2021-01-06
 weight: 60
+series:
+  - marketplace-vm-offer
 menu:
   side:
     parent: marketplace-vm-offer
@@ -140,7 +142,7 @@ This is what all the work in the previous sections was leading up to. This is wh
    #### Use SAS URI approach
 
    1. Paste in the SAS URL you saved at the end of the "VM Offer with SAS" step of the lab.
-   
+
       > Be sure to **Save draft** before exiting the page
 
    > Click on `Plan overview` at the top of the page to revert to the offer pages
@@ -189,17 +191,3 @@ We are now ready to review and publish (to a preview audience) the offer we have
 
 * [How to plan a virtual machine offer](https://docs.microsoft.com/azure/marketplace/marketplace-virtual-machines)
 * [How to create a virtual machine offer on Azure Marketplace](https://docs.microsoft.com/azure/marketplace/azure-vm-create)
-
----
-
-{{< raw >}}
-  <nav class="paginate-container" aria-label="Pagination">
-    <div class="pagination">
-      <a class="previous_page" rel="next" href="../vmoffer-sig" aria-label="Previous Page">VM Offer with SIG</a>
-      <a class="previous_page" rel="next" href="../vmoffer-sas" aria-label="Previous Page">VM Offer with SAS</a>
-      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
-      <a class="text-gray-light" href="." aria-label="Top">Publish Offer</a>
-      <span class="next_page" aria-disabled="true">Next</span>
-    </div>
-  </nav>
-{{< /raw >}}
