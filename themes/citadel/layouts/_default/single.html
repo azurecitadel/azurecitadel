@@ -5,39 +5,7 @@
         <!-- main header (hamburger + breadcrumbs) now rendered globally in base layout -->
 
         {{/* Compute series neighbors once so we can use in TOC header and footer */}}
-        {{ if isset .Params "series" }}
-            {{ $seriesTitle := index .Params.series 0 }}
-            {{ $currentLink := .Permalink }}
-            {{ $allSeriesPages := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages }}
-
-            {{/* Custom sort: _index.md first, then by weight */}}
-            {{ $indexPages := slice }}
-            {{ $otherPages := slice }}
-            {{ range $allSeriesPages }}
-                {{ if eq .File.LogicalName "_index.md" }}
-                    {{ $indexPages = $indexPages | append . }}
-                {{ else }}
-                    {{ $otherPages = $otherPages | append . }}
-                {{ end }}
-            {{ end }}
-            {{ $sortedOthers := sort $otherPages "Params.weight" }}
-            {{ $wholeSeries := $indexPages | append $sortedOthers }}
-
-            {{/* Store sorted series for reuse */}}
-            {{ .Scratch.Set "wholeSeries" $wholeSeries }}
-
-            {{ range $index, $page := $wholeSeries }}
-                {{ if eq $currentLink $page.Permalink }}
-                    {{ .Scratch.Set "currentIndex" $index }}
-                    {{ if gt $index 0 }}
-                        {{ .Scratch.Set "prevInSeries" (index $wholeSeries (sub $index 1)) }}
-                    {{ end }}
-                    {{ if lt $index (sub (len $wholeSeries) 1) }}
-                        {{ .Scratch.Set "nextInSeries" (index $wholeSeries (add $index 1)) }}
-                    {{ end }}
-                {{ end }}
-            {{ end }}
-        {{ end }}
+        {{- partial "series-navigation.html" . -}}
 
     <div class="d-flex flex-column flex-xl-row-reverse markdown-body">
 
@@ -88,9 +56,10 @@
                             </h3>
                         {{ end }}
                         </div>
-                                        <div id="dynamic-toc" class="f6" style="max-height: calc(100vh - 8rem); overflow-y: auto;">
-                                            {{ .TableOfContents }}
-                                        </div>
+                        <div id="dynamic-toc" class="f6" style="max-height: calc(100vh - 8rem); overflow-y: auto;">
+                            {{- partial "series-mobile-nav.html" . -}}
+                            {{ .TableOfContents }}
+                        </div>
                                     </div>
                                 </div>
 

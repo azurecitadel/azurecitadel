@@ -1,0 +1,55 @@
+{{/*
+  Partial template to calculate series navigation with custom sorting (_index.md first, then by weight)
+
+  This partial:
+  1. Computes the custom-sorted series list
+  2. Finds the current page's index in that list
+  3. Sets scratch variables for prev/next navigation
+
+  Scratch variables set:
+  - wholeSeries: The complete custom-sorted series list
+  - currentIndex: Index of current page in the series
+  - prevInSeries: Previous page (if exists)
+  - nextInSeries: Next page (if exists)
+
+  For header controls, also sets:
+  - prevInSeriesHeader: Previous page for header navigation
+  - nextInSeriesHeader: Next page for header navigation
+*/}}
+
+{{ if isset .Params "series" }}
+    {{ $seriesTitle := index .Params.series 0 }}
+    {{ $currentLink := .Permalink }}
+    {{ $allSeriesPages := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages }}
+
+    {{/* Custom sort: _index.md first, then by weight */}}
+    {{ $indexPages := slice }}
+    {{ $otherPages := slice }}
+    {{ range $allSeriesPages }}
+        {{ if eq .File.LogicalName "_index.md" }}
+            {{ $indexPages = $indexPages | append . }}
+        {{ else }}
+            {{ $otherPages = $otherPages | append . }}
+        {{ end }}
+    {{ end }}
+    {{ $sortedOthers := sort $otherPages "Params.weight" }}
+    {{ $wholeSeries := $indexPages | append $sortedOthers }}
+
+    {{/* Store sorted series for reuse */}}
+    {{ .Scratch.Set "wholeSeries" $wholeSeries }}
+
+    {{/* Find current page and set navigation */}}
+    {{ range $index, $page := $wholeSeries }}
+        {{ if eq $currentLink $page.Permalink }}
+            {{ .Scratch.Set "currentIndex" $index }}
+            {{ if gt $index 0 }}
+                {{ .Scratch.Set "prevInSeries" (index $wholeSeries (sub $index 1)) }}
+                {{ .Scratch.Set "prevInSeriesHeader" (index $wholeSeries (sub $index 1)) }}
+            {{ end }}
+            {{ if lt $index (sub (len $wholeSeries) 1) }}
+                {{ .Scratch.Set "nextInSeries" (index $wholeSeries (add $index 1)) }}
+                {{ .Scratch.Set "nextInSeriesHeader" (index $wholeSeries (add $index 1)) }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
