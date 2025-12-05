@@ -76,48 +76,30 @@
                 {{ index $parts 0 | safeHTML }}
 
                 {{ if isset .Params "series" }}
-                    {{/* Show _index.md first if it exists, then other pages by weight */}}
-                    {{ $seriesPages := .Pages }}
-                    {{ if eq .Kind "page" }}
-                        {{ $seriesPages = .Parent.Pages }}
-                    {{ end }}
-
-                    {{/* First render _index.md if it exists */}}
-                    {{ range $seriesPages }}
-                    {{ if eq .File.LogicalName "_index.md" }}
-                        {{ $highlightClass := "" }}
-                        {{ if .Params.highlight }}
-                            {{ $highlightClass = " box-highlight" }}
+                    {{/* Use custom-sorted series from scratch */}}
+                    {{ $wholeSeries := index .Scratch.Values "wholeSeries" }}
+                    {{ if $wholeSeries }}
+                        {{ $seriesToShow := $wholeSeries }}
+                        {{/* Only exclude _index.md if it's at index 0 */}}
+                        {{ if and (gt (len $wholeSeries) 0) (eq (index $wholeSeries 0).File.LogicalName "_index.md") }}
+                            {{ $seriesToShow = after 1 $wholeSeries }}
                         {{ end }}
-                        <div class="box Box-row--hover-gray px-3 mt-3{{ $highlightClass }}">
-                            <a title="{{.Title}}" href="{{.Permalink}}">
-                                <h4>{{.Title}}</h4>
-                            </a>
-                            <p>
-                                {{.Description}}
-                            </p>
-                        </div>
-                    {{ end }}
-                    {{ end }}
-
-                    {{/* Then render all non-index pages by weight */}}
-                    {{ range $seriesPages.ByWeight }}
-                    {{ if ne .File.LogicalName "_index.md" }}
-                        {{ $highlightClass := "" }}
-                        {{ if .Params.highlight }}
-                            {{ $highlightClass = " box-highlight" }}
+                        {{ range $seriesToShow }}
+                            {{ $highlightClass := "" }}
+                            {{ if .Params.highlight }}
+                                {{ $highlightClass = " box-highlight" }}
+                            {{ end }}
+                            <div class="box Box-row--hover-gray px-3 mt-3{{ $highlightClass }}">
+                                <a title="{{.Title}}" href="{{.Permalink}}">
+                                    <h4>{{.Title}}</h4>
+                                </a>
+                                <p>
+                                    {{.Description}}
+                                </p>
+                            </div>
                         {{ end }}
-                        <div class="box Box-row--hover-gray px-3 mt-3{{ $highlightClass }}">
-                            <a title="{{.Title}}" href="{{.Permalink}}">
-                                <h4>{{.Title}}</h4>
-                            </a>
-                            <p>
-                                {{.Description}}
-                            </p>
-                        </div>
+                        <div class="mt-5"></div>
                     {{ end }}
-                    {{ end }}
-                    <div class="mt-5"></div>
                 {{ end }}
 
                 {{/* Render content after the marker */}}
@@ -129,51 +111,29 @@
                 {{.Content}}
 
                 {{ if isset .Params "series" }}
-                    {{/* Show _index.md first if it exists, then other pages by weight */}}
-                    {{ $seriesPages := .Pages }}
-                    {{ if eq .Kind "page" }}
-                        {{ $seriesPages = .Parent.Pages }}
-                    {{ end }}
-
-                    {{/* Include current page if it's an _index.md */}}
-                    {{ if and (eq .File.LogicalName "_index.md") (not (in $seriesPages .)) }}
-                        {{ $seriesPages = $seriesPages | append . }}
-                    {{ end }}
-
-                    {{/* First render _index.md if it exists */}}
-                    {{ range $seriesPages }}
-                    {{ if eq .File.LogicalName "_index.md" }}
-                        {{ $highlightClass := "" }}
-                        {{ if .Params.highlight }}
-                            {{ $highlightClass = " box-highlight" }}
+                    {{/* Use custom-sorted series from scratch */}}
+                    {{ $wholeSeries := index .Scratch.Values "wholeSeries" }}
+                    {{ if $wholeSeries }}
+                        {{ $seriesToShow := $wholeSeries }}
+                        {{/* Only exclude _index.md if it's at index 0 */}}
+                        {{ if and (gt (len $wholeSeries) 0) (eq (index $wholeSeries 0).File.LogicalName "_index.md") }}
+                            {{ $seriesToShow = after 1 $wholeSeries }}
                         {{ end }}
-                        <div class="box Box-row--hover-gray px-3 mt-3{{ $highlightClass }}">
-                            <a title="{{.Title}}" href="{{.Permalink}}">
-                                <h4>{{.Title}}</h4>
-                            </a>
-                            <p>
-                                {{.Description}}
-                            </p>
-                        </div>
-                    {{ end }}
-                    {{ end }}
-
-                    {{/* Then render all non-index pages by weight */}}
-                    {{ range $seriesPages.ByWeight }}
-                    {{ if ne .File.LogicalName "_index.md" }}
-                        {{ $highlightClass := "" }}
-                        {{ if .Params.highlight }}
-                            {{ $highlightClass = " box-highlight" }}
+                        {{ range $seriesToShow }}
+                            {{ $highlightClass := "" }}
+                            {{ if .Params.highlight }}
+                                {{ $highlightClass = " box-highlight" }}
+                            {{ end }}
+                            <div class="box Box-row--hover-gray px-3 mt-3{{ $highlightClass }}">
+                                <a title="{{.Title}}" href="{{.Permalink}}">
+                                    <h4>{{.Title}}</h4>
+                                </a>
+                                <p>
+                                    {{.Description}}
+                                </p>
+                            </div>
                         {{ end }}
-                        <div class="box Box-row--hover-gray px-3 mt-3{{ $highlightClass }}">
-                            <a title="{{.Title}}" href="{{.Permalink}}">
-                                <h4>{{.Title}}</h4>
-                            </a>
-                            <p>
-                                {{.Description}}
-                            </p>
-                        </div>
-                    {{ end }}
+                        <div class="mt-5"></div>
                     {{ end }}
                 {{ end }}
             {{ end }}
