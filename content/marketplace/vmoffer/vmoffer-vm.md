@@ -4,6 +4,8 @@ author: [ "Mike Ormond" ]
 description: "Create and customise a VM image for publishing to Marketplace."
 date: 2021-01-06
 weight: 20
+series:
+  - marketplace-vm-offer
 menu:
   side:
     parent: marketplace-vm-offer
@@ -173,17 +175,3 @@ We now have a generalised OS VHD for our Ubuntu-based VM offer with a web server
 ## Resources
 
 * [How to create a virtual machine using an approved base](https://docs.microsoft.com/azure/marketplace/azure-vm-create-using-approved-base)
-
----
-
-{{< raw >}}
-  <nav class="paginate-container" aria-label="Pagination">
-    <div class="pagination">
-      <a class="previous_page" rel="next" href="../overview" aria-label="Previous Page">Getting Started</a>
-      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
-      <a class="text-gray-light" href="." aria-label="Top">Create VM Image</a>
-      <a class="next_page" rel="next" href="../vmoffer-test" aria-label="Next Page">Test VM Image</a>
-      <!-- <span class="next_page" aria-disabled="true">Next</span> -->
-    </div>
-  </nav>
-{{< /raw >}}

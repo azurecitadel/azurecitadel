@@ -3,6 +3,9 @@ title: "Microsoft Fabric"
 description: "Using infrastructure as code with Microsoft Fabric"
 author: [ "Richard Cheney" ]
 github: [ "richeney" ]
+layout: series
+series:
+  - fabric_terraform_administrator
 menu:
   side:
     identifier: fabric

@@ -5,7 +5,7 @@ author: [ "Tom Wilde" ]
 description: "Specify the allowed VM SKU sizes using the Azure CLI."
 weight: 2
 series:
- - policy
+ - policy-basics
 menu:
   side:
     parent: policy-basics

@@ -4,13 +4,11 @@ description: "Learn how to use the Azure Landing Zone Accelerator to get to a Gi
 draft: false
 layout: series
 series:
-  - alz
   - alz-accelerator
 menu:
   side:
     parent: alz
     identifier: alz-accelerator
-weight: 1
 ---
 
 ## Introduction

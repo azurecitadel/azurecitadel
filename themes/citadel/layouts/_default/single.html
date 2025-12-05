@@ -8,9 +8,27 @@
         {{ if isset .Params "series" }}
             {{ $seriesTitle := index .Params.series 0 }}
             {{ $currentLink := .Permalink }}
-            {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
+            {{ $allSeriesPages := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages }}
+
+            {{/* Custom sort: _index.md first, then by weight */}}
+            {{ $indexPages := slice }}
+            {{ $otherPages := slice }}
+            {{ range $allSeriesPages }}
+                {{ if eq .File.LogicalName "_index.md" }}
+                    {{ $indexPages = $indexPages | append . }}
+                {{ else }}
+                    {{ $otherPages = $otherPages | append . }}
+                {{ end }}
+            {{ end }}
+            {{ $sortedOthers := sort $otherPages "Params.weight" }}
+            {{ $wholeSeries := $indexPages | append $sortedOthers }}
+
+            {{/* Store sorted series for reuse */}}
+            {{ .Scratch.Set "wholeSeries" $wholeSeries }}
+
             {{ range $index, $page := $wholeSeries }}
                 {{ if eq $currentLink $page.Permalink }}
+                    {{ .Scratch.Set "currentIndex" $index }}
                     {{ if gt $index 0 }}
                         {{ .Scratch.Set "prevInSeries" (index $wholeSeries (sub $index 1)) }}
                     {{ end }}
@@ -27,16 +45,10 @@
                     <div style="position: sticky; top: 1rem; padding: 0.75rem; background: var(--color-canvas-default); border: 1px solid var(--color-border-default); border-radius: 6px; box-shadow: 0 2px 8px rgba(140,149,159,0.1);">
                         <div class="toc-header d-flex flex-items-center pb-2 mb-2 border-bottom color-border-muted">
                         {{ if isset .Params "series" }}
-                            {{/* Series Progress Indicator */}}
-                            {{ $seriesTitle := index .Params.series 0 }}
-                            {{ $currentLink := .Permalink }}
-                            {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
-                            {{ $currentIndex := 0 }}
-                            {{ range $index, $page := $wholeSeries }}
-                                {{ if eq $currentLink $page.Permalink }}
-                                    {{ $currentIndex = $index }}
-                                {{ end }}
-                            {{ end }}
+                            {{/* Series Progress Indicator - reuse computed values */}}
+                            {{ $wholeSeries := index .Scratch.Values "wholeSeries" }}
+                            {{ $currentIndex := index .Scratch.Values "currentIndex" }}
+                            {{ if not $currentIndex }}{{ $currentIndex = 0 }}{{ end }}
                             <div class="series-progress-container">
                                 <div class="series-name"><a href="javascript:void(0);" onclick="document.querySelector('h1')?.scrollIntoView({behavior:'smooth'})" style="color: inherit; text-decoration: none; cursor: pointer;">{{ .Title }}</a></div>
                                 <div class="series-controls">

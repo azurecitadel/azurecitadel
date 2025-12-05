@@ -16,7 +16,6 @@ aliases:
 series:
   - pal
 layout: series
-weight: 1
 ---
 
 ## Overview

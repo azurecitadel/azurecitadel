@@ -2,6 +2,9 @@
 title: "Azure Lighthouse"
 description: "Azure Lighthouse can be very useful, but also comes with some limitations that you should be aware of. Here are some useful"
 draft: false
+layout: series
+series:
+  - lighthouse
 menu:
   side:
     identifier: lighthouse

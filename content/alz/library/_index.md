@@ -9,7 +9,6 @@ menu:
 weight: 4
 draft: true
 series:
-  - alz
   - alz-library
 layout: series
 ---

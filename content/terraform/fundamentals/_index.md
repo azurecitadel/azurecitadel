@@ -8,6 +8,9 @@ menu:
   side:
     identifier: terraform-basics
     parent: 'terraform'
+series:
+ - terraform-basics
+layout: series
 ---
 
 ## Overview

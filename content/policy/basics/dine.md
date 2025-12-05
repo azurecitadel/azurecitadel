@@ -5,7 +5,7 @@ author: [ "Tom Wilde" ]
 description: "Using a policy initiative with the DeployIfNotExist effect for automated deployment of the Azure Monitor agent. Remediate existing servers to make them compliant with the new policy."
 weight: 3
 series:
- - policy
+ - policy-basics
 menu:
   side:
     parent: policy-basics

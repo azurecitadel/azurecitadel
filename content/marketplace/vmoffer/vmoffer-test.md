@@ -4,6 +4,8 @@ author: [ "Mike Ormond" ]
 description: "Test the VM image before publishing."
 date: 2021-01-06
 weight: 30
+series:
+  - marketplace-vm-offer
 menu:
   side:
     parent: marketplace-vm-offer
@@ -162,18 +164,3 @@ The following is based on the instructions [Test a virtual machine image](https:
 * [Test a virtual machine image](https://docs.microsoft.com/azure/marketplace/azure-vm-image-test)
 * [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource)
 * [Create an image from a VM](https://docs.microsoft.com/azure/virtual-machines/image-version-vm-powershell)
-
----
-
-{{< raw >}}
-  <nav class="paginate-container" aria-label="Pagination">
-    <div class="pagination">
-      <a class="previous_page" rel="next" href="../vmoffer-vm" aria-label="Previous Page">Create VM Image</a>
-      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
-      <a class="text-gray-light" href="." aria-label="Top">Test VM Image</a>
-      <a class="next_page" rel="next" href="../vmoffer-sig" aria-label="Next Page">VM Offer with SIG</a>
-      <a class="next_page" rel="next" href="../vmoffer-sas" aria-label="Next Page">VM Offer with SAS</a>
-      <!-- <span class="next_page" aria-disabled="true">Next</span> -->
-    </div>
-  </nav>
-{{< /raw >}}

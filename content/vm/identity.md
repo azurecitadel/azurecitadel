@@ -7,8 +7,6 @@ menu:
   side:
     parent: vm
     identifier: vm-identity
-series:
- - vm-identity
 ---
 
 ## Introduction
