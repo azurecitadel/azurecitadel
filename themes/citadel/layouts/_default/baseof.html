@@ -14,21 +14,7 @@
           {{- partial "breadcrumbs.html" . -}}
           <div class="header-actions">
             {{/* Series neighbors for header controls */}}
-            {{ if isset .Params "series" }}
-              {{ $seriesTitle := index .Params.series 0 }}
-              {{ $currentLink := .Permalink }}
-              {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
-              {{ range $index, $page := $wholeSeries }}
-                {{ if eq $currentLink $page.Permalink }}
-                  {{ if gt $index 0 }}
-                    {{ .Scratch.Set "prevInSeriesHeader" (index $wholeSeries (sub $index 1)) }}
-                  {{ end }}
-                  {{ if lt $index (sub (len $wholeSeries) 1) }}
-                    {{ .Scratch.Set "nextInSeriesHeader" (index $wholeSeries (add $index 1)) }}
-                  {{ end }}
-                {{ end }}
-              {{ end }}
-            {{ end }}
+            {{- partial "series-navigation.html" . -}}
             {{ with index .Scratch.Values "prevInSeriesHeader" }}
               <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Previous in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</a>
             {{ else }}
@@ -205,6 +191,7 @@
     function build(){
       const tocInline = document.querySelector('.markdown-body .toc');
       if(!tocInline) return;
+
       panel.innerHTML = '';
       // Create a wrapper with same class to apply indentation styles
       const wrapper = document.createElement('div');
@@ -213,24 +200,87 @@
       const inner = tocInline.querySelector('.f6');
       const cloneSource = inner || tocInline;
       const clone = cloneSource.cloneNode(true);
+
+      // Show series navigation in flydown
+      const seriesNav = clone.querySelector('.series-mobile-nav');
+      if(seriesNav) {
+        seriesNav.style.display = 'block';
+      }
+
       wrapper.appendChild(clone);
       panel.appendChild(wrapper);
     }
+    let autoHideTimer = null;
     function setOpen(open){
       fly.classList.toggle('is-open', open);
       btn.setAttribute('aria-expanded', open? 'true':'false');
       fly.setAttribute('aria-hidden', open? 'false':'true');
+      // Clear any existing auto-hide timer when manually opening/closing
+      if(autoHideTimer) {
+        clearTimeout(autoHideTimer);
+        autoHideTimer = null;
+      }
+    }
+    function scheduleAutoHide(delay = 2000) {
+      if(autoHideTimer) clearTimeout(autoHideTimer);
+      autoHideTimer = setTimeout(() => {
+        if(window.innerWidth < BREAKPOINT && fly.classList.contains('is-open')) {
+          // Smooth fade out before closing
+          fly.classList.add('fading-out');
+          setTimeout(() => {
+            setOpen(false);
+            fly.classList.remove('fading-out');
+          }, 400); // Wait for fade out to complete
+        }
+        autoHideTimer = null;
+      }, delay);
     }
     btn.addEventListener('click', ()=>{
       if(!panel.innerHTML) build();
       setOpen(!fly.classList.contains('is-open'));
     });
-    // Close on link click inside the panel (narrow mode)
+
+    // Handle series navigation clicks - set flag for next page
+    document.addEventListener('click', (e) => {
+      const seriesBtn = e.target.closest('.series-btn');
+      if(seriesBtn && fly.classList.contains('is-open') && window.innerWidth < BREAKPOINT) {
+        // Smooth fade out on navigation
+        fly.classList.add('fading-out');
+        // Set sessionStorage flag that next page should reopen flydown
+        sessionStorage.setItem('reopenFlydown', 'true');
+      }
+    });
+
+    // Handle link clicks inside the panel (narrow mode)
     fly.addEventListener('click', (e)=>{
       const a = e.target.closest('a');
-      if(!a) return;
-      if(window.innerWidth < BREAKPOINT) setOpen(false);
+      if(!a || window.innerWidth >= BREAKPOINT) return;
+
+      // Check if this is a series navigation link (next/prev)
+      const isSeriesNav = a.closest('.series-btn') || a.closest('.series-mobile-nav');
+
+      if(isSeriesNav) {
+        // Smooth fade out and set flag for next page to reopen flydown
+        fly.classList.add('fading-out');
+        sessionStorage.setItem('reopenFlydown', 'true');
+      } else {
+        // For regular TOC links, close immediately
+        setOpen(false);
+      }
     });
+
+    // Check on page load if we should reopen flydown
+    if(sessionStorage.getItem('reopenFlydown') === 'true') {
+      sessionStorage.removeItem('reopenFlydown');
+      if(window.innerWidth < BREAKPOINT) {
+        // Small delay to let page settle, then smooth fade in
+        setTimeout(() => {
+          if(!panel.innerHTML) build();
+          setOpen(true);
+          scheduleAutoHide();
+        }, 200);
+      }
+    }
     document.addEventListener('click', (e)=>{
       if(window.innerWidth >= BREAKPOINT) return; // only act in narrow mode
       if(!fly.classList.contains('is-open')) return;

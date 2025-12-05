@@ -19,6 +19,18 @@
    <!-- Print stylesheet -->
    <link rel="stylesheet" href="{{ "stylesheets/print.css" | relURL }}" media="print">
 
+   <style>
+   /* Smooth transitions for flydown TOC */
+   #toc-flydown {
+     transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+   }
+   #toc-flydown.fading-out {
+     opacity: 0;
+     transform: translateY(-10px);
+     pointer-events: none;
+   }
+   </style>
+
    <script>(function(){try{document.documentElement.classList.add('js');document.documentElement.classList.add('htmljs');}catch(e){}})();</script>
 
    {{/* Tab + Mode shortcode assets */}}
