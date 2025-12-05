@@ -201,10 +201,18 @@
       const cloneSource = inner || tocInline;
       const clone = cloneSource.cloneNode(true);
 
-      // Show series navigation in flydown
+      // Remove series navigation from flydown and only show generated TOC
       const seriesNav = clone.querySelector('.series-mobile-nav');
       if(seriesNav) {
-        seriesNav.style.display = 'block';
+        seriesNav.remove();
+      }
+
+      // Only keep the generated TOC in the flydown
+      const generatedToc = clone.querySelector('.generated-toc');
+      if(generatedToc) {
+        // If there's a generated TOC, make it the main content
+        clone.innerHTML = '';
+        clone.appendChild(generatedToc);
       }
 
       wrapper.appendChild(clone);
@@ -374,13 +382,21 @@
   // Dynamic TOC: regenerate table of contents to include headers from shared content
   (function(){
     const tocContainer = document.getElementById('dynamic-toc');
-    if(!tocContainer) return;
+    if(!tocContainer) {
+      console.log('ERROR: dynamic-toc container not found!');
+      return;
+    }
+    console.log('Found dynamic-toc container:', tocContainer);
 
     function generateTOC() {
       console.log('Generating TOC...');
       // Find all headers in the main content area
       const contentArea = document.querySelector('.markdown-body .flex-1');
-      if(!contentArea) return;
+      if(!contentArea) {
+        console.log('ERROR: content area not found!');
+        return;
+      }
+      console.log('Found content area:', contentArea);
 
       // Get all headers, but exclude those in inactive mode panels
       let headers = Array.from(contentArea.querySelectorAll('h2, h3, h4, h5, h6')).filter(header => {
@@ -464,17 +480,26 @@
       }
       tocHTML += '</nav>';
 
-      // Replace existing TOC content
-      const existingTOC = tocContainer.querySelector('nav');
-      if(existingTOC) {
-        // Always replace the existing TOC content
-        existingTOC.outerHTML = tocHTML;
-        console.log('Replaced existing TOC with', headers.length, 'headers');
-      } else {
-        // No existing TOC - add the generated one
-        tocContainer.innerHTML = tocHTML;
-        console.log('Created new TOC with', headers.length, 'headers');
+      // Find any existing generated TOC and remove it
+      const existingGenerated = tocContainer.querySelector('.generated-toc');
+      if(existingGenerated) {
+        existingGenerated.remove();
       }
+
+      // Add our generated TOC after the series nav (if present)
+      const wrapper = document.createElement('div');
+      wrapper.className = 'generated-toc';
+      wrapper.innerHTML = tocHTML;
+
+      // Insert after series nav or at the beginning
+      const seriesNav = tocContainer.querySelector('.series-mobile-nav');
+      if(seriesNav) {
+        seriesNav.parentNode.insertBefore(wrapper, seriesNav.nextSibling);
+      } else {
+        tocContainer.insertBefore(wrapper, tocContainer.firstChild);
+      }
+
+      console.log('Added generated TOC with', headers.length, 'headers');
     }
 
     // Generate TOC after page load and when content changes

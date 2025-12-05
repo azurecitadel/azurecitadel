@@ -56,7 +56,7 @@
                         </h3>
                     {{ end }}
                 </div>
-                <div class="f6" style="max-height: calc(100vh - 8rem); overflow-y: auto;">
+                <div id="dynamic-toc" class="f6" style="max-height: calc(100vh - 8rem); overflow-y: auto;">
                     {{- partial "series-mobile-nav.html" . -}}
                     {{ .TableOfContents }}
                 </div>
