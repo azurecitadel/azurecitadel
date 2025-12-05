@@ -1,4 +1,218 @@
-<details class="details-overlay">
-  <summary class="btn">{{ .Get 0 }}</summary>
-  <div class="border p-3 mt-2">{{ .Page.RenderString .Inner }}</div>
-</details>
+<div class="details-overlay citadel-details">
+  <div class="citadel-details-summary">
+    <span class="citadel-details-chevron">{{- partial "octicon" (dict "icon" "chevron-right" "height" 16) -}}</span>
+    <span class="citadel-details-title">{{ .Get 0 }}</span>
+  </div>
+  <div class="citadel-details-content border p-3 mt-2" style="display: none;">
+    <div class="citadel-details-inner">{{ .Page.RenderString .Inner }}</div>
+    <div class="citadel-details-close-container">
+      <button class="citadel-details-close-btn btn-octicon" aria-label="Close details" title="Close">
+        {{- partial "octicon" (dict "icon" "x" "height" 16) -}}
+        <span class="ml-1">Close</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+.citadel-details {
+  margin: 1rem 0;
+}
+
+.citadel-details-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.citadel-details-summary::-webkit-details-marker {
+  display: none;
+}
+
+.citadel-details-chevron {
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.citadel-details.open .citadel-details-chevron {
+  transform: rotate(90deg);
+}
+
+.citadel-details-title {
+  white-space: nowrap;
+}
+
+:root {
+  --citadel-subtle-glow: 0 2px 8px rgba(140,149,159,0.1);
+}
+
+.citadel-details-content {
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  box-shadow: var(--citadel-subtle-glow);
+  position: relative;
+}
+
+.citadel-details-close-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border-muted);
+}
+
+.citadel-details-close-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-fg-default);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.citadel-details-close-btn:hover {
+  background-color: var(--color-neutral-muted);
+  border-color: var(--color-border-emphasis);
+}
+</style>
+
+<script>
+// Function to initialize details elements
+function initializeDetailsElements() {
+  const uninitializedDetails = document.querySelectorAll('.citadel-details:not([data-initialized])');
+  console.log('Initializing details elements:', uninitializedDetails.length);
+
+  uninitializedDetails.forEach(function(details) {
+    // Check if this details element is in a visible mode panel
+    const modePanel = details.closest('[data-mode-panel]');
+    if (modePanel) {
+      const isVisible = modePanel.style.display === 'block' || modePanel.classList.contains('is-active-panel');
+      console.log('Details in mode panel:', modePanel.getAttribute('data-title'), 'visible:', isVisible);
+      if (!isVisible) {
+        // Don't initialize details in hidden mode panels yet
+        return;
+      }
+    }
+
+    details.setAttribute('data-initialized', 'true');
+    console.log('Initializing details:', details);
+
+    const summary = details.querySelector('.citadel-details-summary');
+    const content = details.querySelector('.citadel-details-content');
+    const closeBtn = details.querySelector('.citadel-details-close-btn');
+
+    function closeDetails() {
+      details.classList.remove('open');
+      content.style.display = 'none';
+    }
+
+    function openDetails() {
+      details.classList.add('open');
+      content.style.display = 'block';
+    }
+
+    // Handle summary clicks
+    summary.addEventListener('click', function(e) {
+      console.log('Details summary clicked');
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Toggle visibility
+      if (details.classList.contains('open')) {
+        closeDetails();
+      } else {
+        openDetails();
+      }
+    });
+
+    // Handle close button clicks
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function(e) {
+        console.log('Details close button clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        closeDetails();
+      });
+    }
+  });
+}
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', initializeDetailsElements);
+
+// Watch for mode panel visibility changes using event delegation
+function setupModeObserver() {
+  // Use a global observer to watch for style and class changes
+  const observer = new MutationObserver(function(mutations) {
+    let shouldReinitialize = false;
+
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes') {
+        const target = mutation.target;
+
+        // Check if this is a mode panel that became visible
+        if (target.hasAttribute('data-mode-panel')) {
+          console.log('Mode panel change detected:', target.getAttribute('data-title'), mutation.attributeName);
+          if (mutation.attributeName === 'style' && target.style.display === 'block') {
+            console.log('Mode panel became visible via style');
+            shouldReinitialize = true;
+          }
+          if (mutation.attributeName === 'class' && target.classList.contains('is-active-panel')) {
+            console.log('Mode panel became active via class');
+            shouldReinitialize = true;
+          }
+        }
+      }
+
+      // Also check for new nodes being added that might contain details
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            if (node.querySelector && (node.querySelector('.citadel-details') || node.hasAttribute('data-mode-panel'))) {
+              console.log('New content added with details or mode panels');
+              shouldReinitialize = true;
+            }
+          }
+        });
+      }
+    });
+
+    if (shouldReinitialize) {
+      console.log('Reinitializing details elements due to mode change');
+      setTimeout(initializeDetailsElements, 10);
+    }
+  });
+
+  // Observe the entire document for changes
+  observer.observe(document, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class']
+  });
+
+  console.log('Mode observer setup complete');
+}
+
+// Setup observer when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  setupModeObserver();
+});
+
+// Also initialize with a slight delay to catch dynamically loaded content
+setTimeout(initializeDetailsElements, 100);
+</script>

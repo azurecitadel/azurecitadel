@@ -5,12 +5,13 @@ description: "Introduction to the commercial marketplace"
 date: 2021-01-06
 weight: 10
 style: list
+layout: series
 menu:
   side:
     parent: marketplace
     identifier: marketplace-introduction
 series:
- - 'amp-introduction'
+ - marketplace-introduction
 ---
 
 Microsoft's commercial marketplace is a catalog of solutions and services from our partner network. While we talk about a commercial marketplace, there are a number of "storefronts" including the [Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/), [AppSource](https://appsource.microsoft.com/) as well as in-product integration such as within the Azure Portal (which surfaces offers from the Azure Marketplace).

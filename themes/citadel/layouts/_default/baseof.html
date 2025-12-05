@@ -14,21 +14,7 @@
           {{- partial "breadcrumbs.html" . -}}
           <div class="header-actions">
             {{/* Series neighbors for header controls */}}
-            {{ if isset .Params "series" }}
-              {{ $seriesTitle := index .Params.series 0 }}
-              {{ $currentLink := .Permalink }}
-              {{ $wholeSeries := (index .Site.Taxonomies.series ($seriesTitle | urlize)).Pages.ByWeight }}
-              {{ range $index, $page := $wholeSeries }}
-                {{ if eq $currentLink $page.Permalink }}
-                  {{ if gt $index 0 }}
-                    {{ .Scratch.Set "prevInSeriesHeader" (index $wholeSeries (sub $index 1)) }}
-                  {{ end }}
-                  {{ if lt $index (sub (len $wholeSeries) 1) }}
-                    {{ .Scratch.Set "nextInSeriesHeader" (index $wholeSeries (add $index 1)) }}
-                  {{ end }}
-                {{ end }}
-              {{ end }}
-            {{ end }}
+            {{- partial "series-navigation.html" . -}}
             {{ with index .Scratch.Values "prevInSeriesHeader" }}
               <a class="btn-octicon series-btn" href="{{ .Permalink }}" aria-label="Previous in series: {{ .Title }}" title="{{ .Title }}">{{- partial "octicon" (dict "icon" "chevron-left" "height" 16) -}}</a>
             {{ else }}
@@ -205,6 +191,7 @@
     function build(){
       const tocInline = document.querySelector('.markdown-body .toc');
       if(!tocInline) return;
+
       panel.innerHTML = '';
       // Create a wrapper with same class to apply indentation styles
       const wrapper = document.createElement('div');
@@ -213,24 +200,95 @@
       const inner = tocInline.querySelector('.f6');
       const cloneSource = inner || tocInline;
       const clone = cloneSource.cloneNode(true);
+
+      // Remove series navigation from flydown and only show generated TOC
+      const seriesNav = clone.querySelector('.series-mobile-nav');
+      if(seriesNav) {
+        seriesNav.remove();
+      }
+
+      // Only keep the generated TOC in the flydown
+      const generatedToc = clone.querySelector('.generated-toc');
+      if(generatedToc) {
+        // If there's a generated TOC, make it the main content
+        clone.innerHTML = '';
+        clone.appendChild(generatedToc);
+      }
+
       wrapper.appendChild(clone);
       panel.appendChild(wrapper);
     }
+    let autoHideTimer = null;
     function setOpen(open){
       fly.classList.toggle('is-open', open);
       btn.setAttribute('aria-expanded', open? 'true':'false');
       fly.setAttribute('aria-hidden', open? 'false':'true');
+      // Clear any existing auto-hide timer when manually opening/closing
+      if(autoHideTimer) {
+        clearTimeout(autoHideTimer);
+        autoHideTimer = null;
+      }
+    }
+    function scheduleAutoHide(delay = 2000) {
+      if(autoHideTimer) clearTimeout(autoHideTimer);
+      autoHideTimer = setTimeout(() => {
+        if(window.innerWidth < BREAKPOINT && fly.classList.contains('is-open')) {
+          // Smooth fade out before closing
+          fly.classList.add('fading-out');
+          setTimeout(() => {
+            setOpen(false);
+            fly.classList.remove('fading-out');
+          }, 400); // Wait for fade out to complete
+        }
+        autoHideTimer = null;
+      }, delay);
     }
     btn.addEventListener('click', ()=>{
       if(!panel.innerHTML) build();
       setOpen(!fly.classList.contains('is-open'));
     });
-    // Close on link click inside the panel (narrow mode)
+
+    // Handle series navigation clicks - set flag for next page
+    document.addEventListener('click', (e) => {
+      const seriesBtn = e.target.closest('.series-btn');
+      if(seriesBtn && fly.classList.contains('is-open') && window.innerWidth < BREAKPOINT) {
+        // Smooth fade out on navigation
+        fly.classList.add('fading-out');
+        // Set sessionStorage flag that next page should reopen flydown
+        sessionStorage.setItem('reopenFlydown', 'true');
+      }
+    });
+
+    // Handle link clicks inside the panel (narrow mode)
     fly.addEventListener('click', (e)=>{
       const a = e.target.closest('a');
-      if(!a) return;
-      if(window.innerWidth < BREAKPOINT) setOpen(false);
+      if(!a || window.innerWidth >= BREAKPOINT) return;
+
+      // Check if this is a series navigation link (next/prev)
+      const isSeriesNav = a.closest('.series-btn') || a.closest('.series-mobile-nav');
+
+      if(isSeriesNav) {
+        // Smooth fade out and set flag for next page to reopen flydown
+        fly.classList.add('fading-out');
+        sessionStorage.setItem('reopenFlydown', 'true');
+      } else {
+        // For regular TOC links, close immediately
+        setOpen(false);
+      }
     });
+
+    // Check on page load if we should reopen flydown
+    if(sessionStorage.getItem('reopenFlydown') === 'true') {
+      sessionStorage.removeItem('reopenFlydown');
+      if(window.innerWidth < BREAKPOINT) {
+        // Small delay to let page settle, then smooth fade in
+        setTimeout(() => {
+          if(!panel.innerHTML) build();
+          setOpen(true);
+          scheduleAutoHide();
+        }, 200);
+      }
+    }
     document.addEventListener('click', (e)=>{
       if(window.innerWidth >= BREAKPOINT) return; // only act in narrow mode
       if(!fly.classList.contains('is-open')) return;
@@ -301,6 +359,196 @@
         open(src, img.alt || '');
       });
     }
+  })();
+
+  // Function to switch mode and scroll to header
+  window.switchToModeAndScroll = function(modeTitle, headerId) {
+    // Find and click the correct mode tab
+    const tabs = document.querySelectorAll('[data-modes] .ac-tab');
+    const targetTab = Array.from(tabs).find(tab => tab.textContent.trim() === modeTitle);
+
+    if(targetTab) {
+      targetTab.click();
+      // Wait a moment for the panel to become visible, then scroll
+      setTimeout(() => {
+        const targetHeader = document.getElementById(headerId);
+        if(targetHeader) {
+          targetHeader.scrollIntoView({behavior: 'smooth'});
+        }
+      }, 100);
+    }
+  };
+
+  // Dynamic TOC: regenerate table of contents to include headers from shared content
+  (function(){
+    const tocContainer = document.getElementById('dynamic-toc');
+    if(!tocContainer) {
+      console.log('ERROR: dynamic-toc container not found!');
+      return;
+    }
+    console.log('Found dynamic-toc container:', tocContainer);
+
+    function generateTOC() {
+      console.log('Generating TOC...');
+      // Find all headers in the main content area
+      const contentArea = document.querySelector('.markdown-body .flex-1');
+      if(!contentArea) {
+        console.log('ERROR: content area not found!');
+        return;
+      }
+      console.log('Found content area:', contentArea);
+
+      // Get all headers, but exclude those in inactive mode panels
+      let headers = Array.from(contentArea.querySelectorAll('h2, h3, h4, h5, h6')).filter(header => {
+        // Exclude TOC-related headers
+        if(header.id === 'in-this-article') return false;
+        if(header.textContent.trim() === 'Table of Contents') return false;
+
+        // Exclude headers inside the TOC container itself
+        if(header.closest('.toc')) return false;
+
+        // Check if header is inside a mode panel
+        const modePanel = header.closest('[data-mode-panel]');
+        if(modePanel) {
+          // Only include if the mode panel is visible (active)
+          return modePanel.style.display !== 'none';
+        }
+        // Include headers outside of mode panels
+        return true;
+      });
+
+      if(headers.length === 0) return;
+
+      // First pass: Ensure all headers have proper unique IDs (regenerate every time)
+      headers.forEach((header, index) => {
+        const text = header.textContent.trim();
+        let baseId = text.toLowerCase().replace(/[^a-z0-9\\s-]/g, '').replace(/\\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || `heading-${index}`;
+
+        // Check if header is in a mode panel and make ID unique
+        const modePanel = header.closest('[data-mode-panel]');
+        if(modePanel) {
+          const modeTitle = modePanel.getAttribute('data-title') || 'mode';
+          const modePrefix = modeTitle.toLowerCase().replace(/[^a-z0-9\\s-]/g, '').replace(/\\s+/g, '-');
+          const newId = `${modePrefix}-${baseId}`;
+          if(header.id !== newId) {
+            header.id = newId;
+            console.log(`Set ID for mode header: ${header.id} (mode: ${modeTitle})`);
+          }
+        } else {
+          if(header.id !== baseId) {
+            header.id = baseId;
+            console.log(`Set ID for regular header: ${header.id}`);
+          }
+        }
+      });
+
+      // Build TOC HTML
+      let tocHTML = '<nav role="navigation"><ul>';
+      let currentLevel = 0;
+
+      headers.forEach((header, index) => {
+        const level = parseInt(header.tagName.charAt(1));
+        const text = header.textContent.trim();
+        const id = header.id; // ID is now guaranteed to exist
+
+        // Handle nesting levels
+        if(level > currentLevel) {
+          for(let i = currentLevel; i < level; i++) {
+            if(i > 0) tocHTML += '<ul>';
+          }
+        } else if(level < currentLevel) {
+          for(let i = level; i < currentLevel; i++) {
+            tocHTML += '</ul>';
+          }
+        }
+
+        // Check if header is in a mode panel and add special click handler
+        const modePanel = header.closest('[data-mode-panel]');
+        const modeTitle = modePanel ? modePanel.getAttribute('data-title') : null;
+
+        if(modeTitle) {
+          tocHTML += `<li><a href="#${id}" onclick="switchToModeAndScroll('${modeTitle}', '${id}'); return false;">${text}</a></li>`;
+        } else {
+          tocHTML += `<li><a href="#${id}">${text}</a></li>`;
+        }
+        currentLevel = level;
+      });
+
+      // Close remaining ul tags
+      for(let i = 0; i < currentLevel; i++) {
+        tocHTML += '</ul>';
+      }
+      tocHTML += '</nav>';
+
+      // Find any existing generated TOC and remove it
+      const existingGenerated = tocContainer.querySelector('.generated-toc');
+      if(existingGenerated) {
+        existingGenerated.remove();
+      }
+
+      // Add our generated TOC after the series nav (if present)
+      const wrapper = document.createElement('div');
+      wrapper.className = 'generated-toc';
+      wrapper.innerHTML = tocHTML;
+
+      // Insert after series nav or at the beginning
+      const seriesNav = tocContainer.querySelector('.series-mobile-nav');
+      if(seriesNav) {
+        seriesNav.parentNode.insertBefore(wrapper, seriesNav.nextSibling);
+      } else {
+        tocContainer.insertBefore(wrapper, tocContainer.firstChild);
+      }
+
+      console.log('Added generated TOC with', headers.length, 'headers');
+    }
+
+    // Generate TOC after page load and when content changes
+    if(document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', generateTOC);
+    } else {
+      generateTOC();
+    }
+
+    // Also regenerate after a short delay to catch any async content loading
+    setTimeout(generateTOC, 100);
+
+    // Regenerate TOC when mode tabs are clicked - use more specific detection
+    document.addEventListener('click', function(e) {
+      // Check if clicked element is a mode tab
+      if(e.target.classList.contains('ac-tab') && e.target.closest('.ac-modes')) {
+        console.log('Mode tab clicked, regenerating TOC...', e.target.textContent);
+        setTimeout(generateTOC, 100);
+      }
+    });
+
+    // Set up observer after a delay to ensure mode panels are ready
+    setTimeout(() => {
+      const observer = new MutationObserver(function(mutations) {
+        let shouldRegenerate = false;
+        mutations.forEach(function(mutation) {
+          if(mutation.type === 'attributes' && mutation.attributeName === 'style') {
+            const target = mutation.target;
+            if(target.hasAttribute('data-mode-panel')) {
+              console.log('Mode panel visibility changed:', target.getAttribute('data-title'));
+              shouldRegenerate = true;
+            }
+          }
+        });
+        if(shouldRegenerate) {
+          setTimeout(generateTOC, 100);
+        }
+      });
+
+      // Observe all mode panels
+      const modePanels = document.querySelectorAll('[data-mode-panel]');
+      console.log('Setting up observers for', modePanels.length, 'mode panels');
+      modePanels.forEach(panel => {
+        observer.observe(panel, { attributes: true, attributeFilter: ['style'] });
+      });
+    }, 200);
+
+    // Expose generateTOC globally for manual regeneration
+    window.regenerateTOC = generateTOC;
   })();
 </script>
 

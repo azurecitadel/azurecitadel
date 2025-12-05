@@ -1,0 +1,19 @@
+---
+title: "Run through the CI/CD workflow"
+date: 2025-10-10
+author: [ "Richard Cheney" ]
+description: "Make a new branch, commit and publish your changes, create a pull request, and then follow the approval workflow process."
+draft: false
+weight: 30
+menu:
+  side:
+    parent: alz-deploy
+    identifier: alz-deploy-cicd
+series:
+ - alz-deploy
+tabs:
+  - azure-landing-zone
+force_tabs: true
+---
+
+{{% shared-content "alz/deploy/cicd" %}}

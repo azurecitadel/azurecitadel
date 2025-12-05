@@ -4,6 +4,9 @@ author: [ "Mike Ormond" ]
 description: "Lab walkthrough of publishing a VM Offer"
 date: 2021-01-06
 weight: 40
+layout: series
+series:
+  - marketplace-vm-offer
 style: list
 menu:
   side:

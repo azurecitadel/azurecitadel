@@ -4,6 +4,8 @@ author: [ "Mike Ormond" ]
 description: "Use Shared Image Gallery to Publish"
 date: 2021-01-06
 weight: 40
+series:
+  - marketplace-vm-offer
 menu:
   side:
     parent: marketplace-vm-offer
@@ -115,17 +117,3 @@ If using the Shared Image Gallery approach, you will have created a managed VM I
 ## Resources
 
 * [Shared Image Galleries overview](https://docs.microsoft.com/azure/virtual-machines/shared-image-galleries)
-
----
-
-{{< raw >}}
-  <nav class="paginate-container" aria-label="Pagination">
-    <div class="pagination">
-      <a class="previous_page" rel="next" href="../vmoffer-test" aria-label="Previous Page">Test VM Image</a>
-      <!-- <span class="previous_page" aria-disabled="true">Previous</span> -->
-      <a class="text-gray-light" href="." aria-label="Top">VM Offer with SIG</a>
-      <a class="next_page" rel="next" href="../vmpublish" aria-label="Next Page">Publish VM Offer</a>
-      <!-- <span class="next_page" aria-disabled="true">Next</span> -->
-    </div>
-  </nav>
-{{< /raw >}}

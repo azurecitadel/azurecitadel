@@ -13,6 +13,8 @@ series:
   - pal
 aliases:
   - /pal/user
+tabs:
+  - portal
 ---
 
 ## In brief
@@ -34,7 +36,7 @@ The information here is lifted straight from the main documentation which is fou
 
 When you have access to the customer's resources, use the Azure portal, PowerShell, or the Azure CLI to link your Partner ID to your user ID. Link the Partner ID in each customer tenant.
 
-{{< modes default="Portal" >}}
+{{< modes >}}
 {{< mode title="Portal" >}}
 
 {{< flash >}}

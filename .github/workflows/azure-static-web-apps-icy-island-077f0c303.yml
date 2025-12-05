@@ -65,10 +65,10 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.90.1'
+          hugo-version: '0.123.7'
           extended: true
       - name: Build
-        run: hugo --minify
+        run: hugo
       - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

@@ -8,11 +8,9 @@ description: "Common lifecycle management areas that deal with state with refres
 weight: 8
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
-
 ---
 
 ## Overview

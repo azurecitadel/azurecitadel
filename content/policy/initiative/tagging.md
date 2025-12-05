@@ -4,6 +4,7 @@ date: 2019-05-21
 author: [ "Richard Cheney" ]
 description: "Enable default resource tagging without compromising innovation using the append and audit effects."
 weight: 5
+draft: true
 series:
  - policy
 menu:

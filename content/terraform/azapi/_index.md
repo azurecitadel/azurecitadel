@@ -4,6 +4,9 @@ description: "Bridge any gaps in the Terraform AzureRM provider (and the Go SDK 
 date: 2021-05-04
 draft: false
 weight: 50
+layout: series
+series:
+  - terraform-azapi
 menu:
   side:
     identifier: 'terraform-azapi'

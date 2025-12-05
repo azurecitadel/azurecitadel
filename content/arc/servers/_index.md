@@ -9,6 +9,9 @@ menu:
 aliases:
   - /arc/server
 weight: 3
+series:
+ - arc-servers
+layout: series
 ---
 
 ## Introduction

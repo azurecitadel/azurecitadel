@@ -5,6 +5,9 @@ description: "Lab walkthrough of publishing a Solution Template Offer"
 date: 2021-06-20
 weight: 50
 style: list
+layout: series
+series:
+  - marketplace-aast
 menu:
   side:
     parent: marketplace

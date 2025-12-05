@@ -5,6 +5,9 @@ description: "Lab walkthrough of publishing a Managed Application Offer"
 date: 2021-01-06
 weight: 60
 style: list
+layout: series
+series:
+  - marketplace-aama
 menu:
   side:
     parent: marketplace

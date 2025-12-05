@@ -1,13 +1,17 @@
 ---
 title: "Nesting Test"
 description: "Testing nested shortcodes"
+tabs:
+  - test1
+  - test2
+  - test3
 ---
 
 # Simple Nesting Test
 
 ## Test 1: Flash in Mode
 
-{{< modes default="Test1" >}}
+{{< modes >}}
 {{< mode title="Test1" >}}
 
 {{< flash >}}
@@ -21,7 +25,7 @@ Normal content here.
 
 ## Test 2: Details in Mode
 
-{{< modes default="Test2" >}}
+{{< modes >}}
 {{< mode title="Test2" >}}
 
 {{< details "Click to expand" >}}
@@ -36,7 +40,7 @@ This is **details** content with markdown.
 
 ## Test 3: Multiple Nesting
 
-{{< modes default="Test3" >}}
+{{< modes >}}
 {{< mode title="Test3" >}}
 
 {{< flash >}}

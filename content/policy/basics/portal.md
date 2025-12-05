@@ -5,7 +5,7 @@ author: [ "Tom Wilde" ]
 description: "Use a simple policy to stipulate the permitted regions for your deployed resources."
 weight: 1
 series:
- - policy
+ - policy-basics
 menu:
   side:
     parent: policy-basics

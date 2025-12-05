@@ -4,7 +4,7 @@ description: "Onboarding multiple Linux and WIndows servers with a service princ
 layout: single
 draft: true
 series:
- - arc-servers-hack-proctor
+ - arc-servers-previous-hack-proctor
 weight: 130
 url: /arc/servers/linux/proctor
 ---

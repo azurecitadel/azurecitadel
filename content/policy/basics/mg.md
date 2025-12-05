@@ -5,7 +5,7 @@ author: [ "Richard Cheney" ]
 description: "Step up a level using Management Groups and assigning a basic custom Deny initiative."
 weight: 4
 series:
- - policy
+ - policy-basics
 menu:
   side:
     parent: policy-basics

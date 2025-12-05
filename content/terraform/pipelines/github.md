@@ -7,10 +7,9 @@ description: "Learn about personal access tokens and some of the basics for work
 weight: 30
 menu:
   side:
-    parent: 'terraform-envs'
+    parent: terraform-pipelines
 series:
- - terraform-envs
-layout: single
+ - terraform-pipelines
 ---
 
 ## Overview

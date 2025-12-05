@@ -19,6 +19,18 @@
    <!-- Print stylesheet -->
    <link rel="stylesheet" href="{{ "stylesheets/print.css" | relURL }}" media="print">
 
+   <style>
+   /* Smooth transitions for flydown TOC */
+   #toc-flydown {
+     transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+   }
+   #toc-flydown.fading-out {
+     opacity: 0;
+     transform: translateY(-10px);
+     pointer-events: none;
+   }
+   </style>
+
    <script>(function(){try{document.documentElement.classList.add('js');document.documentElement.classList.add('htmljs');}catch(e){}})();</script>
 
    {{/* Tab + Mode shortcode assets */}}
@@ -48,5 +60,31 @@
       src="{{ $js.RelPermalink }}" defer>
       </script>
       {{ end }}
+
+   {{/* Mermaid support - only load if mermaid shortcode is used */}}
+   {{ if (findRE "{{<\\s*mermaid" .RawContent 1) }}
+   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+   <script>
+      document.addEventListener('DOMContentLoaded', function() {
+         mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.classList.contains('citadel-user-dark') ? 'dark' : 'default',
+            securityLevel: 'loose'
+         });
+      });
+   </script>
+   {{ end }}
+
+   {{/* Series page highlight support */}}
+   <style>
+   .box-highlight {
+      box-shadow: 0 0 8px rgba(38, 158, 134, 0.25) !important;
+      border: 1px solid rgba(38, 158, 134, 0.3) !important;
+   }
+   [data-color-mode="dark"] .box-highlight {
+      box-shadow: 0 0 8px rgba(51, 197, 170, 0.25) !important;
+      border: 1px solid rgba(51, 197, 170, 0.3) !important;
+   }
+   </style>
 
 </head>

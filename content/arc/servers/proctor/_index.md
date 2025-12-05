@@ -2,6 +2,7 @@
 title: "Proctor guides"
 description: "Proctor content for the two day Azure Arc for Servers partner hack."
 draft: false
+layout: series
 series:
   - arc-servers-proctor
 aliases:

@@ -8,11 +8,9 @@ description: "Step through an example of importing an existing resource into Ter
 weight: 9
 menu:
   side:
-    parent: 'terraform-basics'
+    parent: terraform-basics
 series:
  - terraform-basics
-layout: single
-
 ---
 
 ## Overview

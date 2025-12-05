@@ -1,3 +1,7 @@
-<div class="ac-tabs" data-tabs {{ with .Get "id" }}data-tabs-id="{{ . }}"{{ end }} {{ with .Get "default" }}data-default="{{ . }}"{{ end }}>
+{{/* New priority system: force_tabs overrides user preferences, otherwise user prefs take priority */}}
+{{ $pageTabDefaults := .Page.Params.tabs }}
+{{ $forceTabs := .Page.Params.force_tabs }}
+
+<div class="ac-tabs" data-tabs {{ with .Get "id" }}data-tabs-id="{{ . }}"{{ end }} {{ if $pageTabDefaults }}data-page-defaults="{{ delimit $pageTabDefaults "," }}"{{ end }} {{ if $forceTabs }}data-force-tabs="true"{{ end }}>
   {{ .Page.RenderString .Inner }}
 </div>

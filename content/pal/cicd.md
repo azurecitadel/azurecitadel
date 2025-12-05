@@ -11,6 +11,9 @@ menu:
     identifier: pal-cicd
 series:
   - pal
+tabs:
+  - github
+  - azure-cli
 ---
 
 ## Introduction
@@ -27,7 +30,7 @@ With OpenID Connect the service principal uses a federated credential to define 
     ℹ️ If you don't know the appId then you can search the [Enterprise apps](https://entra.microsoft.com/#blade/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade) for the service principal's objectId and retrieve the appId from there.
 1. Click on **Certificates and secrets** to view the federated credential's **Subject identifier or claims matching expression**
 
-    {{< modes default="GitHub" >}}
+    {{< modes >}}
 {{< mode title="GitHub" >}}
 
 ![App registration's federated credential for a GitHub repo's main branch](/pal/images/appreg-fedcred.png)
@@ -58,7 +61,7 @@ This step assumes you have the permissions to create, commit, and run workflows 
 1. Create a new workflow, e.g. `.github/workflows/pal.yml`
 1. Add in the example YAML workflow
 
-    {{< modes default="Azure CLI" >}}
+    {{< modes >}}
 {{< mode title="Azure CLI" >}}
 
 ```yaml

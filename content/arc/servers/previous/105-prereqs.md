@@ -7,9 +7,8 @@ draft: true
 menu:
   side:
     parent: arc-servers
-    identifier: arc-servers-prereqs
 series:
- - arc-servers
+ - arc-servers-previous
 aliases:
  - /arc/prereqs
 weight: 110

@@ -1,7 +1,10 @@
 ---
 title: "Azure Lighthouse"
-description: "Azure Lighthouse can be very useful, but also comes with some limitations that you should be aware of. Here are some useful"
+description: "Azure Lighthouse can be very useful, but also comes with some limitations that you should be aware of. Here are some useful examples for partners to help manage customer environments and be recognised for their influence."
 draft: false
+layout: series
+series:
+  - lighthouse
 menu:
   side:
     identifier: lighthouse

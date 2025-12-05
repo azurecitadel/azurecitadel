@@ -1,0 +1,34 @@
+{{/*
+  Partial template for mobile series navigation
+
+  Requires series-navigation.html to have been called first to set scratch variables:
+  - wholeSeries
+  - currentIndex
+*/}}
+
+{{ if isset .Params "series" }}
+    {{ $wholeSeries := index .Scratch.Values "wholeSeries" }}
+    {{ $currentIndex := index .Scratch.Values "currentIndex" }}
+    {{ if $wholeSeries }}
+    <div class="series-mobile-nav pb-3 mb-3 border-bottom color-border-muted" style="display: none;">
+        <div class="f6 text-bold mb-2">{{ .Title }}</div>
+        <nav class="series-nav-list">
+            {{ range $index, $page := $wholeSeries }}
+                {{ $status := "future" }}
+                {{ if lt $index $currentIndex }}{{ $status = "completed" }}{{ end }}
+                {{ if eq $index $currentIndex }}{{ $status = "current" }}{{ end }}
+                <div class="series-nav-item mb-1" style="display: flex; align-items: center; gap: 8px;">
+                    <div class="progress-dot progress-dot--{{ $status }}"
+                         style="width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;">
+                    </div>
+                    {{ if eq $index $currentIndex }}
+                        <span class="text-bold">{{ $page.Title }}</span>
+                    {{ else }}
+                        <a href="{{ $page.Permalink }}" class="text-small">{{ $page.Title }}</a>
+                    {{ end }}
+                </div>
+            {{ end }}
+        </nav>
+    </div>
+    {{ end }}
+{{ end }}

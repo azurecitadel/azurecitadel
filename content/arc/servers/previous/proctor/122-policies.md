@@ -4,7 +4,7 @@ description: "Explore some of the other built-in and custom policies for Azure A
 layout: single
 draft: true
 series:
- - arc-servers-hack-proctor
+ - arc-servers-previous-hack-proctor
 weight: 122
 url: /arc/servers/policies/proctor
 ---
