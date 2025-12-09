@@ -443,8 +443,9 @@
       });
 
       // Build TOC HTML
-      let tocHTML = '<nav role="navigation"><ul>';
+      let tocHTML = '<nav role="navigation">';
       let currentLevel = 0;
+      let firstHeader = true;
 
       headers.forEach((header, index) => {
         const level = parseInt(header.tagName.charAt(1));
@@ -452,9 +453,13 @@
         const id = header.id; // ID is now guaranteed to exist
 
         // Handle nesting levels
-        if(level > currentLevel) {
+        if(firstHeader) {
+          tocHTML += '<ul>';
+          currentLevel = level;
+          firstHeader = false;
+        } else if(level > currentLevel) {
           for(let i = currentLevel; i < level; i++) {
-            if(i > 0) tocHTML += '<ul>';
+            tocHTML += '<ul>';
           }
         } else if(level < currentLevel) {
           for(let i = level; i < currentLevel; i++) {
@@ -475,29 +480,31 @@
       });
 
       // Close remaining ul tags
-      for(let i = 0; i < currentLevel; i++) {
+      for(let i = 1; i < currentLevel; i++) {
+        tocHTML += '</ul>';
+      }
+      if(!firstHeader) {
         tocHTML += '</ul>';
       }
       tocHTML += '</nav>';
 
-      // Find any existing generated TOC and remove it
-      const existingGenerated = tocContainer.querySelector('.generated-toc');
-      if(existingGenerated) {
-        existingGenerated.remove();
+      // Preserve series navigation but clear everything else
+      const seriesNav = tocContainer.querySelector('.series-mobile-nav');
+      const seriesNavHTML = seriesNav ? seriesNav.outerHTML : '';
+      
+      // Clear the entire TOC container
+      tocContainer.innerHTML = '';
+      
+      // Restore series navigation if it existed
+      if(seriesNavHTML) {
+        tocContainer.innerHTML = seriesNavHTML;
       }
 
-      // Add our generated TOC after the series nav (if present)
+      // Add our generated TOC
       const wrapper = document.createElement('div');
       wrapper.className = 'generated-toc';
       wrapper.innerHTML = tocHTML;
-
-      // Insert after series nav or at the beginning
-      const seriesNav = tocContainer.querySelector('.series-mobile-nav');
-      if(seriesNav) {
-        seriesNav.parentNode.insertBefore(wrapper, seriesNav.nextSibling);
-      } else {
-        tocContainer.insertBefore(wrapper, tocContainer.firstChild);
-      }
+      tocContainer.appendChild(wrapper);
 
       console.log('Added generated TOC with', headers.length, 'headers');
     }

@@ -4,7 +4,7 @@ date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "Browse the Azure Landing Zone oOnce the workflow has run"
 draft: true
-weight: 40
+weight: 90
 menu:
   side:
     parent: alz-deploy

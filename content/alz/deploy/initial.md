@@ -29,20 +29,4 @@ On this page you will:
 
     Add a config based on the examples provided for the Azure Verified Modules in the Terraform registry.
 
-1. Locally test your config will pass the CI tests
-
-    The CI workflow will test that your config meets minimum standards, and will pass the format, will initialise the providers, and passes the validation. You will also test it will create a terraform plan.
-
-    Override the backend with a terraform_override.tf file and test locally.
-
-    {{< flash >}}
-⚠️ You **must not** attempt to run terraform apply locally at his point. You will use the CI/CD workflow in the next page instead.
-{{< /flash >}}
-
 {{% shared-content "alz/deploy/initial" %}}
-
-## References
-
-- <https://aka.ms/alz>
-- <https://aka.ms/alz/accelerator/docs>
-- <https://github.com/Azure/alz-terraform-accelerator>
