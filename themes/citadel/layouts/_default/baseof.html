@@ -407,6 +407,9 @@
         // Exclude headers inside the TOC container itself
         if(header.closest('.toc')) return false;
 
+        // Exclude headers inside series tiles (box elements)
+        if(header.closest('.box')) return false;
+
         // Check if header is inside a mode panel
         const modePanel = header.closest('[data-mode-panel]');
         if(modePanel) {
@@ -442,14 +445,30 @@
         }
       });
 
+      // Normalize levels for series pages to avoid double indentation
+      // If we have multiple H2s after a "Content" H2, treat subsequent H2s as H3s
+      let hasContentHeader = false;
+      const normalizedHeaders = headers.map(header => {
+        const level = parseInt(header.tagName.charAt(1));
+        const text = header.textContent.trim();
+
+        if(level === 2 && text.toLowerCase() === 'content') {
+          hasContentHeader = true;
+          return { header, level, text };
+        } else if(hasContentHeader && level === 2 && text.toLowerCase() !== 'content') {
+          // Convert subsequent H2s to H3 level for TOC purposes
+          return { header, level: 3, text };
+        } else {
+          return { header, level, text };
+        }
+      });
+
       // Build TOC HTML
       let tocHTML = '<nav role="navigation">';
       let currentLevel = 0;
       let firstHeader = true;
 
-      headers.forEach((header, index) => {
-        const level = parseInt(header.tagName.charAt(1));
-        const text = header.textContent.trim();
+      normalizedHeaders.forEach(({header, level, text}, index) => {
         const id = header.id; // ID is now guaranteed to exist
 
         // Handle nesting levels
@@ -491,10 +510,10 @@
       // Preserve series navigation but clear everything else
       const seriesNav = tocContainer.querySelector('.series-mobile-nav');
       const seriesNavHTML = seriesNav ? seriesNav.outerHTML : '';
-      
+
       // Clear the entire TOC container
       tocContainer.innerHTML = '';
-      
+
       // Restore series navigation if it existed
       if(seriesNavHTML) {
         tocContainer.innerHTML = seriesNavHTML;
