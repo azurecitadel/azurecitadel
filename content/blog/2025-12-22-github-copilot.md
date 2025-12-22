@@ -14,6 +14,16 @@ GitHub Copilot CLI provides an interactive terminal assistant that helps with so
 
 I am often working with the newer technologies as part of my day job working with partner and I need to make sure that my references are fully up to date. After installing GitHub Copilot I will integrate with the Microsoft Learn MCP server to make sure that is the case, rather than relying on potentially stale training data.
 
+## Prerequisites
+
+It is assumed that you have
+
+- curl
+- jq
+- gh
+
+It is also assumed that you are authenticated to GitHub. (Check with `gh auth status`.)
+
 ## Install
 
 ### Node.js and nvm
@@ -74,13 +84,7 @@ This guide is based on installing nvm and Node.js into [WLS2](https://learn.micr
     copilot
     ```
 
-1. Authenticate to the GitHub MCP Server
-
-    ```bash
-    /login
-    ```
-
-    Follow the guided instructions.
+    If you are already using the GitHub CLI (`gh`) and you are authenticated (`gh auth status`) then the GitHub Copilot CLI should use the same credentials.
 
 ## Adding the Microsoft Learn MCP Server
 
@@ -115,23 +119,30 @@ In this section we will look at the process to add MCP servers. Here we'll add t
 
 1. Save the configuration
 1. Use `q` to quit the wizard
+1. View the MCP config file
 
-The will create a ~/.copilot/mcp-config.json file.
+    The steps above will create a ~/.copilot/mcp-config.json file.
 
-```json
-{
-  "mcpServers": {
-    "Microsoft-Learn": {
-      "type": "http",
-      "url": "https://learn.microsoft.com/api/mcp",
-      "headers": {},
-      "tools": [
-        "*"
-      ]
+    ```bash
+    jq . ~/.copilot/mcp-config.json
+    ```
+
+    Example output:
+
+    ```json
+    {
+      "mcpServers": {
+        "Microsoft-Learn": {
+          "type": "http",
+          "url": "https://learn.microsoft.com/api/mcp",
+          "headers": {},
+          "tools": [
+            "*"
+          ]
+        }
+      }
     }
-  }
-}
-```
+    ```
 
 ## Creating Copilot instructions
 
@@ -164,4 +175,4 @@ After making configuration changes, restart your terminal session or reload your
 
     Use `source ~/.zshrc` for zsh.
 
-You're now ready to use GitHub Copilot CLI with Microsoft Learn integration!
+You're now ready to use GitHub Copilot CLI with full Microsoft Learn integration!
