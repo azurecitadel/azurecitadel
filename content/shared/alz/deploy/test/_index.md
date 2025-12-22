@@ -35,7 +35,11 @@ Before we progress we want to make sure that your config will pass the CI checks
 {{% modes %}}
 {{% mode title="Local backend" %}}
 
-Using a local backend is the easiest approach for basic testing of a config. It will check to ensure that a plan can be created, and nothing more.
+{{< flash >}}
+Using a local backend is the easiest approach for basic testing of a config. On the positive side it will check to ensure that a plan can be created - and nothing more. That is sufficient to be able to commit and publish a branch assuming the fmt and validate checks have also been met.
+
+On the negative side you do not get a true idea what the proposed changes will be as you are not using the same state file as the CI/CD workflows. For that you need the remote backend.
+{{< /flash >}}
 
 This approach does not need any RBAC role assignment or network settings on the storage account to work as you are only creating a local terraform.tfstate file.
 
@@ -67,7 +71,73 @@ This approach does not need any RBAC role assignment or network settings on the 
 
     Regardless of which approach you use, make sure that you set the subscription ID or the name of the subscription.
 
+{{% /mode %}}
+{{% mode title="Remote backend" %}}
 
+{{< flash >}}
+Using the same remote backend as the CI/CD pipelines is a fantastic way to make changes to a config locally and then view the diff plan created by terraform.
+
+Setting this up takes a little more work and access but it is worth the effort.
+{{< /flash >}}
+{{< flash "warn" >}}
+⚠️ Note that this option requires a privileged role. The RBAC role assignment and storage account networking changes weaken security. Check the warnings against those steps.
+{{< /flash >}}
+
+1. Set the variables using the GitHub Actions variables
+
+    You will need to be authenticated in the GitHub CLI (`gh auth status`) and you must also have jq installed.
+
+    ```shell
+    vars=$(gh variable list --json name,value | jq 'map({(.name): .value}) | add')
+    sub="$(jq -r .AZURE_SUBSCRIPTION_ID <<< $vars)"
+    rg="$(jq -r .BACKEND_AZURE_RESOURCE_GROUP_NAME <<< $vars)"
+    sa="$(jq -r .BACKEND_AZURE_STORAGE_ACCOUNT_NAME <<< $vars)"
+    container="$(jq -r .BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME <<< $vars)"
+    ```
+
+1. Create the override file
+
+    ```shell
+    cat > terraform_override.tf << EOF
+    # Overrides to enable local terraform plan
+
+    terraform {
+      backend "azurerm" {
+        use_azuread_auth     = true
+        subscription_id      = "$sub"
+        resource_group_name  = "$rg"
+        storage_account_name = "$sa"
+        container_name       = "$container"
+        key                  = "terraform.tfstate"
+      }
+    }
+
+    provider "azurerm" {
+      subscription_id = "$(jq -r .AZURE_SUBSCRIPTION_ID <<< $vars)"
+    }
+    EOF
+    echo "Created terraform_override.tf using the GitHub Actions variables"
+    ```
+
+1. Assign the Storage Blob Data Reader role
+
+    ⚠️ This role will give access to view any sensitive values stored in the state file.
+
+    ```shell
+    id="/subscriptions/$sub/resourceGroups/$rg/providers/Microsoft.Storage/storageAccounts/$sa"
+    scope="$id/blobServices/default/containers/$container"
+    az role assignment create --role "Storage Blob Data Reader" --scope $scope --assignee $(az ad signed-in-user show --query id -otsv)
+    ```
+
+1. Allow my public IP access to the storage account
+
+    ⚠️ This increases the attack surface of the storage account by making it vulnerable to potential IP address spoofing attacks.
+
+    ```shell
+    address=$(curl -s ipinfo.io/ip) # address=$(curl -s ipinfo.io/ip | cut -d. -f1-2).0.0/16
+    az storage account update --ids "$id" --public-network-access Enabled --default-action Deny
+    az storage account network-rule add --subscription "$sub" --resource-group "$rg" --account-name  "$id" --ip-address "$address"
+    ```
 
 {{% /mode %}}
 {{% /modes %}}
@@ -127,17 +197,22 @@ Run a plan using the local backend override.
 terraform plan
 ```
 
-    The output will show that terraform plans to create over 600 resources.
-
-If your ID does **not** have that access the the plan should correctly fail. If so then skip this step and move onto the next page. When you commit your changes and create your pull request then the terraform plan will be tested in the CI workflow.
+The output will show that terraform plans to create over 600 resources.
 
 {{< flash >}}
-Note that running `terraform plan` locally just checks the code and is not using the remote state in the storage account as we overrode the backend to use a local backend instead.
+Note that running `terraform plan` locally just checks the code and is not using the remote state in the storage account as we overrode the backend to use a local backend instead..
 
 The terraform plan outputs in the CI/CD pipelines will provide the accurate and definitive diff and should always be properly reviewed.
 {{< /flash >}}
 {{% /mode %}}
 {{% mode title="Remote backend" %}}
-If you have configured read access to the
+Run a plan using the remote state file.
+
+```shell
+terraform plan -lock=false
+```
+
+Note that the Storage Blob Data Reader role cannot create leases on the blobs which is the mechanism used for state locking.
+
 {{% /mode %}}
 {{% /modes %}}
