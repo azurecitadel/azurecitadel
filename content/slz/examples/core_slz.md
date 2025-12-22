@@ -79,7 +79,7 @@ Note:
 
 As per the Azure Landing Zone example, the path and ref arguments point at a semantic version release of the Microsoft maintained platform/slz library.
 
-```terraform
+```ruby
 provider "alz" {
   library_overwrite_enabled = true
   library_references = [

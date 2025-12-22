@@ -5,6 +5,7 @@ draft: false
 layout: series
 series:
  - alz-examples
+weight: 9
 menu:
   side:
     parent: alz
@@ -21,6 +22,6 @@ Not sure which one to choose? The [Azure Landing Zone library with overrides](/a
 
 This would be our default recommendation for standard Azure Landing Zone scenarios.
 
-### Sovereignty
+## Sovereignty
 
 Also check out our dedicated page for [sovereignty examples](/slz/examples).
