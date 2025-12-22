@@ -3,10 +3,6 @@ headless: true
 title: "Azure Landing Zones - Initial ALZ config for management and management groups"
 ---
 
-{{< flash "danger" >}}
-Placeholder commands. Extend with images / videos once tested. Also provide CLI commands in a tabs. Could also mode the alz v slz.
-{{< /flash >}}
-
 ## Overview
 
 On this page you will:
