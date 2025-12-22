@@ -65,7 +65,7 @@ This is the standard set of management groups and their associated archetypes.
 
 The path and ref arguments point at a semantic version release of the Microsoft maintained [platform/alz](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.09.3/platform/alz) library.
 
-```json
+```ruby
 provider "alz" {
   library_overwrite_enabled = true
   library_references = [

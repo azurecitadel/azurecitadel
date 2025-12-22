@@ -5,6 +5,7 @@ draft: false
 layout: series
 series:
   - alz-accelerator
+weight: 1
 menu:
   side:
     parent: alz

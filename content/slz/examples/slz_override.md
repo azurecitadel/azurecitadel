@@ -13,13 +13,6 @@ series:
 highlight: true
 ---
 
-
-{{< flash "danger" >}}
-Need to rework this. See [here](https://azure.github.io/Azure-Landing-Zones/accelerator/startermodules/terraform-platform-landing-zone/options/slz/). It is designed to overwrite an existing local library.
-
-Run as a two step?
-{{< /flash >}}
-
 ## Description
 
 This configuration stacks a local override library in `./lib` which is stacked on top of the Sovereign Landing Zone.
@@ -32,6 +25,12 @@ The local library contains a set of uniquely named archetypes (using override fi
 
 {{% shared-content "alz/local_library" %}}
 
+## Extend the library for Sovereign Landing Zone
+
+{{% shared-content "alz/local_library/add_slz" %}}
+
+Note that the architecture file is still called alz_custom.alz_architecture_definition.yaml and the architecture name is **alz_custom**. The reason for this is that the Sovereign Landing Zone scenario is designed to handle brownfield scenarios.
+
 ## Architecture and Archetypes
 
 The architecture name is `slz_custom`, as defined in the local `slz_custom.alz_architecture_definition.yaml` that you'll find in `lib/architecture_definitions`.
@@ -39,49 +38,54 @@ The architecture name is `slz_custom`, as defined in the local `slz_custom.alz_a
 {{< mermaid >}}
 flowchart TD
   slz["Sovereign Landing Zone
-(root, sovereign_root)"]
+(root_custom, sovereign_root_custom)"]
   slz --> decommissioned
   decommissioned["Decommissioned
-(decommissioned)"]
+(decommissioned_custom)"]
   slz --> landingzones
   landingzones["Landing zones
-(landing_zones)"]
+(landing_zones_custom)"]
   landingzones --> confidential_corp
   confidential_corp["Confidential Corp
-(confidential_corp)"]
+(confidential_corp_custom)"]
   landingzones --> confidential_online
   confidential_online["Confidential Online
-(confidential_online)"]
+(confidential_online_custom)"]
   landingzones --> corp
   corp["Corp
-(corp)"]
+(corp_custom)"]
   landingzones --> online
   online["Online
-(online)"]
+(online_custom)"]
   landingzones --> public
   public["Public
-(public)"]
+(public_custom)"]
   slz --> platform
   platform["Platform
-(platform)"]
+(platform_custom)"]
   platform --> connectivity
   connectivity["Connectivity
-(connectivity)"]
+(connectivity_custom)"]
   platform --> identity
   identity["Identity
-(identity)"]
+(identity_custom)"]
   platform --> management
   management["Management
-(management)"]
+(management_custom)"]
   platform --> security
   security["Security
-(security)"]
+(security_custom)"]
   slz --> sandbox
   sandbox["Sandbox
-(sandbox)"]
+(sandbox_custom)"]
 {{< /mermaid >}}
 
-Note that the architecture refers to the uniquely named custom override archetypes. Each archetype shortcode is now, for example, **corp_custom** rather than **corp**. This relates to the corresponding files in the `lib/archetype_definitions` folder, e.g. `corp_custom.alz_archetype_override.yaml`.
+Note the Sovereign Landing Zone at the top has two archetypes assigned:
+
+- root_custom
+- sovereign_root_custom
+
+and you will find override files for both in the lib's archetype_definitions folder.
 
 ## Provider block
 
@@ -102,32 +106,33 @@ provider "alz" {
 
 The local metadata filename is `lib/alz_library_metadata.json`.
 
-{{< code lang="json" url="<https://github.com/Azure/alz-terraform-accelerator/raw/refs/heads/main/templates/platform_landing_zone/lib/alz_library_metadata.json>" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/alz_library_metadata.json>" >}}
 
-The dependency is also semantically versioned. In this case it is again dependant on <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.09.3/platform/alz>.
+The dependency is also semantically versioned. It is dependant on <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz>, which is itself stacked on top of <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.9.3/platform/alz>.
 
-If you need to pull in a more recent version of the Azure Landing Zone library then you would update the ref here.
+If you need to pull in a more recent version of the Sovereign Landing Zone library then you would update the ref here.
 
 See the previous page for more detail on the architecture, archetypes, and assets for the main Azure Landing Zone library repo.
 
 ## Override files
 
-The individual override files are in `lib/archetype_definitions`.  For example, the one for corp is named `corp_custom.alz_archetype_override.yaml`, and is shown below.
+The individual override files are in `lib/archetype_definitions`.  For example, the one for confidential_online is named `confidential_online_custom.alz_archetype_override.yaml`, and is shown below.
 
-{{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/lib/archetype_definitions/corp_custom.alz_archetype_override.yaml>" >}}
+{{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2025.10.1/platform/slz/archetype_definitions/confidential_online.alz_archetype_definition.json>" >}}
 
 These are used to define a custom delta against the base archetype. The most common is to remove unwanted policy assignments, or add one that is not part of the default archetype.
 
 ## Removing assignments
 
-Remember that the [Azure Landing Zone library](https://aka.ms/alz/library) details the available archetypes and assets when you go to `platform/alz`, and you can select the tag for specific versions.
+Remember that the the available archetypes and assets may now being pulled from three libraries - your custom library in (./lib), the Sovereign Landing Zone library, and the underlying Azure Landing Zones library. You can see the archetype definitions in
 
-The base archetype specified in the example override file is `corp`. You'll find the `corp.alz_archetype_definition.json` file in the `archetype_definitions` folder. Here it is.
+- <https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz#archetypes>
+- <https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz#archetypes>
 
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2025.09.3/platform/alz/archetype_definitions/corp.alz_archetype_definition.json>" >}}
+And don't forget to change **main** in the drop down to a specific version if not using the latest.
 
 ## Adding assignments
 
-Return back to the [platform/alz](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz) folder, then you can browse the policy_assignments. The naming convention includes the name before the first full stop or period.
+In the previous example we looked at adding an assignment from the main library, which you can still do.
 
-For example, the name for the `Enforce-TLS-SSL-Q225.alz_policy_assignment.json` policy would be `Enforce-TLS-SSL-Q225`. You could add this to the override if you wanted to assign that policy initiative to enforce encryption in flight for a set of services.
+In addition, you now you have the ability to create your own assets in the local library and adding those to existing archetypes, or create new
