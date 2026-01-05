@@ -1,10 +1,10 @@
 ---
-title: "Policies and Roles"
+title: "Policies, Assignments and Roles"
 date: 2025-11-20
 author: [ "Richard Cheney" ]
 description: "Documentation for Azure Policy definitions, initiatives, assignments, and custom role definitions within the Sovereign Landing Zones Library."
-weight: 30
-draft: true
+weight: 20
+draft: false
 menu:
   side:
     parent: slz-library
@@ -13,4 +13,4 @@ series:
  - slz-library
 ---
 
-{{% shared-content "alz/library/policies_and_roles" %}}
+{{% shared-content "alz/library/assets" %}}

@@ -138,6 +138,12 @@ The architecture files are uniquely identified and standalone. When you specify 
 
 Default policy values are defined in [alz_policy_default_values.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/alz_policy_default_values.json).
 
+- Add allowed_locations as required by the SLZ policy
+
+    ```ruby
+    "allowed_locations" = jsonencode({ value = ["westeurope", "northeurope"] })
+    ```
+
 {{< details "SLZ Policy Default Values" >}}
 {{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/alz_policy_default_values.json>" >}}
 {{< /details >}}
