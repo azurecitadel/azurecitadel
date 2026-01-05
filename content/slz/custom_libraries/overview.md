@@ -1,9 +1,9 @@
 ---
-title: "Library System Overview"
+title: "Overview of Libraries"
 date: 2025-11-20
 author: [ "Richard Cheney" ]
 description: "Introduction to the Azure Landing Zones Library system, its components, and how they work together to provide standardized governance for sovereign environments."
-draft: true
+draft: false
 weight: 10
 menu:
   side:
@@ -13,4 +13,35 @@ series:
  - slz-library
 ---
 
-{{% shared-content "alz/library" %}}
+{{% shared-content "alz/library/overview/intro" %}}
+
+## Library structure
+
+{{< mermaid >}}
+---
+title: Azure Landing Zone structure
+---
+
+graph TD
+  M([Metadata])
+  A([Architecture])
+  V([Policy Default Values])
+
+  A --> AT[Archetype]
+  A --> AO(Archetype Overrides)
+  AO --> AT
+
+  AT --> PA[Policy Assignments]
+  AT --> PS[Policy Set Definitions]
+  AT --> PD[Policy Definitions]
+  AT --> RD[Role Definitions]
+
+{{< /mermaid >}}
+
+Note that there can be multiple of all files. The bottom row are collectively called assets.
+
+{{% shared-content "alz/library/overview/body" %}}
+
+## Next
+
+We'll look at the example BIO custom library for The Netherlands.

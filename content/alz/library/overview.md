@@ -1,16 +1,16 @@
 ---
-title: "Library System Overview"
+title: "Library overview"
 date: 2025-11-20
 author: [ "Richard Cheney" ]
-description: "Introduction to the Azure Landing Zones Library system, its components, and how they work together to provide standardized governance."
-weight: 10
-draft: true
+description: "Understand the Azure Landing Zones Library system construct, assets, and design principles in extensible and versioned use."
+weight: 20
+draft: false
 menu:
   side:
     parent: alz-library
-    identifier: alz-library-overview
+    identifier: alz-library-architecture
 series:
  - alz-library
 ---
 
-{{% shared-content "alz/library" %}}
+{{% shared-content "alz/library/overview" %}}
