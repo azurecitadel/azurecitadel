@@ -81,19 +81,13 @@ The architecture definitions finally bring everything together, defining the man
 
 This is the default architecture file used in the main Azure Landing Zone platform library.
 
-{{< mermaid >}}
-flowchart LR
-    subgraph alz["alz"]
-        alz_box["alz"]
-    end
-{{< /mermaid >}}
-
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/heads/main/platform/alz/architecture_definitions/alz.alz_architecture_definition.json>" >}}
 
 {{< flash >}}
 
 - The architecture name here is **alz**, must be unique, and is used as the value of the architecture_name in the [avm-ptn-alz Terraform module](https://registry.terraform.io/modules/Azure/avm-ptn-alz/azurerm/latest/examples/default).
 - There is usually a maximum of one architecture file in a library.
+- The **exists** boolean is used to determine whether the management group needs to be created, or if it should already exist and therefore the creation steps should be skipped.
 {{< /flash >}}
 
 ### Architecture example #2: [alz_custom](https://github.com/Azure/alz-terraform-accelerator/blob/main/templates/platform_landing_zone/lib/architecture_definitions/alz_custom.alz_architecture_definition.yaml)
