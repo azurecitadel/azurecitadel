@@ -1,8 +1,8 @@
 ---
-title: "Overview of Libraries"
-date: 2025-11-20
+title: "What is a library?"
+date: 2026-01-07
 author: [ "Richard Cheney" ]
-description: "Introduction to the Azure Landing Zones Library system, its components, and how they work together to provide standardized governance for sovereign environments."
+description: "Overview of the Azure Landing Zones Library system."
 draft: false
 weight: 10
 menu:

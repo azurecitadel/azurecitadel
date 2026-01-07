@@ -17,7 +17,15 @@ This page will cover the remaining files in the library which are located in the
 
 There needs to be a single metadata file per library.
 
-`./alz_library_metadata.json`
+| | |
+| --- | --- |
+| Folder | |
+| Filename | **alz_library_metadata.json** |
+| Formats | JSON only |
+| Examples | [Azure Landing Zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz) |
+| | [Sovereign Landing Zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz) |
+| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio) |
+| Documentation | [Metadata](https://azure.github.io/Azure-Landing-Zones-Library/assets/metadata) |
 
 {{< details "Metadata schema" >}}
 [Azure/Azure-Landing-Zones-Library/blob/main/schemas/library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/schemas/library_metadata.json)
@@ -76,7 +84,15 @@ This is the default metadata file for the local library in `./lib` when stacked 
 
 There can be an optional Policy Default Values file per library.
 
-`./alz_policy_default_values.json`
+| | |
+| --- | --- |
+| Folder | |
+| Filename | **alz_policy_default_values.json** |
+| Formats | JSON or YAML |
+| Examples | [Azure Landing Zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz) |
+| | [Sovereign Landing Zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz) |
+| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio) |
+| Documentation | [Policy Assignment Default Values](https://azure.github.io/Azure-Landing-Zones-Library/assets/policy-default-values) |
 
 {{< details "Default Policy Values schema" >}}
 [Azure/Azure-Landing-Zones-Library/blob/main/schemas/default_policy_values.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/schemas/default_policy_values.json)

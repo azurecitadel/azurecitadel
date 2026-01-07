@@ -16,11 +16,19 @@ Those three constructs are:
 - **Archetype overrides**: These define new archetypes as a delta from a base archetype definition.
 - **Architecture**: Define a management group hierarchy and the array of archetypes
 
-## Archetype
+## Archetypes
 
 The assets in a library don't do anything unless they are grouped into archetypes and used within an architecture definition.
 
-`archetype_definitions/<name>.alz_archetype_definition.json`
+| | |
+| --- | --- |
+| Folder | **archetype_definitions** |
+| Filename | **\<name>.alz_archetype_definition.json** |
+| Formats | JSON or YAML |
+| Examples | [Azure Landing Zone archetypes](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/archetype_definitions) |
+| | [Sovereign Landing Zone archetypes](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz/archetype_definitions) |
+| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/archetype_definitions) |
+| Documentation | [Archetype Definitions](https://azure.github.io/Azure-Landing-Zones-Library/assets/archetypes) |
 
 {{< details "Archetype Definition schema" >}}
 [Azure/Azure-Landing-Zones-Library/schemas/archetype_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/schemas/archetype_definition.json)
@@ -44,7 +52,14 @@ The assets in a library don't do anything unless they are grouped into archetype
 
 Archetype overrides define a delta against a base archetype, which add significant flexibility. Overrides are not intended for use in centralised libraries - they are more commonly used in local libraries so that end customers can add or remove from archetypes.
 
-`archetype_definitions/<name>.alz_archetype_override.json`
+| | |
+| --- | --- |
+| Folder | **archetype_definitions** |
+| Filename | **\<name>.alz_archetype_override.json** |
+| Formats | JSON or YAML |
+| Examples | [Azure Landing Zone Accelerator's local lib template](https://github.com/Azure/alz-terraform-accelerator/tree/main/templates/platform_landing_zone/lib/archetype_definitions) |
+| | [Sovereign Landing Zone Accelerator's local lib template delta](https://github.com/Azure/alz-terraform-accelerator/tree/main/templates/platform_landing_zone/examples/slz/lib/archetype_definitions) |
+| Documentation | [Archetype Overrides](https://azure.github.io/Azure-Landing-Zones-Library/assets/archetype-overrides/) |
 
 {{< details "Archetype Override schema" >}}
 [Azure/Azure-Landing-Zones-Library/schemas/archetype_override.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/schemas/archetype_override.json)
@@ -70,7 +85,15 @@ This is the default override file created by the accelerator in the local librar
 
 The architecture definitions finally bring everything together, defining the management group hierarchy, the IDs and displayNames, and the array of archetypes to be used at each scope point.
 
-`architecture_definitions/<name>.alz_architecture_definition.json`
+| | |
+| --- | --- |
+| Folder | **architecture_definitions** |
+| Filename | **\<name>.alz_architecture_definition.json** |
+| Formats | JSON or YAML |
+| Examples | [Azure Landing Zone architecture](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/architecture_definitions) |
+| | [Sovereign Landing Zone architecture](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz/architecture_definitions) |
+| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/architecture_definitions) |
+| Documentation | [Architectures](https://azure.github.io/Azure-Landing-Zones-Library/assets/architectures/) |
 
 {{< details "Architecture Definition schema" >}}
 [Azure/Azure-Landing-Zones-Library/schemas/architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/schemas/architecture_definition.json)
