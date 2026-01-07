@@ -8,11 +8,24 @@ description: "Documentation for Azure Policy definitions, initiatives, assignmen
 
 The core assets in a library are the definitions and assignments for Azure Policy, and the custom role definitions for RBAC. These will be grouped together into archetypes on the next page, but let's explore these first.
 
+For each asset type we will describe the recommended folder name, the required naming convention, the supported file formats and link through to the Azure Landing Zone libraries set of assets as a reference point.
+
+You will also find one or more examples based on a mix of the platform libraries (Azure Landing Zone, Sovereign Landing Zone and Azure Monitoring Baseline Alerts) and an example Sovereign Landing Zone country pack.
+
+Each asset type on this page will also include example Bash and PowerShell commands to individually test the asset.
+
 ## Policy Definitions
 
-Full JSON definitions of custom policies.
+Each file contains a full definition for a custom policy.
 
-`policy_definitions/<name>.alz_policy_definition.json`
+| | |
+| --- | --- |
+| Folder | **policy_definitions** |
+| Filename | **\<name>.alz_policy_definition.json** |
+| Formats | JSON only |
+| Examples | [Azure Landing Zone policy definitions](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/policy_definitions) |
+| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/policy_definitions) |
+| Documentation | [Policy Definitions](https://azure.github.io/Azure-Landing-Zones-Library/assets/policy-definitions) |
 
 ### Policy: [Enforce-KV-Premium](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/blob/2026.01.0/country/nl/bio/policy_definitions/Enforce-KV-Premium.alz_policy_definition.json)
 
@@ -29,7 +42,14 @@ Full JSON definitions of custom policies.
 
 Collections of related policy definitions that are grouped together for simplified management and assignment. Also called Policy Initiatives. The policy definitions referenced by the policy set definition may either be built-in definitions or custom.
 
-`policy_set_definitions/<name>.alz_policy_set_definition.json`
+| | |
+| --- | --- |
+| Folder | **policy_set_definitions** |
+| Filename | **\<name>.alz_policy_set_definition.json** |
+| Formats | JSON only |
+| Examples | [Azure Landing Zone policy set definitions](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/policy_set_definitions) |
+| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/policy_set_definitions) |
+| Documentation | [Policy Set Definitions](https://azure.github.io/Azure-Landing-Zones-Library/assets/policy-set-definitions) |
 
 ### Policy Set #1: [Deny-NL-Global](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/blob/2026.01.0/country/nl/bio/policy_set_definitions/Deny-NL-Global.alz_policy_set_definition.json)
 
@@ -61,7 +81,15 @@ Collections of related policy definitions that are grouped together for simplifi
 
 Policy Assignments for both policy definitions and policy set definitions. It is more common to assign policy sets as this is a more manageable and scalable approach. The policy and policy set definitions can either be built-in definitions, or the custom definitions shown above.
 
-`policy_assignments/<name>.alz_policy_assignment.json`
+| | |
+| --- | --- |
+| Folder | **policy_assignments** |
+| Filename | **\<name>.alz_policy_assignment.json** |
+| Formats | JSON only |
+| Examples | [Azure Landing Zone policy assignments](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/policy_assignments) |
+| | [Sovereign Landing Zone policy assignments](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz/policy_assignments) |
+| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/policy_assignments) |
+| Documentation | [Policy Assignments](https://azure.github.io/Azure-Landing-Zones-Library/assets/policy-assignments) |
 
 ### Assignment #1: [Audit-NL-BIO](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/blob/2026.01.0/country/nl/bio/policy_assignments/Audit-NL-BIO.alz_policy_assignment.json)
 
@@ -90,6 +118,14 @@ Policy Assignments for both policy definitions and policy set definitions. It is
 ## Custom Role Definitions
 
 It is also possible to include custom role definitions. Here is one included in the main Azure Landing Zone Library.
+
+| | |
+| --- | --- |
+| Folder | **role_definitions** |
+| Filename | **\<name>.alz_policy_definition.json** |
+| Formats | JSON only |
+| Examples | [Azure Landing Zone policy definitions](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/role_definitions) |
+| Documentation | [Role Definitions](https://azure.github.io/Azure-Landing-Zones-Library/assets/role-definitions) |
 
 ### Role: [Network-Subnet-Contributor](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/platform/alz/role_definitions/Network-Subnet-Contributor.alz_role_definition.json)
 
