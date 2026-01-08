@@ -8,9 +8,19 @@ description: "Shortcuts to the main platform content and how to use them."
 
 Before we move on to custom libraries, let's cover the platform libraries. How do you specify them in with the alz provider, how do you add an override library, and how do you override or modify.
 
+{{< flash "tip" >}}
+This page will first show how to use the platform libraries directly, but will then quickly switch to inserting a local override library. This is the recommended approach for most customers as it provides more flexibility.
+{{< /flash >}}
+
 ## Azure Landing Zone Library's platform libraries
 
-These are your platform libraries. All are found in the platform folder of [Azure/Azure-Landing-Zones-Library](https://aka.ms/alz/library) and are maintained by Microsoft with semantic versioning for the [releases](https://github.com/Azure/Azure-Landing-Zones-Library/releases). If you find any issues with the platform libraries then you can use the [issue tracking](https://aka.ms/alz/issues) for known issues or raise a new one.
+These are your platform libraries. All are found in the platform folder of [Azure/Azure-Landing-Zones-Library](https://aka.ms/alz/library) and are maintained by Microsoft with semantic versioning for the [releases](https://github.com/Azure/Azure-Landing-Zones-Library/releases).
+
+- Azure Landing Zone (platform/alz)
+- Sovereign Landing Zone (platform/slz)
+- Azure Monitor Baseline Alerts (platform/amba)
+
+If you find any issues with the platform libraries then you can use the [issue tracking](https://aka.ms/alz/issues) for known issues or raise a new one.
 
 Each platform area has a README page that includes a mermaid diagram for the architecture and a listing of all of the assets.
 
@@ -91,7 +101,7 @@ The [platform/amba/alz_library_metadata.json](https://github.com/Azure/Azure-Lan
 
 ## Creating a local override library
 
-Local libraries are commonly used, enabling archetype_overrides so that customers can define deltas from the default baselines in the main libraries.
+Local libraries are commonly used, enabling archetype_overrides so that customers can define deltas from the default baselines in the main libraries. By convention these local library are stored in the **./lib** folder, and contain only archetype override and architecture files. However you could also add customer specific assets if they require bespoke policies or role definitions.
 
 {{< flash >}}
 This is the recommended approach even if you are not overriding anything on day one. You can extend with side loaded custom libraries using the alz provider block array, and stack on top of the alz and slz platform using the local library's metadata dependencies.
@@ -109,13 +119,13 @@ Optional.
 
 {{% shared-content "alz/local_library/add_slz" %}}
 
-Note that the architecture file is still called alz_custom.alz_architecture_definition.yaml and the architecture name is **alz_custom**. The reason for this is that the Sovereign Landing Zone scenario is designed to handle brownfield scenarios.
+Note that the architecture file is still called **alz_custom.alz_architecture_definition.yaml** (rather than slz_custom.alz_architecture_definition.yaml) and the architecture name is **alz_custom** (rather than slz_custom). The reason for this is that the Sovereign Landing Zone scenario is designed to gracefully handle brownfield scenarios, uplifting existing Azure Landing Zone deployments to include the additional Sovereignty Landing Zone assets.
 
 ## Using a local override library
 
-You now have a local library in the **./lib** folder. (Example [override library for ALZ](https://github.com/Azure/alz-terraform-accelerator/tree/refs/heads/main/templates/platform_landing_zone/lib).)
+### Configure the alz provider block
 
-Example alz provider block:
+Update the library references in the provider block to use a custom_url to the local `./lib` folder.
 
 ```ruby
 provider "alz" {
@@ -127,9 +137,11 @@ provider "alz" {
 }
 ```
 
-Customer specific assets can also be included if they need bespoke policies or role definitions.
+### Configure the metadata dependencies
 
-Example **lib/alz_library_metadata.json** in a local library, stacked on top the Azure Landing Zone library.
+Update the dependencies in the local library's metadata file to include the required libraries.
+
+Here is an example **lib/alz_library_metadata.json** in a local library, stacked on top the Azure Landing Zone library.
 
 ```json
 {
