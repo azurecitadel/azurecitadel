@@ -1,8 +1,8 @@
 ---
-title: "Using platform and local override libraries"
+title: "Platform libraries with local overrides"
 date: 2026-01-07
 author: [ "Richard Cheney" ]
-description: "Using custom libraries with the alz provider."
+description: "Using the standard platform libraries with the alz provider and adding local override libraries."
 weight: 70
 draft: false
 menu:
