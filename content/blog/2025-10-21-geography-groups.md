@@ -198,7 +198,7 @@ Here is the resulting table in Markdown form.
 | Africa        | South Africa    | Johannesburg     | South Africa North    | southafricanorth     |
 | Africa        | South Africa    | Cape Town        | South Africa West     | southafricawest      |
 | Asia Pacific  | Asia Pacific    | Hong Kong        | East Asia             | eastasia             |
-| Asia Pacific  | Asia Pacific    | Singapore        | Southeast Asia        | southeastasia         |
+| Asia Pacific  | Asia Pacific    | Singapore        | Southeast Asia        | southeastasia        |
 | Asia Pacific  | Australia       | Canberra         | Australia Central     | australiacentral     |
 | Asia Pacific  | Australia       | Canberra         | Australia Central 2   | australiacentral2    |
 | Asia Pacific  | Australia       | New South Wales  | Australia East        | australiaeast        |
@@ -218,6 +218,7 @@ Here is the resulting table in Markdown form.
 | Canada        | Canada          | Toronto          | Canada Central        | canadacentral        |
 | Canada        | Canada          | Quebec           | Canada East           | canadaeast           |
 | Europe        | Austria         | Vienna           | Austria East          | austriaeast          |
+| Europe        | Belgium         | Brussels         | Belgium Central       | belgiumcentral       |
 | Europe        | Europe          | Ireland          | North Europe          | northeurope          |
 | Europe        | Europe          | Netherlands      | West Europe           | westeurope           |
 | Europe        | France          | Paris            | France Central        | francecentral        |
