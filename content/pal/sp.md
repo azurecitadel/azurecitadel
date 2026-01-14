@@ -22,13 +22,20 @@ The user of service principals is mentioned in the official documentation, and w
 
 Take the scenario where a team of people providing the managed service are all  originally set up with Partner Admin Link and they all have equivalent access in the customer's account. As people leave and join the team - and assuming those new joiners don't create PAL links - then the PAL recognition is fine until the very last person from the original cohort leaves and then the recognition falls off a cliff. That does not happen if you also use a service principal.
 
-This page assumes that there is an existing service principal that has existing Azure RBAC role assignments with PEC eligible roles, and that you have access to use the secret or certificate for authentication.
+{{< flash >}}
+This page assumes that you are looking at an existing service principal that
+
+- has Azure RBAC role assignments with PEC eligible roles, and
+- you are allowed to use its secret or certificate for authentication.
+
+If you have a service principal or managed identity that you are using in a CI/CD pipeline then visit the [CI/CD pipelines & PAL](./cicd.md) page
+
+If you are intending to "PAL tag" with a new and dedicated Partner Admin Link service principal that exists purely for recognition purposes then go to the [PAL tag with a service principal](./dedicated.md)
+{{< /flash >}}
+
+Note that you cannot create a Partner Admin Link for a service principal using the Azure Portal.
 
 ## Service principal with secret or cert
-
-{{< flash >}}
-⚠️ Note that you cannot create a Partner Admin Link for a service principal using the Azure Portal.
-{{< /flash >}}
 
 {{< modes >}}
   {{< mode title="PowerShell" >}}
