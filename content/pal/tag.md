@@ -8,9 +8,12 @@ weight: 60
 menu:
   side:
     parent: pal
-    identifier: pal-dedicated
+    identifier: pal-tag
 series:
   - pal
+aliases:
+  - /pal/tagging
+  - /pal/dedicated
 ---
 
 ## Introduction
@@ -21,7 +24,7 @@ There are certain scenarios where the partner has had influence on a set of reso
 - Proof of value pilot deployments which have been subsequently handed over to the customer team
 - Highly secured production environments that only permit contributor access for workload identities, i.e. those used in CI/CD deployment pipelines
 
-Historically these scenarios may have been recognised by a mechanism called Digital Partner of Record but DPOR has been retired.
+So, how do you get recognition when you don't have ongoing access from, say, a managed service? Historically these scenarios may have been recognised by a mechanism called Digital Partner of Record but DPOR had its own limitations and has been retired.
 
 On this page we will use a dedicated service principal that purely exists to "PAL tag" specific environments so that the partner receives the correct level of recognition.
 
@@ -150,7 +153,71 @@ Removing the secret addresses potential security concerns and also removes the n
 
         ![Azure portal showing the Certificates and secrets page for an app registration with empty sections for Certificates, Client secrets, and Federated credentials, confirming no authentication credentials are configured](/pal/images/paltag-nosecret.png)
 
-The service principal is now ready and RBAC role assignments can be created for it.
+The service principal is now ready for use. At the moment there will be no recognition associated with it, but in the next step that will changed as RBAC role assignments are created for it.
+
+## Viewing dedicated PAL service principals
+
+I will assume that all of the service principal display names start with "_PAL_ ".
+
+{{< modes >}}
+{{< mode title="Portal" >}}
+
+### Viewing app registrations
+
+{{< /mode >}}
+
+1. View app registrations in the [Azure Portal](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) or [Microsoft Entra admin center](https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade/quickStartType~/null/sourceType/Microsoft_AAD_IAM).
+1. If you are an owner then the service principals, app reg should show up in Owned Applications.
+
+    ![List of app registrations in Azure Portal showing the Owned applications tab selected, with a PAL service principal named "PAL (Partner Admin Link) for Microsoft" visible in the list](/pal/images/appreg-owned.png)
+
+1. Switch to _All applications_ and filter on "PAL" or "Partner Admin Link".
+
+    This will also list any service principals where you aren't owner.
+
+1. Selected your PAL app registration
+
+    The Overview pane will have a link to its service principal with the _Managed application in local directory_ in the Essentials.
+
+    ![Overview page of an app registration in Azure Portal showing the 'Managed application in local directory' link in the Essentials section that navigates to the corresponding service principal in Enterprise Apps](/pal/images/appreg-linktosp.png)
+
+    The link will take you straight to the service principal in Enterprise Apps, as also shown below. This where you will find the service principal's object ID.
+
+### Viewing enterprise apps
+
+1. View enterprise apps in the [Azure Portal](https://portal.azure.com/#view/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/~/AppAppsPreview/menuId~/null) or [Microsoft Entra admin center](https://entra.microsoft.com/#view/Microsoft_AAD_IAM/StartboardApplicationsMenuBlade/~/AppAppsPreview).
+1. By default it will be filtered to _Application type == **Enterprise Applications**_. Remove this filter.
+1. Filter on "PAL" or "Partner Admin Link"
+
+    ![Filtered list of enterprise applications in Azure Portal showing search results for "PAL" with a service principal named "PAL (Partner Admin Link) for Microsoft" displayed in the results](/pal/images/serviceprincipal-filteredlist.png)
+
+1. Select the correct service principal.
+
+    ![Overview page of a service principal in Azure Portal Enterprise Apps showing the Object ID field highlighted with a copy button, allowing users to easily copy the service principal's unique identifier for use in role assignments and other administrative tasks](/pal/images/serviceprincipal-copyobjectid.png)
+
+    You can copy the Object ID straight from this page.
+
+{{< /mode >}}
+{{< mode title="Azure CLI" >}}
+
+### List your PAL service principals
+
+1. List the service principals
+
+    ```bash
+    az ad sp list --filter "startswith(displayName,'PAL') and servicePrincipalType  eq 'Application'" --query "[].{DisplayName:displayName, AppId:appId, ObjectId:id}" --output table
+    ```
+
+    Example output
+
+    ```text
+    DisplayName                                 AppId                                 ObjectId
+    ------------------------------------------  ------------------------------------  ------------------------------------
+    PAL (Partner Admin Link) for Azure Citadel  a8e4a6e3-220e-4ab8-b705-539d3f08ab0b  00755c50-b896-4f05-a214-c816a22726ed
+    ```
+
+{{< /mode >}}
+{{< /modes >}}
 
 ## Create RBAC role assignments for the service principal
 
@@ -189,36 +256,76 @@ Repeat the process for other scope points if required.
 {{< /modes >}}
 {{< mode title="Azure CLI">}}
 
+### Set the object ID
+
+1. Set the object ID.
+
+    The section above shows how to [list the service principals](#viewing-dedicated-pal-service-principals). Copy the object ID from here.
+
+    ```bash
+    objectId="<objectId>"
+    ```
+
+    Or if you are following straight from the previous commands and the appId variable is still set then you can run this command.
+
+    ```bash
+    objectId=$(az ad sp show --id $appId --query id -otsv)
+    ```
+
 ### Subscription example
 
-This example creates an assignment for the current subscription.
+1. Create an assignment for the current subscription.
 
-```bash
-objectId=$(az ad sp show --id $appId --query id -otsv)
-role="Support Request Contributor"
-scope="/subscriptions/$(az account show --query id -otsv)"
-az role assignment create --role "$role" --scope "$scope" --assignee-object-id "$objectId" --assignee-principal-type "ServicePrincipal"
-```
+    ```bash
+    scope="/subscriptions/$(az account show --query id -otsv)"
+    role="Support Request Contributor"
+    az role assignment create --role "$role" --scope "$scope" --assignee-object-id "$objectId" --assignee-principal-type "ServicePrincipal"
+    ```
 
-The scope point can be the resourceId for a subscription, resource group or individual resource.
+    The scope point can be the resourceId for a subscription, resource group or individual resource.
 
-The scope may also be set to a management group's resourceId, in which case it will include all subscriptions underneath that management group.
+    The scope may also be set to a management group's resourceId, in which case it will include all subscriptions underneath that management group.
 
 ### Multiple subscriptions
 
 This example creates the role assignment at all subscriptions within the service principal's tenant based on your access.
 
-```bash
-objectId=$(az ad sp show --id $appId --query id -otsv)
-role="Support Request Contributor"
-upn=$(az ad signed-in-user show --query userPrincipalName -otsv)
+1. Create multiple assignments
 
-subscriptionIds=$(az account list --refresh --only-show-errors --query "[?tenantId == '"${tenantId}"' && user.name == '"${upn}"'].id" -otsv)
+    ```bash
+    objectId=$(az ad sp show --id $appId --query id -otsv)
+    role="Support Request Contributor"
+    upn=$(az ad signed-in-user show --query userPrincipalName -otsv)
 
-for subscriptionId in $subscriptionIds
-do az role assignment create --role "$role" --scope "/subscriptions/${subscriptionId}" --assignee-object-id "$objectId" --assignee-principal-type "ServicePrincipal"
-done
-```
+    subscriptionIds=$(az account list --refresh --only-show-errors --query "[?tenantId == '"${tenantId}"' && user.name == '"${upn}"'].id" -otsv)
+
+    for subscriptionId in $subscriptionIds
+    do az role assignment create --role "$role" --scope "/subscriptions/${subscriptionId}" --assignee-object-id "$objectId" --assignee-principal-type "ServicePrincipal"
+    done
+    ```
+
+{{< /mode >}}
+{{< /modes >}}
+
+### Listing the scope points
+
+You may wish to view all of the scope points where the ID has an RBAC role assignment. This is not easy within the Azure Portal.
+
+{{< modes >}}
+{{< mode title="Azure CLI">}}
+You will need the [service principal's objectId](#set-the-object-id) as before.
+
+1. List all RBAC role assignments
+
+    ```bash
+    az role assignment list --all --assignee $objectId --query "[].{roleDefinitionName:roleDefinitionName, scope:scope}" --output yamlc
+    ```
+
+1. List only the scope points
+
+    ```bash
+    az role assignment list --all --assignee $objectId --query "[].scope" --output tsv
+    ```
 
 {{< /mode >}}
 {{< /modes >}}
