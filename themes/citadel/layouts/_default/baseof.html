@@ -576,6 +576,90 @@
     // Expose generateTOC globally for manual regeneration
     window.regenerateTOC = generateTOC;
   })();
+
+  // Custom scroll restoration for #main-scroll container
+  (function() {
+    const scrollContainer = document.getElementById('main-scroll');
+    const SCROLL_KEY = 'citadel-scroll-positions';
+
+    if (!scrollContainer) return;
+
+    // Get stored scroll positions from sessionStorage
+    function getStoredPositions() {
+      try {
+        return JSON.parse(sessionStorage.getItem(SCROLL_KEY)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    // Store current scroll position for this page
+    function storeScrollPosition() {
+      const positions = getStoredPositions();
+      positions[location.pathname] = scrollContainer.scrollTop;
+      try {
+        sessionStorage.setItem(SCROLL_KEY, JSON.stringify(positions));
+      } catch {
+        // Handle quota exceeded or other storage errors silently
+      }
+    }
+
+    // Restore scroll position for this page
+    function restoreScrollPosition() {
+      const positions = getStoredPositions();
+      const savedPosition = positions[location.pathname];
+
+      if (savedPosition && savedPosition > 0) {
+        scrollContainer.scrollTop = savedPosition;
+      }
+    }
+
+    // Store position before leaving the page
+    window.addEventListener('beforeunload', storeScrollPosition);
+
+    // Store position when clicking internal links
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a[href]');
+      if (link && !link.href.startsWith('mailto:') && !link.href.startsWith('tel:') && !link.target) {
+        // Only store for internal navigation, not external links or downloads
+        storeScrollPosition();
+      }
+    });
+
+    // Restore position when page loads (after content is ready)
+    function handlePageLoad() {
+      // Small delay to ensure content is fully loaded
+      setTimeout(restoreScrollPosition, 150);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', handlePageLoad);
+    } else {
+      handlePageLoad();
+    }
+
+    // Handle browser back/forward navigation
+    window.addEventListener('popstate', function() {
+      setTimeout(restoreScrollPosition, 150);
+    });
+
+    // Clean up old scroll positions (keep only last 50 pages to prevent storage bloat)
+    function cleanupOldPositions() {
+      const positions = getStoredPositions();
+      const entries = Object.entries(positions);
+      if (entries.length > 50) {
+        const recent = Object.fromEntries(entries.slice(-50));
+        try {
+          sessionStorage.setItem(SCROLL_KEY, JSON.stringify(recent));
+        } catch {
+          // Handle storage errors silently
+        }
+      }
+    }
+
+    // Periodically clean up storage
+    setTimeout(cleanupOldPositions, 1000);
+  })();
 </script>
 
 {{- block "embedded-script" . }}{{- end }}
