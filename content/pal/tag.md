@@ -49,10 +49,17 @@ The page has two key steps that require certain permissions:
     - User Access Administrator
     - Role Based Access Control Administrator
 
-The two steps do not have to be run by the same person.
+{{< /flash >}}
+{{< flash "tip" >}}
+The two steps do not have to be run by the same person. If someone else has already created a service principal for PAL tagging then you can skip straight to:
+
+- [viewing the service principal(s)](#viewing-dedicated-pal-service-principals)
+- [creating the RBAC role assignments](#create-rbac-role-assignments-for-the-service-principal)
 {{< /flash >}}
 
 ## Create a service principal and PAL
+
+### Set variables
 
 1. Set a partner name variable.
 
@@ -70,6 +77,8 @@ The two steps do not have to be run by the same person.
     partnerId="<partnerId>"
     ```
 
+### Create the service principal
+
 1. Create the service principal
 
     ```bash
@@ -81,9 +90,67 @@ The two steps do not have to be run by the same person.
     az ad sp show --id $appId --output jsonc
     ```
 
+    {{< details "Example output">}}
+
+```json
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#servicePrincipals/$entity",
+  "accountEnabled": true,
+  "addIns": [],
+  "alternativeNames": [],
+  "appDescription": null,
+  "appDisplayName": "PAL (Partner Admin Link) for Azure Citadel",
+  "appId": "5d1613d5-3cf5-48c0-a229-d0152ab4b8d0",
+  "appOwnerOrganizationId": "ac40fc60-2717-4051-a567-c0cd948f0ac9",
+  "appRoleAssignmentRequired": false,
+  "appRoles": [],
+  "applicationTemplateId": null,
+  "createdDateTime": "2026-01-16T11:37:19Z",
+  "deletedDateTime": null,
+  "description": null,
+  "disabledByMicrosoftStatus": null,
+  "displayName": "PAL (Partner Admin Link) for Azure Citadel",
+  "homepage": null,
+  "id": "d358ac16-e877-4080-8b99-a67500701366",
+  "info": {
+    "logoUrl": null,
+    "marketingUrl": null,
+    "privacyStatementUrl": null,
+    "supportUrl": null,
+    "termsOfServiceUrl": null
+  },
+  "keyCredentials": [],
+  "loginUrl": null,
+  "logoutUrl": null,
+  "notes": null,
+  "notificationEmailAddresses": [],
+  "oauth2PermissionScopes": [],
+  "passwordCredentials": [],
+  "preferredSingleSignOnMode": null,
+  "preferredTokenSigningKeyThumbprint": null,
+  "replyUrls": [],
+  "resourceSpecificApplicationPermissions": [],
+  "samlSingleSignOnSettings": null,
+  "servicePrincipalNames": [
+    "0752ad1e-497b-4338-93f1-622265ee96d6"
+  ],
+  "servicePrincipalType": "Application",
+  "signInAudience": "AzureADMyOrg",
+  "tags": [],
+  "tokenEncryptionKeyId": null,
+  "verifiedPublisher": {
+    "addedDateTime": null,
+    "displayName": null,
+    "verifiedPublisherId": null
+  }
+}
+```
+
+{{< /details >}}
+
     By default, the service principal will have no RBAC role assignments.
 
-1. Add an owner (optional)
+1. Add yourself as the owner
 
     ```bash
     myObjectId=$(az ad signed-in-user show --query id -otsv)
@@ -93,9 +160,36 @@ The two steps do not have to be run by the same person.
 
     You can also add owners in the portal.
 
+    {{< details "Example output">}}
+
+```json
+[
+  {
+    "@odata.type": "#microsoft.graph.user",
+    "businessPhones": [
+      "425-555-0100"
+    ],
+    "displayName": "John Doe",
+    "givenName": "John",
+    "id": "74afa9e2-d243-414b-bab2-db8dd242827f",
+    "jobTitle": null,
+    "mail": "john.doe@mydomain.onmicrosoft.com",
+    "mobilePhone": "425-555-0101",
+    "officeLocation": null,
+    "preferredLanguage": "en",
+    "surname": "Doe",
+    "userPrincipalName": "john.doe@mydomain.onmicrosoft.com"
+  }
+]
+```
+
+{{< /details >}}
+
+### Create the partner admin link
+
 1. Get the token
 
-    ℹ️ This approach uses the REST API to avoid having to switch IDs with the Azure CLI.
+    ℹ️ This approach uses the REST API to avoid having to switch IDs back and forth with the Azure CLI.
 
     ```bash
     uri="https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token"
@@ -104,6 +198,19 @@ The two steps do not have to be run by the same person.
     [[ -n "$token" ]] && cut -d. -f2 <<< $token | base64 --decode 2>/dev/null | jq '{aud, iss, tid, appid}' || echo "Error getting the token."
     ```
 
+    {{< details "Example output">}}
+
+```json
+{
+  "aud": "https://management.azure.com",
+  "iss": "https://sts.windows.net/ac40fc60-2717-4051-a567-c0cd948f0ac9/",
+  "tid": "ac40fc60-2717-4051-a567-c0cd948f0ac9",
+  "appid": "5d1613d5-3cf5-48c0-a229-d0152ab4b8d0"
+}
+```
+
+{{< /details >}}
+
 1. Create the Partner Admin Link
 
     ```bash
@@ -111,6 +218,29 @@ The two steps do not have to be run by the same person.
     data='{"partnerId": "'${partnerId}'"}'
     curl --silent --request PUT --header "Authorization: Bearer ${token}" --header "Content-Type: application/json" --data "$data" "$uri" | jq .
     ```
+
+    {{< details "Example output">}}
+
+```json
+{
+  "id": "/providers/microsoft.managementpartner/partners/994867",
+  "type": "Microsoft.ManagementPartner/partners",
+  "name": "3141593",
+  "etag": 1,
+  "properties": {
+    "partnerId": "3141593",
+    "partnerName": "Azure Citadel",
+    "tenantId": "ac40fc60-2717-4051-a567-c0cd948f0ac9",
+    "objectId": "2ee63cf0-5219-42bd-b42f-a547de2be218",
+    "version": 1,
+    "updatedTime": "2026-01-16T13:56:59.6112004Z",
+    "createdTime": "2026-01-16T13:56:59.6112004Z",
+    "state": "Active"
+  }
+}
+```
+
+{{< /details >}}
 
     {{< details "Additional commands">}}
 
@@ -128,30 +258,24 @@ curl --silent --request DELETE --header "Authorization: Bearer ${token}" --heade
 
 {{< /details >}}
 
-1. Remove the secret
+### Reduce the attack surface
 
-    You may remove the secret once the Partner Admin Link has been successfully created.
+{{< flash "tip">}}
+You may remove the secret once the Partner Admin Link has been successfully created.
 
-    {{< flash "tip">}}
 Removing the secret addresses potential security concerns and also removes the need to rotate secrets ahead of expiry dates.
 {{< /flash >}}
 
-   Delete the credential.
+1. Delete the secret
 
     ```bash
     keyId=$(az ad app credential list --id $appId --query "[?displayName == 'rbac']|[0].keyId" -otsv)
     az ad app credential delete --id $appId --key-id $keyId
     ```
 
-    The command has no output, but you will see that there is no secret in the Azure Portal in the next step.
+    The command has no output, but you will see that there is no secret in the Azure Portal when viewing.
 
-    Note that you will no longer be able to display that the partner admin link exists as you can no longer authenticate as the service principal.
-
-1. View the [App registrations](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps).
-    1. Select the Partner Admin Link app registration in Owned Applications.
-    1. View the **Certificates and secrets** and confirm that there are no certs, secrets, or federated credentials.
-
-        ![Azure portal showing the Certificates and secrets page for an app registration with empty sections for Certificates, Client secrets, and Federated credentials, confirming no authentication credentials are configured](/pal/images/paltag-nosecret.png)
+    Note that you will no longer be able to display the Partner Admin Link as you can no longer authenticate as the service principal.
 
 The service principal is now ready for use. At the moment there will be no recognition associated with it, but in the next step that will changed as RBAC role assignments are created for it.
 
@@ -163,8 +287,6 @@ I will assume that all of the service principal display names start with "_PAL_ 
 {{< mode title="Portal" >}}
 
 ### Viewing app registrations
-
-{{< /mode >}}
 
 1. View app registrations in the [Azure Portal](https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) or [Microsoft Entra admin center](https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade/quickStartType~/null/sourceType/Microsoft_AAD_IAM).
 1. If you are an owner then the service principals, app reg should show up in Owned Applications.
@@ -181,7 +303,13 @@ I will assume that all of the service principal display names start with "_PAL_ 
 
     ![Overview page of an app registration in Azure Portal showing the 'Managed application in local directory' link in the Essentials section that navigates to the corresponding service principal in Enterprise Apps](/pal/images/appreg-linktosp.png)
 
-    The link will take you straight to the service principal in Enterprise Apps, as also shown below. This where you will find the service principal's object ID.
+    The link would take you straight to the service principal in Enterprise Apps, as also shown below. This where you will find the service principal's object ID.
+
+1. View the Certificates and secrets
+
+    Confirm that there are no certs, secrets, or federated credentials.
+
+    ![Azure portal showing the Certificates and secrets page for an app registration with empty sections for Certificates, Client secrets, and Federated credentials, confirming no authentication credentials are configured](/pal/images/paltag-nosecret.png)
 
 ### Viewing enterprise apps
 
@@ -235,7 +363,9 @@ Recognition will associate the resource telemetry for all resources below the ro
 Only assign roles to scope points that define the set of resources where the partner deserves recognition for their influence.
 {{< /flash >}}
 
-Note that the telemetry is always collected for Azure billing purposes. No new telemetry is collected, it is just associated withe the partner ID. The association solely indicates the positive influence that the partner has in the customer account and the partner does not have access to the telemetry itself except for a highly aggregated and anonymized number for the customer.
+Note that the telemetry is always collected for Azure billing purposes. No new telemetry is collected, it is just associated with the partner ID. The association solely indicates the positive influence that the partner has in the customer account. The partner does not have access to the telemetry itself except for a highly aggregated and anonymized number for the customer.
+
+Please reference the official statements from Microsoft in the [Frequently asked questions about a PAL association](https://learn.microsoft.com/partner-center/membership/link-partner-id-for-azure-performance-pal-dpor#frequently-asked-questions-about-a-pal-association) section.
 
 {{< modes >}}
 {{< mode title="Portal" >}}
@@ -307,7 +437,7 @@ This example creates the role assignment at all subscriptions within the service
 {{< /mode >}}
 {{< /modes >}}
 
-### Listing the scope points
+## Listing the scope points
 
 You may wish to view all of the scope points where the ID has an RBAC role assignment. This is not easy within the Azure Portal.
 

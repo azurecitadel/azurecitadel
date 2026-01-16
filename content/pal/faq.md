@@ -15,7 +15,7 @@ series:
 
 ## Microsoft Learn
 
-The first port of call is the Azure Learn documentation which includes a [PAL FAQ](https://learn.microsoft.com/partner-center/membership/link-partner-id-for-azure-performance-pal-dpor#frequently-asked-questions-about-a-pal-association) section.
+The first port of call is the Azure Learn documentation which includes the official [PAL FAQ](https://learn.microsoft.com/partner-center/membership/link-partner-id-for-azure-performance-pal-dpor#frequently-asked-questions-about-a-pal-association) section.
 
 Selection of the questions:
 
@@ -34,6 +34,6 @@ Selection of the questions:
 
 ## Additional questions
 
-Additional questions and guidance that are not already covered in the main FAQ or in the [Understanding PAL](./theory) page will be added here.
+Additional questions and guidance that are not already covered in the main FAQ or in the [Understanding PAL](../theory) page will be added here.
 
 If you have a question then please jump to the [Partner Admin Link](https://github.com/azurecitadel/azurecitadel/discussions/132) discussions page and post it there. Note that the discussion is public so please ensure there is nothing sensitive in your posts. We reserve the right to delete posts.
