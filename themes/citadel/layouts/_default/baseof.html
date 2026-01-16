@@ -425,13 +425,13 @@
       // First pass: Ensure all headers have proper unique IDs (regenerate every time)
       headers.forEach((header, index) => {
         const text = header.textContent.trim();
-        let baseId = text.toLowerCase().replace(/[^a-z0-9\\s-]/g, '').replace(/\\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || `heading-${index}`;
+        let baseId = text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || `heading-${index}`;
 
         // Check if header is in a mode panel and make ID unique
         const modePanel = header.closest('[data-mode-panel]');
         if(modePanel) {
           const modeTitle = modePanel.getAttribute('data-title') || 'mode';
-          const modePrefix = modeTitle.toLowerCase().replace(/[^a-z0-9\\s-]/g, '').replace(/\\s+/g, '-');
+          const modePrefix = modeTitle.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
           const newId = `${modePrefix}-${baseId}`;
           if(header.id !== newId) {
             header.id = newId;
