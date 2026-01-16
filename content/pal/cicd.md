@@ -1,10 +1,10 @@
 ---
-title: "CI/CD pipelines & PAL"
+title: "CI/CD pipelines & OpenID Connect"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
-description: "Workload identities securely using OpenID Connect are becoming the prevailing standard. As they don't have client secrets then using a dedicated workflow is another approach to create a Partner Admin Link."
+description: "Pipelines or workflows commonly use service principals. Authenticating these securely using OpenID Connect is recommended to avoid the use of secrets or certificates. Here we show how to use a dedicated workflow to create the Partner Admin Link."
 draft: false
-weight: 55
+weight: 70
 menu:
   side:
     parent: pal
@@ -19,6 +19,8 @@ tabs:
 ## Introduction
 
 This scenario is for when you no longer have the secret or cert for a service principal, but you do have permission to create or modify pipelines or workflows in your CI/CD platform. These commonly use service principals when interacting with Azure environments. Historically they would have the client secret stored as a pipeline secret whereas it is now increasingly common to leverage OpenID Connect (OIDC) using a federated workload credential.
+
+Note that if you have access to the secret or certificate then you can also use the [Service Principals with credentials](../credential) page.
 
 ### Check the subject in the federated credential
 

@@ -74,6 +74,12 @@ The first Partner Location Account ID is created automatically when creating the
 This is the default PartnerID recommendation for PAL.
 {{< /flash >}}
 
+## Why are service principals recommended?
+
+The use of service principals is mentioned in the official documentation, and with respect to Azure Lighthouse - more on that later - it is a recommendation. One benefit of using a service principal is that you don't face unintended issues with losing PAL recognition if users are removed from a customer's tenant. This can occur if an employee leaves the organisation or changes roles.
+
+Take the scenario where a team of people providing the managed service are all  originally set up with Partner Admin Link and they all have equivalent access in the customer's account. As people leave and join the team - and assuming those new joiners don't create PAL links - then the PAL recognition is fine until the very last person from the original cohort leaves and then the recognition falls off a cliff. That does not happen if you also use a service principal.
+
 ## How do you actually create a Partner Admin Link?
 
 ### Users and Guests
@@ -86,13 +92,21 @@ Linking should be done in every customer context. At a technical level the link 
 For example, if a user's ID (i.e. _first.last@partnername.com_) has been invited as a guest into 30 different customers then they should switch to each of those 30 directories in turn and create the Partner Admin Link for the objectId in that tenant.
 {{< /flash >}}
 
-All are covered in the [User IDs & Pal](./users) page as well as the official [Link to a partner ID by using a PAL](https://learn.microsoft.com/partner-center/membership/link-partner-id-for-azure-performance-pal-dpor#link-to-a-partner-id-by-using-a-pal) page.
+All are covered in the [User IDs & PAL](../users) page as well as the official [Link to a partner ID by using a PAL](https://learn.microsoft.com/partner-center/membership/link-partner-id-for-azure-performance-pal-dpor#link-to-a-partner-id-by-using-a-pal) page.
 
 ### Service Principals
 
-For security principals, then it depends. Where the service principal's secret is known - e.g. when you are creating the service principal - then you can authenticate and run the command using the CLI or PowerShell. If it is a service principal authenticating using OpenID Connect then you can add the commands into a workflow that meets the federated workload credential's subject.
+Note that you cannot create a Partner Admin Link for a service principal using the Azure Portal.
 
-Both approaches are covered on the [Service Principals & PAL](./sp) page.
+We cover a few scenarios here
+
+#### I have a service principal with a secret
+
+If you can authenticate as the service principal using either a secret (app password) or certificate then go to
+- [Service Principals & PAL](../sp)
+
+Where the service principal's secret is known - e.g. when you are creating the service principal - then you can authenticate and run the command using the CLI or PowerShell. If it is a service principal authenticating using OpenID Connect then you can add the commands into a workflow that meets the federated workload credential's subject.
+
 
 ### Via Azure Lighthouse
 

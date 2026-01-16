@@ -1,8 +1,8 @@
 ---
-title: "PAL tag with a service principal"
+title: "PAL tagging with a service principal"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
-description: "In the final service principal scenario, we'll look at creating a service principal dedicated purely for recognition purposes."
+description: "There are a number of scenarios where you may not have eligible permanent access, and your recognition is being understated. We'll look at creating a new service principal purely for recognition purposes."
 draft: false
 weight: 60
 menu:

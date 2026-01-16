@@ -22,9 +22,11 @@ layout: series
 
 Partner Admin Link is an important mechanism for Microsoft to recognise the influence and impact that partners to bring to their customers on Azure.
 
-At one level it is fairly simple. If you have access to a customer environment as part of your managed service delivery then creating a Partner Admin Link associates the usage telemetry - which is always being collected for billing purposes - with the Partner ID. It is based on the RBAC role assignments for that access so that the partner gains recognition for the specific resources. Configuration for a user is quick and simple and doesn't require any involvement from the customer.
+At a surface level it is a simple mechanism. If you have a) have access to a customer environment, b) create a Partner Admin Link for your identity, and c) that identity has eligible RBAC role assignments, then the usage telemetry - which is always being collected for billing purposes - is also associated to your Partner ID. Here we cover the theory in more detail, and cover multiple scenarios that I have seen in my time working with - and for - Azure partners.
 
-However, there are several scenarios for how partners access customer environments and this set of guidance aims to help you get to those configurations quickly.
+<!-- SERIES_PAGES -->
+
+The pages above give you advice on multiple scenarios for how partners are given access to customer environments and how you can configure Partner Admin Link to get the right recognition.
 
 - Need to quickly see how to configure Partner Admin Link as a user with PowerShell commands? Jump to the [user](/pal/users) page and select the PowerShell tab.
 - Need to do the same for a service principal? There is a [service principal](/pal/sp) page for that too.
