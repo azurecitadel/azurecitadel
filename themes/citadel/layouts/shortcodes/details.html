@@ -5,12 +5,7 @@
   </div>
   <div class="citadel-details-content border p-3 mt-2" style="display: none;">
     <div class="citadel-details-inner">{{ .Page.RenderString .Inner }}</div>
-    <div class="citadel-details-close-container">
-      <button class="citadel-details-close-btn btn-octicon" aria-label="Close details" title="Close">
-        {{- partial "octicon" (dict "icon" "x" "height" 16) -}}
-        <span class="ml-1">Close</span>
-      </button>
-    </div>
+    <div class="citadel-details-close-area" title="Click to close"></div>
   </div>
 </div>
 
@@ -61,32 +56,21 @@
   margin-top: 0.5rem;
   box-shadow: var(--citadel-subtle-glow);
   position: relative;
+  padding-bottom: 1rem; /* Reduced spacing */
 }
 
-.citadel-details-close-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--color-border-muted);
+.citadel-details-inner {
+  /* No additional bottom padding needed */
 }
 
-.citadel-details-close-btn {
-  display: flex;
-  align-items: center;
-  background: transparent;
-  border: 1px solid var(--color-border-default);
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  color: var(--color-fg-default);
+.citadel-details-close-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1rem; /* Same as padding-bottom */
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.citadel-details-close-btn:hover {
-  background-color: var(--color-neutral-muted);
-  border-color: var(--color-border-emphasis);
+  /* Invisible clickable area */
 }
 </style>
 
@@ -113,11 +97,48 @@ function initializeDetailsElements() {
 
     const summary = details.querySelector('.citadel-details-summary');
     const content = details.querySelector('.citadel-details-content');
-    const closeBtn = details.querySelector('.citadel-details-close-btn');
+    const closeArea = details.querySelector('.citadel-details-close-area');
+
+    // Find the actual scrolling container
+    const scrollContainer = document.getElementById('main-scroll') || window;
+
+    // Store the scroll position when clicking
+    let scrollPositionWhenClicked = 0;
+
+    function getScrollPosition() {
+      if (scrollContainer === window) {
+        return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      } else {
+        return scrollContainer.scrollTop || 0;
+      }
+    }
+
+    function scrollToPosition(position) {
+      if (scrollContainer === window) {
+        window.scrollTo({
+          top: position,
+          behavior: 'smooth'
+        });
+      } else {
+        scrollContainer.scrollTo({
+          top: position,
+          behavior: 'smooth'
+        });
+      }
+    }
 
     function closeDetails() {
+      // Check if summary is visible BEFORE changing anything
+      const rect = summary.getBoundingClientRect();
+      const summaryVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
       details.classList.remove('open');
       content.style.display = 'none';
+
+      // If summary not visible, go back to where we clicked
+      if (!summaryVisible) {
+        scrollToPosition(scrollPositionWhenClicked);
+      }
     }
 
     function openDetails() {
@@ -127,7 +148,6 @@ function initializeDetailsElements() {
 
     // Handle summary clicks
     summary.addEventListener('click', function(e) {
-      console.log('Details summary clicked');
       e.preventDefault();
       e.stopPropagation();
 
@@ -135,14 +155,15 @@ function initializeDetailsElements() {
       if (details.classList.contains('open')) {
         closeDetails();
       } else {
+        // Store the current scroll position before opening
+        scrollPositionWhenClicked = getScrollPosition();
         openDetails();
       }
     });
 
-    // Handle close button clicks
-    if (closeBtn) {
-      closeBtn.addEventListener('click', function(e) {
-        console.log('Details close button clicked');
+    // Handle close area clicks
+    if (closeArea) {
+      closeArea.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         closeDetails();
