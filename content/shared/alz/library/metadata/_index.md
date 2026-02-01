@@ -52,7 +52,7 @@ This is the default metadata file for a local library in `./lib` when stacked on
 
 {{< flash >}}
 
-- There is a dependency on the `platform/alz/2025.09.3` release.
+- There is a dependency on the `platform/alz/2026.01.0` release.
 {{< /flash >}}
 
 ### Metadata example #3: [slz](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/platform/slz/alz_library_metadata.json)
@@ -64,7 +64,7 @@ This is the default metadata file for Sovereign Landing Zone. This library is es
 {{< flash >}}
 
 - The path in the repo is `platform/slz`
-- The Sovereign Landing Zone library is dependent on the `platform/alz/2025.09.3` release.
+- The Sovereign Landing Zone library is dependent on the `platform/alz/2026.01.0` release.
 {{< /flash >}}
 
 ### Metadata example #4: [slz_custom](https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/alz_library_metadata.json)
@@ -77,7 +77,7 @@ This is the default metadata file for the local library in `./lib` when stacked 
 
 - There is a dependency on the `platform/slz/2025.10.1` Sovereign Landing Zone library release.
 - Remember that this is the one above, and therefore the dependency is recursively chained.
-- The full dependency chain is therefore `./lib` > `platform/slz/2025.10.1` > `platform/alz/2025.09.3`.
+- The full dependency chain is therefore `./lib` > `platform/slz/2025.10.1` > `platform/alz/2026.01.0`.
 {{< /flash >}}
 
 ## Policy Default Values
@@ -114,7 +114,7 @@ This is the default_policy_values file for the Sovereign Landing Zone.
 
 ### Metadata example #2: [nl_slz](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/blob/main/country/nl/bio/alz_policy_default_values.json)
 
-This is the default metadata file for the Sovereign Landing Zone.
+This is the metadata file for the example country pack. It relies on the alz provider having `[library_overwrite_enabled = true](https://registry.terraform.io/providers/Azure/alz/latest/docs#library_overwrite_enabled-1)'.
 
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/richeney-org/Sovereign-Landing-Zone-Packs/refs/heads/main/country/nl/bio/alz_policy_default_values.json>" >}}
 

@@ -132,7 +132,7 @@ The [slz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landin
 {{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json>" >}}
 {{< /details >}}
 
-The architecture files are uniquely identified and standalone. When you specify `slz` as the architecture_name then it matches against [slz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json). If your module still specified `alz` then it would still match up against the [alz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2025.09.3/platform/alz/architecture_definitions/alz.alz_architecture_definition.json) in the underlying Azure Landing Zone library.
+The architecture files are uniquely identified and standalone. When you specify `slz` as the architecture_name then it matches against [slz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/slz/2025.10.1/platform/slz/architecture_definitions/slz.alz_architecture_definition.json). If your module still specified `alz` then it would still match up against the [alz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/architecture_definitions/alz.alz_architecture_definition.json) in the underlying Azure Landing Zone library.
 
 ## Default policy values
 
@@ -150,8 +150,8 @@ Default policy values are defined in [alz_policy_default_values.json](https://gi
 
 These value are used for consistency across multiple policy and policy initiatives in the archetypes.
 
-Note that you would need to check the same [alz_policy_default_values.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2025.09.3/platform/alz/alz_policy_default_values.json) file for the underlying Azure Landing Zone library.
+Note that you would need to check the same [alz_policy_default_values.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/alz_policy_default_values.json) file for the underlying Azure Landing Zone library.
 
 {{< details "ALZ Policy Default Values" >}}
-{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2025.09.3/platform/alz/alz_policy_default_values.json>" >}}
+{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/alz_policy_default_values.json>" >}}
 {{< /details >}}

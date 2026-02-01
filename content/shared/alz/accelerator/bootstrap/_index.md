@@ -224,6 +224,10 @@ Please confirm you wish to apply the plan.
 1. Check the bootstrap plan
 1. Approve with `Y` to continue
 
+    {{< flash "warning" >}}
+Note that this step will naturally create resources that will add cost to your Azure billing.
+{{< /flash >}}
+
     The bootstrap will create the Azure and GitHub resources. The process should complete in under 15 minutes.
 
     {{< flash >}}

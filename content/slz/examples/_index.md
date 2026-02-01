@@ -1,6 +1,6 @@
 ---
 title: "Reference Library Configs"
-description: "A reference guide to common library patterns if you know what you are doing with Landing Zone libraries and the alz provider."
+description: "A guide to common library patterns. Use this as a quick reference if you're familiar with the content above and know what you are doing with Landing Zone libraries and the alz provider."
 draft: false
 menu:
   side:

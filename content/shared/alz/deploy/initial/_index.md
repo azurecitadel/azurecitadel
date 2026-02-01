@@ -58,3 +58,11 @@ The most common library source is the [ALZ Library repo](https://aka.ms/alz/libr
 
 {{< /mode >}}
 {{< /modes >}}
+
+## Next
+
+The config in your repo will work as it stands with its direct use of the platform library.
+
+Skip the next page and you will get the standard set of definitions and assignments from the standard alz or slz platform library as you test your repo locally and then deploy via the CI/CD pipelines. Absolutely valid, but not recommended. Why not?
+
+The next page will take you through the steps to configure a local override library. Even if you have no need to use an override on day one this approach gives you the flexibility to do so in the future. It also gives you a local metadata file and architecture file and you will see in the examples how you can update these when you add in additional hosted custom libraries without causing massive trauma to your Terraform state file.

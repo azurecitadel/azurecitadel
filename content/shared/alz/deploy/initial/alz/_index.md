@@ -11,7 +11,7 @@ Add the alz provider and specify the most recent Azure Landing Zone library rele
 
 1. Check the [releases](https://github.com/Azure/Azure-Landing-Zones-Library/releases) page for the most recent platform/alz release.
 
-    At the time of writing this is 2025.09.3.
+    At the time of writing this is 2026.01.0.
 
 1. Add to the terraform.tf
 
@@ -21,7 +21,7 @@ Add the alz provider and specify the most recent Azure Landing Zone library rele
       library_references = [
         {
           path = "platform/alz"
-          ref  = "2025.09.3"
+          ref  = "2026.01.0"
         }
       ]
     }
@@ -29,7 +29,7 @@ Add the alz provider and specify the most recent Azure Landing Zone library rele
 
     The alz provider will pull in that version of the library definition from `https://github.com/Azure/Azure-Landing-Zones-Library/tree/{tag}/{path}` where `{tag}` is `{path}/{ref}`.
 
-    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.09.3/platform/alz> for the core Azure Landing Zones library.
+    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz> for the core Azure Landing Zones library.
 
 ### Variables
 
@@ -108,7 +108,7 @@ We will cover how the AVM modules work with the library as we progress through t
     module "management_groups" {
       # <https://registry.terraform.io/modules/Azure/avm-ptn-alz/azurerm/latest>
       source  = "Azure/avm-ptn-alz/azurerm"
-      version = "0.14.0"
+      version = "0.20.2"
 
       architecture_name  = "alz"
       location           = var.location

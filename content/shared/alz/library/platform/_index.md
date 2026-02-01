@@ -6,7 +6,7 @@ description: "Shortcuts to the main platform content and how to use them."
 
 ## Overview
 
-Before we move on to custom libraries, let's cover the platform libraries. How do you specify them in with the alz provider, how do you add an override library, and how do you override or modify.
+Before we move on to shared custom libraries, let's cover the platform libraries. How do you specify them in with the alz provider, how do you add an override library, and how do you override or modify.
 
 {{< flash "tip" >}}
 This page will first show how to use the platform libraries directly, but will then quickly switch to inserting a local override library. This is the recommended approach for most customers as it provides more flexibility.
@@ -28,7 +28,7 @@ Each platform area has a README page that includes a mermaid diagram for the arc
 
 The **Microsoft ALZ Library** has the core Azure Landing Zone definitions.
 
-Example release: [platform/alz/2025.09.3](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.09.3/platform/alz)
+Example release: [platform/alz/2026.01.0](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz)
 
 Example alz provider block:
 
@@ -37,16 +37,16 @@ provider "alz" {
   library_references = [
     {
       path = "platform/alz"
-      ref  = "2025.09.3"
+      ref  = "2026.01.0"
     }
   ]
 }
 ```
 
-The [platform/alz/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/alz/2025.09.3/platform/alz/alz_library_metadata.json) file has no dependencies.
+The [platform/alz/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/alz/2026.01.0/platform/alz/alz_library_metadata.json) file has no dependencies.
 
 {{< details "platform/alz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2025.09.3/platform/alz/alz_library_metadata.json>" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.01.0/platform/alz/alz_library_metadata.json>" >}}
 {{< /details >}}
 
 ### Sovereign Landing Zone (slz)
@@ -152,7 +152,7 @@ Here is an example **lib/alz_library_metadata.json** in a local library, stacked
   "dependencies": [
     {
       "path": "platform/alz",
-      "ref": "2025.09.3"
+      "ref": "2026.01.0"
     }
   ]
 }
