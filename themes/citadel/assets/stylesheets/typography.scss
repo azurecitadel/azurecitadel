@@ -65,7 +65,7 @@ em, i {
 
 /* Blockquote styling to match GitHub */
 .markdown-body blockquote {
-  margin: 0;
+  margin: 0 0 1rem 0;
   padding: 0 1em;
   color: var(--color-fg-muted);
   border-left: 0.25em solid var(--color-border-default);

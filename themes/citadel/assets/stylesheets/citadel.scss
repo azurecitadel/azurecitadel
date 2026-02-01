@@ -468,44 +468,57 @@ html[data-color-mode='dark'] #theme-toggle-container .theme-btn:focus-visible { 
 /* Flash variants with muted colors */
 .flash-note {
     background-color: #dbeafe;
+    border-color: #93c5fd;
     border-left-color: #3b82f6;
     color: #1e40af;
 }
 html[data-color-mode='dark'] .flash-note {
     background-color: rgba(59, 130, 246, 0.1);
+    border-color: rgba(147, 197, 253, 0.3);
     border-left-color: #60a5fa;
     color: #bfdbfe;
 }
 
 .flash-tip {
     background-color: #dcfce7;
+    border-color: #86efac;
     border-left-color: #22c55e;
     color: #15803d;
 }
 html[data-color-mode='dark'] .flash-tip {
     background-color: rgba(34, 197, 94, 0.1);
+    border-color: rgba(134, 239, 172, 0.3);
     border-left-color: #4ade80;
     color: #bbf7d0;
 }
 
 .flash-warning {
     background-color: #fef3c7;
+    border-color: #fcd34d;
     border-left-color: #f59e0b;
     color: #92400e;
 }
 html[data-color-mode='dark'] .flash-warning {
     background-color: rgba(245, 158, 11, 0.1);
+    border-color: rgba(252, 211, 77, 0.3);
     border-left-color: #fbbf24;
     color: #fed7aa;
 }
 
 .flash-danger {
     background-color: #fee2e2;
+    border-color: #fca5a5;
     border-left-color: #ef4444;
     color: #dc2626;
 }
 html[data-color-mode='dark'] .flash-danger {
     background-color: rgba(239, 68, 68, 0.1);
+    border-color: rgba(252, 165, 165, 0.3);
     border-left-color: #f87171;
     color: #fecaca;
+}
+
+/* Override Primer CSS flash defaults to ensure our colors show */
+.flash {
+    background-image: none;
 }
