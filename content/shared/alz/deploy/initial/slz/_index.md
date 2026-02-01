@@ -117,7 +117,7 @@ There is a later deep dive on libraries and how the AVM modules work with those 
     module "management_groups" {
       # <https://registry.terraform.io/modules/Azure/avm-ptn-alz/azurerm/latest>
       source  = "Azure/avm-ptn-alz/azurerm"
-      version = "0.14.0"
+      version = "0.20.2"
 
       architecture_name  = "slz"
       location           = var.location

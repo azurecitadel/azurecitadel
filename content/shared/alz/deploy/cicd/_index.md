@@ -13,6 +13,10 @@ On this page you will:
 1. Review the changes
 1. Squash and merge
 
+{{< flash "warning" >}}
+Note that this step will naturally create resources that will add costs to your Azure billing.
+{{< /flash >}}
+
 ## Create a branch
 
 The main brach is protected to you must create a pull request on a feature branch. Note that the current branch is shown in Visual Studio Code's status bar.

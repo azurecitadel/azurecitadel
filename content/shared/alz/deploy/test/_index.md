@@ -16,7 +16,7 @@ The various providers in your config, such as azurerm and azapi, have additional
 
 The plans are usually run by the GitHub Actions workflows and those workflows rely on the GitHub Actions variables to define the subscription ID and backend, i.e. the storage account container and key (blob) file. You'll see how you can override the backend with a terraform_override.tf file to enable local testing without exporting environment variables.
 
-{{< flash "warn" >}}
+{{< flash "warning" >}}
 ⚠️ You **must not** attempt to run terraform apply locally. You will use the CI/CD workflow in the next page instead.
 {{< /flash >}}
 
@@ -79,7 +79,7 @@ Using the same remote backend as the CI/CD pipelines is a fantastic way to make 
 
 Setting this up takes a little more work and access but it is worth the effort.
 {{< /flash >}}
-{{< flash "warn" >}}
+{{< flash "warning" >}}
 ⚠️ Note that this option requires a privileged role. The RBAC role assignment and storage account networking changes weaken security. Check the warnings against those steps.
 {{< /flash >}}
 

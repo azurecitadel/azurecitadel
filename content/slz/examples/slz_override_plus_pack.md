@@ -1,32 +1,30 @@
 ---
-title: "Sovereign Landing Zone library with overrides"
+title: "SLZ extended with a country pack"
 date: 2025-12-03
 author: [ "Richard Cheney" ]
-description: "This is the similar to the default created by the accelerator. Uses the maintained SLZ library as above, but adds a local library to allow overrides on the extended set of archetypes as well as a space to create additional assets."
+description: "This is the same as the previous one, but also adds in an example side loaded custom library hosted on GitHub. "
 draft: false
-weight: 20
+weight: 30
 menu:
   side:
     parent: slz-examples
 series:
  - slz-examples
-highlight: true
+highlight: false
 ---
 
 ## Description
 
-This configuration stacks a local override library in `./lib` which is stacked on top of the Sovereign Landing Zone.
+As per the previous configuration, we have a local override library in `./lib` stacked on top of the Sovereign Landing Zone. It has all of the override functionality of that example.
 
-From a partner perspective this is great for defining specific archetype overrides for individual customers, and it also allows bespoke assets - e.g. custom policies or RBAC roles - to be added for that customer.
-
-The local library contains a set of uniquely named archetypes (using override files) and a different architecture name (`slz_custom` rather than `slz`). You would specify this architecture name in the module block.
+In addition there is an example custom library hosted in GitHub. It is loosely associated with the BIO compliancy requirement in the Netherlands, but the example is constructed more to illustrate how to construct custom libraries. However, the process to insert custom libraries (from the Custom Libraries lab series) is summarised here as a useful reference.
 
 ## Local override library
 
 {{< flash >}}
 Included if you need to add in a local override library first.
 
-If not then you can skip down to [Architecture and Archetypes](#architecture-and-archetypes), or right down to [Metadata](#metadata) which is the start of the most important section.
+If not then you can skip down to [Architecture and Archetypes](#architecture-and-archetypes), or right down to [Provider Block](#provider-block) which is the start of the most important section.
 {{< /flash >}}
 
 ### Create the default local override library
@@ -38,8 +36,6 @@ If not then you can skip down to [Architecture and Archetypes](#architecture-and
 {{% shared-content "alz/local_library/add_slz" %}}
 
 Note that the architecture file is still called alz_custom.alz_architecture_definition.yaml and the architecture name is **alz_custom**. The reason for this is that the Sovereign Landing Zone scenario is designed to handle brownfield scenarios.
-
-The individual [archetype override](/slz/libraries/constructs/#archetypeoverrides) can be found in `lib/archetype_definitions`.
 
 ## Architecture and Archetypes
 
@@ -99,7 +95,7 @@ and you will find override files for both in the lib's archetype_definitions fol
 
 ## Provider block
 
-The provider block here refers to the override library, in the local `lib` folder.
+The provider block here is unchanged and refers to the override library in the local `lib` folder.
 
 ```ruby
 provider "alz" {
@@ -116,17 +112,35 @@ provider "alz" {
 
 The local metadata filename is `lib/alz_library_metadata.json`.
 
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/alz_library_metadata.json>" >}}
+{{< flash >}}
+This is where the the custom library in GitHub is side loaded to add in the additional archetypes etc. within that library. Note the two dependencies.
+{{< /flash >}}
 
-The dependency is also semantically versioned. The first dependency is [Sovereign Landing Zone 2025.10.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz), which is itself stacked on top of [Azure Landing Zone  2025.9.3](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.09.3/platform/alz).
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/main/schemas/library_metadata.json",
+  "name": "local",
+  "display_name": "ALZ Accelerator - Azure Verified Modules for SLZ Platform Landing Zone",
+  "description": "This library allows overriding policies, archetypes, and management group architecture in the ALZ Accelerator.",
+  "dependencies": [
+    {
+      "path": "platform/slz",
+      "ref": "2025.10.1"
+    },
+    {
+      "custom_url": "github.com/richeney-org/Sovereign-Landing-Zone-Packs//country/nl/bio?ref=2026.01.0"
+    }
+  ]
+}
+```
 
-If you need to pull in a more recent version of the Sovereign Landing Zone library then you would update the ref here.
+The first dependency is semantically versioned to [Sovereign Landing Zone 2025.10.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz), which is itself stacked on top of [Azure Landing Zone  2025.9.3](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.9.3/platform/alz).
 
-See the previous page for more detail on the architecture, archetypes, and assets for the main Azure Landing Zone library repo.
+The second dependency is the custom_url to the custom library. The url specifies the GitHub hosted custom repo, subfolder, and ref. More details in the [custom libraries](/slz/libraries/custom/) section including [go-getter url](https://github.com/hashicorp/go-getter?tab=readme-ov-file#url-format) alternatives.
 
 ## Module block
 
-The architecture name is in `lib/alz_library_metadata.json`. Update the module block to match.
+Specify the architecture name in `lib/alz_library_metadata.json` as the value to the `architecture_name` module argument.
 
 ```ruby
 module "management_groups" {

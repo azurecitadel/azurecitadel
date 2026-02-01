@@ -6,7 +6,7 @@ description: "Add SLZ overrides to the local library"
 
 As you are using the Sovereign Landing Zone then run these commands to extend the default local library with additional override files for the additional archetypes found in the Sovereign Landing Zone.
 
-{{< flash "warn" >}}
+{{< flash "warning" >}}
 ⚠️ As well as adding the additional override files, these commands will also overwrite the following files:
 
 - **lib/alz_library_metadata.json** - library dependency on the Sovereign Landing Zone, which has its own dependency on the Azure Landing Zone
