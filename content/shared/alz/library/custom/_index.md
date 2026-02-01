@@ -32,6 +32,8 @@ Finally, there is the question of security which is enhanced by keeping the conf
 
 These pages specify GitHub for hosting the custom library, but it could be any valid URL format that [go-getter](https://pkg.go.dev/github.com/hashicorp/go-getter#readme-url-format) can access.
 
+It is assumed that you will be proficient with creating custom policies, assignments and role definitions, and comfortable with git and GitHub. Therefore this page will be reference level to give a few key pointers that you may find useful.
+
 ## Reference repos
 
 This series has described the assets and structure of a library, but it is always useful to look at examples as a reference point when creating your own custom libraries.
@@ -80,23 +82,15 @@ This will allow you to test creation without affecting any subscriptions or thei
 
 {{< /flash >}}
 
-These are example commands that I use to check that my JSON files are syntactically sound and create the Azure resources correctly.
+These are the example commands that I use to check that my JSON files are syntactically sound and create the Azure resources correctly.
 
 {{< flash "warning" >}}
 Whether your policy and role definitions actually achieve the intended functionality is outside the scope of these pages, and you naturally use these commands at your own risk.
 {{< /flash >}}
 
-The alz provider and All of f testing at management group level then you may wish to create one specifically for testing.
-
 1. Define the scope
 
-    Example for the current subscription.
-
-    ```bash
-    scope="subscriptions/$(az account show --query id --output tsv)"
-    ```
-
-    Example for a management group called "_test_".
+    The example is for a management group called "_test_". Change if required.
 
     ```bash
     scope="/providers/Microsoft.Management/managementGroups/test"
@@ -108,7 +102,7 @@ The alz provider and All of f testing at management group level then you may wis
 
     {{< modes >}}
 {{< mode title="Policy Definition" >}}
-Example policy definition filename.
+Example policy definition filename. Change as required.
 
 ```bash
 file="policy_definitions/Enforce-KV-Premium.alz_policy_definition.json"
@@ -116,7 +110,7 @@ file="policy_definitions/Enforce-KV-Premium.alz_policy_definition.json"
 
 {{< /mode >}}
 {{< mode title="Policy Set Definition" >}}
-Example policy definition filename.
+Example policy set definition filename. Change as required.
 
 ```bash
 file="policy_set_definitions/Deny-NL-Global.alz_policy_set_definition.json"
@@ -124,7 +118,7 @@ file="policy_set_definitions/Deny-NL-Global.alz_policy_set_definition.json"
 
 {{< /mode >}}
 {{< mode title="Policy Assignment" >}}
-Example policy definition filename.
+Example policy assignment filename. Change as required.
 
 ```bash
 file="policy_assignments/Deny-NL-Global.alz_policy_assignment.json"
@@ -132,7 +126,7 @@ file="policy_assignments/Deny-NL-Global.alz_policy_assignment.json"
 
 {{< /mode >}}
 {{< mode title="RBAC Role Definition" >}}
-Example policy definition filename.
+Example role definition filename. Change as required.
 
 ```bash
 file="role_definitions/fabric_reader.alz_role_definition.json"
@@ -184,33 +178,119 @@ az rest --method put --url "$uri" --body @"$file"
 {{< /mode >}}
 {{< /modes >}}
 
+1. Delete
 
-### Policy Definitions
+    Assuming that the definitions were successfully created, you may want to tidy up and remove them. Here are the commands to match the example names. Update as required.
 
-{{% shared-content "alz/library/assets/testing/policy_definitions" %}}
+    {{< modes >}}
+{{< mode title="Policy Definition" >}}
 
-### Policy Set Definitions
+```bash
+az policy definition delete --management-group test --name "Enforce-KV-Premium"
+```
 
-{{% shared-content "alz/library/assets/testing/policy_set_definitions" %}}
+{{< /mode >}}
+{{< mode title="Policy Set Definition" >}}
 
-### Policy Assignments
+```bash
+az policy set-definition delete --management-group test --name  "Deny-NL-Global"
+```
 
-{{% shared-content "alz/library/assets/testing/policy_assignments" %}}
+{{< /mode >}}
+{{< mode title="Policy Assignment" >}}
 
-### Role Definitions
+```bash
+az policy assignment delete --scope /providers/Microsoft.Management/managementGroups/test --name "Deny-NL-Global"
+```
 
-{{% shared-content "alz/library/assets/testing/role_definitions" %}}
+{{< /mode >}}
+{{< mode title="RBAC Role Definition" >}}
+
+```bash
+az role definition delete --scope /providers/Microsoft.Management/managementGroups/test --name  "fabric_reader"
+```
+
+{{< /mode >}}
+{{< /modes >}}
+
+## Using the alzlibtool
+
+The alzlibtool is a standalone CLI tool that is part of the [github.com/Azure/alzlib](https://github.com/Azure/alzlib) source repo. The tool has many uses, but I primarily use it to
+
+- check and validate a custom library
+- generate the documentation in the style seen for the platform libraries' README.md files
+
+You will need to have [Go](https://go.dev/doc/install) installed.
+
+### Install
+
+```bash
+go install github.com/Azure/alzlib@latest
+```
+
+By default this will install azlibtool into your $HOME/go/bin directory.
+
+### Testing libraries
+
+The alzlibtool can validate your custom library structure and content to ensure it conforms to the expected format.
+
+```bash
+alzlibtool check library .
+```
+
+This assumes you are running in the root of your library.
+
+### Creating documentation
+
+The alzlibtool can automatically generate comprehensive documentation for your custom library in markdown format, including the mermaid diagrams for the architecture hierarchy if it contains a hierarchy file. The command only works if your library can pass the check.
+
+{{< flash "warning" >}}
+Note that this will command will overwrite the current directories README.md file if it exists. You may want to remove the redirection, or pick another filename.
+{{< /flash >}}
+
+Generate documentation and output to README.md.
+
+```bash
+alzlibtool document library . > README.md
+```
+
+This creates markdown files documenting all archetypes, policies, assignments and other library components. You can then customise.
+
+Note that the provide block generated for the Usage section is in the format for a platform library, with path and ref arguments. Update to your custom_url format, e.g.:
+
+```ruby
+provider "alz" {
+  library_references = [
+    {
+      custom_url = "github.com/richeney-org/Sovereign-Landing-Zone-Packs//country/nl/bio?ref=2026.01.0"
+    }
+  ]
+}
+```
 
 ## Semantic versioning, tags and releases
 
-By convention the custom libraries should be versioned with releases. This allows you to update libraries in the future with control. The [semantic versioning](https://semver.org/) convention is the standard: `MAJOR.MINOR.PATCH`.
+Follow the formatting of the platform libraries by adding your own tags and releases.
 
-Rerunning existing CI/CD pipelines will not show any changes to be made if the existing alz provider blocks are pinned to a specific version of your library.  then .
+{{< modes >}}
+{{< mode title="GitHub CLI" >}}
 
+This GitHub CLI command to create releases is great. Once you have committed and pushed your repo, you can use this to interactively and it will configure a tag on the local and origin, and it will create a release in GitHub.
 
+```bash
+gh release create 2026.01.0
+```
 
-The tags are the important part
+Modify the semantic version to match the right yyyy.mm.v for your release. This will also be interactively suggested for the Title, so hit enter to accept.
 
-## Specifying custom libraries with custom_url
+If you select **Write using generated notes as template** then it will generate default release notes based on your commits and their descriptions and open in your default editor. Save.
 
-TODO
+You can then publish, save as draft or cancel.
+
+{{< /modes >}}
+{{< /mode >}}
+
+{{< flash >}}
+Note that it is the tag which is specified in your ref value, not the GitHub releases per se. However, the standard for these libraries is to ensure that the same value is used for both to avoid unnecessary confusion.
+
+{{< /flash >}}

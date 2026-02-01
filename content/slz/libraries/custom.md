@@ -1,8 +1,8 @@
 ---
-title: "Creating and using custom libraries"
+title: "Custom libraries"
 date: 2026-01-07
 author: [ "Richard Cheney" ]
-description: "Hosting custom libraries in GitHub and specifying folder and versions with custom_url."
+description: "Creating custom libraries to be hosted in GitHub, checking the contents, generating documentation, and creating tags and releases for sematic versioning."
 weight: 80
 draft: false
 menu:
