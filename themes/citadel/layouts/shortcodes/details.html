@@ -101,8 +101,8 @@ function initializeDetailsElements() {
     // Find the actual scrolling container
     const scrollContainer = document.getElementById('main-scroll') || window;
 
-    // Store the scroll position when clicking
-    let scrollPositionWhenClicked = 0;
+    // Store the scroll position when details is opened
+    let scrollPositionWhenOpened = 0;
 
     function getScrollPosition() {
       if (scrollContainer === window) {
@@ -127,20 +127,20 @@ function initializeDetailsElements() {
     }
 
     function closeDetails() {
-      // Check if summary is visible BEFORE changing anything
-      const rect = summary.getBoundingClientRect();
-      const summaryVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-
       details.classList.remove('open');
       content.style.display = 'none';
 
-      // If summary not visible, go back to where we clicked
-      if (!summaryVisible) {
-        scrollToPosition(scrollPositionWhenClicked);
+      // Check if the stored position is now off the top of the screen
+      const currentScrollPosition = getScrollPosition();
+      if (scrollPositionWhenOpened < currentScrollPosition) {
+        // The stored position is above the current view, scroll back to it
+        scrollToPosition(scrollPositionWhenOpened);
       }
     }
 
     function openDetails() {
+      // Store scroll position when opening details
+      scrollPositionWhenOpened = getScrollPosition();
       details.classList.add('open');
       content.style.display = 'block';
     }
@@ -154,8 +154,6 @@ function initializeDetailsElements() {
       if (details.classList.contains('open')) {
         closeDetails();
       } else {
-        // Store the current scroll position before opening
-        scrollPositionWhenClicked = getScrollPosition();
         openDetails();
       }
     });

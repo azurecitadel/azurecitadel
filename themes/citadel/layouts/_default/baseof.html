@@ -617,14 +617,7 @@
     // Store position before leaving the page
     window.addEventListener('beforeunload', storeScrollPosition);
 
-    // Store position when clicking internal links
-    document.addEventListener('click', function(e) {
-      const link = e.target.closest('a[href]');
-      if (link && !link.href.startsWith('mailto:') && !link.href.startsWith('tel:') && !link.target) {
-        // Only store for internal navigation, not external links or downloads
-        storeScrollPosition();
-      }
-    });
+    // Note: Scroll position storage is now handled specifically by details shortcode
 
     // Restore position when page loads (after content is ready)
     function handlePageLoad() {
