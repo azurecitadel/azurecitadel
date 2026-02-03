@@ -133,8 +133,23 @@ function initializeDetailsElements() {
       // Check if the stored position is now off the top of the screen
       const currentScrollPosition = getScrollPosition();
       if (scrollPositionWhenOpened < currentScrollPosition) {
-        // The stored position is above the current view, scroll back to it
-        scrollToPosition(scrollPositionWhenOpened);
+        // The stored position is above the current view, position details at top
+        const detailsRect = details.getBoundingClientRect();
+        const detailsTop = detailsRect.top + currentScrollPosition;
+        
+        // Account for header/navigation area - try to find header height
+        let headerOffset = 0;
+        const header = document.querySelector('header') || 
+                      document.querySelector('.header') || 
+                      document.querySelector('nav') ||
+                      document.querySelector('.navbar');
+        if (header) {
+          headerOffset = header.offsetHeight + 20; // Add some padding
+        } else {
+          headerOffset = 80; // Fallback estimate
+        }
+        
+        scrollToPosition(Math.max(0, detailsTop - headerOffset));
       }
     }
 
