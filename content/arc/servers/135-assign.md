@@ -91,7 +91,7 @@ It is preferable to configure the target environment before onboarding VMs as th
 {{< flash >}}
 Key questions:
 
-* what is your preferred automation for deploying Azure Landing Zones for customers migrating to Azure?
+* what is your preferred automation for deploying Azure landing zone for customers migrating to Azure?
 * what will you offer as a default suggested target environment for your customer's hybrid and multi-cloud estates?
 * what supporting collateral will hybrid engagements need for
   * go to market

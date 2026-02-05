@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Reference"
+title: "Azure landing zone Library - Reference"
 description: "Useful links. Extend out with sovereign specifics."
 ---
 

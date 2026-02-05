@@ -35,7 +35,7 @@ If you are attending a UK Azure Arc Partner Hack:
 ⚠️ Please complete this page before you attend the hack!
 {{< /flash >}}
 
-There will be a brief level set at the start of day one, but there is an assumption that you will have a core understanding of Azure Landing Zones and the Azure Arc hybrid capabilities. See the [Required reading](#required-reading) section for recommended links.
+There will be a brief level set at the start of day one, but there is an assumption that you will have a core understanding of Azure landing zone and the Azure Arc hybrid capabilities. See the [Required reading](#required-reading) section for recommended links.
 
 The hack is designed for partners who want to understand how they can standardise their target landing zones for multiple customers with hybrid environments. There is a focus on multi-tenancy, scale and automation and therefore the tooling is important. Whilst we understand that different people have different preferences in tooling, we have made a few assumptions to make effective use of the limited time and that includes the use of bash commands to accelerate deployments.
 
@@ -164,7 +164,7 @@ OK, your system is good to go!
 
 ## Required reading
 
-The hack will assume that you have a base understanding of Azure, Azure Arc, the Cloud Adoption Framework and Azure Landing Zones for hybrid and multi-cloud environments.
+The hack will assume that you have a base understanding of Azure, Azure Arc, the Cloud Adoption Framework and Azure landing zone for hybrid and multi-cloud environments.
 
 1. [Azure Arc product page](https://azure.microsoft.com/services/azure-arc/#product-overview)
 1. [Azure Arc-enabled servers overview](https://docs.microsoft.com/azure/azure-arc/servers/overview) (including the video)

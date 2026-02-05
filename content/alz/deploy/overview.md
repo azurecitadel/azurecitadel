@@ -1,8 +1,8 @@
 ---
-title: "What is the Azure Landing Zone?"
+title: "What is the Azure landing zone?"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
-description: "An overview for Azure Landing Zones and how they work with Azure Verified Modules."
+description: "An overview for Azure landing zone and how they work with Azure Verified Modules."
 draft: true
 weight: 10
 menu:

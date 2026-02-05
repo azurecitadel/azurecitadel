@@ -1,6 +1,6 @@
 ---
-title: "Sovereign Landing Zones"
-description: "Sovereign Landing Zones now uses the same platform as Azure Landing Zones. Use these labs to deploy a set of sovereign guardrails for your Azure environment and learn how to add country or industry packs."
+title: "Sovereign landing zone"
+description: "Sovereign landing zone now uses the same platform as Azure landing zone. Use these labs to deploy a set of sovereign guardrails for your Azure environment and learn how to add country or industry packs."
 draft: false
 menu:
   side:
@@ -10,7 +10,7 @@ layout: list
 
 ## Introduction
 
-Sovereign Landing Zones (SLZ) now builds on the same platform as Azure Landing Zones (ALZ). Microsoft has transposed the sovereign guardrails to use ALZ library constructs, ensuring consistency with the core platform while maintaining sovereignty controls.
+Sovereign landing zone (SLZ) now builds on the same platform as Azure landing zone (ALZ). Microsoft has transposed the sovereign guardrails to use ALZ library constructs, ensuring consistency with the core platform while maintaining sovereignty controls.
 
 The underlying ALZ platform leverages Azure Verified Modules (AVM) for infrastructure and the ALZ Terraform provider for policy management. This modular approach means you can layer sovereign requirements alongside the Microsoft-maintained baseline without forking the codebase.
 
@@ -28,4 +28,4 @@ Before starting, you should be familiar with:
 - Azure Policy and governance concepts
 - Basic understanding of sovereign cloud requirements
 
-This foundation is essential for implementing and customizing Sovereign Landing Zones effectively.
+This foundation is essential for implementing and customizing Sovereign landing zone effectively.

@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Initial ALZ config for management and management groups"
+title: "Azure landing zone - Initial ALZ config for management and management groups"
 ---
 
 ## Overview
@@ -69,9 +69,9 @@ You will need to run the Pull Request to trigger the CI checks and prompt a revi
 1. Add a description.
 
     ```text
-    Initial Azure Landing Zones definition. Added:
+    Initial Azure landing zone definition. Added:
 
-    - alz provider, linked to the core Azure Landing Zones library
+    - alz provider, linked to the core Azure landing zone library
     - `alz` architecture name specified in the standard management group AVM module
     - plus the related management module
     ```
@@ -159,7 +159,7 @@ The merge (pull) into the main branch will trigger the Continuous Deployment (CD
 
 The **CD / Apply with Terraform** step will start to run once the plan has been approved.
 
-Click on the job name to view the log in the workflow. The core Azure Landing Zone will be deployed. Expect it to take up to ten minutes.
+Click on the job name to view the log in the workflow. The core Azure landing zone will be deployed. Expect it to take up to ten minutes.
 
 ![A successfully completed deployment step in GitHub Actions](/shared/alz/deploy/cicd/complete.png)
 

@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Test a config"
+title: "Azure landing zone - Test a config"
 ---
 
 ## Overview

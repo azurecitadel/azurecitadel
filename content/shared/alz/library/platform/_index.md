@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Using platform libraries"
+title: "Azure landing zone Library - Using platform libraries"
 description: "Shortcuts to the main platform content and how to use them."
 ---
 
@@ -12,23 +12,23 @@ Before we move on to shared custom libraries, let's cover the platform libraries
 This page will first show how to use the platform libraries directly, but will then quickly switch to inserting a local override library. This is the recommended approach for most customers as it provides more flexibility.
 {{< /flash >}}
 
-## Azure Landing Zone Library's platform libraries
+## Azure landing zone Library's platform libraries
 
 These are your platform libraries. All are found in the platform folder of [Azure/Azure-Landing-Zones-Library](https://aka.ms/alz/library) and are maintained by Microsoft with semantic versioning for the [releases](https://github.com/Azure/Azure-Landing-Zones-Library/releases).
 
-- Azure Landing Zone (platform/alz)
-- Sovereign Landing Zone (platform/slz)
+- Azure landing zone (platform/alz)
+- Sovereign landing zone (platform/slz)
 - Azure Monitor Baseline Alerts (platform/amba)
 
 If you find any issues with the platform libraries then you can use the [issue tracking](https://aka.ms/alz/issues) for known issues or raise a new one.
 
 Each platform area has a README page that includes a mermaid diagram for the architecture and a listing of all of the assets.
 
-### Azure Landing Zone (alz)
+### Azure landing zone (alz)
 
-The **Microsoft ALZ Library** has the core Azure Landing Zone definitions.
+The **Microsoft ALZ Library** has the core Azure landing zone definitions.
 
-Example release: [platform/alz/2026.01.0](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz)
+Example release: [platform/alz/2026.01.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz)
 
 Example alz provider block:
 
@@ -37,23 +37,23 @@ provider "alz" {
   library_references = [
     {
       path = "platform/alz"
-      ref  = "2026.01.0"
+      ref  = "2026.01.1"
     }
   ]
 }
 ```
 
-The [platform/alz/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/alz/2026.01.0/platform/alz/alz_library_metadata.json) file has no dependencies.
+The [platform/alz/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/alz/2026.01.1/platform/alz/alz_library_metadata.json) file has no dependencies.
 
 {{< details "platform/alz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.01.0/platform/alz/alz_library_metadata.json>" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.01.1/platform/alz/alz_library_metadata.json>" >}}
 {{< /details >}}
 
-### Sovereign Landing Zone (slz)
+### Sovereign landing zone (slz)
 
-The **Microsoft SLZ Library** includes Sovereign Landing Zone extensions. This is stacked on top of Azure Landing Zone with additional management groups and archetypes for sovereignty scenarios.
+The **Microsoft SLZ Library** includes Sovereign landing zone extensions. This is stacked on top of Azure landing zone with additional management groups and archetypes for sovereignty scenarios.
 
-Example release: [platform/slz/2025.10.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz)
+Example release: [platform/slz/2026.02.0](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.02.0/platform/slz)
 
 Example alz provider block:
 
@@ -62,23 +62,23 @@ provider "alz" {
   library_references = [
     {
       path = "platform/slz"
-      ref  = "2025.10.1"
+      ref  = "2026.02.0"
     }
   ]
 }
 ```
 
-The [metadata file](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/slz/2025.10.1/platform/slz/alz_library_metadata.json) has a dependency on ALZ.
+The [metadata file](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/slz/2026.02.0/platform/slz/alz_library_metadata.json) has a dependency on ALZ.
 
 {{< details "platform/slz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2025.10.1/platform/slz/alz_library_metadata.json>" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2026.02.0/platform/slz/alz_library_metadata.json>" >}}
 {{< /details >}}
 
 ### Azure Monitor Baseline Alerts (amba)
 
 The **Microsoft AMBA Library** is an additional platform library with policies relating to [Azure Monitoring Baseline Alerts](https://aka.ms/amba). Can be used standalone or in addition to ALZ/SLZ.
 
-Example release: [platform/amba/2025.11.0](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/amba/2025.11.0/platform/amba)
+Example release: [platform/amba/2026.01.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/amba/2026.01.1/platform/amba)
 
 Example alz provider block:
 
@@ -87,16 +87,16 @@ provider "alz" {
   library_references = [
     {
       path = "platform/amba"
-      ref  = "2025.11.0"
+      ref  = "2026.01.1"
     }
   ]
 }
 ```
 
-The [platform/amba/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/amba/2025.11.0/platform/amba/alz_library_metadata.json) file has no dependencies.
+The [platform/amba/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/amba/2026.01.1/platform/amba/alz_library_metadata.json) file has no dependencies.
 
 {{< details "platform/alz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/amba/2025.11.0/platform/amba/alz_library_metadata.json>" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/amba/2026.01.1/platform/amba/alz_library_metadata.json>" >}}
 {{< /details >}}
 
 ## Creating a local override library
@@ -111,7 +111,7 @@ This is the recommended approach even if you are not overriding anything on day 
 
 {{% shared-content "alz/local_library" %}}
 
-### Extend for the Sovereign Landing Zone
+### Extend for the Sovereign landing zone
 
 {{< flash >}}
 Optional.
@@ -119,7 +119,7 @@ Optional.
 
 {{% shared-content "alz/local_library/add_slz" %}}
 
-Note that the architecture file is still called **alz_custom.alz_architecture_definition.yaml** (rather than slz_custom.alz_architecture_definition.yaml) and the architecture name is **alz_custom** (rather than slz_custom). The reason for this is that the Sovereign Landing Zone scenario is designed to gracefully handle brownfield scenarios, uplifting existing Azure Landing Zone deployments to include the additional Sovereignty Landing Zone assets.
+Note that the architecture file is still called **alz_custom.alz_architecture_definition.yaml** (rather than slz_custom.alz_architecture_definition.yaml) and the architecture name is **alz_custom** (rather than slz_custom). The reason for this is that the Sovereign landing zone scenario is designed to gracefully handle brownfield scenarios, uplifting existing Azure landing zone deployments to include the additional Sovereignty Landing Zone assets.
 
 ## Using a local override library
 
@@ -141,7 +141,7 @@ provider "alz" {
 
 Update the dependencies in the local library's metadata file to include the required libraries.
 
-Here is an example **lib/alz_library_metadata.json** in a local library, stacked on top the Azure Landing Zone library.
+Here is an example **lib/alz_library_metadata.json** in a local library, stacked on top the Azure landing zone library.
 
 ```json
 {
@@ -152,7 +152,7 @@ Here is an example **lib/alz_library_metadata.json** in a local library, stacked
   "dependencies": [
     {
       "path": "platform/alz",
-      "ref": "2026.01.0"
+      "ref": "2026.01.1"
     }
   ]
 }

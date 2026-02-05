@@ -15,7 +15,7 @@ highlight: false
 
 ## Description
 
-As per the previous configuration, we have a local override library in `./lib` stacked on top of the Sovereign Landing Zone. It has all of the override functionality of that example.
+As per the previous configuration, we have a local override library in `./lib` stacked on top of the Sovereign landing zone. It has all of the override functionality of that example.
 
 In addition there is an example custom library hosted in GitHub. It is loosely associated with the BIO compliancy requirement in the Netherlands, but the example is constructed more to illustrate how to construct custom libraries. However, the process to insert custom libraries (from the Custom Libraries lab series) is summarised here as a useful reference.
 
@@ -31,11 +31,11 @@ If not then you can skip down to [Architecture and Archetypes](#architecture-and
 
 {{% shared-content "alz/local_library" %}}
 
-### Extend the library for Sovereign Landing Zone
+### Extend the library for Sovereign landing zone
 
 {{% shared-content "alz/local_library/add_slz" %}}
 
-Note that the architecture file is still called alz_custom.alz_architecture_definition.yaml and the architecture name is **alz_custom**. The reason for this is that the Sovereign Landing Zone scenario is designed to handle brownfield scenarios.
+Note that the architecture file is still called alz_custom.alz_architecture_definition.yaml and the architecture name is **alz_custom**. The reason for this is that the Sovereign landing zone scenario is designed to handle brownfield scenarios.
 
 ## Architecture and Archetypes
 
@@ -43,7 +43,7 @@ The architecture name is `slz_custom`, as defined in the local `slz_custom.alz_a
 
 {{< mermaid >}}
 flowchart TD
-  slz["Sovereign Landing Zone
+  slz["Sovereign landing zone
 (root_custom, sovereign_root_custom)"]
   slz --> decommissioned
   decommissioned["Decommissioned
@@ -86,7 +86,7 @@ flowchart TD
 (sandbox_custom)"]
 {{< /mermaid >}}
 
-Note the Sovereign Landing Zone at the top has two archetypes assigned:
+Note the Sovereign landing zone at the top has two archetypes assigned:
 
 - root_custom
 - sovereign_root_custom
@@ -125,7 +125,7 @@ This is where the the custom library in GitHub is side loaded to add in the addi
   "dependencies": [
     {
       "path": "platform/slz",
-      "ref": "2025.10.1"
+      "ref": "2026.02.0"
     },
     {
       "custom_url": "github.com/richeney-org/Sovereign-Landing-Zone-Packs//country/nl/bio?ref=2026.01.0"
@@ -134,7 +134,7 @@ This is where the the custom library in GitHub is side loaded to add in the addi
 }
 ```
 
-The first dependency is semantically versioned to [Sovereign Landing Zone 2025.10.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz), which is itself stacked on top of [Azure Landing Zone  2025.9.3](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2025.9.3/platform/alz).
+The first dependency is semantically versioned to [Sovereign landing zone 2025.10.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.02.0/platform/slz), which is itself stacked on top of [Azure landing zone  2025.9.3](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz).
 
 The second dependency is the custom_url to the custom library. The url specifies the GitHub hosted custom repo, subfolder, and ref. More details in the [custom libraries](/slz/libraries/custom/) section including [go-getter url](https://github.com/hashicorp/go-getter?tab=readme-ov-file#url-format) alternatives.
 

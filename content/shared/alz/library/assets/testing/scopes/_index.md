@@ -1,10 +1,10 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Scopes"
+title: "Azure landing zone Library - Scopes"
 description: "Setting scopes at management group or subscription level."
 ---
 
-When working with custom policies and role definitions, you have to create those at a scope point. Most of the definitions are created at a high scope point such as Sovereign Landing Zone (`alz`) so that they can be used throughout the environment. For testing, I often use the current subscription scope as it is simple to clean it up afterwards. Both options are shown.
+When working with custom policies and role definitions, you have to create those at a scope point. Most of the definitions are created at a high scope point such as Sovereign landing zone (`alz`) so that they can be used throughout the environment. For testing, I often use the current subscription scope as it is simple to clean it up afterwards. Both options are shown.
 
 #### Management Group Scope
 
@@ -25,7 +25,7 @@ Here the scope is being set to the `alz` management group.
     DisplayName             Name
     ----------------------  ------------------------------------
     Tenant Root Group       <tenantId>
-    Sovereign Landing Zone  alz
+    Sovereign landing zone  alz
     Confidential Corp       confidential-corp
     Confidential Online     confidential-online
     Connectivity            connectivity

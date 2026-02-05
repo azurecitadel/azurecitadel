@@ -1,6 +1,6 @@
 ---
-title: "Deploy Sovereign Landing Zone"
-description: "Follow this guide to deploy a Sovereign Landing Zone using Azure Verified Modules"
+title: "Deploy Sovereign landing zone"
+description: "Follow this guide to deploy a Sovereign landing zone using Azure Verified Modules"
 draft: false
 menu:
   side:

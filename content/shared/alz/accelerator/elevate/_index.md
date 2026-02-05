@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Bootstrap Prereqs"
+title: "Azure landing zone - Bootstrap Prereqs"
 ---
 
 ## Overview

@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Create an initial config"
+title: "Azure landing zone - Create an initial config"
 ---
 
 ## Clone the repo
@@ -36,23 +36,23 @@ title: "Azure Landing Zones - Create an initial config"
 
 ## What is the ALZ Library repo?
 
-We will be looking at libraries in greater detail in another series, but for the moment here is a brief introduction. You can read the documentation for the Azure Landing Zone libraries at <https://azure.github.io/Azure-Landing-Zones-Library>.
+We will be looking at libraries in greater detail in another series, but for the moment here is a brief introduction. You can read the documentation for the Azure landing zone libraries at <https://azure.github.io/Azure-Landing-Zones-Library>.
 
 Libraries contain definitions for core compliancy guardrails. They define archetypes, collections of Azure Policy policies, initiatives, and assignments, plus custom role definitions. The archetypes. The architecture definitions then define the set of management groups, including their name, cosmetic display names, and the array of archetypes assigned to them.
 
-The [Azure Landing Zones Terraform provider](https://registry.terraform.io/providers/Azure/alz/latest/docs) can pull library definitions from different sources. These are then referenced by the [ALZ Terraform module](https://registry.terraform.io/modules/Azure/avm-ptn-alz/azurerm/latest) which specifies the architecture_name as well as any additional modifications, default values, etc. The two are closely related and these labs will help you to understand both.
+The [Azure landing zone Terraform provider](https://registry.terraform.io/providers/Azure/alz/latest/docs) can pull library definitions from different sources. These are then referenced by the [ALZ Terraform module](https://registry.terraform.io/modules/Azure/avm-ptn-alz/azurerm/latest) which specifies the architecture_name as well as any additional modifications, default values, etc. The two are closely related and these labs will help you to understand both.
 
-The provider can pull from more than one source, and those sources can have dependencies on other libraries, which provides great scope for extensibility and customisation. We will explore this from a Microsoft partner perspective,  extending the Azure Landing Zone and Sovereign Landing Zone baselines with reusable partner libraries, including country and industry packs for the sovereignty context. In addition, we will explore using archetype overrides to allow individual customers to customise their deployments.
+The provider can pull from more than one source, and those sources can have dependencies on other libraries, which provides great scope for extensibility and customisation. We will explore this from a Microsoft partner perspective,  extending the Azure landing zone and Sovereign landing zone baselines with reusable partner libraries, including country and industry packs for the sovereignty context. In addition, we will explore using archetype overrides to allow individual customers to customise their deployments.
 
-The most common library source is the [ALZ Library repo](https://aka.ms/alz/library) which is actively maintained by the Microsoft Customer Architecture and Engineering team (CAE). The repo contains library definitions for Azure Landing Zones, Sovereign Landing Zones, and Azure Monitoring Baseline Alerts. All are semantically versioned and you can view the [releases](https://github.com/Azure/Azure-Landing-Zones-Library/releases).
+The most common library source is the [ALZ Library repo](https://aka.ms/alz/library) which is actively maintained by the Microsoft Customer Architecture and Engineering team (CAE). The repo contains library definitions for Azure landing zone, Sovereign landing zone, and Azure Monitoring Baseline Alerts. All are semantically versioned and you can view the [releases](https://github.com/Azure/Azure-Landing-Zones-Library/releases).
 
 {{< modes >}}
-{{< mode title="Azure Landing Zone" >}}
+{{< mode title="Azure landing zone" >}}
 
 {{% shared-content "alz/deploy/initial/alz" %}}
 
 {{< /mode >}}
-{{< mode title="Sovereign Landing Zone" >}}
+{{< mode title="Sovereign landing zone" >}}
 
 {{% shared-content "alz/deploy/initial/slz" %}}
 

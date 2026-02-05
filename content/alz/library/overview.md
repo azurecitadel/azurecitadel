@@ -2,7 +2,7 @@
 title: "What is a library?"
 date: 2026-01-07
 author: [ "Richard Cheney" ]
-description: "Overview of the Azure Landing Zones Library system."
+description: "Overview of the Azure landing zone Library system."
 draft: false
 weight: 10
 menu:
@@ -19,7 +19,7 @@ series:
 
 {{< mermaid >}}
 ---
-title: Azure Landing Zone structure
+title: Azure landing zone structure
 ---
 
 graph TD

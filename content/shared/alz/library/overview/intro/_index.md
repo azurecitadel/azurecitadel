@@ -1,12 +1,12 @@
 ---
 headless: true
-title: "Azure Landing Zones Library Overview - Intro"
-description: "A brief overview of the Azure Landing Zones Library system architecture, components, and design principles."
+title: "Azure landing zone Library Overview - Intro"
+description: "A brief overview of the Azure landing zone Library system architecture, components, and design principles."
 ---
 
 ## Introduction
 
-The Azure Landing Zones **library** format is a prescribed structure containing JSON and YAML files to provide assets and controls for use by the Terraform alz provider. Understanding libraries and how they are used is vital when going beyond the defaults for governed Azure environment and when you are looking to override, modify and extend.
+The Azure landing zone **library** format is a prescribed structure containing JSON and YAML files to provide assets and controls for use by the Terraform alz provider. Understanding libraries and how they are used is vital when going beyond the defaults for governed Azure environment and when you are looking to override, modify and extend.
 
 The sole purpose of a library is to help define the management group structure - and the associated policies and roles - used to govern environments assets.
 

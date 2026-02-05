@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Browsing the resulting deployment"
+title: "Azure landing zone - Browsing the resulting deployment"
 ---
 
 {{< flash "danger" >}}

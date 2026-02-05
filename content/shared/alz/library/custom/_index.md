@@ -1,12 +1,12 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Creating and using hosted custom libraries"
+title: "Azure landing zone Library - Creating and using hosted custom libraries"
 description: "Where to host, how to secure."
 ---
 
 ## Overview
 
-The focus of the deploy lab series for both Azure Landing Zone and Sovereign Landing Zone was the platform libraries themselves, and the local override library that you then added to your repo before testing and deploying via the CI/CD pipelines.
+The focus of the deploy lab series for both Azure landing zone and Sovereign landing zone was the platform libraries themselves, and the local override library that you then added to your repo before testing and deploying via the CI/CD pipelines.
 
 For most customers this will be all they ever need.
 
@@ -21,9 +21,9 @@ So, what is the point of a custom library hosted in GitHub?
 {{< flash >}}
 There are a main reasons, and I'll give a single word for each: **reuse** and **security**.
 
-The main reason is reuse and it particularly valid for the work I do with Microsoft partners. Here they can pull together their own custom definitions into a custom repo and reuse for multiple Azure Landing Zone customers, including support for multiple archetypes and architectures for common patterns, avoiding local overriding by default.
+The main reason is reuse and it particularly valid for the work I do with Microsoft partners. Here they can pull together their own custom definitions into a custom repo and reuse for multiple Azure landing zone customers, including support for multiple archetypes and architectures for common patterns, avoiding local overriding by default.
 
-The value is even greater in sovereignty scenarios, where the baseline Sovereign Landing Zone library can be extended and customised with packs specific to requirement for specific regions, countries, and industry compliancy demands.
+The value is even greater in sovereignty scenarios, where the baseline Sovereign landing zone library can be extended and customised with packs specific to requirement for specific regions, countries, and industry compliancy demands.
 
 A benefit is that the custom libraries support semantic versioning, which allows release control at a customer level.
 
@@ -42,11 +42,11 @@ Platform libraries found in the platform subfolder of <https://aka.ms/alz/librar
 
 - [platform/alz](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz),
 
-    The main Azure Landing Zone repo has a huge selection of assets to use as a reference.
+    The main Azure landing zone repo has a huge selection of assets to use as a reference.
 
 - [platform/slz](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz)
 
-    The Sovereign Landing Zone library is a good example of a "stacked" library, extending the dependency (alz) and creating new management groups in the architecture. This is the repo I use most often as a reference when creating custom libraries.
+    The Sovereign landing zone library is a good example of a "stacked" library, extending the dependency (alz) and creating new management groups in the architecture. This is the repo I use most often as a reference when creating custom libraries.
 
 - [platform/amba](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/amba)
 
@@ -58,11 +58,11 @@ Additional example library repos found pinned in my <https://github.com/richeney
 
 - [Azure-Citadel-Custom-Library](https://github.com/richeney-org/Azure-Citadel-Custom-Library)
 
-    Example single custom library for Azure Landing Zones' alz provider for partners or organisations that repeatably deploy customised landing zones.
+    Example single custom library for Azure landing zone' alz provider for partners or organisations that repeatably deploy customised landing zones.
 
 - [Sovereign-Landing-Zone-Packs](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs)
 
-    Example repo capable of hosting multiple libraries to extend a Sovereign Landing Zone to meet country and industry requirements. Each library will be in a subfolder.
+    Example repo capable of hosting multiple libraries to extend a Sovereign landing zone to meet country and industry requirements. Each library will be in a subfolder.
 
 Construct your repo to match the format of one of these.
 

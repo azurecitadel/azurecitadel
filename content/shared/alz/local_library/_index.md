@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Local Library"
+title: "Azure landing zone Library - Local Library"
 description: "Simple code blocks for creating a local library"
 ---
 
@@ -8,7 +8,7 @@ description: "Simple code blocks for creating a local library"
 
 {{< tab title="Bash" >}}
 
-These commands are designed for Bash on a Linux/macOS system. Ensure that you are in the root of your Azure Landing Zone repo.
+These commands are designed for Bash on a Linux/macOS system. Ensure that you are in the root of your Azure landing zone repo.
 
 ```bash
 tmp=$(mktemp -d)
@@ -23,7 +23,7 @@ rm -rf "$tmp"
 {{< /tab >}}
 {{< tab title="PowerShell" >}}
 
-These commands are designed for PowerShell on a Windows system. Ensure that you are in the root of your Azure Landing Zone repo.
+These commands are designed for PowerShell on a Windows system. Ensure that you are in the root of your Azure landing zone repo.
 
 ```powershell
 $tmp = Join-Path $env:TEMP (New-Guid)
@@ -39,4 +39,4 @@ Remove-Item -Path $tmp -Recurse -Force
 {{< /tab >}}
 {{< /tabs >}}
 
-The code blocks creates a local library using similar logic to the documentation for the Azure Landing Zone accelerator, and pulls the [example lib folder](https://github.com/Azure/alz-terraform-accelerator/raw/refs/heads/main/templates/platform_landing_zone/lib) from the ALZ Accelerator repo.
+The code blocks creates a local library using similar logic to the documentation for the Azure landing zone accelerator, and pulls the [example lib folder](https://github.com/Azure/alz-terraform-accelerator/raw/refs/heads/main/templates/platform_landing_zone/lib) from the ALZ Accelerator repo.

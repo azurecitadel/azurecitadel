@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Constructs"
+title: "Azure landing zone Library - Constructs"
 description: "There are three library constructs - archetypes, archetype overrides and infrastructure. See how they relate to each other."
 ---
 
@@ -8,7 +8,7 @@ description: "There are three library constructs - archetypes, archetype overrid
 
 The assets on the previous page - policy definitions, policy set definitions, role definitions, and policy assignments - will all be familiar to those working with governance on Azure and use the standard definition and assignment schemas for those resources.
 
-The three constructs covered on this page are specific to the Azure Landing Zone library format, and control how those assets are used by the alz provider and by clients such as the Bicep and Terraform modules for management groups.
+The three constructs covered on this page are specific to the Azure landing zone library format, and control how those assets are used by the alz provider and by clients such as the Bicep and Terraform modules for management groups.
 
 Those three constructs are:
 
@@ -25,9 +25,9 @@ The assets in a library don't do anything unless they are grouped into archetype
 | Folder | **archetype_definitions** |
 | Filename | **\<name>.alz_archetype_definition.json** |
 | Formats | JSON or YAML |
-| Examples | [Azure Landing Zone archetypes](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/archetype_definitions) |
-| | [Sovereign Landing Zone archetypes](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz/archetype_definitions) |
-| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/archetype_definitions) |
+| Examples | [Azure landing zone archetypes](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/archetype_definitions) |
+| | [Sovereign landing zone archetypes](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz/archetype_definitions) |
+| | [Example Sovereign landing zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/archetype_definitions) |
 | Documentation | [Archetype Definitions](https://azure.github.io/Azure-Landing-Zones-Library/assets/archetypes) |
 
 {{< details "Archetype Definition schema" >}}
@@ -57,8 +57,8 @@ Archetype overrides define a delta against a base archetype, which add significa
 | Folder | **archetype_definitions** |
 | Filename | **\<name>.alz_archetype_override.json** |
 | Formats | JSON or YAML |
-| Examples | [Azure Landing Zone Accelerator's local lib template](https://github.com/Azure/alz-terraform-accelerator/tree/main/templates/platform_landing_zone/lib/archetype_definitions) |
-| | [Sovereign Landing Zone Accelerator's local lib template delta](https://github.com/Azure/alz-terraform-accelerator/tree/main/templates/platform_landing_zone/examples/slz/lib/archetype_definitions) |
+| Examples | [Azure landing zone Accelerator's local lib template](https://github.com/Azure/alz-terraform-accelerator/tree/main/templates/platform_landing_zone/lib/archetype_definitions) |
+| | [Sovereign landing zone Accelerator's local lib template delta](https://github.com/Azure/alz-terraform-accelerator/tree/main/templates/platform_landing_zone/examples/slz/lib/archetype_definitions) |
 | Documentation | [Archetype Overrides](https://azure.github.io/Azure-Landing-Zones-Library/assets/archetype-overrides/) |
 
 {{< details "Archetype Override schema" >}}
@@ -90,9 +90,9 @@ The architecture definitions finally bring everything together, defining the man
 | Folder | **architecture_definitions** |
 | Filename | **\<name>.alz_architecture_definition.json** |
 | Formats | JSON or YAML |
-| Examples | [Azure Landing Zone architecture](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/architecture_definitions) |
-| | [Sovereign Landing Zone architecture](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz/architecture_definitions) |
-| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/architecture_definitions) |
+| Examples | [Azure landing zone architecture](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/architecture_definitions) |
+| | [Sovereign landing zone architecture](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz/architecture_definitions) |
+| | [Example Sovereign landing zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio/architecture_definitions) |
 | Documentation | [Architectures](https://azure.github.io/Azure-Landing-Zones-Library/assets/architectures/) |
 
 {{< details "Architecture Definition schema" >}}
@@ -102,7 +102,7 @@ The architecture definitions finally bring everything together, defining the man
 
 ### Architecture example #1: [alz](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/platform/alz/architecture_definitions/alz.alz_architecture_definition.json)
 
-This is the default architecture file used in the main Azure Landing Zone platform library.
+This is the default architecture file used in the main Azure landing zone platform library.
 
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/heads/main/platform/alz/architecture_definitions/alz.alz_architecture_definition.json>" >}}
 
@@ -130,7 +130,7 @@ This is the architecture file used in the local library.
 
 ### Architecture example #3: [alz_custom + slz](https://github.com/Azure/alz-terraform-accelerator/blob/main/templates/platform_landing_zone/examples/slz/lib/architecture_definitions/alz_custom.alz_architecture_definition.yaml)
 
-This is the same architecture file in the local library after it has been updated with the additional Sovereign Landing Zone archetypes and management groups.
+This is the same architecture file in the local library after it has been updated with the additional Sovereign landing zone archetypes and management groups.
 
 {{< details "alz_custom with slz" >}}
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/architecture_definitions/alz_custom.alz_architecture_definition.yaml>" >}}
@@ -147,7 +147,7 @@ This is the same architecture file in the local library after it has been update
 
 ### Architecture example #4: [nl_slz_custom](https://github.com/Azure/alz-terraform-accelerator/blob/main/templates/platform_landing_zone/examples/slz/lib/architecture_definitions/alz_custom.alz_architecture_definition.yaml)
 
-This final version includes the is the same architecture file in the local library after it has been updated with the additional Sovereign Landing Zone archetypes and management groups.
+This final version includes the is the same architecture file in the local library after it has been updated with the additional Sovereign landing zone archetypes and management groups.
 
 {{< details "alz_custom with slz" >}}
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/architecture_definitions/alz_custom.alz_architecture_definition.yaml>" >}}

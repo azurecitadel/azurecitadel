@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Metadata"
+title: "Azure landing zone Library - Metadata"
 description: "Documentation for the metadata and default policy values files."
 ---
 
@@ -22,9 +22,9 @@ There needs to be a single metadata file per library.
 | Folder | |
 | Filename | **alz_library_metadata.json** |
 | Formats | JSON only |
-| Examples | [Azure Landing Zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz) |
-| | [Sovereign Landing Zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz) |
-| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio) |
+| Examples | [Azure landing zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz) |
+| | [Sovereign landing zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz) |
+| | [Example Sovereign landing zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio) |
 | Documentation | [Metadata](https://azure.github.io/Azure-Landing-Zones-Library/assets/metadata) |
 
 {{< details "Metadata schema" >}}
@@ -34,7 +34,7 @@ There needs to be a single metadata file per library.
 
 ### Metadata example #1: [alz](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/platform/alz/alz_library_metadata.json)
 
-This is the default metadata file for Azure Landing Zone.
+This is the default metadata file for Azure landing zone.
 
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/heads/main/platform/alz/alz_library_metadata.json>" >}}
 
@@ -46,38 +46,38 @@ This is the default metadata file for Azure Landing Zone.
 
 ### Metadata example #2: [alz_custom](https://github.com/Azure/alz-terraform-accelerator/blob/main/templates/platform_landing_zone/lib/alz_library_metadata.json)
 
-This is the default metadata file for a local library in `./lib` when stacked on top of the main Azure Landing Zone library.
+This is the default metadata file for a local library in `./lib` when stacked on top of the main Azure landing zone library.
 
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/lib/alz_library_metadata.json>" >}}
 
 {{< flash >}}
 
-- There is a dependency on the `platform/alz/2026.01.0` release.
+- There is a dependency on the `platform/alz/2026.01.1` release.
 {{< /flash >}}
 
 ### Metadata example #3: [slz](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/platform/slz/alz_library_metadata.json)
 
-This is the default metadata file for Sovereign Landing Zone. This library is essentially a custom platform library stacked on top of the main Azure Landing Zone Library.
+This is the default metadata file for Sovereign landing zone. This library is essentially a custom platform library stacked on top of the main Azure landing zone Library.
 
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/heads/main/platform/slz/alz_library_metadata.json>" >}}
 
 {{< flash >}}
 
 - The path in the repo is `platform/slz`
-- The Sovereign Landing Zone library is dependent on the `platform/alz/2026.01.0` release.
+- The Sovereign landing zone library is dependent on the `platform/alz/2026.01.1` release.
 {{< /flash >}}
 
 ### Metadata example #4: [slz_custom](https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/alz_library_metadata.json)
 
-This is the default metadata file for the local library in `./lib` when stacked on top of the Sovereign Landing Zone library.
+This is the default metadata file for the local library in `./lib` when stacked on top of the Sovereign landing zone library.
 
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/alz_library_metadata.json>" >}}
 
 {{< flash >}}
 
-- There is a dependency on the `platform/slz/2025.10.1` Sovereign Landing Zone library release.
+- There is a dependency on the `platform/slz/2026.02.0` Sovereign landing zone library release.
 - Remember that this is the one above, and therefore the dependency is recursively chained.
-- The full dependency chain is therefore `./lib` > `platform/slz/2025.10.1` > `platform/alz/2026.01.0`.
+- The full dependency chain is therefore `./lib` > `platform/slz/2026.02.0` > `platform/alz/2026.01.1`.
 {{< /flash >}}
 
 ## Policy Default Values
@@ -89,9 +89,9 @@ There can be an optional Policy Default Values file per library.
 | Folder | |
 | Filename | **alz_policy_default_values.json** |
 | Formats | JSON or YAML |
-| Examples | [Azure Landing Zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz) |
-| | [Sovereign Landing Zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz) |
-| | [Example Sovereign Landing Zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio) |
+| Examples | [Azure landing zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz) |
+| | [Sovereign landing zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz) |
+| | [Example Sovereign landing zone country pack](https://github.com/richeney-org/Sovereign-Landing-Zone-Packs/tree/main/country/nl/bio) |
 | Documentation | [Policy Assignment Default Values](https://azure.github.io/Azure-Landing-Zones-Library/assets/policy-default-values) |
 
 {{< details "Default Policy Values schema" >}}
@@ -101,7 +101,7 @@ There can be an optional Policy Default Values file per library.
 
 ### Metadata example #1: [slz](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/platform/slz/alz_policy_default_values.json)
 
-This is the default_policy_values file for the Sovereign Landing Zone.
+This is the default_policy_values file for the Sovereign landing zone.
 
 {{< code lang="yaml" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/heads/main/platform/slz/alz_policy_default_values.json>" >}}
 

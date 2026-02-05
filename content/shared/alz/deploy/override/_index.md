@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Adding an override file"
+title: "Azure landing zone - Adding an override file"
 ---
 
 ## Creating a local override library
@@ -10,7 +10,7 @@ Local libraries are commonly used, enabling archetype_overrides so that customer
 {{< flash "tip" >}}
 This is the recommended approach even if you are not overriding anything on day one.
 
-Adding in a local override library after you have deployed Azure Landing Zones or Sovereign Landing Zones has a greater impact based on resource names in the Terraform state file.
+Adding in a local override library after you have deployed Azure landing zone or Sovereign landing zone has a greater impact based on resource names in the Terraform state file.
 
 This way you can easily choose to override the archetypes later. Or you have the option to add in a hosted custom library by either
 
@@ -21,20 +21,20 @@ and then updating the architecture definition.
 {{< /flash >}}
 
 {{< modes >}}
-{{< mode title="Azure Landing Zone" >}}
+{{< mode title="Azure landing zone" >}}
 
 ### Creating an ALZ local override library
 
 {{% shared-content "alz/local_library" %}}
 
 {{< /mode >}}
-{{< mode title="Sovereign Landing Zone" >}}
+{{< mode title="Sovereign landing zone" >}}
 
 {{< flash >}}
-The process for Sovereign Landing Zone is two-step and follows the official Microsoft documentation:
+The process for Sovereign landing zone is two-step and follows the official Microsoft documentation:
 
-1. Create a standard local override library using exactly the same process as you would for the Azure Landing Zone platform library
-1. Then update with additional files (and overwrites) specific to the Sovereign Landing Zone's additional management groups and archetypes
+1. Create a standard local override library using exactly the same process as you would for the Azure landing zone platform library
+1. Then update with additional files (and overwrites) specific to the Sovereign landing zone's additional management groups and archetypes
 
 The update step below warns which files will be overwritten by step two.
 {{< /flash >}}
@@ -43,14 +43,14 @@ The update step below warns which files will be overwritten by step two.
 
 {{% shared-content "alz/local_library" %}}
 
-### Then extend for the Sovereign Landing Zone
+### Then extend for the Sovereign landing zone
 
 {{% shared-content "alz/local_library/add_slz" %}}
 
 {{< flash >}}
 Note that the alz_architecture_definition.yaml architecture file's architecture name (and file prefix) is unchanged and uses **alz_custom** rather than **slz_custom**.
 
-The reason for this approach is that the Sovereign Landing Zone scenario is designed to gracefully handle brownfield scenarios, uplifting existing Azure Landing Zone deployments to include the additional Sovereignty Landing Zone assets.
+The reason for this approach is that the Sovereign landing zone scenario is designed to gracefully handle brownfield scenarios, uplifting existing Azure landing zone deployments to include the additional Sovereignty Landing Zone assets.
 {{< /flash >}}
 {{< /mode >}}
 {{< /modes >}}
@@ -60,20 +60,20 @@ The reason for this approach is that the Sovereign Landing Zone scenario is desi
 The dependencies in the local library's metadata file are now an additional control point for you.
 
 {{< modes >}}
-{{< mode title="Azure Landing Zone" >}}
+{{< mode title="Azure landing zone" >}}
 
-Note that the local metadata library is stacked on top the Azure Landing Zone library, and specifies the release version.
+Note that the local metadata library is stacked on top the Azure landing zone library, and specifies the release version.
 
 {{< code lang="json" url="<https://github.com/Azure/alz-terraform-accelerator/raw/refs/heads/main/templates/platform_landing_zone/lib/alz_library_metadata.json>" >}}
 
 {{< /mode >}}
-{{< mode title="Sovereign Landing Zone" >}}
+{{< mode title="Sovereign landing zone" >}}
 
-Note that it is stacked on top the Sovereign Landing Zone library, and specifies the release version.
+Note that it is stacked on top the Sovereign landing zone library, and specifies the release version.
 
 {{< code lang="json" url="<https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/alz_library_metadata.json>" >}}
 
-The Sovereign Landing Zone platform library is itself stacked on top of the Azure Landing Zone.
+The Sovereign landing zone platform library is itself stacked on top of the Azure landing zone.
 
 {{< /mode >}}
 {{< /modes >}}
@@ -126,7 +126,7 @@ This is the module with `source  = "Azure/avm-ptn-alz/azurerm"`.
 
 ## Next
 
-OK, the local override library is in place. Note that the ALZ Accelerator will automate much of this process, although the Sovereign Landing Zone update to the local library is still a manual step. The local override library is very useful and flexible.
+OK, the local override library is in place. Note that the ALZ Accelerator will automate much of this process, although the Sovereign landing zone update to the local library is still a manual step. The local override library is very useful and flexible.
 
 In addition to the standard archetype overrides, it also allows a local space to create
 

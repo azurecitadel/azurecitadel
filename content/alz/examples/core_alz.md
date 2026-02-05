@@ -1,8 +1,8 @@
 ---
-title: "Azure Landing Zone library"
+title: "Azure landing zone library"
 date: 2025-12-03
 author: [ "Richard Cheney" ]
-description: "Simple example using solely the core Azure Landing Zone library provided by Microsoft."
+description: "Simple example using solely the core Azure landing zone library provided by Microsoft."
 draft: false
 weight: 10
 menu:
@@ -14,17 +14,17 @@ series:
 
 ## Description
 
-This is the simplest configuration. Use the core Azure Landing Zone with no additional custom libraries.
+This is the simplest configuration. Use the core Azure landing zone with no additional custom libraries.
 
 Note that we recommend the next example which adds a local custom override library.
 
 ## Architecture and Archetypes
 
-The architecture name is `alz`, as defined in the [alz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/architecture_definitions/alz.alz_architecture_definition.json).
+The architecture name is `alz`, as defined in the [alz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.1/platform/alz/architecture_definitions/alz.alz_architecture_definition.json).
 
 {{< mermaid >}}
 flowchart TD
-  alz["Azure Landing Zones
+  alz["Azure landing zone
 (root)"]
   alz --> decommissioned
   decommissioned["Decommissioned
@@ -63,7 +63,7 @@ This is the standard set of management groups and their associated archetypes.
 
 ## Provider block
 
-The path and ref arguments point at a semantic version release of the Microsoft maintained [platform/alz](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz) library.
+The path and ref arguments point at a semantic version release of the Microsoft maintained [platform/alz](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz) library.
 
 ```ruby
 provider "alz" {
@@ -71,7 +71,7 @@ provider "alz" {
   library_references = [
     {
       path = "platform/alz"
-      ref  = "2026.01.0"
+      ref  = "2026.01.1"
     }
   ]
 }
@@ -81,19 +81,19 @@ Refer to the main page of [aka.ms/alz/library](https://aka.ms/alz/library) for u
 
 ## Metadata
 
-Note that the [metadata](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/alz_library_metadata.json) file for the core Azure Landing Zone library has no dependencies. It is the core and foundational library.
+Note that the [metadata](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.1/platform/alz/alz_library_metadata.json) file for the core Azure landing zone library has no dependencies. It is the core and foundational library.
 
-{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/alz_library_metadata.json>" >}}
+{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.1/platform/alz/alz_library_metadata.json>" >}}
 
 ## Library
 
 The path and the ref (semantic version) in the provider block form parts of the url to the specific platform and release for the library. For example:
 
 ```text
-https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz
+https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz
 ```
 
-The [Azure Landing Zones library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz) contains all of the standard assets. The [README page](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz/README.md) has a list of the archetypes, policy definitions, policy assignments and custom RBAC role definitions. This is useful as a reference for your low level design documentation, or a reference when overriding archetypes.
+The [Azure landing zone library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz) contains all of the standard assets. The [README page](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz/README.md) has a list of the archetypes, policy definitions, policy assignments and custom RBAC role definitions. This is useful as a reference for your low level design documentation, or a reference when overriding archetypes.
 
 You can get here more naturally by:
 
@@ -110,18 +110,18 @@ Note the URL in the address bar.
 
 ## Architecture file
 
-The [alz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/architecture_definitions/alz.alz_architecture_definition.json) architecture definition mirrors the mermaid diagram above.
+The [alz.alz_architecture_definition.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.1/platform/alz/architecture_definitions/alz.alz_architecture_definition.json) architecture definition mirrors the mermaid diagram above.
 
-{{< details "Azure Landing Zones architecture" >}}
-{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/architecture_definitions/alz.alz_architecture_definition.json>" >}}
+{{< details "Azure landing zone architecture" >}}
+{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.1/platform/alz/architecture_definitions/alz.alz_architecture_definition.json>" >}}
 {{< /details >}}
 
 ## Default policy values
 
-Default policy values are defined in [alz_policy_default_values.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/alz_policy_default_values.json).
+Default policy values are defined in [alz_policy_default_values.json](https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.1/platform/alz/alz_policy_default_values.json).
 
 {{< details "Policy Default Values" >}}
-{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.0/platform/alz/alz_policy_default_values.json>" >}}
+{{< code lang="json" url="<https://github.com/Azure/Azure-Landing-Zones-Library/raw/refs/tags/platform/alz/2026.01.1/platform/alz/alz_policy_default_values.json>" >}}
 {{< /details >}}
 
 These value are used for consistency across multiple policy and policy initiatives in the archetypes.

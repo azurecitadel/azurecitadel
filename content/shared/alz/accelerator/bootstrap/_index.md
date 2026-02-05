@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Bootstrap Process"
+title: "Azure landing zone - Bootstrap Process"
 ---
 
 
@@ -16,7 +16,7 @@ Reminder of the prereqs
 
 ## Create the accelerator area
 
-Switch to a PowerShell environment for the Azure Landing Zone Accelerator. (The following commands have been run in PowerShell 7 within Ubuntu 24.04.)
+Switch to a PowerShell environment for the Azure landing zone Accelerator. (The following commands have been run in PowerShell 7 within Ubuntu 24.04.)
 
 1. Create the directory structure
 

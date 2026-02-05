@@ -126,7 +126,7 @@ layout: single
 ### Workshop Series
 ```yaml
 ---
-title: "Azure Landing Zones Workshop"
+title: "Azure landing zone Workshop"
 description: "Complete workshop series for ALZ"
 layout: series
 series: ["alz-workshop"]

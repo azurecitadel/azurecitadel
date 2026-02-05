@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Bootstrap Demotion"
+title: "Azure landing zone - Bootstrap Demotion"
 ---
 
 ## Overview

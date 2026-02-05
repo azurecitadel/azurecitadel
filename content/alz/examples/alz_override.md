@@ -1,5 +1,5 @@
 ---
-title: "Azure Landing Zone library with overrides"
+title: "Azure landing zone library with overrides"
 date: 2025-12-03
 author: [ "Richard Cheney" ]
 description: "This is the default created by the accelerator. Uses the core ALZ library as above, but adds a local library to allow overrides on those core archetypes as well as a space to create additional assets."
@@ -16,7 +16,7 @@ highlight: true
 
 ## Description
 
-This configuration stacks a local override library in `./lib` which is stacked on top of the Azure Landing Zone.
+This configuration stacks a local override library in `./lib` which is stacked on top of the Azure landing zone.
 
 From a partner perspective this is great for defining specific archetype overrides for individual customers, and it also allows bespoke assets - e.g. custom policies or RBAC roles - to be added for that customer.
 
@@ -32,7 +32,7 @@ The architecture name is `alz_custom`, as defined in the local `alz_custom.alz_a
 
 {{< mermaid >}}
 flowchart TD
-  alz["Azure Landing Zones
+  alz["Azure landing zone
 (root)"]
   alz --> decommissioned
   decommissioned["Decommissioned
@@ -90,11 +90,11 @@ The local metadata filename is `lib/alz_library_metadata.json`.
 
 {{< code lang="json" url="<https://github.com/Azure/alz-terraform-accelerator/raw/refs/heads/main/templates/platform_landing_zone/lib/alz_library_metadata.json>" >}}
 
-The dependency is also semantically versioned. In this case it is again dependant on <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz>.
+The dependency is also semantically versioned. In this case it is again dependant on <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz>.
 
-If you need to pull in a more recent version of the Azure Landing Zone library then you would update the ref here.
+If you need to pull in a more recent version of the Azure landing zone library then you would update the ref here.
 
-See the previous page for more detail on the architecture, archetypes, and assets for the main Azure Landing Zone library repo.
+See the previous page for more detail on the architecture, archetypes, and assets for the main Azure landing zone library repo.
 
 ## Override files
 
@@ -106,11 +106,11 @@ These are used to define a custom delta against the base archetype. The most com
 
 ## Removing assignments
 
-Remember that the [Azure Landing Zone library](https://aka.ms/alz/library) details the available archetypes and assets when you go to `platform/alz`, and you can select the tag for specific versions.
+Remember that the [Azure landing zone library](https://aka.ms/alz/library) details the available archetypes and assets when you go to `platform/alz`, and you can select the tag for specific versions.
 
 The base archetype specified in the example override file is `corp`. You'll find the `corp.alz_archetype_definition.json` file in the `archetype_definitions` folder. Here it is.
 
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.01.0/platform/alz/archetype_definitions/corp.alz_archetype_definition.json>" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.01.1/platform/alz/archetype_definitions/corp.alz_archetype_definition.json>" >}}
 
 ## Adding assignments
 

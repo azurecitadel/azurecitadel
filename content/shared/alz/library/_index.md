@@ -1,12 +1,12 @@
 ---
 headless: true
-title: "Azure Landing Zones Library Documentation"
-description: "Comprehensive documentation for the Azure Landing Zones Library system, including policies, roles, archetypes, architectures, and metadata."
+title: "Azure landing zone Library Documentation"
+description: "Comprehensive documentation for the Azure landing zone Library system, including policies, roles, archetypes, architectures, and metadata."
 ---
 
-## Azure Landing Zones Library
+## Azure landing zone Library
 
-The Azure Landing Zones Library provides a comprehensive framework for defining and managing governance constructs within Azure Landing Zone deployments. This library system enables organizations to implement consistent compliance, security, and operational standards across their Azure environments.
+The Azure landing zone Library provides a comprehensive framework for defining and managing governance constructs within Azure landing zone deployments. This library system enables organizations to implement consistent compliance, security, and operational standards across their Azure environments.
 
 ## Key Components
 
@@ -38,7 +38,7 @@ The library system supports multiple sources and extensibility patterns:
 
 ## Getting Started
 
-To effectively use the Azure Landing Zones Library system, familiarize yourself with each component:
+To effectively use the Azure landing zone Library system, familiarize yourself with each component:
 
 1. Start with the [Overview](overview/) to understand the library architecture
 2. Learn about [Policies and Roles](policies_and_roles/) for governance implementation
@@ -50,7 +50,7 @@ To effectively use the Azure Landing Zones Library system, familiarize yourself 
 
 The library system integrates seamlessly with:
 
-- Azure Landing Zones Terraform Provider
+- Azure landing zone Terraform Provider
 - ALZ Terraform Module
 - Azure Policy and RBAC systems
 - CI/CD deployment pipelines

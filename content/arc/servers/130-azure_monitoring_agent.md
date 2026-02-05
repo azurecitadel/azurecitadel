@@ -27,7 +27,7 @@ As a starting point, they would like to have VM Insights configured for the hybr
 
 ## Delete policy assignments
 
-OK, first things first. We will delete a couple of the legacy policy assignments created by Azure Landing Zones.
+OK, first things first. We will delete a couple of the legacy policy assignments created by Azure landing zone.
 
 The default policy assignments continue to deploy the legacy agents whilst some of the Azure Monitor Agent policies remain in preview. Unassign them.
 

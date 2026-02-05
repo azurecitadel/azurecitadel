@@ -1,13 +1,13 @@
 ---
 headless: true
-title: "Azure Landing Zones - Components"
+title: "Azure landing zone - Components"
 ---
 
 ## Overview
 
-The Azure Landing Zone Accelerator deploys a comprehensive set of components to support your landing zone implementation. These components work together to provide a complete DevOps environment for managing your Azure infrastructure.
+The Azure landing zone Accelerator deploys a comprehensive set of components to support your landing zone implementation. These components work together to provide a complete DevOps environment for managing your Azure infrastructure.
 
-![Azure Landing Zone Accelerator components overview](https://raw.githubusercontent.com/Azure/Azure-Landing-Zones/main/docs/content/accelerator/img/components.png)
+![Azure landing zone Accelerator components overview](https://raw.githubusercontent.com/Azure/Azure-Landing-Zones/main/docs/content/accelerator/img/components.png)
 
 ## Azure
 
@@ -33,7 +33,7 @@ The plan identity is used for all plan steps. Here you can see the permissions.
 
 ![Role assignments for the managed identity used for the plan workflow](/shared/alz/accelerator/components/id-alz-mgmt-uksouth-plan-001_permissions.png)
 
-Note that the ID only has write access to a single container within the storage account used for Terraform remote state. All other permissions are a variant of reader, including the custom role, Azure Landing Zones Management Group Reader.
+Note that the ID only has write access to a single container within the storage account used for Terraform remote state. All other permissions are a variant of reader, including the custom role, Azure landing zone Management Group Reader.
 
 From the GitHub perspective, the workflows will use OpenID Connect for secret free authentication from the GitHub identity provider (IdP) to the Azure identity provider. The relationship is defined in the federated credential below, but is only valid in the context defined in the subject.
 
@@ -49,7 +49,7 @@ As expected, the second identity is linked to the apply step and associated GitH
 
 ![Role assignments for the managed identity used for the apply workflow](/shared/alz/accelerator/components/id-alz-mgmt-uksouth-apply-001_permissions.png)
 
-ℹ️ The managed identity will also receive additional role assignments when we deploy Azure Landing Zones, such as Owner on the management groups that will be created. Also note the use of custom roles.
+ℹ️ The managed identity will also receive additional role assignments when we deploy Azure landing zone, such as Owner on the management groups that will be created. Also note the use of custom roles.
 
 Let's examine the federated credential a little more closely as this managed identity has such elevated privileges.
 
@@ -94,7 +94,7 @@ OK, let's switch focus from the Azure resources to the GitHub configuration and 
 
 ### Repos
 
-The Azure Landing Zone accelerator has created two repositories in your organization. See the example below.
+The Azure landing zone accelerator has created two repositories in your organization. See the example below.
 
 ![The two repositories, alz-mgmt and alz-mgmt-templates, created by the accelerator](/shared/alz/accelerator/components/repos.png)
 
@@ -128,7 +128,7 @@ You will also see the variables for the managed identity's client IDs are also d
 
 ### Variables
 
-The Azure Landing Zones accelerator automatically configures both repository-level and environment-specific variables as used by the workflows.
+The Azure landing zone accelerator automatically configures both repository-level and environment-specific variables as used by the workflows.
 
 ![Environment and repo level variables used in the GitHub Actions workflows](/shared/alz/accelerator/components/variables.png)
 

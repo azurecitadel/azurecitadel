@@ -1,18 +1,18 @@
 ---
 headless: true
-title: "Azure Landing Zones Library Overview - Body"
-description: "A brief overview of the Azure Landing Zones Library system architecture, components, and design principles."
+title: "Azure landing zone Library Overview - Body"
+description: "A brief overview of the Azure landing zone Library system architecture, components, and design principles."
 ---
 
 ## Example Libraries
 
 ### Platform Libraries
 
-These libraries are maintained by Microsoft's Customer Architecture and Engineering team (CAE) and are hosted in the main [Azure Landing Zone library](https://aka.ms/alz/library) repo and supporting [documentation](https://aka.ms/alz/library/site). They are semantically versions with controlled releases, changelogs, and [issue tracking](https://aka.ms/alz/issues).
+These libraries are maintained by Microsoft's Customer Architecture and Engineering team (CAE) and are hosted in the main [Azure landing zone library](https://aka.ms/alz/library) repo and supporting [documentation](https://aka.ms/alz/library/site). They are semantically versions with controlled releases, changelogs, and [issue tracking](https://aka.ms/alz/issues).
 
-- **[Azure Landing Zones Library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz)** (alz)
-- **[Sovereign Landing Zones Library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz)** (slz)
-- **[Azure Landing Zones Library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/amba)** (amba)
+- **[Azure landing zone Library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz)** (alz)
+- **[Sovereign landing zone Library](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/slz)** (slz)
+- **[Azure Monitoring Baseline Alerts](https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/amba)** (amba)
 
 ## Modularity and extensibility
 

@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Policies Definitions"
+title: "Azure landing zone Library - Policies Definitions"
 description: "Commands to check the JSON is syntactically good"
 ---
 

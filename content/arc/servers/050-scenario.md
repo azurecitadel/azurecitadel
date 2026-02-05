@@ -23,7 +23,7 @@ The imperative is to move to a more elegant hybrid management and operations mod
 
 You have been tasked to help work with them on a pilot of a few POC Windows and Linux (Ubuntu) servers to evaluate how the hybrid model could work from a deployment, configuration and management perspective, and whether there are opportunities to move away from some of the legacy management tooling. The outcome of the pilot will determine how the teams will initially work and scale from the small number of servers in the pilot to the wider estate.
 
-Wide World Importers wishes to adhere to the Azure Landing Zones within the Cloud Adoption Framework. Also included in the POC requirement
+Wide World Importers wishes to adhere to the Azure landing zone within the Cloud Adoption Framework. Also included in the POC requirement
 
 * use Azure Monitor Agent for logs and metrics
 * demonstrate that on prem governance can be enabled
@@ -52,4 +52,4 @@ The next few labs will cover target environment preparation:
 1. Custom policy creation for additional extension installation
 1. Target resource group and service principal for onboarding
 
-Let's start with the default deployment of the Azure Landing Zones.
+Let's start with the default deployment of the Azure landing zone.

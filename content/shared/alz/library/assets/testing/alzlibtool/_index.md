@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - alzlibtool"
+title: "Azure landing zone Library - alzlibtool"
 description: "Commands to check the library will pass checks."
 ---
 

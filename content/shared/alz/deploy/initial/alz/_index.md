@@ -1,13 +1,13 @@
 ---
 headless: true
-title: "Azure Landing Zones - Create an initial config - ALZ version"
+title: "Azure landing zone - Create an initial config - ALZ version"
 ---
 
-## Azure Landing Zone
+## Azure landing zone
 
 ### Provider
 
-Add the alz provider and specify the most recent Azure Landing Zone library release.
+Add the alz provider and specify the most recent Azure landing zone library release.
 
 1. Check the [releases](https://github.com/Azure/Azure-Landing-Zones-Library/releases) page for the most recent platform/alz release.
 
@@ -21,7 +21,7 @@ Add the alz provider and specify the most recent Azure Landing Zone library rele
       library_references = [
         {
           path = "platform/alz"
-          ref  = "2026.01.0"
+          ref  = "2026.01.1"
         }
       ]
     }
@@ -29,7 +29,7 @@ Add the alz provider and specify the most recent Azure Landing Zone library rele
 
     The alz provider will pull in that version of the library definition from `https://github.com/Azure/Azure-Landing-Zones-Library/tree/{tag}/{path}` where `{tag}` is `{path}/{ref}`.
 
-    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.0/platform/alz> for the core Azure Landing Zones library.
+    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz> for the core Azure landing zone library.
 
 ### Variables
 

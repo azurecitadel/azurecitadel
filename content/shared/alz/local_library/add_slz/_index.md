@@ -1,15 +1,15 @@
 ---
 headless: true
-title: "Azure Landing Zones Library - Local Library - SLZ add on"
+title: "Azure landing zone Library - Local Library - SLZ add on"
 description: "Add SLZ overrides to the local library"
 ---
 
-As you are using the Sovereign Landing Zone then run these commands to extend the default local library with additional override files for the additional archetypes found in the Sovereign Landing Zone.
+As you are using the Sovereign landing zone then run these commands to extend the default local library with additional override files for the additional archetypes found in the Sovereign landing zone.
 
 {{< flash "warning" >}}
 ⚠️ As well as adding the additional override files, these commands will also overwrite the following files:
 
-- **lib/alz_library_metadata.json** - library dependency on the Sovereign Landing Zone, which has its own dependency on the Azure Landing Zone
+- **lib/alz_library_metadata.json** - library dependency on the Sovereign landing zone, which has its own dependency on the Azure landing zone
 - **lib/architecture_definitions/alz_custom.alz_architecture_definition.yaml** - additional archetype overrides
 {{< /flash >}}
 
@@ -17,7 +17,7 @@ As you are using the Sovereign Landing Zone then run these commands to extend th
 
 {{< tab title="Bash" >}}
 
-These commands are designed for Bash on a Linux/macOS system. Ensure that you are in the root of your Azure Landing Zone repo.
+These commands are designed for Bash on a Linux/macOS system. Ensure that you are in the root of your Azure landing zone repo.
 
 ```bash
 tmp=$(mktemp -d)
@@ -32,7 +32,7 @@ rm -rf "$tmp"
 {{< /tab >}}
 {{< tab title="PowerShell" >}}
 
-These commands are designed for PowerShell on a Windows system. Ensure that you are in the root of your Azure Landing Zone repo.
+These commands are designed for PowerShell on a Windows system. Ensure that you are in the root of your Azure landing zone repo.
 
 ```powershell
 $tmp = Join-Path $env:TEMP (New-Guid)

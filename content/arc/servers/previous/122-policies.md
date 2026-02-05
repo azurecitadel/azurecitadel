@@ -14,7 +14,7 @@ weight: 122
 
 ## Introduction
 
-The Azure Landing Zones creates a useful set of default platform resources, policies and RBAC role assignments. The Azure Monitor for VMs is useful as it applies to both Azure and Azure Arc-enabled Servers and will install the MMA agent and the Dependency agent.
+The Azure landing zone creates a useful set of default platform resources, policies and RBAC role assignments. The Azure Monitor for VMs is useful as it applies to both Azure and Azure Arc-enabled Servers and will install the MMA agent and the Dependency agent.
 
 However, the VM monitoring landscape is moving at the moment and the desire from Wide World Importers is to move towards the newer Azure Monitor Agent (AMA) for collecting metrics and data. The AMA agent does not have full parity with the older agents, but for metrics and data it is more flexible, supporting multiple data collection rules.
 
@@ -26,7 +26,7 @@ Before we move through the [Overview](#overview) for this lab, quickly step thro
 
 There are a number of other custom and built-in policies that are applicable to Azure Arc-enabled Servers.
 
-1. Select the Azure Landing Zones management group
+1. Select the Azure landing zone management group
 1. Select **Policy | Definitions**
 1. Filter Categories to
     * Azure Arc
@@ -264,7 +264,7 @@ The assignment scope is the Landing Zones management group. Copy the ID.
 The management group resource ID format is `/providers/Microsoft.Management/managementGroups/<id>`.
 
 {{< flash >}}
-Azure Landing Zones management group resource ID:
+Azure landing zone management group resource ID:
 
 **/providers/Microsoft.Management/managementGroups/alz-landingzones**
 {{< /flash >}}

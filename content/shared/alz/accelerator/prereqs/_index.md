@@ -1,6 +1,6 @@
 ---
 headless: true
-title: "Azure Landing Zones - Bootstrap Prerequisites"
+title: "Azure landing zone - Bootstrap Prerequisites"
 ---
 
 
@@ -53,7 +53,7 @@ For the bootstrap you will need a few [prerequisites](https://azure.github.io/Az
 Create a personal access token for the **bootstrap** process.
 
 1. Click on **Generate new token**.
-    * Token Name: `Azure Landing Zone accelerator`
+    * Token Name: `Azure landing zone accelerator`
     * Description: `Short-lived token for the ALZ Accelerator bootstrap process`
     * Resource Owner: **Switch to your organization**
     * Expiration: Custom, select short period.
@@ -87,7 +87,7 @@ Create a personal access token for the **private runners**
 
 1. Click on **Generate new token**.
 
-    * Token Name: `Azure Landing Zone private runners`
+    * Token Name: `Azure landing zone private runners`
     * Description: `Long-term token used by the private runners`
     * Resource Owner: **Switch to your organization**
     * Expiration: Select no expiration.

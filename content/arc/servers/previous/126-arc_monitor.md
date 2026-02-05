@@ -218,7 +218,7 @@ The assignment scope is the Landing Zones management group. Copy the ID.
 The management group resource ID format is `/providers/Microsoft.Management/managementGroups/<id>`.
 
 {{< flash >}}
-Azure Landing Zones management group resource ID:
+Azure landing zone management group resource ID:
 
 **/providers/Microsoft.Management/managementGroups/alz-landingzones**
 {{< /flash >}}

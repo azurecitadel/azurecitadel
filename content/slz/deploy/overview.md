@@ -1,8 +1,8 @@
 ---
-title: "What is the Sovereign Landing Zone?"
+title: "What is the Sovereign landing zone?"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
-description: "An overview for Sovereign Landing Zones and where they sit in the Microsoft Sovereign Cloud portfolio."
+description: "An overview for Sovereign landing zone and where they sit in the Microsoft Sovereign Cloud portfolio."
 draft: true
 weight: 10
 menu:

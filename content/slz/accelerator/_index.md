@@ -1,6 +1,6 @@
 ---
 title: "ALZ Accelerator"
-description: "Learn how to use the Azure Landing Zone Accelerator to get to a GitHub CI/CD configuration recommended by Microsoft."
+description: "Learn how to use the Azure landing zone Accelerator to get to a GitHub CI/CD configuration recommended by Microsoft."
 draft: false
 layout: list
 menu:
@@ -15,7 +15,7 @@ layout: series
 
 ## Introduction
 
-The Azure Landing Zone Accelerator is a powerful tool that streamlines the deployment of Azure Landing Zones using infrastructure as code, including the Sovereign Landing Zone.
+The Azure landing zone Accelerator is a powerful tool that streamlines the deployment of Azure landing zone using infrastructure as code, including the Sovereign landing zone.
 
 {{% shared-content "alz/accelerator/overview" %}}
 

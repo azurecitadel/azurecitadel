@@ -1,13 +1,13 @@
 ---
 headless: true
-title: "Azure Landing Zones - Create an initial config - SLZ version"
+title: "Azure landing zone - Create an initial config - SLZ version"
 ---
 
-## Sovereign Landing Zone
+## Sovereign landing zone
 
 ### Provider
 
-Add the alz provider and specify the most recent Sovereign Landing Zone library release.
+Add the alz provider and specify the most recent Sovereign landing zone library release.
 
 1. Check the [releases](https://github.com/Azure/Azure-Landing-Zones-Library/releases) page for the most recent platform/slz release.
 
@@ -21,7 +21,7 @@ Add the alz provider and specify the most recent Sovereign Landing Zone library 
       library_references = [
         {
           path = "platform/slz"
-          ref  = "2025.10.1"
+          ref  = "2026.02.0"
         }
       ]
     }
@@ -29,7 +29,7 @@ Add the alz provider and specify the most recent Sovereign Landing Zone library 
 
     The alz provider will pull in that version of the library definition from `https://github.com/Azure/Azure-Landing-Zones-Library/tree/{tag}/{path}` where `{tag}` is `{path}/{ref}`.
 
-    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2025.10.1/platform/slz> for the Sovereign Landing Zone library.
+    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.02.0/platform/slz> for the Sovereign landing zone library.
 
 ### Variables
 
@@ -52,7 +52,7 @@ Add the alz provider and specify the most recent Sovereign Landing Zone library 
 ### Main
 
 {{< flash >}}
-The Sovereign Landing Zone example differs from the Azure Landing Zone example in only a few ways, all related to the management_groups module:
+The Sovereign landing zone example differs from the Azure landing zone example in only a few ways, all related to the management_groups module:
 
 1. the architecture_name is now set to `slz` rather than `alz`
 1. the policy_assignments_to_modify object also refers to the `slz` architecture name
