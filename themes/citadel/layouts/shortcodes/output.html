@@ -41,25 +41,35 @@
 
 /* Target code blocks within output content */
 .output-content pre {
-  background: #161b22 !important;
+  background: rgba(var(--color-canvas-subtle), 0.6) !important;
   border: 1px solid var(--color-border-default) !important;
   color: #f0f6fc !important;
   border-radius: 6px !important;
 }
 
+html[data-color-mode='light'] .output-content pre {
+  background: #f8f9fa !important;
+  color: #24292f !important;
+}
+
 .output-content .hljs {
-  background: #161b22 !important;
-  color: #f0f6fc !important;
+  background: transparent !important;
+  color: inherit !important;
   border: none !important;
 }
 
-/* Ensure inline code also gets the dark background */
+/* Ensure inline code also gets the gentle background */
 .output-content code:not(.hljs) {
-  background: #161b22 !important;
+  background: rgba(var(--color-canvas-subtle), 0.6) !important;
   color: #f0f6fc !important;
   border: 1px solid var(--color-border-default) !important;
   padding: 2px 4px !important;
   border-radius: 3px !important;
+}
+
+html[data-color-mode='light'] .output-content code:not(.hljs) {
+  background: #f8f9fa !important;
+  color: #24292f !important;
 }
 
 /* Details styling for output shortcode */
