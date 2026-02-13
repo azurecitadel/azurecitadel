@@ -1,2 +1,49 @@
 <!-- raw html -->
 {{.Inner}}
+
+<style>
+/* Aha ANSI color mapping to theme colors */
+span[style*="color:aqua"],
+span[style*="color:cyan"] {
+  color: var(--color-prettylights-syntax-constant, #6cb6ff) !important;
+}
+
+span[style*="color:lime"],
+span[style*="color:green"] {
+  color: var(--color-prettylights-syntax-entity-tag, #8ddb8c) !important;
+}
+
+span[style*="color:#3333FF"],
+span[style*="color:blue"] {
+  color: var(--color-prettylights-syntax-string, #96d0ff) !important;
+}
+
+span[style*="color:yellow"] {
+  color: var(--color-prettylights-syntax-variable, #f69d50) !important;
+}
+
+span[style*="color:red"] {
+  color: var(--color-prettylights-syntax-keyword, #f47067) !important;
+}
+
+span[style*="color:magenta"],
+span[style*="color:purple"] {
+  color: var(--color-prettylights-syntax-entity, #dcbdfb) !important;
+}
+
+/* Map bright/bold variants */
+span[style*="color:brightcyan"],
+span[style*="color:lightcyan"] {
+  color: var(--citadel-accent, #44D9BC) !important;
+}
+
+span[style*="color:brightgreen"],
+span[style*="color:lightgreen"] {
+  color: var(--color-prettylights-syntax-entity-tag, #8ddb8c) !important;
+}
+
+span[style*="color:brightblue"],
+span[style*="color:lightblue"] {
+  color: var(--color-prettylights-syntax-string, #96d0ff) !important;
+}
+</style>
