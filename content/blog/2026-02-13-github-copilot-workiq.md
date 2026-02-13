@@ -161,7 +161,7 @@ published <span style="color:aqua;">2 weeks ago</span> by <span style="color:#33
 
 1. Display as JSON
 
-    You can run shell commands within GutHub Copilot CLI bu either prefixing them with `!` or by using **shift*+**tab**. Either way will switch you into the yellow Shell mode.
+    You can run shell commands within GutHub Copilot CLI by either prefixing them with `!` or by using **shift*+**tab**. Either way will switch you into the yellow Shell mode.
 
     ```shell
     jq < ~/.copilot/mcp-config.json
