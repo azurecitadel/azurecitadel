@@ -8,9 +8,11 @@ weight: 75
 menu:
   side:
     parent: pal
-    identifier: pal-terraform
+    identifier: pal-azapi
 series:
   - pal
+aliases:
+  - /pal/terraform
 ---
 
 ## Introduction
