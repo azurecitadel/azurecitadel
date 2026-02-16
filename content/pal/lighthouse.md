@@ -4,7 +4,7 @@ date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "Combining Partner Admin Link with Azure Lighthouse reduces some of the administrative overhead. How does it differ compared to more traditional PAL configurations?"
 draft: false
-weight: 80
+weight: 90
 menu:
   side:
     parent: pal

@@ -4,7 +4,7 @@ date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "The Understanding PAL page helps to answer most of your questions on Partner Admin Link. Here you'll find a link to the main Microsoft FAQ for PAL, plus an option to ask more questions here."
 draft: false
-weight: 90
+weight: 1000
 menu:
   side:
     parent: pal
