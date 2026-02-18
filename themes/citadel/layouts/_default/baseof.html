@@ -300,63 +300,251 @@
     });
   })();
 
-  // Image lightbox: click images to open at native size within viewport
+  // Image lightbox: click to open; wide=fit margins, narrow=50% native;
+  // Mouse: click image to zoom 2× (centred on cursor); drag to pan when zoomed; click at max to reset.
+  // Touch: pinch-to-zoom; tap outside image to close.
   (function(){
-    const lb = document.getElementById('image-lightbox');
-    if(!lb) return;
-  const imgEl = lb.querySelector('img');
-  const caption = lb.querySelector('.ilb-caption');
+    const NARROW_BREAKPOINT = 1280; // matches TOC flydown/hamburger breakpoint
+    const NARROW_SCALE      = 0.5;
+    const ZOOM_STEP         = 2;    // multiplier per click
+    const lb      = document.getElementById('image-lightbox');
+    if (!lb) return;
+    const imgEl   = lb.querySelector('img');
+    const wrap    = lb.querySelector('.ilb-wrap');
+    const content = lb.querySelector('.ilb-content');
+    const caption = lb.querySelector('.ilb-caption');
     const backdrop = lb.querySelector('.ilb-backdrop');
-    function open(src, alt){
-      imgEl.src = src;
-      imgEl.alt = alt||'';
-      lb.classList.add('is-open');
-      lb.setAttribute('aria-hidden','false');
-      if(caption){
-        const text = (alt||'').trim();
-        caption.textContent = text || '';
-        caption.toggleAttribute('hidden', !text);
+
+    // ── State ──
+    let baseW = 0, baseH = 0, maxScale = 1, displayScale = 1;
+    let clickFracX = 0.5, clickFracY = 0.5; // fraction within source image at open-click
+    let pinching = false, pinchStartDist = 0, pinchStartScale = 1;
+    let dragging = false, dragStartX = 0, dragStartY = 0,
+        dragScrollL = 0, dragScrollT = 0, dragMoved = false;
+
+    // ── Zoom ──
+    // Resize image to baseW/baseH * newScale, keeping anchorFrac* at the same
+    // visual position within the content viewport.
+    function setScale(newScale, anchorFracX, anchorFracY) {
+      newScale = Math.max(1, Math.min(maxScale, newScale));
+      const oldW = imgEl.offsetWidth  || baseW * displayScale;
+      const oldH = imgEl.offsetHeight || baseH * displayScale;
+      const newW = Math.round(baseW * newScale);
+      const newH = Math.round(baseH * newScale);
+      // Visual position of anchor in the content viewport before resize
+      const aFX = (anchorFracX !== undefined) ? anchorFracX : 0.5;
+      const aFY = (anchorFracY !== undefined) ? anchorFracY : 0.5;
+      const visX = aFX * oldW - content.scrollLeft;
+      const visY = aFY * oldH - content.scrollTop;
+      displayScale = newScale;
+      imgEl.style.width  = newW + 'px';
+      imgEl.style.height = newH + 'px';
+      requestAnimationFrame(() => {
+        const maxSL = Math.max(0, newW - content.offsetWidth);
+        const maxST = Math.max(0, newH - content.offsetHeight);
+        content.scrollLeft = Math.max(0, Math.min(maxSL, aFX * newW - visX));
+        content.scrollTop  = Math.max(0, Math.min(maxST, aFY * newH - visY));
+        updateCursor();
+      });
+    }
+
+    function updateCursor() {
+      if (!imgEl) return;
+      imgEl.style.cursor = displayScale >= maxScale ? 'zoom-out' :
+                           (dragging ? 'grabbing' :
+                           (displayScale > 1 ? 'grab' : 'zoom-in'));
+    }
+
+    // ── Source selection ──
+    function getBestSrc(img) {
+      let src = img.currentSrc || img.src;
+      const srcset = img.getAttribute('srcset');
+      if (srcset) {
+        try {
+          const best = srcset.split(',').map(s => s.trim()).map(item => {
+            const parts = item.split(' ');
+            const w = parts.find(p => p.endsWith('w'));
+            return { url: parts[0], width: w ? parseInt(w, 10) : 0 };
+          }).sort((a, b) => b.width - a.width)[0];
+          if (best && best.url) src = best.url;
+        } catch(e) {}
       }
+      return src;
     }
-    function close(){
-      lb.classList.remove('is-open');
-      lb.setAttribute('aria-hidden','true');
-  imgEl.removeAttribute('src');
-  if(caption){ caption.textContent=''; caption.setAttribute('hidden',''); }
+
+    // ── Open / close ──
+    function computeBase(natW, natH) {
+      if (window.innerWidth > NARROW_BREAKPOINT) {
+        // Always fill the available width (94% of viewport), scale height proportionally.
+        // If that would make the image taller than 92% of the viewport, constrain by height instead.
+        const maxW = Math.round(window.innerWidth  * 0.94);
+        const maxH = Math.round(window.innerHeight * 0.92);
+        const sByW = maxW / natW;
+        const sByH = maxH / natH;
+        const s = Math.min(sByW, sByH); // fill width unless height would clip
+        baseW = Math.round(natW * s);
+        baseH = Math.round(natH * s);
+      } else {
+        baseW = Math.round(natW * NARROW_SCALE);
+        baseH = Math.round(natH * NARROW_SCALE);
+      }
+      maxScale = Math.max(1, natW / baseW);
     }
-  backdrop.addEventListener('click', (e)=>{ e.stopPropagation(); close(); });
-    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && lb.classList.contains('is-open')) close(); });
-  // Clicking anywhere on the overlay closes it
-  lb.addEventListener('click', (e)=>{ e.stopPropagation(); close(); });
-    // Delegate clicks on images inside main content
-    const main = document.getElementById('main-scroll');
-  if(main){
-      main.addEventListener('click', (e)=>{
-    // Ignore clicks while lightbox is open
-    if(lb && lb.classList.contains('is-open')) return;
-        const a = e.target.closest('a');
-        if(a && a.contains(e.target)) return; // don't override linked images
-        const img = e.target.closest('img');
-        if(!img) return;
-        // ignore emoji/utility images
-        if(img.src.includes('github.githubassets.com/images/icons/emoji')) return;
-        // choose largest srcset candidate if present
-        let src = img.currentSrc || img.src;
-        const srcset = img.getAttribute('srcset');
-        if(srcset){
-          try{
-            const candidates = srcset.split(',').map(s=>s.trim()).map(item=>{
-              const parts = item.split(' ');
-              const url = parts[0];
-              const w = parts.find(p=>p.endsWith('w'));
-              const width = w ? parseInt(w.replace('w',''),10) : 0;
-              return {url, width};
-            });
-            const best = candidates.sort((a,b)=>b.width-a.width)[0];
-            if(best && best.url) src = best.url;
-          }catch(err){ /* fall back to currentSrc */ }
+
+    function applyBase() {
+      displayScale = 1;
+      imgEl.style.width     = baseW + 'px';
+      imgEl.style.height    = baseH + 'px';
+      imgEl.style.maxWidth  = 'none';
+      imgEl.style.maxHeight = 'none';
+      updateCursor();
+    }
+
+    function open(src, alt) {
+      const probe = new Image();
+      probe.onload = () => {
+        computeBase(probe.naturalWidth, probe.naturalHeight);
+        applyBase();
+        imgEl.src = src;
+        imgEl.alt = alt || '';
+        lb.classList.add('is-open');
+        lb.setAttribute('aria-hidden', 'false');
+        if (caption) {
+          const text = (alt || '').trim();
+          caption.textContent = text || '';
+          caption.toggleAttribute('hidden', !text);
         }
-        open(src, img.alt || '');
+        // Scroll to centre on the open-click point
+        requestAnimationFrame(() => {
+          const maxSL = Math.max(0, baseW - content.offsetWidth);
+          const maxST = Math.max(0, baseH - content.offsetHeight);
+          content.scrollLeft = Math.max(0, Math.min(maxSL, baseW * clickFracX - content.offsetWidth  / 2));
+          content.scrollTop  = Math.max(0, Math.min(maxST, baseH * clickFracY - content.offsetHeight / 2));
+        });
+      };
+      probe.src = src;
+    }
+
+    function close() {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      imgEl.removeAttribute('src');
+      imgEl.style.width = imgEl.style.height = '';
+      imgEl.style.maxWidth = imgEl.style.maxHeight = imgEl.style.cursor = '';
+      displayScale = 1;
+      if (caption) { caption.textContent = ''; caption.setAttribute('hidden', ''); }
+    }
+
+    // ── Close triggers ──
+    backdrop.addEventListener('click', e => { e.stopPropagation(); close(); });
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+    });
+    content.addEventListener('click', e => { if (e.target === content) close(); });
+    lb.addEventListener('click',      e => { if (e.target === lb)      close(); });
+    lb.addEventListener('touchend', e => {
+      if (pinching) return;
+      if (e.target === lb || e.target === backdrop || e.target === content) close();
+    }, { passive: true });
+
+    // ── Mouse: drag-to-pan + click-to-zoom ──
+    if (imgEl) {
+      imgEl.addEventListener('mousedown', e => {
+        if (e.button !== 0) return;
+        dragging    = true;
+        dragMoved   = false;
+        dragStartX  = e.clientX;
+        dragStartY  = e.clientY;
+        dragScrollL = content.scrollLeft;
+        dragScrollT = content.scrollTop;
+        imgEl.style.cursor = 'grabbing';
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        const dx = e.clientX - dragStartX;
+        const dy = e.clientY - dragStartY;
+        if (!dragMoved && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) dragMoved = true;
+        if (dragMoved) {
+          const maxSL = Math.max(0, imgEl.offsetWidth  - content.offsetWidth);
+          const maxST = Math.max(0, imgEl.offsetHeight - content.offsetHeight);
+          content.scrollLeft = Math.max(0, Math.min(maxSL, dragScrollL - dx));
+          content.scrollTop  = Math.max(0, Math.min(maxST, dragScrollT - dy));
+        }
+      });
+
+      window.addEventListener('mouseup', e => {
+        if (!dragging) return;
+        const wasDrag = dragMoved;
+        dragging = dragMoved = false;
+        if (!wasDrag) {
+          // Click: zoom 2× centred on cursor, or reset if at max
+          const rect   = imgEl.getBoundingClientRect();
+          const fracX  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+          const fracY  = Math.max(0, Math.min(1, (e.clientY - rect.top)  / rect.height));
+          const next   = displayScale >= maxScale ? 1 : displayScale * ZOOM_STEP;
+          setScale(next, fracX, fracY);
+        } else {
+          updateCursor();
+        }
+      });
+    }
+
+    // ── Touch: pinch-to-zoom ──
+    function pinchDist(touches) {
+      const dx = touches[0].clientX - touches[1].clientX;
+      const dy = touches[0].clientY - touches[1].clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+    if (content) {
+      content.addEventListener('touchstart', e => {
+        if (e.touches.length === 2) {
+          pinching = true;
+          lb.dataset.pinching = '1';
+          pinchStartDist  = pinchDist(e.touches);
+          pinchStartScale = displayScale;
+          const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          const rect = imgEl.getBoundingClientRect();
+          content.dataset.pinchFracX = Math.max(0, Math.min(1, (mx - rect.left) / rect.width));
+          content.dataset.pinchFracY = Math.max(0, Math.min(1, (my - rect.top)  / rect.height));
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      content.addEventListener('touchmove', e => {
+        if (e.touches.length === 2 && pinching) {
+          setScale(
+            pinchStartScale * (pinchDist(e.touches) / pinchStartDist),
+            parseFloat(content.dataset.pinchFracX) || 0.5,
+            parseFloat(content.dataset.pinchFracY) || 0.5
+          );
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      content.addEventListener('touchend', e => {
+        if (e.touches.length < 2) {
+          setTimeout(() => { pinching = false; delete lb.dataset.pinching; }, 150);
+        }
+      }, { passive: true });
+    }
+
+    // ── Open on image click from page ──
+    const main = document.getElementById('main-scroll');
+    if (main) {
+      main.addEventListener('click', e => {
+        if (lb.classList.contains('is-open')) return;
+        const a = e.target.closest('a');
+        if (a && a.contains(e.target)) return;
+        const img = e.target.closest('img');
+        if (!img) return;
+        if (img.src.includes('github.githubassets.com/images/icons/emoji')) return;
+        const rect = img.getBoundingClientRect();
+        clickFracX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        clickFracY = Math.max(0, Math.min(1, (e.clientY - rect.top)  / rect.height));
+        open(getBestSrc(img), img.alt || '');
       });
     }
   })();

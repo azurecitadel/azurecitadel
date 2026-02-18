@@ -302,9 +302,10 @@ html[data-color-mode='dark'] #toc-flydown .toc ul ul { border-left-color: var(--
 #image-lightbox.is-open { display:block; }
 #image-lightbox .ilb-backdrop { position:absolute; inset:0; background: rgba(0,0,0,0.5); }
 html[data-color-mode='dark'] #image-lightbox .ilb-backdrop { background: rgba(0,0,0,0.65); }
-#image-lightbox .ilb-content { position:absolute; inset: 4% 3%; margin:0; display:grid; place-items:center; overflow:auto; -webkit-overflow-scrolling: touch; }
-#image-lightbox .ilb-wrap { position:relative; display:inline-block; }
-#image-lightbox img { width: auto; height: auto; max-width: none; max-height: none; box-shadow: 0 12px 32px rgba(0,0,0,.35); border-radius: 4px; display:block; border:1px solid var(--citadel-accent-strong); }
+/* Remove place-items:center — use auto margins on ilb-wrap instead so scroll-based zoom works */
+#image-lightbox .ilb-content { position:absolute; inset: 4% 3%; margin:0; overflow:auto; -webkit-overflow-scrolling: touch; }
+#image-lightbox .ilb-wrap { display:table; margin:auto; /* centres when image fits; scroll works when it doesn't */ }
+#image-lightbox img { display:block; width: auto; height: auto; max-width: none; max-height: none; box-shadow: 0 12px 32px rgba(0,0,0,.35); border-radius: 4px; border:1px solid var(--citadel-accent-strong); user-select:none; -webkit-user-drag:none; }
 #image-lightbox .ilb-caption { margin-top: 10px; padding: 0; text-align: center; color: var(--citadel-accent-strong); font-weight: 600; font-size: 1.5rem; line-height: 1.25; max-width: 100%; }
 
 /* Make entire blog summary tile clickable */
@@ -424,6 +425,28 @@ html[data-color-mode='dark'] .paginate-container .pagination a.text-gray-light:h
 html[data-color-mode='dark'] .paginate-container .pagination a.text-gray-light:focus {
     color: var(--color-fg-muted,#8b949e) !important;
 }
+/* Hover-reveal slim scrollbars on code blocks (horizontal axis only) */
+.markdown-body pre,
+.highlight pre { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+.markdown-body pre:hover,
+.highlight pre:hover { scrollbar-color: rgba(140,149,159,0.4) transparent; }
+html[data-color-mode='dark'] .markdown-body pre:hover,
+html[data-color-mode='dark'] .highlight pre:hover { scrollbar-color: rgba(110,118,129,0.5) transparent; }
+.markdown-body pre::-webkit-scrollbar,
+.highlight pre::-webkit-scrollbar { height: 4px; background: transparent; }
+.markdown-body pre::-webkit-scrollbar-track,
+.highlight pre::-webkit-scrollbar-track { background: transparent; }
+.markdown-body pre::-webkit-scrollbar-thumb,
+.highlight pre::-webkit-scrollbar-thumb { background: transparent; border-radius: 4px; transition: background 0.25s ease; }
+.markdown-body pre:hover::-webkit-scrollbar-thumb,
+.highlight pre:hover::-webkit-scrollbar-thumb { background: rgba(140,149,159,0.4); }
+html[data-color-mode='dark'] .markdown-body pre:hover::-webkit-scrollbar-thumb,
+html[data-color-mode='dark'] .highlight pre:hover::-webkit-scrollbar-thumb { background: rgba(110,118,129,0.5); }
+.markdown-body pre::-webkit-scrollbar-thumb:hover,
+.highlight pre::-webkit-scrollbar-thumb:hover { background: rgba(140,149,159,0.6); }
+html[data-color-mode='dark'] .markdown-body pre::-webkit-scrollbar-thumb:hover,
+html[data-color-mode='dark'] .highlight pre::-webkit-scrollbar-thumb:hover { background: rgba(110,118,129,0.65); }
+
 /* Overlay auto-hidden scrollbars (sidebar + main) */
 /* Apply to both legacy .sidebar-scroll and new generalized .scroll-overlay for backward compatibility */
 /* Use thin width so Firefox can still show a thumb when active; we hide it visually via transparent colors until scrolling */
