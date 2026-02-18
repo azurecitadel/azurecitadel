@@ -385,8 +385,17 @@
         baseW = Math.round(natW * s);
         baseH = Math.round(natH * s);
       } else {
-        baseW = Math.round(natW * NARROW_SCALE);
-        baseH = Math.round(natH * NARROW_SCALE);
+        // 50% of native pixels, but never smaller than what would fill the
+        // available viewport width (so low-res images aren't shown tiny on open).
+        const maxW = Math.round(window.innerWidth  * 0.94);
+        const maxH = Math.round(window.innerHeight * 0.92);
+        const sByW = maxW / natW;
+        const sByH = maxH / natH;
+        const sFill = Math.min(sByW, sByH);       // scale to fill viewport
+        const sNarrow = NARROW_SCALE;              // 50% of native
+        const s = Math.max(sNarrow, Math.min(sFill, 1)); // fill viewport, cap at 1× native
+        baseW = Math.round(natW * s);
+        baseH = Math.round(natH * s);
       }
       maxScale = Math.max(1, natW / baseW);
     }
