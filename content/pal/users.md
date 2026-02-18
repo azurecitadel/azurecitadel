@@ -49,11 +49,11 @@ When you have access to the customer's resources, use the Azure portal, PowerShe
 
     ![Microsoft partner network link on the Settings page in the Azure ](/pal/images/pal-mpn-dark.png)
 
-4. Enter your Partner ID.
+1. Enter your Partner ID.
 
     ![Link to a partner ID](/pal/images/pal-link-dark.png)
 
-5. Click on the **Link a partner ID** button to save.
+1. Click on the **Link a partner ID** button to save.
 
 {{< /mode >}}
 {{< mode title="PowerShell" >}}
@@ -121,21 +121,42 @@ When you have access to the customer's resources, use the Azure portal, PowerShe
     az managementpartner create --partner-id "<partnerId>"
     ```
 
-4. Additional commands
+    {{< output >}}
 
-    Display the partner ID.
+```json
+{
+  "createdTime": "2026-02-16T14:44:35.818407Z",
+  "etag": 9,
+  "id": "/providers/microsoft.managementpartner/partners/314159",
+  "name": "314159",
+  "objectId": "84964f8f-22ce-4a1e-ba9d-1e45a53ca1c4",
+  "partnerId": "314159",
+  "partnerName": "Azure Citadel",
+  "state": "Active",
+  "tenantId": "ac40fc60-2717-4051-a567-c0cd948f0ac9",
+  "type": "Microsoft.ManagementPartner/partners",
+  "updatedTime": "2026-02-17T13:48:41.4676825Z",
+  "version": 9
+}
+```
+
+{{< /output >}}
+
+### Additional commands
+
+- Display the partner ID.
 
     ```bash
     az managementpartner show
     ```
 
-    Update the partner ID.
+- Update the partner ID.
 
     ```bash
     az managementpartner update --partner-id "<partnerId>"
     ```
 
-    Delete the Partner Admin Link.
+- Delete the Partner Admin Link.
 
     ```bash
     az managementpartner delete --partner-id "<partnerId>"
@@ -143,7 +164,6 @@ When you have access to the customer's resources, use the Azure portal, PowerShe
 
 {{< /mode >}}
 {{< /modes >}}
-
 
 ## Why do you have to switch into each customer tenant?
 

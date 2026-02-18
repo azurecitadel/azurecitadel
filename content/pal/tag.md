@@ -90,7 +90,7 @@ The two steps do not have to be run by the same person. If someone else has alre
     az ad sp show --id $appId --output jsonc
     ```
 
-    {{< details "Example output">}}
+    {{< output "Click to expand" "Example output from an `az ad sp show` command." >}}
 
 ```json
 {
@@ -146,7 +146,7 @@ The two steps do not have to be run by the same person. If someone else has alre
 }
 ```
 
-{{< /details >}}
+{{< /output >}}
 
     By default, the service principal will have no RBAC role assignments.
 
@@ -160,7 +160,7 @@ The two steps do not have to be run by the same person. If someone else has alre
 
     You can also add owners in the portal.
 
-    {{< details "Example output">}}
+    {{< output >}}
 
 ```json
 [
@@ -183,7 +183,7 @@ The two steps do not have to be run by the same person. If someone else has alre
 ]
 ```
 
-{{< /details >}}
+{{< /output >}}
 
 ### Create the partner admin link
 
@@ -198,7 +198,7 @@ The two steps do not have to be run by the same person. If someone else has alre
     [[ -n "$token" ]] && cut -d. -f2 <<< $token | base64 --decode 2>/dev/null | jq '{aud, iss, tid, appid}' || echo "Error getting the token."
     ```
 
-    {{< details "Example output">}}
+    {{< output >}}
 
 ```json
 {
@@ -209,7 +209,7 @@ The two steps do not have to be run by the same person. If someone else has alre
 }
 ```
 
-{{< /details >}}
+{{< /output >}}
 
 1. Create the Partner Admin Link
 
@@ -219,7 +219,7 @@ The two steps do not have to be run by the same person. If someone else has alre
     curl --silent --request PUT --header "Authorization: Bearer ${token}" --header "Content-Type: application/json" --data "$data" "$uri" | jq .
     ```
 
-    {{< details "Example output">}}
+    {{< output >}}
 
 ```json
 {
@@ -240,7 +240,7 @@ The two steps do not have to be run by the same person. If someone else has alre
 }
 ```
 
-{{< /details >}}
+{{< /output >}}
 
     {{< details "Additional commands">}}
 
@@ -336,13 +336,15 @@ I will assume that all of the service principal display names start with "_PAL_ 
     az ad sp list --filter "startswith(displayName,'PAL') and servicePrincipalType  eq 'Application'" --query "[].{DisplayName:displayName, AppId:appId, ObjectId:id}" --output table
     ```
 
-    Example output
+    {{< output >}}
 
-    ```text
-    DisplayName                                 AppId                                 ObjectId
-    ------------------------------------------  ------------------------------------  ------------------------------------
-    PAL (Partner Admin Link) for Azure Citadel  a8e4a6e3-220e-4ab8-b705-539d3f08ab0b  00755c50-b896-4f05-a214-c816a22726ed
-    ```
+```text
+DisplayName                                 AppId                                 ObjectId
+------------------------------------------  ------------------------------------  ------------------------------------
+PAL (Partner Admin Link) for Azure Citadel  a8e4a6e3-220e-4ab8-b705-539d3f08ab0b  00755c50-b896-4f05-a214-c816a22726ed
+```
+
+{{< /output >}}
 
 {{< /mode >}}
 {{< /modes >}}
