@@ -11,38 +11,3 @@
 {{ .Inner | safeHTML }}
   </div>
 </div>
-
-<style>
-.mermaid-container {
-  background: var(--color-canvas-subtle);
-  border: 1px solid var(--color-border-default);
-  border-radius: 6px;
-  padding: 1rem;
-  overflow-x: auto;
-}
-
-.mermaid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
-}
-
-/* Dark mode adjustments */
-[data-color-mode="dark"] .mermaid-container {
-  background: var(--color-canvas-default);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .mermaid-container {
-    padding: 0.5rem;
-    margin: 1rem 0;
-  }
-
-  .mermaid svg {
-    max-width: 100%;
-    height: auto;
-  }
-}
-</style>

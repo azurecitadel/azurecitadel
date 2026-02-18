@@ -1,4 +1,2 @@
 {{ $title := .Get "title" | default "Mode" }}
-<div class="ac-mode-panel" data-mode-panel data-title="{{ $title | htmlEscape }}">
-  {{ .Page.RenderString .Inner }}
-</div>
+<div class="ac-mode-panel" data-mode-panel data-title="{{ $title | htmlEscape }}">{{ .Page.RenderString .Inner }}</div>

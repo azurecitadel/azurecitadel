@@ -1,12 +1,15 @@
 {{/* Output shortcode for displaying expected command output with dark background */}}
-{{ $label := .Get 0 | default "Expected output:" }}
-{{ $detailsTitle := .Get 1 }}
+{{ $detailsTitle := .Get 0 }}
+{{ $label := .Get 1 | default "Example output:" }}
+{{ if eq $label "-" }}
+  {{ $label = "" }}
+{{ end }}
 
 {{ if $detailsTitle }}
 {{/* Nest within details shortcode */}}
 {{ $outputContent := "" }}
 {{ if ne $label "" }}
-{{ $outputContent = printf "<div class=\"output-label\">%s</div>" $label }}
+{{ $outputContent = printf "<div class=\"output-label\">%s</div>" (.Page.RenderString $label) }}
 {{ end }}
 {{ $outputContent = printf "%s<div class=\"output-content\">%s</div>" $outputContent (.Page.RenderString .Inner) }}
 {{ $detailsCall := printf "{{< details \"%s\" >}}<div class=\"output-block\">%s</div>{{< /details >}}" $detailsTitle $outputContent }}
@@ -14,142 +17,9 @@
 {{ else }}
 {{/* Standard output without details wrapper */}}
 <div class="output-block">
-  {{ if ne $label "" }}
-  <div class="output-label">{{ $label }}</div>
-  {{ end }}
-  <div class="output-content">
-    {{ .Page.RenderString .Inner }}
-  </div>
+{{ if ne $label "" }}
+<div class="output-label">{{ .Page.RenderString $label }}</div>
+{{ end }}
+<div class="output-content">{{ .Page.RenderString .Inner }}</div>
 </div>
 {{ end }}
-
-<style>
-.output-block {
-  margin: 1rem 0;
-}
-
-.output-label {
-  font-weight: 600;
-  color: var(--color-fg-default);
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-}
-
-.output-content {
-  /* Container styling */
-}
-
-/* Target code blocks within output content */
-.output-content pre {
-  background: rgba(var(--color-canvas-subtle), 0.6) !important;
-  border: 1px solid var(--color-border-default) !important;
-  color: #f0f6fc !important;
-  border-radius: 6px !important;
-}
-
-html[data-color-mode='light'] .output-content pre {
-  background: #f8f9fa !important;
-  color: #24292f !important;
-}
-
-.output-content .hljs {
-  background: transparent !important;
-  color: inherit !important;
-  border: none !important;
-}
-
-/* Ensure inline code also gets the gentle background */
-.output-content code:not(.hljs) {
-  background: rgba(var(--color-canvas-subtle), 0.6) !important;
-  color: #f0f6fc !important;
-  border: 1px solid var(--color-border-default) !important;
-  padding: 2px 4px !important;
-  border-radius: 3px !important;
-}
-
-html[data-color-mode='light'] .output-content code:not(.hljs) {
-  background: #f8f9fa !important;
-  color: #24292f !important;
-}
-
-/* Details styling for output shortcode */
-.output-block .citadel-details {
-  margin: 0;
-}
-
-.output-block .citadel-details-summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 0.75rem 0.75rem 0.75rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: transparent;
-  font-weight: 600;
-  border-radius: 6px;
-}
-
-.output-block .citadel-details-chevron {
-  transition: transform 0.2s ease;
-  display: flex;
-  align-items: center;
-}
-
-.output-block .citadel-details.open .citadel-details-chevron {
-  transform: rotate(90deg);
-}
-
-.output-block .citadel-details-content {
-  background: transparent;
-  border: 1px solid var(--color-border-default);
-  border-radius: 6px;
-  margin-top: 0.5rem;
-  position: relative;
-  padding-bottom: 1rem;
-}
-
-.output-block .citadel-details-close-area {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1rem;
-  cursor: pointer;
-}
-</style>
-
-<script>
-// Initialize output details on page load
-document.addEventListener('DOMContentLoaded', function() {
-  const outputDetails = document.querySelectorAll('.output-block .citadel-details:not([data-initialized])');
-
-  outputDetails.forEach(function(details) {
-    details.setAttribute('data-initialized', 'true');
-
-    const summary = details.querySelector('.citadel-details-summary');
-    const content = details.querySelector('.citadel-details-content');
-    const closeArea = details.querySelector('.citadel-details-close-area');
-
-    if (summary && content) {
-      summary.addEventListener('click', function() {
-        const isOpen = details.classList.contains('open');
-
-        if (isOpen) {
-          content.style.display = 'none';
-          details.classList.remove('open');
-        } else {
-          content.style.display = 'block';
-          details.classList.add('open');
-        }
-      });
-
-      if (closeArea) {
-        closeArea.addEventListener('click', function() {
-          content.style.display = 'none';
-          details.classList.remove('open');
-        });
-      }
-    }
-  });
-});
-</script>
