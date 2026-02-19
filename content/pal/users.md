@@ -15,6 +15,7 @@ aliases:
   - /pal/user
 tabs:
   - portal
+  - user
 ---
 
 ## In brief
@@ -165,10 +166,14 @@ When you have access to the customer's resources, use the Azure portal, PowerShe
 {{< /mode >}}
 {{< /modes >}}
 
-## Why do you have to switch into each customer tenant?
+## Why do you have to switch into each customer tenant for guest IDs?
 
 Your user ID in your home tenant may have been invited as a guest to multiple customer environments. You are signing in with the same MFA each time, so why do you need to switch into each customer tenant and recreate the Partner Admin Link in each one?
 
 When you accept an invitation, Entra creates a new objectId in the customer's tenant. (The User Principal Name for a guest ID includes #EXT#, e.g. first.last_partner.com#EXT#\@customer.com.)
 
 The Partner Admin Link is between the tenantId.objectId and the partnerId as you can see in the JSON output above for the Azure CLI commands.
+
+## Attestation
+
+{{% shared-content "pal/attestation" %}}

@@ -13,6 +13,7 @@ series:
   - pal
 tabs:
   - azure-cli
+  - service-principal
 aliases:
   - sp
 force_tabs: true
@@ -161,3 +162,7 @@ The example here is for a system assigned managed identity on an Azure RHEL linu
 {{< /modes >}}
 
 Partner Admin Link should now associate telemetry for all resources under the service principal's RBAC role assignments, assuming they include a PEC eligible role.
+
+## Attestation
+
+{{% shared-content "pal/attestation" %}}
