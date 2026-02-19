@@ -48,7 +48,7 @@ Security principal is an Entra ID term. Here are the types that you can use.
 - **Service principals**: Service principals are system accounts. They are often referred to as app registrations (as they're closely related), or enterprise apps (as that is where you'll find them in Entra's admin portal.).
 - **Managed identities**: These are the exception as they are out of scope for PAL. They are a special type of service principal created as an Azure resource and linked to services (user assigned managed identities), or directly associated with the lifecycle of an Azure resource, e.g. the system assigned managed identity for, say, a virtual machine.
 
-{{< flash >}}
+{{< flash "tip" >}}
 If you have a team of people providing a managed service into the customer account then it is recommended to get each and every one to link the user or guest IDs in the customer context, i.e. when they have switched to the customer's directory. Make it part of your standard processes when each person works on a new customer for the first time. Maximising coverage helps avoid sudden losses of PAL recognition through employee attrition.
 
 Using service principals is highly recommended as they do not leave organisations.
@@ -86,7 +86,7 @@ Take the scenario where a team of people providing the managed service are all  
 
 For users and guest IDs, the employee can authenticate in the customer's context and then configure the link using either the Azure Portal, Azure CLI, or PowerShell.
 
-{{< flash >}}
+{{< flash "tip" >}}
 Linking should be done in every customer context. At a technical level the link connects the Entra security principal's objectId (which belongs to the customer's tenantId) with the PartnerID.
 
 For example, if a user's ID (i.e. _first.last@partnername.com_) has been invited as a guest into 30 different customers then they should switch to each of those 30 directories in turn and create the Partner Admin Link for the objectId in that tenant.
@@ -96,27 +96,17 @@ All are covered in the [User IDs & PAL](../users) page as well as the official [
 
 ### Service Principals
 
-Note that you cannot create a Partner Admin Link for a service principal using the Azure Portal.
+Note that you cannot create a Partner Admin Link for a service principal using the Azure Portal, so we go into more detail on how to create those.
 
-We cover a few scenarios here
+We cover several scenarios here and this is the main area where I am adding new pages as different approaches are required.
 
-#### I have a service principal with a secret
-
-If you can authenticate as the service principal using either a secret (app password) or certificate then go to
-- [Service Principals & PAL](../sp)
-
-Where the service principal's secret is known - e.g. when you are creating the service principal - then you can authenticate and run the command using the CLI or PowerShell. If it is a service principal authenticating using OpenID Connect then you can add the commands into a workflow that meets the federated workload credential's subject.
-
+Jump up a level using the breadcrumbs above to browse those scenarios.
 
 ### Via Azure Lighthouse
 
-Azure Lighthouse is slightly different as the managed service delegations project resources from the customer's tenant to the managed service provider (MSP). The authorisations in the service definition define the MSP's access which uses the security principals (users, service principals, and security groups) in the MSP's tenant. Therefore that is where the Partner Admin Link's are defined, applying to any and all Azure Lighthouse delegations where they are included. A benefit of this approach is that link only needs to be created once.
+Azure Lighthouse is slightly different as the managed service delegations project resources from the customer's tenant to the managed service provider (MSP). The authorisations in the service definition define the MSP's access which specifies the security principals (users, service principals, and security groups) in the MSP's tenant. Any delegations then project the customer's resources into the MSP's tenant.
 
-{{< flash >}}
-The approaches are not mutually exclusive. It is perfectly fine to use multiple approaches.
-{{< /flash >}}
-
-If you are already using Azure Lighthouse with your customers then it is one of the easiest and most effective methods for PAL tagging at scale. See the [Azure Lighthouse & PAL](./pal) for more information.
+Therefore you link the security principals in the MSP tenant rather than in the custom context. A benefit of this approach is that link only needs to be created once. If you are already using Azure Lighthouse with your customers then it is one of the easiest and most effective methods for PAL tagging at scale. See the [Azure Lighthouse & PAL](./pal) for more information.
 
 ## Which Azure RBAC roles are eligible?
 
@@ -128,9 +118,63 @@ Based on the list there is no hard rule, but the following statements are genera
 
 - reader roles are not PEC eligible
 - contributor roles - i.e. those that include write and delete control plane actions - are eligible
-- PaaS service roles _may_ be eligible. Check the list. An example anomaly is Cognitive Services User, a role which is ineligible despite including listkeys for the control plane, whilst Azure Service Bus Data Receiver - which only has read actions on the control plane - is eligible.
 
-There appears to be a subjective aspect to these in the list depending if they are based on the provision of a solution rather than use of a service.
+## Support Request Contributor
+
+{{< flash "tip" >}}
+One role that you will see referenced frequently in these pages is **Support Request Contributor** which is often used in combination with the Reader role.
+
+Support Request Contributor is PEC eligible and most customers view it as a reasonable role to have permanently active as it is only capable of creating support tickets and changing their classification.
+{{< /flash >}}
+
+{{< details "Click here for more details on Support Request Contributor" >}}
+
+{{< output "JSON role definition" "From [Support Request Contributor](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/management-and-governance#support-request-contributor)." >}}
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Lets you create and manage Support requests",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e",
+  "name": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Support/*"
+      ],
+      "notActions": [],
+      "dataActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Support Request Contributor",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+{{< /output >}}
+
+The command has some read access - far less than Reader itself - plus `"Microsoft.Support/*"`. The command below lists all of the individual actions covered by that provider type wildcard.
+
+```bash
+az provider operation show --namespace Microsoft.Support --query "resourceTypes[].operations[].name" -otsv
+```
+
+- Microsoft.Support/supportTickets/read
+- Microsoft.Support/supportTickets/write
+- Microsoft.Support/services/read
+- Microsoft.Support/services/classifyProblems/action
+- Microsoft.Support/services/problemClassifications/read
+- Microsoft.Support/operationresults/read
+- Microsoft.Support/operationsstatus/read
+- Microsoft.Support/operations/read
+
+{{< /details >}}
 
 ## Does Privileged Identity Management have an impact?
 
@@ -138,8 +182,8 @@ Absolutely. One very important nuance to be aware is that the telemetry associat
 
 For example, say there is only one linked user ID with a permanent role of Reader and an eligible role of Contributor. If The Contributor role is activated at the subscription scope for eight hours in a month then the recognised influence would be 8 / 730 hours. (Azure uses 730 hours a month for billing purposes.) If it is only activated for one of many resource groups in the subscription then it will be an even smaller fraction.
 
-{{< flash >}}
-It is recommended to include both Reader and Support Request Contributor as the permanent roles for Privileged Identity Management (PIM). Support Request Contributor is PEC eligible and most customers view it as a reasonable role to have permanently active.
+{{< flash "tip" >}}
+It is recommended to include both Reader and Support Request Contributor as the permanent roles for Privileged Identity Management (PIM).
 {{< /flash >}}
 
 ## Does it matter about where and when the RBAC role assignments are created?
