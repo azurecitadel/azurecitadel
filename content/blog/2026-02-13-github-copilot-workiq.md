@@ -100,9 +100,15 @@ published <span style="color:aqua;">2 weeks ago</span> by <span style="color:#33
 
 1. Test it out
 
+    Run a command at the Windows OS level.
+
     ```powershell
     workiq.cmd ask --question "Who is my manager?"
     ```
+
+    {{< flash "tip" >}}
+    This will trigger the EULA acceptance on first use.
+    {{< /flash >}}
 
 ## Reconfiguring Work IQ in WSL2
 
