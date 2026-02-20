@@ -38,6 +38,8 @@ This guide is based on installing nvm and Node.js into [WLS2](https://learn.micr
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
     ```
 
+    This command adds to your ~/.bashrc. Restart the session.
+
 1. Install a supported Node.js version (22 or later)
 
     ```bash
@@ -71,12 +73,14 @@ This guide is based on installing nvm and Node.js into [WLS2](https://learn.micr
     copilot --version
     ```
 
-    Example output:
+    {{< output >}}
 
-    ```text
-    0.0.372
-    Commit: 5534560
-    ```
+```text
+GitHub Copilot CLI 0.0.412.
+Run 'copilot update' to check for updates.
+```
+
+{{< /output >}}
 
 1. Start GitHub Copilot at the CLI
 
@@ -107,32 +111,62 @@ In this section we will look at the process to add MCP servers. Here we'll add t
 1. Enter the server name
 
     ```text
-    Microsoft-Learn
+    MicrosoftLearn
     ```
 
-1. Select option `2` for HTTP transport
+1. Select **HTTP** for the transport
 1. Enter the URL
 
     ```text
     https://learn.microsoft.com/api/mcp
     ```
 
-1. Save the configuration
-1. Use `q` to quit the wizard
+1. Save the configuration with `ctrl` + `s`
+1. Use `esc` to close the wizard
+1. Show the config
+
+   You can press `enter` immediately after adding an MCP server into Copilot, or use:
+
+   ```bash
+   /mcp show MicrosoftLearn
+   ```
+
+   {{< output >}}
+
+{{< raw >}}
+<pre>
+<span style="font-weight:bold; color:blue">●</span> Configured MCP servers: MicrosoftLearn
+
+<span style="font-weight:bold; color:blue">●</span> MCP configuration saved successfully! Changes will take effect immediately.
+
+ MCP Server: MicrosoftLearn
+
+ <span style="color:lightgray;">Type:</span>     http
+ <span style="color:lightgray;">URL:</span>      https://learn.microsoft.com/api/mcp
+ <span style="color:lightgray;">Status:</span>   <span style="color:green;">✓</span> Connected
+
+ Tools (3/3 enabled):
+  <span style="color:green;">✓</span> microsoft_code_sample_search: Search for code snippets and examples in official Microsoft ...
+  <span style="color:green;">✓</span> microsoft_docs_fetch: Fetch and convert a Microsoft Learn documentation webpage to...
+  <span style="color:green;">✓</span> microsoft_docs_search: Search official Microsoft/Azure documentation to find the mo...
+</pre>
+{{< /raw >}}
+{{< /output >}}
+
 1. View the MCP config file
 
-    The steps above will create a ~/.copilot/mcp-config.json file.
+    The steps above will create a ~/.copilot/mcp-config.json file. View it using the command below:
 
     ```bash
     jq . ~/.copilot/mcp-config.json
     ```
 
-    Example output:
+    {{< output >}}
 
     ```json
     {
       "mcpServers": {
-        "Microsoft-Learn": {
+        "MicrosoftLearn": {
           "type": "http",
           "url": "https://learn.microsoft.com/api/mcp",
           "headers": {},
@@ -143,6 +177,12 @@ In this section we will look at the process to add MCP servers. Here we'll add t
       }
     }
     ```
+
+    {{< /output >}}
+
+{{< flash "tip" >}}
+You can stay in GitHub Copilot CLI and run shell commands. Either prefix the command with **`!`** for a single shell command, or switch modes using `shift`+`tab`.
+{{< /flash >}}
 
 ## Creating Copilot instructions
 
