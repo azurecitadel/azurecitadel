@@ -24,7 +24,7 @@ After following the official [Work IQ MCP preview](https://learn.microsoft.com/m
 
 ## Workaround
 
-The answer is to reconfigure the MCP server to run at the Windows OS level, rather than natively in the WSL2 subsystem. THis is easy as WSL2 supports running [Windows commands](https://learn.microsoft.com/windows/wsl/filesystems#run-windows-tools-from-linux) directly within the subsystem.
+The answer is to reconfigure the MCP server to run at the Windows OS level, rather than natively in the WSL2 subsystem. This is easy as WSL2 supports running [Windows commands](https://learn.microsoft.com/windows/wsl/filesystems#run-windows-tools-from-linux) directly within the subsystem.
 
 Here's how to configure it.
 
@@ -45,9 +45,11 @@ Open PowerShell as admin. (I right click on the Windows icon, select **Terminal 
     ```
 
     {{< output >}}
+
 ```text
 https://registry.npmjs.org/@microsoft/workiq/-/workiq-0.2.8.tgz
 ```
+
 {{< /output >}}
 
     Or run the command without dist.tarball to get detailed release info (from `npm help view`).
@@ -112,7 +114,7 @@ This will trigger the EULA acceptance on first use.
 
 1. Remove the workiq plugin
 
-    The default commands install Work IQ as a plugin using npx. If you have it and need to remove it:
+    The commands on the official [Work IQ MCP preview](https://learn.microsoft.com/microsoft-365-copilot/extensibility/workiq-overview) page install Work IQ as a plugin using npx. Use the following command to remove it if you have it installed that way:
 
     ```bash
     /plugin uninstall workiq
@@ -124,7 +126,7 @@ This will trigger the EULA acceptance on first use.
     /mcp add WorkIQ
     ```
 
-    This will open up the interactive MCP addition and the name will have been prepopulated.
+    This will open up the interactive MCP server wizard. The name will have been prepopulated.
 
     - Leave the **Server Type** as **Local**.
     - Set the **Command**
@@ -161,7 +163,7 @@ This will trigger the EULA acceptance on first use.
 
 1. Display the JSON config file
 
-    You can run shell commands within GutHub Copilot CLI by either prefixing them with `!` or by using **shift*+**tab**. Either way will switch you into the yellow Shell mode.
+    You can run shell commands within GutHub Copilot CLI by either prefixing them with `!` or by using **shift**+**tab**. Either way will switch you into the yellow Shell mode.
 
     ```shell
     jq < ~/.copilot/mcp-config.json
@@ -201,8 +203,8 @@ This will trigger the EULA acceptance on first use.
 
 Now that Work IQ is configured as an MCP server, you can ask GitHub Copilot CLI questions about your work context and it will use the WorkIQ MCP to query your Microsoft 365 data.
 
-{{< output "" "GitHub Copilot CLI with WorkIQ:" >}}
+{{< output "" "Example use of GitHub Copilot CLI with the WorkIQ MCP tools:" >}}
 ![GitHub Copilot CLI with WorkIQ MCP server displaying a question about work context being answered using Microsoft 365 data](/blog/images/2026-02-13-github-copilot-workiq.png)
 {{< /output >}}
 
-This demonstrates the power of combining GitHub Copilot CLI with Work IQ - you can now ask questions about your work context and get answers directly within your development workflow.
+This demonstrates the power of combining GitHub Copilot CLI with Work IQ - you can now ask questions about your work context and get answers directly within your development workflow!
