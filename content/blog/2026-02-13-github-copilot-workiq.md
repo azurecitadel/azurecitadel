@@ -44,7 +44,7 @@ Open PowerShell as admin. (I right click on the Windows icon, select **Terminal 
     npm view @microsoft/workiq dist.tarball
     ```
 
-    {{< output "Example output" >}}
+    {{< output >}}
 ```text
 https://registry.npmjs.org/@microsoft/workiq/-/workiq-0.2.8.tgz
 ```
@@ -55,7 +55,7 @@ https://registry.npmjs.org/@microsoft/workiq/-/workiq-0.2.8.tgz
     ```powershell
     npm view @microsoft/workiq
     ```
-    {{< output "Example output" >}}
+    {{< output >}}
 {{< raw style="color:white; background-color:black" >}}
 <pre>
 <span style="text-decoration:underline;"></span><span style="text-decoration:underline;color:aqua;">@microsoft/workiq@0.2.8</span><span style="text-decoration:underline;"></span> | <span style="color:lime;">SEE EULA</span> | deps: <span style="color:aqua;">none</span> | versions: <span style="color:aqua;">4</span>
@@ -92,23 +92,15 @@ published <span style="color:aqua;">2 weeks ago</span> by <span style="color:#33
 
 1. Close down and then reopen PowerShell
 
-1. Accept the EULA
-
-    ```powershell
-    workiq.cmd accept-eula
-    ```
-
-1. Test it out
-
-    Run a command at the Windows OS level.
+1. Run a command at the Windows OS level.
 
     ```powershell
     workiq.cmd ask --question "Who is my manager?"
     ```
 
-    {{< flash "tip" >}}
-    This will trigger the EULA acceptance on first use.
-    {{< /flash >}}
+    {{< flash >}}
+This will trigger the EULA acceptance on first use.
+{{< /flash >}}
 
 ## Reconfiguring Work IQ in WSL2
 
@@ -120,7 +112,7 @@ published <span style="color:aqua;">2 weeks ago</span> by <span style="color:#33
 
 1. Remove the workiq plugin
 
-    The default commands install Work IQ as a plugin using npx. If you have it and need too remove it:
+    The default commands install Work IQ as a plugin using npx. If you have it and need to remove it:
 
     ```bash
     /plugin uninstall workiq
@@ -149,23 +141,25 @@ published <span style="color:aqua;">2 weeks ago</span> by <span style="color:#33
     /mcp show WorkIQ
     ```
 
-    {{< output "Example Output" >}}
+    {{< output >}}
 
-```text
-● MCP Server: WorkIQ
+{{< raw style="color:white; background-color:black" >}}
+<pre>
+<span style="color:aqua";>●</span> MCP Server: WorkIQ
 
   Type: local
   Command: powershell.exe
   Status: Enabled
 
   Tools (2/2 enabled):
-    ✓ accept_eula: Accept the End User License Agreement (EULA) to enable full ...
-    ✓ ask_work_iq: Ask a question to Microsoft 365 Copilot for information abou...
-```
+    <span style="color:lime";>✓</span> accept_eula: Accept the End User License Agreement (EULA) to enable full ...
+    <span style="color:lime";>✓</span> ask_work_iq: Ask a question to Microsoft 365 Copilot for information abou...
+</pre>
+{{< /raw >}}
 
 {{< /output >}}
 
-1. Display as JSON
+1. Display the JSON config file
 
     You can run shell commands within GutHub Copilot CLI by either prefixing them with `!` or by using **shift*+**tab**. Either way will switch you into the yellow Shell mode.
 
@@ -173,7 +167,7 @@ published <span style="color:aqua;">2 weeks ago</span> by <span style="color:#33
     jq < ~/.copilot/mcp-config.json
     ```
 
-    {{< output "Example mcp-config.json" >}}
+    {{< output "" "Example mcp-config.json with MicrosoftLearn and WorkIQ MCP servers" >}}
 
 ```json
 {
@@ -207,7 +201,7 @@ published <span style="color:aqua;">2 weeks ago</span> by <span style="color:#33
 
 Now that Work IQ is configured as an MCP server, you can ask GitHub Copilot CLI questions about your work context and it will use the WorkIQ MCP to query your Microsoft 365 data.
 
-{{< output "GitHub Copilot CLI with WorkIQ:" >}}
+{{< output "" "GitHub Copilot CLI with WorkIQ:" >}}
 ![GitHub Copilot CLI with WorkIQ MCP server displaying a question about work context being answered using Microsoft 365 data](/blog/images/2026-02-13-github-copilot-workiq.png)
 {{< /output >}}
 
