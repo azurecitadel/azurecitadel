@@ -1,0 +1,15 @@
+{{/* Explore Topics tiles — included in both right pane (xl+) and main column (mobile) */}}
+{{ $all := .Site.Menus.side }}
+{{ $exclude := slice "About" "Archive" "Blog" }}
+{{ $topics := where $all "Name" "not in" $exclude }}
+<section class="frontpage-categories" aria-label="Topic categories">
+	<h2 class="h3 mb-2">Explore Topics</h2>
+	<div class="frontpage-grid" role="list">
+		{{ range $topics }}
+		<div class="frontpage-tile tile-hover-accent box Box-row--hover-gray p-2 position-relative" role="listitem">
+			<a class="stretched-link text-decoration-none" href="{{ .URL }}" aria-label="Go to {{ .Name }}"></a>
+			<span class="tile-title d-block">{{ .Name }}</span>
+		</div>
+		{{ end }}
+	</div>
+</section>

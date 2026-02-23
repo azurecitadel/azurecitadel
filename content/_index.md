@@ -1,5 +1,11 @@
 +++
 title = "Azure Citadel"
+
+[bio]
+  name        = "Richard Cheney"
+  title       = "Senior Partner Solutions Architect"
+  company     = "Microsoft"
+  description = "In my role I work with some of Microsoft's largest partners and their customers, but I like to create content that all partners, customers and individual users can benefit from. I specialise in the Cloud and AI Platform and with a love of infrastructure as code, cloud-native, and platform engineering. Based in Reading, UK."
 +++
 
 ## Azure Citadel

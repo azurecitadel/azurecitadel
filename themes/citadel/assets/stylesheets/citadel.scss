@@ -149,6 +149,14 @@ html[data-color-mode='dark'] #sidebar-toggle:hover { color: var(--citadel-accent
 .frontpage-tile .tile-title { font-weight:600; font-size:.68rem; line-height:1.05; display:inline-block; }
 @media (min-width: 1400px){ .frontpage-tile .tile-title { font-size:.7rem; } }
 
+/* Homepage right pane — bio card */
+.homepage-bio { padding:.75rem; background:var(--color-canvas-subtle,#f6f8fa); border:1px solid var(--color-border-default,#d0d7de); border-radius:6px; }
+.homepage-bio-avatar { width:80px; height:80px; border-radius:50%; object-fit:cover; display:block; margin-bottom:.75rem; border:2px solid var(--color-border-default,#d0d7de); }
+/* Mobile bio footer — landscape orientation */
+.homepage-bio-mobile { padding:.75rem; background:var(--color-canvas-subtle,#f6f8fa); border:1px solid var(--color-border-default,#d0d7de); border-radius:6px; }
+.homepage-bio-mobile .bio-header { display:flex; align-items:center; gap:.75rem; margin-bottom:.5rem; }
+.homepage-bio-mobile .bio-header img { width:56px; height:56px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid var(--color-border-default,#d0d7de); }
+
 /* Removed legacy category tile & iframe styles */
 
 /* Theme toggle */
