@@ -30,10 +30,15 @@
 					<p class="f5 mb-1"><strong>{{ .Site.Home.Params.bio.name }}</strong></p>
 					<p class="f6 text-gray mb-2">{{ .Site.Home.Params.bio.title }} · {{ .Site.Home.Params.bio.company }}</p>
 					<p class="f6 mb-2">{{ .Site.Home.Params.bio.description }}</p>
-					<p class="f6 mb-0">
-						<a href="https://github.com/richeney" class="mr-2" rel="noopener">GitHub</a>
-						<a href="https://richeney.bsky.social" rel="noopener">Bluesky</a>
-					</p>
+					<ul class="list-style-none pl-0 mb-0 f6">
+						{{ range .Site.Home.Params.bio.socials }}
+						<li class="d-flex flex-items-center mb-1" style="gap:.4rem;">
+							{{ $icon := .octicon | default "link-external" }}
+							<span class="color-fg-muted" style="flex-shrink:0;">{{- partial "octicon" (dict "icon" $icon "height" 16) -}}</span>
+							<a href="{{ .uri }}" rel="noopener">{{ .displayName }}</a>
+						</li>
+						{{ end }}
+					</ul>
 				</section>
 
 			</div>
@@ -93,9 +98,15 @@
 						</div>
 					</div>
 					<p class="f6 mb-1">{{ .Site.Home.Params.bio.description }}</p>
-					<p class="f6 mb-0">
-						<a href="https://github.com/richeney" class="mr-2" rel="noopener">GitHub</a>
-						<a href="https://richeney.bsky.social" rel="noopener">Bluesky</a>
+					<p class="f6 mb-0 d-flex flex-items-center flex-wrap" style="gap:.35rem .5rem;">
+						{{ range $i, $s := .Site.Home.Params.bio.socials }}
+						{{ if gt $i 0 }}<span class="color-fg-muted">&middot;</span>{{ end }}
+						<span class="d-inline-flex flex-items-center" style="gap:.25rem;">
+							{{ $icon := $s.octicon | default "link-external" }}
+							<span class="color-fg-muted" style="flex-shrink:0;">{{- partial "octicon" (dict "icon" $icon "height" 16) -}}</span>
+							<a href="{{ $s.uri }}" rel="noopener">{{ $s.displayName }}</a>
+						</span>
+						{{ end }}
 					</p>
 				</section>
 			</div>
