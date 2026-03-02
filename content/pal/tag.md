@@ -225,10 +225,10 @@ The two steps do not have to be run by the same person. If someone else has alre
 {
   "id": "/providers/microsoft.managementpartner/partners/994867",
   "type": "Microsoft.ManagementPartner/partners",
-  "name": "3141593",
+  "name": "314159",
   "etag": 1,
   "properties": {
-    "partnerId": "3141593",
+    "partnerId": "314159",
     "partnerName": "Azure Citadel",
     "tenantId": "ac40fc60-2717-4051-a567-c0cd948f0ac9",
     "objectId": "2ee63cf0-5219-42bd-b42f-a547de2be218",
