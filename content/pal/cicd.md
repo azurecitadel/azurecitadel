@@ -4,7 +4,7 @@ date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "Pipelines or workflows commonly use service principals. Authenticating these securely using OpenID Connect is recommended to avoid the use of secrets or certificates. Here we show how to use a dedicated workflow to create the Partner Admin Link."
 draft: false
-weight: 70
+weight: 40
 menu:
   side:
     parent: pal
@@ -14,6 +14,8 @@ series:
 tabs:
   - github
   - azure-cli
+  - service-principal
+force_tabs: true
 ---
 
 ## Introduction

@@ -4,13 +4,16 @@ date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "There are a number of scenarios where you may not have eligible permanent access, and your recognition is being understated. We'll look at creating a new service principal purely for recognition purposes."
 draft: false
-weight: 60
+weight: 80
 menu:
   side:
     parent: pal
     identifier: pal-tag
 series:
   - pal
+tabs:
+  - service-principal
+force_tabs: true
 aliases:
   - /pal/tagging
   - /pal/dedicated
@@ -439,25 +442,10 @@ This example creates the role assignment at all subscriptions within the service
 {{< /mode >}}
 {{< /modes >}}
 
-## Listing the scope points
+## Attestation
 
-You may wish to view all of the scope points where the ID has an RBAC role assignment. This is not easy within the Azure Portal.
+{{< flash "tip" >}}
+Note that you can no longer authenticate as the service principal so the [Assignment info for another object id](#assignment-info-for-another-object-id) is the only script option that makes sense.
+{{< /flash >}}
 
-{{< modes >}}
-{{< mode title="Azure CLI">}}
-You will need the [service principal's objectId](#set-the-object-id) as before.
-
-1. List all RBAC role assignments
-
-    ```bash
-    az role assignment list --all --assignee $objectId --query "[].{roleDefinitionName:roleDefinitionName, scope:scope}" --output yamlc
-    ```
-
-1. List only the scope points
-
-    ```bash
-    az role assignment list --all --assignee $objectId --query "[].scope" --output tsv
-    ```
-
-{{< /mode >}}
-{{< /modes >}}
+{{% shared-content "pal/attestation" %}}

@@ -4,7 +4,7 @@ date: 2026-02-16
 author: [ "Richard Cheney" ]
 description: "Here is an example Terraform config to create the Partner Admin Link using azapi_resource_action, useful in CI/CD and subscription vending machine situations."
 draft: false
-weight: 75
+weight: 50
 menu:
   side:
     parent: pal

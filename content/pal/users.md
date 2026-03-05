@@ -4,7 +4,7 @@ date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "If you are have a user ID in a customer tenant then follow this page to configure Partner Admin Link. This is the primary use case covered in the Microsoft Learn docs but included here for completeness."
 draft: false
-weight: 80
+weight: 20
 menu:
   side:
     parent: pal
@@ -16,6 +16,7 @@ aliases:
 tabs:
   - portal
   - user
+force_tabs: true
 ---
 
 ## In brief

@@ -4,7 +4,7 @@ date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "Do you need to create a Partner Admin Link for a service principal? And it has eligible RBAC role assignments? Can you authenticate using its secret or certificate? If so, follow this guide."
 draft: false
-weight: 20
+weight: 30
 menu:
   side:
     parent: pal
@@ -14,9 +14,9 @@ series:
 tabs:
   - azure-cli
   - service-principal
+force_tabs: true
 aliases:
   - sp
-force_tabs: true
 ---
 
 ## Introduction brief
