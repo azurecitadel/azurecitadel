@@ -32,7 +32,7 @@ jobs:
 
   build_and_deploy_job:
     needs: check_source_repo
-    if: needs.check_source_repo.outputs.source_repo == 'azurecitadel/azurecitadel' && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
+    if: contains(fromJSON('["azurecitadel/azurecitadel", "richeney/azurecitadel"]'), needs.check_source_repo.outputs.source_repo) && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
     runs-on: ubuntu-latest
     name: Build Job
 
