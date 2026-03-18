@@ -74,13 +74,7 @@ The additional AzManagementPartner cmdlets are the same as for managing links fo
 {{< /mode >}}
 {{< mode title="Azure CLI" >}}
 
-### Use the Azure CLI to create the link for a service principal
-
-1. Install the Azure CLI's managementpartner extension.
-
-    ```bash
-    az extension add --name "managementpartner"
-    ```
+### Authenticate
 
 1. Sign in to the customer's tenant as the service principal.
 
@@ -96,6 +90,18 @@ The additional AzManagementPartner cmdlets are the same as for managing links fo
     az login --service-principal --user "<clientId>" --tenant "<tenantId>" --certificate "<pathToCertificate>"
     ```
 
+### Use `az managementpartner` to create the Partner Admin Link
+
+1. Install the Azure CLI's managementpartner extension.
+
+    The az management
+
+    ```bash
+    az extension add --name "managementpartner"
+    ```
+
+    This is a one off task.
+
 1. Create the Partner Admin Link.
 
     ```bash
@@ -103,6 +109,14 @@ The additional AzManagementPartner cmdlets are the same as for managing links fo
     ```
 
 The additional Azure CLI commands are the same as for managing links for [users](/pal/users/#creating-the-partner-admin-link).
+
+### Alternative using `az rest`
+
+Alternatively, you can also call the REST API directly using the `az rest` command. This removes the need to download the extension.
+
+```bash
+az rest --method put --uri "https://management.azure.com/providers/microsoft.managementpartner/partners/<partnerId>?api-version=2018-02-01" --body '{"partnerId": "<partnerId>"}'
+```
 
 {{< /mode >}}
 {{< mode title="REST API" >}}

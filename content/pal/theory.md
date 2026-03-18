@@ -41,20 +41,34 @@ The process is sometimes called PAL tagging.
 
 ## What do you mean by eligible security principal?
 
-Security principal is an Entra ID term. Here are the types that you can use.
+Security principal is an Entra ID term. Here are the types that you can use. Effectively if you can authenticate as any of these security principals and then call the REST API in some way then you can create a Partner Admin Link.
+
+### Users and Guests
+
+User IDs fall into two groups
 
 - **Directory accounts**: User IDs that the customer creates for you in their own directory. Usually called users or members.
 - **Guest users**: The customer invites your ID to their directory. Usually called guests or invited users.
-- **Service principals**: Service principals are system accounts. They are often referred to as app registrations (as they're closely related), or enterprise apps (as that is where you'll find them in Entra's admin portal.).
-- **Managed identities**: These are the exception as they are out of scope for PAL. They are a special type of service principal created as an Azure resource and linked to services (user assigned managed identities), or directly associated with the lifecycle of an Azure resource, e.g. the system assigned managed identity for, say, a virtual machine.
 
 {{< flash "tip" >}}
 If you have a team of people providing a managed service into the customer account then it is recommended to get each and every one to link the user or guest IDs in the customer context, i.e. when they have switched to the customer's directory. Make it part of your standard processes when each person works on a new customer for the first time. Maximising coverage helps avoid sudden losses of PAL recognition through employee attrition.
-
-Using service principals is highly recommended as they do not leave organisations.
 {{< /flash >}}
 
-The Azure documentation states that you cannot use Partner Admin Link on managed identities. So an eligible security principal in the PAL context is any user, guest, or service principal in the customer's tenant that you can authenticate as, and then link.
+### Service Principals and Managed Identities
+
+- **Service principals**: Service principals are system accounts. They are often referred to as app registrations (as they're closely related), or enterprise apps (as that is where you'll find them in Entra's admin portal.).
+- **Managed identities**: They are a special type of service principal created as an Azure resource. They are either
+  - **user assigned managed identities** which are created as a standalone resource in Azure and then associated to resources, or
+  - **system assigned managed identities** which are directly associated with the lifecycle of an Azure resource such as a virtual machine
+
+{{< flash "tip" >}}
+Using service principals (or managed identities) is recommended as they do not leave organisations.
+{{< /flash >}}
+
+The Azure documentation for [Partner Admin Link](https://aka.ms/partneradminlink) does not explicitly state that you can use Partner Admin Link on managed identities, but they are effectively a variant of a service principal and these pages include a couple of examples.
+
+1. The [REST API](/pal/credential/?tabs=restapi) tab on the service principal page is actually for a system assigned managed identity
+1. The [CICD and OpenID Connect](/pal/cicd/) and [AzAPI](/pal/azapi) pages are pipeline focused and they work exactly the same way regardless of whether those workflows are using service principals or managed identities.
 
 ## What is the Partner ID?
 
