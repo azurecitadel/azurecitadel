@@ -3,8 +3,8 @@ title: "Secure Key Release"
 description: "SKR release policies control exactly which trusted execution environment can receive a key. Here is how to configure them for Confidential VMs, confidential ACI containers, and Intel SGX enclaves."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
-draft: false
-weight: 30
+draft: true
+weight: 90
 menu:
   side:
     parent: cmk

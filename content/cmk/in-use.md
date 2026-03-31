@@ -3,8 +3,8 @@ title: "Encrypting data in use with ACC"
 description: "Encryption at rest protects stored data. Azure Confidential Computing goes further — protecting data while it is being processed, by running workloads inside hardware-isolated trusted execution environments."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
-draft: false
-weight: 28
+draft: true
+weight: 30
 menu:
   side:
     parent: cmk

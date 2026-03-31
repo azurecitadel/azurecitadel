@@ -1,10 +1,10 @@
 ---
-title: "Lab: CMK for VM Disks and AKS"
+title: "🧪 CMK for VM Disks and AKS"
 description: "Use a Disk Encryption Set and an HSM-backed CMK to encrypt VM managed disks and AKS node OS disks. The second of three challenge-style labs."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
-draft: false
-weight: 50
+draft: true
+weight: 24
 menu:
   side:
     parent: cmk

@@ -1,6 +1,6 @@
 ---
 title: "Encrypting data at rest with CMK"
-description: "Customer-Managed Keys protect data at rest across a wide range of Azure services. Here we cover the five services in scope for this training, the CMK integration pattern for each, and how it differs between Key Vault and Managed HSM."
+description: "Customer-Managed Keys can be used to protect data at rest across a wide range of Azure services. Here we cover five common services, the CMK integration pattern for each, and differences between Azure Key Vault Premium and Azure Key Vault Managed HSM."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
 draft: false
@@ -19,12 +19,12 @@ series:
 
 This page covers **encryption at rest** — protecting stored data so that it cannot be read without access to your key. Each Azure service that supports customer-managed keys wraps its own internal data encryption keys using your CMK in Key Vault. If your key is unavailable, the service cannot decrypt the data.
 
-Encryption in use — protecting data while it is being processed, using Azure Confidential Computing — is a separate topic covered later in this series.
+Encryption in use — protecting data while it is being processed, using Azure Confidential Compute — is a separate topic covered later in this series.
 
 {{< flash >}}
 The pattern is the same across services:
 
-1. Create a key in Key Vault (Premium for HSM-backed).
+1. Create a key in Azure Key Vault Premium.
 1. Enable a managed identity on the Azure resource.
 1. Grant that identity access to **Get**, **Wrap Key**, and **Unwrap Key** on the key.
 1. Point the resource's encryption settings at the key URI.

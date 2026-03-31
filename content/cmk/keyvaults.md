@@ -1,6 +1,6 @@
 ---
 title: "Key Management Options"
-description: "Azure Key Vault Standard, Key Vault Premium, and Managed HSM each offer a different balance of security, sovereignty, and cost. Here is how to choose."
+description: "Azure Key Vault Standard, Azure Key Vault Premium, and Azure Key Vault Managed HSM each offer a different balance of security, sovereignty, and cost. Here is how to choose."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
 draft: false
@@ -8,7 +8,7 @@ weight: 10
 menu:
   side:
     parent: cmk
-    identifier: cmk-options
+    identifier: cmk-keyvaults
 aliases:
   - /cmk/theory
 series:
@@ -17,17 +17,17 @@ series:
 
 ## Introduction
 
-Azure gives you three key management options. They share a common API surface but differ significantly in how keys are protected and who ultimately controls them. Choosing the right one has direct implications for your compliance and sovereignty posture.
+Azure gives you many key management options. Here we will cover three of them: Azure Key Vault Standard and Premium, plus Azure Ket Vault Managed HSM. They share a common API surface but differ significantly in how keys are protected and who ultimately controls them. Choosing the right one has direct implications for your compliance and sovereignty posture.
 
 {{< flash >}}
 **Quick guidance**
 
-- **Key Vault Standard** — good for dev/test and low-sensitivity workloads: secrets, certs, software-protected keys.
-- **Key Vault Premium** — production workloads needing HSM-backed keys; the right default for most CMK scenarios.
-- **Managed HSM** — top-tier compliance requirements (PCI DSS, sovereignty mandates) where single-tenant, customer-controlled key infrastructure is non-negotiable.
+- **Azure Key Vault Standard** — good for dev/test and low-sensitivity workloads: secrets, certs, software-protected keys.
+- **Azure Key Vault Premium** — production workloads needing HSM-backed keys; the right default for most CMK scenarios.
+- **Azure Key Vault Managed HSM** — top-tier compliance requirements (PCI DSS, sovereignty mandates) where single-tenant, customer-controlled key infrastructure is non-negotiable.
 {{< /flash >}}
 
-## Key Vault Standard
+## Azure Key Vault Standard
 
 Standard tier vaults store keys using software-backed encryption (FIPS 140-2 Level 1). They support RSA and EC keys alongside secrets and certificates. Keys are logically isolated per vault but the underlying infrastructure is shared and ultimately controlled by Microsoft.
 
@@ -39,7 +39,7 @@ Standard is a good fit for development, test, and non-critical production use ca
 - [About keys, secrets, and certificates](https://learn.microsoft.com/azure/key-vault/general/about-keys-secrets-certificates)
 - [Create and import keys in Key Vault (CLI)](https://learn.microsoft.com/azure/key-vault/keys/quick-create-cli)
 
-## Key Vault Premium
+## Azure Key Vault Premium
 
 Premium adds hardware-backed key storage. Keys are generated and protected inside Marvell LiquidSecurity HSMs that are now FIPS 140-3 Level 3 validated. The underlying HSMs are partitioned per customer but are still shared infrastructure — Microsoft holds the root of trust.
 
@@ -57,7 +57,7 @@ The API is identical to Standard. Upgrading from Standard to Premium requires no
 - [Import HSM-protected keys to Key Vault (BYOK)](https://learn.microsoft.com/azure/key-vault/keys/hsm-protected-keys-byok)
 - [Generate and transfer HSM-protected keys for Azure Key Vault](https://learn.microsoft.com/azure/key-vault/keys/hsm-protected-keys-ndes)
 
-## Managed HSM
+## Azure Key Vault Managed HSM
 
 Managed HSM provides a dedicated HSM cluster per customer — FIPS 140-3 Level 3, single-tenant, and cryptographically isolated from other tenants. It is also PCI DSS and PCI 3DS compliant.
 
@@ -96,6 +96,47 @@ Managed HSM uses a different endpoint (`*.managedhsm.azure.net`) and a local RBA
 #### References
 
 - [How to choose the right Azure key management solution](https://learn.microsoft.com/azure/security/fundamentals/key-management-choose)
+
+## Soft delete and purge protection
+
+Losing access to keys through administrative error or due to malicious intent by bad actors can have catastrophic impact. This is particularly important where those keys are used to encrypt Azure services via Customer Managed Key.
+
+Data encrypted with customer managed keys will become permanently unrecoverable if the key is permanently deleted and therefore Azure enforces recoverability.
+
+- Soft delete is universally enabled across all Azure Key Vault SKUs.
+- The default (and maximum) retention period is 90 days. (The minimum is 7 days.)
+- The retention period is an immutable property and cannot be changed set.
+- Deleted key vaults without purge protection can be purged.
+- However, purge protection is **mandatory** for all Azure services using customer managed keys.
+
+Example command to enable customer managed key on a storage account:
+
+```shell
+az storage account update --name "<myStorageAccount>" --encryption-key-source Microsoft.Keyvault --encryption-key-vault "https://mykeyvault.vault.azure.net" --encryption-key-name "mykey"
+```
+
+{{< output >}}
+
+Example command to enable customer managed key on a storage account:
+
+```shell
+az storage account update --name "<myStorageAccount>" --encryption-key-source Microsoft.Keyvault --encryption-key-vault "https://mykeyvault.vault.azure.net" --encryption-key-name "mykey"
+```
+
+Error message if you do not have purge protection enabled on the key vault:
+
+{{< raw >}}
+<pre style="color:lightcoral; background-color:black">
+(KeyVaultPolicyError) Keyvault policy recoverable is not set
+Code: KeyVaultPolicyError
+Message: Keyvault policy recoverable is not set
+</pre>
+{{< /raw >}}
+{{< /output >}}
+
+{{< flash "warning" >}}
+Soft enable and purge protection are mandatory for customer managed keys. A deleted key vault will continue to be charged to your Azure bill until the retention period has elapsed and the key vault is permanently deleted.
+{{< /flash>}}
 
 ## Why we use Key Vault Premium for these labs
 
