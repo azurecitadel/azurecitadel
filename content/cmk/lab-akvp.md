@@ -39,7 +39,8 @@ Not all regions support these sizes — check the [Azure products available by r
 
     {{< output >}}
 
-```text
+{{< raw >}}
+<pre>
 Name               Location
 -----------------  -------------
 Standard_DC2as_v5  ItalyNorth
@@ -53,7 +54,8 @@ Standard_DC2as_v6  uksouth
 Standard_DC2as_v6  westcentralus
 Standard_DC2as_v5  westus
 Standard_DC2as_v6  westus
-```
+</pre>
+{{< /raw >}}
 
 {{< /output >}}
 
@@ -65,18 +67,20 @@ Standard_DC2as_v6  westus
 
     {{< output >}}
 
-```text
+{{< raw >}}
+<pre>
 CurrentValue    Limit    LocalName
 --------------  -------  ----------------------------
 0               100      Standard DCASv5 Family vCPUs
 0               0        Standard DCasv6 Family vCPUs
-```
+</pre>
+{{< /raw >}}
 
 {{< /output >}}
 
 Use these commands to select your region and VM SKU.
 
-In the commands here you will see **Italy North** and **Standard_DC2as_v5**.
+**Italy North** and **Standard_DC2as_v5** will be used within these labs.
 
 ## Resource Group
 
@@ -123,18 +127,19 @@ Standard tier does not support HSM-backed keys or Secure Key Release, so Premium
     ```shell
     resource_group_id=$(az group show --name $AZURE_DEFAULTS_GROUP --query id -o tsv)
     uniq=$(md5sum <<< $resource_group_id | cut -c1-8)
-    key_vault_name=cmk-${uniq}
+    key_vault_name=cmk-lab-${uniq}
     echo "$key_vault_name"
     ```
 
     {{< output >}}
 
-```text
-cmk-bd36f48c
-```
+{{< raw >}}
+<pre>
+cmk-lab-bd36f48c
+</pre>
+{{< /raw >}}
 
 {{< /output >}}
-
 
 1. Create the vault.
 
@@ -142,6 +147,7 @@ cmk-bd36f48c
     az keyvault create --name $key_vault_name \
       --sku premium \
       --enable-rbac-authorization true \
+      --enable-purge-protection true \
       --retention-days 7
     ```
 
@@ -149,13 +155,13 @@ cmk-bd36f48c
 
 ```json
 {
-  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-bd36f48c",
+  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-lab-bd36f48c",
   "location": "italynorth",
-  "name": "cmk-bd36f48c",
+  "name": "cmk-lab-bd36f48c",
   "properties": {
     "accessPolicies": [],
     "createMode": null,
-    "enablePurgeProtection": null,
+    "enablePurgeProtection": true,
     "enableRbacAuthorization": true,
     "enableSoftDelete": true,
     "enabledForDeployment": false,
@@ -172,14 +178,14 @@ cmk-bd36f48c
     },
     "softDeleteRetentionInDays": 7,
     "tenantId": "ac40fc60-2717-4051-a567-c0cd948f0ac9",
-    "vaultUri": "https://cmk-bd36f48c.vault.azure.net/"
+    "vaultUri": "https://cmk-lab-bd36f48c.vault.azure.net/"
   },
   "resourceGroup": "cmk",
   "systemData": {
-    "createdAt": "2026-03-30T11:23:44.745000+00:00",
+    "createdAt": "2026-03-31T12:15:08.937000+00:00",
     "createdBy": "admin@MngEnvMCAP520989.onmicrosoft.com",
     "createdByType": "User",
-    "lastModifiedAt": "2026-03-30T11:23:44.745000+00:00",
+    "lastModifiedAt": "2026-03-31T12:15:08.937000+00:00",
     "lastModifiedBy": "admin@MngEnvMCAP520989.onmicrosoft.com",
     "lastModifiedByType": "User"
   },
@@ -213,21 +219,43 @@ By default you will have no ability to create keys within the key vault. (Note t
   "condition": null,
   "conditionVersion": null,
   "createdBy": null,
-  "createdOn": "2026-03-30T15:52:19.492645+00:00",
+  "createdOn": "2026-03-31T12:28:24.828012+00:00",
   "delegatedManagedIdentityResourceId": null,
   "description": null,
-  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-bd36f48c/providers/Microsoft.Authorization/roleAssignments/3a027df8-80f0-4d87-b19e-999461e1aa94",
-  "name": "3a027df8-80f0-4d87-b19e-999461e1aa94",
+  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-lab-bd36f48c/providers/Microsoft.Authorization/roleAssignments/83c8494f-039f-45c9-8feb-3d1800ccf91b",
+  "name": "83c8494f-039f-45c9-8feb-3d1800ccf91b",
   "principalId": "74afa9e2-d243-414b-bab2-db8dd242827f",
   "principalType": "User",
   "resourceGroup": "cmk",
   "roleDefinitionId": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/providers/Microsoft.Authorization/roleDefinitions/14b46e9e-c2b7-41b4-b07b-48a6ebf60603",
-  "scope": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-bd36f48c",
+  "scope": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-lab-bd36f48c",
   "type": "Microsoft.Authorization/roleAssignments",
   "updatedBy": "74afa9e2-d243-414b-bab2-db8dd242827f",
-  "updatedOn": "2026-03-30T15:52:20.637681+00:00"
+  "updatedOn": "2026-03-31T12:28:25.527015+00:00"
 }
 ```
+
+{{< /output >}}
+
+    {{< output "Got a token error? Click here." " " >}}
+
+If you got the following error from the `az ad signed-in-user command`:
+
+{{< raw >}}
+<pre style="color:lightcoral">
+Continuous access evaluation resulted in challenge with result:
+InteractionRequired and code: TokenCreatedWithOutdatedPolicies
+</pre>
+{{< /raw >}}
+
+1. Clear your token cache and reauthenticate.
+
+    ```shell
+    az account clear
+    az login
+    ```
+
+1. Reapply the command block to create the role assignment.
 
 {{< /output >}}
 
@@ -249,39 +277,21 @@ OK, you're set! You can move onto the next page if you like, or continue reading
 
 {{< /output >}}
 
-## Info on deleting and purging
-
-The Azure Key Vault Premium you created is purgeable. (This is the current default on Azure Key Vaults.)
-
-**Don't delete the key vault yet** as you will need it for all of the labs in this series that you intend to complete.
-
-Once you are done then you can delete it using the portal or CLI commands. Soft delete is now permanently enforced by Azure and cannot be disabled. The minimum retention period is 7 days, as used here to keep the lab easy to clean up. Deleted vaults are retained for the defined period and whilst in that state they may be recovered.
-
-They may also be purged unless purge protection is in place. Purge protection is recommended as a protection against bad actors should there be a breach in security.
-
-Once the retention period has ended then the key vault will be permanently deleted.
-
-{{< flash "tip" >}}
-For production vaults, consider using `--retention-days 90` and `--enable-purge-protection true` for maximum protection.
-{{< /flash >}}
-
 ## Managed HSM differences
 
 The [Azure Key Vault Managed HSM](https://learn.microsoft.com/azure/key-vault/managed-hsm/) has its own documentation area including a [CLI quickstart](https://learn.microsoft.com/azure/key-vault/managed-hsm/quick-create-cli).
 
-Key differences
+Key creation differences
 
 - uses `--hsm-name` rather than `--name`
 - no need to specify the SKU; this is implicit in the switch above
 - mandatory requirement for `--administrators` with your object ID (or indeed a comma delimited list of object IDs)
-- the URI changes to `https://<hsm-name>.managedhsm.azure.net`
 - no `--enable-rbac-authorization` as local RBAC is used to defined all data plane access
-
-{{< flash "danger" >}}
-Avoid `--enable-purge-protection` in lab environments — once enabled it cannot be turned off, and the HSM is billed for the full retention period even if idle. Managed HSM's have a relatively high per hour cost and will charge several thousand dollars over a three month period.
-{{< /flash >}}
+- the URI endpoint changes to `https://<hsm-name>.managedhsm.azure.net`
 
 After provisioning completes, the HSM must be [**activated**](https://learn.microsoft.com/azure/key-vault/managed-hsm/quick-create-cli#activate-your-managed-hsm) by downloading the security domain before it can be used. You specify the RSA public keys (min 3, max 10) for encrypting the security domain and then it downloads. You also specify the minimum number of private keys required to achieve quorum for decryption.
+
+You need to use the local RBAC model for data plane access. See the links below. Your managed identities will usually need the **Managed HSM Crypto Service Encryption User** role.
 
 {{< flash "danger" >}}
 The Managed HSM is under your control and you have increased responsibilities. It is imperative that you safely store the security domain file and the RSA key pairs.
@@ -295,3 +305,10 @@ These are used for diaster recovery, or for creating additional Managed HSM inst
 - <https://learn.microsoft.com/azure/key-vault/managed-hsm/quick-create-cli>
 - <https://learn.microsoft.com/azure/key-vault/managed-hsm/security-domain>
 - <https://learn.microsoft.com/azure/key-vault/managed-hsm/access-control>
+- <https://learn.microsoft.com/azure/key-vault/managed-hsm/built-in-roles>
+- <https://learn.microsoft.com/security/benchmark/azure/baselines/key-vault-managed-hsm-security-baseline>
+- <https://learn.microsoft.com/azure/key-vault/managed-hsm/backup-restore>
+
+{{< flash "tip" >}}
+Treat this list as a good start, rather than exhaustive! If you are the administrator on your own Managed HSM then you should be familiar with all of the documentation in the <https://learn.microsoft.com/azure/key-vault/managed-hsm> area.
+{{< /flash >}}
