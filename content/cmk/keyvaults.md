@@ -126,7 +126,7 @@ az storage account update --name "<myStorageAccount>" --encryption-key-source Mi
 Error message if you do not have purge protection enabled on the key vault:
 
 {{< raw >}}
-<pre style="color:lightcoral; background-color:black">
+<pre style="color:lightcoral">
 (KeyVaultPolicyError) Keyvault policy recoverable is not set
 Code: KeyVaultPolicyError
 Message: Keyvault policy recoverable is not set

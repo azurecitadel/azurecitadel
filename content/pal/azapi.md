@@ -90,7 +90,7 @@ output "pal" {
 
     {{< output >}}
 {{< raw >}}
-<pre style="color:white; background-color:black">
+<pre>
 <span style="font-weight:bold;">Initializing the backend...</span>
 <span style="font-weight:bold;">Initializing provider plugins...</span>
 - Reusing previous version of azure/azapi from the dependency lock file
@@ -121,7 +121,7 @@ commands will detect it and remind you to do so if necessary.</span>
 
     {{< output >}}
 {{< raw >}}
-<pre style="color:white; background-color:black">
+<pre>
 <span style="color:lime;"></span><span style="font-weight:bold;color:lime;">Success!</span> The configuration is valid.
 </pre>
 {{< /raw >}}
@@ -135,7 +135,7 @@ commands will detect it and remind you to do so if necessary.</span>
 
     {{< output >}}
 {{< raw >}}
-<pre style="color:white; background-color:black">
+<pre>
 Terraform used the selected providers to generate the following execution
 plan. Resource actions are indicated with the following symbols:
   <span style="color:lime;">+</span> create
@@ -194,7 +194,7 @@ guarantee to take exactly these actions if you run &quot;terraform apply&quot; n
 
     {{< output >}}
 {{< raw >}}
-<pre style="color:white; background-color:black">
+<pre>
 - snip -
 
 <span style="font-weight:bold;">Plan:</span> 2 to add, 0 to change, 0 to destroy.
@@ -240,7 +240,7 @@ Outputs:
 
     {{< output >}}
 {{< raw >}}
-<pre style="color:white; background-color:black">
+<pre>
 <span style="font-weight:bold;">azapi_resource_action.pal: Refreshing state... [id=/providers/Microsoft.ManagementPartner/partners/314159]</span>
 <span style="font-weight:bold;">azapi_resource_action.pal_destroy: Refreshing state... [id=/providers/Microsoft.ManagementPartner/partners/314159]</span>
 
