@@ -1,6 +1,6 @@
 ---
-title: "Customer-Managed Keys & Confidential Computing"
-description: "Skill up on using Customer-Managed Keys with Azure Key Vault and Managed HSM, and how they combine with Azure Confidential Computing and Secure Key Release."
+title: "Customer Managed Keys"
+description: "Skill up on using Customer Managed Keys with Azure Key Vault Premium and Managed HSM, and how they combine with encrypted storage in Azure services, plus Azure Confidential Computing and Secure Key Release."
 author: [ "Richard Cheney" ]
 github: [ "richeney" ]
 draft: false
@@ -22,4 +22,4 @@ The services in scope are Azure Storage, Virtual Machines and Managed Disks, Azu
 
 ## A note on Managed HSM
 
-Azure Key Vault Managed HSM gives you the strongest key sovereignty story — a dedicated, single-tenant HSM cluster where only you hold the root of trust. It is also the most expensive option. The labs in this series use **Azure Key Vault Premium** throughout, which is HSM-backed but multi-tenant and far more cost-effective for learning. Where the steps differ for Managed HSM, we call it out clearly — so you can apply the same knowledge in production.
+Azure Key Vault Managed HSM gives you the strongest key sovereignty story from the three options covered — a dedicated, single-tenant HSM cluster where only you hold the root of trust. It is also the most expensive option. The labs in this series use **Azure Key Vault Premium** throughout, which is HSM-backed but multi-tenant and far more cost-effective for learning. Where the steps differ for Managed HSM, we call it out clearly — so you can apply the same knowledge in production.

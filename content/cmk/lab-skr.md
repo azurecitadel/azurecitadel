@@ -1,10 +1,10 @@
 ---
-title: "Lab: Secure Key Release"
+title: "🧪 Secure Key Release"
 description: "Configure an exportable HSM key with an SKR release policy and retrieve it from inside an Azure Confidential VM. The third and most advanced of the challenge-style labs."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
-draft: false
-weight: 60
+draft: true
+weight: 35
 menu:
   side:
     parent: cmk
