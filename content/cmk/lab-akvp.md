@@ -13,6 +13,15 @@ series:
   - cmk
 ---
 
+## Objectives
+
+By the end of this lab you will have:
+
+- Determined a sensible Azure region for these labs.
+- Created a resource group.
+- Created an Azure Key Vault Premium and assigned yourself the Key Vault Crypto Officer role.
+- Understood some of the key differences in creating, activating and managing a Managed HSM instead.
+
 ## Access
 
 The labs assume you are either **Owner** or have **Contributor** plus **Role Based Access Control Administrator** on an Azure subscription as they create resources and RBAC role assignments.
@@ -312,3 +321,12 @@ These are used for diaster recovery, or for creating additional Managed HSM inst
 {{< flash "tip" >}}
 Treat this list as a good start, rather than exhaustive! If you are the administrator on your own Managed HSM then you should be familiar with all of the documentation in the <https://learn.microsoft.com/azure/key-vault/managed-hsm> area.
 {{< /flash >}}
+
+## Summary
+
+As a reminder, here are the objectives achieved in this lab.
+
+- Determined a sensible Azure region for these labs.
+- Created a resource group.
+- Created an Azure Key Vault Premium and assigned yourself the Key Vault Crypto Officer role.
+- Understood some of the key differences in creating, activating and managing a Managed HSM instead.

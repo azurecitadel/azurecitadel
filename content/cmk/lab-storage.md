@@ -36,7 +36,7 @@ If you are continuing straight from the previous lab then you should already hav
 
 1. Get the key vault name and determine the storage account name
 
-    This command assumes that you only have on active key vault in the resource group.
+    This command assumes that you only have one active key vault in the resource group.
 
     ```shell
     resource_group_id=$(az group show --name $AZURE_DEFAULTS_GROUP --query id -otsv)
@@ -273,20 +273,20 @@ The storage account needs a managed identity so you can grant it access to the k
 
 {{< /output >}}
 
+## Create the RBAC role assignment
+
+The storage account needs the **Key Vault Crypto Service Encryption User** role on the vault so it can wrap and unwrap keys.
+
 1. Get the object ID
 
     Grab the object ID for the storage account's system-assigned managed identity
 
     ```shell
-    sami_object_id=$(az storage account show --name "$storage_account_name" \
+    sa_object_id=$(az storage account show --name "$storage_account_name" \
       --query "identity.principalId" -o tsv)
     ```
 
-## Create the RBAC role assignment
-
-The storage account needs the **Key Vault Crypto Service Encryption User** role on the vault so it can wrap and unwrap keys.
-
-1. Grab the storage account's resource ID
+1. Get the storage account's resource ID
 
     ```shell
     key_vault_id=$(az keyvault show --name $key_vault_name --query id -o tsv)
@@ -297,7 +297,7 @@ The storage account needs the **Key Vault Crypto Service Encryption User** role 
     ```shell
     az role assignment create \
       --role "Key Vault Crypto Service Encryption User" \
-      --assignee-object-id "$sami_object_id" \
+      --assignee-object-id "$sa_object_id" \
       --assignee-principal-type ServicePrincipal \
       --scope "$key_vault_id"
     ```
@@ -326,6 +326,10 @@ The storage account needs the **Key Vault Crypto Service Encryption User** role 
 ```
 
 {{< /output >}}
+
+    {{< flash >}}
+Note that you can create the RBAC role assignments on the whole key vault (more common) or on individual keys. We'll do the latter in the next lab for comparison.
+{{< /flash >}}
 
 ## Enable Customer Managed Key encryption
 
@@ -473,6 +477,7 @@ The storage account needs the **Key Vault Crypto Service Encryption User** role 
   "vault": "https://cmk-lab-bd36f48c.vault.azure.net"
 }
 ```
+
 {{< /output >}}
 
     You should see `keySource` as `Microsoft.Keyvault` and the vault and key name pointing at your Key Vault.
@@ -484,3 +489,11 @@ The storage account needs the **Key Vault Crypto Service Encryption User** role 
     ![Encryption blade showing the storage account configured with a customer-managed key from Key Vault](/cmk/images/cmk-storage.png)
 
 Standard operations such as blob upload are unchanged. The CMK encryption is transparent to the data plane.
+
+## Summary
+
+As a reminder, here are the objectives achieved in this lab.
+
+- Created an RSA-HSM key in the Azure Key Vault Premium.
+- Created a storage account encrypted with that customer-managed key.
+- Verified that the encryption is in place and points at your key.
