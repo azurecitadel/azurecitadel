@@ -42,6 +42,10 @@ In this example we capture the coloured ASCII output from `terraform`. This assu
     {{</* /raw */>}}
     ```
 
+{{< flash "tip" >}}
+If you are nesting a `raw` shortcode inside an `output` shortcode, remove the inline style from the `<pre>` tag (leave it as a bare `<pre>`) so that the output block's themed background and text colour apply correctly. Only keep inline styles on `<span>` elements for individual colour highlights.
+{{< /flash >}}
+
 Check the .md files in /content/terraform for examples.
 
 ## Example
