@@ -42,7 +42,7 @@ If you are continuing straight from the previous lab then you should already hav
     resource_group_id=$(az group show --name $AZURE_DEFAULTS_GROUP --query id -otsv)
     key_vault_name=$(az keyvault list --query "[0].name" -otsv)
     uniq=$(md5sum <<< $resource_group_id | cut -c1-8)
-    storage_account_name=sacmk${uniq}
+    storage_account_name=cmklab${uniq}
     key_name="cmk-lab-storage"
     ```
 
@@ -61,15 +61,15 @@ If you are continuing straight from the previous lab then you should already hav
 ```json
 {
   "attributes": {
-    "created": "2026-03-30T15:57:29+00:00",
+    "created": "2026-03-31T12:54:56+00:00",
     "enabled": true,
     "expires": null,
     "exportable": false,
     "hsmPlatform": "2",
     "notBefore": null,
     "recoverableDays": 7,
-    "recoveryLevel": "CustomizedRecoverable+Purgeable",
-    "updated": "2026-03-30T15:57:29+00:00"
+    "recoveryLevel": "CustomizedRecoverable",
+    "updated": "2026-03-31T12:54:56+00:00"
   },
   "key": {
     "crv": null,
@@ -86,9 +86,9 @@ If you are continuing straight from the previous lab then you should already hav
       "wrapKey",
       "unwrapKey"
     ],
-    "kid": "https://cmk-bd36f48c.vault.azure.net/keys/cmk-lab-storage/bcb5d6274b3f46a3a5f6c25a256789fc",
+    "kid": "https://cmk-lab-bd36f48c.vault.azure.net/keys/cmk-lab-storage/dd008bc0a78543ed9238cff4e1372e36",
     "kty": "RSA-HSM",
-    "n": "kbDOIxmB1nnCzUSzXxtHpRVw0EPpK4p9ljzYtO1CP6K470gvK0mWahPNL/b/oBeZZC1Y9DMgL5RtM8ucRlTM9rWhDs5LAg9ABX6xhm52qpjuHLM6SGCoCFRYBFzPnkMhoDU+uaX8L3LvXiQZny7/4RB5boqQuL9fuUYPCzYGmVywAEOWHhHOTK1dgeViPeMouD0cBo5UVZ+smNzKvMSqD/h2X1uMEdsmXYtd8MEn0clJkzsSuXPn5yIrLrjnjmYRQiHyTOpHIUXYxtqCL4xhTl1zY9IUSEVmNVtWYy7zTGy0PZFOnBjK00iEy3QD5eIkrkWPBfNGhhCeOchDdsp7+w==",
+    "n": "sTvgIN21z8P3efNPdUTLV46FUg/hb5TXOtplI5jK5luDoWGGGeZpr9oOAxxfPfgRceYG3EJdixyX9SwPk6Kbwmqokr4GqiOXtDeNE8u5NGfQNL6zctMpPakDrqcz2Ef2b9SzEgLmSO+wJTf1b6Ea6KCWvesMP4tMtpqpA+FqCsgFx5oxUWfOJadbKFJWbtqRSNjGAphJzMucZqPkxG74JZt9VTK42d/ARDgg8igYGTJG0a9NeU4KfHS/NPwVAjfs0W7U2JpFSmIjioU3YlNfI7Fj9dQJ+YUdITSP9cnF1RlSVse1LSqtet/IkwLA13XyzwA73XS/DKeZgEQijmFWtw==",
     "p": null,
     "q": null,
     "qi": null,
@@ -118,16 +118,36 @@ If you are continuing straight from the previous lab then you should already hav
 
     {{< output "" "Expected output:" >}}
 
-```json
+{{< raw >}}
+<pre style="color:goldenrod">
 "RSA-HSM"
-```
+</pre>
+{{< /raw >}}
 
 {{< /output >}}
 
     The `keyType` in the response should be `RSA-HSM` rather than `RSA`.
 
-    {{< flash >}}
-Note that the pricing for HSM-protected keys is higher than for software keys - note the per version charging - and those with advanced key types (i.e., RSA 3,072-bit, RSA 4,096-bit, and Elliptic-Curve Cryptography (ECC)) is higher still.
+1. Display the versionless key URI
+
+     ```shell
+     key_uri=$(az keyvault key show --vault-name "$key_vault_name" --name "$key_name" --query "key.kid" -o tsv)
+     key_uri=${key_uri%/*}
+     echo "$key_uri"
+     ```
+
+     {{< output >}}
+{{< raw >}}
+<pre>
+https://cmk-lab-bd36f48c.vault.azure.net/keys/cmk-lab-storage
+</pre>
+{{< /raw >}}
+{{< /output >}}
+
+    Alternatively, you can construct the key URI by concatenation, i.e. `<vault_uri>/keys/<key_name>`.
+
+{{< flash >}}
+Note that the pricing for HSM-protected keys is higher than for software keys. Those with advanced key types (i.e., RSA 3,072-bit, RSA 4,096-bit, and Elliptic-Curve Cryptography (ECC)) is higher still. Note that the charge is per version, but do not remove old versions prematurely.
 {{< /flash >}}
 
 ## Create the storage account
@@ -154,7 +174,7 @@ The storage account needs a managed identity so you can grant it access to the k
   "allowedCopyScope": null,
   "azureFilesIdentityBasedAuthentication": null,
   "blobRestoreStatus": null,
-  "creationTime": "2026-03-30T16:17:21.771869+00:00",
+  "creationTime": "2026-03-31T13:01:08.165285+00:00",
   "customDomain": null,
   "defaultToOAuthAuthentication": null,
   "dnsEndpointType": null,
@@ -171,12 +191,12 @@ The storage account needs a managed identity so you can grant it access to the k
       "blob": {
         "enabled": true,
         "keyType": "Account",
-        "lastEnabledTime": "2026-03-30T16:17:21.873764+00:00"
+        "lastEnabledTime": "2026-03-31T13:01:08.257662+00:00"
       },
       "file": {
         "enabled": true,
         "keyType": "Account",
-        "lastEnabledTime": "2026-03-30T16:17:21.873764+00:00"
+        "lastEnabledTime": "2026-03-31T13:01:08.257662+00:00"
       },
       "queue": null,
       "table": null
@@ -186,9 +206,9 @@ The storage account needs a managed identity so you can grant it access to the k
   "failoverInProgress": null,
   "geoPriorityReplicationStatus": null,
   "geoReplicationStats": null,
-  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.Storage/storageAccounts/sacmkbd36f48c",
+  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.Storage/storageAccounts/cmklabbd36f48c",
   "identity": {
-    "principalId": "643ab719-8bd2-4e60-86b2-20ecec70c1ce",
+    "principalId": "721eb7fc-4f6d-4818-b2d7-961782e1ad6d",
     "tenantId": "ac40fc60-2717-4051-a567-c0cd948f0ac9",
     "type": "SystemAssigned",
     "userAssignedIdentities": null
@@ -199,8 +219,8 @@ The storage account needs a managed identity so you can grant it access to the k
   "isSftpEnabled": null,
   "isSkuConversionBlocked": null,
   "keyCreationTime": {
-    "key1": "2026-03-30T16:17:21.862555+00:00",
-    "key2": "2026-03-30T16:17:21.862555+00:00"
+    "key1": "2026-03-31T13:01:08.247430+00:00",
+    "key2": "2026-03-31T13:01:08.247430+00:00"
   },
   "keyPolicy": null,
   "kind": "StorageV2",
@@ -208,7 +228,7 @@ The storage account needs a managed identity so you can grant it access to the k
   "lastGeoFailoverTime": null,
   "location": "italynorth",
   "minimumTlsVersion": "TLS1_0",
-  "name": "sacmkbd36f48c",
+  "name": "cmklabbd36f48c",
   "networkRuleSet": {
     "bypass": "AzureServices",
     "defaultAction": "Allow",
@@ -219,15 +239,15 @@ The storage account needs a managed identity so you can grant it access to the k
   },
   "placement": null,
   "primaryEndpoints": {
-    "blob": "https://sacmkbd36f48c.blob.core.windows.net/",
-    "dfs": "https://sacmkbd36f48c.dfs.core.windows.net/",
-    "file": "https://sacmkbd36f48c.file.core.windows.net/",
+    "blob": "https://cmklabbd36f48c.blob.core.windows.net/",
+    "dfs": "https://cmklabbd36f48c.dfs.core.windows.net/",
+    "file": "https://cmklabbd36f48c.file.core.windows.net/",
     "internetEndpoints": null,
     "ipv6Endpoints": null,
     "microsoftEndpoints": null,
-    "queue": "https://sacmkbd36f48c.queue.core.windows.net/",
-    "table": "https://sacmkbd36f48c.table.core.windows.net/",
-    "web": "https://sacmkbd36f48c.z38.web.core.windows.net/"
+    "queue": "https://cmklabbd36f48c.queue.core.windows.net/",
+    "table": "https://cmklabbd36f48c.table.core.windows.net/",
+    "web": "https://cmklabbd36f48c.z38.web.core.windows.net/"
   },
   "primaryLocation": "italynorth",
   "privateEndpointConnections": [],
@@ -289,19 +309,19 @@ The storage account needs the **Key Vault Crypto Service Encryption User** role 
   "condition": null,
   "conditionVersion": null,
   "createdBy": null,
-  "createdOn": "2026-03-30T16:32:37.445661+00:00",
+  "createdOn": "2026-03-31T13:02:59.940613+00:00",
   "delegatedManagedIdentityResourceId": null,
   "description": null,
-  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-bd36f48c/providers/Microsoft.Authorization/roleAssignments/c4b6af3f-50b3-4e61-af93-8b6f5b195c6a",
-  "name": "c4b6af3f-50b3-4e61-af93-8b6f5b195c6a",
-  "principalId": "643ab719-8bd2-4e60-86b2-20ecec70c1ce",
+  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-lab-bd36f48c/providers/Microsoft.Authorization/roleAssignments/e81012ba-bb70-4ea2-8d44-f9cb1b80528a",
+  "name": "e81012ba-bb70-4ea2-8d44-f9cb1b80528a",
+  "principalId": "721eb7fc-4f6d-4818-b2d7-961782e1ad6d",
   "principalType": "ServicePrincipal",
   "resourceGroup": "cmk",
   "roleDefinitionId": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/providers/Microsoft.Authorization/roleDefinitions/e147488a-f6f5-4113-8e2d-b22465e65bf6",
-  "scope": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-bd36f48c",
+  "scope": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.KeyVault/vaults/cmk-lab-bd36f48c",
   "type": "Microsoft.Authorization/roleAssignments",
   "updatedBy": "74afa9e2-d243-414b-bab2-db8dd242827f",
-  "updatedOn": "2026-03-30T16:32:38.655796+00:00"
+  "updatedOn": "2026-03-31T13:03:00.995989+00:00"
 }
 ```
 
@@ -309,14 +329,7 @@ The storage account needs the **Key Vault Crypto Service Encryption User** role 
 
 ## Enable Customer Managed Key encryption
 
-1. Retrieve the key URI
-
-     ```shell
-     key_uri=$(az keyvault key show --vault-name "$key_vault_name" \
-       --name "$key_name" --query "key.kid" -o tsv)
-     ```
-
-1. Attach it to the storage account
+1. Encrypt the storage account using the customer managed key
 
     ```shell
     az storage account update --name "$storage_account_name" \
@@ -325,22 +338,149 @@ The storage account needs the **Key Vault Crypto Service Encryption User** role 
       --encryption-key-name "$key_name"
     ```
 
-## Step 6: Verify
+    {{< output "Click to view output" "Example output:" >}}
 
-```shell
-az storage account show \
-  --name $SA_NAME \
-  --resource-group $RG \
-  --query "encryption.{source:keySource, vault:keyVaultProperties.keyVaultUri, key:keyVaultProperties.keyName}" \
-  -o table
+```json
+{
+  "accessTier": "Hot",
+  "accountMigrationInProgress": null,
+  "allowBlobPublicAccess": false,
+  "allowCrossTenantReplication": null,
+  "allowSharedKeyAccess": false,
+  "allowedCopyScope": null,
+  "azureFilesIdentityBasedAuthentication": null,
+  "blobRestoreStatus": null,
+  "creationTime": "2026-03-31T13:01:08.165285+00:00",
+  "customDomain": null,
+  "defaultToOAuthAuthentication": null,
+  "dnsEndpointType": null,
+  "dualStackEndpointPreference": null,
+  "enableExtendedGroups": null,
+  "enableHttpsTrafficOnly": true,
+  "enableNfsV3": null,
+  "encryption": {
+    "encryptionIdentity": null,
+    "keySource": "Microsoft.Keyvault",
+    "keyVaultProperties": {
+      "currentVersionedKeyExpirationTimestamp": "1970-01-01T00:00:00+00:00",
+      "currentVersionedKeyIdentifier": "https://cmk-lab-bd36f48c.vault.azure.net/keys/cmk-lab-storage/dd008bc0a78543ed9238cff4e1372e36",
+      "keyName": "cmk-lab-storage",
+      "keyVaultUri": "https://cmk-lab-bd36f48c.vault.azure.net",
+      "keyVersion": null,
+      "lastKeyRotationTimestamp": "2026-03-31T13:11:52.782584+00:00"
+    },
+    "requireInfrastructureEncryption": null,
+    "services": {
+      "blob": {
+        "enabled": true,
+        "keyType": "Account",
+        "lastEnabledTime": "2026-03-31T13:01:08.257662+00:00"
+      },
+      "file": {
+        "enabled": true,
+        "keyType": "Account",
+        "lastEnabledTime": "2026-03-31T13:01:08.257662+00:00"
+      },
+      "queue": null,
+      "table": null
+    }
+  },
+  "extendedLocation": null,
+  "failoverInProgress": null,
+  "geoPriorityReplicationStatus": null,
+  "geoReplicationStats": null,
+  "id": "/subscriptions/73568139-5c52-4066-a406-3e8533bb0f15/resourceGroups/cmk/providers/Microsoft.Storage/storageAccounts/cmklabbd36f48c",
+  "identity": {
+    "principalId": "721eb7fc-4f6d-4818-b2d7-961782e1ad6d",
+    "tenantId": "ac40fc60-2717-4051-a567-c0cd948f0ac9",
+    "type": "SystemAssigned",
+    "userAssignedIdentities": null
+  },
+  "immutableStorageWithVersioning": null,
+  "isHnsEnabled": null,
+  "isLocalUserEnabled": null,
+  "isSftpEnabled": null,
+  "isSkuConversionBlocked": null,
+  "keyCreationTime": {
+    "key1": "2026-03-31T13:01:08.247430+00:00",
+    "key2": "2026-03-31T13:01:08.247430+00:00"
+  },
+  "keyPolicy": null,
+  "kind": "StorageV2",
+  "largeFileSharesState": null,
+  "lastGeoFailoverTime": null,
+  "location": "italynorth",
+  "minimumTlsVersion": "TLS1_0",
+  "name": "cmklabbd36f48c",
+  "networkRuleSet": {
+    "bypass": "AzureServices",
+    "defaultAction": "Allow",
+    "ipRules": [],
+    "ipv6Rules": [],
+    "resourceAccessRules": null,
+    "virtualNetworkRules": []
+  },
+  "placement": null,
+  "primaryEndpoints": {
+    "blob": "https://cmklabbd36f48c.blob.core.windows.net/",
+    "dfs": "https://cmklabbd36f48c.dfs.core.windows.net/",
+    "file": "https://cmklabbd36f48c.file.core.windows.net/",
+    "internetEndpoints": null,
+    "ipv6Endpoints": null,
+    "microsoftEndpoints": null,
+    "queue": "https://cmklabbd36f48c.queue.core.windows.net/",
+    "table": "https://cmklabbd36f48c.table.core.windows.net/",
+    "web": "https://cmklabbd36f48c.z38.web.core.windows.net/"
+  },
+  "primaryLocation": "italynorth",
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "publicNetworkAccess": null,
+  "resourceGroup": "cmk",
+  "routingPreference": null,
+  "sasPolicy": null,
+  "secondaryEndpoints": null,
+  "secondaryLocation": null,
+  "sku": {
+    "name": "Standard_LRS",
+    "tier": "Standard"
+  },
+  "statusOfPrimary": "available",
+  "statusOfSecondary": null,
+  "storageAccountSkuConversionStatus": null,
+  "tags": {},
+  "type": "Microsoft.Storage/storageAccounts",
+  "zones": null
+}
 ```
 
-You should see `keySource` as `Microsoft.Keyvault` and the vault and key name pointing at your Key Vault. Upload a blob and confirm the data is there — the CMK encryption is transparent to the data plane.
+{{< /output >}}
 
-## What to discuss
+## Verify
 
-- What happens if you delete or disable the CMK? The storage account becomes inaccessible to all data plane operations until the key is restored.
-- How does key rotation work? You can create a new key version and point the storage account at it, or enable auto-rotation on the Key Vault key.
-- **Managed HSM difference:** The grant mechanism changes — instead of a vault-scoped role assignment, you would assign the **Managed HSM Crypto Service Encryption User** role on the HSM itself (using `az keyvault role assignment create --hsm-name`).
+1. Verify that the encryption is using the customer managed key
 
-Reference: [Customer-managed keys for Azure Storage encryption](https://learn.microsoft.com/azure/storage/common/customer-managed-keys-overview)
+    ```shell
+    az storage account show --name $storage_account_name --query "encryption.{source:keySource, vault:keyVaultProperties.keyVaultUri, key:keyVaultProperties.keyName}"
+    ```
+
+    {{< output >}}
+
+```json
+{
+  "key": "cmk-lab-storage",
+  "source": "Microsoft.Keyvault",
+  "vault": "https://cmk-lab-bd36f48c.vault.azure.net"
+}
+```
+{{< /output >}}
+
+    You should see `keySource` as `Microsoft.Keyvault` and the vault and key name pointing at your Key Vault.
+
+1. Check in the portal
+
+    View the Encryption blade within the storage account.
+
+    ![Encryption blade showing the storage account configured with a customer-managed key from Key Vault](/cmk/images/cmk-storage.png)
+
+Standard operations such as blob upload are unchanged. The CMK encryption is transparent to the data plane.

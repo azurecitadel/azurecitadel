@@ -12,11 +12,10 @@ Key Vault Premium does not have a fixed charge itself. It charges purely for the
 Azure Key Vault Standard does not support Secure Key Release that is required for the Confidential Compute labs.
 
 {{< flash "danger" >}}
-💀 Managed HSM has enforced soft delete and purge protection for customer managed keys.
-
-**Deleted Managed HSMs will continue to be charged to your bill until permanently purged at the end of the retention period.**
+💀 **Deleted Managed HSMs are chargeable until permanently purged after the retention period.**
 
 - The current usage fee per HSM pool is $3.20 per hour. ($76.80 per day, or $2,336 per Azure month of 730 hours.)
+- A Managed HSM has enforced soft delete and purge protection for customer managed key scenarios.
 - A deleted Managed HSM would charge an additional $6,912 over the default retention period of 90 days.
 - You may specify a shorter retention period at creation time.
 - Retention times are immutable properties and cannot be changed.

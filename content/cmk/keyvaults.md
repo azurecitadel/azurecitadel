@@ -109,13 +109,7 @@ Data encrypted with customer managed keys will become permanently unrecoverable 
 - Deleted key vaults without purge protection can be purged.
 - However, purge protection is **mandatory** for all Azure services using customer managed keys.
 
-Example command to enable customer managed key on a storage account:
-
-```shell
-az storage account update --name "<myStorageAccount>" --encryption-key-source Microsoft.Keyvault --encryption-key-vault "https://mykeyvault.vault.azure.net" --encryption-key-name "mykey"
-```
-
-{{< output >}}
+{{< output "Example error message" " " >}}
 
 Example command to enable customer managed key on a storage account:
 
@@ -134,8 +128,8 @@ Message: Keyvault policy recoverable is not set
 {{< /raw >}}
 {{< /output >}}
 
-{{< flash "warning" >}}
-Soft enable and purge protection are mandatory for customer managed keys. A deleted key vault will continue to be charged to your Azure bill until the retention period has elapsed and the key vault is permanently deleted.
+{{< flash >}}
+Soft enable and purge protection are mandatory for customer managed key scdenarioss.
 {{< /flash>}}
 
 ## Why we use Key Vault Premium for these labs
