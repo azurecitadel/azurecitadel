@@ -29,7 +29,7 @@ If you are continuing straight from the previous lab then you should already hav
 
 1. Set default variables.
 
-    ```shell
+    ```bash
     export AZURE_DEFAULTS_LOCATION="italynorth"
     export AZURE_DEFAULTS_GROUP="cmk"
     ```
@@ -38,7 +38,7 @@ If you are continuing straight from the previous lab then you should already hav
 
     This command assumes that you only have one active key vault in the resource group.
 
-    ```shell
+    ```bash
     resource_group_id=$(az group show --name $AZURE_DEFAULTS_GROUP --query id -otsv)
     key_vault_name=$(az keyvault list --query "[0].name" -otsv)
     uniq=$(md5sum <<< $resource_group_id | cut -c1-8)
@@ -50,7 +50,7 @@ If you are continuing straight from the previous lab then you should already hav
 
 1. Generate an HSM-backed key
 
-    ```shell
+    ```bash
     az keyvault key create --name $key_name \
       --vault-name $key_vault_name \
       --kty RSA-HSM --size 2048
@@ -112,7 +112,7 @@ If you are continuing straight from the previous lab then you should already hav
 
     Confirm the key is HSM-protected.
 
-    ```shell
+    ```bash
     az keyvault key show --vault-name "$key_vault_name" --name "$key_name" --query "key.kty"
     ```
 
@@ -130,7 +130,7 @@ If you are continuing straight from the previous lab then you should already hav
 
 1. Display the versionless key URI
 
-     ```shell
+     ```bash
      key_uri=$(az keyvault key show --vault-name "$key_vault_name" --name "$key_name" --query "key.kid" -o tsv)
      key_uri=${key_uri%/*}
      echo "$key_uri"
@@ -156,7 +156,7 @@ The storage account needs a managed identity so you can grant it access to the k
 
 1. Create the storage account with a managed identity
 
-    ```shell
+    ```bash
     az storage account create --name "$storage_account_name" \
       --sku Standard_LRS --kind StorageV2 \
       --assign-identity --identity-type SystemAssigned
@@ -281,20 +281,20 @@ The storage account needs the **Key Vault Crypto Service Encryption User** role 
 
     Grab the object ID for the storage account's system-assigned managed identity
 
-    ```shell
+    ```bash
     sa_object_id=$(az storage account show --name "$storage_account_name" \
       --query "identity.principalId" -o tsv)
     ```
 
 1. Get the storage account's resource ID
 
-    ```shell
+    ```bash
     key_vault_id=$(az keyvault show --name $key_vault_name --query id -o tsv)
     ```
 
 1. Grant the storage account access to the key
 
-    ```shell
+    ```bash
     az role assignment create \
       --role "Key Vault Crypto Service Encryption User" \
       --assignee-object-id "$sa_object_id" \
@@ -335,7 +335,7 @@ Note that you can create the RBAC role assignments on the whole key vault (more 
 
 1. Encrypt the storage account using the customer managed key
 
-    ```shell
+    ```bash
     az storage account update --name "$storage_account_name" \
       --encryption-key-source Microsoft.Keyvault \
       --encryption-key-vault "https://${key_vault_name}.vault.azure.net" \
@@ -464,7 +464,7 @@ Note that you can create the RBAC role assignments on the whole key vault (more 
 
 1. Verify that the encryption is using the customer managed key
 
-    ```shell
+    ```bash
     az storage account show --name $storage_account_name --query "encryption.{source:keySource, vault:keyVaultProperties.keyVaultUri, key:keyVaultProperties.keyName}"
     ```
 

@@ -32,7 +32,7 @@ A valid attestation is not enough without an authorised identity, and vice versa
 
 The `--exportable` flag and `--policy` file are required when creating the key. You cannot add an SKR policy to an existing non-exportable key.
 
-```shell
+```bash
 az keyvault key create \
   --vault-name <vault-name> \
   --name <key-name> \

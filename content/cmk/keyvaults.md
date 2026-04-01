@@ -113,7 +113,7 @@ Data encrypted with customer managed keys will become permanently unrecoverable 
 
 Example command to enable customer managed key on a storage account:
 
-```shell
+```bash
 az storage account update --name "<myStorageAccount>" --encryption-key-source Microsoft.Keyvault --encryption-key-vault "https://mykeyvault.vault.azure.net" --encryption-key-name "mykey"
 ```
 
