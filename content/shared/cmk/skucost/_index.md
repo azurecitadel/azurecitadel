@@ -5,12 +5,6 @@ title: "CMK - Key Vault SKU and cost"
 
 Managed HSM would be the production-grade choice for dedicated HSM isolation, but can become dangerously expensive. It runs to thousand USD per month for a minimum cluster.
 
-Key Vault Premium replicates the experience closely enough: same API, same SKR flow, same CMK integration patterns across Azure services. Where a real Managed HSM deployment would differ (security domain, HSM RBAC, backup/recovery), we highlight it in each lab.
-
-Key Vault Premium does not have a fixed charge itself. It charges purely for the keys and their operations. The HSM backed keys are a little more expensive, but in practice the cost for lab exercises is relatively small.
-
-Azure Key Vault Standard does not support Secure Key Release that is required for the Confidential Compute labs.
-
 {{< flash "danger" >}}
 💀 **Deleted Managed HSMs are chargeable until permanently purged after the retention period.**
 
@@ -21,6 +15,12 @@ Azure Key Vault Standard does not support Secure Key Release that is required fo
 - Retention times are immutable properties and cannot be changed.
 - The minimum retention period is 7 days which equates to $537.60.
 {{< /flash >}}
+
+Key Vault Premium replicates the experience closely enough: same API, same SKR flow, same CMK integration patterns across Azure services. Where a real Managed HSM deployment would differ (security domain, HSM RBAC, backup/recovery), we highlight it in each lab.
+
+Key Vault Premium does not have a fixed charge itself. It charges purely for the keys and their operations. The HSM backed keys are a little more expensive, but in practice the cost for lab exercises is relatively small.
+
+Note that Azure Key Vault Standard does not support Secure Key Release which is required for the Confidential Compute labs.
 
 #### References
 

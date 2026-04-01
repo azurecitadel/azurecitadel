@@ -20,7 +20,8 @@ By the end of this lab you will have:
 - Determined a sensible Azure region for these labs.
 - Created a resource group.
 - Created an Azure Key Vault Premium and assigned yourself the Key Vault Crypto Officer role.
-- Understood some of the key differences in creating, activating and managing a Managed HSM instead.
+
+There is also some additional information on this page about securing vaults and some of the key differences in creating, activating and managing a Managed HSM instead.
 
 ## Access
 
@@ -40,7 +41,7 @@ Not all regions support these sizes — check the [Azure products available by r
 
 1. List all regions where DC2as virtual machines are available without any restrictions.
 
-    ```shell
+    ```bash
     az vm list-skus --size Standard_DC2as_v --location '' --query "sort_by([?restrictions==\`[]\`],&locations[0])[].{name:name,location:locations[0]}" -o table
     ```
 
@@ -70,7 +71,7 @@ Standard_DC2as_v6  westus
 
 1. Check current quota and usage in a specific region (e.g., `italynorth`):
 
-    ```shell
+    ```bash
     az vm list-usage --location italynorth --query "[?contains(localName, 'DCas') || contains(localName, 'DCAS')]" -o table
     ```
 
@@ -98,13 +99,13 @@ Set your default region and create a resource group for the labs. The `AZURE_DEF
 1. Login and select your subscription.
 1. Set the default region.
 
-    ```shell
+    ```bash
     export AZURE_DEFAULTS_LOCATION=italynorth
     ```
 
 1. Create the resource group and set it as the default.
 
-    ```shell
+    ```bash
     az group create --name cmk
     export AZURE_DEFAULTS_GROUP=cmk
     ```
@@ -133,7 +134,7 @@ Standard tier does not support HSM-backed keys or Secure Key Release, so Premium
 
 1. Create a unique name and create the vault.
 
-    ```shell
+    ```bash
     resource_group_id=$(az group show --name $AZURE_DEFAULTS_GROUP --query id -o tsv)
     uniq=$(md5sum <<< $resource_group_id | cut -c1-8)
     key_vault_name=cmk-lab-${uniq}
@@ -152,7 +153,7 @@ cmk-lab-bd36f48c
 
 1. Create the vault.
 
-    ```shell
+    ```bash
     az keyvault create --name $key_vault_name \
       --sku premium \
       --enable-rbac-authorization true \
@@ -215,7 +216,7 @@ By default you will have no ability to create keys within the key vault. (Note t
 
 1. Add **Key Vault Crypto Officer** role assignment
 
-    ```shell
+    ```bash
     key_vault_id=$(az keyvault show --name $key_vault_name --query id -otsv)
     object_id="$(az ad signed-in-user show --query id -otsv)"
     az role assignment create --assignee "$object_id" --scope "$key_vault_id" --role "Key Vault Crypto Officer"
@@ -259,7 +260,7 @@ InteractionRequired and code: TokenCreatedWithOutdatedPolicies
 
 1. Clear your token cache and reauthenticate.
 
-    ```shell
+    ```bash
     az account clear
     az login
     ```
@@ -268,7 +269,7 @@ InteractionRequired and code: TokenCreatedWithOutdatedPolicies
 
 {{< /output >}}
 
-OK, you're set! You can move onto the next page if you like, or continue reading the useful information below.
+
 
 #### References
 
@@ -285,6 +286,42 @@ OK, you're set! You can move onto the next page if you like, or continue reading
 ```
 
 {{< /output >}}
+
+## Summary
+
+As a reminder, here are the objectives achieved in this lab.
+
+- Determined a sensible Azure region for these labs.
+- Created a resource group.
+- Created an Azure Key Vault Premium and assigned yourself the Key Vault Crypto Officer role.
+
+OK, you're set! You can move onto the next page if you like, or continue reading the additional information below.
+
+## Securing Azure Key Vault Premium
+
+For these labs, the vault keeps public network access enabled so that the CLI steps work without additional networking setup. That is convenient for learning, but it would not usually be the production-ready posture.
+
+{{< flash "tip" >}}
+For a production deployment, review the following controls:
+
+- Restrict public access with the Key Vault firewall, trusted services, or private endpoints.
+- Limit RBAC role assignments to the smallest practical scope and use separate identities for users, workloads, and automation.
+- Keep purge protection enabled and use a retention period that matches your recovery requirements.
+- Send diagnostic logs to Log Analytics, Event Hub, or Storage for audit and alerting.
+- Apply Azure Policy so vault networking, purge protection, and RBAC requirements are enforced consistently.
+- Review Microsoft Defender for Cloud recommendations and the Azure security baseline for Key Vault.
+{{< /flash >}}
+
+Note that the Azure Policy in the [Azure Landing Zone](/alz) and [Sovereign Landing Zone](/slz) sections provides a good set of guardrails.
+
+#### References
+
+- <https://learn.microsoft.com/azure/key-vault/general/network-security>
+- <https://learn.microsoft.com/azure/key-vault/general/private-link-service>
+- <https://learn.microsoft.com/azure/key-vault/general/soft-delete-overview>
+- <https://learn.microsoft.com/azure/key-vault/general/howto-azure-policy>
+- <https://learn.microsoft.com/azure/key-vault/general/logging>
+- <https://learn.microsoft.com/security/benchmark/azure/baselines/key-vault-security-baseline>
 
 ## Managed HSM differences
 
@@ -321,12 +358,3 @@ These are used for diaster recovery, or for creating additional Managed HSM inst
 {{< flash "tip" >}}
 Treat this list as a good start, rather than exhaustive! If you are the administrator on your own Managed HSM then you should be familiar with all of the documentation in the <https://learn.microsoft.com/azure/key-vault/managed-hsm> area.
 {{< /flash >}}
-
-## Summary
-
-As a reminder, here are the objectives achieved in this lab.
-
-- Determined a sensible Azure region for these labs.
-- Created a resource group.
-- Created an Azure Key Vault Premium and assigned yourself the Key Vault Crypto Officer role.
-- Understood some of the key differences in creating, activating and managing a Managed HSM instead.

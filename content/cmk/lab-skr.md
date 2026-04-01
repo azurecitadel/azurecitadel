@@ -29,7 +29,7 @@ This is the most complex lab in the series. If you prefer to follow along rather
 
 Check that your subscription has quota for the Confidential VM SKU in your chosen region. The `DCasv5` and `ECasv5` series (AMD SEV-SNP) are required.
 
-```shell
+```bash
 az vm list-skus \
   --location $LOCATION \
   --size DCas \
@@ -38,7 +38,7 @@ az vm list-skus \
 
 You also need diagnostic settings on your Key Vault to capture audit logs. If not already enabled:
 
-```shell
+```bash
 WORKSPACE_ID=$(az monitor log-analytics workspace create \
   --name law-cmk-labs \
   --resource-group $RG \
@@ -58,7 +58,7 @@ az monitor diagnostic-settings create \
 
 You need an attestation provider to validate the Confidential VM's hardware report.
 
-```shell
+```bash
 ATTEST_NAME=attest-cmk-$(cat /dev/urandom | tr -dc 'a-z0-9' | head -c6)
 
 az attestation create \
@@ -78,7 +78,7 @@ echo $ATTEST_URI
 
 Save the release policy as a local JSON file, then create the key.
 
-```shell
+```bash
 cat > skr-policy.json <<EOF
 {
   "version": "1.0.0",
@@ -97,7 +97,7 @@ cat > skr-policy.json <<EOF
 EOF
 ```
 
-```shell
+```bash
 SKR_KEY_NAME=cmk-skr-key
 
 az keyvault key create \
@@ -111,7 +111,7 @@ az keyvault key create \
 
 Confirm the key has a release policy attached.
 
-```shell
+```bash
 az keyvault key show \
   --vault-name $KV_NAME \
   --name $SKR_KEY_NAME \
@@ -120,7 +120,7 @@ az keyvault key show \
 
 ## Step 3: Deploy the Confidential VM
 
-```shell
+```bash
 CVM_NAME=cvm-skr-demo
 
 az vm create \
@@ -139,7 +139,7 @@ az vm create \
 
 Capture the VM's managed identity principal ID.
 
-```shell
+```bash
 CVM_PRINCIPAL_ID=$(az vm show \
   --name $CVM_NAME \
   --resource-group $RG \
@@ -150,7 +150,7 @@ CVM_PRINCIPAL_ID=$(az vm show \
 
 The VM identity needs the **Key Vault Crypto User** role, which includes the `release` permission.
 
-```shell
+```bash
 az role assignment create \
   --role "Key Vault Crypto User" \
   --assignee-object-id $CVM_PRINCIPAL_ID \
@@ -162,7 +162,7 @@ az role assignment create \
 
 SSH into the Confidential VM and run the key release. Azure provides a sample helper script for this.
 
-```shell
+```bash
 CVM_IP=$(az vm show \
   --name $CVM_NAME \
   --resource-group $RG \
@@ -173,7 +173,7 @@ ssh azureuser@$CVM_IP
 
 Inside the VM, install the Azure CLI and the `az confcom` extension, then request the key release.
 
-```shell
+```bash
 # Inside the CVM
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 az extension add --name confcom
@@ -194,7 +194,7 @@ The full attestation token flow is covered in [Secure Key Release with a Confide
 
 Back on your workstation, query the Key Vault audit log to confirm the SKR operation was recorded.
 
-```shell
+```bash
 az monitor log-analytics query \
   --workspace $WORKSPACE_ID \
   --analytics-query "AzureDiagnostics | where ResourceType == 'VAULTS' | where OperationName == 'SecureKeyRelease' | project TimeGenerated, identity_claim_appid_g, identity_claim_oid_g, resultDescription | order by TimeGenerated desc" \

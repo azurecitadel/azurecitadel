@@ -45,16 +45,20 @@ Managed HSM is supported. The role to assign is **Managed HSM Crypto Service Enc
 - [Customer-managed keys for Azure Storage encryption](https://learn.microsoft.com/azure/storage/common/customer-managed-keys-overview)
 - [Customer-managed keys using Azure Key Vault Managed HSM](https://learn.microsoft.com/azure/storage/common/customer-managed-keys-configure-key-vault-hsm)
 
+## Managed Disks and Disk Encryption Sets
+
+For Azure managed disks, CMK encryption is configured through **Disk Encryption Sets** (DES). A DES is a dedicated Azure resource that wraps the relationship between your key and the managed disks that use it.
+
+The DES has its own managed identity, which needs permission to use the key:
+
+- **Key Vault Premium:** assign **Key Vault Crypto Service Encryption User**.
+- **Managed HSM:** assign **Managed HSM Crypto Service Encryption User** using local RBAC on the HSM or key scope.
+
+This model applies to both **Virtual Machines** and **AKS node OS disks**.
+
 ## Virtual Machines and Managed Disks
 
-VM disk encryption with CMK is managed through **Disk Encryption Sets** (DES). A DES is a dedicated Azure resource that wraps the relationship between your key and the managed disks that use it.
-
-Once you have a DES, you can:
-
-- Attach it to a VM at creation time so all managed disks (OS and data) are encrypted with your CMK.
-- Change the encryption settings on existing disks.
-
-The DES has its own managed identity which needs **Key Vault Crypto Service Encryption User** access on the key. Azure VMs and AKS both support using keys from either Key Vault or Managed HSM. For Managed HSM, assign the **Managed HSM Crypto Service Encryption User** role on the HSM using the HSM local RBAC model.
+VM managed disks (OS and data) use the DES model described above. You can attach a DES when creating a VM or update disk encryption settings on existing managed disks to use that DES.
 
 #### References
 
@@ -63,11 +67,11 @@ The DES has its own managed identity which needs **Key Vault Crypto Service Encr
 
 ## Azure Kubernetes Service
 
-AKS uses Disk Encryption Sets to encrypt the OS disks of cluster nodes. You create the DES separately, then reference it when creating or updating the node pool.
+AKS node OS disk encryption also uses the DES model described above. Create the DES separately, then reference it when creating or updating a node pool.
 
 Host-based encryption extends this further — encrypting the temp disk and OS cache of the node VM itself, not just the managed disks.
 
-AKS inherits Managed HSM support through the Disk Encryption Set — configure the DES with an mHSM key and AKS uses it transparently. The role grant on the mHSM is the same as for VMs above.
+AKS inherits Managed HSM support through the same DES configuration.
 
 #### References
 
@@ -97,8 +101,31 @@ Managed HSM is supported. The managed identity requires the **Managed HSM Crypto
 - [TDE with customer-managed keys at the instance level](https://learn.microsoft.com/azure/azure-sql/managed-instance/transparent-data-encryption-byok-best-practices)
 - [Azure SQL Managed Instance transparent data encryption with customer-managed key](https://learn.microsoft.com/azure/azure-sql/managed-instance/transparent-data-encryption-byok-configure)
 
+## When to create more than one Disk Encryption Set
+
+{{< flash "tip" >}}
+Use more than one DES when you need clear separation of keys, ownership, or lifecycle.
+
+- **Data classification boundaries** - Isolate sensitive workloads (for example regulated or PII data) from general workloads.
+- **Environment isolation** - Keep development, test, and production on separate keys and DES resources.
+- **Separate key vaults or HSMs** - Use distinct DES resources when workloads point to different vault or HSM sources.
+- **Access control separation** - Split DES resources so each managed identity only has the minimum required key scope.
+- **Different rotation policies** - Run independent key rotation cadence for workloads with different change-control requirements.
+- **Blast radius reduction** - Limit operational impact if one key, role assignment, or DES configuration has an issue.
+{{< /flash >}}
+
 ## Broader support
 
-Well over 100 Azure services now support CMK integration with Azure Key Vault, and most of them also support Managed HSM. For a comprehensive list, see [Services that support customer-managed keys in Azure Key Vault and Azure Managed HSM](https://learn.microsoft.com/azure/security/fundamentals/encryption-customer-managed-keys-support).
+Well over 100 Azure services now support CMK integration with Azure Key Vault, and most of them also support Managed HSM.
+
+ For a comprehensive list, see [Services that support customer-managed keys in Azure Key Vault and Azure Managed HSM](https://learn.microsoft.com/azure/security/fundamentals/encryption-customer-managed-keys-support).
 
 If you are assessing a service against a digital sovereignty audit checklist, that list is your first reference.
+
+## Notable exceptions
+
+Some Azure services include elements of persistent storage but are not represented in the core list above because they use a different storage ownership or encryption model.
+
+- **Azure Container Apps** - Supports mounting Azure Files and storing container images and logs through dependent platform services, but it does not expose a single service-level CMK setting equivalent to DES.
+- **Azure App Service** - Persists application content and diagnostics through platform-managed storage layers; CMK posture depends on the underlying integrated services rather than a unified app-level BYOK switch.
+- **Azure Functions (Consumption/Premium)** - Can persist state, logs, and artifacts through Storage and Application Insights, so CMK decisions are typically applied on those backing services.
