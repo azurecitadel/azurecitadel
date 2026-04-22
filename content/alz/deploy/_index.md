@@ -6,7 +6,7 @@ menu:
   side:
     parent: alz
     identifier: alz-deploy
-weight: 2
+weight: 5
 series:
  - alz-deploy
 layout: series

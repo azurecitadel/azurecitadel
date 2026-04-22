@@ -1,6 +1,6 @@
 ---
-title: "Example Library Configs"
-description: "A reference guide to common library patterns if you know what you are doing with Landing Zone libraries and the alz provider."
+title: "Reference configs"
+description: "A set of examples for commonly used alz provider and library metadata patterns for Azure landing zones."
 draft: false
 layout: series
 series:

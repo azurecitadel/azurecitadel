@@ -1,6 +1,6 @@
 ---
-title: "Reference Library Configs"
-description: "A guide to common library patterns. Use this as a quick reference if you're familiar with the content above and know what you are doing with Landing Zone libraries and the alz provider."
+title: "Reference configs"
+description: "A set of examples for commonly used alz provider and library metadata patterns for Sovereign landing zones."
 draft: false
 menu:
   side:

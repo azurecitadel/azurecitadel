@@ -20,12 +20,23 @@ These labs focus on deploying sovereign guardrails and understanding how to exte
 
 <!-- SERIES_PAGES -->
 
-### Prerequisites
+## Expected Knowledge
 
-Before starting, you should be familiar with:
+Before diving in to the, you should be familiar with:
 
-- Cloud Adoption Framework (CAF) and Platform Landing Zones (PLZ)
-- Azure Policy and governance concepts
-- Basic understanding of sovereign cloud requirements
+{{< flash "note" >}}
+**Foundation Knowledge Required**
+{{< /flash >}}
 
-This foundation is essential for implementing and customizing Sovereign landing zone effectively.
+- **Cloud Adoption Framework (CAF)** and Platform Landing Zones (PLZ) concepts
+- **Application Landing Zones** and Well-Architected Framework (WAF) principles
+- **Azure Policy** and governance fundamentals
+- **Terraform** infrastructure as code
+- **GitHub** workflows and CI/CD pipelines
+
+Understanding the Azure landing zone approach provides a solid foundation that will help with:
+
+- Standard platform landing zone deployments (ALZ / PLZ)
+- Deploying Sovereign landing zone (SLZ)
+- Azure Monitoring Baseline Alerts (AMBA)
+- AI Landing Zones (AI LZ) and other application landing zone accelerators

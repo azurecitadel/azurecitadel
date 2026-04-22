@@ -2,7 +2,7 @@
 title: "Sovereign landing zone"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
-description: "Browse the Sovereign landing zone oOnce the workflow has run"
+description: "Browse the Sovereign landing zone once the workflow has run"
 draft: true
 weight: 90
 menu:

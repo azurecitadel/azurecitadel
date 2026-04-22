@@ -1,5 +1,5 @@
 ---
-title: "ALZ Accelerator"
+title: "Run the ALZ Accelerator"
 description: "Learn how to use the Azure landing zone Accelerator to get to a GitHub CI/CD configuration recommended by Microsoft."
 draft: false
 layout: list
@@ -7,7 +7,7 @@ menu:
   side:
     parent: slz
     identifier: slz-accelerator
-weight: 1
+weight: 3
 series:
   - slz-accelerator
 layout: series

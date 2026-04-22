@@ -20,17 +20,9 @@ The move to Azure Verified Modules (AVM) for modular and structured infrastructu
 
 <!-- SERIES_PAGES -->
 
-## Combining it with your own IP
-
-Historically you could have accused Azure landing zone of being monolithic, forcing you to choose between adopting and falling in line with the Microsoft approach, or forging your own path and developing your own platform landing zone infrastructure as code standards including policy.
-
-Now the combination of Azure Verified Modules and the Azure landing zone library approach allows you to build on the Microsoft managed IP, giving you the ability to extend, augmenting and override that baseline with your own IP and definitions for a true level of flexibility.
-
-These labs are designed for partners who need to deeply understand how ALZ works — particularly those with existing landing zone IP or custom Azure Policy guardrails. You'll learn how to integrate your assets alongside the Microsoft-maintained baseline and get the best of both worlds.
-
 ## Expected Knowledge
 
-Before diving in, you should be familiar with:
+Before diving in to the, you should be familiar with:
 
 {{< flash "note" >}}
 **Foundation Knowledge Required**

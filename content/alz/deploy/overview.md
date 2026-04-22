@@ -3,7 +3,7 @@ title: "What is the Azure landing zone?"
 date: 2025-10-10
 author: [ "Richard Cheney" ]
 description: "An overview for Azure landing zone and how they work with Azure Verified Modules."
-draft: true
+draft: false
 weight: 10
 menu:
   side:
@@ -13,23 +13,16 @@ series:
  - alz-deploy
 ---
 
-<TODO>
+{{% shared-content "alz/deploy/overview/intro" %}}
 
-<COPILOT>
+{{% shared-content "alz/deploy/overview/alz" %}}
 
-Need an overview of the quickstart.
+{{% shared-content "alz/deploy/overview/slz" %}}
 
-Quickstart using native libraryVideo and steps
-ALZ AVM modules
-management / management-groups
-Default library
-Releases and alternatives
-Updating
+{{% shared-content "alz/overview/libraries" %}}
 
-When it is deploying we can:
+{{% shared-content "alz/deploy/overview/avm" %}}
 
-- Show the four AVM modules.
-- Browse the AVM pages, and the Registry pages
-- See the examples.
+{{% shared-content "alz/deploy/overview/registry" %}}
 
-Once run browse
+{{% shared-content "alz/deploy/overview/sections" %}}
