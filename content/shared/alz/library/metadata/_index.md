@@ -52,7 +52,7 @@ This is the default metadata file for a local library in `./lib` when stacked on
 
 {{< flash >}}
 
-- There is a dependency on the `platform/alz/2026.01.1` release.
+- There is a dependency on the `platform/alz/2026.04.2` release.
 {{< /flash >}}
 
 ### Metadata example #3: [slz](https://github.com/Azure/Azure-Landing-Zones-Library/blob/main/platform/slz/alz_library_metadata.json)
@@ -64,7 +64,7 @@ This is the default metadata file for Sovereign landing zone. This library is es
 {{< flash >}}
 
 - The path in the repo is `platform/slz`
-- The Sovereign landing zone library is dependent on the `platform/alz/2026.01.1` release.
+- The Sovereign landing zone library is dependent on the `platform/alz/2026.04.2` release.
 {{< /flash >}}
 
 ### Metadata example #4: [slz_custom](https://raw.githubusercontent.com/Azure/alz-terraform-accelerator/refs/heads/main/templates/platform_landing_zone/examples/slz/lib/alz_library_metadata.json)
@@ -75,9 +75,9 @@ This is the default metadata file for the local library in `./lib` when stacked 
 
 {{< flash >}}
 
-- There is a dependency on the `platform/slz/2026.02.0` Sovereign landing zone library release.
+- There is a dependency on the `platform/slz/2026.04.2` Sovereign landing zone library release.
 - Remember that this is the one above, and therefore the dependency is recursively chained.
-- The full dependency chain is therefore `./lib` > `platform/slz/2026.02.0` > `platform/alz/2026.01.1`.
+- The full dependency chain is therefore `./lib` > `platform/slz/2026.04.2` > `platform/alz/2026.04.2`.
 {{< /flash >}}
 
 ## Policy Default Values
