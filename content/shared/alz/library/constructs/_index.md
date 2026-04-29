@@ -142,7 +142,7 @@ This is the same architecture file in the local library after it has been update
 - The value of the architecture_name in the [avm-ptn-alz Terraform module](https://registry.terraform.io/modules/Azure/avm-ptn-alz/azurerm/latest/examples/default) stays as **alz_custom** to limit the `terraform plan` diff.
 - The management group hierarchy is extended with Public, Confidential Corp, and Confidential Online.
 - The new archetypes are associated to those new management group scopes.
-- The root (`alz`) management group includes both the **root_custom** and **sovereign_root_custom** archetypes.
+- The root (`alz`) management group includes both the **root_custom** and **sovereign_l1_controls_custom** archetypes.
 {{< /flash >}}
 
 ### Architecture example #4: [nl_slz_custom](https://github.com/Azure/alz-terraform-accelerator/blob/main/templates/platform_landing_zone/examples/slz/lib/architecture_definitions/alz_custom.alz_architecture_definition.yaml)
@@ -159,5 +159,5 @@ This final version includes the is the same architecture file in the local libra
 - The value of the architecture_name in the [avm-ptn-alz Terraform module](https://registry.terraform.io/modules/Azure/avm-ptn-alz/azurerm/latest/examples/default) stays as **alz_custom** to limit the `terraform plan` diff.
 - The management group hierarchy is extended with Public, Confidential Corp, and Confidential Online.
 - The new archetypes are associated to those new management group scopes.
-- The root (`alz`) management group includes both the **root_custom** and **sovereign_root_custom** archetypes.
+- The root (`alz`) management group includes both the **root_custom** and **sovereign_l1_controls_custom** archetypes.
 {{< /flash >}}

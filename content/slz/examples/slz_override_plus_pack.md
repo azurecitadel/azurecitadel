@@ -44,7 +44,7 @@ The architecture name is `slz_custom`, as defined in the local `slz_custom.alz_a
 {{< mermaid >}}
 flowchart TD
   slz["Sovereign landing zone
-(root_custom, sovereign_root_custom)"]
+(root_custom, sovereign_l1_controls_custom)"]
   slz --> decommissioned
   decommissioned["Decommissioned
 (decommissioned_custom)"]
@@ -53,16 +53,19 @@ flowchart TD
 (landing_zones_custom)"]
   landingzones --> confidential_corp
   confidential_corp["Confidential Corp
-(confidential_corp_custom)"]
+(corp_custom, sovereign_l2_controls_custom, sovereign_l3_controls_custom)"]
   landingzones --> confidential_online
   confidential_online["Confidential Online
-(confidential_online_custom)"]
+(online_custom, sovereign_l2_controls_custom, sovereign_l3_controls_custom)"]
   landingzones --> corp
   corp["Corp
-(corp_custom)"]
+(corp_custom, sovereign_l2_controls_custom)"]
+  landingzones --> local
+  local["Local
+(local_custom)"]
   landingzones --> online
   online["Online
-(online_custom)"]
+(online_custom, sovereign_l2_controls_custom)"]
   landingzones --> public
   public["Public
 (public_custom)"]
@@ -71,16 +74,16 @@ flowchart TD
 (platform_custom)"]
   platform --> connectivity
   connectivity["Connectivity
-(connectivity_custom)"]
+(connectivity_custom, sovereign_l2_controls_custom)"]
   platform --> identity
   identity["Identity
-(identity_custom)"]
+(identity_custom, sovereign_l2_controls_custom)"]
   platform --> management
   management["Management
-(management_custom)"]
+(management_custom, sovereign_l2_controls_custom)"]
   platform --> security
   security["Security
-(security_custom)"]
+(security_custom, sovereign_l2_controls_custom)"]
   slz --> sandbox
   sandbox["Sandbox
 (sandbox_custom)"]
@@ -89,7 +92,7 @@ flowchart TD
 Note the Sovereign landing zone at the top has two archetypes assigned:
 
 - root_custom
-- sovereign_root_custom
+- sovereign_l1_controls_custom
 
 and you will find override files for both in the lib's archetype_definitions folder.
 
@@ -125,7 +128,7 @@ This is where the the custom library in GitHub is side loaded to add in the addi
   "dependencies": [
     {
       "path": "platform/slz",
-      "ref": "2026.02.0"
+      "ref": "2026.04.2"
     },
     {
       "custom_url": "github.com/richeney-org/Sovereign-Landing-Zone-Packs//country/nl/bio?ref=2026.01.0"
@@ -134,7 +137,7 @@ This is where the the custom library in GitHub is side loaded to add in the addi
 }
 ```
 
-The first dependency is semantically versioned to [Sovereign landing zone 2025.10.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.02.0/platform/slz), which is itself stacked on top of [Azure landing zone  2025.9.3](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz).
+The first dependency is semantically versioned to [Sovereign landing zone 2026.04.2](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.04.2/platform/slz), which is itself stacked on top of [Azure landing zone 2026.04.2](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.04.2/platform/alz).
 
 The second dependency is the custom_url to the custom library. The url specifies the GitHub hosted custom repo, subfolder, and ref. More details in the [custom libraries](/slz/libraries/custom/) section including [go-getter url](https://github.com/hashicorp/go-getter?tab=readme-ov-file#url-format) alternatives.
 
