@@ -21,7 +21,7 @@ Add the alz provider and specify the most recent Azure landing zone library rele
       library_references = [
         {
           path = "platform/alz"
-          ref  = "2026.01.1"
+          ref  = "2026.04.2"
         }
       ]
     }
@@ -29,7 +29,7 @@ Add the alz provider and specify the most recent Azure landing zone library rele
 
     The alz provider will pull in that version of the library definition from `https://github.com/Azure/Azure-Landing-Zones-Library/tree/{tag}/{path}` where `{tag}` is `{path}/{ref}`.
 
-    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz> for the core Azure landing zone library.
+    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.04.2/platform/alz> for the core Azure landing zone library.
 
 ### Variables
 

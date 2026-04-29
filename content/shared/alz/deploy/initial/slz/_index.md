@@ -21,7 +21,7 @@ Add the alz provider and specify the most recent Sovereign landing zone library 
       library_references = [
         {
           path = "platform/slz"
-          ref  = "2026.02.0"
+          ref  = "2026.04.2"
         }
       ]
     }
@@ -29,7 +29,7 @@ Add the alz provider and specify the most recent Sovereign landing zone library 
 
     The alz provider will pull in that version of the library definition from `https://github.com/Azure/Azure-Landing-Zones-Library/tree/{tag}/{path}` where `{tag}` is `{path}/{ref}`.
 
-    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.02.0/platform/slz> for the Sovereign landing zone library.
+    For example, <https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.04.2/platform/slz> for the Sovereign landing zone library.
 
 ### Variables
 
