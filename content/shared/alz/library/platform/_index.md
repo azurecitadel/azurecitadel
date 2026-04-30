@@ -95,7 +95,7 @@ provider "alz" {
 
 The [platform/amba/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/amba/2026.01.1/platform/amba/alz_library_metadata.json) file has no dependencies.
 
-{{< details "platform/alz/alz_library_metadata.json" >}}
+{{< details "platform/amba/alz_library_metadata.json" >}}
 {{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/amba/2026.01.1/platform/amba/alz_library_metadata.json>" fallback="data/alz/platform-amba-2026.01.1-alz_library_metadata.json" >}}
 {{< /details >}}
 

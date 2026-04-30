@@ -40,8 +40,8 @@
 {{ end }}
 
 {{ if $fetchError }}
-  <div class="fetch-error-notice" style="border-left:4px solid #f0ad4e;padding:0.75em 1em;background:#fffbe6;margin:1em 0;">
-    ⚠️ Content temporarily unavailable. <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">View the latest version on GitHub</a>.
+  <div class="flash flash-warning">
+    ⚠️ Content temporarily unavailable. <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">View the latest version online</a>.
   </div>
 {{ else }}
   {{ (print "```" $lang "\n" $content "\n```") | markdownify }}
