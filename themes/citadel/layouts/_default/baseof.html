@@ -598,7 +598,7 @@
       console.log('Found content area:', contentArea);
 
       // Get all headers, but exclude those in inactive mode panels
-      let headers = Array.from(contentArea.querySelectorAll('h2, h3, h4, h5, h6')).filter(header => {
+      let headers = Array.from(contentArea.querySelectorAll('h2, h3')).filter(header => {
         // Exclude TOC-related headers
         if(header.id === 'in-this-article') return false;
         if(header.textContent.trim() === 'Table of Contents') return false;
