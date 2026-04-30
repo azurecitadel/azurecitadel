@@ -46,7 +46,7 @@ provider "alz" {
 The [platform/alz/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/alz/2026.04.2/platform/alz/alz_library_metadata.json) file has no dependencies.
 
 {{< details "platform/alz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.04.2/platform/alz/alz_library_metadata.json>" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.04.2/platform/alz/alz_library_metadata.json>" fallback="data/alz/platform-alz-2026.04.2-alz_library_metadata.json" >}}
 {{< /details >}}
 
 ### Sovereign landing zone (slz)
@@ -71,7 +71,7 @@ provider "alz" {
 The [metadata file](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/slz/2026.04.2/platform/slz/alz_library_metadata.json) has a dependency on ALZ.
 
 {{< details "platform/slz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2026.04.2/platform/slz/alz_library_metadata.json>" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2026.04.2/platform/slz/alz_library_metadata.json>" fallback="data/alz/platform-slz-2026.04.2-alz_library_metadata.json" >}}
 {{< /details >}}
 
 ### Azure Monitor Baseline Alerts (amba)
@@ -95,8 +95,8 @@ provider "alz" {
 
 The [platform/amba/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/amba/2026.01.1/platform/amba/alz_library_metadata.json) file has no dependencies.
 
-{{< details "platform/alz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/amba/2026.01.1/platform/amba/alz_library_metadata.json>" >}}
+{{< details "platform/amba/alz_library_metadata.json" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/amba/2026.01.1/platform/amba/alz_library_metadata.json>" fallback="data/alz/platform-amba-2026.01.1-alz_library_metadata.json" >}}
 {{< /details >}}
 
 ## Creating a local override library
