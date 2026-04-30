@@ -1,17 +1,35 @@
-{{/* Create codeblock with local files or remote URLs */}}
+{{/* Create codeblock with local files or remote URLs.
+     When a remote URL is unreachable (e.g. 502/timeout), the build degrades gracefully:
+     a warning is logged, and either a local fallback asset (if 'fallback' param is given)
+     or a placeholder notice is shown — the build does NOT fail. */}}
 
 {{ $file := .Get "file" }}
 {{ $url := .Get "url" }}
 {{ $lang := .Get "lang" }}
 {{ $lang = $lang | default "text" }}
+{{ $fallback := .Get "fallback" }}
 
 {{ $content := "" }}
+{{ $fetchError := false }}
 {{ if $url }}
   {{/* Strip angle brackets from URL if present */}}
   {{ $url = $url | strings.TrimPrefix "<" | strings.TrimSuffix ">" }}
   {{ $resource := resources.GetRemote $url }}
   {{ if $resource.Err }}
-    {{ errorf "Failed to fetch remote file %s: %s" $url $resource.Err }}
+    {{/* Remote fetch failed: log a warning rather than errorf so the build continues */}}
+    {{ warnf "Failed to fetch remote resource %s: %s" $url $resource.Err }}
+    {{ if $fallback }}
+      {{/* Try the local fallback asset (path relative to the assets/ directory) */}}
+      {{ $localResource := resources.Get $fallback }}
+      {{ if $localResource }}
+        {{ $content = $localResource.Content }}
+      {{ else }}
+        {{ warnf "Local fallback asset not found: %s" $fallback }}
+        {{ $fetchError = true }}
+      {{ end }}
+    {{ else }}
+      {{ $fetchError = true }}
+    {{ end }}
   {{ else }}
     {{ $content = $resource.Content }}
   {{ end }}
@@ -21,4 +39,10 @@
   {{ errorf "Either 'file' or 'url' parameter is required" }}
 {{ end }}
 
-{{ (print "```" $lang "\n" $content "\n```") | markdownify }}
+{{ if $fetchError }}
+  <div class="fetch-error-notice" style="border-left:4px solid #f0ad4e;padding:0.75em 1em;background:#fffbe6;margin:1em 0;">
+    ⚠️ Content temporarily unavailable. <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">View the latest version on GitHub</a>.
+  </div>
+{{ else }}
+  {{ (print "```" $lang "\n" $content "\n```") | markdownify }}
+{{ end }}
