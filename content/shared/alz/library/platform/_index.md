@@ -28,7 +28,7 @@ Each platform area has a README page that includes a mermaid diagram for the arc
 
 The **Microsoft ALZ Library** has the core Azure landing zone definitions.
 
-Example release: [platform/alz/2026.01.1](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.01.1/platform/alz)
+Example release: [platform/alz/2026.04.2](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/alz/2026.04.2/platform/alz)
 
 Example alz provider block:
 
@@ -37,23 +37,23 @@ provider "alz" {
   library_references = [
     {
       path = "platform/alz"
-      ref  = "2026.01.1"
+      ref  = "2026.04.2"
     }
   ]
 }
 ```
 
-The [platform/alz/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/alz/2026.01.1/platform/alz/alz_library_metadata.json) file has no dependencies.
+The [platform/alz/alz_library_metadata.json](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/alz/2026.04.2/platform/alz/alz_library_metadata.json) file has no dependencies.
 
 {{< details "platform/alz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.01.1/platform/alz/alz_library_metadata.json>" fallback="data/alz/platform-alz-2026.01.1-alz_library_metadata.json" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/alz/2026.04.2/platform/alz/alz_library_metadata.json>" fallback="data/alz/platform-alz-2026.04.2-alz_library_metadata.json" >}}
 {{< /details >}}
 
 ### Sovereign landing zone (slz)
 
 The **Microsoft SLZ Library** includes Sovereign landing zone extensions. This is stacked on top of Azure landing zone with additional management groups and archetypes for sovereignty scenarios.
 
-Example release: [platform/slz/2026.02.0](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.02.0/platform/slz)
+Example release: [platform/slz/2026.04.2](https://github.com/Azure/Azure-Landing-Zones-Library/tree/platform/slz/2026.04.2/platform/slz)
 
 Example alz provider block:
 
@@ -62,16 +62,16 @@ provider "alz" {
   library_references = [
     {
       path = "platform/slz"
-      ref  = "2026.02.0"
+      ref  = "2026.04.2"
     }
   ]
 }
 ```
 
-The [metadata file](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/slz/2026.02.0/platform/slz/alz_library_metadata.json) has a dependency on ALZ.
+The [metadata file](https://github.com/Azure/Azure-Landing-Zones-Library/blob/platform/slz/2026.04.2/platform/slz/alz_library_metadata.json) has a dependency on ALZ.
 
 {{< details "platform/slz/alz_library_metadata.json" >}}
-{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2026.02.0/platform/slz/alz_library_metadata.json>" fallback="data/alz/platform-slz-2026.02.0-alz_library_metadata.json" >}}
+{{< code lang="json" url="<https://raw.githubusercontent.com/Azure/Azure-Landing-Zones-Library/refs/tags/platform/slz/2026.04.2/platform/slz/alz_library_metadata.json>" fallback="data/alz/platform-slz-2026.04.2-alz_library_metadata.json" >}}
 {{< /details >}}
 
 ### Azure Monitor Baseline Alerts (amba)
@@ -87,7 +87,7 @@ provider "alz" {
   library_references = [
     {
       path = "platform/amba"
-      ref  = "2026.01.1"
+      ref  = "2026.04.2"
     }
   ]
 }
@@ -152,7 +152,7 @@ Here is an example **lib/alz_library_metadata.json** in a local library, stacked
   "dependencies": [
     {
       "path": "platform/alz",
-      "ref": "2026.01.1"
+      "ref": "2026.04.2"
     }
   ]
 }
