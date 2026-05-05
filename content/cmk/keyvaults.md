@@ -1,10 +1,10 @@
 ---
-title: "Key Management Options"
+title: "Key management options"
 description: "Azure Key Vault Standard, Azure Key Vault Premium, and Azure Key Vault Managed HSM each offer a different balance of security, sovereignty, and cost. Here is how to choose."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
 draft: false
-weight: 10
+weight: 12
 menu:
   side:
     parent: cmk

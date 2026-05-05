@@ -1,5 +1,5 @@
 ---
-title: "Encrypting data at rest with CMK"
+title: "L2: Encryption at rest with CMK"
 description: "Customer-Managed Keys can be used to protect data at rest across a wide range of Azure services. Here we cover five common services, the CMK integration pattern for each, and differences between Azure Key Vault Premium and Azure Key Vault Managed HSM."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
