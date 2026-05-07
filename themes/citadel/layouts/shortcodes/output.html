@@ -1,25 +1,12 @@
 {{/* Output shortcode for displaying expected command output with dark background */}}
-{{ $detailsTitle := .Get 0 }}
-{{ $label := .Get 1 | default "Example output:" }}
+{{ $label := .Get 0 | default "Example output:" }}
 {{ if eq $label "-" }}
   {{ $label = "" }}
 {{ end }}
 
-{{ if $detailsTitle }}
-{{/* Nest within details shortcode */}}
-{{ $outputContent := "" }}
-{{ if ne $label "" }}
-{{ $outputContent = printf "<div class=\"output-label\">%s</div>" (.Page.RenderString $label) }}
-{{ end }}
-{{ $outputContent = printf "%s<div class=\"output-content\">%s</div>" $outputContent (.Page.RenderString .Inner) }}
-{{ $detailsCall := printf "{{< details \"%s\" >}}<div class=\"output-block\">%s</div>{{< /details >}}" $detailsTitle $outputContent }}
-{{ .Page.RenderString $detailsCall }}
-{{ else }}
-{{/* Standard output without details wrapper */}}
 <div class="output-block">
 {{ if ne $label "" }}
 <div class="output-label">{{ .Page.RenderString $label }}</div>
 {{ end }}
 <div class="output-content">{{ .Page.RenderString .Inner }}</div>
 </div>
-{{ end }}

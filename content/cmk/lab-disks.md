@@ -371,7 +371,8 @@ Feel free to change the size and number of nodes for a more useful and represent
 This command will take a few minutes so a good time to grab a drink...
 {{< /flash>}}
 
-    {{< output "Click here for example command output" "Example output" >}}
+    {{< details "Click here for example command output" >}}
+    {{< output "Example output" >}}
 
 ```json
 {
@@ -611,6 +612,7 @@ This command will take a few minutes so a good time to grab a drink...
 ```
 
 {{< /output >}}
+    {{< /details >}}
 
 1. Verify encryption is applied to the node pools.
 

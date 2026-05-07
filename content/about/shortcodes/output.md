@@ -25,10 +25,9 @@ The shortcode supports all standard markdown code block syntax highlighting. You
 
 ### Parameters
 
-The output shortcode accepts two optional parameters:
+The output shortcode accepts one optional parameter:
 
-1. **Details title**: If provided, wraps the output in a collapsible details section
-2. **Label text** (default: "Example output:"):
+1. **Label text** (default: "Example output:"):
    - Use custom text to replace the default label
    - Supports markdown formatting (e.g., backticks for code)
    - Use `"-"` to hide the label entirely
@@ -37,12 +36,10 @@ The output shortcode accepts two optional parameters:
 
 ```text
 {{</* output */>}}                                       <!-- Default label -->
-{{</* output "" "API Response:" */>}}                   <!-- Custom label -->
-{{</* output "" "-" */>}}                              <!-- No label -->
-{{</* output "Show output" */>}}                        <!-- Collapsible with default label -->
-{{</* output "Click to expand" "Results:" */>}}        <!-- Collapsible with custom label -->
-{{</* output "Show details" "-" */>}}                  <!-- Collapsible with no label -->
-{{</* output "Expand" "Example `az` output:" */>}}     <!-- Collapsible with markdown in label -->
+{{</* output "API Response:" */>}}                     <!-- Custom label -->
+{{</* output "-" */>}}                                 <!-- No label -->
+{{</* details "Click to expand" */>}}{{</* output */>}}...{{</* /output */>}}{{</* /details */>}}                 <!-- Collapsible output -->
+{{</* details "Click to expand" */>}}{{</* output "Example `az` output:" */>}}...{{</* /output */>}}{{</* /details */>}} <!-- Collapsible with custom label -->
 ```
 
 ## Example with JSON output
@@ -74,7 +71,7 @@ Result: Based on your organizational data, your manager is John Smith (john.smit
 
 ## Example with custom label
 
-{{< output "" "API Response:" >}}
+{{< output "API Response:" >}}
 ```json
 {
     "success": true,
@@ -88,7 +85,7 @@ Result: Based on your organizational data, your manager is John Smith (john.smit
 
 ## Example with no label
 
-{{< output "" "-" >}}
+{{< output "-" >}}
 ```text
 Connection established successfully
 Authenticated as: admin@domain.com
@@ -98,7 +95,8 @@ Ready to proceed...
 
 ## Example with collapsible details
 
-{{< output "Click to see full npm output" >}}
+{{< details "Click to see full npm output" >}}
+{{< output >}}
 ```text
 npm WARN deprecated har-validator@5.1.5: this library is no longer supported
 npm WARN deprecated uuid@3.4.0: Please upgrade to version 7 or higher
@@ -108,10 +106,12 @@ added 847 packages, and audited 848 packages in 45s
 found 0 vulnerabilities
 ```
 {{< /output >}}
+{{< /details >}}
 
 ## Example with custom collapsible label
 
-{{< output "Show debug output" "Console log:" >}}
+{{< details "Show debug output" >}}
+{{< output "Console log:" >}}
 ```text
 [DEBUG] Starting application initialization
 [INFO] Loading configuration from config.json
@@ -120,6 +120,7 @@ found 0 vulnerabilities
 [DEBUG] All middleware loaded successfully
 ```
 {{< /output >}}
+{{< /details >}}
 
 ## Visual distinction
 
