@@ -169,7 +169,7 @@ This will trigger the EULA acceptance on first use.
     jq < ~/.copilot/mcp-config.json
     ```
 
-    {{< output "" "Example mcp-config.json with MicrosoftLearn and WorkIQ MCP servers" >}}
+    {{< output "Example mcp-config.json with MicrosoftLearn and WorkIQ MCP servers" >}}
 
 ```json
 {
@@ -203,7 +203,7 @@ This will trigger the EULA acceptance on first use.
 
 Now that Work IQ is configured as an MCP server, you can ask GitHub Copilot CLI questions about your work context and it will use the WorkIQ MCP to query your Microsoft 365 data.
 
-{{< output "" "Example use of GitHub Copilot CLI with the WorkIQ MCP tools:" >}}
+{{< output "Example use of GitHub Copilot CLI with the WorkIQ MCP tools:" >}}
 ![GitHub Copilot CLI with WorkIQ MCP server displaying a question about work context being answered using Microsoft 365 data](/blog/images/2026-02-13-github-copilot-workiq.png)
 {{< /output >}}
 

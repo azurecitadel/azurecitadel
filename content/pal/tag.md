@@ -93,7 +93,8 @@ The two steps do not have to be run by the same person. If someone else has alre
     az ad sp show --id $appId --output jsonc
     ```
 
-    {{< output "Click to expand" "Example output from an `az ad sp show` command." >}}
+    {{< details "Click to expand" >}}
+    {{< output "Example output from an `az ad sp show` command." >}}
 
 ```json
 {
@@ -150,6 +151,7 @@ The two steps do not have to be run by the same person. If someone else has alre
 ```
 
 {{< /output >}}
+    {{< /details >}}
 
     By default, the service principal will have no RBAC role assignments.
 

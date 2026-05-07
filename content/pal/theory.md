@@ -143,7 +143,7 @@ Support Request Contributor is PEC eligible and most customers view it as a reas
 
 {{< details "Click here for more details on Support Request Contributor" >}}
 
-{{< output "JSON role definition" "From [Support Request Contributor](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/management-and-governance#support-request-contributor)." >}}
+{{< output "From [Support Request Contributor](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/management-and-governance#support-request-contributor)." >}}
 
 ```json
 {
