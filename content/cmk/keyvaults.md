@@ -131,7 +131,7 @@ Message: Keyvault policy recoverable is not set
 {{< /details >}}
 
 {{< flash >}}
-Soft enable and purge protection are mandatory for customer managed key scdenarioss.
+Soft enable and purge protection are mandatory for customer managed key scenarios.
 {{< /flash>}}
 
 ## Why we use Key Vault Premium for these labs
