@@ -594,14 +594,21 @@ html[data-color-mode='dark'] .flash-danger {
 }
 
 .output-content pre {
-  background: rgba(var(--color-canvas-subtle), 0.6);
+  background: var(--color-canvas-default) !important;
   border: 1px solid var(--color-border-default);
   color: #f0f6fc;
   border-radius: 6px;
 }
+.output-content .highlight pre {
+  background: var(--color-canvas-default) !important;
+}
+.output-content .highlight .copy-code-button {
+  display: none !important;
+}
 
-html[data-color-mode='light'] .output-content pre {
-  background: #f8f9fa;
+html[data-color-mode='light'] .output-content pre,
+html[data-color-mode='light'] .output-content .highlight pre {
+  background: var(--color-canvas-default) !important;
   color: #24292f;
 }
 
@@ -612,7 +619,7 @@ html[data-color-mode='light'] .output-content pre {
 }
 
 .output-content code:not(.hljs) {
-  background: rgba(var(--color-canvas-subtle), 0.6) !important;
+  background: var(--color-canvas-default) !important;
   color: #f0f6fc !important;
   border: 1px solid var(--color-border-default) !important;
   padding: 2px 4px !important;
@@ -620,7 +627,7 @@ html[data-color-mode='light'] .output-content pre {
 }
 
 html[data-color-mode='light'] .output-content code:not(.hljs) {
-  background: #f8f9fa !important;
+  background: var(--color-canvas-default) !important;
   color: #24292f !important;
 }
 

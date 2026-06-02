@@ -247,16 +247,20 @@ By default you will have no ability to create keys within the key vault. (Note t
 
 {{< /output >}}
 
-    {{< output "Got a token error? Click here." " " >}}
+    {{< details "Got a token error? Click here." >}}
 
-If you got the following error from the `az ad signed-in-user command`:
+If you get the following error from the `az ad signed-in-user command`:
 
+{{< output "-" >}}
 {{< raw >}}
 <pre style="color:lightcoral">
 Continuous access evaluation resulted in challenge with result:
 InteractionRequired and code: TokenCreatedWithOutdatedPolicies
 </pre>
 {{< /raw >}}
+{{< /output >}}
+
+then you need to refresh your token.
 
 1. Clear your token cache and reauthenticate.
 
@@ -267,16 +271,14 @@ InteractionRequired and code: TokenCreatedWithOutdatedPolicies
 
 1. Reapply the command block to create the role assignment.
 
-{{< /output >}}
-
-
+{{< /details >}}
 
 #### References
 
 - <https://learn.microsoft.com/azure/key-vault/general/rbac-guide>
 - <https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/security#key-vault-crypto-officer>
 
-    {{< output "" "The dataActions for Key Vault Crypto Office:" >}}
+    {{< output "The dataActions for Key Vault Crypto Office:" >}}
 
 ```json
 "dataActions": [

@@ -1,6 +1,6 @@
 ---
 title: "Sovereignty scenarios"
-description: "THe use of Customer Managed Keys is tightly aligned to the appropriate level of workload sovereignty. Here we will take a look at the levels used in sovereign frameworks."
+description: "The use of Customer Managed Keys is tightly aligned to the appropriate level of workload sovereignty. Here we will take a look at the levels used in sovereign frameworks."
 date: 2026-03-06
 author: [ "Richard Cheney" ]
 draft: false

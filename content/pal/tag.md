@@ -93,7 +93,9 @@ The two steps do not have to be run by the same person. If someone else has alre
     az ad sp show --id $appId --output jsonc
     ```
 
-    {{< output "Click to expand" "Example output from an `az ad sp show` command." >}}
+    {{< details "Click to expand" >}}
+
+{{< output "Example output from an `az ad sp show` command." >}}
 
 ```json
 {
@@ -150,6 +152,7 @@ The two steps do not have to be run by the same person. If someone else has alre
 ```
 
 {{< /output >}}
+{{< /details >}}
 
     By default, the service principal will have no RBAC role assignments.
 
@@ -190,9 +193,11 @@ The two steps do not have to be run by the same person. If someone else has alre
 
 ### Create the partner admin link
 
-1. Get the token
+{{< flash >}}
+This section uses the REST API to get the service principal's token and create the link. This is a little quicker than authenticating as the service principal using az login and then having to do so again when reverting back to your user ID.
+{{< /flash >}}
 
-    ℹ️ This approach uses the REST API to avoid having to switch IDs back and forth with the Azure CLI.
+1. Get the token
 
     ```bash
     uri="https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token"
