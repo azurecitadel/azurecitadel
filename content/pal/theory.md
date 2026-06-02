@@ -141,9 +141,9 @@ One role that you will see referenced frequently in these pages is **Support Req
 Support Request Contributor is PEC eligible and most customers view it as a reasonable role to have permanently active as it is only capable of creating support tickets and changing their classification.
 {{< /flash >}}
 
-{{< details "Click here for more details on Support Request Contributor" >}}
+{{< details "Technical detail for Support Request Contributor" >}}
 
-{{< output "JSON role definition" "From [Support Request Contributor](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/management-and-governance#support-request-contributor)." >}}
+{{< output "Full role definition JSON" >}}
 
 ```json
 {
@@ -171,14 +171,17 @@ Support Request Contributor is PEC eligible and most customers view it as a reas
 }
 ```
 
+Reference: <https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/management-and-governance#support-request-contributor>.
+
 {{< /output >}}
 
-The command has some read access - far less than Reader itself - plus `"Microsoft.Support/*"`. The command below lists all of the individual actions covered by that provider type wildcard.
+The role definition has some read access - far less than Reader itself - but it is the `"Microsoft.Support/*"` line that gives it PEC eligibility as that has some write actions. The command below lists all of the individual actions covered by that provider type wildcard.
 
 ```bash
 az provider operation show --namespace Microsoft.Support --query "resourceTypes[].operations[].name" -otsv
 ```
 
+{{< output >}}
 - Microsoft.Support/supportTickets/read
 - Microsoft.Support/supportTickets/write
 - Microsoft.Support/services/read
@@ -187,6 +190,7 @@ az provider operation show --namespace Microsoft.Support --query "resourceTypes[
 - Microsoft.Support/operationresults/read
 - Microsoft.Support/operationsstatus/read
 - Microsoft.Support/operations/read
+{{< /output >}}
 
 {{< /details >}}
 

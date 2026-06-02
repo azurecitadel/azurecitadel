@@ -59,7 +59,7 @@ The claims differ by TEE type. The examples below use shared regional MAA endpoi
 
 The key claim is `x-ms-compliance-status`, which the MAA token sets to `azure-compliant-cvm` for a VM that has passed Azure's confidential VM compliance checks (secure boot enabled, vTPM present, no debug mode).
 
-{{< output "" "Release policy — Confidential VM (AMD SEV-SNP):" >}}
+{{< output "Release policy — Confidential VM (AMD SEV-SNP):" >}}
 ```json
 {
   "version": "1.0.0",
@@ -91,7 +91,7 @@ SGX attestation uses different claims. The critical ones are `x-ms-sgx-mrenclave
 
 The example below uses `mrsigner`, which is more practical for iterative development.
 
-{{< output "" "Release policy — Intel SGX (signer-bound):" >}}
+{{< output "Release policy — Intel SGX (signer-bound):" >}}
 ```json
 {
   "version": "1.0.0",
@@ -120,7 +120,7 @@ The example below uses `mrsigner`, which is more practical for iterative develop
 
 For production, replace `mrsigner` with `mrenclave` to pin the policy to a specific enclave build:
 
-{{< output "" "Release policy — Intel SGX (enclave-bound):" >}}
+{{< output "Release policy — Intel SGX (enclave-bound):" >}}
 ```json
 {
   "version": "1.0.0",
@@ -155,7 +155,7 @@ For production, replace `mrsigner` with `mrenclave` to pin the policy to a speci
 
 For ACI confidential container groups, the attestation token is generated at container group initialisation. The key claim is `x-ms-sevsnpvm-is-debuggable` (must be false) and `ContainerPlat.CodesignData` to anchor the policy to your specific container image digest. A simpler starting policy trusts any non-debuggable ACI confidential container group attested by your provider.
 
-{{< output "" "Release policy — Confidential containers (ACI):" >}}
+{{< output "Release policy — Confidential containers (ACI):" >}}
 ```json
 {
   "version": "1.0.0",

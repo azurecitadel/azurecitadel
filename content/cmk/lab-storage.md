@@ -116,7 +116,7 @@ If you are continuing straight from the previous lab then you should already hav
     az keyvault key show --vault-name "$key_vault_name" --name "$key_name" --query "key.kty"
     ```
 
-    {{< output "" "Expected output:" >}}
+    {{< output "Expected output:" >}}
 
 {{< raw >}}
 <pre style="color:goldenrod">
@@ -162,7 +162,9 @@ The storage account needs a managed identity so you can grant it access to the k
       --assign-identity --identity-type SystemAssigned
     ```
 
-    {{< output "Click to view output" "Example output:" >}}
+    {{< details "Click to view output" >}}
+
+{{< output "Example output:" >}}
 
 ```json
 {
@@ -273,6 +275,8 @@ The storage account needs a managed identity so you can grant it access to the k
 
 {{< /output >}}
 
+    {{< /details >}}
+
 ## Create the RBAC role assignment
 
 The storage account needs the **Key Vault Crypto Service Encryption User** role on the vault so it can wrap and unwrap keys.
@@ -342,7 +346,9 @@ Note that you can create the RBAC role assignments on the whole key vault (more 
       --encryption-key-name "$key_name"
     ```
 
-    {{< output "Click to view output" "Example output:" >}}
+    {{< details "Click to view output" >}}
+
+    {{< output "Example output:" >}}
 
 ```json
 {
@@ -459,6 +465,8 @@ Note that you can create the RBAC role assignments on the whole key vault (more 
 ```
 
 {{< /output >}}
+
+    {{< /details >}}
 
 ## Verify
 
