@@ -1,6 +1,6 @@
 ---
-title: "Migrating from PMK to CMK"
-description: "When existing Azure services need to move from Platform Managed Keys to Customer Managed Keys. Which services support in-place migration and which require recreation."
+title: "Migration Scenarios"
+description: "Migrating existing Azure services from Platform Managed Keys to Customer Managed Keys, or from Azure Key Vault Premium to Managed HSM. Which services support in-place migration and what steps are involved."
 date: 2026-06-03
 author: [ "Richard Cheney" ]
 draft: false
@@ -8,25 +8,34 @@ weight: 26
 menu:
   side:
     parent: cmk
-    identifier: cmk-pmk-to-cmk
+    identifier: cmk-migration
 series:
   - cmk
 ---
 
 ## Introduction
 
-The labs in this series create new resources with CMK from the start. In practice, many customers already have services running with Platform Managed Keys (the default server-side encryption) and later need to switch to Customer Managed Keys.
+The labs in this series create new resources with CMK from the start. In practice, customers often need to migrate existing services — either from Platform Managed Keys to CMK, or from one key store to another.
+
+This page covers two common migration scenarios:
+
+1. **PMK to CMK** — services currently using the default platform-managed encryption need customer-controlled keys.
+1. **Key Vault Premium to Managed HSM** — services already using CMK in Azure Key Vault Premium need to move to the stronger isolation of a dedicated Managed HSM.
 
 Common triggers include:
 
 - A **security audit** identifies encryption key control as a gap.
-- A new **regulatory or sovereignty requirement** mandates customer-held keys.
-- An organisation adopts a **cloud security posture** that standardises CMK across all data services.
+- A new **regulatory or sovereignty requirement** mandates customer-held keys or dedicated HSM.
+- An organisation adopts a **cloud security posture** that standardises CMK or Managed HSM across all data services.
 - A workload moves from a development environment into **production** where stricter controls apply.
 
-The good news is that several Azure services support **in-place migration** — you update the encryption settings on the existing resource without recreating it or migrating data.
+---
 
-## Service support summary
+## PMK to CMK
+
+Several Azure services support **in-place migration** from Platform Managed Keys to Customer Managed Keys — you update the encryption settings on the existing resource without recreating it or migrating data.
+
+### Service support summary
 
 | Service | In-place migration? | Method |
 |---------|:-------------------:|--------|
@@ -35,8 +44,6 @@ The good news is that several Azure services support **in-place migration** — 
 | Azure SQL Managed Instance | ✅ | Change the TDE protector |
 | AKS node pools | ❌ | Create new node pool, migrate workloads, delete old |
 | Azure Container Instances | ❌ | Delete and recreate the container group |
-
-The sections below cover the approach for each service.
 
 ## Azure Storage
 
@@ -176,3 +183,110 @@ Since ACI container groups are typically stateless (persistent data lives in mou
 For most core data services — storage accounts, managed disks, and SQL MI — you can migrate from PMK to CMK in place without recreating resources or moving data. The key prerequisites are always the same: a key in your vault, a managed identity on the resource, and the correct RBAC role assignment.
 
 For AKS and ACI, plan for resource recreation as part of the migration. In both cases, infrastructure-as-code templates make the process repeatable.
+
+---
+
+## Key Vault Premium to Managed HSM
+
+Once services are using CMK in Azure Key Vault Premium, a customer may later want to move to **Managed HSM** for stronger key isolation — a single-tenant, FIPS 140-2 Level 3 validated HSM cluster dedicated to their organisation.
+
+This is conceptually similar to key rotation (you point the service at a new key URI), but there are important differences:
+
+- The **key URI domain** changes from `*.vault.azure.net` to `*.managedhsm.azure.net`.
+- The **RBAC model** changes from standard Azure RBAC to the Managed HSM **local RBAC** model. You assign roles like `Managed HSM Crypto Service Encryption User` using `az keyvault role assignment create --hsm-name` rather than `az role assignment create`.
+- The managed identity needs permissions granted on the **Managed HSM** (the old Key Vault permissions are no longer relevant).
+
+### Service support summary
+
+| Service | In-place? | Notes |
+|---------|:---------:|-------|
+| Azure Storage | ✅ | Update the key vault URI and key name — same `az storage account update` command |
+| Managed Disks (DES) | ❌ | Must create a **new** DES pointing at the Managed HSM key, then reassign disks |
+| Azure SQL Managed Instance | ✅ | Change the TDE protector URI to the Managed HSM key |
+| AKS node pools | ❌ | Inherits the DES limitation — new DES, new node pool |
+| Azure Container Instances | ❌ | Does not support Managed HSM at all |
+
+### Azure Storage
+
+The `az storage account update` command works identically — just change the vault URI to the Managed HSM endpoint:
+
+```bash
+az storage account update --name "$storage_account_name" \
+  --encryption-key-source Microsoft.Keyvault \
+  --encryption-key-vault "https://${mhsm_name}.managedhsm.azure.net" \
+  --encryption-key-name "$key_name"
+```
+
+Before running this, grant the storage account's managed identity the **Managed HSM Crypto Service Encryption User** role on the HSM:
+
+```bash
+az keyvault role assignment create --hsm-name "$mhsm_name" \
+  --role "Managed HSM Crypto Service Encryption User" \
+  --assignee-object-id "$sa_object_id" \
+  --scope /keys
+```
+
+No downtime. No data migration.
+
+#### References
+
+- [Customer-managed keys using Azure Key Vault Managed HSM](https://learn.microsoft.com/azure/storage/common/customer-managed-keys-configure-key-vault-hsm)
+
+### Managed Disks
+
+You **cannot** update an existing Disk Encryption Set to point at a different key source. The DES is coupled to its vault/HSM at creation time.
+
+The migration path is:
+
+1. Create a **new key** in Managed HSM.
+1. Create a **new DES** pointing at the Managed HSM key.
+1. Grant the new DES identity the **Managed HSM Crypto Service Encryption User** role on the HSM.
+1. Deallocate the VM.
+1. Update each disk to reference the new DES:
+
+    ```bash
+    az disk update --name "$disk_name" \
+      --resource-group "$resource_group" \
+      --disk-encryption-set "$new_des_id"
+    ```
+
+1. Start the VM.
+1. Delete the old DES when all disks have been migrated.
+
+{{< flash >}}
+This is a more involved process than a simple key rotation. Plan a maintenance window and test the migration on non-production disks first.
+{{< /flash >}}
+
+### Azure SQL Managed Instance
+
+The TDE protector can be pointed at a Managed HSM key using the same `az sql mi tde-key set` command:
+
+```bash
+az sql mi tde-key set --name "$mi_name" \
+  --resource-group "$resource_group" \
+  --kid "https://${mhsm_name}.managedhsm.azure.net/keys/${key_name}" \
+  --server-key-type AzureKeyVault
+```
+
+Grant the instance's user-assigned managed identity the **Managed HSM Crypto Service Encryption User** role on the HSM beforehand.
+
+This is operationally identical to a key rotation — the TDE protector simply changes to a different key URI.
+
+### AKS node pools
+
+AKS inherits the Managed Disks limitation. Since the DES must be recreated, you also need a new node pool referencing the new DES. Follow the same cordon-drain-delete pattern described in the PMK to CMK section above.
+
+### Azure Container Instances
+
+ACI does not support Managed HSM at all. This service only supports CMK from standard Key Vault.
+
+---
+
+## Key rotation vs migration
+
+It is worth noting the distinction:
+
+- **Key rotation** changes the key *version* within the same vault or HSM. Services that use a versionless key URI pick up the new version automatically. This is a routine operational task.
+- **Migration** changes the key *source* — a different vault, a different HSM, or a completely different key. This requires updating the service configuration and, for some services like DES, recreating resources.
+
+The migrations described on this page are one-off transitions, not recurring operations. Once you are on Managed HSM with auto-rotation configured, ongoing key management is handled by the HSM's built-in rotation policies.
