@@ -45,7 +45,7 @@ Several Azure services support **in-place migration** from Platform Managed Keys
 | AKS node pools | ❌ | Create new node pool, migrate workloads, delete old |
 | Azure Container Instances | ❌ | Delete and recreate the container group |
 
-## Azure Storage
+### Azure Storage
 
 Storage accounts can be updated from PMK to CMK at any time. The operation is seamless — no downtime and no data migration.
 
@@ -69,7 +69,7 @@ The prerequisites are the same whether the account is new or existing:
 - [Customer-managed keys for Azure Storage encryption](https://learn.microsoft.com/azure/storage/common/customer-managed-keys-overview)
 - [Configure customer-managed keys for an existing storage account](https://learn.microsoft.com/azure/storage/common/customer-managed-keys-configure-existing-account)
 
-## Managed Disks
+### Managed Disks
 
 Existing managed disks can be switched from PMK to CMK by assigning them to a Disk Encryption Set. The VM must be **deallocated** first.
 
@@ -104,7 +104,7 @@ If you have multiple disks (OS + data) on a VM, repeat the `az disk update` for 
 - [Enable customer-managed keys with SSE — managed disks (portal)](https://learn.microsoft.com/azure/virtual-machines/disks-enable-customer-managed-keys-portal)
 - [az disk update CLI reference](https://learn.microsoft.com/cli/azure/disk#az-disk-update)
 
-## Azure SQL Managed Instance
+### Azure SQL Managed Instance
 
 SQL MI uses Transparent Data Encryption (TDE). By default the TDE protector is service-managed. You can change it to a customer-managed key at any time without data migration.
 
@@ -141,7 +141,7 @@ SQL MI uses Transparent Data Encryption (TDE). By default the TDE protector is s
 
 - [TDE with customer-managed keys — Azure SQL Managed Instance](https://learn.microsoft.com/azure/azure-sql/managed-instance/transparent-data-encryption-byok-configure)
 
-## AKS node pools
+### AKS node pools
 
 AKS does **not** support changing the Disk Encryption Set on an existing node pool. The encryption setting is immutable after node pool creation.
 
@@ -166,7 +166,7 @@ This means planning a maintenance window and validating that workloads reschedul
 
 - [Bring your own keys for AKS node OS disk encryption](https://learn.microsoft.com/azure/aks/azure-disk-customer-managed-keys)
 
-## Azure Container Instances
+### Azure Container Instances
 
 ACI encryption configuration is **immutable** after the container group is created. You cannot change the key or switch from PMK to CMK on an existing container group.
 
@@ -177,12 +177,6 @@ Since ACI container groups are typically stateless (persistent data lives in mou
 #### References
 
 - [Encrypt deployment data with a customer-managed key](https://learn.microsoft.com/azure/container-instances/container-instances-encrypt-data)
-
-## Summary
-
-For most core data services — storage accounts, managed disks, and SQL MI — you can migrate from PMK to CMK in place without recreating resources or moving data. The key prerequisites are always the same: a key in your vault, a managed identity on the resource, and the correct RBAC role assignment.
-
-For AKS and ACI, plan for resource recreation as part of the migration. In both cases, infrastructure-as-code templates make the process repeatable.
 
 ---
 
@@ -282,11 +276,14 @@ ACI does not support Managed HSM at all. This service only supports CMK from sta
 
 ---
 
-## Key rotation vs migration
+## Summary
 
-It is worth noting the distinction:
+For most core data services — storage accounts, managed disks, and SQL MI — you can migrate from PMK to CMK in place without recreating resources or moving data. The key prerequisites are always the same: a key in your vault or HSM, a managed identity on the resource, and the correct RBAC role assignment.
 
-- **Key rotation** changes the key *version* within the same vault or HSM. Services that use a versionless key URI pick up the new version automatically. This is a routine operational task.
-- **Migration** changes the key *source* — a different vault, a different HSM, or a completely different key. This requires updating the service configuration and, for some services like DES, recreating resources.
+When moving from Key Vault Premium to Managed HSM, Storage and SQL MI can be updated in place (just a different key URI and RBAC model), but Disk Encryption Sets are coupled to their key source at creation time — requiring a new DES and disk reassignment.
 
-The migrations described on this page are one-off transitions, not recurring operations. Once you are on Managed HSM with auto-rotation configured, ongoing key management is handled by the HSM's built-in rotation policies.
+For AKS and ACI, plan for resource recreation in both scenarios. Infrastructure-as-code templates make the process repeatable.
+
+{{< flash >}}
+**Key rotation vs migration:** Key rotation changes the key *version* within the same vault or HSM — services using a versionless key URI pick up the new version automatically. Migration changes the key *source* (a different vault, HSM, or key) and requires updating the service configuration. The migrations described on this page are one-off transitions, not recurring operations. Once you are on your target key store with auto-rotation configured, ongoing key management is handled by the vault or HSM's built-in rotation policies.
+{{< /flash >}}
