@@ -1,6 +1,6 @@
 ---
-title: "Migration Scenarios"
-description: "Migrating existing Azure services from Platform Managed Keys to Customer Managed Keys, or from Azure Key Vault Premium to Managed HSM. Which services support in-place migration and what steps are involved."
+title: "Key Management Transition Scenarios"
+description: "Transitioning existing Azure services from Platform Managed Keys to Customer Managed Keys, or from Azure Key Vault Premium to Managed HSM. Which services support in-place transitions and what steps are involved."
 date: 2026-06-03
 author: [ "Richard Cheney" ]
 draft: false
@@ -8,7 +8,7 @@ weight: 26
 menu:
   side:
     parent: cmk
-    identifier: cmk-migration
+    identifier: cmk-kms-transition
 series:
   - cmk
 ---
