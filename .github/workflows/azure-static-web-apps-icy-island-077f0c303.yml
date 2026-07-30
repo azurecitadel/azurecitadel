@@ -41,12 +41,12 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
         with:
           submodules: true
           lfs: false
       - name: Setup NodeJS 20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v7
         with:
           node-version: 20
       - name: Install dependencies
@@ -63,7 +63,7 @@ jobs:
         run:
           echo "baseURL = \"https://www.azurecitadel.com/\"" > ./config/production/config.toml
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.123.7'
           extended: true
@@ -79,6 +79,7 @@ jobs:
           app_location: "public"
           api_location: "api"
           skip_app_build: true
+          skip_deploy_on_missing_secrets: true
         env:
           AZURE_STATIC_WEB_APPS_APP_INSIGHTS_CONNECTION_STRING: ${{ secrets.AZURE_STATIC_WEB_APPS_APP_INSIGHTS_CONNECTION_STRING }}
 
@@ -95,3 +96,4 @@ jobs:
           api_location: "api"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ICY_ISLAND_077F0C303 }}
           action: "close"
+          skip_deploy_on_missing_secrets: true
