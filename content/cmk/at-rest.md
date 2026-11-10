@@ -122,6 +122,10 @@ Well over 100 Azure services now support CMK integration with Azure Key Vault, a
 
 If you are assessing a service against a digital sovereignty audit checklist, that list is your first reference.
 
+## Migrating existing services
+
+If you already have services running with Platform Managed Keys and need to switch to CMK, or if you need to move from Key Vault Premium to Managed HSM, see [Key Management Transition Scenarios](../kms-transition) for a summary of which services support in-place transitions and the steps involved.
+
 ## Notable exceptions
 
 Some Azure services include elements of persistent storage but are not represented in the core list above because they use a different storage ownership or encryption model.
