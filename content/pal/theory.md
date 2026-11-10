@@ -185,7 +185,6 @@ az provider operation show --namespace Microsoft.Support --query "resourceTypes[
 - Microsoft.Support/supportTickets/read
 - Microsoft.Support/supportTickets/write
 - Microsoft.Support/services/read
-- Microsoft.Support/services/classifyProblems/action
 - Microsoft.Support/services/problemClassifications/read
 - Microsoft.Support/operationresults/read
 - Microsoft.Support/operationsstatus/read
